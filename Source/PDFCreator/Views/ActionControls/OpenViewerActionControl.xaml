@@ -1,0 +1,44 @@
+﻿<actionControls:ActionControl x:Class="pdfforge.PDFCreator.Views.ActionControls.OpenViewerActionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:actionControls="clr-namespace:pdfforge.PDFCreator.Shared.Views.ActionControls;assembly=PDFCreator.Shared"
+             mc:Ignorable="d"
+             x:Name="OpenViewerUserControl" x:ClassModifier="internal">
+    <actionControls:ActionControl.Resources>
+        <Style TargetType="ContentControl">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.4"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.4"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </actionControls:ActionControl.Resources>
+    <StackPanel Margin="5,5,5,5" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <CheckBox Name="OpenWithArchitectCheckBox" IsChecked="{Binding CurrentProfile.OpenWithPdfArchitect, Mode=TwoWay}" Click="OpenWithArchitectCheckBox_OnClick">Open PDF files with PDF Architect</CheckBox>
+        <StackPanel Margin="5,20,5,0" Visibility="{Binding ElementName=OpenViewerUserControl, Path=PdfArchitectVisibilty}">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock FontWeight="ExtraBlack" FontSize="15" HorizontalAlignment="Center">PDF Architect</TextBlock>
+                <TextBlock Margin="0,5,0,0" Name="PdfArchitectIntroText" TextWrapping="Wrap" FontSize="14" FontWeight="Bold">Our full-featured PDF Editor</TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                <TextBlock Name="PdfArchitectFreeText" FontWeight="Bold">FREE features include:</TextBlock>
+                <TextBlock Name="PdfArchitectSplitAndMergeText" TextWrapping="Wrap">Split and merge PDFs</TextBlock>
+                <TextBlock Name="PdfArchitectViewAndPrintText" TextWrapping="Wrap">View and print PDFs</TextBlock>
+                <TextBlock Name="PdfArchitectAddModulesText" TextWrapping="Wrap" Margin="0,10,0,0" FontWeight="Bold">Obtain powerful modules to do more like</TextBlock>
+                <TextBlock Name="PdfArchitectEditText" TextWrapping="Wrap">Edit PDFs like with a word processor</TextBlock>
+                <TextBlock Name="PdfArchitectConvertBackText" TextWrapping="Wrap">Convert PDFs to Word, Excel and more</TextBlock>
+                <TextBlock Name="PdfArchitectOcrText" TextWrapping="Wrap">Text recognition (OCR)</TextBlock>
+            </StackPanel>
+            <Button HorizontalAlignment="Center" Padding="10" Margin="15" MinWidth="150" Name="GetPdfArchitectButton" Click="GetPdfArchitectButton_OnClick">More on PDF Architect</Button>
+        </StackPanel>
+    </StackPanel>
+</actionControls:ActionControl>

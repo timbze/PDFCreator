@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/Colors.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/Logos.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/Buttons.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/Icons.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/Controls.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/ControlStyles/DataGrid.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/ControlStyles/FancyTabs.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/ControlStyles/HeaderPanel.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/ControlStyles/ListView.xaml"/>
+        <ResourceDictionary Source="/PDFCreator.Shared;component/Resources/ControlStyles/GpoStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

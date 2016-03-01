@@ -1,0 +1,7 @@
+iTextSharp
+NUnit
+NSubstitute
+
+DataStorage
+DynamicTranslator
+GpoReader

@@ -1,0 +1,47 @@
+﻿<Window x:Class="pdfforge.PDFCreator.Shared.Views.OfflineActivationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:pdfforge.PDFCreator.Shared.Views"
+        xmlns:viewModels="clr-namespace:pdfforge.PDFCreator.Shared.ViewModels"
+        xmlns:helper="clr-namespace:pdfforge.PDFCreator.Shared.Helper"
+        mc:Ignorable="d" 
+        Title="Offline activation"
+        Width="540"
+        MinWidth="500"
+        MinHeight="250"
+        SizeToContent="Height"
+        ResizeMode="CanMinimize"
+        KeyDown="OfflineActivationWindow_OnKeyDown"
+        Background="{x:Static SystemColors.ControlBrush}"
+        >
+    <Window.DataContext>
+        <viewModels:OfflineActivationViewModel/>
+    </Window.DataContext>
+    <StackPanel Margin="10">
+        <Label Name="LicenseKeyLabel">License key</Label>
+        <TextBox Text="{Binding LicenseKey, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Name="RequestActivationCodeLabel">Request an activation code on our website:</Label>
+        <TextBlock VerticalAlignment="Center" Padding="5 0 5 5">
+            <Hyperlink Click="Hyperlink_OnClick">
+                <TextBlock Text="{x:Static helper:Urls.OfflineActivationUrl}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBox MinHeight="100" Name="OfflineActivationTextBox" Text="{Binding OfflineActivationString, Mode=OneWay}" TextWrapping="Wrap" AcceptsReturn="True" />
+        <Label Name="PasteResponseLabel">Paste the response code here:</Label>
+        <TextBox MinHeight="215" Name="LicenseServerTextBox" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding LicenseServerAnswer, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="MinWidth" Value="150" />
+                    <Setter Property="Margin" Value="10 0 0 0" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Name="OkButton" IsDefault="True" Click="OkButton_OnClick">_OK</Button>
+            <Button Name="CancelButton" IsCancel="True" >_Cancel</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
