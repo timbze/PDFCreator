@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Views.UserControls.ProfileSettings.AutosaveTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:beh="clr-namespace:pdfforge.Obsidian;assembly=Obsidian"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.Converter;assembly=PDFCreator.ViewModels"
+             xmlns:views="clr-namespace:pdfforge.PDFCreator.UI.Views"
+             xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Views.UserControls"
+             xmlns:profileSettings="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ProfileSettings;assembly=PDFCreator.DesignTimeViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance profileSettings:DesignTimeAutosaveTabViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converter:TokenReplacerConverterForFolderName x:Key="TokenReplacerConverter" />
+    </UserControl.Resources>
+
+    <HeaderedContentControl Name="AutomaticSavingControl" Template="{StaticResource HeaderPanelTemplate}"
+                            Header="Automatic Saving">
+        <StackPanel>
+            <CheckBox Margin="0 5 0 0" Name="AutomaticSavingCheckBox"
+                      IsChecked="{Binding CurrentProfile.AutoSave.Enabled, Mode=TwoWay}">
+                Enable automatic saving
+            </CheckBox>
+            <Grid IsEnabled="{Binding ElementName=AutomaticSavingCheckBox, Path=IsChecked}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" MaxWidth="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <CheckBox Name="EnsureUniqueFilenamesCheckBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                          Margin="15,5,0,0"
+                          IsChecked="{Binding CurrentProfile.AutoSave.EnsureUniqueFilenames, Mode=TwoWay}"
+                          IsEnabled="{Binding ElementName=AutomaticSavingCheckBox, Path=IsChecked}">
+                    Ensure unique filenames (Do not overwrite existing files)
+                </CheckBox>
+                <Label Name="TargetFolderLabel" Grid.Row="3" Grid.Column="0">Target Folder:</Label>
+                <Label Name="TargetFolderTokenLabel" Grid.Row="3" Grid.Column="1">Add Token:</Label>
+                <DockPanel Grid.Row="4" Grid.Column="0">
+                    <Button Width="25" Padding="0" Margin="5,0,5,0" DockPanel.Dock="Right"
+                            Command="{Binding BrowseAutoSaveFolderCommand}">
+                        ...
+                    </Button>
+                    <views:BindableTextBox x:Name="TargetFolderTextBox"
+                                           BindableSelectionStart="{Binding TargetDirectoryViewModel.CurrentCursorPos}"
+                                           Text="{Binding TargetDirectoryViewModel.Text}" />
+                </DockPanel>
+                <ComboBox Grid.Row="4" Grid.Column="1" Name="TargetFolderTokensComboBox"
+                          ItemsSource="{Binding TargetDirectoryViewModel.TokenList}"
+                          SelectedItem="{Binding TargetDirectoryViewModel.SelectedToken}">
+                    <i:Interaction.Behaviors>
+                        <beh:EventToCommandBehavior Event="SelectionChanged"
+                                                    Command="{Binding TargetDirectoryViewModel.OnSelectionChangedCommand}" />
+                    </i:Interaction.Behaviors>
+                </ComboBox>
+                <Label Name="TargetFolderPreviewLabel" Grid.Row="5" Grid.Column="0">Preview:</Label>
+                <userControls:TokenHintPanel Grid.Row="5" Grid.Column="1"
+                                             TextWithToken="{Binding Text, ElementName=TargetFolderTextBox}"
+                                             Translator="{Binding Translator}" />
+                <TextBox Name="TargetFolderPreviewText" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                         IsReadOnly="True">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TokenReplacerConverter}">
+                            <Binding ElementName="TargetFolderTextBox" Path="Text"
+                                     UpdateSourceTrigger="PropertyChanged" />
+                            <Binding Path="TokenReplacer" />
+                        </MultiBinding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TextBlock TextWrapping="Wrap" Margin="0 10 0 0" Name="AutomaticSavingHintText">Edit profiles without print dialog by opening PDFCreator in Windows Explorer</TextBlock>
+                </Label>
+            </Grid>
+        </StackPanel>
+    </HeaderedContentControl>
+</UserControl>

@@ -1,0 +1,21 @@
+﻿<actionViewModels:ActionControl 
+    x:Class="pdfforge.PDFCreator.UI.Views.ActionControls.UserTokenActionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:actionViewModels="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.ActionViewModels;assembly=PDFCreator.ViewModels"
+    xmlns:actionViewModels1="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.ActionViewModels;assembly=PDFCreator.DesignTimeViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance actionViewModels1:DesignTimeUserTokenViewModel, IsDesignTimeCreatable=True}">
+    <StackPanel>
+        <TextBlock Name="DescriptionText"  Text="Define your own tokens directly in the original document with the following pattern: [[[UserTokenName:User token value]]]. Afterwards the definied value can be called via the following token: &lt;User:UserTokenName&gt;. The original pattern will be removed from the created document. You can define any number of user tokens. You can find more information in the user guide:" TextWrapping="Wrap" DockPanel.Dock="Top" />
+        <Button Width="150" Padding="5" Margin="0 10" Name="UserGuideButton" Command="{Binding OpenUserGuideCommand}">
+            <TextBlock Name="UserGuideButtonText" Text="More on user tokens" DockPanel.Dock="Top" TextWrapping="Wrap"/></Button>
+        <TextBlock Name="BetaNote" Text="Please note:" DockPanel.Dock="Top" TextWrapping="Wrap" FontWeight="Bold" />
+        <TextBlock Name="BetaNoteText"  Text="The user tokens feature is currently in beta status, and it is not considered stable. You are welcome to test and use it. If you should encounter any questions or problems, please feel free to contact our support. If you can also attach the document in which you experience the problems, we can help you in solving them." DockPanel.Dock="Top" TextWrapping="Wrap"/>
+        <TextBlock Text="The extraction of user tokens is only available in the business editions of PDFCreator" Name="OnlyForBusinessText" TextWrapping="Wrap" DockPanel.Dock="Top" Margin="0 0 0 10" />
+    </StackPanel>
+</actionViewModels:ActionControl>

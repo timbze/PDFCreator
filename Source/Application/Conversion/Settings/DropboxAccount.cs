@@ -1,0 +1,93 @@
+using pdfforge.DataStorage.Storage;
+using pdfforge.DataStorage;
+using System.Collections.Generic;
+using System.Text;
+using System;
+
+// ! This file is generated automatically.
+// ! Do not edit it outside the sections for custom code.
+// ! These changes will be deleted during the next generation run
+
+namespace pdfforge.PDFCreator.Conversion.Settings
+{
+	public class DropboxAccount {
+		
+		private string _accessToken;
+		public string AccessToken { get { try { return Data.Decrypt(_accessToken); } catch { return ""; } } set { _accessToken = Data.Encrypt(value); } }
+		
+		public string AccountId { get; set; }
+		
+		public string AccountInfo { get; set; }
+		
+		
+		private void Init() {
+			AccessToken = "";
+			AccountId = "";
+			AccountInfo = "";
+		}
+		
+		public DropboxAccount()
+		{
+			Init();
+		}
+		
+		public void ReadValues(Data data, string path) {
+			_accessToken = data.GetValue(@"" + path + @"AccessToken");
+			try { AccountId = Data.UnescapeString(data.GetValue(@"" + path + @"AccountId")); } catch { AccountId = "";}
+			try { AccountInfo = Data.UnescapeString(data.GetValue(@"" + path + @"AccountInfo")); } catch { AccountInfo = "";}
+		}
+		
+		
+		public void StoreValues(Data data, string path) {
+			data.SetValue(@"" + path + @"AccessToken", _accessToken);
+			data.SetValue(@"" + path + @"AccountId", Data.EscapeString(AccountId));
+			data.SetValue(@"" + path + @"AccountInfo", Data.EscapeString(AccountInfo));
+		}
+		
+		public DropboxAccount Copy()
+		{
+			DropboxAccount copy = new DropboxAccount();
+			
+			copy.AccessToken = AccessToken;
+			copy.AccountId = AccountId;
+			copy.AccountInfo = AccountInfo;
+			
+			return copy;
+		}
+		
+		public override bool Equals(object o)
+		{
+			if (!(o is DropboxAccount)) return false;
+			DropboxAccount v = o as DropboxAccount;
+			
+			if (!AccessToken.Equals(v.AccessToken)) return false;
+			if (!AccountId.Equals(v.AccountId)) return false;
+			if (!AccountInfo.Equals(v.AccountInfo)) return false;
+			
+			return true;
+		}
+		
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
+			
+			sb.AppendLine("AccessToken=" + AccessToken.ToString());
+			sb.AppendLine("AccountId=" + AccountId.ToString());
+			sb.AppendLine("AccountInfo=" + AccountInfo.ToString());
+			
+			return sb.ToString();
+		}
+		
+		public override int GetHashCode()
+		{
+			// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
+			return base.GetHashCode();
+		}
+		
+// Custom Code starts here
+// START_CUSTOM_SECTION:GENERAL
+// END_CUSTOM_SECTION:GENERAL
+// Custom Code ends here. Do not edit below
+		
+	}
+}

@@ -1,0 +1,311 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading;
+using SystemInterface.IO;
+using SystemInterface.Reflection;
+using SystemWrapper.IO;
+using NSubstitute;
+using NUnit.Framework;
+using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Core.ComImplementation;
+using pdfforge.PDFCreator.Core.Services.Translation;
+using pdfforge.PDFCreator.Core.SettingsManagement;
+using pdfforge.PDFCreator.Core.Workflow;
+using pdfforge.PDFCreator.Core.Workflow.Queries;
+using pdfforge.PDFCreator.UI.COM;
+using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.Utilities;
+using ThreadPool = pdfforge.PDFCreator.Core.ComImplementation.ThreadPool;
+
+namespace ComImplementation.UnitTest
+{
+    [TestFixture]
+    class PrintJobAdapterTest
+    {
+        private IList<ConversionProfile> _profiles;
+        private Job _job;
+        private IDirectory _directory;
+        private IConversionWorkflow _conversionWorkflow;
+        private WorkflowResult _workflowResult;
+        private IErrorNotifier _errorNotifier;
+        private IJobInfoQueue _jobInfoQueue;
+
+        [SetUp]
+        public void Setup()
+        {
+            _errorNotifier = null;
+            _workflowResult = WorkflowResult.Finished;
+
+            _jobInfoQueue = Substitute.For<IJobInfoQueue>();
+
+            _profiles = new List<ConversionProfile>();
+            _profiles.Add(new ConversionProfile
+            {
+                Guid = "SomeGuid"
+            });
+            _profiles.Add(new ConversionProfile
+            {
+                Guid = "AnotherGuid",
+                AutoSave = new AutoSave
+                {
+                    Enabled = true
+                }
+            });
+
+            _conversionWorkflow = Substitute.For<IConversionWorkflow>();
+            _conversionWorkflow.RunWorkflow(Arg.Any<Job>())
+                .Returns(x =>
+                {
+
+                    var job = x.Arg<Job>();
+                    job.Completed = true;
+                    return _workflowResult;
+                });
+        }
+
+        private PrintJobAdapter BuildPrintJobAdapter()
+        {
+            var settings = new PdfCreatorSettings(null);
+            settings.ConversionProfiles = _profiles;
+            var settingsProvider = Substitute.For<ISettingsProvider>();
+            settingsProvider.Settings.Returns(settings);
+
+            var comWorkflowFactory = Substitute.For<IComWorkflowFactory>();
+
+            comWorkflowFactory.BuildWorkflow(Arg.Any<string>(), Arg.Any<IErrorNotifier>())
+                .Returns(x =>
+                {
+                    _errorNotifier = x.Arg<IErrorNotifier>();
+                    return _conversionWorkflow;
+                });
+
+            var jobInfo = new JobInfo
+            {
+                Metadata = new Metadata(Substitute.For<IAssemblyHelper>())
+                {
+                    Title = "Test"
+                }
+            };
+            jobInfo.SourceFiles.Add(new SourceFileInfo());
+            _job = new Job(jobInfo, _profiles[0], new JobTranslations(), new Accounts());
+
+            _directory = Substitute.For<IDirectory>();
+
+            var printJobAdapter = new PrintJobAdapter(settingsProvider, comWorkflowFactory, new ThreadPool(), _jobInfoQueue, new ErrorCodeInterpreter(new SectionNameTranslator()), new PathWrapSafe(), _directory);
+            printJobAdapter.Job = _job;
+
+            return printJobAdapter;
+        }
+
+        [Test]
+        public void SetProfileByGuid_InsertsCopyOfProfileInJob()
+        {
+            var expectedProfile = _profiles[1];
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            printJobAdapter.SetProfileByGuid(expectedProfile.Guid);
+
+            Assert.AreEqual(expectedProfile, printJobAdapter.Job.Profile);
+            Assert.AreNotSame(expectedProfile, printJobAdapter.Job.Profile);
+        }
+
+        [Test]
+        public void SetProfileByGuid_WithUnknownGuid_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.SetProfileByGuid("Invalid GUID"));
+        }
+
+        [Test]
+        public void SetProfileSetting_UpdatesProfile()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            printJobAdapter.SetProfileSetting("PdfSettings.ColorModel", "Cmyk");
+
+            Assert.AreEqual(ColorModel.Cmyk, printJobAdapter.Job.Profile.PdfSettings.ColorModel);
+        }
+
+        [Test]
+        public void SetProfileSetting_WithUnknownProperty_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.SetProfileSetting("Unknown.Profile.Setting", "Cmyk"));
+        }
+
+        [Test]
+        public void SetProfileSetting_WithUnaccessibleProperty_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.SetProfileSetting("AutoSave.Enabled", "True"));
+        }
+
+        [Test]
+        public void GetProfileSetting_GetsValueFromProfile()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            var value = printJobAdapter.GetProfileSetting("PdfSettings.ColorModel");
+
+            Assert.AreEqual(_profiles[0].PdfSettings.ColorModel.ToString(), value);
+        }
+
+        [Test]
+        public void GetProfileSetting_WithInvalidSetting_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.GetProfileSetting("Unknown.Profile.Setting"));
+        }
+
+        [Test]
+        public void GetProfileSetting_WithEmptySettingName_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.GetProfileSetting(""));
+        }
+
+        [Test]
+        public void GetProfileSetting_WithUnaccessibleProperty_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+
+            Assert.Throws<COMException>(() => printJobAdapter.GetProfileSetting("AutoSave.Enabled"));
+        }
+
+        [Test]
+        public void ConvertTo_CallsConversionWorkflow()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            _conversionWorkflow.Received().RunWorkflow(_job);
+        }
+
+        [Test]
+        public void ConvertTo_WhenSuccessful_SetsSuccessfulFlag()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            Assert.IsTrue(printJobAdapter.IsFinished);
+            Assert.IsTrue(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertTo_WhenSuccessful_RemovesJobFromQueue()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            _jobInfoQueue.Received().Remove(_job.JobInfo, true);
+        }
+
+        [Test]
+        public void ConvertTo_WhenSuccessful_CallsJobFinishedEvent()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+            bool wasCalled = false;
+            printJobAdapter.JobFinished += (sender, args) => wasCalled = true;
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            Assert.IsTrue(wasCalled);
+        }
+
+        [Test]
+        public void ConvertTo_WhenAbortedByUser_NotSuccessful()
+        {
+            _workflowResult = WorkflowResult.AbortedByUser;
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            Assert.IsTrue(printJobAdapter.IsFinished);
+            Assert.IsFalse(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertTo_WhenFailed_NotSuccessful()
+        {
+            _workflowResult = WorkflowResult.Error;
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+
+            _conversionWorkflow.When(x => x.RunWorkflow(_job)).Do(x => { _errorNotifier.Notify(new ActionResult(ErrorCode.Conversion_UnknownError)); });
+
+            Assert.Throws<COMException>(() => printJobAdapter.ConvertTo("X:\\test.pdf"));
+
+            Assert.IsTrue(printJobAdapter.IsFinished);
+            Assert.IsFalse(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertToAsync_ConvertsSuccessfully()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+            var resetEvent = new ManualResetEventSlim();
+            printJobAdapter.JobFinished += (sender, args) => resetEvent.Set();
+
+            printJobAdapter.ConvertToAsync("X:\\test.pdf");
+
+            resetEvent.Wait(TimeSpan.FromMilliseconds(100));
+            Assert.IsTrue(printJobAdapter.IsFinished);
+            Assert.IsTrue(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertTo_WithoutSourceFiles_IsIgnored()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+            _job.JobInfo.SourceFiles.Clear();
+
+            printJobAdapter.ConvertTo("X:\\test.pdf");
+
+            Assert.IsFalse(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertTo_WithEmptyFilename_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+            _job.JobInfo.SourceFiles.Clear();
+
+            Assert.Throws<COMException>(() => printJobAdapter.ConvertToAsync(null));
+
+            Assert.IsFalse(printJobAdapter.IsSuccessful);
+        }
+
+        [Test]
+        public void ConvertTo_WhenTargetDirectoryDoesNotExist_ThrowsComException()
+        {
+            var printJobAdapter = BuildPrintJobAdapter();
+            _directory.Exists("X:\\").Returns(true);
+            _job.JobInfo.SourceFiles.Clear();
+
+            Assert.Throws<COMException>(() => printJobAdapter.ConvertToAsync(@"X:\UnknownFolder\test.pdf"));
+
+            Assert.IsFalse(printJobAdapter.IsSuccessful);
+        }
+    }
+}

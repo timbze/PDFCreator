@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4F2F7AA-5A58-44A4-905D-09536CB81EA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pdfforge.PDFCreator.Core.Workflow</RootNamespace>
+    <AssemblyName>PDFCreator.Workflow</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\AbortWorkflowException.cs" />
+    <Compile Include="ConversionWorkflow.cs" />
+    <Compile Include="Exceptions\ErrorCodeException.cs" />
+    <Compile Include="Exceptions\ManagePrintJobsException.cs" />
+    <Compile Include="IConversionWorkflow.cs" />
+    <Compile Include="IJobInfoQueue.cs" />
+    <Compile Include="IMailSignatureHelper.cs" />
+    <Compile Include="IManagePrintJobExceptionHandler.cs" />
+    <Compile Include="JobCleanUp.cs" />
+    <Compile Include="JobBuilder.cs" />
+    <Compile Include="Output\AutosaveOutputFileMover.cs" />
+    <Compile Include="Output\InteractiveOutputFileMover.cs" />
+    <Compile Include="Output\OutputFileMoverBase.cs" />
+    <Compile Include="Output\OutputFilenameComposer.cs" />
+    <Compile Include="PageNumberCalculator.cs" />
+    <Compile Include="ProfileChecker.cs" />
+    <Compile Include="Queries\IConversionProgress.cs" />
+    <Compile Include="Queries\IFileNameQuery.cs" />
+    <Compile Include="Queries\IJobFinishedHandler.cs" />
+    <Compile Include="Queries\IRetypeFileNameQuery.cs" />
+    <Compile Include="Queries\ITargetFileNameComposer.cs" />
+    <Compile Include="IWorkflowFactory.cs" />
+    <Compile Include="JobInfoQueue.cs" />
+    <Compile Include="JobInfoQueueManager.cs" />
+    <Compile Include="JobRunner.cs" />
+    <Compile Include="NewJobInfoEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Exceptions\WorkflowException.cs" />
+    <Compile Include="JobDataUpdater.cs" />
+    <Compile Include="Queries\IErrorNotifier.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Conversion\ActionsInterface\ActionsInterface.csproj">
+      <Project>{8de100b3-17e1-46e3-830b-5e0b072483ca}</Project>
+      <Name>ActionsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\ConverterInterface\ConverterInterface.csproj">
+      <Project>{2856c862-70ec-42cb-9bd4-a889bd6ec1f7}</Project>
+      <Name>ConverterInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
+      <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
+      <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SettingsManagement\SettingsManagement.csproj">
+      <Project>{9b31d8cd-4e32-4925-b696-7d1cf02f0142}</Project>
+      <Name>SettingsManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Jobs\Jobs.csproj">
+      <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
+      <Name>Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Settings\Settings.csproj">
+      <Project>{94936199-c9c7-4a5f-a58e-6123158e84f3}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{ea29538b-89a5-4fb3-ae0f-5e2370e852f8}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="paket.references" />
+    <None Include="pdfforge.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="NLog">
+          <HintPath>..\..\..\..\packages\NLog\lib\net40\NLog.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="SystemInterface">
+          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

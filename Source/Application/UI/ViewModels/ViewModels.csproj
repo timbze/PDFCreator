@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB822333-3D7C-4BC7-8C91-7FFBE1945239}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pdfforge.PDFCreator.UI.ViewModels</RootNamespace>
+    <AssemblyName>PDFCreator.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Resources\Red-signin_Short_base_32dp.png" />
+    <None Include="Resources\FB-f-Logo__blue_50.png" />
+    <None Include="Images\donate.png" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionViewModels\ActionControl.cs" />
+    <Compile Include="ActionViewModels\AttatchmentActionViewModel.cs" />
+    <Compile Include="ActionViewModels\BackgroundActionViewModel.cs" />
+    <Compile Include="ActionViewModels\CoverActionViewModel.cs" />
+    <Compile Include="ActionViewModels\DropboxActionViewModel.cs" />
+    <Compile Include="ActionViewModels\EmailClientActionViewModel.cs" />
+    <Compile Include="ActionViewModels\EmailSmtpActionViewModel.cs" />
+    <Compile Include="ActionViewModels\FtpActionViewModel.cs" />
+    <Compile Include="ActionViewModels\OpenViewerActionViewModel.cs" />
+    <Compile Include="ActionViewModels\PrintActionViewModel.cs" />
+    <Compile Include="ActionViewModels\ScriptActionViewModel.cs" />
+    <Compile Include="ActionViewModels\UserTokenActionViewModel.cs" />
+    <Compile Include="Assistants\IniSettingsAssistant.cs" />
+    <Compile Include="Assistants\IPrinterActionsAssistant.cs" />
+    <Compile Include="Assistants\PrinterActionsAssistant.cs" />
+    <Compile Include="Assistants\PrintFileAssistant.cs" />
+    <Compile Include="Assistants\RepairPrinterAssistant.cs" />
+    <Compile Include="Assistants\RepairSpoolFolderAssistant.cs" />
+    <Compile Include="Assistants\UacAssistant.cs" />
+    <Compile Include="Assistants\Update\ApplicationVersion.cs" />
+    <Compile Include="Assistants\Update\DisabledUpdateAssistant.cs" />
+    <Compile Include="Assistants\Update\UpdateAssistant.cs" />
+    <Compile Include="Assistants\Update\UpdateInformationProvider.cs" />
+    <Compile Include="Assistants\Update\UpdateLauncher.cs" />
+    <Compile Include="DialogViewModels\DropboxAuthenticationWindowViewModel.cs" />
+    <Compile Include="DialogViewModels\UpdateAvailableViewModel.cs" />
+    <Compile Include="Helper\IPlusHintHelper.cs" />
+    <Compile Include="Helper\PlusHintHelper.cs" />
+    <Compile Include="Helper\PlusHintHelperDisabled.cs" />
+    <Compile Include="MainWindowThreadLauncher.cs" />
+    <Compile Include="SettingsLoader.cs" />
+    <Compile Include="SettingsManager.cs" />
+    <Compile Include="WindowViewModels\ButtonDisplayOptions.cs" />
+    <Compile Include="WindowViewModels\LicenseOptionProvider.cs" />
+    <Compile Include="WindowViewModels\StoreLicenseForAllUsersWindowViewModel.cs" />
+    <Compile Include="WorkflowQuery\AutosaveTargetFileNameComposer.cs" />
+    <Compile Include="WorkflowQuery\InteractiveConversionProgress.cs" />
+    <Compile Include="WorkflowQuery\InteractiveFileNameQuery.cs" />
+    <Compile Include="WorkflowQuery\InteractiveFtpPasswordProvider.cs" />
+    <Compile Include="WorkflowQuery\InteractiveProcessingPasswordsProvider.cs" />
+    <Compile Include="WorkflowQuery\InteractiveSmtpPasswordProvider.cs" />
+    <Compile Include="WorkflowQuery\InteractiveTargetFileNameComposer.cs" />
+    <Compile Include="WorkflowQuery\ErrorNotifier.cs" />
+    <Compile Include="WorkflowQuery\JobFinishedHandler.cs" />
+    <Compile Include="WorkflowQuery\InteractiveRecommendArchitect.cs" />
+    <Compile Include="Converter\AreEqualConverter.cs" />
+    <Compile Include="Converter\BitmapToBitmapsourceConverter.cs" />
+    <Compile Include="Converter\BoolNegationConverter.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\ColorConverter.cs" />
+    <Compile Include="Converter\ColorWithFactorConverter.cs" />
+    <Compile Include="Converter\EnumToBooleanConverter.cs" />
+    <Compile Include="Converter\IdentityConverter.cs" />
+    <Compile Include="Converter\MessageIconToIconConverter.cs" />
+    <Compile Include="Converter\TokenReplacerConverter.cs" />
+    <Compile Include="Converter\StringIsNullOrWhiteSpaceToBoolConverter.cs" />
+    <Compile Include="Converter\TokenTextToVisibilityConverter.cs" />
+    <Compile Include="Converter\TranslatedEnumConverter.cs" />
+    <Compile Include="Converter\TranslatorConverter.cs" />
+    <Compile Include="DialogViewModels\EditEmailTextViewModel.cs" />
+    <Compile Include="DialogViewModels\LicenseWindowViewModel.cs" />
+    <Compile Include="Helper\ClientTestEmail.cs" />
+    <Compile Include="Helper\DragAndDropEventHandler.cs" />
+    <Compile Include="Assistants\SmtpTestEmailAssistant.cs" />
+    <Compile Include="Helper\FontHelper.cs" />
+    <Compile Include="Helper\HelpTopic.cs" />
+    <Compile Include="Helper\MailSignatureHelper.cs" />
+    <Compile Include="Helper\OpenFileHelper.cs" />
+    <Compile Include="Helper\TokenHelper.cs" />
+    <Compile Include="Assistants\Update\UpdateEventArgs.cs" />
+    <Compile Include="Helper\UserGuideHelper.cs" />
+    <Compile Include="ManagePrintJobExceptionHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UserControlViewModels\ApplicationSettings\ApplicationSettingsViewModelBundle.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\PdfArchitectTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\TokenViewModel.cs" />
+    <Compile Include="WindowViewModels\AboutWindowViewModel.cs" />
+    <Compile Include="ActionViewModels\ActionViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\AutoSaveTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\DocumentTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\ProfileSettingsViewModelBundle.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\SaveTabViewModel.cs" />
+    <Compile Include="WindowViewModels\ApplicationSettingsViewModel.cs" />
+    <Compile Include="DialogViewModels\EncryptionPasswordViewModel.cs" />
+    <Compile Include="DialogViewModels\PasswordViewModel.cs" />
+    <Compile Include="DialogViewModels\InputBoxWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\ConversionProgressWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\DefectiveProfilesWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\MainWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\ManagePrintJobsViewModel.cs" />
+    <Compile Include="DialogViewModels\MessageWindowViewModel.cs" />
+    <Compile Include="Helper\SoundPlayer.cs" />
+    <Compile Include="DialogViewModels\OfflineActivationViewModel.cs" />
+    <Compile Include="WindowViewModels\PlusHintWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\PrintJobviewModel.cs" />
+    <Compile Include="WindowViewModels\ProfileSettingsViewModel.cs" />
+    <Compile Include="DialogViewModels\SignaturePasswordViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\ActionsTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\CurrentProfileViewModel.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\DebugTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\GeneralTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\ImageFormatsTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\LicenseTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\PdfTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\PrinterTabViewModel.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\TitleTabViewModel.cs" />
+    <Compile Include="Validation\NonEmptyStringValidationRule.cs" />
+    <Compile Include="WindowViewModels\RecommendPdfArchitectWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\UpdateDownloadWindowViewModel.cs" />
+    <Compile Include="WindowViewModels\WelcomeWindowViewModel.cs" />
+    <Compile Include="Wrapper\AskSwitchPrinter.cs" />
+    <Compile Include="Wrapper\DispatcherWrapper.cs" />
+    <Compile Include="Wrapper\PrinterMappingWrapper.cs" />
+    <Compile Include="Helper\SynchronizedCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="paket.references" />
+    <None Include="pdfforge.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Conversion\ActionsInterface\ActionsInterface.csproj">
+      <Project>{8de100b3-17e1-46e3-830b-5e0b072483ca}</Project>
+      <Name>ActionsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Actions\Actions.csproj">
+      <Project>{1dbb980a-80ed-4263-bc5d-b90377466e14}</Project>
+      <Name>Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
+      <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
+      <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
+      <Project>{be1a6f7d-6439-4361-8e96-df90b4bfe000}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Printing\Printing.csproj">
+      <Project>{fd68eb7e-2ae8-4c8e-ba9c-71f9ad98e33e}</Project>
+      <Name>Printing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\SettingsManagement\SettingsManagement.csproj">
+      <Project>{9b31d8cd-4e32-4925-b696-7d1cf02f0142}</Project>
+      <Name>SettingsManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Jobs\Jobs.csproj">
+      <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
+      <Name>Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Mail\Mail.csproj">
+      <Project>{884d14eb-6d78-41d8-b022-968209dd6ce4}</Project>
+      <Name>Mail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Services\Services.csproj">
+      <Project>{c6058628-42b2-4cf6-a4be-622ad45f6e42}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Settings\Settings.csproj">
+      <Project>{94936199-c9c7-4a5f-a58e-6123158e84f3}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{ea29538b-89a5-4fb3-ae0f-5e2370e852f8}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Workflow\Workflow.csproj">
+      <Project>{e4f2f7aa-5a58-44a4-905d-09536cb81ea1}</Project>
+      <Name>Workflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interactions\Interactions.csproj">
+      <Project>{9fa4da88-81e9-4ff9-8521-70102762415b}</Project>
+      <Name>Interactions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="DataStorage">
+          <HintPath>..\..\..\..\packages\DataStorage\lib\DataStorage.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="DynamicTranslator">
+          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="LicenseValidator">
+          <HintPath>..\..\..\..\packages\LicenseValidator\lib\LicenseValidator.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="NLog">
+          <HintPath>..\..\..\..\packages\NLog\lib\net40\NLog.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Obsidian">
+          <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Expression.Interactions">
+          <HintPath>..\..\..\..\packages\System.Windows.Interactivity.WPF\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Windows.Interactivity">
+          <HintPath>..\..\..\..\packages\System.Windows.Interactivity.WPF\lib\net40\System.Windows.Interactivity.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="SystemInterface">
+          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="SystemWrapper">
+          <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="TrueTypeFontInfo">
+          <HintPath>..\..\..\..\packages\TrueTypeFontInfo\lib\net40-Client\TrueTypeFontInfo.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

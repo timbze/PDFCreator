@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings.GeneralTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:applicationSettings="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ApplicationSettings;assembly=PDFCreator.DesignTimeViewModels"
+             xmlns:controller1="clr-namespace:pdfforge.PDFCreator.Core.Controller;assembly=PDFCreator.Controller"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance applicationSettings:DesignTimeGeneralTabViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <HeaderedContentControl Name="LanguageControl" Template="{StaticResource HeaderPanelTemplate}"
+                                Header="Language">
+            <StackPanel HorizontalAlignment="Left" MinWidth="250" Style="{StaticResource GpoStyle}"
+                        IsEnabled="{Binding LanguageIsEnabled}">
+                <Label>
+                    <TextBlock Name="SelectLanguageLabel" TextWrapping="Wrap">Please select the application language:</TextBlock>
+                </Label>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Name="LanguageBox" Width="200" DisplayMemberPath="CommonName"
+                              SelectedValuePath="CommonName" SelectedValue="{Binding CurrentLanguage}"
+                              ItemsSource="{Binding Languages}" />
+                    <Button Name="LanguagePreviewButton" Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
+                            Command="{Binding PreviewTranslationCommand}">
+                        Preview
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl
+            Name="UpdateCheckControl" Margin="0 10 0 0" Template="{StaticResource HeaderPanelTemplate}"
+            Header="Update Check" Visibility="{Binding UpdateCheckControlVisibility}">
+            <StackPanel HorizontalAlignment="Left" MinWidth="250" Style="{StaticResource GpoStyle}"
+                        IsEnabled="{Binding UpdateIsEnabled}">
+                <Label Margin="0 0 0 -5">
+                    <TextBlock Name="UpdateIntervalLabel" TextWrapping="Wrap">Check for updates:</TextBlock>
+                </Label>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <ComboBox Name="UpdateIntervalComboBox" Width="200" HorizontalAlignment="Left"
+                              SelectedValue="{Binding CurrentUpdateInterval}" SelectedValuePath="Value"
+                              DisplayMemberPath="Name" ItemsSource="{Binding UpdateIntervals}" />
+                    <Button Name="CheckUpdateButton" Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
+                            Command="{Binding UpdateCheckCommand}">
+                        Check now
+                    </Button>
+                </StackPanel>
+
+                <DockPanel Name="UpdateNeverWarning" VerticalAlignment="Center" Margin="0 5 0 0"
+                           Visibility="{Binding DisplayUpdateWarning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           LastChildFill="True">
+                    <ContentControl DockPanel.Dock="Left" Content="{StaticResource WarningIcon}" Width="15" Height="15"
+                                    VerticalAlignment="Center" />
+                    <TextBlock Name="NeverUpdateWarningTextBlock"
+                               Text="Please note that you won't receive any notifications about available updates!"
+                               TextWrapping="Wrap" VerticalAlignment="Center" Margin="5 0 0 0" />
+                </DockPanel>
+                <TextBlock Name="DownloadLatestVersionText" Margin="0 5 0 0">Download the latest version at:</TextBlock>
+                <TextBlock>
+                    <Hyperlink NavigateUri="Look in DownloadHyperlink_OnRequestNavigate"
+                               Command="{Binding VisitWebsiteCommand}">
+                        <TextBlock Text="{x:Static controller1:Urls.PdfforgeWebsiteUrl}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl Name="DefaultPrinterControl" Margin="0 10 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}" Header="Default Printer">
+            <StackPanel>
+                <Label>
+                    <TextBlock Name="ChangeDefaultPrinterLabel" TextWrapping="Wrap">Allow PDFCreator to temporarily change the default printer</TextBlock>
+                </Label>
+                <ComboBox Name="ChangeDefaultPrinterComboBox" Width="200" HorizontalAlignment="Left"
+                          SelectedValue="{Binding ApplicationSettings.AskSwitchDefaultPrinter}"
+                          SelectedValuePath="Value" DisplayMemberPath="Name"
+                          ItemsSource="{Binding AskSwitchPrinterValues}" />
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl Name="MenuIntegrationControl" Margin="0 10 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}"
+                                Header="Explorer Context Menu Integration">
+            <UniformGrid Columns="2" Margin="0 10 0 0" HorizontalAlignment="Left" Width="410">
+                <Button Margin="0 0 5 0" Padding="5" Command="{Binding AddExplorerIntegrationCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
+                                        Margin="5 0">
+                            <StaticResource ResourceKey="UacShield" />
+                        </ContentControl>
+                        <TextBlock VerticalAlignment="Center" Name="AddMenuIntegrationText">Add</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5 0 0 0" Padding="5" Command="{Binding RemoveExplorerIntegrationCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
+                                        Margin="5 0">
+                            <StaticResource ResourceKey="UacShield" />
+                        </ContentControl>
+                        <TextBlock VerticalAlignment="Center" Name="RemoveMenuIntegrationText">Remove</TextBlock>
+                    </StackPanel>
+                </Button>
+            </UniformGrid>
+
+        </HeaderedContentControl>
+    </StackPanel>
+</UserControl>

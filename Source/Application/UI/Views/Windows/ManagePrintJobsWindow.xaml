@@ -1,0 +1,100 @@
+﻿<Window x:Class="pdfforge.PDFCreator.UI.Views.Windows.ManagePrintJobsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:beh="clr-namespace:pdfforge.Obsidian;assembly=Obsidian"
+        xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance windows:DesignTimeManagePrintJobsVm, IsDesignTimeCreatable=True}"
+        Title="Manage Print Jobs"
+        Height="319" Width="623"
+        WindowStartupLocation="CenterScreen"
+        AllowDrop="True"
+        Background="{x:Static SystemColors.ControlBrush}">
+
+    <i:Interaction.Behaviors>
+        <beh:EventToCommandBehavior Command="{Binding WindowClosedCommand}" Event="Closing" PassArguments="True" />
+        <beh:EventToCommandBehavior Command="{Binding WindowActivatedCommand}" Event="Activated" PassArguments="True" />
+        <beh:EventToCommandBehavior Command="{Binding DragEnterCommand}" Event="DragEnter" PassArguments="True" />
+        <beh:EventToCommandBehavior Command="{Binding DropCommand}" Event="Drop" PassArguments="True" />
+        <beh:EventToCommandBehavior Command="{Binding KeyDownCommand}" Event="KeyDown" PassArguments="True" />
+    </i:Interaction.Behaviors>
+
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="Up" Command="{Binding MoveUpCommand}"
+                    CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}" />
+        <KeyBinding Modifiers="Control" Key="Down" Command="{Binding MoveDownCommand}"
+                    CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}" />
+        <KeyBinding Modifiers="Control" Key="M" Command="{Binding MergeJobsCommand}"
+                    CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}" />
+        <KeyBinding Key="Delete" Command="{Binding DeleteJobCommand}"
+                    CommandParameter="{Binding SelectedItems, ElementName=JobList}" />
+
+    </Window.InputBindings>
+    <Grid>
+        <DockPanel Background="{StaticResource TitleBarGrayBrush}" Height="64" VerticalAlignment="Top"
+                   LastChildFill="True" Margin="0 0 0 10">
+            <ContentControl Margin="10" Content="{StaticResource PDFCreatorLogo}" Height="45" />
+            <TextBlock
+                Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}, FallbackValue=PDFCreator}"
+                HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24"
+                Foreground="#FFFAFAFA" FontFamily="Calibri" />
+        </DockPanel>
+        <DockPanel Margin="10 80 10 10">
+
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="28 10 0 10">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0 0 8 0" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Name="MergeButton" Padding="5" Command="{Binding MergeJobsCommand}"
+                        CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
+                    Merge
+                </Button>
+                <Button Name="MergeAllButton" Padding="5" Command="{Binding MergeAllJobsCommand}"
+                        CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
+                    Merge All
+                </Button>
+                <Button Name="DeleteButton" Padding="5" Command="{Binding DeleteJobCommand}"
+                        CommandParameter="{Binding SelectedItems, ElementName=JobList}" Content="Delete" />
+                <Button Name="ContinueButton" Padding="5" IsCancel="True" Content="Continue" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="0 0 5 0">
+                <Button Name="MoveUpButton" Padding="5" Command="{Binding MoveUpCommand}"
+                        CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
+                    <Viewbox Height="8">
+                        <Path Data="{StaticResource UpArrow}" Fill="Black" />
+                    </Viewbox>
+                </Button>
+                <Button Name="MoveDownButton" Padding="5" Command="{Binding MoveDownCommand}"
+                        CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
+                    <Viewbox Height="8">
+                        <Path Data="{StaticResource DownArrow}" Fill="Black" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+            <ListView Name="JobList" ItemsSource="{Binding JobInfos}" IsSynchronizedWithCurrentItem="True">
+
+                <i:Interaction.Behaviors>
+                    <beh:EventToCommandBehavior Command="{Binding ListSelectionChangedCommand}"
+                                                Event="SelectionChanged" PassArguments="True" />
+                </i:Interaction.Behaviors>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Title" x:Name="TitleColumn" Width="300"
+                                        DisplayMemberBinding="{Binding Metadata.PrintJobName}" />
+                        <GridViewColumn Header="Files" x:Name="FilesColumn" Width="60"
+                                        DisplayMemberBinding="{Binding SourceFiles.Count}" />
+                        <GridViewColumn Header="Pages" x:Name="PagesColumn" Width="60"
+                                        DisplayMemberBinding="{Binding TotalPages}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</Window>

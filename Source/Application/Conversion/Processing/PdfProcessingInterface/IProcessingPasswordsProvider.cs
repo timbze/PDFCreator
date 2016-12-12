@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+
+namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
+{
+    public interface IProcessingPasswordsProvider
+    {
+        void SetSignaturePassword(Job job);
+        void SetEncryptionPasswords(Job job);
+    }
+}

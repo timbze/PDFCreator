@@ -1,0 +1,8 @@
+﻿NSubstitute
+NUnit
+RhinoMocks
+SystemInterface
+DataStorage
+DynamicTranslator
+LicenseValidator
+Obsidian

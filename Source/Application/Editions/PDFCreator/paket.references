@@ -1,0 +1,9 @@
+SimpleInjector
+Obsidian
+NLog
+DynamicTranslator
+SystemWrapper
+SystemInterface
+
+group Setup
+    PrinterHelper

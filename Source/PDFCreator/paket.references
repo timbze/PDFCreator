@@ -1,8 +1,0 @@
-NLog
-SystemWrapper
-SystemInterface
-
-DataStorage
-DynamicTranslator
-LicenseValidator
-GpoReader

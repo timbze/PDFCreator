@@ -1,0 +1,9 @@
+﻿NUnit
+NSubstitute
+iTextSharp
+SystemWrapper
+SystemInterface
+DynamicTranslator
+DataStorage
+SimpleInjector
+RhinoMocks

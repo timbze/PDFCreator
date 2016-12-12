@@ -1,0 +1,8 @@
+NUnit
+NSubstitute
+NLog
+DataStorage
+SystemInterface
+DynamicTranslator
+LicenseValidator
+

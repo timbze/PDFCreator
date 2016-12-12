@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings.PdfArchitectTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.Converter;assembly=PDFCreator.ViewModels"
+             xmlns:applicationSettings="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ApplicationSettings;assembly=PDFCreator.DesignTimeViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance applicationSettings:DesignTimePdfArchitectTabViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="VisibleWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
+        <converter:BoolToVisibilityConverter x:Key="VisibleWhenFalse" TrueValue="Collapsed" FalseValue="Visible" />
+    </UserControl.Resources>
+    <StackPanel Margin="5">
+        <ContentControl Focusable="False" Content="{StaticResource PDFArchitectLogo}" Height="50" Margin="10" />
+        <TextBlock Name="PdfArchitectIntroText" TextWrapping="Wrap" FontSize="14" FontWeight="Bold"
+                   HorizontalAlignment="Center">
+            PDF Architect is our full-featured PDF Editor
+        </TextBlock>
+        <UniformGrid Rows="2">
+            <UniformGrid.Resources>
+                <Style x:Key="TitleStyle" TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Margin" Value="5 10 5 0" />
+                </Style>
+            </UniformGrid.Resources>
+
+            <StackPanel>
+                <TextBlock Name="PdfArchitectFreeText" Style="{StaticResource TitleStyle}" Foreground="#c5091d">FREE features include:</TextBlock>
+                <TextBlock Name="PdfArchitectSplitAndMergeText" TextWrapping="Wrap">Split and merge PDFs</TextBlock>
+                <TextBlock Name="PdfArchitectViewAndPrintText" TextWrapping="Wrap">View and print PDFs</TextBlock>
+                <TextBlock Name="PdfArchitectAddModulesText" TextWrapping="Wrap">Obtain powerful modules to do more</TextBlock>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Name="PdfArchitectEditText" Style="{StaticResource TitleStyle}">Edit PDFs</TextBlock>
+                <TextBlock Name="PdfArchitectEditAndFontsText" TextWrapping="Wrap">Edit text, change fonts, correct typos</TextBlock>
+                <TextBlock Name="PdfArchitectInsertAndDeleteText" TextWrapping="Wrap">Insert, delete or replace images</TextBlock>
+                <TextBlock Name="PdfArchitectFormatAndMarginsText" TextWrapping="Wrap">Change page format and marings</TextBlock>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Name="PdfArchitectConvertText" Style="{StaticResource TitleStyle}">Convert PDFs back</TextBlock>
+                <TextBlock Name="PdfArchitectConvertLongText" TextWrapping="Wrap">Convert PDFs to other popular formats like Word, Excel, HTML or TXT</TextBlock>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Name="PdfArchitectTextRecognitionOcrText" Style="{StaticResource TitleStyle}">Text recognition (OCR)</TextBlock>
+                <TextBlock Name="PdfArchitectOcrLongText" TextWrapping="Wrap">Convert images to text you can search and edit using existing PDFs or documents from your scanner</TextBlock>
+            </StackPanel>
+        </UniformGrid>
+
+        <StackPanel Margin="10" Name="GetPdfArchitectStackPanel" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenFalse}}">
+            <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150" Name="GetPdfArchitectButton"
+                    Command="{Binding LaunchWebsiteCommand}">
+                More on PDF Architect
+            </Button>
+            <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150"
+                    Name="DownloadPdfArchitectButton"
+                    Command="{Binding DownloadPdfArchitectCommand}">
+                Download now
+            </Button>
+        </StackPanel>
+
+        <StackPanel Margin="10" Name="LaunchPdfArchitectStackPanel"
+                    Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenTrue}}">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 10" FontSize="14"
+                       FontWeight="Bold" Name="PdfArchitectInstalledText">
+                You already have PDF Architect on your computer
+            </TextBlock>
+            <Button HorizontalAlignment="Center" Padding="10" Name="LaunchPdfArchitectButton"
+                    Command="{Binding LaunchPdfArchitectCommand}">
+                Launch PDF Architect
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
