@@ -18,7 +18,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
     public interface ISettingsLoader
     {
         PdfCreatorSettings LoadPdfCreatorSettings();
-        void SaveSettings(PdfCreatorSettings settings);
+        void SaveSettingsInRegistry(PdfCreatorSettings settings);
     }
 
     public class SettingsLoader : ISettingsLoader
@@ -44,13 +44,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels
 
         public int SettingsVersion => new ApplicationProperties().SettingsVersion;
 
-        public void SaveSettings(PdfCreatorSettings settings)
+        public void SaveSettingsInRegistry(PdfCreatorSettings settings)
         {
             CheckGuids(settings);
-
+            var regStorage = BuildStorage();
             _logger.Debug("Saving settings");
-            settings.SaveData("");
-
+            settings.SaveData(regStorage, "");
             LogProfiles(settings);
         }
 
@@ -231,6 +230,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels
             {
                 defaultProfile = profileBuilder.CreateDefaultProfile();
                 settings.ConversionProfiles.Add(defaultProfile);
+            }
+            else
+            {
+                defaultProfile.Properties.Deletable = false;
             } 
         }
 

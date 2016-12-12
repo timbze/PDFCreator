@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.Utilities;
@@ -18,7 +19,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
     {
         public void LaunchUpdate(ApplicationVersion version)
         {
-            Process.Start(version.DownloadUrl);
+            Process.Start(Urls.PDFCreatorDownloadUrl);
         }
     }
 

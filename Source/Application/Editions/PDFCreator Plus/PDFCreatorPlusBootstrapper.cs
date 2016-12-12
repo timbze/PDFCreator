@@ -36,7 +36,7 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorPlus
                 () => new ActivationHelper(product, container.GetInstance<ILicenseServerHelper>())
                 {
                     AcceptExpiredActivation = true,
-                    AcceptExpiredLicense = true
+                    Perpetual = true
                 });
         }
 

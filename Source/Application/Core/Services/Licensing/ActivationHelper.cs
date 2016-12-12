@@ -53,7 +53,7 @@ namespace pdfforge.PDFCreator.Core.Services.Licensing
 
         public bool AcceptExpiredActivation { private get; set; }
 
-        public bool AcceptExpiredLicense { private get; set; }
+        public bool Perpetual { private get; set; }
 
         public void LoadActivation()
         {
@@ -165,10 +165,10 @@ namespace pdfforge.PDFCreator.Core.Services.Licensing
                             return LicenseStatus.ActivationExpired;
 
                     if (!activation.IsLicenseStillValid())
-                        return AcceptExpiredLicense
+                        return Perpetual
                             ? LicenseStatus.ValidForVersionButLicenseExpired
                             : LicenseStatus.LicenseExpired;
-
+                    
                     return LicenseStatus.Valid;
 
                 case Result.BLOCKED:

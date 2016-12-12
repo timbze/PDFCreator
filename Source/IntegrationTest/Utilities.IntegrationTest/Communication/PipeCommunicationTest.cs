@@ -51,24 +51,6 @@ namespace PDFCreator.Utilities.IntegrationTest.Communication
         }
 
         [Test]
-        public void PipeServer_DoubleInstance_ThrowsException()
-        {
-            CreateServerPipe();
-            _pipeServer.Start();
-
-            var pipeServer = new PipeServer(_pipeName, _pipeName);
-
-            try
-            {
-                Assert.Throws<InvalidOperationException>(() => pipeServer.Start());
-            }
-            finally
-            {
-                pipeServer.Stop();
-            }
-        }
-
-        [Test]
         public void PipeServer_OnClose_CloseEventIsFired()
         {
             CreateServerPipe();
@@ -79,6 +61,32 @@ namespace PDFCreator.Utilities.IntegrationTest.Communication
             _pipeServer.Stop();
 
             Assert.IsTrue(reset.WaitOne(200));
+        }
+
+        [Test]
+        public void PipeServer_DoubleInstance_DoesNotThrowException()
+        {
+            CreateServerPipe();
+            _pipeServer.Start();
+
+            var pipeServer = new PipeServer(_pipeName, _pipeName);
+
+            try
+            {
+                Assert.DoesNotThrow(() => pipeServer.Start());
+            }
+            finally
+            {
+                pipeServer.Stop();
+            }
+        }
+
+        [Test]
+        public void PipeServer_TryingToStartAlreadyStartedServer_ReturnFalse()
+        {
+            CreateServerPipe();
+            _pipeServer.Start();
+            Assert.IsFalse(_pipeServer.Start());
         }
 
         [Test]

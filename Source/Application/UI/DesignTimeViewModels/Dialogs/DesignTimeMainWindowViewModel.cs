@@ -30,8 +30,7 @@ namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Dialogs
             return new PdfCreatorSettings(new IniStorage());
         }
 
-        public void SaveSettings(PdfCreatorSettings settings)
-        {
-        }
+        public void SaveSettingsInRegistry(PdfCreatorSettings settings)
+        {   }
     }
 }

@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Utilities
 {
@@ -77,30 +82,93 @@ namespace pdfforge.PDFCreator.Utilities
                     "The file extension must start with a dot (.) and must not contain any dots after the first character");
             }
 
-            UIntPtr hKey;
-            var res = AssocQueryKey(AssocF.Init_IgnoreUnknown, AssocKey.ShellExecClass, assoc, verb, out hKey);
+            var verbs = GetVerbsByExtension(assoc);
 
-            if (res == 0)
+            return verbs.Any(s => s.Equals(verb, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private string[] GetVerbsByExtension(string extension)
+        {
+            var win8Version = new Version(6, 2, 9200, 0);
+
+            // On Windows 8 and above, we have to detect the verbs by the associated ProgID
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
+                Environment.OSVersion.Version >= win8Version)
             {
-                RegCloseKey(hKey);
-                return true;
+                string progId = AssocQueryString(AssocStr.ASSOCSTR_PROGID, extension);
+
+                if (string.IsNullOrWhiteSpace(progId))
+                    return new string[] {};
+
+                return GetVerbsByProgId(progId);
             }
 
-            return false;
+            var psi = new ProcessStartInfo(@"C:\files" + extension);
+            return psi.Verbs;
+        }
+
+        private string[] GetVerbsByProgId(string progId)
+        {
+            var verbs = new List<string>();
+
+            if (string.IsNullOrEmpty(progId))
+                return verbs.ToArray();
+
+            using (var key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(progId + "\\shell"))
+            {
+                if (key != null)
+                {
+                    var names = key.GetSubKeyNames();
+                    verbs.AddRange(
+                        names.Where(
+                            name =>
+                                string.Compare(
+                                    name,
+                                    "new",
+                                    StringComparison.OrdinalIgnoreCase)
+                                != 0));
+                }
+            }
+
+            return verbs.ToArray();
+        }
+
+        private string AssocQueryString(AssocStr association, string extension)
+        {
+            uint length = 0;
+            uint ret = AssocQueryString(
+                AssocF.None, association, extension, "printto", null, ref length);
+            if (ret != 1) //expected S_FALSE
+            {
+                throw new Win32Exception();
+            }
+
+            var sb = new StringBuilder((int)length);
+            ret = AssocQueryString(
+                AssocF.None, association, extension, null, sb, ref length);
+            if (ret != 0) //expected S_OK
+            {
+                throw new Win32Exception();
+            }
+
+            return sb.ToString();
         }
 
         #region Shell Lightweight API
 
-        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern uint AssocQueryKey(AssocF flags, AssocKey key, string pszAssoc, string pszExtra,
-            [Out] out UIntPtr phkeyOut);
-
-        [DllImport("advapi32.dll", SetLastError = true)]
-        public static extern int RegCloseKey(UIntPtr hKey);
+        [DllImport("Shlwapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern uint AssocQueryString(
+           AssocF flags,
+           AssocStr str,
+           string pszAssoc,
+           string pszExtra,
+           [Out] StringBuilder pszOut,
+           ref uint pcchOut);
 
         [Flags]
         private enum AssocF
         {
+            None = 0x0,
             Init_NoRemapCLSID = 0x1,
             Init_ByExeName = 0x2,
             Open_ByExeName = 0x2,
@@ -115,14 +183,6 @@ namespace pdfforge.PDFCreator.Utilities
             Init_IgnoreUnknown = 0x00000400,
             Init_FixedProgId = 0x00000800,
             IsProtocol = 0x00001000
-        }
-
-        private enum AssocKey
-        {
-            ShellExecClass = 1,
-            App,
-            Class,
-            BaseClass
         }
 
         private enum AssocStr
@@ -146,7 +206,11 @@ namespace pdfforge.PDFCreator.Utilities
             DROPTARGET,
             DELEGATEEXECUTE,
             SUPPORTED_URI_PROTOCOLS,
-            MAX
+            ASSOCSTR_PROGID,
+            ASSOCSTR_APPID,
+            ASSOCSTR_APPPUBLISHER,
+            ASSOCSTR_APPICONREFERENCE,
+            ASSOCSTR_MAX
         }
 
         #endregion

@@ -24,7 +24,10 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
         {
             var assemblyDirectory = _assemblyHelper.GetPdfforgeAssemblyDirectory();
             var directoryInfo = new DirectoryInfo(assemblyDirectory);
-            var candidates = directoryInfo.GetFiles("PDFCreator*.exe").Where(file => !file.Name.Contains(".vshost.exe"));
+
+            // Get files that start with PDFCreator, end with exe and have only one dot (to exclude .vshost.exe and PDFCreator.LicenseService.exe)
+            var candidates = directoryInfo.GetFiles("PDFCreator*.exe")
+                .Where(file => file.Name.Count(c => c == '.') == 1);
 
             if (candidates.Count() != 1)
                 throw new ApplicationException("The assembly directory contains more or less than one PDFCreator*.exe");

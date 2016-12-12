@@ -145,7 +145,7 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             defaultProfile.Name = "<Default Profile>";
             defaultProfile.Guid = ProfileGuids.DEFAULT_PROFILE_GUID;
 
-            SetDefaultProperties(defaultProfile, true);
+            SetDefaultProperties(defaultProfile, false);
             return defaultProfile;
         }
 

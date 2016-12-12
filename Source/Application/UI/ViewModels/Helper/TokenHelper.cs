@@ -122,7 +122,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
             tokenList.Remove("<OutputFilenames>");
             tokenList.Remove("<InputFilePath>");
             tokenList.Remove("<OutputFilePath>");
-            tokenList.Remove("<DropboxSharedLinks>");
+            tokenList.Remove("<DropboxHtmlLinks>");
+            tokenList.Remove("<DropboxFullLinks>");
+
             return tokenList;
         }
 
@@ -131,6 +133,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
         {
             var tokenList = GetTokenListWithFormatting();
             tokenList.Remove("<OutputFilePath>");
+            tokenList.Remove("<DropboxHtmlLinks>");
+            tokenList.Remove("<DropboxFullLinks>");
 
             return tokenList;
         }

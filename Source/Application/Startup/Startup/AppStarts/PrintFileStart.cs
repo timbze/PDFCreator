@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using NLog;
 using pdfforge.PDFCreator.Core.Printing.Printing;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels;
 
@@ -10,13 +11,13 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
     {
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPrintFileHelper _printFileHelper;
-        private readonly ISettingsLoader _settingsLoader;
+        private readonly ISettingsManager _settingsManager;
 
-        public PrintFileStart(ICheckAllStartupConditions startupConditions, IPrintFileHelper printFileHelper, ISettingsLoader settingsLoader)
+        public PrintFileStart(ICheckAllStartupConditions startupConditions, IPrintFileHelper printFileHelper, ISettingsManager settingsManager) 
             : base(startupConditions)
         {
             _printFileHelper = printFileHelper;
-            _settingsLoader = settingsLoader;
+            _settingsManager = settingsManager;
         }
 
         public string PrintFile { get; internal set; }
@@ -38,6 +39,8 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
                 _logger.Error("The file \"{0}\" does not exist!", PrintFile);
                 return ExitCode.PrintFileDoesNotExist;
             }
+
+            _settingsManager.LoadPdfCreatorSettings();
 
             _printFileHelper.PdfCreatorPrinter = GetValidPrinterName();
 
@@ -61,7 +64,9 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             if (!string.IsNullOrWhiteSpace(PrinterName))
                 return PrinterName;
 
-            var settings = _settingsLoader.LoadPdfCreatorSettings();
+            var settingsProvider = _settingsManager.GetSettingsProvider();
+
+            var settings = settingsProvider.Settings;
             return settings.ApplicationSettings.PrimaryPrinter;
         }
     }

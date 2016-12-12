@@ -454,7 +454,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Services.UnitTest.Licensing
             if (product == Product.PdfCreator)
             {
                 activationHelper.AcceptExpiredActivation = true;
-                activationHelper.AcceptExpiredLicense = true;
+                activationHelper.Perpetual = true;
             }
 
             return activationHelper;

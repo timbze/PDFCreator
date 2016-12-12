@@ -84,7 +84,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             if (!success)
                 return;
 
-            SettingsLoaded?.Invoke(this, new SettingsEventArgs(_settingsProvider.Settings));
+            ApplySettingsProcedure(_settingsProvider.Settings);
         }
 
         private void ExecuteSaveIniSettings(object o)
@@ -142,11 +142,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             {
                 var profileBuilder = new DefaultProfileBuilder();
                 var defaultSettings = profileBuilder.CreateDefaultSettings(_settingsProvider.Settings);
-                _settingsManager.ApplyAndSaveSettings(defaultSettings);
-                _settingsManager.LoadPdfCreatorSettings();
-                _settingsProvider = _settingsManager.GetSettingsProvider();
-                SettingsLoaded?.Invoke(this, new SettingsEventArgs(_settingsProvider.Settings));
+                ApplySettingsProcedure(defaultSettings);
             }
+        }
+
+        private void ApplySettingsProcedure(PdfCreatorSettings settings)
+        {
+            _settingsManager.ApplyAndSaveSettings(settings);
+            _settingsManager.LoadPdfCreatorSettings(); //Load settings to ensure default profile
+            _settingsManager.SaveCurrentSettings(); //Save settings again to synch registry with current settings
+            SettingsLoaded?.Invoke(this, new SettingsEventArgs(_settingsProvider.Settings));
         }
 
         private bool AppSettingsAreModified()

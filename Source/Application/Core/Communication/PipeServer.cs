@@ -6,6 +6,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Threading;
+using NLog;
 
 namespace pdfforge.PDFCreator.Core.Communication
 {
@@ -16,7 +17,7 @@ namespace pdfforge.PDFCreator.Core.Communication
     {
         private readonly Dispatcher _dispatcher;
         private readonly string _mutexName;
-        //private static readonly Logger Logger = LogManager.GetLogger(typeof (PipeServer).FullName);
+        private static readonly Logger Logger = LogManager.GetLogger(typeof (PipeServer).FullName);
         private readonly string _pipeName;
 
         private readonly ManualResetEvent _pipeServerStartedEvent = new ManualResetEvent(false);
@@ -95,7 +96,10 @@ namespace pdfforge.PDFCreator.Core.Communication
         public bool Start()
         {
             if (IsServerRunning())
-                throw new InvalidOperationException("A pipe server with the name " + _pipeName + " already exists!");
+            {
+               Logger.Info("A pipe server with the name " + _pipeName + " already exists!");
+                return false;
+            }
 
             ClaimMutex();
 

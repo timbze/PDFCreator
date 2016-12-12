@@ -31,7 +31,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
         public void SaveCurrentSettings()
         {
             var settings = _settingsProvider.Settings;
-            _loader.SaveSettings(settings);
+            _loader.SaveSettingsInRegistry(settings);
         }
 
         public void ApplyAndSaveSettings(PdfCreatorSettings settings)

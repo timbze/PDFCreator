@@ -67,6 +67,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
             UpdateFontButtonText(CurrentProfile.Stamping);
             AuthorViewModel.RaiseTextChanged();
             TitleViewModel.RaiseTextChanged();
+            SubjectViewModel.RaiseTextChanged();
+            KeywordViewModel.RaiseTextChanged();
         }
 
         private void ChooseStampColorExecute(object obj)

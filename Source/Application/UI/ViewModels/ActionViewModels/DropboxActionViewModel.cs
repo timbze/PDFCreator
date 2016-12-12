@@ -26,7 +26,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
             RemoveDropboxAccountCommand = new DelegateCommand(RemoveDropboxAccount, RemoveDropboxCanExecute);
             var tokenHelper = new TokenHelper(translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
-            TokenViewModel = new TokenViewModel(x => CurrentProfile.DropboxSettings.SharedFolder = x, () => CurrentProfile?.DropboxSettings.SharedFolder, TokenReplacer.GetTokenNames(true));
+            TokenViewModel = new TokenViewModel(x => CurrentProfile.DropboxSettings.SharedFolder = x, () => CurrentProfile?.DropboxSettings.SharedFolder,
+                tokenHelper.GetTokenListForDirectory());
             DisplayName = translator.GetTranslation("DropboxActionSettings", "DisplayName");
         }
 

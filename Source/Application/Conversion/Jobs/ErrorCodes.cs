@@ -161,7 +161,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         [StringValue("The specified Dropbox access token is not configured.")]
         Dropbox_AccessTokenNotSpecified = 19002,
 
-        [StringValue("These characters are not allowed as Dropbox folder name: \\ : ? * \" |")]
+        [StringValue("These characters are not allowed as Dropbox folder name: < > \\ : ? * \" |")]
         Dropbox_InvalidFolderName = 19003,
 
         [StringValue("Automatic saving without target directory.")]

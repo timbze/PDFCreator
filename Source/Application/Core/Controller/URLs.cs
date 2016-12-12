@@ -12,6 +12,7 @@
 
         public const string PdfforgeWebsiteUrl = "http://www.pdfforge.org";
 
+        public const string PDFCreatorDownloadUrl = "http://go.pdfforge.org/pdfcreator/download";
         public const string PDFCreatorWhatsNewUrl = "http://go.pdfforge.org/pdfcreator/whatsnew";
 
         public const string OfflineActivationUrl = "http://go.pdfforge.org/pdfcreator/offline-activation";

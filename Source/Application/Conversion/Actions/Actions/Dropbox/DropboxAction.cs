@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
@@ -71,8 +73,15 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
             if (account == null)
                 return new ActionResult(ErrorCode.Dropbox_AccountNotSpecified);
 
-            var listOfInvalidCharacthers = new[] {'\\', '/', ':', '?', '*', '|', '"', '*', '.'};
-            if (profile.DropboxSettings.SharedFolder.IndexOfAny(listOfInvalidCharacthers) != -1)
+            var listOfInvalidCharacthers = new[] {'<', '>', '\\', '/', ':', '?', '*', '|', '"', '*', '.'};
+            var currentSharedFolder = profile.DropboxSettings.SharedFolder;
+            // remove all tokens from dropboxSharedFolder: Token has format <anything>
+            foreach (Match xx in new Regex("<(.*?)>").Matches(currentSharedFolder))
+            {
+                int index = currentSharedFolder.IndexOf(xx.Value, StringComparison.InvariantCulture);
+                currentSharedFolder = (index < 0) ? currentSharedFolder : currentSharedFolder.Remove(index, xx.Value.Length);
+            }
+            if (currentSharedFolder.IndexOfAny(listOfInvalidCharacthers) != -1)
                 return new ActionResult(ErrorCode.Dropbox_InvalidFolderName);
 
             var accessToken = account.AccessToken;
