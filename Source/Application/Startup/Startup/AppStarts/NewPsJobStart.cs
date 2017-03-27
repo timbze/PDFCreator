@@ -9,7 +9,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
     {
         public NewPsJobStart(IJobInfoQueue jobInfoQueue, ISpoolerProvider spoolerProvider,
             IMaybePipedApplicationStarter maybePipedApplicationStarter, IJobInfoManager jobInfoManager, PsDirectConversion directConversion)
-            : base(jobInfoQueue, maybePipedApplicationStarter, spoolerProvider, jobInfoManager)
+            : base(jobInfoQueue, maybePipedApplicationStarter, jobInfoManager)
         {
             DirectConversionBase = directConversion;
         }

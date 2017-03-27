@@ -1,3 +1,7 @@
-LicenseValidator
+LicenseValidator.Interface
 Obsidian
-DynamicTranslator
+Translatable
+SystemWrapper
+NLog
+Optional.StrongNamed
+DataStorage

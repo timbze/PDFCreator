@@ -3,7 +3,6 @@ NSubstitute
 SystemInterface
 SystemWrapper
 NLog
-DynamicTranslator
 SimpleInjector
 Obsidian
-
+Translatable

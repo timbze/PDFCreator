@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
+using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
@@ -12,14 +14,14 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
     {
         private EditEmailTextViewModel BuildEditEmailTextViewModel()
         {
-            return new EditEmailTextViewModel(new TranslationProxy());
+            return new EditEmailTextViewModel(new EditEmailTextWindowTranslation(), new MailSignatureHelperFreeVersion(new MailSignatureHelperTranslation()), new TokenHelper(new TokenPlaceHoldersTranslation()));
         }
 
         [Test]
         public void AddSignature_IsInitializedFromInteraction()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             Assert.IsTrue(viewModel.AddSignature);
         }
@@ -29,7 +31,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         {
             var changedProperties = new List<string>();
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false, false));
 
             viewModel.PropertyChanged += (sender, args) => changedProperties.Add(args.PropertyName);
 
@@ -42,7 +44,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void AddSignature_WhenSet_UpdatesInteraction()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false, false));
 
             viewModel.AddSignature = true;
 
@@ -53,7 +55,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void BodyViewModel_WhenReadingText_ReturnsBody()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             viewModel.Interaction.Content = "Test";
 
@@ -64,7 +66,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void BodyViewModel_WhenSettingText_UpdatesBody()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             viewModel.BodyTextViewModel.Text = "Test";
 
@@ -75,7 +77,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void Footer_WithSignatureDisabled_ReturnsEmptyString()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", false, false));
 
             Assert.AreEqual("", viewModel.Footer);
         }
@@ -84,7 +86,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void Footer_WithSignatureEnabled_ReturnsFooterString()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             Assert.IsTrue(!string.IsNullOrWhiteSpace(viewModel.Footer));
         }
@@ -95,7 +97,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             var changedProperties = new List<string>();
             var viewModel = BuildEditEmailTextViewModel();
             viewModel.PropertyChanged += (sender, args) => changedProperties.Add(args.PropertyName);
-            var interaction = new EditEmailTextInteraction("", "", false);
+            var interaction = new EditEmailTextInteraction("", "", false, false);
             var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, interaction);
 
             CollectionAssert.Contains(changedProperties, nameof(viewModel.AddSignature));
@@ -107,7 +109,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         {
             var viewModel = BuildEditEmailTextViewModel();
 
-            Assert.NotNull(viewModel.Translator);
+            Assert.NotNull(viewModel.Translation);
             CollectionAssert.IsNotEmpty(viewModel.SubjectTextViewModel.TokenList);
             CollectionAssert.IsNotEmpty(viewModel.BodyTextViewModel.TokenList);
         }
@@ -116,7 +118,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void SetProperties_AfterCallingOk_InteractionIsSuccessful()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             viewModel.OkCommand.Execute(null);
 
@@ -128,7 +130,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void SubjectViewModel_WhenReadingText_ReturnsSubject()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             viewModel.Interaction.Subject = "Test";
 
@@ -139,7 +141,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void SubjectViewModel_WhenSettingText_UpdatesSubject()
         {
             var viewModel = BuildEditEmailTextViewModel();
-            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true));
+            var interactionHelper = new InteractionHelper<EditEmailTextInteraction>(viewModel, new EditEmailTextInteraction("", "", true, false));
 
             viewModel.SubjectTextViewModel.Text = "Test";
 

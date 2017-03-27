@@ -2,3 +2,4 @@ NLog
 SystemWrapper
 SystemInterface
 DataStorage
+Translatable

@@ -1,7 +1,5 @@
 ﻿using System;
-using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 
@@ -18,15 +16,13 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly IDirectConversionProvider _provider;
         private readonly ISettingsProvider _settingsProvider;
-        private readonly ISpoolerProvider _spoolerProvider;
         private readonly IJobInfoManager _jobInfoManager;
 
-        public DirectConversionHelper(IDirectConversionProvider provider, IJobInfoQueue jobInfoQueue, ISettingsProvider settingsProvider, ISpoolerProvider spoolerProvider, IJobInfoManager jobInfoManager)
+        public DirectConversionHelper(IDirectConversionProvider provider, IJobInfoQueue jobInfoQueue, ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager)
         {
             _provider = provider;
             _jobInfoQueue = jobInfoQueue;
             _settingsProvider = settingsProvider;
-            _spoolerProvider = spoolerProvider;
             _jobInfoManager = jobInfoManager;
         }
 
@@ -42,11 +38,10 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
 
             var converter = GetCorrectConverterForFile(file);
 
-            var infFile = converter.TransformToInfFile(file, _spoolerProvider.SpoolFolder, _settingsProvider.Settings.ApplicationSettings.PrimaryPrinter);
+            var infFile = converter.TransformToInfFile(file, _settingsProvider.Settings.ApplicationSettings.PrimaryPrinter);
 
             if (string.IsNullOrWhiteSpace(infFile))
                 return;
-
 
             var jobInfo = _jobInfoManager.ReadFromInfFile(infFile);
             _jobInfoQueue.Add(jobInfo);

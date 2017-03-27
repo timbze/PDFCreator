@@ -100,6 +100,14 @@
       <Project>{18354054-45F6-4F51-8730-D05643A400A3}</Project>
       <Name>Jobs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
+      <Project>{F7126398-BB4F-49AF-AD90-0F23D2EDDCFE}</Project>
+      <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfToolsProcessing\PdfToolsProcessing.csproj">
+      <Project>{a80fba8d-683c-4622-8c0b-5ab66c2a8968}</Project>
+      <Name>PdfToolsProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
       <Project>{BE1A6F7D-6439-4361-8E96-DF90B4BFE000}</Project>
       <Name>Controller</Name>
@@ -133,16 +141,6 @@
       <Name>Startup</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\..\packages\LicenseValidator\tools\hx32.dll">
-      <Link>hx32.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\..\packages\LicenseValidator\tools\hx64.dll">
-      <Link>hx64.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -165,8 +163,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+        <Reference Include="LicenseValidator.Interface">
+          <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -189,6 +187,17 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Optional">
+          <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net40\Optional.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -244,11 +253,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <ItemGroup>
-    <Reference Include="PrinterHelper">
-      <HintPath>..\..\..\..\packages\setup\PrinterHelper\lib\PrinterHelper.exe</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
 </Project>

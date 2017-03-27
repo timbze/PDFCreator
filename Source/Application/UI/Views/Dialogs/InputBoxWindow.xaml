@@ -41,8 +41,8 @@
                     <Setter Property="MinWidth" Value="50" />
                 </Style>
             </DockPanel.Resources>
-            <Button DockPanel.Dock="Right" IsCancel="True" Name="CancelButton" Command="{Binding CancelDialogCommand}">Cancel</Button>
-            <Button DockPanel.Dock="Right" IsDefault="True" Name="OkButton" Command="{Binding ConfirmDialogCommand}">OK</Button>
+            <Button DockPanel.Dock="Right" IsCancel="True" Command="{Binding CancelDialogCommand}" Content="{Binding Translation.CancelButtonContent}" />
+            <Button DockPanel.Dock="Right" IsDefault="True" Command="{Binding ConfirmDialogCommand}" Content="{Binding Translation.OkButtonContent}" />
         </DockPanel>
     </StackPanel>
 </Window>

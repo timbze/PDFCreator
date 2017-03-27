@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using SystemWrapper;
-using pdfforge.DynamicTranslator;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Helper
 {
     public class TokenHelper
     {
-        private readonly ITranslator _translator;
+        private readonly TokenPlaceHoldersTranslation _translation;
         private TokenReplacer _tokenReplacer;
 
-        public TokenHelper(ITranslator translator)
+        public TokenHelper(TokenPlaceHoldersTranslation translation)
         {
-            _translator = translator;
+            _translation = translation;
         }
 
         public TokenReplacer TokenReplacerWithPlaceHolders
@@ -31,7 +30,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
             tr.AddToken(new StringToken("ComputerName", Environment.MachineName));
             tr.AddToken(new NumberToken("Counter", 1234));
             tr.AddToken(new DateToken("DateTime", DateTime.Now));
-            tr.AddToken(new StringToken("InputFilename", _translator.GetTranslation("TokenPlaceHolders", "MyFileDocx")));
+            tr.AddToken(new StringToken("InputFilename", _translation.MyFileDocx));
             tr.AddToken(new StringToken("InputFilePath", @"C:\Temp"));
             tr.AddToken(new NumberToken("JobID", 1));
             tr.AddToken(new NumberToken("NumberOfCopies", 1));
@@ -39,33 +38,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
             tr.AddToken(new ListToken("OutputFilenames",
                 new[]
                 {
-                    _translator.GetTranslation("TokenPlaceHolders", "OutputFilename")
-                    , _translator.GetTranslation("TokenPlaceHolders", "OutputFilename2")
-                    , _translator.GetTranslation("TokenPlaceHolders", "OutputFilename3")
+                    _translation.OutputFilename
+                    , _translation.OutputFilename2
+                    , _translation.OutputFilename3
                 }));
             tr.AddToken(new StringToken("OutputFilePath", @"C:\Temp"));
             tr.AddToken(new StringToken("PrinterName", "PDFCreator"));
             tr.AddToken(new NumberToken("SessionID", 0));
-            tr.AddToken(new StringToken("Title", _translator.GetTranslation("TokenPlaceHolders", "TitleFromSettings")));
-            tr.AddToken(new StringToken("PrintJobName", _translator.GetTranslation("TokenPlaceHolders", "TitleFromPrintJob")));
+            tr.AddToken(new StringToken("Title", _translation.TitleFromSettings));
+            tr.AddToken(new StringToken("PrintJobName", _translation.TitleFromPrintJob));
             tr.AddToken(new StringToken("Username", Environment.UserName));
-            tr.AddToken(new StringToken("Subject", _translator.GetTranslation("TokenPlaceHolders", "SubjectFromSettings")));
-            tr.AddToken(new StringToken("Keywords", _translator.GetTranslation("TokenPlaceHolders", "KeywordsFromSettings")));
-            tr.AddToken(new ListToken("DropboxHtmlLinks",
-                new[]
-                {
-                    _translator.GetTranslation("TokenPlaceHolders", "DropboxHtmlLink")
-                    , _translator.GetTranslation("TokenPlaceHolders", "DropboxHtmlLink2")
-                    , _translator.GetTranslation("TokenPlaceHolders", "DropboxHtmlLink3")
-                }));
-
-            tr.AddToken(new ListToken("DropboxFullLinks",
-             new[]
-            {
-            _translator.GetTranslation("TokenPlaceHolders", "DropboxFullLink")
-            , _translator.GetTranslation("TokenPlaceHolders", "DropboxFullLink2")
-            , _translator.GetTranslation("TokenPlaceHolders", "DropboxFullLink3")
-            }));
+            tr.AddToken(new StringToken("Subject", _translation.SubjectFromSettings));
+            tr.AddToken(new StringToken("Keywords", _translation.KeywordsFromSettings));
+            tr.AddToken(new StringToken("DropboxHtmlLinks", "<a href=\"https://dropbox.com/link1\">File.pdf</a>"));
+            tr.AddToken(new StringToken("DropboxFullLinks", "File.pdf ( https://dropbox.com/link1 )"));
             tr.AddToken(new EnvironmentToken());
 
             return tr;
@@ -146,14 +132,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
             tokenList.Insert(tokenList.IndexOf("<OutputFilePath>") + 1, "<OutputFilenames:, >");
             tokenList.Insert(tokenList.IndexOf("<OutputFilePath>") + 2, "<OutputFilenames:\\r\\n>");
 
-            tokenList.Insert(tokenList.IndexOf("<DropboxHtmlLinks>") + 1, "<DropboxHtmlLinks:, >");
-            tokenList.Insert(tokenList.IndexOf("<DropboxHtmlLinks>") + 2, "<DropboxHtmlLinks:\\r\\n>");
-
-            tokenList.Insert(tokenList.IndexOf("<DropboxFullLinks>") + 1, "<DropboxFullLinks:, >");
-            tokenList.Insert(tokenList.IndexOf("<DropboxFullLinks>") + 2, "<DropboxFullLinks:\\r\\n>");
-
-            tokenList.Remove("<DropboxHtmlLinks>");
-            tokenList.Remove("<DropboxFullLinks>");
             tokenList.Remove("<OutputFilePath>");
             return tokenList;
         }

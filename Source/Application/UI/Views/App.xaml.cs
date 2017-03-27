@@ -24,7 +24,8 @@ namespace pdfforge.PDFCreator.UI.Views
         {
             try
             {
-                _appStart.CheckApplicationConditions();
+                if (!_appStart.SkipStartupConditionCheck)
+                    _appStart.CheckApplicationConditions();
             }
             catch (StartupConditionFailedException ex)
             {
@@ -32,7 +33,6 @@ namespace pdfforge.PDFCreator.UI.Views
                 Shutdown(ex.ExitCode);
                 return;
             }
-
 
             var exitCode = _appStart.Run();
             Shutdown(exitCode);

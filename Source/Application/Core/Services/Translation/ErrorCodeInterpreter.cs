@@ -1,17 +1,18 @@
-﻿using System.Globalization;
-using pdfforge.DynamicTranslator;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using pdfforge.PDFCreator.Conversion.Jobs;
-using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Services.Translation
 {
     public class ErrorCodeInterpreter
     {
-        private readonly ITranslator _translator;
+        private readonly IList<EnumTranslation<ErrorCode>> _errorCodeTranslations;
 
-        public ErrorCodeInterpreter(ITranslator translator)
+        public ErrorCodeInterpreter(ITranslationFactory translationFactory)
         {
-            _translator = translator;
+            _errorCodeTranslations = translationFactory.CreateEnumTranslation<ErrorCode>();
         }
 
         public string GetFirstErrorText(ActionResult actionResult, bool withNumber)
@@ -23,16 +24,14 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
 
         public string GetErrorText(ErrorCode errorCode, bool withNumber)
         {
+            var errorTranslation = _errorCodeTranslations.FirstOrDefault(val => val.Value == errorCode);
+
+            if (errorTranslation == null)
+                throw new ArgumentException("The error code is not part of the ErrorCode enum!", nameof(errorTranslation));
+
             var errorNumber = (int) errorCode;
 
-            var errorCodeSection = errorNumber.ToString();
-            var errorMessage = _translator.GetTranslation("ErrorCodes", errorCodeSection);
-
-            if (string.IsNullOrWhiteSpace(errorMessage))
-                errorMessage = StringValueAttribute.GetValue(errorCode);
-
-            if (string.IsNullOrWhiteSpace(errorMessage))
-                errorMessage = _translator.GetTranslation("ErrorCodes", "Default");
+            var errorMessage = errorTranslation.Translation;
 
             if (withNumber)
                 return errorNumber + " - " + errorMessage;

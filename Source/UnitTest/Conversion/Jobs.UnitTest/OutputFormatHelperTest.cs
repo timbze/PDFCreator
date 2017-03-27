@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Core.Workflow.Output;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
 {

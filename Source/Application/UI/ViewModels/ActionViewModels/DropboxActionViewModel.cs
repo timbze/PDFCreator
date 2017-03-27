@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels;
 using pdfforge.PDFCreator.Utilities.Tokens;
@@ -15,20 +15,23 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 {
     public class DropboxActionViewModel : ActionViewModel
     {
+        public DropboxSettingsAndActionTranslation Translation { get; }
         private readonly IInteractionInvoker _interactionInvoker;
+        private readonly IDropboxService _dropboxService;
         private SynchronizedCollection<DropboxAccount> _accountsCollection;
 
-        public DropboxActionViewModel(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public DropboxActionViewModel(DropboxSettingsAndActionTranslation translation, IInteractionInvoker interactionInvoker, IDropboxService dropboxService, TokenHelper tokenHelper)
         {
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
+            _dropboxService = dropboxService;
             AddDropboxAccountCommand = new DelegateCommand(AuthoriseDropboxUser);
             _accountsCollection = new SynchronizedCollection<DropboxAccount>(new List<DropboxAccount>());
             RemoveDropboxAccountCommand = new DelegateCommand(RemoveDropboxAccount, RemoveDropboxCanExecute);
-            var tokenHelper = new TokenHelper(translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
             TokenViewModel = new TokenViewModel(x => CurrentProfile.DropboxSettings.SharedFolder = x, () => CurrentProfile?.DropboxSettings.SharedFolder,
                 tokenHelper.GetTokenListForDirectory());
-            DisplayName = translator.GetTranslation("DropboxActionSettings", "DisplayName");
+            DisplayName = translation.DisplayName;
         }
 
         private bool RemoveDropboxCanExecute(object o)
@@ -62,6 +65,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
                 DropboxAccounts.Remove(currentSelectedAccount);
                 var account = Accounts.DropboxAccounts.FirstOrDefault();
                 CurrentProfile.DropboxSettings.AccountId = account == null ? "" : account.AccountId;
+                _dropboxService.RevokeToken(currentSelectedAccount.AccessToken);
                 RaisePropertyChanged(nameof(Accounts));
             }
 

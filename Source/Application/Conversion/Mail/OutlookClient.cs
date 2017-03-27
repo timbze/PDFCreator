@@ -69,12 +69,11 @@ namespace pdfforge.PDFCreator.Conversion.Mail
                 return false;
 
             dynamic mail = outlook.CreateItem(0);
-
             mail.To = string.Join(";", email.To);
             //mail.CC = "";
             //mail.BCC = "";
             mail.Subject = email.Subject;
-            //mail.BodyFormat = 2; // 1 = Text, 2 = HTML
+            mail.BodyFormat = email.Html? 2 : 1; //2 = HTML, 1 = Text
             mail.Display();
 
             // We need to set the body after the mail is displayed to not overwrite the signature

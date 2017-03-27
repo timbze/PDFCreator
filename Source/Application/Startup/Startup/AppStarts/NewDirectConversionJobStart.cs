@@ -1,5 +1,4 @@
 ﻿using NLog;
-using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.DirectConversion;
 using pdfforge.PDFCreator.Core.Workflow;
@@ -11,16 +10,14 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         private readonly IJobInfoManager _jobInfoManager;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ISpoolerProvider _spoolerProvider;
 
         private string _newInfFile;
 
         protected NewDirectConversionJobStart(IJobInfoQueue jobInfoQueue,
-            IMaybePipedApplicationStarter maybePipedApplicationStarter, ISpoolerProvider spoolerProvider, IJobInfoManager jobInfoManager)
+            IMaybePipedApplicationStarter maybePipedApplicationStarter, IJobInfoManager jobInfoManager)
             : base(maybePipedApplicationStarter)
         {
             _jobInfoQueue = jobInfoQueue;
-            _spoolerProvider = spoolerProvider;
             _jobInfoManager = jobInfoManager;
         }
 
@@ -36,8 +33,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
                 if (!string.IsNullOrEmpty(_newInfFile))
                     return _newInfFile;
 
-                var spool = _spoolerProvider.SpoolFolder;
-                _newInfFile = DirectConversionBase.TransformToInfFile(NewDirectConversionFile, spool, PrinterName);
+                _newInfFile = DirectConversionBase.TransformToInfFile(NewDirectConversionFile, PrinterName);
 
                 if (string.IsNullOrEmpty(_newInfFile))
                     _newInfFile = "";

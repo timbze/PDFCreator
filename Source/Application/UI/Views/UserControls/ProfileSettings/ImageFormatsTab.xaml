@@ -9,8 +9,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance profileSettings:DesignTimeImageFormatsTabViewModel, IsDesignTimeCreatable=True}">
     <StackPanel>
-        <HeaderedContentControl Name="JpegControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="JPEG-Settings">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.JpegControlHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MaxWidth="200" />
@@ -22,17 +22,17 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Name="JpegColorsLabel" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0">Colors:</Label>
-                <ComboBox Name="JpegColorsComboBox" Grid.Row="0" Grid.Column="1" Margin="0 5 0 0"
+                <Label Content="{Binding Translation.JpegColorsLabelContent}" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0"></Label>
+                <ComboBox  Grid.Row="0" Grid.Column="1" Margin="0 5 0 0"
                           VerticalAlignment="Center" SelectedValue="{Binding CurrentProfile.JpegSettings.Color}"
-                          SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding JpegColorValues}" />
+                          SelectedValuePath="Value" DisplayMemberPath="Translation" ItemsSource="{Binding Translation.JpegColorValues}" />
 
-                <Label Name="JpegResolutionLabel" Grid.Row="1" Grid.Column="0" Margin="0 5 5 0">Resolution (DPI):</Label>
+                <Label Content="{Binding Translation.JpegResolutionLabelContent}" Grid.Row="1" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" HorizontalAlignment="Left" Width="50"
                          TextAlignment="Right"
                          Text="{Binding CurrentProfile.JpegSettings.Dpi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Label Name="JpegQualityLabel" Grid.Row="2" Grid.Column="0" Margin="0 5 5 0">Quality (%):</Label>
+                <Label Content="{Binding Translation.JpegQualityLabelContent}"  Grid.Row="2" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <TextBox Name="JpegQualityTextBox" Grid.Row="2" Grid.Column="1" Margin="0 5 0 0"
                          HorizontalAlignment="Left" Width="50" TextAlignment="Right"
                          Text="{Binding CurrentProfile.JpegSettings.Quality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -44,8 +44,8 @@
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Name="PngControl" Margin="0 5 0 0" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="PNG-Settings">
+        <HeaderedContentControl Margin="0 5 0 0" Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.PngControlHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MaxWidth="200" />
@@ -56,21 +56,20 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Name="PngColorsLabel" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0">Colors:</Label>
+                <Label Content="{Binding Translation.PngColorsLabelContent}" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <ComboBox Name="PngColorsComboBox" Grid.Row="0" Grid.Column="1" Margin="0 5 0 0"
                           VerticalAlignment="Center" SelectedValue="{Binding CurrentProfile.PngSettings.Color}"
-                          SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding PngColorValues}" />
+                          SelectedValuePath="Value" DisplayMemberPath="Translation" ItemsSource="{Binding Translation.PngColorValues}" />
 
-                <Label Name="PngResolutionLabel" Grid.Row="1" Grid.Column="0" Margin="0 5 5 0">Resolution (DPI):</Label>
+                <Label Content="{Binding Translation.PngResolutionLabelContent}" Grid.Row="1" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" HorizontalAlignment="Left" Width="50"
-                         TextAlignment="Right"
-                         Text="{Binding CurrentProfile.PngSettings.Dpi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                         TextAlignment="Right" Text="{Binding CurrentProfile.PngSettings.Dpi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Name="TiffControl" Margin="0 5 0 0" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="TIFF-Settings">
+        <HeaderedContentControl Margin="0 5 0 0" Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.TiffControlHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MaxWidth="200" />
@@ -81,12 +80,12 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Name="TiffColorsLabel" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0">Colors:</Label>
+                <Label Content="{Binding Translation.TiffColorsLabelContent}" Grid.Row="0" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <ComboBox Name="TiffColorsComboBox" Grid.Row="0" Grid.Column="1" Margin="0 5 0 0"
                           VerticalAlignment="Center" SelectedValue="{Binding CurrentProfile.TiffSettings.Color}"
-                          SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding TiffColorValues}" />
+                          SelectedValuePath="Value" DisplayMemberPath="Translation" ItemsSource="{Binding Translation.TiffColorValues}" />
 
-                <Label Name="TiffResolutionLabel" Grid.Row="1" Grid.Column="0" Margin="0 5 5 0">Resolution (DPI):</Label>
+                <Label Content="{Binding Translation.TiffResolutionLabelContent}"  Grid.Row="1" Grid.Column="0" Margin="0 5 5 0"></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" Width="50" HorizontalAlignment="Left"
                          TextAlignment="Right"
                          Text="{Binding CurrentProfile.TiffSettings.Dpi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

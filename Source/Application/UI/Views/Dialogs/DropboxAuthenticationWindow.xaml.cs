@@ -1,9 +1,5 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Forms;
+﻿using System.Windows;
 using System.Windows.Navigation;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
 
 //using System.Net.Http;
@@ -19,7 +15,7 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
         //private readonly IDropboxService _dropboxService;
         private readonly DropboxAuthenticationWindowViewModel _viewModel;
 
-        public DropboxAuthenticationWindow(DropboxAuthenticationWindowViewModel viewModel, ITranslator translator, IWinInetHelper winInetHelper)
+        public DropboxAuthenticationWindow(DropboxAuthenticationWindowViewModel viewModel, IWinInetHelper winInetHelper)
         {
             DataContext = viewModel;
             _viewModel = viewModel;
@@ -28,7 +24,6 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
             var authorizeUri = viewModel.GetAuthorizeUri();
             winInetHelper.EndBrowserSession();
             Browser.Navigate(authorizeUri);
-            translator.Translate(this);
         }
 
         /// <summary>

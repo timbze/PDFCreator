@@ -131,10 +131,6 @@
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Conversion\Mail\Mail.csproj">
-      <Project>{884d14eb-6d78-41d8-b022-968209dd6ce4}</Project>
-      <Name>Mail</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Services\Services.csproj">
       <Project>{C6058628-42B2-4CF6-A4BE-622AD45F6E42}</Project>
       <Name>Services</Name>
@@ -182,19 +178,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DataStorage">
-          <HintPath>..\..\..\..\packages\DataStorage\lib\DataStorage.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
-      <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+        <Reference Include="LicenseValidator.Interface">
+          <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -217,6 +202,17 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Optional">
+          <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net40\Optional.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -272,11 +268,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <ItemGroup>
-    <Reference Include="PrinterHelper">
-      <HintPath>..\..\..\..\packages\setup\PrinterHelper\lib\PrinterHelper.exe</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
 </Project>

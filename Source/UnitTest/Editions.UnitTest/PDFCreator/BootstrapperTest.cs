@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using NUnit.Framework;
 using pdfforge.Obsidian.Interaction;
@@ -9,7 +8,6 @@ using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.SettingsManagement;
-using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Core.Workflow;
@@ -76,7 +74,6 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
 
             var defaultConditions = new[]
             {
-                typeof(TranslationCondition),
                 typeof(SpoolerRunningCondition),
                 typeof(CheckSpoolFolderCondition),
                 typeof(GhostscriptCondition),
@@ -202,7 +199,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
         [Test]
         public void AllAppStarts_AreRegistered()
         {
-            var bootstrapper = new PDFCreatorBootstrapper();
+            var bootstrapper = new PDFCreatorPlusBootstrapper();
             var container = new Container();
             bootstrapper.ConfigureContainer(container, null);
 

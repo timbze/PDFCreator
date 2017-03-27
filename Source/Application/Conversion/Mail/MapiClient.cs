@@ -35,7 +35,7 @@ namespace pdfforge.PDFCreator.Conversion.Mail
 
                 message.Subject = email.Subject;
                 message.Body = email.Body;
-
+                
                 foreach (string recipient in email.To)
                 {
                     if (recipient.Trim() != "")
@@ -261,7 +261,6 @@ public class MapiMailMessage
             _logger.Info("Subject: " + _subject);
             message.Subject = _subject;
             message.NoteText = _body;
-
             message.Recipients = interopRecipients.Handle;
             message.RecipientCount = _recipientCollection.Count;
 

@@ -1,8 +1,8 @@
 ﻿using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -10,15 +10,15 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
     {
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IRepairSpoolFolderAssistant _repairSpoolFolderAssistant;
-        private readonly ITranslator _translator;
+        private readonly ApplicationTranslation _translation;
         private readonly ISpoolerProvider _spoolerProvider;
         private readonly ISpoolFolderAccess _spoolFolderAccess;
 
-        public CheckSpoolFolderCondition(ISpoolFolderAccess spoolFolderAccess, IRepairSpoolFolderAssistant repairSpoolFolderAssistant, ITranslator translator, ISpoolerProvider spoolerProvider)
+        public CheckSpoolFolderCondition(ISpoolFolderAccess spoolFolderAccess, IRepairSpoolFolderAssistant repairSpoolFolderAssistant, ApplicationTranslation translation, ISpoolerProvider spoolerProvider)
         {
             _spoolFolderAccess = spoolFolderAccess;
             _repairSpoolFolderAssistant = repairSpoolFolderAssistant;
-            _translator = translator;
+            _translation = translation;
             _spoolerProvider = spoolerProvider;
         }
 
@@ -35,7 +35,7 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
             {
                 _logger.Info("The spool folder could not be repaired.");
                 _repairSpoolFolderAssistant.DisplayRepairFailedMessage();
-                var message = _translator.GetFormattedTranslation("Application", "SpoolFolderUnableToRepair", _spoolerProvider.SpoolFolder);
+                var message = _translation.GetSpoolFolderUnableToRepairMessage(_spoolerProvider.SpoolFolder);
                 return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.SpoolFolderInaccessible, message);
             }
             _logger.Info("The spool folder was repaired successfully.");

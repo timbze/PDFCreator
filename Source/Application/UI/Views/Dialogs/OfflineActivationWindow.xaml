@@ -6,8 +6,7 @@
         xmlns:beh="clr-namespace:pdfforge.Obsidian;assembly=Obsidian"
         xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
-        xmlns:controller1="clr-namespace:pdfforge.PDFCreator.Core.Controller;assembly=PDFCreator.Controller"
-        Title="Offline Activation"
+        Title="{Binding Translation.Title}"
         Width="540"
         MinWidth="500"
         MinHeight="250"
@@ -20,18 +19,18 @@
         <beh:EventToCommandBehavior Command="{Binding ShowHelpCommand}" Event="KeyDown" PassArguments="True" />
     </interactivity:Interaction.Behaviors>
     <StackPanel Margin="10">
-        <Label Name="LicenseKeyLabel">License key</Label>
+        <Label Content="{Binding Translation.LicenseKeyLabelContent}"></Label>
         <TextBox Text="{Binding LicenseKey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <Label Name="RequestActivationCodeLabel">Request an activation code on our website:</Label>
+        <Label Name="RequestActivationCodeLabel" Content="{Binding Translation.RequestActivationCodeLabelContent}"></Label>
         <TextBlock VerticalAlignment="Center" Padding="5 0 5 5">
             <Hyperlink Command="{Binding OpenOfflineActivationUrlCommand}">
-                <TextBlock Text="{x:Static controller1:Urls.OfflineActivationUrl}" />
+                <TextBlock Text="{Binding OfflineActivationUrl}" />
             </Hyperlink>
         </TextBlock>
         <TextBox MinHeight="100" Name="OfflineActivationTextBox"
                  Text="{Binding OfflineActivationString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                  TextWrapping="Wrap" AcceptsReturn="True" IsEnabled="{Binding LicenseKeyIsValid}" />
-        <Label Name="PasteResponseLabel">Paste the response code here:</Label>
+        <Label  Content="{Binding Translation.PasteResponseLabelContent}"></Label>
         <TextBox MinHeight="215" Name="LicenseServerTextBox" TextWrapping="Wrap" AcceptsReturn="True"
                  Text="{Binding LicenseServerAnswer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
@@ -43,8 +42,8 @@
                     <Setter Property="Margin" Value="10 0 0 0" />
                 </Style>
             </StackPanel.Resources>
-            <Button Name="OkButton" IsDefault="True" Command="{Binding OkCommand}">_OK</Button>
-            <Button Name="CancelButton" IsCancel="True">_Cancel</Button>
+            <Button Content="{Binding Translation.OkButtonContent}" IsDefault="True" Command="{Binding OkCommand}"></Button>
+            <Button Content="{Binding Translation.CancelButtonContent}" IsCancel="True"></Button>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -99,18 +99,24 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
 
             var requiresDefaultPrinter = _printCommands.RequiresDefaultPrinter;
             var defaultPrinter = _printerHelper.GetDefaultPrinter();
-
             try
             {
-                if (requiresDefaultPrinter)
+                if (requiresDefaultPrinter && (defaultPrinter != PdfCreatorPrinter))
                 {
+                    _logger.Debug("Current default printer is " + defaultPrinter);
+                    _logger.Info("PDFCreator must be set temporarily as default printer");
                     if (_settingsProvider.Settings.ApplicationSettings.AskSwitchDefaultPrinter)
                     {
                         if (!QuerySwitchDefaultPrinter())
                             return false;
                     }
+                    if (!_printerHelper.SetDefaultPrinter(PdfCreatorPrinter))
+                    {
+                        _logger.Error("PDFCreator could not be set as default printer");
+                        return false;
+                    }
 
-                    _printerHelper.SetDefaultPrinter(PdfCreatorPrinter);
+                    _logger.Debug("PDFCreator set as default printer");
                 }
 
                 return _printCommands.PrintAll();
@@ -118,7 +124,10 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             finally
             {
                 if (requiresDefaultPrinter)
+                {
                     _printerHelper.SetDefaultPrinter(defaultPrinter);
+                    _logger.Debug("Default printer set back to " + defaultPrinter);
+                }
                 _printCommands = new PrintCommandGroup();
             }
         }

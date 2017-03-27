@@ -1,8 +1,8 @@
 ﻿using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Services.Licensing;
+using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -17,13 +17,13 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly IProcessStarter _processStarter;
         private readonly ApplicationNameProvider _applicationNameProvider;
         private readonly ITerminalServerDetection _terminalServerDetection;
-        private readonly ITranslator _translator;
+        private readonly ProgramTranslation _translation;
 
-        public TerminalServerNotAllowedCondition(ITerminalServerDetection terminalServerDetection, ITranslator translator,
+        public TerminalServerNotAllowedCondition(ITerminalServerDetection terminalServerDetection, ProgramTranslation translation,
             IInteractionInvoker interactionInvoker, IProcessStarter processStarter, ApplicationNameProvider applicationNameProvider)
         {
             _terminalServerDetection = terminalServerDetection;
-            _translator = translator;
+            _translation = translation;
             _interactionInvoker = interactionInvoker;
             _processStarter = processStarter;
             _applicationNameProvider = applicationNameProvider;
@@ -37,7 +37,7 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
             var errorMessage = $"It is not possible to run {_applicationNameProvider.ApplicationName} with installed Terminal Services. Please use the Terminal Server Edition instead.";
             _logger.Error(errorMessage);
             var caption = _applicationNameProvider.ApplicationName;
-            var message = _translator.GetTranslation("Program", "UsePDFCreatorTerminalServer");
+            var message = _translation.UsePDFCreatorTerminalServer;
             var result = ShowMessage(message, caption, MessageOptions.MoreInfoCancel, MessageIcon.Exclamation);
             if (result == MessageResponse.MoreInfo)
                 _processStarter.Start(Urls.PdfCreatorTerminalServerUrl);

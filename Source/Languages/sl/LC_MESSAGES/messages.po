@@ -1,0 +1,2804 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Slovenian (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-15 12:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Slovenian "
+"<http://translate.pdfforge.org/projects/pdfcreator/messages/sl/>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 2.11\n"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "<Default Profile>"
+msgstr "<Privzeti profil>"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "High Compression (small file)"
+msgstr "Močno stiskanje (majhna datoteka)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "High Quality (large file)"
+msgstr "Visoka kakovost (velika datoteka)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "JPEG (graphic file)"
+msgstr "JPEG (slikovna datoteka)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "PDF/A (long term preservation)"
+msgstr "PDF/A (arhivski PDF)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "PNG (graphic file)"
+msgstr "PNG (slikovna datoteka)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "Print after saving"
+msgstr "Natisni po shranjevanju"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "TIFF (multipage graphic file)"
+msgstr "TIFF (večstranska slikovna datoteka)"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"There was an error with a component licensed by pdfforge.\r\n"
+"Please reinstall PDFCreator. (Error {0})"
+msgstr ""
+"Prišlo je do napake v komponenti, ki ima licenco pdfforge.\n"
+"Ponovno namestite PDFCreator. (Napaka {0})"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" is invalid or has expired. Please check your "
+"license, otherwise PDFCreator will shutdown.\r\n"
+"Do you want to check your license now?"
+msgstr ""
+"Vaša licenca za \"{0}\" je neveljavna ali pa je potekla. Prosimo, preverite "
+"licenco, sicer se bo program zaprl.\n"
+"Ali želite preveriti vašo licenco?"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" has expired.\r\n"
+"PDFCreator will shut down."
+msgstr ""
+"Vaša licenca za \"{0}\" je potekla.\n"
+"PDFCreator se bo zaprl."
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" has expired.\r\n"
+"Please contact your administrator.\r\n"
+"PDFCreator will shut down."
+msgstr ""
+"Vaša licenca za \"{0}\" je potekla.\n"
+"Obrnite se na vašega skrbnika.\n"
+"PDFCreator se bo zaprl."
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.\r\n"
+"\r\n"
+"Please visit our website for more information or contact us directly: "
+"licensing@pdfforge.org"
+msgstr ""
+"Uporabite \"PDFCreator Terminal Server\" za uporabo na računalnikih z "
+"nameščenimi Terminalskimi storitvami.\n"
+"\n"
+"Za več informacij obiščite našo spletno stran ali nam pišite: "
+"licensing@pdfforge.org"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"Can't find a supported Ghostscript installation.\r\n"
+"\r\n"
+"Program exiting now."
+msgstr ""
+"Ne najdem potrebne namestitve Ghostscript.\n"
+"\n"
+"Program se bo zaprl."
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"The Windows spooler service is not running. Please start the spooler first.\r"
+"\n"
+"\r\n"
+"Program exiting now."
+msgstr ""
+"Storitev Windows spooler se ne izvaja. Najprej zaženite to storitev.\n"
+"\n"
+"Program se bo zaprl."
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"There was an error while starting PDFCreator. Please reinstall the "
+"application. If the error should persist, please contact the support."
+msgstr ""
+"Prišlo je do napake pri zagonu programa PDFCreator. Ponovno namestite "
+"program. V kolikor to ne zadostuje, se obrnite na podporno osebje."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Clear log file"
+msgstr "Počisti dnevnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Restore"
+msgstr "Obnovi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Default Settings"
+msgstr "Privzete nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Export Settings"
+msgstr "Izvoz nastavitev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Load settings from file"
+msgstr "Uvozi nastavitve iz datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Log file cleared"
+msgstr "Dnevniška datoteka izpraznjena"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Logging"
+msgstr "Dnevnik dogodkov"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Logging-Level:"
+msgstr "Stopnja beleženja:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Print PDFCreator Test Page"
+msgstr "Natisni PDFCreator testno stran"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Save settings to file"
+msgstr "Shrani nastavitve v datoteko"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Show log file"
+msgstr "Pokaži dnevniško datoteko"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Test Pages"
+msgstr "Preizkusne strani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Print Windows Test Page"
+msgstr "Natisni Windows testno stran"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid ""
+"Do you really want to restore the default settings? The current settings "
+"will be lost."
+msgstr ""
+"Ali res želite obnoviti privzete nastavitve? Trenutne nastavitve bodo "
+"izgubljene."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "No log file"
+msgstr "Ni dnevniške datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "There is currently no log file available."
+msgstr "Trenutno ni nobene dnevniške datoteke."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Restore Default Settings"
+msgstr "Obnovi privzete nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Are you sure that you want to delete the printer '{0}'?"
+msgstr "Ali ste prepričani, da želite izbrisati tiskalnik '{0}'?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid ""
+"You have modified the application settings. In order to print a test page "
+"with the new settings, you have to save them first.\r\n"
+"Do you want to save the application settings now?"
+msgstr ""
+"Spremenili ste nastavitve programa. Za tiskanje preizkusne strani v skladu s "
+"spremembami je treba nove nastavitve shraniti.\n"
+"Ali jih želite shraniti zdaj?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "Application Settings"
+msgstr "Nastavitve programa"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Ask"
+msgstr "vprašaj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Add"
+msgstr "Dodaj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Added to context menu"
+msgstr "Dodano v kontekstni meni"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Allow PDFCreator to temporarily change the default printer"
+msgstr "Dovoli, da PDFCreator začasno spremeni privzeti tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Check now"
+msgstr "Preveri zdaj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Default Printer"
+msgstr "Privzeti tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Download the latest version at:"
+msgstr "Prenesite najnovejšo različico:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Language"
+msgstr "Jezik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Preview"
+msgstr "Predogled"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Explorer Context Menu Integration"
+msgstr "Bližnjica v kontekstnem meniju Raziskovalca"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid ""
+"Please note that you won't receive any notifications about available updates!"
+msgstr "Obvestil o razpoložljivih posodobitvah ne boste prejemali!"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Removed from context menu (Maybe you need to restart your computer)"
+msgstr ""
+"Odstranjeno s kontekstnega menija (morda bo treba ponovno zagnati računalnik)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Remove"
+msgstr "Odstrani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Select the application language:"
+msgstr "Izberite jezik:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update"
+msgstr "Posodobitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update check is already running."
+msgstr "Preverjanje posodobitev je že v teku."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update check"
+msgstr "Posodobitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Check for updates:"
+msgstr "Preveri za posodobitve:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "Yes"
+msgstr "da"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Last activation:"
+msgstr "Zadnja aktivacija:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation failed"
+msgstr "Aktivacija ni uspela"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation was not successful:"
+msgstr "Aktivacija ni bila uspešna:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation successful"
+msgstr "Aktivacija uspela"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation was successful."
+msgstr "Aktivacija je bila uspešna."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation valid till:"
+msgstr "Aktivacija velja do:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Enter license key"
+msgstr "Vnesite licenčni ključ"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Please enter your license key:"
+msgstr "Vnesite vaš licenčni ključ:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Licensee:"
+msgstr "Imetnik licence:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Never"
+msgstr "nikoli"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Expires:"
+msgstr "Poteče:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "License"
+msgstr "Licenca"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid ""
+"The license key contains illegal characters. Valid characters are: A-Z, 0-9 "
+"and the dash."
+msgstr ""
+"Licenčni ključ vsebuje nedovoljene znake. Veljavni znaki so: A-Z, 0-9 in "
+"črtica."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "License Key:"
+msgstr "Licenčni ključ:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation has expired. Please renew your activation."
+msgstr "Vaša aktivacija je potekla. Prosimo, da jo obnovite."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The machine or user is blocked. Please contact the support."
+msgstr "Blokiran je uporabnik ali naprava. Obrnite se na podporno osebje."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Error while authenticating license."
+msgstr "Napaka pri overitvi licence."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license key is not valid. Please enter a new license key."
+msgstr "Licenčni ključ ni veljaven. Vnesite nov licenčni ključ."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has expired. Please renew your license."
+msgstr "Vaša licenca je potekla. Prosimo, da jo obnovite."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "No license available. Please enter a new license key."
+msgstr "Nobena licenca ni na voljo. Vnesite nov licenčni ključ."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "No license key available. Please enter a new license key."
+msgstr "Noben licenčni ključ ni na voljo. Vnesite nov licenčni ključ."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "There was a problem with the connection to the license server."
+msgstr "Prišlo je do težav pri povezavi z licenčnim strežnikom."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has exceeded the allowed number of activated machines."
+msgstr "Dovoljeno število aktiviranih naprav za to licenco je preseženo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "License status:"
+msgstr "Licenčni status:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license is valid."
+msgstr "Licenca je veljavna."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has expired but is valid for this version."
+msgstr "Licenca je potekla, vendar je veljavna za to različico."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license is not valid for this version."
+msgstr "Licenca ni veljavna za to različico."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Machine ID:"
+msgstr "ID naprave:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Manage licenses"
+msgstr "Upravljaj licence"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Offline activation"
+msgstr "Aktivacija brez povezave"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Online activation"
+msgstr "Spletna aktivacija"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Validating license..."
+msgstr "Preverjanje veljavnosti licence ..."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license key consists of 30 characters or numbers, i.e. {0}"
+msgstr "Licenčni ključ je sestavljen iz 30 črk ali številk, npr. {0}"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Download PDF Architect now"
+msgstr "Prenesite program PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "More on PDF Architect"
+msgstr "Več o programu PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Launch PDF Architect"
+msgstr "Odpri program PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Obtain powerful modules to do more"
+msgstr "Dodajanje zmogljivih razširitev po vaši meri"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Convert PDFs to other popular formats like Word, Excel, HTML or TXT"
+msgstr ""
+"Pretvorite PDF v druge pogoste formate, kot so Word, Excel, HTML ali TXT"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Convert PDFs back"
+msgstr "PDF pretvorite nazaj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Edit text, change fonts, correct typos"
+msgstr "Uredite besedilo, spremenite pisave, popravite napake"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Edit PDFs"
+msgstr "Uredite PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Change page format and margins"
+msgstr "Spremenite format strani in robove"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "FREE features include:"
+msgstr "Brezplačna izdaja omogoča:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Insert, delete or replace images"
+msgstr "Vstavite, izbrišite ali zamenjajte slike"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "You already have PDF Architect on your computer"
+msgstr "PDF Architect je že nameščen na vašem računalniku"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "PDF Architect is our full-featured PDF Editor"
+msgstr "PDF Architect je polno funkcionalni PDF urejevalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid ""
+"Convert images to text you can search and edit using existing PDFs or "
+"documents from your scanner"
+msgstr ""
+"Spremenite skenirane slike ali slike iz PDF-jev v besedilo, ki ga lahko "
+"preiščete in uredite."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Split and merge PDFs"
+msgstr "Ločevanje in združevanje PDF-jev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Text recognition (OCR)"
+msgstr "Uporabite prepoznavo teksta (OCR)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "View and print PDFs"
+msgstr "Ogled in tiskanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Add Printer"
+msgstr "Dodaj tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Delete Printer"
+msgstr "Izbriši tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Last used profile"
+msgstr "Nazadnje uporabljen profil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Manage Printers"
+msgstr "Upravljanje tiskalnikov"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Primary"
+msgstr "Glavni"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Set Primary Printer"
+msgstr "Glavni tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Printer"
+msgstr "Tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Profile"
+msgstr "Profil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Rename Printer"
+msgstr "Preimenuj tiskalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Replaced Title:"
+msgstr "Zamenjan naslov:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Replace with"
+msgstr "Zamenjaj z"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Sample Title:"
+msgstr "Vzorčni naslov:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Search text"
+msgstr "Iskano besedilo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Title Replacement"
+msgstr "Zamenjava naslova"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Type"
+msgstr "Vrsta"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "Error"
+msgstr "Napaka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"You do not have any PDFCreator printers installed. Most likely there was a "
+"problem during the setup or the installation has been altered afterwards.\r\n"
+"Do you want to fix this by reinstalling the PDFCreator printers?\r\n"
+"\r\n"
+"Note: You might be asked to grant admin privileges while fixing the problem."
+msgstr ""
+"Noben PDFCreator tiskalnik ni nameščen. Verjetno je prišlo do težav med "
+"namestitvijo programa ali do sprememb po namestitvi.\n"
+"Ali želite ponovno namestiti PDFCreator tiskalnike?\n"
+"\n"
+"Opomba: Med postopkom boste morda potrebovali skrbniške pravice."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"PDFCreator was not able to repair your printers. Please contact your "
+"administrator or the support to assist you in with this problem."
+msgstr ""
+"Vaših tiskalnikov ni bilo mogoče popraviti. Za pomoč se obrnite na skrbnika "
+"ali podporno osebje."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "No printers installed"
+msgstr "Ni nameščenih tiskalnikov"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "RepairTool not found"
+msgstr "Orodje za popravilo ni najdeno"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "Set by administrator"
+msgstr "Nastavil administrator"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"An important PDFCreator file is missing ('{0}'). Please reinstall PDFCreator!"
+msgstr ""
+"Manjka pomembna programska datoteka ('{0}'). Ponovno namestite PDFCreator!"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "Access Denied"
+msgstr "Dostop zavrnjen"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"The temporary path where PDFCreator stores the print jobs can't be accessed. "
+"This is a configuration problem on your machine and needs to be fixed. Do "
+"you want PDFCreator to attempt repairing it?\r\n"
+"Your spool folder is: {0}"
+msgstr ""
+"Nedosegljivo je mesto, kamor PDFCreator začasno shranjuje tiskalniške posle. "
+"Odpraviti je treba težavo z nastavitvami vašega sistema. Ali naj PDFCreator "
+"poskusi s popravilom?\n"
+"Vaša mapa za tisk je: {0}"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"PDFCreator was not able to repair your spool folder. Please contact your "
+"administrator or the support to assist you in changing the permissions of "
+"the path '{0}'."
+msgstr ""
+"Mape za tisk ni bilo mogoče popraviti. Obrnite se na skrbnika ali podporno "
+"osebje za spremembo dovoljenj te poti: '{0}'."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Enable automatic saving"
+msgstr "Omogoči samodejno shranjevanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Automatic Saving"
+msgstr "Samodejno shranjevanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid ""
+"Edit profiles without print dialog by opening PDFCreator in Windows Explorer"
+msgstr ""
+"Urejajte profile brez pogovornega okna za tisk tako, da odprete PDFCreator "
+"iz Raziskovalca."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Ensure unique filenames (Do not overwrite existing files)"
+msgstr "Zagotovi enolična imena datotek (ne zamenjaj obstoječih datotek)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Target Folder:"
+msgstr "Ciljna mapa:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Preview:"
+msgstr "Predogled:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Add Token:"
+msgstr "Dodaj spremenljivko:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Select folder for automatic saving"
+msgstr "Izberite mapo za samodejno shranjevanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Author:"
+msgstr "Avtor:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Keywords:"
+msgstr "Ključne besede:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Metadata"
+msgstr "Metapodatki"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Add a stamp text on top of all pages"
+msgstr "Dodaj žig na vrh vseh strani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Stamp"
+msgstr "Žig"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Show Font as outline"
+msgstr "Oriši pisavo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Font Color:"
+msgstr "Barva pisave:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Font:"
+msgstr "Pisava:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Outline Width:"
+msgstr "širina orisa:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Stamp Text:"
+msgstr "Besedilo žiga:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Subject:"
+msgstr "Zadeva:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Title:"
+msgstr "Naslov:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "The selected font is not supported. Please select a different font."
+msgstr "Izbrana pisava ni podprta. Izberite drugo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Colors:"
+msgstr "Barve:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "JPEG Settings"
+msgstr "JPEG"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Quality (%):"
+msgstr "Kakovost (%):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Resolution (DPI):"
+msgstr "Ločljivost (DPI):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "PNG Settings"
+msgstr "PNG"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "TIFF Settings"
+msgstr "TIFF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "An error occurred:"
+msgstr "Prišlo je do napake:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "JPEG file"
+msgstr "JPEG datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/A-1b file"
+msgstr "PDF/A-1b datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/A-2b file"
+msgstr "PDF/A-2b datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF file"
+msgstr "PDF datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/X file"
+msgstr "PDF/X datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PNG file"
+msgstr "PNG datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid ""
+"The file could not be saved. Maybe the file is currently in use or you do "
+"not have the required permissions.\r\n"
+"Please select another filename and try again."
+msgstr ""
+"Datoteke ni mogoče shraniti. Morda je ta trenutno v uporabi ali pa nimate "
+"potrebnih dovoljenj.\n"
+"Izberite drugo ime datoteke in poskusite znova."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid ""
+"Could not authenticate at server.\r\n"
+"Please check your password and verify that you have a working internet "
+"connection."
+msgstr ""
+"Neuspešna overitev na strežniku.\n"
+"Preverite vaše geslo in internetno povezavo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "Select destination"
+msgstr "Izberite cilj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid ""
+"The total length of path and filename is too long.\r\n"
+"Please use a shorter name."
+msgstr ""
+"Skupna dolžina poti in imena datoteke je predolga.\n"
+"Uporabite krajše ime."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "Text file"
+msgstr "Text datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "TIFF file"
+msgstr "TIFF datoteka"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "FTP server password:"
+msgstr "Geslo FTP strežnika:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "FTP server password"
+msgstr "Geslo FTP strežnika"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.MailSignatureHelperTranslation
+msgid "E-mail automatically created by the free PDFCreator"
+msgstr "E-pošto je samodejno ustvaril brezplačni PDFCreator."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.MailSignatureHelperTranslation
+msgid "E-mail automatically created by PDFCreator"
+msgstr "E-pošto je samodejno ustvaril PDFCreator"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid ""
+"The print document action allows to print the document to a physical printer "
+"in addition to the conversion to PDF or any other format."
+msgstr ""
+"To dejanje omogoča, da dokument pretvorite v PDF ali drug podprt format in "
+"ga istočasno natisnete še s fizičnim tiskalnikom."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Print document"
+msgstr "Natisni dokument"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Duplex printing (if support by the printer)"
+msgstr "Obojestranski tisk (če ga tiskalnik omogoča)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Select printer:"
+msgstr "Izberi tiskalnik:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Conversion"
+msgstr "Pretvorba"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Select the default file format:"
+msgstr "Privzeta vrsta datoteke:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Filename"
+msgstr "Ime datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Filename Template:"
+msgstr "Privzeta oblika imena datoteke:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid ""
+"Set default output folder (else the last saved file location will be opened)"
+msgstr ""
+"Nastavi privzeto mapo za shranjevanje (sicer se bo odprla nazadnje "
+"uporabljena)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Save Dialog Folder"
+msgstr "Privzeta mapa shranjevanja"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Folder Template:"
+msgstr "Ciljna mapa:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Show progress during conversion"
+msgstr "Kaži napredek med pretvarjanjem"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Skip print dialog (directly proceed to the save dialog)"
+msgstr "Preskoči pogovorno okno tiskanja (takoj odpri okno za shranjevanje)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Select save dialog folder"
+msgstr "Izberi privzeto mapo za shranjevanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "keyword 1 keyword 2"
+msgstr "KljučnaBeseda 1 KljučnaBeseda 2"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "MyFile.docx"
+msgstr "MojDokument.docx"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename.jpg"
+msgstr "IzvoženaDatoteka.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename2.jpg"
+msgstr "IzvoženaDatoteka2.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename3.jpg"
+msgstr "IzvoženaDatoteka3.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Subject from Settings"
+msgstr "Zadeva iz Nastavitev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Title from Printjob"
+msgstr "Naslov iz tiskanja"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Title from Settings"
+msgstr "Naslov iz nastavitev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "General"
+msgstr "Splošno"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PDF Version"
+msgstr "Različica PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Current PDF version:"
+msgstr "Trenutna različica PDF:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid ""
+"Note: For best compatibility PDFCreator uses the lowest version that is "
+"possible with the current settings."
+msgstr ""
+"Opomba: PDFCreator za najboljšo združljivost uporablja najstarejšo možno "
+"različico, ki jo dopuščajo trenutne nastavitve."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page Orientation"
+msgstr "Orientacija strani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Color Model"
+msgstr "Barvni model"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Viewer Settings"
+msgstr "Privzet prikaz"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page view:"
+msgstr "Prikaz strani:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Document view:"
+msgstr "Prikaz dokumenta:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Viewer opens on page:"
+msgstr "Dokument se odpre na strani:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Compression"
+msgstr "Stiskanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Color and Grayscale Images"
+msgstr "Barvne in sivinske slike"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Enable compression"
+msgstr "Omogoči stiskanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Factor:"
+msgstr "Faktor:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Resample images to"
+msgstr "Prevzorči slike na"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "DPI"
+msgstr "DPI"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Monochrome Images"
+msgstr "Enobarvne slike"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Security"
+msgstr "Varnost"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Encrypt PDF documents to protect its contents"
+msgstr "Zaščiti vsebino PDF dokumentov s šifriranjem"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Require a password to open the PDF document"
+msgstr "Zahtevaj geslo za odpiranje PDF dokumenta"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Set Passwords"
+msgstr "Nastavi gesla"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Encryption Level"
+msgstr "Moč šifriranja"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Low (128 Bit)"
+msgstr "Nizka (128 Bit)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "- Unsecure. Use only for compatibility."
+msgstr "- Ranljivo. Samo v primeru zagotavljanja združljivosti."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Medium (128 Bit AES)"
+msgstr "Srednja (128 Bit AES)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "High (256 Bit AES)"
+msgstr "Visoka (256 Bit AES)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "- Only available in PDFCreator Plus and Business"
+msgstr "- Na voljo samo v PDFCreator Plus in Business"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "More info"
+msgstr "Več informacij"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Allow the user"
+msgstr "Uporabniku dovoli"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to copy content from the document"
+msgstr "kopiranje vsebine"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to print the document"
+msgstr "tiskanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "restrict to low quality"
+msgstr "samo v slabši kakovosti"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to use a screen reader"
+msgstr "uporabo bralnika zaslona"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit the document"
+msgstr "urejanje dokumenta"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit comments"
+msgstr "komentiranje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to fill forms"
+msgstr "izpolnjevanje obrazcev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit the assembly"
+msgstr "sestavo dokumenta"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Signature"
+msgstr "Podpis"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Sign PDF document with a digital signature"
+msgstr "Podpiši PDF z digitalnim podpisom"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Certificate File:"
+msgstr "Datoteka digitalnega potrdila:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Set Password"
+msgstr "Nastavi geslo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Reason:"
+msgstr "Razlog:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Contact:"
+msgstr "Kontakt:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Location:"
+msgstr "Lokacija:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Allow multiple signing"
+msgstr "Dovoli večkratno podpisovanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Time Server URL:"
+msgstr "URL časovnega strežnika:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Default Time Server"
+msgstr "Privzeti časovni strežnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Secured Time Server"
+msgstr "Varni časovni strežnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "User Name:"
+msgstr "Uporabniško ime:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Display signature in document"
+msgstr "Podpis pokaži v dokumentu"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page:"
+msgstr "Stran:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Left X:"
+msgstr "Levi X:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Right X:"
+msgstr "Desni X:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Left Y:"
+msgstr "Levi Y:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Right Y:"
+msgstr "Desni Y:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PDF Signature"
+msgstr "PDF podpis"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Select certificate file"
+msgstr "Izberi digitalno potrdilo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PFX/P12 files"
+msgstr "PFX/P12 datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "All files"
+msgstr "Vse datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "The certificate file does not exist."
+msgstr "Datoteka z digitalnim potrdilom ne obstaja."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Password for Time Server"
+msgstr "Geslo za časovni strežnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Time Server Password:"
+msgstr "Geslo za časovni strežnik:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid ""
+"PDFCreator is free software consisting of multiple components with "
+"individual licenses. Please read the license section in the manual for "
+"further information on these licenses."
+msgstr ""
+"PDFCreator je brezplačen program, ki ga sestavlja več komponent z lastnimi "
+"licencami. Za podrobnosti preberite poglavje o licencah v navodilih za "
+"uporabo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid "About PDFCreator"
+msgstr "O programu PDFCreator"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid "User Manual"
+msgstr "Navodila za uporabo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Admin privileges required"
+msgstr "Zahtevane skrbniške pravice"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Debug"
+msgstr "Napake"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Help"
+msgstr "Pomoč"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "INI files (*.ini)|*.ini"
+msgstr "INI datoteke (*.ini)|*.ini"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Invalid settings"
+msgstr "Neveljavne nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "The file does not appear to contain valid PDFCreator settings."
+msgstr "Datoteka ne vsebuje veljavnih nastavitev za PDFCreator."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"By loading the file all settings and profiles will be overwritten. Do you "
+"want to continue?"
+msgstr ""
+"Z uvozom novih nastavitev bodo izbrisani vsi trenutni profili in nastavitve. "
+"Ali želite nadaljevati?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"This operation requires admin privileges and it looks like you are not an "
+"admin. Do you want to continue anyway?\r\n"
+"Note: It is safe to continue even if you are unsure if you have appropriate "
+"rights, but the operation will not be completed."
+msgstr ""
+"To dejanje zahteva skrbniške pravice. Ali želite kljub temu nadaljevati?\n"
+"Opomba: če o svojih pravicah niste prepričani, lahko vseeno nadaljujete. V "
+"kolikor jih nimate, se dejanje ne bo izvedlo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Overwrite all settings"
+msgstr "Prepiši vse trenutne nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Printers"
+msgstr "Tiskalniki"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Save"
+msgstr "Shrani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Operation failed. You probably do not have sufficient permissions."
+msgstr "Dejanje ni uspelo. Verjetno nimate potrebnih dovoljenj."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "PDFCreator Settings"
+msgstr "PDFCreator Nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Title"
+msgstr "Naslov"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "Defective profile:"
+msgstr "Težave profila:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "Defective Profiles"
+msgstr "Napake v profilih"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile:"
+msgstr "Profil:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid ""
+"Do you want to return and edit the settings or\r\n"
+"ignore the error and save anyway?"
+msgstr ""
+"Lahko se vrnete in popravite nastavitve.\n"
+"Če napake prezrete, se bodo trenutne nastavitve shranile!"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "_Edit"
+msgstr "_Popravi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "_Ignore"
+msgstr "_Prezri"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "To get help, hit F1 or the question mark."
+msgstr "Za pomoč pritisnite F1 ali izberite vprašaj."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "1. Set up your profiles and settings here"
+msgstr "1. Tukaj nastavite program in vaše profile."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "2. Print any document to the printer 'PDFCreator'."
+msgstr "2. Natisnite katerikoli dokument s tiskalnikom 'PDFCreator'."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "3. Save your PDF or send it as mail."
+msgstr "3. PDF shranite ali pošljite po e-pošti."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid ""
+"PDFCreator allows to create PDF documents from any application that is able "
+"to print. Creating a PDF document is easy:"
+msgstr ""
+"PDFCreator omogoča izdelavo PDF dokumentov v vseh aplikacijah, ki podpirajo "
+"tiskanje. Izdelava je preprosta:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile Settings"
+msgstr "Nastavitve profila"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Continue"
+msgstr "Nadaljuj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Delete"
+msgstr "Izbriši"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Files"
+msgstr "Datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Merge All"
+msgstr "Združi vse"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Merge"
+msgstr "Združi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Pages"
+msgstr "Strani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Manage Print Jobs"
+msgstr "Čakalna vrsta za tiskanje"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "We highly value that you are using PDFCreator!"
+msgstr "Veseli nas, da uporabljate PDFCreator!"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "No, thanks"
+msgstr "Ne, hvala"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "More Information"
+msgstr "Več informacij"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid ""
+"For power users like you, we recommend PDFCreator Plus to support the future "
+"development and benefit from exclusive features and priority support."
+msgstr ""
+"Naprednim uporabnikom priporočamo PDFCreator Plus, saj z njim podprejo "
+"nadaljnji razvoj ter hkrati koristijo boljše rešitve in prednostno obravnavo."
+
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid ""
+"You have already converted {0} file with PDFCreator. Thank you very much!"
+msgid_plural ""
+"You have already converted {0} files with PDFCreator. Thank you very much!"
+msgstr[0] "S programom PDFCreator ste natisnili že {0} datoteko. Hvala vam!"
+msgstr[1] "S programom PDFCreator ste natisnili že {0} datoteki. Hvala vam!"
+msgstr[2] "S programom PDFCreator ste natisnili že {0} datoteke. Hvala vam!"
+msgstr[3] "S programom PDFCreator ste natisnili že {0} datotek. Hvala vam!"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "Try PDFCreator Plus!"
+msgstr "Preizkusite PDFCreator Plus!"
+
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "There is {0} more Job waiting"
+msgid_plural "There are {0} more Jobs waiting"
+msgstr[0] "Preostali dokumenti v čakalni vrsti: {0}"
+msgstr[1] "Preostali dokumenti v čakalni vrsti: {0}"
+msgstr[2] "Preostali dokumenti v čakalni vrsti: {0}"
+msgstr[3] "Preostali dokumenti v čakalni vrsti: {0}"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "Print more documents to merge or rearrange them"
+msgstr "Dokumente lahko združite tako, da jih tiskate več hkrati."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Author"
+msgstr "_Avtor"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "E-Mail"
+msgstr "E-pošta"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Keywords"
+msgstr "_Ključne besede"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Merge"
+msgstr "Združi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Metadata"
+msgstr "_Metapodatki"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Profile"
+msgstr "_Profil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Save"
+msgstr "Shrani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Subject"
+msgstr "_Zadeva"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Title"
+msgstr "_Naslov"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ActionsTabTranslation
+msgid "Actions"
+msgstr "Dejanja"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Auto-Save"
+msgstr "Shrani samodejno"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Delete profile"
+msgstr "Izbriši profil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid ""
+"The profile '{0}' is assigned to the printer '{1}'. If you delete this "
+"profile, the printer will use the default profile instead. Do you want to "
+"proceed?"
+msgstr ""
+"Profil '{0}' je dodeljen tiskalniku '{1}'. Če ta profil izbrišete, bo "
+"tiskalnik uporabil privzeti profil. Ali se strinjate?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Document"
+msgstr "Dokument"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Please enter profile name:"
+msgstr "Vnesite ime profila:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Image Formats"
+msgstr "Slikovni formati"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "The entered profile name is invalid or does already exist."
+msgstr "Ime profila ni veljavno ali pa že obstaja."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "New Profile"
+msgstr "Nov profil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "PDF"
+msgstr "PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Printer assignment"
+msgstr "Dodelitev tiskalnika"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile name"
+msgstr "Ime profila"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Do you really want to the delete '{0}'?"
+msgstr "Ali ste prepričani, da želite izbrisati '{0}'?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Do you really want to cancel the settings and discard the changes?"
+msgstr "Ali želite razveljaviti spremembe nastavitev?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Unsaved changes"
+msgstr "Neshranjene spremembe"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "Download"
+msgstr "Prenesi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "No application is associated to open PDF files."
+msgstr "Nobena aplikacija ni določena za odpiranje PDF datotek."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid ""
+"We recommend PDF Architect, our free PDF Viewer and Editor.\r\n"
+"The free edition contains a viewer and basic editing capabilities. "
+"Furthermore, you can buy optional modules, which extend the functionality "
+"according to your requirements and even provide OCR."
+msgstr ""
+"Priporočamo program PDF Architect, naš PDF pregledovalnik in urejevalnik.\n"
+"Brezplačna izdaja vsebuje pregledovalnik in osnovne urejevalne zmožnosti. "
+"Dodatno lahko kupite posamezne module, ki razširijo funkcionalnost glede na "
+"vaše potrebe, vključno z OCR za prepoznavo teksta."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Licensing was succesful."
+msgstr "Licenciranje je bilo uspešno."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Do you want to make the license available for all users on your system?"
+msgstr "Ali želite, da je licenca na razpolago vsem uporabnikom sistema?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "An error occured while storing license for all users."
+msgstr "Prišlo je do napake pri shranjevanju licence za vse uporabnike."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Store license for all users was successful."
+msgstr "Shranjevanje licence za vse uporabnike je bilo uspešno."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.InputBoxWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "The update will be started when you close PDFCreator"
+msgstr "Posodobitev se bo začela, ko boste zaprli PDFCreator."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "Loading Update..."
+msgstr "Nalaganje posodobitve ..."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "PDFCreator Plus Updater"
+msgstr "Posodobitev na PDFCreator Plus"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "Welcome"
+msgstr "Dobrodošli"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid ""
+"The improvements of this version are listed in the \"What's new?\" section "
+"of the manual. For latest information about our products, join us on "
+"facebook or google+."
+msgstr ""
+"Seznam izboljšav za to različico najdete v navodilih, v poglavju \"What's "
+"new?\". Za zadnje novice o naših izdelkih se nam pridružite na Facebook ali "
+"Google+."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "Thank you for downloading PDFCreator."
+msgstr "Zahvaljujemo se vam za prenos programa PDFCreator."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "What's new?"
+msgstr "Kaj je novega?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "OK"
+msgstr "V redu"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "Owner password (for editing):"
+msgstr "Lastniško geslo (za urejanje):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid ""
+"An owner password is required to set the user passwords. Leave one or both "
+"passwords empty to get a request during the print job (passwords will not be "
+"saved)."
+msgstr ""
+"Za določitev uporabniškega gesla (za odpiranje) je potrebno lastniško geslo."
+"\n"
+"Geslo vpišite tukaj samo, če ga želite shraniti. V nasprotnem primeru boste "
+"pozvani med izdelavo PDF dokumenta."
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Skip"
+msgstr "Preskoči"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "Encryption Passwords"
+msgstr "Šifrirna gesla"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "User password (for opening):"
+msgstr "Uporabniško geslo (za odpiranje):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.InputBoxWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_OK"
+msgstr "_V redu"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "More information"
+msgstr "Več informacij"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "No"
+msgstr "Ne"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "Retry"
+msgstr "Ponovi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid ""
+"Wrong license key syntax.\r\n"
+"It must look like '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'.\r\n"
+"Valid characters are: A-Z, 0-9 and the dash."
+msgstr ""
+"Oblika licenčnega ključa ni prava.\n"
+"Podobna mora biti '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'.\n"
+"Veljavni znaki so: A-Z, 0-9 in črtica."
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "License key"
+msgstr "Licenčni ključ"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Paste the response code here:"
+msgstr "Tu prilepite povratno pridobljeno kodo:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Request an activation code on our website:"
+msgstr "Zaprosite za aktivacijsko kodo na naši spletni strani:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid ""
+"Leave password empty to get a request during the print job (password will "
+"not be saved)."
+msgstr ""
+"Geslo vpišite tukaj samo, če ga želite shraniti. V nasprotnem primeru boste "
+"pozvani med izdelavo PDF dokumenta."
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Signature _password:"
+msgstr "Podpisno _geslo:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation
+msgid "Authenticate with Dropbox"
+msgstr "Dropbox - preverjanje pristnosti"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Dropbox"
+msgstr "Dropbox"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Links copied successfully"
+msgstr "Povezave uspešno kopirane"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid ""
+"Please note: Everyone who recieves this link will be able to access the file"
+msgstr ""
+"Upoštevajte: Kdorkoli prejme to povezavo, bo lahko dostopal do datoteke."
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "The following links have been created for your document:"
+msgstr "Za vaš dokument so bile ustvarjene naslednje povezave:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "Attach pdfforge signature"
+msgstr "Pripni podpis pdfforge"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "_Text:"
+msgstr "_Besedilo:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "_Subject:"
+msgstr "_Zadeva:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Edit E-Mail Text"
+msgstr "Uredi besedilo e-pošte"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "Use Html"
+msgstr "Uporabi Html"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Remove"
+msgstr "Odstrani"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Skip"
+msgstr "Preskoči"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid "{0} Update"
+msgstr "{0} Posodobitev"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"There was a problem during the download. Do you want to download the update "
+"from the website instead?"
+msgstr ""
+"Prišlo je do težave pri prenosu. Ali želite raje prenesti posodobitev s "
+"spletne strani?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"The MD5 hash of the downloaded file does not match the expected hash. It is "
+"possible that the file has been damaged during the download. Do you want to "
+"retry the download?"
+msgstr ""
+"Rezultat kontrolne funkcije MD5 za preneseno datoteko se ne ujema s "
+"pričakovanim. Morda se je datoteka poškodovala med prenosom. Ali želite "
+"ponoviti prenos?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"Failure in update-process.\r\n"
+"Please check your internet-connection and retry later."
+msgstr ""
+"Napaka v postopku posodobitve.\n"
+"Preverite internetno povezavo in poskusite kasneje."
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"The new version {0} is available.\r\n"
+"Would you like to download the new version?"
+msgstr ""
+"Na voljo je novejša različica {0}.\n"
+"Ali jo želite prenesti?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid "You already have the most recent version."
+msgstr "Različica programa je najnovejša."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer '{0}' could not be installed."
+msgstr "Tiskalnika '{0}' ni bilo možno namestiti."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer '{0}' could not be renamed in '{1}'."
+msgstr "Tiskalnika '{0}' ni bilo možno preimenovati v '{1}'."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid ""
+"You may not delete the last printer. Uninstall PDFCreator if you really want "
+"to remove all related printers."
+msgstr ""
+"Izbris zadnjega tiskalnika ni možen! Odstranite program PDFCreator, če "
+"želite izbrisati vse sorodne tiskalnike."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Please enter printer name:"
+msgstr "Vnesite ime tiskalnika:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid ""
+"A printer with the name '{0}' is already installed on your system. Please "
+"enter a new printer name:"
+msgstr "Tiskalnik z imenom '{0}' je že nameščen. Vnesite drugo ime:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer name contains invalid characters."
+msgstr "Ime tiskalnika vsebuje neveljavne znake."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The name is invalid or a printer with this name already exists"
+msgstr "Ime ni veljavno ali pa tiskalnik s tem imenom že obstaja."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "and {0} more."
+msgstr "in {0} več."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid ""
+"You have tried to convert directories here. This is currently not supported."
+msgstr "Poskusili ste pretvoriti celo mapo. Ta funkcija zaenkrat ni podprta."
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "The following files can't be converted:"
+msgstr "Teh datotek ni možno pretvoriti:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "Do you want to proceed anyway?"
+msgstr "Ali želite vseeno nadaljevati?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid ""
+"PDFCreator needs to temporarily change the default printer to be able to "
+"convert the file. Do you want to proceed?"
+msgstr ""
+"Za dokončanje postopka mora PDFCreator začasno spremeniti privzeti "
+"tiskalnik. Ali želite nadaljevati?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid ""
+"Add an attachment to your documents.\r\n"
+"The attachment file must be a PDF file and may contain multiple pages."
+msgstr ""
+"PDF dokumentu lahko dodate prilogo.\n"
+"Priloga mora biti PDF datoteka, ki lahko vsebuje več strani."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Add attachment"
+msgstr "Dodaj prilogo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "PDF files"
+msgstr "PDF datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Select attachment file"
+msgstr "Izberi datoteko za prilogo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Attachment file (PDF):"
+msgstr "Datoteka za prilogo (PDF):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid ""
+"Add a background to your PDF documents.\r\n"
+"The background file must be a PDF file and may contain multiple pages."
+msgstr ""
+"PDF dokumentu lahko dodate ozadje.\n"
+"Datoteka z ozadjem mora biti PDF, ki lahko vsebuje več strani."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background (only for PDF)"
+msgstr "Dodaj ozadje (samo za PDF)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Select background file"
+msgstr "Izberi datoteko z ozadjem"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Background File (PDF):"
+msgstr "Datoteka z ozadjem (PDF):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Repetition:"
+msgstr "Ponovitev:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background to attachment"
+msgstr "Dodaj ozadje k prilogi"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background to cover"
+msgstr "Dodaj ozadje na naslovnico"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid ""
+"Add a cover to your documents.\r\n"
+"The cover file must be a PDF file and may contain multiple pages."
+msgstr ""
+"PDF dokumentu lahko dodate naslovno stran.\n"
+"Ta mora biti v PDF datoteki, ki lahko vsebuje več strani."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Add cover"
+msgstr "Dodaj naslovnico"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Select cover file"
+msgstr "Izberi datoteko z naslovnico"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Cover file (PDF):"
+msgstr "Datoteka z naslovnico (PDF):"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Upload to Dropbox"
+msgstr "Prenesi na Dropbox"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid ""
+"Create a link to share the uploaded files. Anyone with the link can view "
+"this file."
+msgstr ""
+"Ustvarite povezavo, če želite deliti prenesene datoteke. Datoteko si lahko "
+"ogleda vsak, ki pozna povezavo."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Please select Dropbox Account:"
+msgstr "Izberite Dropbox uporabniški račun:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Please define folder:"
+msgstr "Določite mapo:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Don't overwrite files (adds an increasing number in case of conflict)."
+msgstr "Ne zamenjaj datotek (v primeru enakih imen jih zaporedno oštevilči)."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Check e-mail client"
+msgstr "Preveri odjemalca e-pošte"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid ""
+"Opens a new e-mail in the default client. There you can add recipients, text "
+"and other information and then send the mail to your contacts."
+msgstr ""
+"To dejanje odpre privzeto aplikacijo za e-pošto, kjer ustvari novo sporočilo "
+"in pripne dokument. Sporočilo lahko ročno uredite in pošljete naslovnikom."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Open e-mail client"
+msgstr "Odpri odjemalca e-pošte"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Could not find MAPI client (e.g. Thunderbird or Outlook)."
+msgstr "Ne najdem odjemalca MAPI (npr. Thunderbird ali Outlook)."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Check E-Mail Client"
+msgstr "Preveri e-poštni odjemalec"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Multiple recipients are separated by commas"
+msgstr "Več prejemnikov ločite z vejicami."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Recipients:"
+msgstr "Prejemniki:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid ""
+"The SMTP e-mail action allows to directly send files via e-mail without "
+"further user interaction. Notice: This action is intended for advanced users "
+"and requires careful attention as it can silently send the converted "
+"documents via e-mail to the configured recipients."
+msgstr ""
+"To dejanje omogoča samodejno pošiljanje dokumentov z e-pošto (prek SMTP), "
+"brez dodatnih posegov uporabnika. Opomba: Ta možnost je namenjena naprednim "
+"uporabnikom, saj lahko prednastavljenim prejemnikom pomotoma pošiljate tudi "
+"tiste dokumente, ki jih ne želite."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send e-mail over SMTP"
+msgstr "Pošlji e-pošto prek SMTP"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send test mail"
+msgstr "Pošlji preizkusno sporočilo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Test mail sent to {0}."
+msgstr "Preizkusno sporočilo poslano na {0}."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Smtp Password:"
+msgstr "geslo SMTP:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Set Smtp Password"
+msgstr "Nastavi geslo SMTP"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "E-Mail Address:"
+msgstr "E-naslov:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Port:"
+msgstr "Vrata:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send Test Mail"
+msgstr "Pošlji preizkusno sporočilo"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Server:"
+msgstr "Strežnik:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "SSL"
+msgstr "SSL"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid ""
+"The FTP action allows to upload the created documents to a server via FTP."
+msgstr "Omogoča prenos ustvarjenih dokumentov na strežnik preko povezave FTP."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Upload with FTP"
+msgstr "Naloži prek FTP"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Directory:"
+msgstr "Mapa:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Don't overwrite files (adds an increasing number in case of conflict)"
+msgstr "Ne zamenjaj datotek (v primeru enakih imen jih zaporedno oštevilči)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid ""
+"PDF Architect is not installed.\r\n"
+"Do You want to download it from pdfforge.org?"
+msgstr ""
+"PDF Architect ni nameščen.\n"
+"Ali ga želite prenesti s strani pdfforge.org?"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open document after saving."
+msgstr "Odpre dokument, ko je shranjen."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open document"
+msgstr "Odpri dokument"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open PDF files with PDF Architect"
+msgstr "Odpri PDF-je s programom PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Obtain powerful modules to do more like"
+msgstr "Pridobite zmogljive razširitve in naredite več, na primer:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Convert PDFs to Word, Excel and more"
+msgstr "Pretvorite PDF v Word, Excel in več"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Edit PDFs like with a word processor"
+msgstr "Urejajte PDF kot v urejevalniku besedil"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Our full-featured PDF Editor"
+msgstr "Naš polno funkcionalni PDF urejevalnik"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid ""
+"The script action runs a custom script or application after the conversion. "
+"This allows you to further process the output."
+msgstr ""
+"To dejanje po končani pretvorbi zažene skript po meri ali zunanjo "
+"aplikacijo. Izdelano datoteko lahko tako še dodatno obdelate."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Run script"
+msgstr "Izvedi skript"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Executable files"
+msgstr "Izvedljive datoteke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Select script file"
+msgstr "Izberi skript"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Additional Script Parameters:"
+msgstr "Dodatni parametri skripta:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Script Call Preview:"
+msgstr "Predogled:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Script File:"
+msgstr "Datoteka skripta:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Wait until the script execution has ended"
+msgstr "Počakaj, da se skript izvede do konca"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Parse the document for UserTokens and set their values."
+msgstr ""
+"To dejanje v dokumentu poišče poljubne spremenljivke, ki jih določi "
+"uporabnik, in uporabi njihove vrednosti."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Activate UserTokens"
+msgstr "Omogoči poljubne spremenljivke"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Please note:"
+msgstr "Upoštevajte:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"The user tokens feature is currently in beta status, and it is not "
+"considered stable. You are welcome to test and use it. If you should "
+"encounter any questions or problems, please feel free to contact our "
+"support. If you can also attach the document in which you experience the "
+"problems, we can help you in solving them."
+msgstr ""
+"Funkcija poljubnih spremenljivk ima trenutno beta status, saj ni povsem "
+"preverjena. Lahko jo uporabljate in preizkušate. V primeru težav ali "
+"nejasnosti vam je na voljo naše podporno osebje. Da bomo lažje pomagali, "
+"pošljite tudi dokument, s katerim imate težave."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"Define your own tokens directly in the original document with the following "
+"pattern: \"[[[UserTokenName: User token value]]]\". Afterwards the definied "
+"value can be called via the following token: \"<User:UserTokenName>\". The "
+"original pattern will be removed from the created document. You can define "
+"any number of user tokens. You can find more information in the user guide:"
+msgstr ""
+"Ustvarite svoje spremenljivke kar v izvornem dokumentu s tako oblikovanim "
+"nizom: \"[[[ImePoljubneSpremenljivke: vrednost poljubne spremenljivke]]]\". "
+"Vrednost, ki ste jo določili v dokumentu, prikličete z naslednjo "
+"spremenljivko: \"<User:ImePoljubneSpremenljivke>\". Niz iz izvornega "
+"dokumenta bo v novem dokumentu odstranjen. Število poljubnih spremenljivk ni "
+"omejeno. Več informacij je na voljo v navodilih:"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"The extraction of user tokens is available in the business editions of "
+"PDFCreator"
+msgstr ""
+"Izvleček poljubnih spremenljivk je možen v poslovnih različicah PDFCreator-"
+"ja."
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "More on user tokens"
+msgstr "O poljubnih spremenljivkah"
+
+#: pdfforge.PDFCreator.UI.Views.Translations.TokenHintPanelTranslation
+msgid "See hint on tokens"
+msgstr "Glejte nasvet o varnostnih žetonih"
+
+# pdfforge.PDFCreatorShell.ContextMenuTranslation
+# pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "and {0} more file/directory"
+msgid_plural "and {0} more files/directories"
+msgstr[0] "in še {0} datoteka/mapa"
+msgstr[1] "in še {0} datoteki/mapi"
+msgstr[2] "in še {0} datoteke/mape"
+msgstr[3] "in še {0} datotek/map"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "&Convert with PDFCreator"
+msgstr "&Pretvori s PDFCreator-jem"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "Hint"
+msgstr "Nasvet"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid ""
+"Couldn't find PDFCreator in your system. Please check if you have installed "
+"it."
+msgstr ""
+"Programa PDFCreator ni bilo mogoče najti. Preverite, ali je bil nameščen."
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid ""
+"At least one of the selected items is not convertible! For more information "
+"about the unprintable files, see the list below."
+msgstr ""
+"Vsaj enega od izbranih dokumentov ni možno pretvoriti! Za več informacij o "
+"nenatisljivih datotekah glejte spodnji seznam."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "PDF Architect could not open output file."
+msgstr "PDF Architect ni mogel odpreti izvožene datoteke."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "System could not open output file."
+msgstr "Sistem ni mogel odpreti izvožene datoteke."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No compatible e-mail client installed."
+msgstr "Ni nameščenih združljivih e-poštnih odjemalcev."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Unknown error in e-mail client action."
+msgstr "Neznana napaka v e-poštnem odjemalcu."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No certification file is specified."
+msgstr "Datoteka z digitalnim potrdilom ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Certificate file does not exist."
+msgstr "Datoteka z digitalnim potrdilom ne obstaja."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without certificate password."
+msgstr "Samodejno shranjevanje brez gesla digitalnega potrdila."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Secured Time Server without user name."
+msgstr "Varni časovni strežnik brez uporabniškega imena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Secured Time Server without password."
+msgstr "Varni časovni strežnik brez gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The certificate password is wrong."
+msgstr "Geslo digitalnega potrdila ni pravo."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The certificate has no private key."
+msgstr "Digitalno potrdilo je brez zasebnega ključa."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Not enough space for signature."
+msgstr "Ni dovolj prostora za podpis."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched signing without certification password."
+msgstr "Podpisovanje začeto brez gesla digitalnega potrdila."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while signing. Can not connect to time server."
+msgstr "Napaka pri podpisovanju. Povezava s časovnim strežnikom ni uspela."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while signing the document."
+msgstr "Napaka pri podpisovanju dokumenta."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The default printer is invalid."
+msgstr "Privzeti tiskalnik ni veljaven."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The selected printer is invalid."
+msgstr "Izbrani tiskalnik ni veljaven."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while printing the file."
+msgstr "Napaka pri tiskanju dokumenta."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No script file is specified."
+msgstr "Datoteka s skriptom ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Script file does not exist."
+msgstr "Datoteka s skriptom ne obstaja."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Script file contains illegal characters."
+msgstr "Datoteka skripta vsebuje nedovoljene znake."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while running the script action."
+msgstr "Napaka med izvajanjem skripta."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail address is specified."
+msgstr "Noben SMTP e-naslov ni določen."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail recipients are specified."
+msgstr "Ni določenih prejemnikov SMTP e-pošte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail server is specified."
+msgstr "Noben SMTP poštni strežnik ni določen."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Invalid SMTP port."
+msgstr "Neveljavna vrata za SMTP."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail user name is specified."
+msgstr "Uporabniško ime za SMTP e-pošto ni določeno."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "E-mail over SMTP could not be delivered to one or more recipients."
+msgstr "E-pošte prek SMTP ni bilo možno dostaviti enemu ali več prejemnikom."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not authorize to SMTP server."
+msgstr "Avtorizacija na strežniku SMTP ni uspela."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "User cancelled retyping SMTP e-mail password."
+msgstr "Uporabnik je opustil ponoven vnos gesla za SMTP e-pošto."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No password provided for E-mail over SMTP."
+msgstr "Manjka geslo za e-pošto prek SMTP."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while sending e-mail over SMTP."
+msgstr "Napaka pri pošiljanju pošte prek SMTP."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No background file is specified."
+msgstr "Datoteka z ozadjem ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background file does not exist."
+msgstr "Datoteka z ozadjem ne obstaja."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background file is no PDF file."
+msgstr "Datoteka z ozadjem ni v PDF formatu."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not open cover file."
+msgstr "Datoteke z naslovnico ni možno odpreti."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not open attachment file."
+msgstr "Datoteke za prilogo ni možno odpreti."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while adding background to the document."
+msgstr "Napaka pri dodajanju ozadja v dokument."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server is not specified."
+msgstr "FTP strežnik ni določen."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server user name is not specified."
+msgstr "Uporabniško ime za FTP strežnik ni določeno."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server password is not specified."
+msgstr "Manjka geslo za strežnik FTP."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not login to FTP server."
+msgstr "Prijava na FTP strežnik ni uspela."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Failure in directory on FTP server."
+msgstr "Napaka v mapi na FTP strežniku."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not read from FTP directory to ensure unique filenames."
+msgstr ""
+"Ni mogoče brati iz mape FTP, da bi se zagotovila enolična imena datotek."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not upload file to FTP."
+msgstr "Prenos datoteke na FTP ni uspel."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not login to FTP server. Please check your Internet connection."
+msgstr "Prijava na FTP strežnik ni uspela. Preverite internetno povezavo."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without FTP server password."
+msgstr "Samodejno shranjevanje je brez gesla za FTP strežnik."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "User cancelled retyping FTP password."
+msgstr "Uporabnik je prekinil ponovni vnos FTP gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading file to FTP server."
+msgstr "Napaka pri prenosu datoteke na FTP strežnik."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The specified Dropbox account is not configured."
+msgstr "Naveden Dropbox račun ni nastavljen."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The specified Dropbox access token is not configured."
+msgstr "Naveden Dropbox žeton za dostop ni nastavljen."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "These characters are not allowed as Dropbox folder name: < > : ? * \" |"
+msgstr ""
+"Naslednji znaki niso dovoljeni za poimenovanje Dropbox map: < > : ? * \" |"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without target directory."
+msgstr "Samodejno shranjevanje je brez ciljne mape."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without filename template."
+msgstr "Samodejno shranjevanje je brez privzete oblike imena datoteke."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No cover file is specified."
+msgstr "Datoteka z naslovnico ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Cover file does not exist."
+msgstr "Datoteka z naslovnico ne obstaja."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The cover file is no PDF file."
+msgstr "Datoteka z naslovnico ni v PDF formatu."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No attachment file is specified."
+msgstr "Datoteka za prilogo ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment file does not exist."
+msgstr "Datoteka za prilogo ne obstaja."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment file is no PDF file."
+msgstr "Datoteka za prilogo ni v PDF formatu."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No stamp text is specified."
+msgstr "Besedilo žiga ni določeno."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No stamp font is specified."
+msgstr "Pisava žiga ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without owner password."
+msgstr "Samodejno shranjevanje brez lastniškega gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without user password."
+msgstr "Samodejno shranjevanje brez uporabniškega gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while encrypting the document."
+msgstr "Napaka pri šifriranju dokumenta."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched encryption without owner password."
+msgstr "Šifriranje začeto brez lastniškega gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched encryption without user password."
+msgstr "Šifriranje začeto brez uporabniškega gesla."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Missing output file for PDF processing."
+msgstr "Manjkajoča izhodna datoteka za obdelavo PDF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while processing the document."
+msgstr "Napaka pri obdelavi dokumenta."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Preselected folder for save dialog is empty."
+msgstr "Privzeta mapa za shranjevanje ni določena."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while copying the output file."
+msgstr "Napaka pri kopiranju izvožene datoteke."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Internal Ghostscript error."
+msgstr "Notranja napaka Ghostscript."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Unknown internal error."
+msgstr "Neznana notranja napaka."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error during PDF/A conversion."
+msgstr "Napaka med pretvarjanjem v PDF/A."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading the document to Dropbox."
+msgstr "Napaka pri prenosu dokumenta na Dropbox."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading and sharing the document to Dropbox."
+msgstr "Napaka pri deljenju in prenosu dokumenta na Dropbox."
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Auto-Detect"
+msgstr "samodejno zaznaj"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Portrait"
+msgstr "pokončno"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Landscape"
+msgstr "ležeče"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "No repetition"
+msgstr "Brez ponovitev"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "Repeat all pages"
+msgstr "Ponovi vse strani"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "Repeat last page"
+msgstr "Ponovi zadnjo stran"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "RGB"
+msgstr "RGB"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "CMYK"
+msgstr "CMYK"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "Grayscale"
+msgstr "sivinski"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "Automatic"
+msgstr "samodejno"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Maximum)"
+msgstr "JPEG (najvišje)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (High)"
+msgstr "JPEG (visoko)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Medium)"
+msgstr "JPEG (srednje)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Low)"
+msgstr "JPEG (nizko)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Minimum)"
+msgstr "JPEG (najnižje)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Manual)"
+msgstr "JPEG (po meri)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "ZIP"
+msgstr "ZIP"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "CCITT Fax"
+msgstr "CCITT faks"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "ZIP Compression"
+msgstr "ZIP stiskanje"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "Run Length Compression"
+msgstr "stiskanje Run-Length (RLE)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Neither document outline nor thumbnail images visible"
+msgstr "brez vidnih zaznamkov in sličic strani"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Document outline visible"
+msgstr "vidni zaznamki"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Thumbnail images visible"
+msgstr "vidne sličice strani"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Fullscreen mode"
+msgstr "celozaslonski način"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Optional content group panel visible"
+msgstr "vidne dodatne plasti"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Attachments panel visible"
+msgstr "vidne priloge"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "No duplex printing"
+msgstr "brez obojestranskega tiska"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "Long edge turn"
+msgstr "obračanje prek dolgega roba"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "Short edge turn"
+msgstr "obračanje prek kratkega roba"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "16 Million Colors (24 Bit)"
+msgstr "16 milijonov barv (24 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Grayscale (8 Bit)"
+msgstr "sivinsko (8 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Single page view"
+msgstr "ena stran (cela)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating page view (one page)"
+msgstr "ena stran zvezno"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Double page view (odd pages left)"
+msgstr "dve strani (lihe na levi)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Double page view (odd pages right)"
+msgstr "dve strani (lihe na desni)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating double page view (odd pages left)"
+msgstr "dve strani zvezno (lihe na levi)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating double page view (odd pages right)"
+msgstr "dve strani zvezno (lihe na desni)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "16 Million Colors with Transparency (32 Bit)"
+msgstr "16 milijonov barv s prosojnostjo (32 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "256 Colors (8 Bit)"
+msgstr "256 barv (8 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "16 Color (4 Bit)"
+msgstr "16 barv (4 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "Black & White (2 Bit)"
+msgstr "črno-belo (2 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "Replace"
+msgstr "Zamenjaj"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "Start"
+msgstr "Začetek"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "End"
+msgstr "Konec"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "RegEx"
+msgstr "RegEx"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "default printer"
+msgstr "privzeti tiskalnik"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "printer dialog"
+msgstr "pogovorno okno tiskalnika"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "select printer ->"
+msgstr "izberi tiskalnik ->"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "First Page"
+msgstr "prva stran"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "Last Page"
+msgstr "zadnja stran"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "Custom Page"
+msgstr "stran po meri"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "4096 Colors (12 Bit)"
+msgstr "4096 barv (12 Bit)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit G3 Fax)"
+msgstr "črno-belo (2 Bit G3 faks)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit G4 Fax)"
+msgstr "črno-belo (2 Bit G4 faks)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit LZW)"
+msgstr "črno-belo (2 Bit LZW)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Daily"
+msgstr "dnevno"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Weekly"
+msgstr "tedensko"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Monthly"
+msgstr "mesečno"

@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Win32;
-using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
 

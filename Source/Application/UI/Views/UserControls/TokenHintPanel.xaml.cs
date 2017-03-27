@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using pdfforge.DynamicTranslator;
-using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using pdfforge.PDFCreator.UI.Views.Translations;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.Views.UserControls
 {
@@ -12,17 +13,19 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls
         public static readonly DependencyProperty TextWithTokenProperty = DependencyProperty.Register(
             "TextWithToken", typeof (string), typeof (TokenHintPanel), new PropertyMetadata("", TextWithTokenChanged));
 
-        public static readonly DependencyProperty TranslatorProperty = DependencyProperty.Register(
-            "Translator", typeof (ITranslator), typeof (TokenHintPanel), new PropertyMetadata(TranslatorChanged));
-
         public TokenHintPanel()
         {
             // Initialize TokenHelper with empty Translator to avoid exception in converter
-            TokenHelper = new TokenHelper(new TranslationProxy());
+            TokenHelper = new TokenHelper(new TokenPlaceHoldersTranslation());
+
             InitializeComponent();
+
+            var translation = TranslationFactory.CreateTranslation<TokenHintPanelTranslation>();
+            InsecureTokenTextBlock.Text = translation.InsecureTokenText;
         }
 
         public static IUserGuideHelper UserGuideHelper { private get; set; }
+        public static ITranslationFactory TranslationFactory { private get; set; }
 
         public TokenHelper TokenHelper { get; private set; }
 
@@ -33,12 +36,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls
         }
 
         public string TextWrapper => TextWithToken ?? "";
-
-        public ITranslator Translator
-        {
-            get { return (ITranslator) GetValue(TranslatorProperty); }
-            set { SetValue(TranslatorProperty, value); }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,18 +48,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls
         private void RaiseTextChanged()
         {
             OnPropertyChanged(nameof(TextWrapper));
-        }
-
-        private static void TranslatorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var panel = d as TokenHintPanel;
-            panel?.DoTranslate();
-        }
-
-        private void DoTranslate()
-        {
-            Translator?.Translate(this);
-            TokenHelper = new TokenHelper(Translator);
         }
 
         private void TokenHintOnClick(object sender, RoutedEventArgs e)

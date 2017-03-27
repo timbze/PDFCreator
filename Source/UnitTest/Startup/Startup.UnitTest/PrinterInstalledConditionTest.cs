@@ -6,7 +6,7 @@ using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
             var settingsLoader = Substitute.For<ISettingsLoader>();
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new SectionNameTranslator());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
 
             var result = printerInstalledCondition.Check();
 
@@ -39,7 +39,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             settingsLoader.LoadPdfCreatorSettings().Returns(new PdfCreatorSettings(null));
 
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new SectionNameTranslator());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
 
             var result = printerInstalledCondition.Check();
 
@@ -58,7 +58,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             settingsLoader.LoadPdfCreatorSettings().Returns(new PdfCreatorSettings(null));
 
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new SectionNameTranslator());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
 
             var result = printerInstalledCondition.Check();
 
@@ -85,7 +85,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 return true;
             });
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new SectionNameTranslator());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
 
             printerInstalledCondition.Check();
 

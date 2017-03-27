@@ -9,8 +9,6 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
         {
             DataContext = viewModel;
             InitializeComponent();
-
-            viewModel.Translator.Translate(this);
         }
     }
 }

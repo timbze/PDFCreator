@@ -1,28 +1,28 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using SystemInterface.Diagnostics;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
     public class PlusHintWindowViewModel : InteractionAwareViewModelBase<PlusHintInteraction>
     {
+        public PlusHintWindowTranslation Translation { get; private set; }
         private readonly IProcessStarter _processStarter;
-        private readonly ITranslator _translator;
 
-        public PlusHintWindowViewModel(ITranslator translator, IProcessStarter processStarter)
+        public PlusHintWindowViewModel(PlusHintWindowTranslation translation, IProcessStarter processStarter)
         {
-            _translator = translator;
+            Translation = translation;
             _processStarter = processStarter;
             PlusButtonCommand = new DelegateCommand(PlusButtonExecute);
         }
 
         public DelegateCommand PlusButtonCommand { get; set; }
+        public DelegateCommand NoThanksCommand => new DelegateCommand(o => FinishInteraction());
 
         public string ThankYouText { get; set; }
 
@@ -48,7 +48,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         protected override void HandleInteractionObjectChanged()
         {
-            ThankYouText = _translator.GetFormattedTranslation("PlusHintWindow", "ThankYou", Interaction.CurrentJobCount);
+            ThankYouText = Translation.GetThankYouMessage(Interaction.CurrentJobCount);
             RaisePropertyChanged(nameof(ThankYouText));
         }
     }

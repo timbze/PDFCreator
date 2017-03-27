@@ -115,20 +115,15 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             var recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients);
             recipients = recipients.Replace(';', ',');
 
-            if (job.Profile.EmailSmtpSettings.SameTextAsClientMail)
-            {
-                job.Profile.EmailSmtpSettings.Subject = job.Profile.EmailClientSettings.Subject;
-                job.Profile.EmailSmtpSettings.Content = job.Profile.EmailClientSettings.Content;
-            }
-
             var mail = new MailMessage(job.Profile.EmailSmtpSettings.Address, recipients);
             mail.Subject = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Subject);
-            mail.IsBodyHtml = false;
+            mail.IsBodyHtml = job.Profile.EmailSmtpSettings.Html;
             mail.Body = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Content);
 
             if (job.Profile.EmailSmtpSettings.AddSignature)
             {
-                mail.Body += job.JobTranslations.EmailSignature;
+                // if html option is checked replace newLine with <br />
+                mail.Body += job.Profile.EmailSmtpSettings.Html ? job.JobTranslations.EmailSignature.Replace(Environment.NewLine, "<br>") : job.JobTranslations.EmailSignature;
             }
 
             Logger.Debug("Created new Mail"

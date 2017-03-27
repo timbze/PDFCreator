@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using pdfforge.PsParser;
+﻿using pdfforge.PsParser;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
 {

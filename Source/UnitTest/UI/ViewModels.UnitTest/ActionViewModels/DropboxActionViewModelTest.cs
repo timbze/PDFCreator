@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.ActionViewModels
 {
@@ -17,8 +19,9 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.ActionViewModels
         public void Setup()
         {
             _invoker = Substitute.For<IInteractionInvoker>();
-            _translator = Substitute.For<ITranslator>();
-            _dropboxActionViewModel = new DropboxActionViewModel(_translator, _invoker);
+            _dropboxService = Substitute.For<IDropboxService>();
+           
+            _dropboxActionViewModel = new DropboxActionViewModel(new DropboxSettingsAndActionTranslation(), _invoker, _dropboxService, new TokenHelper(new TokenPlaceHoldersTranslation()));
             _dropboxActionViewModel.Accounts = new Accounts();
             _dropboxActionViewModel.CurrentProfile = new ConversionProfile();
             _invoker.When(x => x.Invoke(Arg.Any<DropboxInteraction>())).Do(info =>
@@ -32,7 +35,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.ActionViewModels
 
         private IInteractionInvoker _invoker;
         private DropboxActionViewModel _dropboxActionViewModel;
-        private ITranslator _translator;
+        private IDropboxService _dropboxService;
 
         private const string AccessToken = "AccessToken";
         private const string AccountID = "AccountID";

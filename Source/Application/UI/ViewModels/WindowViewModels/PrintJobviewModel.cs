@@ -4,12 +4,9 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -17,30 +14,30 @@ using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
     public class PrintJobViewModel : InteractionAwareViewModelBase<PrintJobInteraction>
     {
-        private readonly Dispatcher _currentThreadDispatcher;
+        private readonly IDispatcher _dispatcher;
         private readonly DragAndDropEventHandler _dragAndDrop;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly ISettingsManager _settingsManager;
         private readonly ISettingsProvider _settingsProvider;
-        private readonly ITranslator _translator;
         private readonly IUserGuideHelper _userGuideHelper;
         private ApplicationSettings _applicationSettings;
         private JobInfo _jobInfo;
         private ConversionProfile _preselectedProfile;
         private IList<ConversionProfile> _profiles;
 
-        public PrintJobViewModel(ISettingsManager settingsManager, IJobInfoQueue jobInfoQueue, ITranslator translator, DragAndDropEventHandler dragAndDrop, IInteractionInvoker interactionInvoker, IUserGuideHelper userGuideHelper, ApplicationNameProvider applicationNameProvider)
+        public PrintJobViewModel(ISettingsManager settingsManager, IJobInfoQueue jobInfoQueue, PrintJobViewModelTranslation translation, DragAndDropEventHandler dragAndDrop, IInteractionInvoker interactionInvoker, IUserGuideHelper userGuideHelper, ApplicationNameProvider applicationNameProvider, IDispatcher dispatcher)
         {
             Title = applicationNameProvider.ApplicationName;
 
-            _currentThreadDispatcher = Dispatcher.CurrentDispatcher;
-            _translator = translator;
+            _dispatcher = dispatcher;
             _dragAndDrop = dragAndDrop;
             _interactionInvoker = interactionInvoker;
             _userGuideHelper = userGuideHelper;
@@ -59,7 +56,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
             DragEnterCommand = new DelegateCommand<DragEventArgs>(OnDragEnter);
             DropCommand = new DelegateCommand<DragEventArgs>(OnDrop);
             KeyDownCommand = new DelegateCommand<KeyEventArgs>(OnKeyDown);
+
+            Translation = translation;
         }
+
+        public PrintJobViewModelTranslation Translation { get; }
 
         public ICollectionView ProfilesView { get; private set; }
         public Metadata Metadata { get; set; }
@@ -125,13 +126,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
             get
             {
                 var additionalJobs = _jobInfoQueue.Count - 1;
-                if (additionalJobs == 1)
-                    return _translator.GetTranslation("PrintJobWindow", "OneMoreJobWaiting");
 
-                if (additionalJobs > 1)
-                    return _translator.GetFormattedTranslation("PrintJobWindow", "MoreJobsWaiting", additionalJobs);
+                if (additionalJobs > 0)
+                    return Translation.FormatMoreJobsWaiting(additionalJobs);
 
-                return _translator.GetTranslation("PrintJobWindow", "NoJobsWaiting");
+                return Translation.NoJobsWaiting;
             }
         }
 
@@ -202,7 +201,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         {
             Action updatePendingJobs = () => RaisePropertyChanged(nameof(PendingJobsText));
 
-            _currentThreadDispatcher.Invoke(updatePendingJobs);
+            _dispatcher.BeginInvoke(updatePendingJobs);
         }
 
         private void OnKeyDown(KeyEventArgs e)

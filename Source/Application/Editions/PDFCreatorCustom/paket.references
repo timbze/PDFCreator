@@ -1,9 +1,7 @@
 SimpleInjector
 Obsidian
 NLog
-DynamicTranslator
+LicenseValidator.Interface
 SystemWrapper
 SystemInterface
-
-group Setup
-	PrinterHelper
+DataStorage

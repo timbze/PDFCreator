@@ -10,8 +10,7 @@
              d:DesignHeight="400"
              d:DesignWidth="500">
     <StackPanel>
-        <HeaderedContentControl Name="ManagePrintersControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Manage Printers">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.ManagePrintersControlHeader}">
             <StackPanel Margin="0 5 0 0">
                 <DataGrid
                     Name="PrinterList"
@@ -22,14 +21,32 @@
                     CanUserDeleteRows="False"
                     AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="PrinterColumn" Header="Printer" Width="*" IsReadOnly="True"
-                                            Binding="{Binding PrinterName}" />
-                        <DataGridCheckBoxColumn x:Name="PrimaryColumn" Header="Primary"
-                                                Binding="{Binding IsPrimaryPrinter, Mode=OneWay}" />
-                        <views:DataGridComboBoxColumnWithBindingHack x:Name="ProfileColumn" Header="Profile" Width="*"
+                        <DataGridTextColumn Width="*" IsReadOnly="True"
+                                            Binding="{Binding PrinterName}">
+                            <!-- This is a workaround to allow bindings in the header -->
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DataContext.Translation.PrinterColumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                        </DataGridTextColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsPrimaryPrinter, Mode=OneWay}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DataContext.Translation.PrimaryColumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+                        <views:DataGridComboBoxColumnWithBindingHack Width="*"
                                                                      ItemsSource="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.PrinterMappingProfiles}"
                                                                      DisplayMemberPath="Name"
-                                                                     SelectedItemBinding="{Binding Profile}" />
+                                                                     SelectedItemBinding="{Binding Profile}">
+                            <views:DataGridComboBoxColumnWithBindingHack.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DataContext.Translation.ProfileColumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </DataTemplate>
+                            </views:DataGridComboBoxColumnWithBindingHack.HeaderTemplate>
+                        </views:DataGridComboBoxColumnWithBindingHack>
                     </DataGrid.Columns>
                 </DataGrid>
                 <UniformGrid Columns="3" MinHeight="40" Margin="0 5 0 0">
@@ -55,10 +72,9 @@
                                             Style="{StaticResource UacStyle}" Focusable="False">
                                 <StaticResource ResourceKey="UacShield" />
                             </ContentControl>
-                            <TextBlock VerticalAlignment="Center" Name="AddPrinterButton"
-                                       Style="{StaticResource UacText}">
-                                Add Printer
-                            </TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       Style="{StaticResource UacText}"
+                                       Text="{Binding Translation.AddPrinterButtonText}" />
                         </StackPanel>
                     </Button>
                     <Button Command="{Binding RenamePrinterCommand}"
@@ -69,10 +85,9 @@
                                             Style="{StaticResource UacStyle}" Focusable="False">
                                 <StaticResource ResourceKey="UacShield" />
                             </ContentControl>
-                            <TextBlock VerticalAlignment="Center" Name="RenamePrinterButton"
-                                       Style="{StaticResource UacText}">
-                                Rename Printer
-                            </TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       Style="{StaticResource UacText}"
+                                       Text="{Binding Translation.RenamePrinterButtonText}" />
                         </StackPanel>
                     </Button>
                     <Button Command="{Binding DeletePrinterCommand}"
@@ -83,17 +98,18 @@
                                             Style="{StaticResource UacStyle}" Focusable="False">
                                 <StaticResource ResourceKey="UacShield" />
                             </ContentControl>
-                            <TextBlock VerticalAlignment="Center" Name="DeletePrinterButton"
-                                       Style="{StaticResource UacText}">
-                                Delete Printer
-                            </TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       Style="{StaticResource UacText}"
+                                       Text="{Binding Translation.DeletePrinterButtonText}" />
+
                         </StackPanel>
                     </Button>
                 </UniformGrid>
             </StackPanel>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="PrimaryPrinterControl" Margin="0 10 0 0"
-                                Template="{StaticResource HeaderPanelTemplate}" Header="Set Primary Printer">
+        <HeaderedContentControl Margin="0 10 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.PrimaryPrinterControlHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

@@ -3,7 +3,6 @@ using NLog;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
-using pdfforge.PDFCreator.UI.ViewModels;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {

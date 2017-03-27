@@ -20,16 +20,17 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <param name="sourceFile">Full path to the source file</param>
         /// <param name="destinationFile">Full patch to the destination file</param>
         /// <param name="profile">Profile with encryption settings</param>
-        /// <param name="intendedPdfVersion">PDF Version as string, i.e. "1.6"</param>
+        /// <param name="pdfVersion">PDF Version as string, i.e. "1.6"</param>
         /// <returns>Stamper with content of source file stream, aiming to destination file</returns>
         /// <exception cref="ProcessingException">In case of any error</exception>
-        internal static PdfStamper CreateStamperAccordingToEncryptionAndSignature(string sourceFile, string destinationFile, ConversionProfile profile, string intendedPdfVersion)
+        internal static PdfStamper CreateStamperAccordingToEncryptionAndSignature(string sourceFile, string destinationFile, ConversionProfile profile, 
+            char pdfVersion)
         {
             PdfStamper stamper;
 
             try
             {
-                stamper = DoCreateStamperAccordingToEncryptionAndSignature(sourceFile, destinationFile, profile, intendedPdfVersion);
+                stamper = DoCreateStamperAccordingToEncryptionAndSignature(sourceFile, destinationFile, profile, pdfVersion);
             }
             catch (ProcessingException)
             {
@@ -43,17 +44,13 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             return stamper;
         }
 
-        private static PdfStamper DoCreateStamperAccordingToEncryptionAndSignature(string sourceFilename, string destinationFilename, ConversionProfile profile, string intendedPdfVersion)
+        private static PdfStamper DoCreateStamperAccordingToEncryptionAndSignature(string sourceFilename, string destinationFilename, ConversionProfile profile, char pdfVersion)
         {
             Logger.Debug("Started creating PdfStamper according to Encryption.");
 
             var reader = new PdfReader(sourceFilename);
             var fileStream = new FileStream(destinationFilename, FileMode.Create, FileAccess.Write);
             PdfStamper stamper = null;
-
-            var pdfVersion = PdfWriter.VERSION_1_4;
-            if (intendedPdfVersion == "1.6")
-                pdfVersion = PdfWriter.VERSION_1_6;
 
             if (profile.PdfSettings.Signature.Enabled)
                 stamper = PdfStamper.CreateSignature(reader, fileStream, pdfVersion);

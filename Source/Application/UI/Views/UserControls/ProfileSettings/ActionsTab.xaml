@@ -30,7 +30,7 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Actions" x:Name="ActionsGridViewColumn"
+                    <GridViewColumn Header="{Binding Translation.ActionsGridViewColumnHeader}" x:Name="ActionsGridViewColumn"
                                     CellTemplate="{StaticResource CheckBoxCell}" />
                 </GridView>
             </ListView.View>

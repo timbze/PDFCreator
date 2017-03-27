@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace pdfforge.PDFCreator.IntegrationTest.TranslationTest
 {
-    class TranslationTestHelper
+    public class TranslationTestHelper
     {
         public string FindTranslationFolder()
         {
@@ -21,6 +18,20 @@ namespace pdfforge.PDFCreator.IntegrationTest.TranslationTest
                 {
                     return Path.GetFullPath(dir);
                 }
+            }
+
+            var curPath = Path.GetFullPath(".");
+
+            while (curPath.Length > 3)
+            {
+                var candidate = Path.Combine(curPath, "Languages");
+
+                if (File.Exists(Path.Combine(candidate, "english.ini")))
+                {
+                    return Path.GetFullPath(candidate);
+                }
+
+                curPath = Path.GetFullPath(Path.Combine(curPath, ".."));
             }
 
             throw new IOException("Could not find translation file folder. Current dir:" + Environment.CurrentDirectory);

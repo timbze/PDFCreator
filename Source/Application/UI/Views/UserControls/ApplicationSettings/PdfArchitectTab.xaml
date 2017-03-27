@@ -14,10 +14,8 @@
     </UserControl.Resources>
     <StackPanel Margin="5">
         <ContentControl Focusable="False" Content="{StaticResource PDFArchitectLogo}" Height="50" Margin="10" />
-        <TextBlock Name="PdfArchitectIntroText" TextWrapping="Wrap" FontSize="14" FontWeight="Bold"
-                   HorizontalAlignment="Center">
-            PDF Architect is our full-featured PDF Editor
-        </TextBlock>
+        <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Bold"
+                   HorizontalAlignment="Center" Text="{Binding Translation.PdfArchitectIntroText}" />
         <UniformGrid Rows="2">
             <UniformGrid.Resources>
                 <Style x:Key="TitleStyle" TargetType="TextBlock">
@@ -30,52 +28,44 @@
             </UniformGrid.Resources>
 
             <StackPanel>
-                <TextBlock Name="PdfArchitectFreeText" Style="{StaticResource TitleStyle}" Foreground="#c5091d">FREE features include:</TextBlock>
-                <TextBlock Name="PdfArchitectSplitAndMergeText" TextWrapping="Wrap">Split and merge PDFs</TextBlock>
-                <TextBlock Name="PdfArchitectViewAndPrintText" TextWrapping="Wrap">View and print PDFs</TextBlock>
-                <TextBlock Name="PdfArchitectAddModulesText" TextWrapping="Wrap">Obtain powerful modules to do more</TextBlock>
+                <TextBlock Style="{StaticResource TitleStyle}" Foreground="#c5091d" Text="{Binding Translation.PdfArchitectFreeText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectSplitAndMergeText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectViewAndPrintText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectAddModulesText}" />
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Name="PdfArchitectEditText" Style="{StaticResource TitleStyle}">Edit PDFs</TextBlock>
-                <TextBlock Name="PdfArchitectEditAndFontsText" TextWrapping="Wrap">Edit text, change fonts, correct typos</TextBlock>
-                <TextBlock Name="PdfArchitectInsertAndDeleteText" TextWrapping="Wrap">Insert, delete or replace images</TextBlock>
-                <TextBlock Name="PdfArchitectFormatAndMarginsText" TextWrapping="Wrap">Change page format and marings</TextBlock>
+                <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Translation.PdfArchitectEditText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectEditAndFontsText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectInsertAndDeleteText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectFormatAndMarginsText}" />
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Name="PdfArchitectConvertText" Style="{StaticResource TitleStyle}">Convert PDFs back</TextBlock>
-                <TextBlock Name="PdfArchitectConvertLongText" TextWrapping="Wrap">Convert PDFs to other popular formats like Word, Excel, HTML or TXT</TextBlock>
+                <TextBlock  Style="{StaticResource TitleStyle}" Text="{Binding Translation.PdfArchitectConvertText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectConvertLongText}" />
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Name="PdfArchitectTextRecognitionOcrText" Style="{StaticResource TitleStyle}">Text recognition (OCR)</TextBlock>
-                <TextBlock Name="PdfArchitectOcrLongText" TextWrapping="Wrap">Convert images to text you can search and edit using existing PDFs or documents from your scanner</TextBlock>
+                <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Translation.PdfArchitectTextRecognitionOcrText}" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.PdfArchitectOcrLongText}" />
             </StackPanel>
         </UniformGrid>
 
         <StackPanel Margin="10" Name="GetPdfArchitectStackPanel" Orientation="Horizontal" HorizontalAlignment="Center"
                     Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenFalse}}">
-            <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150" Name="GetPdfArchitectButton"
-                    Command="{Binding LaunchWebsiteCommand}">
-                More on PDF Architect
-            </Button>
             <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150"
-                    Name="DownloadPdfArchitectButton"
-                    Command="{Binding DownloadPdfArchitectCommand}">
-                Download now
-            </Button>
+                    Command="{Binding LaunchWebsiteCommand}" Content="{Binding Translation.GetPdfArchitectButtonContent}" />
+            <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150"
+                    Command="{Binding DownloadPdfArchitectCommand}" Content="{Binding Translation.DownloadPdfArchitectButtonContent}"/>
         </StackPanel>
 
         <StackPanel Margin="10" Name="LaunchPdfArchitectStackPanel"
                     Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenTrue}}">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 10" FontSize="14"
-                       FontWeight="Bold" Name="PdfArchitectInstalledText">
-                You already have PDF Architect on your computer
-            </TextBlock>
-            <Button HorizontalAlignment="Center" Padding="10" Name="LaunchPdfArchitectButton"
-                    Command="{Binding LaunchPdfArchitectCommand}">
-                Launch PDF Architect
+                       FontWeight="Bold" Text="{Binding Translation.PdfArchitectInstalledText}" />
+            <Button HorizontalAlignment="Center" Padding="10"
+                    Command="{Binding LaunchPdfArchitectCommand}" Content="{Binding Translation.LaunchPdfArchitectButtonContent}">
             </Button>
         </StackPanel>
     </StackPanel>

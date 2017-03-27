@@ -37,6 +37,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\..\..\packages\NSubstitute\lib\net40\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,13 +48,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundPageTest.cs" />
-    <Compile Include="BasicTest.cs" />
-    <Compile Include="CombinedTest.cs" />
-    <Compile Include="EncryptionTest.cs" />
+    <Compile Include="Base\BackgroundPageTestBase.cs" />
+    <Compile Include="Base\PdfProcessingBasicTestBase.cs" />
+    <Compile Include="Base\PdfProcessingCombinedTestBase.cs" />
+    <Compile Include="Base\EncryptionTestBase.cs" />
+    <Compile Include="IText\ITextBackgroundPageTest.cs" />
+    <Compile Include="IText\ITextBasicTest.cs" />
+    <Compile Include="IText\ITextCombinedTest.cs" />
+    <Compile Include="IText\ITextEncryptionTest.cs" />
+    <Compile Include="IText\ITextSigningTest.cs" />
+    <Compile Include="IText\ITextXMPMetadataUpdateTest.cs" />
+    <Compile Include="PdfTools\PdfToolsBackgroundPageTest.cs" />
+    <Compile Include="PdfTools\PdfToolsBasicTest.cs" />
+    <Compile Include="PdfTools\PdfToolsCombinedTest.cs" />
+    <Compile Include="PdfTools\PdfToolsEncryptionTest.cs" />
+    <Compile Include="PdfTools\PDFToolsLicensingTest.cs" />
+    <Compile Include="PdfTools\PdfToolsSigningTest.cs" />
+    <Compile Include="PdfTools\PdfToolsTestLicensing.cs" />
+    <Compile Include="PdfTools\PdfToolsXMPMetadataUpdateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SigningTest.cs" />
-    <Compile Include="XMPMetadataUpdateTest.cs" />
+    <Compile Include="Base\SigningTestBase.cs" />
+    <Compile Include="Base\XMPMetadataUpdateTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -65,6 +82,10 @@
     <ProjectReference Include="..\..\..\Application\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
       <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
       <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Conversion\Processing\PdfToolsProcessing\PdfToolsProcessing.csproj">
+      <Project>{a80fba8d-683c-4622-8c0b-5ab66c2a8968}</Project>
+      <Name>PdfToolsProcessing</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Conversion\Settings\Settings.csproj">
       <Project>{94936199-c9c7-4a5f-a58e-6123158e84f3}</Project>

@@ -88,14 +88,6 @@
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Conversion\Mail\Mail.csproj">
-      <Project>{884d14eb-6d78-41d8-b022-968209dd6ce4}</Project>
-      <Name>Mail</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Conversion\Processing\ITextProcessing\ITextProcessing.csproj">
-      <Project>{4915636e-76e6-45cc-8150-e5e31ba4375d}</Project>
-      <Name>ITextProcessing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
       <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
       <Name>PdfProcessingInterface</Name>
@@ -165,6 +157,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Content Include="..\..\..\..\packages\setup\PrinterHelper\lib\PrinterHelper.exe">
+      <Link>PrinterHelper.exe</Link>
+    </Content>
+  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
@@ -179,8 +176,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+        <Reference Include="HtmlAgilityPack">
+          <HintPath>..\..\..\..\packages\HtmlAgilityPack\lib\Net40\HtmlAgilityPack.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -203,6 +200,28 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="pdfforge.Communication">
+          <HintPath>..\..\..\..\packages\pdfforge.Communication\lib\pdfforge.Communication.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="pdfforge.Mail">
+          <HintPath>..\..\..\..\packages\pdfforge.Mail\lib\pdfforge.Mail.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -258,11 +277,15 @@
       </ItemGroup>
     </When>
   </Choose>
-  <ItemGroup>
-    <Reference Include="PrinterHelper">
-      <HintPath>..\..\..\..\packages\setup\PrinterHelper\lib\PrinterHelper.exe</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Translatable">
+          <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>

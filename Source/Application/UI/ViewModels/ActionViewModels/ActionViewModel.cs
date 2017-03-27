@@ -1,5 +1,4 @@
-﻿using System;
-using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels

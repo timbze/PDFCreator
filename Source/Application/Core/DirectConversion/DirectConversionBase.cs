@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
+using SystemInterface.IO;
 using NLog;
+using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -13,12 +14,18 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
     {
         private readonly ISettingsProvider _settingsProvider;
         private readonly IJobInfoManager _jobInfoManager;
+        private readonly ISpoolerProvider _spoolerProvider;
         internal static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        protected DirectConversionBase(ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager)
+        protected abstract IFile File { get; }
+        protected abstract IDirectory Directory { get; }
+        protected abstract IPathSafe Path { get; }
+
+        protected DirectConversionBase(ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager, ISpoolerProvider spoolerProvider)
         {
             _settingsProvider = settingsProvider;
             _jobInfoManager = jobInfoManager;
+            _spoolerProvider = spoolerProvider;
         }
 
         /// <summary>
@@ -26,7 +33,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
         ///     Create inf file from ps file.
         /// </summary>
         /// <returns>inf file in spool folder</returns>
-        public string TransformToInfFile(string file, string spoolFolder, string printerName = "")
+        public string TransformToInfFile(string file, string printerName = "")
         {
             if (string.IsNullOrEmpty(file))
             {
@@ -46,7 +53,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             string jobFolder;
             try
             {
-                jobFolder = CreateJobFolderInSpool(file, spoolFolder);
+                jobFolder = CreateJobFolderInSpool(file);
             }
             catch (Exception ex)
             {
@@ -75,10 +82,10 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             return _settingsProvider.Settings.ApplicationSettings.PrimaryPrinter;
         }
 
-        private static string CreateJobFolderInSpool(string file, string spoolFolder)
+        private string CreateJobFolderInSpool(string file)
         {
             var psFilename = Path.GetFileName(file); 
-            var jobFolder = Path.Combine(spoolFolder, psFilename);
+            var jobFolder = Path.Combine(_spoolerProvider.SpoolFolder, psFilename);
             jobFolder = new UniqueDirectory(jobFolder).MakeUniqueDirectory();
             Directory.CreateDirectory(jobFolder);
             Logger.Trace("Created spool directory for ps-file job: " + jobFolder);
@@ -86,7 +93,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             return jobFolder;
         }
 
-        private static string CopyFileToJobFolder(string jobFolder, string psFile)
+        private string CopyFileToJobFolder(string jobFolder, string psFile)
         {
             var psFilename = Path.GetFileName(psFile);
             var psFileInJobFolder = Path.Combine(jobFolder, psFilename);
@@ -124,7 +131,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             return infFile;
         }
 
-        internal abstract int GetNumberOfPages(string file);
-        internal abstract bool IsValid(string file);
+        protected abstract int GetNumberOfPages(string file);
+        protected abstract bool IsValid(string file);
     }
 }

@@ -1,5 +1,4 @@
-﻿using NSubstitute;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Ghostscript.Conversion;
 

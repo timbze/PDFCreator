@@ -51,13 +51,16 @@
     <Compile Include="Dialogs\DesignTimeLicenseWindowViewModel.cs" />
     <Compile Include="Dialogs\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="Dialogs\DesignTimeMessageWindowViewModel.cs" />
+    <Compile Include="Dialogs\DesignTimeDropboxSharedLinksViewModel.cs" />
     <Compile Include="Dialogs\DesignTimePasswordViewModel.cs" />
     <Compile Include="Dialogs\DesignTimeSignaturePasswordViewModel.cs" />
     <Compile Include="Dialogs\DesignTimeUpdateAvailableViewModel.cs" />
-    <Compile Include="Helper\DesignTimeActivationHelper.cs" />
     <Compile Include="Helper\DesignTimeFileConversionHandler.cs" />
     <Compile Include="Helper\DesignTimeInteractionInvoker.cs" />
     <Compile Include="Helper\DesignTimeLanguageProvider.cs" />
+    <Compile Include="Helper\DesignTimeLicenseChecker.cs" />
+    <Compile Include="Helper\DesignTimeOfflineActivator.cs" />
+    <Compile Include="Helper\DesignTimePDFProcessor.cs" />
     <Compile Include="Helper\DesignTimePlusHintHelper.cs" />
     <Compile Include="Helper\DesignTimePrinterHelper.cs" />
     <Compile Include="Helper\DesignTimePrinterProvider.cs" />
@@ -102,6 +105,10 @@
     <ProjectReference Include="..\..\Conversion\Actions\Actions.csproj">
       <Project>{1dbb980a-80ed-4263-bc5d-b90377466e14}</Project>
       <Name>Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
+      <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
+      <Name>PdfProcessingInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
       <Project>{be1a6f7d-6439-4361-8e96-df90b4bfe000}</Project>
@@ -166,19 +173,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
-      <ItemGroup>
-        <Reference Include="LicenseValidator">
-          <HintPath>..\..\..\..\packages\LicenseValidator\lib\LicenseValidator.dll</HintPath>
+        <Reference Include="LicenseValidator.Interface">
+          <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -201,6 +197,17 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Optional">
+          <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net40\Optional.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -239,6 +246,17 @@
       <ItemGroup>
         <Reference Include="SystemWrapper">
           <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Translatable">
+          <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

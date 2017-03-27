@@ -34,7 +34,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
 
             _logger.Debug("Profile: {0} (GUID {1})", preselectedProfile.Name, preselectedProfile.Guid);
 
-            var jobTranslations = new JobTranslations {EmailSignature = _mailSignatureHelper.ComposeMailSignature()};
+            var jobTranslations = new JobTranslations { EmailSignature = _mailSignatureHelper.ComposeMailSignature() };
 
             var job = new Job(jobInfo, preselectedProfile, jobTranslations, settings.ApplicationSettings.Accounts);
 

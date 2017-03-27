@@ -3,8 +3,10 @@ NSubstitute
 SystemInterface
 SystemWrapper
 NLog
-DynamicTranslator
 DataStorage
 SimpleInjector
 Obsidian
-LicenseValidator
+LicenseValidator.Interface
+pdfforge.Mail
+Translatable
+Translatable.NGettext

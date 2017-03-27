@@ -86,6 +86,14 @@
       <Project>{18354054-45F6-4F51-8730-D05643A400A3}</Project>
       <Name>Jobs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
+      <Project>{F7126398-BB4F-49AF-AD90-0F23D2EDDCFE}</Project>
+      <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Processing\PdfToolsProcessing\PdfToolsProcessing.csproj">
+      <Project>{a80fba8d-683c-4622-8c0b-5ab66c2a8968}</Project>
+      <Name>PdfToolsProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
       <Project>{BE1A6F7D-6439-4361-8E96-DF90B4BFE000}</Project>
       <Name>Controller</Name>
@@ -101,6 +109,10 @@
     <ProjectReference Include="..\..\UI\ViewModels\ViewModels.csproj">
       <Project>{FB822333-3D7C-4BC7-8C91-7FFBE1945239}</Project>
       <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{EA29538B-89A5-4FB3-AE0F-5E2370E852F8}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\EditionBase\EditionBase.csproj">
       <Project>{3844380D-458D-4C8E-A453-AC7DA6BAEE49}</Project>
@@ -147,8 +159,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+        <Reference Include="LicenseValidator">
+          <HintPath>..\..\..\..\packages\LicenseValidator\lib\LicenseValidator.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -158,8 +170,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="LicenseValidator">
-          <HintPath>..\..\..\..\packages\LicenseValidator\lib\LicenseValidator.dll</HintPath>
+        <Reference Include="LicenseValidator.Interface">
+          <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -182,6 +194,17 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Optional">
+          <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net40\Optional.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -237,11 +260,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <ItemGroup>
-    <Reference Include="PrinterHelper">
-      <HintPath>..\..\..\..\packages\setup\PrinterHelper\lib\PrinterHelper.exe</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
 </Project>

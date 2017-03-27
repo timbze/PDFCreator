@@ -1,4 +1,7 @@
-LicenseValidator
+LicenseValidator.Interface
 Obsidian
-DynamicTranslator
 TrueTypeFontInfo
+pdfforge.Mail
+Translatable
+SystemWrapper
+DataStorage

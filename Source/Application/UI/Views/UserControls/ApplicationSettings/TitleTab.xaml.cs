@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using pdfforge.PDFCreator.Conversion.Jobs;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.UI.ViewModels.Converter;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
 
@@ -34,11 +33,10 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings
             if (viewModel == null)
                 return;
 
-            viewModel.Translator.Translate(this);
             viewModel.PropertyChanged += ViewModel_PropertyChanged;
 
             var enumConverter = (TranslatedEnumConverter) Resources["TranslatedEnumConverter"];
-            enumConverter.Translator = viewModel.Translator;
+            enumConverter.TranslationFactory = viewModel.TranslationFactory;
         }
 
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

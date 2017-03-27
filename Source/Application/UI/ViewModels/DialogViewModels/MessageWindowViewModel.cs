@@ -1,9 +1,9 @@
 ﻿using System.Media;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
@@ -11,11 +11,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
     public class MessageWindowViewModel : InteractionAwareViewModelBase<MessageInteraction>
     {
         private readonly ISoundPlayer _soundPlayer;
-        private readonly ITranslator _translator;
+        private readonly MessageWindowTranslation _translation;
 
-        public MessageWindowViewModel(ITranslator translator, ISoundPlayer soundPlayer)
+        public MessageWindowViewModel(MessageWindowTranslation translation, ISoundPlayer soundPlayer)
         {
-            _translator = translator;
+            _translation = translation;
             _soundPlayer = soundPlayer;
             ButtonRightCommand = new DelegateCommand(ExecuteButtonRight, CanExecuteButtonRight);
             ButtonLeftCommand = new DelegateCommand(ExecuteButtonLeft);
@@ -123,23 +123,23 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
             switch (option)
             {
                 case MessageOptions.MoreInfoCancel:
-                    LeftButtonContent = _translator.GetTranslation("MessageWindow", "MoreInfo");
-                    RightButtonContent = _translator.GetTranslation("MessageWindow", "Cancel");
+                    LeftButtonContent = _translation.MoreInfo;
+                    RightButtonContent = _translation.Cancel;
                     break;
                 case MessageOptions.OK:
-                    LeftButtonContent = _translator.GetTranslation("MessageWindow", "Ok");
+                    LeftButtonContent = _translation.Ok;
                     break;
                 case MessageOptions.OKCancel:
-                    LeftButtonContent = _translator.GetTranslation("MessageWindow", "Ok");
-                    RightButtonContent = _translator.GetTranslation("MessageWindow", "Cancel");
+                    LeftButtonContent = _translation.Ok;
+                    RightButtonContent = _translation.Cancel;
                     break;
                 case MessageOptions.RetryCancel:
-                    LeftButtonContent = _translator.GetTranslation("MessageWindow", "Retry");
-                    RightButtonContent = _translator.GetTranslation("MessageWindow", "Cancel");
+                    LeftButtonContent = _translation.Retry;
+                    RightButtonContent = _translation.Cancel;
                     break;
                 case MessageOptions.YesNo:
-                    LeftButtonContent = _translator.GetTranslation("MessageWindow", "Yes");
-                    RightButtonContent = _translator.GetTranslation("MessageWindow", "No");
+                    LeftButtonContent = _translation.Yes;
+                    RightButtonContent = _translation.No;
                     break;
             }
 

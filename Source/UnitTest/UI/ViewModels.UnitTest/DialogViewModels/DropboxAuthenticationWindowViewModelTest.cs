@@ -1,17 +1,10 @@
 ﻿using System;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DataStorage;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
-using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
 {
@@ -23,7 +16,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         {
             _dropboxService = Substitute.For<IDropboxService>();
             var x  = new DropboxAppData("", redirectUri);
-            _viewModel = new DropboxAuthenticationWindowViewModel(_dropboxService,x);
+            _viewModel = new DropboxAuthenticationWindowViewModel(_dropboxService,x, new DropboxAuthenticationWindowTranslation());
             _interaction = new DropboxInteraction();
             _viewModel.SetInteraction(_interaction);
 

@@ -12,17 +12,71 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
 {
     public abstract class PdfProcessorBase : IPdfProcessor
     {
-        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        protected readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
+        protected readonly IFile File;
+        private IProcessingPasswordsProvider PasswordsProvider { get; set; }
 
-        protected abstract IFile File { get; }
-        protected abstract IProcessingPasswordsProvider PasswordsProvider { get; }
+        protected PdfProcessorBase(IFile file, IProcessingPasswordsProvider passwordsProvider)
+        {
+            File = file;
+            PasswordsProvider = passwordsProvider;
+        }
 
+        /// <summary>
+        /// Inits the Profile 
+        /// </summary>
+        /// <param name="job"></param>
         public void Init(Job job)
         {
-            _logger.Trace("Init Processor");
+            Logger.Trace("Init Processor");
+            
+            //Must be applied before determining passwords
+            ApplyRestrictionsToProfile(job);
+            DeterminePasswords(job);
+        }
 
+        private void ApplyRestrictionsToProfile(Job job)
+        {
+            switch (job.Profile.OutputFormat)
+            {
+                case OutputFormat.PdfA1B:
+                    if (job.Profile.PdfSettings.Security.Enabled)
+                    {
+                        job.Profile.PdfSettings.Security.Enabled = false;
+                        Logger.Warn("Encryption automatically disabled for PDF/A1-b");
+                    }
+                    if (job.Profile.PdfSettings.Signature.Enabled)
+                    {
+                        if (!job.Profile.PdfSettings.Signature.AllowMultiSigning)
+                        {
+                            job.Profile.PdfSettings.Signature.AllowMultiSigning = true;
+                            Logger.Warn("Allow multiple signing automatically enabled for PDF/A1-b");
+                        }
+                    }
+                    return;
+
+                case OutputFormat.PdfA2B:
+                    if (job.Profile.PdfSettings.Security.Enabled)
+                    {
+                        job.Profile.PdfSettings.Security.Enabled = false;
+                        Logger.Warn("Encryption automatically disabled for PDF/A2-b");
+                    }
+                    return;
+
+                case OutputFormat.PdfX:
+                    if (job.Profile.PdfSettings.Security.Enabled)
+                    {
+                        job.Profile.PdfSettings.Security.Enabled = false;
+                        Logger.Warn("Encryption automatically disabled for PDF/X");
+                    }
+                    return;
+            }
+        }
+
+        private void DeterminePasswords(Job job)
+        {
             if ((job.Profile.OutputFormat == OutputFormat.Pdf)
                || (job.Profile.OutputFormat == OutputFormat.PdfA1B)
                || (job.Profile.OutputFormat == OutputFormat.PdfA2B)
@@ -30,13 +84,13 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
             {
                 if (job.Profile.PdfSettings.Security.Enabled)
                 {
-                    _logger.Debug("Querying encryption passwords");
+                    Logger.Debug("Querying encryption passwords");
                     PasswordsProvider.SetEncryptionPasswords(job);
                 }
 
                 if (job.Profile.PdfSettings.Signature.Enabled)
                 {
-                    _logger.Debug("Querying signature password");
+                    Logger.Debug("Querying signature password");
                     PasswordsProvider.SetSignaturePassword(job);
                 }
             }
@@ -53,12 +107,17 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
         {
             switch (profile.OutputFormat)
             {
-                case OutputFormat.Pdf:
+                case OutputFormat.PdfA1B:
                 case OutputFormat.PdfA2B:
-                case OutputFormat.PdfX:
+                    return true; //Always true because of the metadata update
+
+                case OutputFormat.Pdf:
                     return profile.PdfSettings.Security.Enabled
                            || profile.BackgroundPage.Enabled
-                           || profile.OutputFormat == OutputFormat.PdfA2B
+                           || profile.PdfSettings.Signature.Enabled;
+         
+                case OutputFormat.PdfX:
+                    return profile.BackgroundPage.Enabled
                            || profile.PdfSettings.Signature.Enabled;
             }
 
@@ -70,30 +129,25 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
         /// </summary>
         public void ProcessPdf(Job job)
         {
-            if (!ProcessingRequired(job.Profile))
-            {
-                _logger.Debug("No processing required.");
-                return;
-            }
             var pdfFile = job.TempOutputFiles.First();
-            _logger.Debug("Start processing of " + pdfFile);
+            Logger.Debug("Start processing of " + pdfFile);
 
             if (!File.Exists(pdfFile))
             {
-                throw new ProcessingException("File in PdfProcessor does not exist: " + pdfFile, ErrorCode.Processing_OutputFileMissing);
+                throw new ProcessingException("_file in PdfProcessor does not exist: " + pdfFile, ErrorCode.Processing_OutputFileMissing);
             }
 
             try
             {
                 DoProcessPdf(job);
             }
-            catch (ProcessingException)
+            catch (ProcessingException ex)
             {
-                throw;
+                throw ex;
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.GetType() + " while processing file:" + pdfFile + Environment.NewLine + ex.Message);
+                Logger.Error(ex.GetType() + " while processing file:" + pdfFile + Environment.NewLine + ex.Message);
                 throw new ProcessingException(
                     ex.GetType() + " while processing file:" + pdfFile + Environment.NewLine + ex.Message, ErrorCode.Processing_GenericError);
             }
@@ -109,35 +163,50 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
         /// <summary>
         ///     Determine PDF-Version according to settings in conversion profile.
         /// </summary>
-        /// <param name="settings">ConversionProfile</param>
-        /// <returns>PDF Version as string, i.e. 1.6</returns>
-        public string DeterminePdfVersion(PdfSettings settings)
+        /// <param name="profile">ConversionProfile</param>
+        /// <returns>PDF Version as string, i.e. 1.4</returns>
+        public string DeterminePdfVersion(ConversionProfile profile)
         {
             var pdfVersion = "1.4";
-            if (settings.Security.Enabled && (settings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit))
-                pdfVersion = "1.6";
+
+            if (profile.OutputFormat == OutputFormat.Pdf)
+                if (profile.PdfSettings.Security.Enabled)
+                    if (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit)
+                        pdfVersion = "1.6";
+
+            if (profile.OutputFormat != OutputFormat.PdfA1B)
+                if (profile.PdfSettings.Signature.Enabled)
+                    if (!profile.PdfSettings.Signature.AllowMultiSigning)
+                        pdfVersion = "1.6";
+
+            if (profile.OutputFormat == OutputFormat.Pdf)
+                if (profile.PdfSettings.Security.Enabled)
+                    if (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes256Bit)
+                        pdfVersion = "1.7";
+
+            if (profile.OutputFormat == OutputFormat.PdfA2B)
+                pdfVersion = "1.7";
+
             return pdfVersion;
         }
-
 
         /// <summary>
         ///     Moves original file to preprocess file, which is the original file with an appended "_PrePdfProcessor.pdf".
         /// </summary>
         /// <param name="pdfFile">Full path to PDF file</param>
+        /// <param name="appendix">filename is oldname_APPENDIX.pdf</param>
         /// <returns>Path to preprocess file</returns>
-        protected string MoveFileToPreProcessFile(string pdfFile)
+        public string MoveFileToPreProcessFile(string pdfFile, string appendix)
         {
             string preProcessFile;
             try
             {
-                //create copy of original file 
-                preProcessFile = _pathSafe.ChangeExtension(pdfFile, "_PrePdfProcessor.pdf").Replace("._", "_");
-
+                preProcessFile = _pathSafe.ChangeExtension(pdfFile, "_" + appendix + ".pdf").Replace("._", "_");
                 File.Move(pdfFile, preProcessFile);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.GetType() + " while creating pdf preprocess file:" + Environment.NewLine + ex.Message);
+                Logger.Error(ex.GetType() + " while creating pdf preprocess file:" + Environment.NewLine + ex.Message);
                 throw new ProcessingException(
                     ex.GetType() + " while creating pdf preprocess file:" + Environment.NewLine + ex.Message, ErrorCode.Processing_GenericError);
             }

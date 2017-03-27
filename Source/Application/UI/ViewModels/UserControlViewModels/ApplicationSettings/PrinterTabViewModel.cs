@@ -6,15 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Services.Translation;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
 using pdfforge.PDFCreator.Utilities;
 
@@ -22,6 +21,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
 {
     public class PrinterTabViewModel : ObservableObject
     {
+        public PrinterTabTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
+        }
+
         private readonly ConversionProfile _dummyLastUsedProfile = new ConversionProfile
         {
             Name = "<Last used profile>",
@@ -42,14 +47,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
         private ICollection<string> _pdfCreatorPrinters;
         private SynchronizedCollection<PrinterMappingWrapper> _printerMappings;
         private ICollectionView _printerMappingView;
+        private PrinterTabTranslation _translation;
 
-        public PrinterTabViewModel(IPrinterProvider printerProvider, ITranslator translator,
-            IPrinterActionsAssistant printerActionsAssistant, IOsHelper osHelper, TranslationHelper translationHelper, IPrinterHelper printerHelper)
+        public PrinterTabViewModel(IPrinterProvider printerProvider, IPrinterActionsAssistant printerActionsAssistant, IOsHelper osHelper, TranslationHelper translationHelper, IPrinterHelper printerHelper, PrinterTabTranslation translation)
         {
+            Translation = translation;
             _osHelper = osHelper;
             _translationHelper = translationHelper;
             _printerHelper = printerHelper;
-            Translator = translator;
             _printerActionsAssistant = printerActionsAssistant;
             _printerProvider = printerProvider;
 
@@ -57,8 +62,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             RenamePrinterCommand = new DelegateCommand(RenamePrinterCommandExecute, ModifyPrinterCommandCanExecute);
             DeletePrinterCommand = new DelegateCommand(DeletePrinterCommandExecute, ModifyPrinterCommandCanExecute);
         }
-
-        public ITranslator Translator { get; }
 
         public Visibility RequiresUacVisibility
         {
@@ -84,8 +87,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             get
             {
                 var profiles = _conversionProfiles.ToList();
-                _dummyLastUsedProfile.Name = Translator.GetTranslation("ApplicationSettingsWindow",
-                    "LastUsedProfileMapping");
+                _dummyLastUsedProfile.Name = "<" + Translation.LastUsedProfileMapping + ">";
                 profiles.Insert(0, _dummyLastUsedProfile);
                 return profiles;
             }

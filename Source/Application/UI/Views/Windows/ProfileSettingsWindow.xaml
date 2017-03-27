@@ -10,7 +10,7 @@
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance windows:DesignTimeProfileSettingsViewModel, IsDesignTimeCreatable=True}"
-        Title="PDFCreator Settings"
+        Title="{Binding Translation.Title}"
         WindowStartupLocation="CenterScreen"
         KeyDown="ProfileSettingsWindow_OnKeyDown"
         MinHeight="611"
@@ -49,11 +49,11 @@
         <DockPanel Background="{StaticResource TitleBarGrayBrush}" Height="64" VerticalAlignment="Top"
                    LastChildFill="True">
             <ContentControl Margin="10" Content="{StaticResource PDFCreatorLogo}" Height="45" />
-            <TextBlock Name="TitleText" Text="Profile Settings" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <TextBlock  Text="{Binding Translation.TitleText}" HorizontalAlignment="Left" VerticalAlignment="Center"
                        FontWeight="Bold" FontSize="24" Foreground="#FFFAFAFA" FontFamily="Calibri" />
 
             <DockPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
-                <TextBlock Name="ProfileLabel" VerticalAlignment="Center" Foreground="White" Margin="0,0,5,0">Profile:</TextBlock>
+                <TextBlock Name="ProfileLabel" VerticalAlignment="Center" Foreground="White" Margin="0,0,5,0" Text="{Binding Translation.ProfileLabelText}"></TextBlock>
                 <ComboBox Name="ProfilesBox" Width="250" ItemsSource="{Binding ProfileCollection.ObservableCollection}"
                           DisplayMemberPath="Name" TabIndex="4" SelectedItem="{Binding CurrentProfile}"
                           IsSynchronizedWithCurrentItem="True" />
@@ -104,7 +104,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="DocumentTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="DocumentTabText" Text="Document">
+                    <userControls:TabHeaderControl x:Name="DocumentTabText" Text="{Binding Translation.DocumentTabText}">
                         <ContentControl Margin="4 1 4 4" Content="{StaticResource DocumentSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -113,7 +113,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="SaveTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="SaveTabText" Text="Save">
+                    <userControls:TabHeaderControl x:Name="SaveTabText" Text="{Binding Translation.SaveTabText}">
                         <ContentControl Margin="0 -1 0 0" Foreground="White" Content="{StaticResource Flame}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -122,7 +122,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="AutoSaveTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="AutoSaveTabText" Text="Autosave">
+                    <userControls:TabHeaderControl x:Name="AutoSaveTabText" Text="{Binding Translation.AutoSaveTabText}">
                         <ContentControl Content="{StaticResource AutoSaveIcon}" Margin="2 -2 2 0" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -131,7 +131,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="ActionsTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="ActionsTabText" Text="Actions">
+                    <userControls:TabHeaderControl x:Name="ActionsTabText" Text="{Binding Translation.ActionsTabText}">
                         <ContentControl Foreground="White" Content="{StaticResource GeneralSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -141,7 +141,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="ImageFormatsTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="ImageFormatsTabText" Text="Image Formats">
+                    <userControls:TabHeaderControl x:Name="ImageFormatsTabText" Text="{Binding Translation.ImageFormatsTabText}">
                         <ContentControl Margin="3" Foreground="White" Content="{StaticResource ImageSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -150,7 +150,7 @@
 
             <TabItem Template="{StaticResource FancyTabItem}" Name="PdfTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="PdfTabText" Text="PDF">
+                    <userControls:TabHeaderControl x:Name="PdfTabText" Text="{Binding Translation.PdfTabText}">
                         <ContentControl Margin="4 1 4 4" Foreground="White" Content="{StaticResource PdfSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -158,12 +158,11 @@
             </TabItem>
         </TabControl>
         <DockPanel Grid.Row="2" LastChildFill="False" Margin="10">
-            <Button Name="CancelButton" IsCancel="True" DockPanel.Dock="Right" MinWidth="150" TabIndex="0">Cancel</Button>
-            <Button Name="SaveButton" Command="{Binding SaveButtonCommand}" DockPanel.Dock="Right" MinWidth="150"
-                    Margin="0,0,10,0" TabIndex="1">
-                Save
+            <Button  IsCancel="True" DockPanel.Dock="Right" MinWidth="150" TabIndex="0" Content="{Binding Translation.CancelButtonContent}"></Button>
+            <Button  Command="{Binding SaveButtonCommand}" DockPanel.Dock="Right" MinWidth="150"
+                    Margin="0,0,10,0" TabIndex="1" Content="{Binding Translation.SaveButtonContent}">
             </Button>
-            <Button Name="HelpButton" DockPanel.Dock="Left" MinWidth="150" Click="HelpButton_OnClick" TabIndex="3">Help</Button>
+            <Button Content="{Binding Translation.HelpButtonContent}" DockPanel.Dock="Left" MinWidth="150" Click="HelpButton_OnClick" TabIndex="3"></Button>
         </DockPanel>
     </Grid>
 </Window>

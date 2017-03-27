@@ -1,5 +1,7 @@
 NLog
 Obsidian
-DynamicTranslator
-LicenseValidator
+LicenseValidator.Interface
 SystemInterface
+SystemWrapper
+Translatable
+DataStorage

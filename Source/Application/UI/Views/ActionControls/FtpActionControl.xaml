@@ -18,21 +18,21 @@
     </UserControl.Resources>
     <StackPanel>
         <Label>
-            <TextBlock Name="ServerText">Server:</TextBlock>
+            <TextBlock Text="{Binding Translation.ServerText}" ></TextBlock>
         </Label>
         <DockPanel>
             <Label DockPanel.Dock="Left" FontWeight="Bold" Margin="5 0 5 0">ftp://</Label>
             <TextBox Text="{Binding CurrentProfile.Ftp.Server}" VerticalAlignment="Center" />
         </DockPanel>
         <Label>
-            <TextBlock Name="DirectoryText">Directory:</TextBlock>
+            <TextBlock Text="{Binding Translation.DirectoryText}"></TextBlock>
         </Label>
         <views:BindableTextBox x:Name="DirectoryTextBox"
                                BindableSelectionStart="{Binding TokenViewModel.CurrentCursorPos}"
                                Text="{Binding TokenViewModel.Text}" />
         <DockPanel Margin="15 5 0 0">
             <Label>
-                <TextBlock Name="DirectoryAddTokenText">Add Token:</TextBlock>
+                <TextBlock Text="{Binding Translation.DirectoryAddTokenText}" ></TextBlock>
             </Label>
             <ComboBox Name="AddTokenComboBox" Margin="5 0 0 0" VerticalAlignment="Center"
                       ItemsSource="{Binding TokenViewModel.TokenList}"
@@ -45,11 +45,10 @@
         </DockPanel>
         <DockPanel LastChildFill="False">
             <Label DockPanel.Dock="Left">
-                <TextBlock Name="DirectoryPreviewText">Preview:</TextBlock>
+                <TextBlock Text="{Binding Translation.DirectoryPreviewText}" ></TextBlock>
             </Label>
             <userControls:TokenHintPanel DockPanel.Dock="Right"
-                                         TextWithToken="{Binding Text, ElementName=DirectoryTextBox}"
-                                         Translator="{Binding Translator}" />
+                                         TextWithToken="{Binding Text, ElementName=DirectoryTextBox}" />
         </DockPanel>
         <TextBox Name="DirectoryPreviewTextBox" IsEnabled="False">
             <TextBox.Text>
@@ -60,15 +59,14 @@
             </TextBox.Text>
         </TextBox>
         <CheckBox Margin="0 10" IsChecked="{Binding CurrentProfile.Ftp.EnsureUniqueFilenames}">
-            <TextBlock Name="EnsureUniqueFilenamesText" TextWrapping="Wrap"
-                       Text="Don't overwrite files (adds an increasing number in case of conflict)" />
+            <TextBlock Text="{Binding Translation.EnsureUniqueFilenamesText}" TextWrapping="Wrap"/>
         </CheckBox>
         <Label>
-            <TextBlock Name="UsernameText">Username:</TextBlock>
+            <TextBlock Text="{Binding Translation.UsernameText}" ></TextBlock>
         </Label>
         <TextBox Text="{Binding CurrentProfile.Ftp.UserName}" />
         <Button Padding="5" Margin="0 10 0 0" Command="{Binding SetPasswordCommand}">
-            <TextBlock Name="SetPasswordText">Set Password</TextBlock>
+            <TextBlock Text="{Binding Translation.SetPasswordText}" ></TextBlock>
         </Button>
     </StackPanel>
 </actionViewModels:ActionControl>

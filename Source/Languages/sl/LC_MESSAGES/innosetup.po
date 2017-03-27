@@ -1,0 +1,705 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Slovenian (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-15 12:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Slovenian "
+"<http://translate.pdfforge.org/projects/pdfcreator/innosetup/sl/>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 2.11\n"
+
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Program je že nameščen.%n%nZa ponovno namestitev ga najprej odstranite.%n%"
+"nNamestitev se bo prekinila."
+
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"PDFCreator je že nameščen.Treba je odstraniti obstoječ program (različica %1)"
+", preden se lahko namesti PDFCreator %2.%n%nAli želite posodobiti PDFCreator "
+"sedaj? Vaši tiskalniki in nastavitve se bodo ohranili."
+
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Program je že nameščen.%n%nPosodobitev ni mogoča. Najprej odstranite "
+"program.%n%nNamestitev se bo prekinila."
+
+msgid "The setup will be canceled."
+msgstr "Namestitev se bo prekinila."
+
+msgid "Do you want to cancel the setup?"
+msgstr "Ali želite prekiniti namestitev?"
+
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr "Za nadaljevanje z odstranitvijo je treba ustaviti sledeče procese:"
+
+msgid "Compact installation"
+msgstr "Osnovna namestitev"
+
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+"Prenesena datoteka je bila poškodovana, zato je izbrisana. Namestitev se bo "
+"prekinila!"
+
+msgid "Custom installation"
+msgstr "Namestitev po meri"
+
+msgid "Donate to PDFCreator"
+msgstr "Podprite PDFCreator"
+
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
+msgstr ""
+"Namešča se Microsoft .Net Framework %1 To lahko traja nekaj minut. Prosim, "
+"počakajte."
+
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+"Prišlo je do napake med namestitvijo Microsoft.Net Framework %1. (Koda "
+"napake: %2)%n%nAli želite pregledati dnevnik .Net namestitve?"
+
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install Microsoft "
+".Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+"PDFCreator potrebuje Microsoft .Net %1. Najprej prenesite in namestite "
+"Microsoft .Net %1, nato ponovite to namestitev."
+
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup "
+"again.%n%nSetup will now exit."
+msgstr ""
+"Namestitveni program za PDFCreator je namestil .Net framework 4.0. Sedaj je "
+"potreben ponovni zagon. Prosim, ponovno zaženite računalnik in ponovite "
+"namestitev za PDFCreator.%n%nNamestitveni program se bo sedaj zaprl."
+
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"Prenesene datoteke se ne da preveriti s kontrolno vsoto. Ali želite kljub "
+"temu začeti namestitev?"
+
+msgid "PDFCreator download"
+msgstr "Prenos programa PDFCreator"
+
+msgid "Download the latest version..."
+msgstr "Prenesi najnovejšo različico..."
+
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"Na voljo je novejša različica (%1).%n%nAli jo želite prenesti in namestiti?"
+
+msgid "Expert settings"
+msgstr "Napredne nastavitve"
+
+msgid "Set installation directory and additional options"
+msgstr "Izbira namestitvene mape in dodatnih možnosti"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"Ime tiskalnika ne sme vsebovati znakov '!','\\' ali ','.  Izberite drugo ime."
+
+msgid "Please choose a printer name."
+msgstr "Določite ime tiskalnika."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"Ime tiskalnika je predolgo - vsebuje lahko največ 221 znakov. Izberite drugo "
+"ime."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "Tiskalnik s tem imenom že obstaja. Izberite drugo ime."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system "
+"afterwards.%n%nOtherwise Cancel the installation."
+msgstr ""
+"Prišlo je do napake v sistemski spremenljivki 'Path'%n%n->Manjkajoč ali "
+"neveljaven vnos: %Systemroot%\\system32\\wbem%n%nTa napaka mora biti "
+"odpravljena, preden lahko nadaljujete z namestitvijo.%n%nIzberite 'V redu', "
+"če želite, da se napaka popravi (na koncu boste morali ponovno zagnati "
+"računalnik).%n%nV nasprotnem primeru izberite 'Prekliči' za prekinitev "
+"namestitve."
+
+msgid "For &all users"
+msgstr "Za &vse uporabnike"
+
+msgid "For the &current user only"
+msgstr "Samo za &trenutnega uporabnika"
+
+msgid "Full installation"
+msgstr "Polna namestitev"
+
+msgid "Help"
+msgstr "Pomoč"
+
+msgid "Install printer"
+msgstr "Namesti tiskalnik"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Namesti monitor tiskanja, tiskalniška vrata, gonilnike in tiskalnik"
+
+msgid "Install printer driver"
+msgstr "Namesti gonilnik tiskalnika"
+
+msgid "Install printer monitor"
+msgstr "Namesti monitor tiskanja"
+
+msgid "Install printer port"
+msgstr "Namesti tiskalniška vrata"
+
+msgid "Offline activation instructions"
+msgstr "Navodila za aktivacijo brez povezave"
+
+msgid "Languages"
+msgstr "Jeziki"
+
+msgid "Please wait. Checking license key..."
+msgstr "Prosim, počakajte. Preverja se licenčni ključ..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "Aktivacija je prestara! Obnovite vašo aktivacijo."
+
+msgid "Empty answer from license server!"
+msgstr "Prazen odgovor z licenčnega strežnika!"
+
+msgid "Invalid answer from license server!"
+msgstr "Neveljaven odgovor z licenčnega strežnika!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr "Licenčni ključ ne velja za to različico! Obnovite vašo licenco na %1."
+
+msgid "No answer from license server!"
+msgstr "Ni odgovora z licenčnega strežnika!"
+
+msgid "An unknown error is occurred!"
+msgstr "Prišlo je do neznane napake!"
+
+msgid "Wrong answer from license server!"
+msgstr "Napačen odgovor z licenčnega strežnika!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr ""
+"Nastavitev sistemskega časa na vašem računalniku najverjetneje ni pravilna! "
+"Preverite nastavitve časa."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Odgovor licenčnega strežnika ne velja za ta računalnik!"
+
+msgid "The license is not valid for the given product!"
+msgstr "Licenca ne velja za ta izdelek!"
+
+msgid "License key validation"
+msgstr "Preverjanje veljavnosti licenčnega ključa"
+
+msgid "Enter the valid license key"
+msgstr "Vnesite veljaven licenčni ključ"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Vnesite veljaven licenčni ključ in nadaljujte z namestitvijo."
+
+msgid "An error occurred validating the license key!"
+msgstr "Napaka pri preverjanju veljavnosti licenčnega ključa!"
+
+msgid "Invalid license answer hash!"
+msgstr "Kontrolna vsota licenčnega odziva ni veljavna!"
+
+msgid "Invalid license key!"
+msgstr "Neveljaven licenčni ključ!"
+
+msgid "License key"
+msgstr "Licenčni ključ"
+
+msgid "Please enter the license key."
+msgstr "Vnesite licenčni ključ."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Oblika licenčnega ključa je XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "Imetnik licence"
+
+msgid "Message"
+msgstr "Sporočilo"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"Za nadaljevanje je potreben nov veljaven licenčni ključ. Ali želite "
+"nadaljevati z namestitvijo?"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter "
+"'/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Noben licenčni ključ ni bil podan. Licenčni ključ v kombinaciji s parametri "
+"'/VerySilent' ali '/Silent' je nujno potreben! Uporabite parameter "
+"'/%1'.%n%nPrimer: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "Niz za aktivacijo brez povezave:"
+
+msgid "Offline license check"
+msgstr "Preverjanje licence brez povezave"
+
+msgid "License server answer:"
+msgstr "Odgovor licenčnega strežnika:"
+
+msgid "The machine or the user is blocked!"
+msgstr "Blokirana je ali naprava ali uporabnik!"
+
+msgid "The authorization is failed!"
+msgstr "Avtorizacija ni uspela!"
+
+msgid "An invalid license key is provided!"
+msgstr "Neveljaven licenčni ključ!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Maksimum licenc (%1) je presežen!"
+
+msgid "OK"
+msgstr "V redu"
+
+msgid "The product %1 does not exist!"
+msgstr "Izdelek %1 ne obstaja!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr "Različica %1 ni podprta! Uporabite najnovejšo različico: %2."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Prosimo, pišite podpornemu osebju na support@pdfforge.org!"
+
+msgid "License agreement"
+msgstr "Licenčni sporazum"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "Z izbiro gumba Naprej potrjujete licenčni sporazum."
+
+msgid "PDFCreator log file"
+msgstr "PDFCreator dnevniška datoteka"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"Nameščena različica '%1' je novejša od namestitvene različice '%2'.%n%nZa "
+"namestitev starejše različice najprej odstranite obstoječ program.%n%"
+"nNamestitev se bo prekinila."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Vaš račun ni član skupine administratorjev.%n%n%nPDFCreator uporablja "
+"tiskalniški gonilnik PostScript za izdelavo PDF dokumentov v katerikoli "
+"aplikaciji.%nZa namestitev tiskalniških gonilnikov so potrebne pravice "
+"administratorja.%n%nČe nadaljujete z namestitvijo, boste lahko pretvarjali "
+"le že obstoječe datoteke PostScript.%n%nAli želite nadaljevati namestitev?%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Za to ne rabite biti član skupine administratorjev.%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"Najdena je bila starejša različica '%1'.%n%nSlednje ni možno posodobiti na "
+"različico '%2'.%n%nNajprej odstranite starejšo različico."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"Najdena je bila starejša različica '%1'.%nMožna je posodobitev na različico "
+"'%2'.%n%n"
+
+msgid "Other tasks:"
+msgstr "Ostala opravila:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "Aplikacija ni nameščena. Tega popravka ne morete izvesti."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr "Ta popravek je za starejšo različico, zato ga ne morete izvesti."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "Nameščena aplikacija je prestara. Tega popravka ne morete izvesti."
+
+msgid "Edit pages"
+msgstr "Urejanje strani"
+
+msgid "Edit texts and fonts"
+msgstr "Urejanje besedil in pisav"
+
+msgid "Split and merge"
+msgstr "Ločevanje in združevanje"
+
+msgid "PDF to Word"
+msgstr "iz PDF v Word"
+
+msgid "Create"
+msgstr "Ustvarjanje"
+
+msgid "Convert"
+msgstr "Pretvarjanje"
+
+msgid "Edit & Insert"
+msgstr "Urejanje & Vstavljanje"
+
+msgid "Review"
+msgstr "Komentiranje"
+
+msgid "Secure & Sign"
+msgstr "Zaščita & Podpisovanje"
+
+msgid "Forms"
+msgstr "Obrazci"
+
+msgid "Try out the new PDF Architect"
+msgstr "Preizkusite novi PDF Architect"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "Dodana je bila bližnjica na vaše namizje."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Namestite PDF Architect z odličnimi in brezplačnimi funkcijami"
+
+msgid "Rotate, move and delete pages"
+msgstr "Vrtite, premikajte in brišite strani"
+
+msgid "Merge multiple PDFs"
+msgstr "Združite več PDF-jev"
+
+msgid "Free features:"
+msgstr "Brezplačne funkcije:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "Dopolnite PDFCreator z orodji za urejanje!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "PDF Architect {0} novosti:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "Avtomatizirano elektronsko podpisovanje"
+
+msgid "Verify and remove signatures"
+msgstr "Preverite in odstranite podpise"
+
+msgid "Already installed"
+msgstr "Že nameščeno"
+
+msgid "Automatic updates"
+msgstr "Samodejne posodobitve"
+
+msgid "Default application for PDF files"
+msgstr "Privzeta aplikacija za PDF datoteke"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "Namestil se bo novi PDFArchitect. To lahko traja nekaj časa."
+
+msgid "Firefox integration"
+msgstr "Firefox integracija"
+
+msgid "Internet Explorer integration"
+msgstr "Internet Explorer integracija"
+
+msgid "MS Outlook previewer integration"
+msgstr "MS Outlook previewer integracija"
+
+msgid "Windows Explorer integration"
+msgstr "Windows Explorer integracija"
+
+msgid "No thanks"
+msgstr "Ne hvala"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"Pred nadaljevanjem namestitve je treba odstraniti 'PDFCreator Server'. "
+"Programov 'PDFCreator' in 'PDFCreator Server' ni možno uporabljati na isti "
+"napravi."
+
+msgid "PDFCreator setup"
+msgstr "Namestitev programa PDFCreator"
+
+msgid "Setup is being prepared..."
+msgstr "Namestitev se pripravlja ..."
+
+msgid "Printer"
+msgstr "Tiskalnik"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"Med namestitvijo tiskalnika je prišlo do napak. Podroben opis najdete v "
+"namestitveni mapi programa, v datoteki 'SetupLog.txt'."
+
+msgid "Printer name"
+msgstr "Ime tiskalnika"
+
+msgid "Choosing a printer name."
+msgstr "Izbira imena tiskalnika."
+
+msgid "Please choose a name for the printer."
+msgstr "Izberite ime za tiskalnik."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"PDFCreator na računalnik namesti tiskalnik. Z njim lahko vsak program, ki "
+"podpira tiskanje, ustvari PDF dokumente, bitne slike ali datoteke "
+"PostScript.%n%nIme tiskalnika:"
+
+msgid "This process might take several minutes."
+msgstr "Ta postopek lahko traja nekaj minut."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"PDFCreator omogoča enostavno izdelavo PDF datotek v kateremkoli programu. "
+"Uporabite ga kot tiskalnik v Wordu, Excelu ali katerem drugem Windows "
+"programu."
+
+msgid "application files"
+msgstr "programske datoteke"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Izvaja se program '%1'.%n%nNajprej ga morate zapreti.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Za nadaljevanje namestitve ponovno zaženite računalnik."
+
+msgid "PDFCreator settings"
+msgstr "Nastavitve programa PDFCreator"
+
+msgid "Show help after setup"
+msgstr "Po namestitvi pokaži pomoč"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"Uporabite \"PDFCreator Terminal Server\" za uporabo na računalnikih z "
+"nameščenimi Terminalskimi storitvami.%n%nAli želite več informacij o \""
+"PDFCreator Terminal Server\"?"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n%"
+"nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"To je predogled programa PDFCreator za razvijalce.%n%nLe-ta ni zgodnja "
+"različica naslednje izdaje. Najverjetneje bo poln napak ali pa sploh ne bo "
+"deloval.%n%nČe ga vseeno namestite, bomo veseli vašega odziva."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"Ta različica ne podpira strežniškega načina. Ali jo želite vseeno namestiti?"
+
+msgid "Delete all application settings?"
+msgstr "Ali naj se izbrišejo vse nastavitve programa?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Odstrani tiskalnik skupaj z vsemi sestavnimi deli."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"Za posodobitev izberite <V redu> ali pa prekinite namestitev in najprej "
+"odstranite starejšo različico."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "Ustvari &bližnjico v kontekstnem meniju Windows Raziskovalca"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Ustvari PDF s programom %1"
+
+msgid "Bad request (400)"
+msgstr "Neveljavna zahteva (400)"
+
+msgid "Access denied (401)"
+msgstr "Dostop zavrnjen (401)"
+
+msgid "File not found (404)"
+msgstr "Strani ni mogoče najti (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Potrebna je overitev na proxy strežniku (407)"
+
+msgid "Server internal error (500)"
+msgstr "Notranja napaka strežnika (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Napačen prehod (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Storitev trenutno ni na voljo (503)"
+
+msgid "Cancelling download..."
+msgstr "Prenos se ustavlja ..."
+
+msgid "Cannot connect"
+msgstr "Povezava ni uspela"
+
+msgid "Connecting..."
+msgstr "Povezovanje ..."
+
+msgid "Current file"
+msgstr "Trenutna datoteka"
+
+msgid "Details"
+msgstr "Podrobnosti"
+
+msgid "Download cancelled"
+msgstr "Prenos je preklican"
+
+msgid "Download complete"
+msgstr "Prenos končan"
+
+msgid "Download failed"
+msgstr "Prenos ni uspel"
+
+msgid "Downloading..."
+msgstr "Prenašanje ..."
+
+msgid "Elapsed time:"
+msgstr "Pretečen čas:"
+
+msgid "File:"
+msgstr "Datoteka:"
+
+msgid "The following files were not downloaded:"
+msgstr "Naslednje datoteke niso bile prenesene:"
+
+msgid "Downloading additional files"
+msgstr "Prenašanje dodatnih datotek"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Počakajte, da se prenesejo dodatne datoteke..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Pridobivanje podatkov o datotekah ..."
+
+msgid "Hide"
+msgstr "Skrij"
+
+msgid "HTTP error %d"
+msgstr "HTTP napaka %d"
+
+msgid "Ignore"
+msgstr "Prezri"
+
+msgid "Initializing..."
+msgstr "Pripravljanje ..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Remaining time:"
+msgstr "Preostali čas:"
+
+msgid "Retry"
+msgstr "Ponovi"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Preverite povezavo in izberite 'Ponovi' za ponoven poskus prenosa ali "
+"izberite 'Prekliči', da prekinete namestitev."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Preverite povezavo in izberite 'Ponovi' za ponoven poskus prenosa ali "
+"izberite 'Naprej', da nadaljujete z namestitvijo."
+
+msgid "Speed:"
+msgstr "Hitrost:"
+
+msgid "Starting download..."
+msgstr "Prenos se začenja ..."
+
+msgid "Status:"
+msgstr "Status:"
+
+msgid "Total progress"
+msgstr "Skupni napredek"
+
+msgid "Unknown"
+msgstr "Neznano"
+
+msgid "%.2f of %.2f"
+msgstr "%.2f od %.2f"
+
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Namestitev je dodala [name] na vaš računalnik."

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Application\Conversion\Jobs\Jobs.csproj", "{18354054-45F6-4F51-8730-D05643A400A3}"
 EndProject
@@ -16,8 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings", "Application\Conversion\Settings\Settings.csproj", "{94936199-C9C7-4A5F-A58E-6123158E84F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorReport", "Application\ErrorReport\ErrorReport.csproj", "{80E33436-0D97-4653-8EDB-ECF03F7CA06A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mail", "Application\Conversion\Mail\Mail.csproj", "{884D14EB-6D78-41D8-B022-968209DD6CE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs.IntegrationTest", "IntegrationTest\Conversion\Jobs.IntegrationTest\Jobs.IntegrationTest.csproj", "{8E23669A-783B-495A-97BF-337580FE20DA}"
 EndProject
@@ -36,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solutio
 		..\paket.dependencies = ..\paket.dependencies
 		..\ResourceHackerHelper.fsx = ..\ResourceHackerHelper.fsx
 		..\userguideHelper.fsx = ..\userguideHelper.fsx
+		..\WeblateHelper.fsx = ..\WeblateHelper.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{E56DE298-B9F1-4C80-943D-5C750A8E97A6}"
@@ -62,30 +61,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COM", "Application\UI\COM\C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Languages", "Languages", "{B3663EDB-F947-48CD-8B9F-79FA71E3804D}"
 	ProjectSection(SolutionItems) = preProject
-		Languages\Catalan (Catalan).ini = Languages\Catalan (Catalan).ini
-		Languages\Catalan (Valencian).ini = Languages\Catalan (Valencian).ini
-		Languages\Chinese (Simplified).ini = Languages\Chinese (Simplified).ini
-		Languages\Chinese (Traditional).ini = Languages\Chinese (Traditional).ini
-		Languages\Corsican (France).ini = Languages\Corsican (France).ini
-		Languages\Czech.ini = Languages\Czech.ini
-		Languages\Danish.ini = Languages\Danish.ini
-		Languages\Dutch.ini = Languages\Dutch.ini
 		Languages\English.ini = Languages\English.ini
-		Languages\Estonian.ini = Languages\Estonian.ini
-		Languages\Finnish.ini = Languages\Finnish.ini
-		Languages\French.ini = Languages\French.ini
-		Languages\Gaelic (Scotland).ini = Languages\Gaelic (Scotland).ini
-		Languages\German.ini = Languages\German.ini
-		Languages\Hungarian.ini = Languages\Hungarian.ini
-		Languages\Italian.ini = Languages\Italian.ini
-		Languages\Lithuanian.ini = Languages\Lithuanian.ini
-		Languages\Norwegian, Bokmal (Norway).ini = Languages\Norwegian, Bokmal (Norway).ini
-		Languages\Polish.ini = Languages\Polish.ini
-		Languages\Portuguese (Brazil).ini = Languages\Portuguese (Brazil).ini
-		Languages\Russian.ini = Languages\Russian.ini
-		Languages\Slovenian.ini = Languages\Slovenian.ini
-		Languages\Spanish.ini = Languages\Spanish.ini
-		Languages\Swedish.ini = Languages\Swedish.ini
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startup", "Application\Startup\Startup\Startup.csproj", "{3157C130-EA8A-45EB-92DB-8615BD66B5C5}"
@@ -131,8 +107,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Printing.UnitTest", "UnitTest\Core\Printing.UnitTest\Printing.UnitTest.csproj", "{DAB29010-B1E7-469C-8AFD-FB6109661E08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.UnitTest", "UnitTest\UI\ViewModels.UnitTest\ViewModels.UnitTest.csproj", "{03E25CF8-15A3-4662-95B6-C536EC947021}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mail.UnitTest", "UnitTest\Conversion\Mail.UnitTest\Mail.UnitTest.csproj", "{ADD89232-B5DF-4EE8-A451-25FFD04F28B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.UnitTest", "UnitTest\Core\Services.UnitTest\Services.UnitTest.csproj", "{AFCBA7A2-C046-412D-BBE1-623F8E4844D2}"
 EndProject
@@ -200,6 +174,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dropbox", "Application\Conv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpoAdapter", "GpoAdapter\GpoAdapter.csproj", "{E2437B45-05E0-479C-BA7D-C263C929429F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Processing", "Processing", "{5DB6474B-B690-4D96-947A-85A7C3D1ECBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectConversion.UnitTest", "UnitTest\Core\DirectConversion.UnitTest\DirectConversion.UnitTest.csproj", "{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.IntegrationTest", "IntegrationTest\Core\Services.IntegrationTest\Services.IntegrationTest.csproj", "{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfToolsProcessing", "Application\Conversion\Processing\PdfToolsProcessing\PdfToolsProcessing.csproj", "{A80FBA8D-683C-4622-8C0B-5AB66C2A8968}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfToolsProcessingUnitTest", "UnitTest\Conversion\Processing\PdfToolsProcessingUnitTest\PdfToolsProcessingUnitTest.csproj", "{DD109C1A-874D-4EC9-94D8-CEDFB674982B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -234,10 +218,6 @@ Global
 		{80E33436-0D97-4653-8EDB-ECF03F7CA06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80E33436-0D97-4653-8EDB-ECF03F7CA06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80E33436-0D97-4653-8EDB-ECF03F7CA06A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{884D14EB-6D78-41D8-B022-968209DD6CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{884D14EB-6D78-41D8-B022-968209DD6CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{884D14EB-6D78-41D8-B022-968209DD6CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{884D14EB-6D78-41D8-B022-968209DD6CE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E23669A-783B-495A-97BF-337580FE20DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E23669A-783B-495A-97BF-337580FE20DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E23669A-783B-495A-97BF-337580FE20DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -334,10 +314,6 @@ Global
 		{03E25CF8-15A3-4662-95B6-C536EC947021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03E25CF8-15A3-4662-95B6-C536EC947021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03E25CF8-15A3-4662-95B6-C536EC947021}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADD89232-B5DF-4EE8-A451-25FFD04F28B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADD89232-B5DF-4EE8-A451-25FFD04F28B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADD89232-B5DF-4EE8-A451-25FFD04F28B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADD89232-B5DF-4EE8-A451-25FFD04F28B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFCBA7A2-C046-412D-BBE1-623F8E4844D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFCBA7A2-C046-412D-BBE1-623F8E4844D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCBA7A2-C046-412D-BBE1-623F8E4844D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -446,6 +422,22 @@ Global
 		{E2437B45-05E0-479C-BA7D-C263C929429F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2437B45-05E0-479C-BA7D-C263C929429F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2437B45-05E0-479C-BA7D-C263C929429F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80FBA8D-683C-4622-8C0B-5AB66C2A8968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80FBA8D-683C-4622-8C0B-5AB66C2A8968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80FBA8D-683C-4622-8C0B-5AB66C2A8968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80FBA8D-683C-4622-8C0B-5AB66C2A8968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD109C1A-874D-4EC9-94D8-CEDFB674982B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD109C1A-874D-4EC9-94D8-CEDFB674982B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD109C1A-874D-4EC9-94D8-CEDFB674982B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD109C1A-874D-4EC9-94D8-CEDFB674982B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -458,7 +450,6 @@ Global
 		{083D9318-F02A-44A1-8AD9-A82413B85655} = {D3675B80-2716-4F93-A168-5AE695DEE138}
 		{94936199-C9C7-4A5F-A58E-6123158E84F3} = {CC1DB869-E02A-4545-AE84-B64BFDB0B008}
 		{80E33436-0D97-4653-8EDB-ECF03F7CA06A} = {045FAED8-C500-49E8-AD0E-81ABF5EC6AB7}
-		{884D14EB-6D78-41D8-B022-968209DD6CE4} = {CC1DB869-E02A-4545-AE84-B64BFDB0B008}
 		{8E23669A-783B-495A-97BF-337580FE20DA} = {EF36E8F4-6AB8-4644-89D3-B8E82D89C335}
 		{63681197-D7A3-47B0-97C9-C7BA7735C3AF} = {E56DE298-B9F1-4C80-943D-5C750A8E97A6}
 		{ED6DD9DE-28E2-408E-9444-DC1558B8D755} = {D3675B80-2716-4F93-A168-5AE695DEE138}
@@ -491,7 +482,6 @@ Global
 		{1ED83AC8-EB5F-4DE2-B2B9-E249D5A3E4D2} = {57114181-ADAD-4B4B-BE7F-2918B08A03C7}
 		{DAB29010-B1E7-469C-8AFD-FB6109661E08} = {F6348260-0E29-4840-9695-A835307BE7B3}
 		{03E25CF8-15A3-4662-95B6-C536EC947021} = {5EA080CE-21C5-44B9-A516-2BDEF218132A}
-		{ADD89232-B5DF-4EE8-A451-25FFD04F28B7} = {57114181-ADAD-4B4B-BE7F-2918B08A03C7}
 		{AFCBA7A2-C046-412D-BBE1-623F8E4844D2} = {F6348260-0E29-4840-9695-A835307BE7B3}
 		{913290B0-952B-4EF5-8839-1CC84CAF0048} = {E56DE298-B9F1-4C80-943D-5C750A8E97A6}
 		{DE5E8798-2022-4CB2-8F5C-B60C0AE6EBDD} = {5EA080CE-21C5-44B9-A516-2BDEF218132A}
@@ -525,5 +515,10 @@ Global
 		{9DAD91EE-8328-4FA1-9578-88386F4BFC46} = {5D4483CE-EB52-47FF-84D3-6B9BE987E7DE}
 		{39E9D8C6-7E30-47DA-9FBD-250E1515C762} = {CC1DB869-E02A-4545-AE84-B64BFDB0B008}
 		{E2437B45-05E0-479C-BA7D-C263C929429F} = {9233C7A6-709E-4041-8B8F-FBC4E3FF0711}
+		{5DB6474B-B690-4D96-947A-85A7C3D1ECBD} = {57114181-ADAD-4B4B-BE7F-2918B08A03C7}
+		{9D05AA0B-16D4-4B7A-913B-F70F011CA3C8} = {F6348260-0E29-4840-9695-A835307BE7B3}
+		{0418F7CD-1797-4D08-BD8A-9E844CF7ECFE} = {B23FEF97-C42B-4671-9F68-F9DC1EE0A785}
+		{A80FBA8D-683C-4622-8C0B-5AB66C2A8968} = {5BDF15DD-DD51-4C25-868E-CE37DF9D804A}
+		{DD109C1A-874D-4EC9-94D8-CEDFB674982B} = {5DB6474B-B690-4D96-947A-85A7C3D1ECBD}
 	EndGlobalSection
 EndGlobal

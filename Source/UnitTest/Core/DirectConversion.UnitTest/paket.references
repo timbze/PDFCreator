@@ -1,0 +1,7 @@
+﻿NUnit
+NSubstitute
+AutoFixture
+AutoFixture.AutoNSubstitute
+DataStorage
+SystemInterface
+SystemWrapper

@@ -2,6 +2,7 @@
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
@@ -12,14 +13,14 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_CanExecute_IfInteractionIsNotSet_ReturnsFalse()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             Assert.IsFalse(viewModel.OkCommand.CanExecute(null));
         }
 
         [Test]
         public void OkCommand_CanExecute_IfSkipNotShown_IsTrue()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             viewModel.SetInteraction(new EncryptionPasswordInteraction(false, true, true));
             Assert.IsTrue(viewModel.OkCommand.CanExecute(null));
         }
@@ -27,7 +28,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_CanExecute_OwnerPasswordIsRequiredAndNotSet_IsFalse()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             viewModel.SetInteraction(new EncryptionPasswordInteraction(true, true, false));
             Assert.IsFalse(viewModel.OkCommand.CanExecute(null));
         }
@@ -35,7 +36,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_CanExecute_RequiredPasswordsAreSet_IsTrue()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             viewModel.SetInteraction(new EncryptionPasswordInteraction(true, false, true));
             viewModel.Interaction.UserPassword = "MyPassword";
             Assert.True(viewModel.OkCommand.CanExecute(null));
@@ -44,7 +45,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_CanExecute_UserPasswordIsRequiredAndNotSet_IsFalse()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             viewModel.SetInteraction(new EncryptionPasswordInteraction(true, false, true));
             Assert.IsFalse(viewModel.OkCommand.CanExecute(null));
         }
@@ -52,7 +53,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_OnExecute_CompletesInteraction()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var interaction = new EncryptionPasswordInteraction(false, true, true);
 
             var helper = new InteractionHelper<EncryptionPasswordInteraction>(viewModel, interaction);
@@ -66,7 +67,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OnInteractionSet_SetsPasswordsInView()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var interaction = new EncryptionPasswordInteraction(false, true, true);
 
             var actionWasCalled = false;
@@ -79,7 +80,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void RemoveCommand_OnExecute_CompletesInteraction()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var interaction = new EncryptionPasswordInteraction(false, true, true);
             var helper = new InteractionHelper<EncryptionPasswordInteraction>(viewModel, interaction);
             viewModel.RemoveCommand.Execute(null);
@@ -93,7 +94,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void SetingOwnerPassword_WritesToInteractionAndCallsCanExecuteChanged()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var canExecuteChanged = false;
             viewModel.OkCommand.CanExecuteChanged += (sender, args) => canExecuteChanged = true;
             var interaction = new EncryptionPasswordInteraction(false, true, true);
@@ -108,7 +109,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void SetingUserPassword_WritesToInteractionAndCallsCanExecuteChanged()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var canExecuteChanged = false;
             viewModel.OkCommand.CanExecuteChanged += (sender, args) => canExecuteChanged = true;
             var interaction = new EncryptionPasswordInteraction(false, true, true);
@@ -123,7 +124,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void SkipCommand_OnExecute_CompletesInteraction()
         {
-            var viewModel = new EncryptionPasswordViewModel();
+            var viewModel = new EncryptionPasswordViewModel(new EncryptionPasswordsWindowTranslation());
             var interaction = new EncryptionPasswordInteraction(false, true, true);
             var helper = new InteractionHelper<EncryptionPasswordInteraction>(viewModel, interaction);
             viewModel.SkipCommand.Execute(null);

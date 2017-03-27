@@ -3,16 +3,16 @@ using System.ComponentModel;
 using System.Windows;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
+using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Translation;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants.Update;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
@@ -29,7 +29,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var updateAssistant = Substitute.For<IUpdateAssistant>();
             updateAssistant.UpdatesEnabled.Returns(true);
 
-            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, Substitute.For<ITranslator>(), updateAssistant, Substitute.For<IUacAssistant>(), Substitute.For<IInteractionInvoker>(), Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>());
+            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, updateAssistant, Substitute.For<IUacAssistant>(), Substitute.For<IInteractionInvoker>(), Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>(), new GeneralTabTranslation());
             generalTabViewModel.SetSettingsAndRaiseNotifications(new PdfCreatorSettings(null), null);
 
             return generalTabViewModel;
@@ -40,7 +40,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var updateAssistant = Substitute.For<IUpdateAssistant>();
             updateAssistant.UpdatesEnabled.Returns(false);
 
-            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, Substitute.For<ITranslator>(), updateAssistant, Substitute.For<IUacAssistant>(), Substitute.For<IInteractionInvoker>(), Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>());
+            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, updateAssistant, Substitute.For<IUacAssistant>(), Substitute.For<IInteractionInvoker>(), Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>(), new GeneralTabTranslation());
             generalTabViewModel.SetSettingsAndRaiseNotifications(new PdfCreatorSettings(null), null);
 
             return generalTabViewModel;

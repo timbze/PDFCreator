@@ -4,7 +4,6 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Editions.PDFCreator;
 using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs

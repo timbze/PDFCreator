@@ -49,7 +49,6 @@
     <Compile Include="IPDFCreatorNameProvider.cs" />
     <Compile Include="ISettingsManager.cs" />
     <Compile Include="ISettingsProvider.cs" />
-    <Compile Include="LanguageDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsMover.cs" />
     <Compile Include="SettingsProvider.cs" />

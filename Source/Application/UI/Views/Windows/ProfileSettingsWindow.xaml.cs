@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
@@ -13,13 +12,12 @@ namespace pdfforge.PDFCreator.UI.Views.Windows
     {
         private readonly IUserGuideHelper _userGuideHelper;
 
-        public ProfileSettingsWindow(ProfileSettingsViewModel profileSettingsViewModel, ActionControlsBundle actionControls, ITranslator translator, IUserGuideHelper userGuideHelper)
+        public ProfileSettingsWindow(ProfileSettingsViewModel profileSettingsViewModel, ActionControlsBundle actionControls, IUserGuideHelper userGuideHelper)
         {
             _userGuideHelper = userGuideHelper;
             DataContext = profileSettingsViewModel;
             InitializeComponent();
             AddActions(actionControls);
-            translator.Translate(this);
         }
 
         private void AddActions(ActionControlsBundle actionControls)

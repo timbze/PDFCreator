@@ -71,6 +71,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
         //Using-PdfCreator
         [HelpTopic("pdfcreator/using-pdfcreator/tokens")] Tokens,
 
+        //Faq
+        [HelpTopic("pdfcreator/frequently-asked-questions/pdf-tools")] PdfTools,
+
         //Server
         [HelpTopic("pdfcreator-server/index")] Server,
 

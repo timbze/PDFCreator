@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
@@ -12,12 +12,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
     {
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public SaveTabViewModel(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public SaveTabViewModel(SaveTabTranslation translation, IInteractionInvoker interactionInvoker, TokenHelper tokenHelper)
         {
-            Translator = translator;
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
 
-            var tokenHelper = new TokenHelper(Translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
             FileNameViewModel = new TokenViewModel(x => CurrentProfile.FileNameTemplate = x, () => CurrentProfile?.FileNameTemplate, tokenHelper.GetTokenListForFilename());
@@ -31,14 +30,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         public TokenReplacer TokenReplacer { get; set; }
 
-        public ITranslator Translator { get; set; }
+        public SaveTabTranslation Translation { get; set; }
 
-        public IEnumerable<EnumValue<OutputFormat>> DefaultFileFormalValues => Translator.GetEnumTranslation<OutputFormat>();
+        public IEnumerable<OutputFormat> DefaultFileFormalValues => System.Enum.GetValues(typeof(OutputFormat)) as OutputFormat[];
+
 
         private void BrowseSaveFolderExecute(object o)
         {
             var interaction = new FolderBrowserInteraction();
-            interaction.Description = Translator.GetTranslation("ProfileSettingsWindow", "SelectSaveDialogFolder");
+            interaction.Description = Translation.SelectSaveDialogFolder;
             interaction.ShowNewFolderButton = true;
 
             _interactionInvoker.Invoke(interaction);

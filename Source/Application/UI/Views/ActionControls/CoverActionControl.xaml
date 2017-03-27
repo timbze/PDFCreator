@@ -12,7 +12,7 @@
     <Grid>
         <StackPanel>
             <Label>
-                <TextBlock Name="CoverFileText">Cover file (PDF):</TextBlock>
+                <TextBlock Text="{Binding Translation.CoverFileText}"></TextBlock>
             </Label>
             <DockPanel>
                 <Button DockPanel.Dock="Right" Margin="5 0 0 0" Width="25" Command="{Binding SelectCoverCommand}">...</Button>

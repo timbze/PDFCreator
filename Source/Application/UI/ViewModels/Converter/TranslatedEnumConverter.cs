@@ -2,18 +2,22 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Converter
 {
     public class TranslatedEnumConverter : DependencyObject, IValueConverter
     {
-        public static DependencyProperty TranslatorProperty = DependencyProperty.Register("Translator", typeof(ITranslator), typeof(FrameworkElement));
+        private TranslationFactory _translationFactory;
 
-        public ITranslator Translator
+        public ITranslationFactory TranslationFactory
         {
-            get { return (ITranslator) GetValue(TranslatorProperty); }
-            set { SetValue(TranslatorProperty, value); }
+            get { return _translationFactory; }
+            set
+            {
+                if (value is TranslationFactory)
+                _translationFactory = (TranslationFactory) value;
+            }
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -22,15 +26,17 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Converter
             if (!sourceType.IsEnum)
                 throw new InvalidOperationException("The target must be an enum");
 
-            if (Translator == null)
+            if (_translationFactory?.TranslationSource == null)
+                return null;
+
+            try
+            {
+                return _translationFactory.TranslationSource.GetTranslation(TranslationAttribute.GetValue(value));
+            }
+            catch
+            {
                 return value.ToString();
-
-            var translation = Translator.GetTranslation("Enums", sourceType.Name + "." + value);
-
-            if (string.IsNullOrEmpty(translation))
-                translation = value.ToString();
-
-            return translation;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

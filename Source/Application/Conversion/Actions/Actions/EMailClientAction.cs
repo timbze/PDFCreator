@@ -1,9 +1,9 @@
 ﻿using System;
 using NLog;
+using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Mail;
 using pdfforge.PDFCreator.Conversion.Settings;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
@@ -28,10 +28,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
                 message.Subject = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Subject);
                 message.Body = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Content);
-
+                message.Html = job.Profile.EmailClientSettings.Html;
                 if (job.Profile.EmailClientSettings.AddSignature)
                 {
-                    message.Body += job.JobTranslations.EmailSignature;
+
+                    // if html option is checked replace newLine with <br />
+                    message.Body += job.Profile.EmailClientSettings.Html ? job.JobTranslations.EmailSignature.Replace(Environment.NewLine, "<br>") : job.JobTranslations.EmailSignature;
                 }
 
                 var recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Recipients);

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using pdfforge.PDFCreator.Utilities.Tokens;
+﻿using pdfforge.PDFCreator.Utilities.Tokens;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
@@ -12,7 +11,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// <summary>
         ///     The full path of the source file
         /// </summary>
-        public string Filename { get; set; }
+        public string Filename { get; set; } = "";
 
         /// <summary>
         ///     The Windows Session Id
@@ -22,22 +21,22 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// <summary>
         ///     The window station the job was created on (i.e. Console)
         /// </summary>
-        public string WinStation { get; set; }
+        public string WinStation { get; set; } = "";
 
         /// <summary>
         ///     The Author of the document
         /// </summary>
-        public string Author { get; set; }
+        public string Author { get; set; } = "";
 
         /// <summary>
         ///     Name of the computer on which the job was created
         /// </summary>
-        public string ClientComputer { get; set; }
+        public string ClientComputer { get; set; } = "";
 
         /// <summary>
         ///     Name of the printer
         /// </summary>
-        public string PrinterName { get; set; }
+        public string PrinterName { get; set; } = "";
 
         /// <summary>
         ///     pdfcmon job counter
@@ -52,7 +51,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// <summary>
         ///     The Title of the document
         /// </summary>
-        public string DocumentTitle { get; set; }
+        public string DocumentTitle { get; set; } = "";
 
         public JobType Type { get; set; }
 

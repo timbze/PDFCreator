@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Actions.Queries;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -9,19 +8,20 @@ using pdfforge.PDFCreator.Conversion.Jobs.Query;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
 {
     public class InteractiveFtpPasswordProvider : IFtpPasswordProvider
     {
         private readonly IInteractionInvoker _interactionInvoker;
+        private readonly InteractiveWorkflowTranslation _translation;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ITranslator _translator;
 
-        public InteractiveFtpPasswordProvider(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public InteractiveFtpPasswordProvider(IInteractionInvoker interactionInvoker, InteractiveWorkflowTranslation translation)
         {
-            _translator = translator;
             _interactionInvoker = interactionInvoker;
+            _translation = translation;
         }
 
         public bool SetPassword(Job job)
@@ -82,10 +82,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         {
             var sb = new StringBuilder();
             if (retype)
-                sb.AppendLine(_translator.GetTranslation("InteractiveWorkflow", "RetypeSmtpPwMessage"));
+                sb.AppendLine(_translation.RetypeSmtpPwMessage);
             
-            var title = _translator.GetTranslation("FtpActionSettings", "PasswordTitle");
-            var description = _translator.GetTranslation("FtpActionSettings", "PasswordDescription");
+            var title = _translation.PasswordTitle;
+            var description = _translation.PasswordDescription;
 
             var button = retype ? PasswordMiddleButton.None : PasswordMiddleButton.Skip;
             var interaction = new PasswordInteraction(button, title, description, false)

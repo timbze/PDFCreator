@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" Height="673.317" Width="633.589" WindowStartupLocation="CenterOwner"
-        Title="Dropbox">
+        Title="{Binding Translation.Title}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -12,16 +12,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Name="DropboxAuthenticationTitle" Grid.Row="0" Text="Authenticate with Dropbox"
+        <TextBlock  Grid.Row="0" Text="{Binding Translation.DropboxAuthenticationTitleText}"
                    Margin="20,6" FontWeight="SemiBold" FontSize="16"
                    Foreground="#28E" />
-        <Border Grid.Row="1" BorderThickness="0,1,0,2" SnapsToDevicePixels="True"
-                BorderBrush="#8000">
+        <Border Grid.Row="1" BorderThickness="0,1,0,2" SnapsToDevicePixels="True" BorderBrush="#8000">
             <WebBrowser Name="Browser" Navigating="BrowserNavigating" />
         </Border>
-        <Button Grid.Row="2" Name="CancelAuthenticationButton" HorizontalAlignment="Right" Margin="20,6" Width="75"
-                Height="25" IsCancel="True">
-            Cancel
+        <Button Grid.Row="2" HorizontalAlignment="Right" Margin="20,6" Width="75" Height="25" IsCancel="True" Content="{Binding Translation.CancelAuthenticationButtonContent }">
+            
         </Button>
     </Grid>
 

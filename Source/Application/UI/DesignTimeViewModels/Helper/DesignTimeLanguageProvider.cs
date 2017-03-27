@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using pdfforge.DynamicTranslator;
+using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Translation;
 
 namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper
@@ -19,6 +19,11 @@ namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper
         }
 
         public Language FindBestLanguage(CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Language FindBestLanguage(string language)
         {
             throw new NotImplementedException();
         }

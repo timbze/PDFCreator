@@ -1,9 +1,9 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
@@ -17,20 +17,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private readonly IProcessStarter _processStarter;
         private readonly ISettingsProvider _settingsProvider;
 
-        public OpenViewerActionViewModel(ITranslator translator, IInteractionInvoker interactionInvoker, IPdfArchitectCheck pdfArchitectCheck,
+        public OpenViewerActionViewModel(OpenViewerSettingsAndActionTranslation translation, IInteractionInvoker interactionInvoker, IPdfArchitectCheck pdfArchitectCheck,
             ISettingsProvider settingsProvider, IProcessStarter processStarter)
         {
-            Translator = translator;
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
             _pdfArchitectCheck = pdfArchitectCheck;
             _settingsProvider = settingsProvider;
             _processStarter = processStarter;
 
-            DisplayName = Translator.GetTranslation("OpenViewerSettings", "DisplayName");
-            Description = Translator.GetTranslation("OpenViewerSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
 
-        public ITranslator Translator { get; }
+        public OpenViewerSettingsAndActionTranslation Translation { get; }
 
         public override bool IsEnabled
         {
@@ -56,7 +56,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
                 return;
 
             const string caption = "PDF Architect";
-            var message = Translator.GetTranslation("OpenViewerSettings", "ArchitectNotInstalled");
+            var message = Translation.ArchitectNotInstalled;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.PDFForge);
             _interactionInvoker.Invoke(interaction);

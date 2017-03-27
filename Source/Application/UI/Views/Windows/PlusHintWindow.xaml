@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
         mc:Ignorable="d"
-        Title="Try PDFCreator Plus!"
+        Title="{Binding Translation.Title, Mode=OneWay}"
         MinHeight="280" Width="500"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
@@ -43,9 +43,9 @@
                         <Setter Property="TextWrapping" Value="WrapWithOverflow" />
                     </Style>
                 </StackPanel.Resources>
-                <TextBlock FontWeight="Bold" Name="Headline">We highly value that you are using PDFCreator!</TextBlock>
-                <TextBlock Margin="0,5,0,0" Name="ThankYou" Text="{Binding ThankYouText}" />
-                <TextBlock Margin="0,5,0,0" Name="RecommendPlus">For power users like you, we recommend PDFCreator Plus to support the future development and benefit from exclusive features and priority support.</TextBlock>
+                <TextBlock FontWeight="Bold" Text="{Binding Translation.HeadlineText, Mode=OneWay}" />
+                <TextBlock Margin="0,5,0,0" Text="{Binding ThankYouText, Mode=OneWay}" />
+                <TextBlock Margin="0,5,0,0" Text="{Binding Translation.RecommendPlusText, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>
 
@@ -53,13 +53,9 @@
             <DockPanel.Background>
                 <SolidColorBrush Opacity="0.05" Color="Black" />
             </DockPanel.Background>
-            <Button DockPanel.Dock="Left" Margin="40 10 10 10" Style="{StaticResource ButtonStyle}" Name="PlusButton"
-                    Command="{Binding PlusButtonCommand}">
-                More Information
-            </Button>
+            <Button DockPanel.Dock="Left" Margin="40 10 10 10" Style="{StaticResource ButtonStyle}" Command="{Binding PlusButtonCommand}" Content="{Binding Translation.PlusButtonContent, Mode=OneWay}" />
             <Button DockPanel.Dock="Right" Margin="10 10 40 10" Style="{StaticResource ButtonStyle}"
-                    Name="NoThanksButton" IsCancel="True">
-                No, thanks
+                    IsCancel="True" Command="{Binding NoThanksCommand}" Content="{Binding Translation.NoThanksButtonContent, Mode=OneWay}">
             </Button>
         </DockPanel>
     </Grid>

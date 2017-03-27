@@ -1,41 +1,44 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.Views.Windows
 {
     public partial class ApplicationSettingsWindow : Window
     {
-        private readonly ITranslator _translator;
         private readonly IUserGuideHelper _userGuideHelper;
+        private readonly TranslationFactory _translationFactory;
+        private ApplicationSettingsViewModel _applicationSettingsViewModel;
 
-        public ApplicationSettingsWindow(ITranslator translator, ApplicationSettingsViewModel applicationSettingsViewModel, IUserGuideHelper userGuideHelper)
+        public ApplicationSettingsWindow( ApplicationSettingsViewModel applicationSettingsViewModel, IUserGuideHelper userGuideHelper, TranslationFactory translationFactory)
         {
             _userGuideHelper = userGuideHelper;
-            _translator = translator;
+            _translationFactory = translationFactory;
             DataContext = applicationSettingsViewModel;
+            _applicationSettingsViewModel = applicationSettingsViewModel;
 
             InitializeComponent();
 
             GeneralTabUserControl.PreviewLanguageAction = UpdateTranslations;
-
-            _translator.Translate(this);
         }
 
         private void UpdateTranslations()
         {
-            _translator.Translate(this);
-            _translator.Translate(GeneralTabUserControl);
-            _translator.Translate(PrinterTabUserControl);
-            _translator.Translate(TitleTabUserControl);
-            _translator.Translate(DebugTabUserControl);
-            _translator.Translate(PdfArchitectTabUserControl);
+            var vms = _applicationSettingsViewModel.ViewModelBundle;
+            _applicationSettingsViewModel.Translation = _translationFactory.CreateTranslation<ApplicationSettingsWindowTranslation>();
+            vms.GeneralTabViewModel.Translation = _translationFactory.CreateTranslation<GeneralTabTranslation>();
+            vms.PrinterTabViewModel.Translation = _translationFactory.CreateTranslation<PrinterTabTranslation>();
+            vms.TitleTabViewModel.Translation = _translationFactory.CreateTranslation<TitleTabTranslation>();
+            vms.DebugTabViewModel.Translation = _translationFactory.CreateTranslation<DebugTabTranslation>();
+            vms.LicenseTabViewModel.Translation = _translationFactory.CreateTranslation<LicenseTabTranslation>();
+            vms.PdfArchitectTabViewModel.Translation = _translationFactory.CreateTranslation<PdfArchitectTabTranslation>();
 
-            var viewModel = DataContext as ApplicationSettingsViewModel;
-            viewModel?.ViewModelBundle.PrinterTabViewModel.TranslateProfileNames();
+            vms.PrinterTabViewModel.TranslateProfileNames();
         }
 
         private void ShowConextBasedHelp()

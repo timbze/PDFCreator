@@ -1,10 +1,9 @@
-﻿using SystemInterface.Diagnostics;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 
@@ -17,7 +16,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         private readonly ButtonDisplayOptions _buttonDisplayOptions;
         private readonly ApplicationNameProvider _applicationNameProvider;
 
-        public AboutWindowViewModel(IProcessStarter processStarter, ApplicationNameProvider applicationNameProvider, IVersionHelper versionHelper, IUserGuideHelper userGuideHelper, ButtonDisplayOptions buttonDisplayOptions)
+        public AboutWindowViewModel(IProcessStarter processStarter, ApplicationNameProvider applicationNameProvider, IVersionHelper versionHelper, IUserGuideHelper userGuideHelper, ButtonDisplayOptions buttonDisplayOptions, AboutWindowTranslation translation)
         {
             _processStarter = processStarter;
             _userGuideHelper = userGuideHelper;
@@ -32,7 +31,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
             PdfforgeWebsiteCommand = new DelegateCommand(PdfforgeWebsiteCommandExecute);
             FacebookCommand = new DelegateCommand(FacebookCommandExecute);
             GooglePlusCommand = new DelegateCommand(GooglePlusCommandExecute);
+            Translation = translation;
         }
+
+        public  AboutWindowTranslation Translation { get; set; }
 
         public bool HideDonateButton => _buttonDisplayOptions.HideDonateButton;
         public bool HideSocialMediaButtons => _buttonDisplayOptions.HideSocialMediaButtons;

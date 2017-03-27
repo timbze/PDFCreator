@@ -43,6 +43,13 @@ namespace pdfforge.PDFCreator.Core.Startup
             if (commandLineParser.HasArgument("StoreLicenseForAllUsers"))
             {
                 var storeLicenseForAllUsers = _appStartResolver.ResolveAppStart<StoreLicenseForAllUsersStart>();
+
+                if (commandLineParser.HasArgument("LicenseServerCode"))
+                    storeLicenseForAllUsers.LicenseServerCode = commandLineParser.GetArgument("LicenseServerCode");
+
+                if (commandLineParser.HasArgument("LicenseKey"))
+                    storeLicenseForAllUsers.LicenseKey = commandLineParser.GetArgument("LicenseKey");
+
                 return storeLicenseForAllUsers;
             }
 

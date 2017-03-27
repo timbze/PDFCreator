@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
@@ -15,15 +15,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
         private readonly IFontHelper _fontHelper;
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public DocumentTabViewModel(ITranslator translator, IInteractionInvoker interactionInvoker, IFontHelper fontHelper)
+        public DocumentTabViewModel(DocumentTabTranslation translation, IInteractionInvoker interactionInvoker, IFontHelper fontHelper, TokenHelper tokenHelper)
         {
             _interactionInvoker = interactionInvoker;
             _fontHelper = fontHelper;
-            Translator = translator;
+            Translation = translation;
 
-            var tokenHelper = new TokenHelper(Translator);
-
-            TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+           TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
             TitleViewModel = new TokenViewModel(
                 s => CurrentProfile.TitleTemplate = s,
@@ -50,7 +48,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
         
         public TokenReplacer TokenReplacer { get; set; }
 
-        public ITranslator Translator { get; set; }
+        public DocumentTabTranslation Translation { get; set; }
 
         public string FontButtonText { get; set; } = "Select Font";
 
@@ -125,7 +123,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         private void DisplayFontError()
         {
-            var message = Translator.GetTranslation("ProfileSettingsWindow", "FontFileNotSupported");
+            var message = Translation.FontFileNotSupported;
 
             var interaction = new MessageInteraction(message, "PDFCreator", MessageOptions.OK, MessageIcon.Warning);
             _interactionInvoker.Invoke(interaction);

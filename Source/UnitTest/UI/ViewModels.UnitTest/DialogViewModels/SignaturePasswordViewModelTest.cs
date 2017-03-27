@@ -5,6 +5,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
 {
@@ -21,7 +22,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             if (expectedPassword != null)
                 signaturePasswordCheck.IsValidPassword(Arg.Any<string>(), expectedPassword).Returns(true);
 
-            var viewModel = new SignaturePasswordViewModel(signaturePasswordCheck);
+            var viewModel = new SignaturePasswordViewModel(signaturePasswordCheck, new SignaturePasswordWindowTranslation());
             var interaction = new SignaturePasswordInteraction(PasswordMiddleButton.Skip, "");
 
             viewModel.SetInteraction(interaction);
@@ -158,7 +159,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             if (expectedPassword != null)
                 signaturePasswordCheck.IsValidPassword(Arg.Any<string>(), expectedPassword).Returns(true);
 
-            var viewModel = new SignaturePasswordViewModel(signaturePasswordCheck);
+            var viewModel = new SignaturePasswordViewModel(signaturePasswordCheck, new SignaturePasswordWindowTranslation());
             var interaction = new SignaturePasswordInteraction(PasswordMiddleButton.Skip, "");
 
             viewModel.SetInteraction(interaction);
@@ -171,7 +172,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         {
             var propertyChangedCalls = new List<string>();
 
-            var viewModel = new SignaturePasswordViewModel(null);
+            var viewModel = new SignaturePasswordViewModel(null, new SignaturePasswordWindowTranslation());
             var interaction = new SignaturePasswordInteraction(PasswordMiddleButton.Skip, "");
 
             viewModel.PropertyChanged += (sender, args) => propertyChangedCalls.Add(args.PropertyName);

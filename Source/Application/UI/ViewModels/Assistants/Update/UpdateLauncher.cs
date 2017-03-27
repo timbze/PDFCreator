@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Threading;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
 {
@@ -25,22 +26,25 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
 
     public class AutoUpdateLauncher : IUpdateLauncher
     {
-        private readonly ITranslator _translator;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IHashUtil _hashUtil;
         private readonly IThreadManager _threadManager;
+        private readonly ApplicationNameProvider _applicationNameProvider;
+        UpdateManagerTranslation _translation;
 
-        public AutoUpdateLauncher(ITranslator translator, IInteractionInvoker interactionInvoker, IHashUtil hashUtil, IThreadManager threadManager)
+        public AutoUpdateLauncher(ITranslationFactory translationFactory, IInteractionInvoker interactionInvoker, IHashUtil hashUtil, IThreadManager threadManager, ApplicationNameProvider applicationNameProvider)
         {
-            _translator = translator;
+            UpdateTranslation(translationFactory);
+            translationFactory.TranslationChanged += (sender, args) => UpdateTranslation(translationFactory);
             _interactionInvoker = interactionInvoker;
             _hashUtil = hashUtil;
             _threadManager = threadManager;
+            _applicationNameProvider = applicationNameProvider;
         }
 
         public void LaunchUpdate(ApplicationVersion version)
         {
-            var caption = _translator.GetTranslation("UpdateManager", "PDFCreatorUpdate");
+            var caption = _translation.GetFormattedTitle(_applicationNameProvider.ApplicationName);
 
             try
             {
@@ -67,7 +71,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
                         continue;
                     }
 
-                    var message = _translator.GetTranslation("UpdateManager", "DownloadHashErrorMessage");
+                    var message = _translation.DownloadHashErrorMessage;
                     var res = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Warning);
 
                     if (res != MessageResponse.No)
@@ -80,7 +84,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
             }
             catch (Exception)
             {
-                var message = _translator.GetTranslation("UpdateManager", "DownloadErrorMessage");
+                var message = _translation.DownloadErrorMessage;
                 var res = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.PDFCreator);
 
                 if (res == MessageResponse.Yes)
@@ -95,6 +99,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
             var interaction = new MessageInteraction(message, title, buttons, icon);
             _interactionInvoker.Invoke(interaction);
             return interaction.Response;
+        }
+        private void UpdateTranslation(ITranslationFactory translationFactory)
+        {
+            _translation = translationFactory.CreateTranslation<UpdateManagerTranslation>();
         }
     }
 }

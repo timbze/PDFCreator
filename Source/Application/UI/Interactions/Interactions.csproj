@@ -57,6 +57,7 @@
     <Compile Include="LicenseInteraction.cs" />
     <Compile Include="MainWindowInteraction.cs" />
     <Compile Include="ManagePrintJobsInteraction.cs" />
+    <Compile Include="DropboxSharedLinksInteraction.cs" />
     <Compile Include="UpdateAvailableInteraction.cs" />
     <Compile Include="MessageInteraction.cs" />
     <Compile Include="OfflineActivationInteraction.cs" />
@@ -86,6 +87,10 @@
   </Target>
   -->
   <ItemGroup>
+    <ProjectReference Include="..\..\Conversion\Actions\Actions.csproj">
+      <Project>{1DBB980A-80ED-4263-BC5D-B90377466E14}</Project>
+      <Name>Actions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Conversion\Jobs\Jobs.csproj">
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>

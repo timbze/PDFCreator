@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using SystemInterface.IO;
+using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 
@@ -6,19 +7,25 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
 {
     public class PsDirectConversion : DirectConversionBase
     {
-        public PsDirectConversion(ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager) : base(settingsProvider, jobInfoManager)
+        public PsDirectConversion(ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager, ISpoolerProvider spoolerProvider, IFile file, IDirectory directory, IPathSafe path) : base(settingsProvider, jobInfoManager, spoolerProvider)
         {
+            File = file;
+            Directory = directory;
+            Path = path;
         }
 
-        internal override int GetNumberOfPages(string fileName)
+        protected override IFile File { get; }
+        protected override IDirectory Directory { get; }
+        protected override IPathSafe Path { get; }
+
+        protected override int GetNumberOfPages(string fileName)
         {
             var count = 0;
             try
             {
                 using (var fs = File.OpenRead(fileName))
+                using (var sr = new System.IO.StreamReader(fs.StreamInstance))
                 {
-                    var sr = new StreamReader(fs);
-
                     while (sr.Peek() >= 0)
                     {
                         var readLine = sr.ReadLine();
@@ -35,7 +42,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             return count == 0 ? 1 : count;
         }
 
-        internal override bool IsValid(string fileName)
+        protected override bool IsValid(string fileName)
         {
             return true;
         }

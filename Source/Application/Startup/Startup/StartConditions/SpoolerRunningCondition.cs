@@ -2,19 +2,19 @@
 using System.ComponentModel;
 using System.ServiceProcess;
 using NLog;
- using pdfforge.DynamicTranslator;
-using pdfforge.PDFCreator.Core.StartupInterface;
+ using pdfforge.PDFCreator.Core.Startup.Translations;
+ using pdfforge.PDFCreator.Core.StartupInterface;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
     public class SpoolerRunningCondition : IStartupCondition
     {
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ITranslator _translator;
+        private readonly StartupTranslation _translation;
 
-        public SpoolerRunningCondition(ITranslator translator)
+        public SpoolerRunningCondition(StartupTranslation translation)
         {
-            _translator = translator;
+            _translation = translation;
         }
 
         public StartupConditionResult Check()
@@ -22,7 +22,7 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
             if (SpoolerIsRunning())
                 return StartupConditionResult.BuildSuccess();
 
-            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.SpoolerNotRunning, _translator.GetTranslation("Startup", "SpoolerNotRunning"));
+            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.SpoolerNotRunning, _translation.SpoolerNotRunning);
         }
 
         private bool SpoolerIsRunning()

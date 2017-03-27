@@ -1,10 +1,10 @@
 ﻿using System.Drawing.Printing;
 using System.Linq;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 {
@@ -13,29 +13,28 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private readonly IInteractionInvoker _invoker;
         private readonly IPrinterHelper _printerHelper;
 
-        private readonly ITranslator _translator;
         private readonly IUacAssistant _uacAssistant;
+        private readonly PrinterActionsAssistantTranslation _translation;
 
-        public PrinterActionsAssistant(ITranslator translator, IInteractionInvoker invoker, IPrinterHelper printerHelper, IUacAssistant uacAssistant)
+        public PrinterActionsAssistant(IInteractionInvoker invoker, IPrinterHelper printerHelper, IUacAssistant uacAssistant, PrinterActionsAssistantTranslation translation)
         {
-            _translator = translator;
             _invoker = invoker;
             _printerHelper = printerHelper;
             _uacAssistant = uacAssistant;
+            _translation = translation;
         }
 
         public bool AddPrinter(out string newPrinterName)
         {
             newPrinterName = CreateValidPrinterName("PDFCreator");
-            var questionText = _translator.GetTranslation("InputBoxWindow", "EnterPrintername");
+            var questionText = _translation.EnterPrintername;
             newPrinterName = RequestPrinternameFromUser(questionText, newPrinterName);
             if (newPrinterName == null)
                 return false;
 
             while (!_printerHelper.IsValidPrinterName(newPrinterName))
             {
-                questionText = _translator.GetFormattedTranslation("ApplicationSettingsWindow", "PrinterAlreadyInstalled",
-                    newPrinterName);
+                questionText = _translation.GetPrinterAlreadyInstalledMessage(newPrinterName);
                 newPrinterName = CreateValidPrinterName(newPrinterName);
                 newPrinterName = RequestPrinternameFromUser(questionText, newPrinterName);
                 if (newPrinterName == null)
@@ -47,8 +46,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                     return true;
 
             const string caption = "PDFCreator";
-            var message = _translator.GetFormattedTranslation("ApplicationSettingsWindow", "CouldNotInstallPrinter",
-                newPrinterName);
+            var message = _translation.GetCouldNotInstallPrinterMessage(newPrinterName);
             ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
 
             return false;
@@ -61,7 +59,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             if (oldPrinterName.Length == 0)
                 return false;
 
-            var questionText = _translator.GetTranslation("InputBoxWindow", "EnterPrintername");
+            var questionText = _translation.EnterPrintername;
             newPrinterName = RequestPrinternameFromUser(questionText, oldPrinterName);
 
             if ((newPrinterName == null) || (newPrinterName == oldPrinterName))
@@ -69,8 +67,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
             while (!_printerHelper.IsValidPrinterName(newPrinterName))
             {
-                questionText = _translator.GetFormattedTranslation("ApplicationSettingsWindow", "PrinterAlreadyInstalled",
-                    newPrinterName);
+                questionText = _translation.GetPrinterAlreadyInstalledMessage(newPrinterName);
                 newPrinterName = CreateValidPrinterName(newPrinterName);
                 newPrinterName = RequestPrinternameFromUser(questionText, newPrinterName);
                 if ((newPrinterName == null) || (newPrinterName == oldPrinterName))
@@ -81,8 +78,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                 if (CheckInstalledPrinter(newPrinterName))
                     return true;
 
-            var message = _translator.GetFormattedTranslation("ApplicationSettingsWindow", "CouldNotRename",
-                oldPrinterName, newPrinterName);
+            var message = _translation.GetCouldNotRenamePrinterMessage(oldPrinterName, newPrinterName);
             const string caption = @"PDFCreator";
             ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
 
@@ -93,15 +89,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         {
             if (numPrinters < 2)
             {
-                var message = _translator.GetTranslation("ApplicationSettingsWindow", "DontDeleteLastPrinter");
+                var message = _translation.DontDeleteLastPrinter;
                 const string caption = @"PDFCreator";
                 ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
                 return false;
             }
 
-            var msg = _translator.GetFormattedTranslation("ApplicationSettingsWindow", "AskDeletePrinter",
-                printerName);
-            var cpt = _translator.GetTranslation("ApplicationSettingsWindow", "DeletePrinter");
+            var msg = _translation.GetAskDeletePrinterMessage(printerName);
+            var cpt = _translation.DeletePrinter;
 
             var resonse = ShowMessage(msg, cpt, MessageOptions.YesNo, MessageIcon.Question);
 
@@ -142,12 +137,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         {
             var invalidChars = new[] {"!", @"\", ",", "\""}; //\" would be valid but causes problems, since it splits input strings
             if (invalidChars.Any(arg.Contains))
-                return new InputValidation(false, _translator.GetTranslation("ApplicationSettingsWindow", "InvalidCharsInPrinterName"));
+                return new InputValidation(false, _translation.InvalidCharsInPrinterName);
 
             if (_printerHelper.IsValidPrinterName(arg.Trim()))
                 return new InputValidation(true, "");
 
-            return new InputValidation(false, _translator.GetTranslation("ApplicationSettingsWindow", "InvalidPrinterName"));
+            return new InputValidation(false, _translation.InvalidPrinterName);
         }
 
         private string CreateValidPrinterName(string baseName)

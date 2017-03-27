@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using SystemInterface.IO;
 using SystemWrapper.IO;
+using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.UserGuide;
@@ -17,20 +20,30 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
         private readonly IAssemblyHelper _assemblyHelper;
         private readonly IFile _fileWrap;
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
-        private readonly ISettingsProvider _settingsProvider;
         private readonly IUserGuideLauncher _userGuideLauncher;
+        private readonly IApplicationLanguageProvider _applicationLanguageProvider;
+        private readonly ILanguageProvider _languageProvider;
 
-        public UserGuideHelper(IFile fileWrap, IAssemblyHelper assemblyHelper, IUserGuideLauncher userGuideLauncher, ISettingsProvider settingsProvider)
+        public UserGuideHelper(IFile fileWrap, IAssemblyHelper assemblyHelper, IUserGuideLauncher userGuideLauncher, IApplicationLanguageProvider applicationLanguageProvider, ILanguageProvider languageProvider)
         {
             _fileWrap = fileWrap;
             _assemblyHelper = assemblyHelper;
             _userGuideLauncher = userGuideLauncher;
-            _settingsProvider = settingsProvider;
+            _applicationLanguageProvider = applicationLanguageProvider;
+            _languageProvider = languageProvider;
 
-            if (_settingsProvider.Settings != null)
-                SetLanguage(_settingsProvider.Settings.ApplicationSettings.Language);
+            UpdateLanguage();
 
-            _settingsProvider.LanguageChanged += OnLanguageChanged;
+            _applicationLanguageProvider.LanguageChanged += OnLanguageChanged;
+        }
+
+        private Language GetLanguage()
+        {
+            var englishLanguage = _languageProvider.FindBestLanguage("en");
+            var languageIso = _applicationLanguageProvider.GetApplicationLanguage();
+            var language = _languageProvider.GetAvailableLanguages().FirstOrDefault(lang => lang.Iso2 == languageIso);
+
+            return language ?? englishLanguage;
         }
 
         public void ShowHelp(HelpTopic topic)
@@ -40,16 +53,18 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
 
         private void OnLanguageChanged(object sender, EventArgs e)
         {
-            SetLanguage(_settingsProvider.Settings.ApplicationSettings.Language);
+            UpdateLanguage();
         }
 
-        public void SetLanguage(string languageName)
+        public void UpdateLanguage()
         {
+            var language = GetLanguage();
+
             var applicationDir = _assemblyHelper.GetPdfforgeAssemblyDirectory();
 
             var candidates = new[]
             {
-                _pathSafe.Combine(applicationDir, $"PDFCreator_{languageName}.chm"),
+                _pathSafe.Combine(applicationDir, $"PDFCreator_{language.CommonName}.chm"),
                 _pathSafe.Combine(applicationDir, "PDFCreator_english.chm")
             };
 

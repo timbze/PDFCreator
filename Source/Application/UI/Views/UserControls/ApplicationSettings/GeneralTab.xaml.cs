@@ -23,7 +23,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings
             if (viewModel == null)
                 return;
 
-            viewModel.Translator.Translate(this);
             viewModel.PreviewTranslation += (o, args) => PreviewLanguageAction?.Invoke();
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;

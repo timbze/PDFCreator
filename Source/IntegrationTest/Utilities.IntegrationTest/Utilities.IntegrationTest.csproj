@@ -48,8 +48,6 @@
     </When>
   </Choose>
   <ItemGroup>
-    <Compile Include="Communication\PipeCommunicationTest.cs" />
-    <Compile Include="Communication\RandomHelper.cs" />
     <Compile Include="FileAssocTest.cs" />
     <Compile Include="PathUtilTest.cs" />
     <Compile Include="CommandLineUtilTest.cs" />

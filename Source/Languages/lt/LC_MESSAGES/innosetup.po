@@ -1,0 +1,711 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lithuanian (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-15 12:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lithuanian "
+"<http://translate.pdfforge.org/projects/pdfcreator/innosetup/lt/>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.11\n"
+
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programa jau įdiegta.%n%nNaujam įdiegimui pirmiausia išdiekite programą.%n%"
+"nDiegimas bus atšauktas."
+
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"„PDFCreator“ jau įdiegtas. Prieš diegiant „PDFCreator %2“, būtina pašalinti "
+"esamą (%1 versija).%n%nAr norite atnaujinti „PDFCreator“ dabar? Jūsų "
+"„PDFCreator“ parametrai ir spausdintuvai išliks."
+
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programa jau įdiegta.%n%nAtnaujinimas neįmanomas! Prašome pirma pašalinti "
+"programą.%n%nDiegimas bus nutrauktas."
+
+msgid "The setup will be canceled."
+msgstr "Diegimas bus atšauktas."
+
+msgid "Do you want to cancel the setup?"
+msgstr "Norite nutraukti diegimą?"
+
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr "Šios programos turi būti uždarytos tam, kad tęsti šalinimą:"
+
+msgid "Compact installation"
+msgstr "Minimalus įdiegimas"
+
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+"Parsisiųstas failas yra sugadintas ir buvo ištrintas. Diegimas bus "
+"nutrauktas!"
+
+msgid "Custom installation"
+msgstr "Pasirinktinis įdiegimas"
+
+msgid "Donate to PDFCreator"
+msgstr "Paaukoti „PDFCreator“"
+
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
+msgstr ""
+"Diegiamas Microsoft .Net Framework %1 Tai gali užtrukti kelias minutes. "
+"Palaukite."
+
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+"Diegiant Microsoft.Net Framework %1 įvyko klaida. (Error code: %2)%n%nAr "
+"norite peržiūrėti .Net diegimo žurnalą?"
+
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install Microsoft "
+".Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+"„PDFCreator“ reikia  Microsoft .Net %1. Atsisiųskite, įdiekite  Microsoft "
+".Net %1 ir vėl pakartokite „PDFCreator“ diegimą."
+
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup "
+"again.%n%nSetup will now exit."
+msgstr ""
+"„PDFCreator“ diegimo programa turi įdiegti .Net framework 4.0. Šiam "
+"žingsniui reikia iš naujo paleisti sistemą. Dabar paleiskite sistemą iš "
+"naujo ir dar kartą paleiskite diegimo programą.%n%nDiegimo programa dabar "
+"bus uždaryta."
+
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"Parsisiųsto failo kontrolinė suma nesutampa. Ar vis tiek norite pradėti "
+"diegimą?"
+
+msgid "PDFCreator download"
+msgstr "„PDFCreator“ atsisiuntimas"
+
+msgid "Download the latest version..."
+msgstr "Atsisiųskite naujausią versiją ..."
+
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"Nauja (%1) versija yra prieinama pdfforge serveriuose!%n%nAr norėtumėte "
+"parsisiųsti ir įsidiegti šią versiją?"
+
+msgid "Expert settings"
+msgstr "Ekspertinės nuostatos"
+
+msgid "Set installation directory and additional options"
+msgstr "Nustatyti diegimo katalogą ir papildomas parinktis"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"Simboliai „!“, „\\“ ar „,“ spausdintuvo pavadinime neleidžiami. Nurodykite "
+"naują spausdintuvo pavadinimą."
+
+msgid "Please choose a printer name."
+msgstr "Nurodykite spausdintuvo pavadinimą."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"Nurodytas spausdintuvo pavadinimas yra per ilgas. Pavadinimas turi būti ne "
+"ilgesnis kaip 221 simbolis. Nurodykite naują spausdintuvo pavadinimą."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "Jau yra spausdintuvas tokiu pavadinimu. Nurodykite kitą pavadinimą."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system "
+"afterwards.%n%nOtherwise Cancel the installation."
+msgstr ""
+"Klaida sistemos aplinkos kintamajame \"Kelias\"%n%n->Trūkstamas/pažeistas "
+"įrašas: %Systemroot%\\system32\\wbem%n%nŠi klaida turi būti ištaisyta prieš "
+"įdiegimo tęsimą.%n%nPrašome paspausti Gerai, jei norite, kad ši klaida būtų "
+"ištaisyta. Po to jūs turite perkrauti sistemą.%n%nPriešingu atveju Atšaukti "
+"diegimą."
+
+msgid "For &all users"
+msgstr "Visiems n&audotojams"
+
+msgid "For the &current user only"
+msgstr "Tik &dabartiniam naudotojui"
+
+msgid "Full installation"
+msgstr "Pilnas įdiegimas"
+
+msgid "Help"
+msgstr "Pagalba"
+
+msgid "Install printer"
+msgstr "Spaudintuvo įdiegimas"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr ""
+"Spausdintuvo ir spausdintuvo monitoriaus, jungties, tvarkyklių įdiegimas"
+
+msgid "Install printer driver"
+msgstr "Spaudintuvo tvarkyklės įdiegimas"
+
+msgid "Install printer monitor"
+msgstr "Spausdintuvo monitoriaus įdiegimas"
+
+msgid "Install printer port"
+msgstr "Spausdintuvo jungties įdiegimas"
+
+msgid "Offline activation instructions"
+msgstr "Instrukcijos aktyvacijai atsijungus"
+
+msgid "Languages"
+msgstr "Kalbos"
+
+msgid "Please wait. Checking license key..."
+msgstr "Prašome palaukti. Tikrinamas licencijos raktas..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "Aktyvinimas per senas! Prašome atnaujinti savo aktyvaciją."
+
+msgid "Empty answer from license server!"
+msgstr "Tuščias licencijų serverio atsakymas!"
+
+msgid "Invalid answer from license server!"
+msgstr "Negaliojantis licencijų serverio atsakymas!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr ""
+"Jūsų licencijos raktas netinka šiai versijai! Аtnaujinkite savo licenciją %1."
+
+msgid "No answer from license server!"
+msgstr "Nesulaukta licencijų serverio atsakymo!"
+
+msgid "An unknown error is occurred!"
+msgstr "Įvyko nežinoma klaida!"
+
+msgid "Wrong answer from license server!"
+msgstr "Klaidingas licencijų serverio atsakymas!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr ""
+"Atrodo, kad kompiuterio laikas nustatytas neteisingai! Patikrinkite savo "
+"sistemos laiką. Diegimas bus atšauktas."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Licencijų serverio atsakymas netinkamas šiam kompiuteriui!"
+
+msgid "The license is not valid for the given product!"
+msgstr "Licencija netinka nurodytam produktui!"
+
+msgid "License key validation"
+msgstr "Licencijos rakto patikra"
+
+msgid "Enter the valid license key"
+msgstr "Įveskite galiojantį licencijos raktą"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Įveskite galiojantį licencijos raktą ir tęskite diegimą."
+
+msgid "An error occurred validating the license key!"
+msgstr "Licencijos rakto patikros metu įvyko klaida!"
+
+msgid "Invalid license answer hash!"
+msgstr "Neteisingas licencijos atsakymo „hash“ kodas!"
+
+msgid "Invalid license key!"
+msgstr "Negaliojantis licencijos raktas!"
+
+msgid "License key"
+msgstr "Licencijos raktas"
+
+msgid "Please enter the license key."
+msgstr "Įveskite licencijos raktą."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Licencijos rakto formatas yra XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "Licenciatas"
+
+msgid "Message"
+msgstr "Pranešimas"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"Kad tęsti, jums reikia naujo galiojančio licencijos rakto. Ar norite tęsti "
+"diegimą?"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter "
+"'/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Nenurodytas licencijos raktas. Būtina nurodyti licencijos raktą, jei "
+"naudojami parametrai '/VerySilent' ar '/Silent'! Naudokite parametrą "
+"'/%1'.%n%nPavyzdys: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "Seka aktyvacijai atsijungus:"
+
+msgid "Offline license check"
+msgstr "Licencijos tikrinimas atsijungus"
+
+msgid "License server answer:"
+msgstr "Licencijų serverio atsakymas:"
+
+msgid "The machine or the user is blocked!"
+msgstr "Kompiuteris ar naudotojas yra blokuoti!"
+
+msgid "The authorization is failed!"
+msgstr "Autorizacija nepavyko!"
+
+msgid "An invalid license key is provided!"
+msgstr "Nurodytas neteisingas licencijos raktas!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Viršijamas maksimalus %1 licencijų kiekis!"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "The product %1 does not exist!"
+msgstr "Produktas %1 neegzistuoja!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr "Versija %1 nepalaikoma! Naudokite naujausią versiją iš čia %2."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Susisiekite su pagalbos tarnyba adresu support@pdfforge.org!"
+
+msgid "License agreement"
+msgstr "Licencinė sutartis"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr ""
+"Paspausdami Toliau jūs patvirtinate, kad sutinkate su licencijos sąlygomis."
+
+msgid "PDFCreator log file"
+msgstr "„PDFCreator“ žurnalas"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"Įdiegtos programos versija '%1' yra naujesnė nei diegiamos programos versija "
+"'%2'!%n%nJei norite įdiegti senesnę programos versiją, pirma pašalinkite "
+"naujesnę.%n%nDiegimas bus nutrauktas."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Jūs nesate administratorių grupės narys.%n%n%nSukuriant pdf failą iš bet "
+"kurios programos, „PDFCreator“ naudoja „PostScript“ spausdintuvo tvarkyklę.%"
+"nJūs nesate administratorių grupės narys ir todėl negalite įdiegti jokių "
+"spausdintuvo tvarkyklių.%n%nJei tęsite diegimą, galėsite tik konvertuoti "
+"egzistuojančius „PostScript“ failus.%n%nTęsti įdiegimą?%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Kad tai atlikti jums nereikia būti administratoriaus grupės nariu.%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"Rasta senesnė programos versija \"%1\"!%n%nNeįmanoma jos atnaujinti iki "
+"versijos \"%2\".%n%nPrašome pirma pašalinti programą."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"Rasta senesnė programos versija \"%1\"!%nGalite ją atnaujinti iki versijos \""
+"%2\".%n%n"
+
+msgid "Other tasks:"
+msgstr "Kitos užduotys:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "Programa neįdiegta. Negalite naudoti šios pataisos."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr ""
+"Ši pataisa skirta senesnei programos versijai. Negalite naudoti šios "
+"pataisos."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "Įdiegta programa yra per sena. Negalite naudoti šios pataisos."
+
+msgid "Edit pages"
+msgstr "Redaguoti puslapius"
+
+msgid "Edit texts and fonts"
+msgstr "Redaguoti tekstus ir šriftus"
+
+msgid "Split and merge"
+msgstr "Padalyti ir sulieti"
+
+msgid "PDF to Word"
+msgstr "PDF į Word"
+
+msgid "Create"
+msgstr "Kurti"
+
+msgid "Convert"
+msgstr "Konvertuoti"
+
+msgid "Edit & Insert"
+msgstr "Redaguoti ir Įterpti"
+
+msgid "Review"
+msgstr "Peržiūrėti"
+
+msgid "Secure & Sign"
+msgstr "Apsaugoti ir Pasirašyti"
+
+msgid "Forms"
+msgstr "Formos"
+
+msgid "Try out the new PDF Architect"
+msgstr "Išbandykite naująjį „PDF Architect“"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "Jūsų darbalaukyje bus sukurta nuoroda."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Įdiekite „PDF Architect“ su puikiomis nemokamomis funkcijomis"
+
+msgid "Rotate, move and delete pages"
+msgstr "Pasukti, perkelti ir trinti puslapius"
+
+msgid "Merge multiple PDFs"
+msgstr "Sulieti kelis PDF dokumentus"
+
+msgid "Free features:"
+msgstr "Nemokamos funkcijos:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "Papildykite „PDFCreator“ redagavimo funkcijomis!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "„PDF Architect {0}“ naujienos:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "Automatinė „E-Sign“ darbų eiga"
+
+msgid "Verify and remove signatures"
+msgstr "Patikrinti ir pašalinti parašus"
+
+msgid "Already installed"
+msgstr "Jau įdiegtas"
+
+msgid "Automatic updates"
+msgstr "Automatiniai atnaujinimai"
+
+msgid "Default application for PDF files"
+msgstr "Numatytoji programa PDF failams"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "Bus įdiegtas naujasis „PDF Architect“. Tai gali šiek tiek užtrukti."
+
+msgid "Firefox integration"
+msgstr "Integracija į „FireFox“"
+
+msgid "Internet Explorer integration"
+msgstr "Integracija į „Internet Explorer“"
+
+msgid "MS Outlook previewer integration"
+msgstr "Integracija į „MS Outlook“ peržiūrą"
+
+msgid "Windows Explorer integration"
+msgstr "Integracija į „Windows Explorer“"
+
+msgid "No thanks"
+msgstr "Ačiū, ne"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"Pašalinkite „PDFCreator Server“ prieš tęsdami diegimą. Neįmanoma vienu metu "
+"tame pačiame kompiuteryje naudoti „PDFCreator“ ir „PDFCreator Server“."
+
+msgid "PDFCreator setup"
+msgstr "„PDFCreator“ diegimas"
+
+msgid "Setup is being prepared..."
+msgstr "Ruošiamasi diegimui ..."
+
+msgid "Printer"
+msgstr "Spausdintuvas"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"Spausdinimo klaida. Detalų aprašymą galite rasti faile „SetupLog.txt“ "
+"programos kataloge."
+
+msgid "Printer name"
+msgstr "Spausdintuvas pavadinimas"
+
+msgid "Choosing a printer name."
+msgstr "Pasirinkite spausdintuvo pavadinimą."
+
+msgid "Please choose a name for the printer."
+msgstr "Prašome nurodyti pavadinimą spausdintuvui."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"„PDFCreator“ įdiegs jūsų kompiuteryje spausdintuvą. Su šiuo spausdintuvu "
+"kiekviena programa, galinti spausdinti, galės kurti PDF dokumentus, "
+"rastrinius ar PostScript failus.%n%nSpausdintuvo pavadinimas:"
+
+msgid "This process might take several minutes."
+msgstr "Šis procesas gali užtrukti keletą minučių."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"„PDFCreator“ lengvai sukuria PDF dokumentus iš bet kokios Windows programos. "
+"Naudokite jį kaip spausdintuvą „Word“, „Excel“ ar bet kurioje kitoje "
+"„Windows“ programoje."
+
+msgid "application files"
+msgstr "programų failai"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Programa '%1' jau paleista.%n%nPrašome pirma uždaryti programą.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Prašome pakartotinai įkrauti sistemą, o po to tęsti diegimą."
+
+msgid "PDFCreator settings"
+msgstr "„PDFCreator“ nuostatos"
+
+msgid "Show help after setup"
+msgstr "Rodyti pagalbą po įdiegimo"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"Kompiuteriuose su įdiegtomis terminalo paslaugomis naudokite „PDFCreator "
+"Terminal Server“.%n%nReikia daugiau informacijos apie „PDFCreator Terminal "
+"Server“?"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n%"
+"nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"Tai preliminari „PDFCreator“ versija kūrėjams.%n%nTai nėra ankstyvoji kitos "
+"laidos versija. Ji gali turėti klaidų arba visai neveikti visai.%n%nJei jūs "
+"turite drąsos ją vis tiek įsidiegti, mes norėtume išgirsti jūsų atsiliepimus."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"Ši versija nepalaiko serverio režimo. Ar vis tiek norite diegti šią versiją?"
+
+msgid "Delete all application settings?"
+msgstr "Naikinti visas programos nuostatas?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Išdiegti spausdintuvą su visais jo komponentais."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"Norėdami atnaujinti programą, spauskite <Gerai>, arba nutraukite įdiegimą ir "
+"pašalinkite senesnę programos versiją."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "Sukurti į&rašą Explorer aplinkos kontekstiniame meniu"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Sukurti PDF ir Bitmap failus su %1"
+
+msgid "Bad request (400)"
+msgstr "Bloga užklausa (400)"
+
+msgid "Access denied (401)"
+msgstr "Prieiga uždrausta (401)"
+
+msgid "File not found (404)"
+msgstr "Failas nerastas (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Reikalingas proxy serverio tapatumo nustatymas (407)"
+
+msgid "Server internal error (500)"
+msgstr "Vidinė serverio klaida (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Blogas šliuzas (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Paslauga laikinai neveikia (503)"
+
+msgid "Cancelling download..."
+msgstr "Nutraukia parsisiuntimą..."
+
+msgid "Cannot connect"
+msgstr "Negali prisijungti"
+
+msgid "Connecting..."
+msgstr "Jungiasi..."
+
+msgid "Current file"
+msgstr "Dabartinis failas"
+
+msgid "Details"
+msgstr "Išsami informacija"
+
+msgid "Download cancelled"
+msgstr "Parsisiuntimas nutrauktas"
+
+msgid "Download complete"
+msgstr "Parsisiuntimas baigtas"
+
+msgid "Download failed"
+msgstr "Parsisiųsti nepavyko"
+
+msgid "Downloading..."
+msgstr "Siunčia..."
+
+msgid "Elapsed time:"
+msgstr "Praėjęs laikas:"
+
+msgid "File:"
+msgstr "Failas:"
+
+msgid "The following files were not downloaded:"
+msgstr "Šie failai nebuvo parsisiųsti:"
+
+msgid "Downloading additional files"
+msgstr "Papildomų failų parsisiuntimas"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Palaukite kol diegimo programą siunčiasi papildomus failus..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Gaunama failo informacija..."
+
+msgid "Hide"
+msgstr "Slėpti"
+
+msgid "HTTP error %d"
+msgstr "HTTP klaida %d"
+
+msgid "Ignore"
+msgstr "Nepaisyti"
+
+msgid "Initializing..."
+msgstr "Ruošiasi..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Remaining time:"
+msgstr "Likęs laikas:"
+
+msgid "Retry"
+msgstr "Kartoti"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Patikrinkite ryšį ir spauskite 'Kartoti', pakartotiniam bandymui, atsisiųsti "
+"failus arba spauskite 'Atšaukti' diegimo nutraukimui."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Patikrinkite ryšį ir spauskite 'Kartoti', pakartotiniam bandymui, atsisiųsti "
+"failus arba spauskite 'Toliau' diegimo tęsimui."
+
+msgid "Speed:"
+msgstr "Greitis:"
+
+msgid "Starting download..."
+msgstr "Pradeda parsisiuntimą..."
+
+msgid "Status:"
+msgstr "Statusas:"
+
+msgid "Total progress"
+msgstr "Eiga iš viso"
+
+msgid "Unknown"
+msgstr "Nežinoma"
+
+msgid "%.2f of %.2f"
+msgstr "%.2f iš %.2f"
+
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Diegimo programa įdiegė [name] jūsų kompiuteryje."

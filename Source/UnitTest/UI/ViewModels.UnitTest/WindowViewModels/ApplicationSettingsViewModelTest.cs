@@ -3,25 +3,26 @@ using System.Windows;
 using SystemInterface.IO;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
-using pdfforge.LicenseValidator;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Printing.Printer;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants.Update;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
 {
@@ -31,16 +32,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
         private ApplicationSettingsViewModel BuildViewModel()
         {
             // TODO extend tests based on Edition
-            var activationHelper = Substitute.For<IActivationHelper>();
+            var licenseChecker = Substitute.For<ILicenseChecker>();
+            var offlineActivator = Substitute.For<IOfflineActivator>();
 
             var printerHelper = Substitute.For<IPrinterHelper>();
             printerHelper.GetApplicablePDFCreatorPrinter(Arg.Any<string>(), Arg.Any<string>()).Returns("PDFCreator");
-
-            var licenseServerHelper = Substitute.For<ILicenseServerHelper>();
-            var licenseChecker = Substitute.For<ILicenseChecker>();
-            licenseServerHelper.BuildLicenseChecker(RegistryHive.CurrentUser)
-                .ReturnsForAnyArgs(licenseChecker);
-            var translator = Substitute.For<ITranslator>();
             var settingsHelper = Substitute.For<ISettingsProvider>();
             var settingsManager = Substitute.For<ISettingsManager>();
             settingsManager.GetSettingsProvider().Returns(settingsHelper);
@@ -48,17 +44,18 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
             var uacAssistant = Substitute.For<IUacAssistant>();
             var process = Substitute.For<IProcessStarter>();
 
-            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, translator, updateAssistant, uacAssistant, Substitute.For<IInteractionInvoker>(),
-                Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>());
-            var printerTabViewModel = new PrinterTabViewModel(printerHelper, translator, null, null, null, printerHelper);
-            var titleTabViewModel = new TitleTabViewModel(translator);
-            var debugTabViewModel = new DebugTabViewModel(translator, settingsManager, Substitute.For<ITestPageHelper>(), Substitute.For<IFile>(), Substitute.For<IProcessStarter>(), Substitute.For<IInteractionInvoker>(), printerHelper, Substitute.For<IIniSettingsAssistant>());
-            var licenseTabViewModel = new LicenseTabViewModel(process, activationHelper, translator, null, Substitute.For<IDispatcher>());
-            var pdfArchitectTabViewModel = new PdfArchitectTabViewModel(translator, Substitute.For<IPdfArchitectCheck>(), Substitute.For<IProcessStarter>());
+            var generalTabViewModel = new GeneralTabViewModel(Substitute.For<ILanguageProvider>(), null, updateAssistant, uacAssistant, Substitute.For<IInteractionInvoker>(),
+                Substitute.For<IOsHelper>(), Substitute.For<IProcessStarter>(), new GeneralTabTranslation());
+            var printerTabViewModel = new PrinterTabViewModel(printerHelper, null, null, null, printerHelper, new PrinterTabTranslation());
+            var titleTabViewModel = new TitleTabViewModel(new TitleTabTranslation(), new TranslationFactory());
+
+            var debugTabViewModel = new DebugTabViewModel(settingsManager, Substitute.For<ITestPageHelper>(), Substitute.For<IFile>(), Substitute.For<IProcessStarter>(), Substitute.For<IInteractionInvoker>(), printerHelper, Substitute.For<IIniSettingsAssistant>(), new DebugTabTranslation());
+            var licenseTabViewModel = new LicenseTabViewModel(process, licenseChecker, offlineActivator, null, Substitute.For<IDispatcher>(), new LicenseTabTranslation());
+            var pdfArchitectTabViewModel = new PdfArchitectTabViewModel(Substitute.For<IPdfArchitectCheck>(), Substitute.For<IProcessStarter>(), new PdfArchitectTabTranslation());
 
             var viewModelBundle = new ApplicationSettingsViewModelBundle(generalTabViewModel, printerTabViewModel, titleTabViewModel, debugTabViewModel, licenseTabViewModel, pdfArchitectTabViewModel);
 
-            return new ApplicationSettingsViewModel(viewModelBundle, new TranslationHelper(new TranslationProxy(), new DefaultSettingsProvider(), new AssemblyHelper()), new LicenseOptionProvider(false));
+            return new ApplicationSettingsViewModel(viewModelBundle, new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(), new TranslationFactory()), new LicenseOptionProvider(false), new ApplicationSettingsWindowTranslation());
         }
 
         [Test]

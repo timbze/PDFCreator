@@ -1,19 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Dialogs
 {
     public partial class PasswordWindow : Window
     {
-        private readonly ITranslator _translator;
         private readonly PasswordViewModel _viewModel;
 
-        public PasswordWindow(PasswordViewModel viewModel, ITranslator translator)
+        public PasswordWindow(PasswordViewModel viewModel)
         {
             _viewModel = viewModel;
-            _translator = translator;
             DataContext = viewModel;
 
             Loaded += (sender, e) =>
@@ -36,7 +33,6 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _translator.Translate(this);
         }
     }
 }

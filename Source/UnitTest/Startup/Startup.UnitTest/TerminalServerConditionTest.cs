@@ -1,15 +1,14 @@
 ﻿using System.Linq;
-using SystemInterface.Diagnostics;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
+using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
@@ -33,7 +32,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
         private TerminalServerNotAllowedCondition BuildTerminalServerCondition()
         {
-            return new TerminalServerNotAllowedCondition(_terminalServerDetection, new SectionNameTranslator(), _interactionInvoker, _process, new ApplicationNameProvider("PDFCreator"));
+            return new TerminalServerNotAllowedCondition(_terminalServerDetection, new ProgramTranslation(), _interactionInvoker, _process, new ApplicationNameProvider("PDFCreator"));
         }
 
         [Test]
@@ -63,13 +62,14 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void WhenOnTerminalServer_ShowsMoreInfoInteraction()
         {
             var terminalServerCondition = BuildTerminalServerCondition();
+            var translation = new ProgramTranslation();
             _terminalServerDetection.IsTerminalServer().Returns(true);
 
             terminalServerCondition.Check();
 
             _interactionInvoker.Received().Invoke(Arg.Any<MessageInteraction>());
             var interaction = (MessageInteraction)_interactionInvoker.ReceivedCalls().First().GetArguments()[0];
-            Assert.AreEqual("Program\\UsePDFCreatorTerminalServer", interaction.Text);
+            Assert.AreEqual(translation.UsePDFCreatorTerminalServer, interaction.Text);
             Assert.AreEqual(MessageOptions.MoreInfoCancel, interaction.Buttons);
         }
 

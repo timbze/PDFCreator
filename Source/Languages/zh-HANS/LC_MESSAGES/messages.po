@@ -1,0 +1,2702 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Chinese (Simplified) (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-15 12:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Chinese (Simplified) "
+"<http://translate.pdfforge.org/projects/pdfcreator/messages/zh_HANS/>\n"
+"Language: zh_HANS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.11\n"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "<Default Profile>"
+msgstr "<默认配置>"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "High Compression (small file)"
+msgstr "高压缩比 (文件较小)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "High Quality (large file)"
+msgstr "高质量 (文件较大)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "JPEG (graphic file)"
+msgstr "JPEG（图形文件）"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "PDF/A (long term preservation)"
+msgstr "PDF/A (长期保存)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "PNG (graphic file)"
+msgstr "PNG (图形文件)"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "Print after saving"
+msgstr "保存后打印"
+
+#: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
+msgid "TIFF (multipage graphic file)"
+msgstr "TIFF (多页图片)"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"There was an error with a component licensed by pdfforge.\r\n"
+"Please reinstall PDFCreator. (Error {0})"
+msgstr ""
+"一个由pdfforge许可的组件发生了错误。\n"
+"请重新安装PDFCreator。 (Error {0})"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" is invalid or has expired. Please check your "
+"license, otherwise PDFCreator will shutdown.\r\n"
+"Do you want to check your license now?"
+msgstr ""
+"你的密钥\"{0}\"是无效或者过期的。请检查你的密钥，否则PDFCreator将关闭。\n"
+"是否现在检查你的密钥？"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" has expired.\r\n"
+"PDFCreator will shut down."
+msgstr ""
+"你的密钥\"{0}\"是过期的。\n"
+"PDFCreator将关闭。"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your license for \"{0}\" has expired.\r\n"
+"Please contact your administrator.\r\n"
+"PDFCreator will shut down."
+msgstr ""
+"你的密钥\"{0}\"是过期的。\n"
+"请联系你的管理员。\n"
+"PDFCreator将关闭。"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.\r\n"
+"\r\n"
+"Please visit our website for more information or contact us directly: "
+"licensing@pdfforge.org"
+msgstr ""
+"请使用 \"PDFCreator Terminal Server\"来在电脑上安装终端服务。\n"
+"\n"
+"请浏览我们的网页获得更多信息或者直接联系我们： licensing@pdfforge.org"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"Can't find a supported Ghostscript installation.\r\n"
+"\r\n"
+"Program exiting now."
+msgstr ""
+"找不到一个受支持的Ghostscript内容安装。\n"
+"\n"
+"程序正在退出。"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"The Windows spooler service is not running. Please start the spooler first.\r"
+"\n"
+"\r\n"
+"Program exiting now."
+msgstr ""
+"Windows后台打印服务未运行，请先启动后台打印服务。\n"
+"\n"
+"程序正在退出。"
+
+#: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
+msgid ""
+"There was an error while starting PDFCreator. Please reinstall the "
+"application. If the error should persist, please contact the support."
+msgstr "运行PDFCreator时出现一个错误，请重新安装。如果该错误仍然存在，请联系我们帮忙解决。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Clear log file"
+msgstr "清除日志文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Restore"
+msgstr "恢复"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Default Settings"
+msgstr "默认设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Export Settings"
+msgstr "输出设置参数"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Load settings from file"
+msgstr "从文件中加载设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Log file cleared"
+msgstr "日志文件已经清除"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Logging"
+msgstr "日志"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Logging-Level:"
+msgstr "日志记录级别："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Print PDFCreator Test Page"
+msgstr "打印 PDFCreator 测试页"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Save settings to file"
+msgstr "保存设置到文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Show log file"
+msgstr "显示日志文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Test Pages"
+msgstr "测试页"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Print Windows Test Page"
+msgstr "打印 Windows 测试页"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid ""
+"Do you really want to restore the default settings? The current settings "
+"will be lost."
+msgstr "是否恢复默认设置？当前的设置将会丢失。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "No log file"
+msgstr "无日志文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "There is currently no log file available."
+msgstr "当前没有可用的日志文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid "Restore Default Settings"
+msgstr "恢复默认设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Are you sure that you want to delete the printer '{0}'?"
+msgstr "您是否确定删除 '{0}' 打印机？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation
+msgid ""
+"You have modified the application settings. In order to print a test page "
+"with the new settings, you have to save them first.\r\n"
+"Do you want to save the application settings now?"
+msgstr "你已经变更应用程序设置。你必须先进行保存后才能以此新设置来打印测试页。是否现在保存此应用程序的设置？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.DebugTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "Application Settings"
+msgstr "应用程序设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Ask"
+msgstr "询问"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Add"
+msgstr "新增"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Added to context menu"
+msgstr "添加至上下文菜单"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Allow PDFCreator to temporarily change the default printer"
+msgstr "允许 PDFCreator 更改默认打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Check now"
+msgstr "马上检查"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Default Printer"
+msgstr "默认打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Download the latest version at:"
+msgstr "下载最新版本自："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Language"
+msgstr "语言"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Preview"
+msgstr "预览"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Explorer Context Menu Integration"
+msgstr "添加至文件管理器右键菜单"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid ""
+"Please note that you won't receive any notifications about available updates!"
+msgstr "请注意您将不会再接收到任何更新提醒！"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Removed from context menu (Maybe you need to restart your computer)"
+msgstr "已从右键菜单中移除(你可能需要重启电脑)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Remove"
+msgstr "移除"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Select the application language:"
+msgstr "请选择应用程序语言："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update"
+msgstr "更新"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update check is already running."
+msgstr "更新检查早已执行。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Update check"
+msgstr "更新检查"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation
+msgid "Check for updates:"
+msgstr "检查更新："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.GeneralTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "Yes"
+msgstr "确认"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Last activation:"
+msgstr "最后激活："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation failed"
+msgstr "激活失败"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation was not successful:"
+msgstr "激活失败："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation successful"
+msgstr "激活成功"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation was successful."
+msgstr "已经激活成功。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Activation valid till:"
+msgstr "激活有效期至："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Enter license key"
+msgstr "请输入许可密钥"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Please enter your license key:"
+msgstr "输入您的许可证密钥："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Licensee:"
+msgstr "被许可方："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Never"
+msgstr "永远不会"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Expires:"
+msgstr "到期："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "License"
+msgstr "授权"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid ""
+"The license key contains illegal characters. Valid characters are: A-Z, 0-9 "
+"and the dash."
+msgstr "密钥包含非法字符。合法字符包括：A-Z，0-9 和横线。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "License Key:"
+msgstr "被许可方："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The activation has expired. Please renew your activation."
+msgstr "激活已经过期。请更新你的激活。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The machine or user is blocked. Please contact the support."
+msgstr "该电脑或用户已被封。请联系帮助。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Error while authenticating license."
+msgstr "验证许可证时出错。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license key is not valid. Please enter a new license key."
+msgstr "许可证密钥无效。请输入新的许可证密钥。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has expired. Please renew your license."
+msgstr "许可证已过期。请更新您的许可证。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "No license available. Please enter a new license key."
+msgstr "无可用的许可。请输入新的许可证密钥。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "No license key available. Please enter a new license key."
+msgstr "无可用的许可。请输入新的许可证密钥。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "There was a problem with the connection to the license server."
+msgstr "与许可证服务器连接时出现一个问题。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has exceeded the allowed number of activated machines."
+msgstr "该许可证已超过可允许激活的电脑数量。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "License status:"
+msgstr "授权状态："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license is valid."
+msgstr "许可证是有效的。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license has expired but is valid for this version."
+msgstr "许可证已过期，但对于这个版本有效。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license is not valid for this version."
+msgstr "许可证对于这个版本无效。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Machine ID:"
+msgstr "机器识别码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Manage licenses"
+msgstr "管理许可证"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Offline activation"
+msgstr "离线激活"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Online activation"
+msgstr "在线激活"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "Validating license..."
+msgstr "正在验证许可证..."
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.LicenseTabTranslation
+msgid "The license key consists of 30 characters or numbers, i.e. {0}"
+msgstr "许可证密钥包含 30 个字符或数字，例如{0}"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Download PDF Architect now"
+msgstr "马上下载 PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "More on PDF Architect"
+msgstr "更多功能尽在PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Launch PDF Architect"
+msgstr "启动 PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Obtain powerful modules to do more"
+msgstr "获得强大的功能模块去做更多事情"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Convert PDFs to other popular formats like Word, Excel, HTML or TXT"
+msgstr "转换PDF为常用的格式如 Word、Excel、HTML 或 TXT"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Convert PDFs back"
+msgstr "将PDF转换回来"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Edit text, change fonts, correct typos"
+msgstr "编辑文字、更换字体、更正拼写"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Edit PDFs"
+msgstr "编辑PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Change page format and margins"
+msgstr "修改页面格式和边界"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "FREE features include:"
+msgstr "免费功能包括："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "Insert, delete or replace images"
+msgstr "插入、删除或替换图片"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "You already have PDF Architect on your computer"
+msgstr "本电脑里已存在 PDF Architect"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid "PDF Architect is our full-featured PDF Editor"
+msgstr "PDF Architect 是全功能的PDF编辑器"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation
+msgid ""
+"Convert images to text you can search and edit using existing PDFs or "
+"documents from your scanner"
+msgstr "目前的PDF或文件由扫描仪扫描并转换图片为文字后使得你可以搜索和编辑它们"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Split and merge PDFs"
+msgstr "分割和合并PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Text recognition (OCR)"
+msgstr "文字识别 (OCR)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PdfArchitectTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "View and print PDFs"
+msgstr "阅读和打印PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Add Printer"
+msgstr "新增打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Delete Printer"
+msgstr "删除打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Last used profile"
+msgstr "最近一次使用的设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Manage Printers"
+msgstr "管理打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Primary"
+msgstr "主要"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Set Primary Printer"
+msgstr "设置首要打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Printer"
+msgstr "打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Profile"
+msgstr "配置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Rename Printer"
+msgstr "重命名打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Replaced Title:"
+msgstr "替换标题："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Replace with"
+msgstr "替换于"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Sample Title:"
+msgstr "范例标题："
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Search text"
+msgstr "搜索文本"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Title Replacement"
+msgstr "标题替换"
+
+#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.TitleTabTranslation
+msgid "Type"
+msgstr "类型"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "Error"
+msgstr "错误"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"You do not have any PDFCreator printers installed. Most likely there was a "
+"problem during the setup or the installation has been altered afterwards.\r\n"
+"Do you want to fix this by reinstalling the PDFCreator printers?\r\n"
+"\r\n"
+"Note: You might be asked to grant admin privileges while fixing the problem."
+msgstr ""
+"你未安装任何PDFCreator打印机。有可能在安装过程中或安装之后出现了一个问题导致被更改。\n"
+"你想重新安装PDFCreator打印机来修复这个问题吗？\n"
+"\n"
+"注意：你可能需要管理员权限来修复该问题。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"PDFCreator was not able to repair your printers. Please contact your "
+"administrator or the support to assist you in with this problem."
+msgstr "PDFCreator无法修复你的打印机。请联系你的系统管理员协助解决。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "No printers installed"
+msgstr "未安装打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "RepairTool not found"
+msgstr "找不到修复工具"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "Set by administrator"
+msgstr "由系统管理员设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"An important PDFCreator file is missing ('{0}'). Please reinstall PDFCreator!"
+msgstr "重要的 PDFCreator 文件 ('{0}')丢失。请重新安装PDFCreator！"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid "Access Denied"
+msgstr "拒绝访问"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"The temporary path where PDFCreator stores the print jobs can't be accessed. "
+"This is a configuration problem on your machine and needs to be fixed. Do "
+"you want PDFCreator to attempt repairing it?\r\n"
+"Your spool folder is: {0}"
+msgstr ""
+"PDFCreator用来缓存打印工作的路径无法访问。该配置问题需要被修复。你想PDFCreator尝试修复它吗？\n"
+"你的后台打印文件夹是：{0}"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationTranslation
+msgid ""
+"PDFCreator was not able to repair your spool folder. Please contact your "
+"administrator or the support to assist you in changing the permissions of "
+"the path '{0}'."
+msgstr "PDFCreator 无法修复缓存目录。请联系你的系统管理员或技术人员以协助您取得更改缓存目录路径 '{0} '的权限。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Enable automatic saving"
+msgstr "启用自动保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Automatic Saving"
+msgstr "自动保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid ""
+"Edit profiles without print dialog by opening PDFCreator in Windows Explorer"
+msgstr "可直接从文件管理器开启 PDFCreator 来编辑配置文件而不必打开打印对话框"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Ensure unique filenames (Do not overwrite existing files)"
+msgstr "确保文件名唯一 (不要覆盖已存在文件)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Target Folder:"
+msgstr "目标文件夹："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Preview:"
+msgstr "预览："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Add Token:"
+msgstr "新增令牌："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.AutosaveTabTranslation
+msgid "Select folder for automatic saving"
+msgstr "选取自动保存的文件夹"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Author:"
+msgstr "作者："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Keywords:"
+msgstr "关键字："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Metadata"
+msgstr "元数据"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Add a stamp text on top of all pages"
+msgstr "在所有页面顶层加入水印文字"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Stamp"
+msgstr "水印"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Show Font as outline"
+msgstr "显示字体外框"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Font Color:"
+msgstr "字体颜色："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Font:"
+msgstr "字体："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Outline Width:"
+msgstr "轮廓的宽度："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Stamp Text:"
+msgstr "水印文字："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Subject:"
+msgstr "主旨："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "Title:"
+msgstr "标题："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.DocumentTabTranslation
+msgid "The selected font is not supported. Please select a different font."
+msgstr "不支持所选择的字体，请选取其他字体。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Colors:"
+msgstr "颜色："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "JPEG Settings"
+msgstr "设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Quality (%):"
+msgstr "品质(%)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "Resolution (DPI):"
+msgstr "分辨率(DPI)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "PNG Settings"
+msgstr "PNG设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.ImageFormatsTabTranslation
+msgid "TIFF Settings"
+msgstr "TIFF设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "An error occurred:"
+msgstr "发生一个错误："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "JPEG file"
+msgstr "JPEG文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/A-1b file"
+msgstr "PDF/A-1b文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/A-2b file"
+msgstr "PDF/A-2b文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF file"
+msgstr "PDF文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PDF/X file"
+msgstr "PDF/X文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "PNG file"
+msgstr "PNG文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid ""
+"The file could not be saved. Maybe the file is currently in use or you do "
+"not have the required permissions.\r\n"
+"Please select another filename and try again."
+msgstr ""
+"文件无法被保存。可能文件当前正在被使用或者你没有相应的权限。\n"
+"请选择其他文件名再次尝试保存。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid ""
+"Could not authenticate at server.\r\n"
+"Please check your password and verify that you have a working internet "
+"connection."
+msgstr ""
+"不能在服务器验证身份。\n"
+"请检查你的密码并且保证你的网络连接正常。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "Select destination"
+msgstr "选取目标"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid ""
+"The total length of path and filename is too long.\r\n"
+"Please use a shorter name."
+msgstr ""
+"文件路径和文件名过长。\n"
+"请使用一个短一些的文件名。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "Text file"
+msgstr "文本文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation
+msgid "TIFF file"
+msgstr "TIFF文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "FTP server password:"
+msgstr "FTP服务器密码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.InteractiveWorkflowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "FTP server password"
+msgstr "FTP服务器密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.MailSignatureHelperTranslation
+msgid "E-mail automatically created by the free PDFCreator"
+msgstr "由免费的 PDFCreator 自动创建的电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.MailSignatureHelperTranslation
+msgid "E-mail automatically created by PDFCreator"
+msgstr "由PDFCreator 自动创建的电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid ""
+"The print document action allows to print the document to a physical printer "
+"in addition to the conversion to PDF or any other format."
+msgstr "文件打印动作允许将文件打印至实体打印机，并转换为PDF或其他格式。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Print document"
+msgstr "打印文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Duplex printing (if support by the printer)"
+msgstr "双面打印 (如果打印机支持)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PrintActionSettingsAndActionTranslation
+msgid "Select printer:"
+msgstr "选择打印机："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Conversion"
+msgstr "转换"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Select the default file format:"
+msgstr "选取默认的文件格式："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Filename"
+msgstr "文件名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Filename Template:"
+msgstr "文件名范本："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid ""
+"Set default output folder (else the last saved file location will be opened)"
+msgstr "设置默认的输出文件夹 (否则以最近保存的位置为准)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Save Dialog Folder"
+msgstr "保存对话框文件夹"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Folder Template:"
+msgstr "文件夹范本："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Show progress during conversion"
+msgstr "显示转换进度"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Skip print dialog (directly proceed to the save dialog)"
+msgstr "跳过打印对话框 (直接到保存对话框)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.SaveTabTranslation
+msgid "Select save dialog folder"
+msgstr "选取保存对话框文件夹"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "keyword 1 keyword 2"
+msgstr "关键字 1 关键字 2"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "MyFile.docx"
+msgstr "我的文件.docx"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename.jpg"
+msgstr "输出文件名.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename2.jpg"
+msgstr "输出文件名2.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "OutputFilename3.jpg"
+msgstr "输出文件名3.jpg"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Subject from Settings"
+msgstr "主题来自设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Title from Printjob"
+msgstr "标题来自打印作业"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.TokenPlaceHoldersTranslation
+msgid "Title from Settings"
+msgstr "标题来自设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "General"
+msgstr "一般"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PDF Version"
+msgstr "PDF版本"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Current PDF version:"
+msgstr "当前PDF版本："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid ""
+"Note: For best compatibility PDFCreator uses the lowest version that is "
+"possible with the current settings."
+msgstr "注意：为保持最佳兼容性当前的设置可能需要使用更低版本的PDFCreator。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page Orientation"
+msgstr "页面方向"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Color Model"
+msgstr "颜色模式"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Viewer Settings"
+msgstr "视图设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page view:"
+msgstr "页面预览："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Document view:"
+msgstr "文件视图："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Viewer opens on page:"
+msgstr "在页面上的查看器打开："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Compression"
+msgstr "压缩"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Color and Grayscale Images"
+msgstr "彩色和灰阶图像"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Enable compression"
+msgstr "启用压缩"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Factor:"
+msgstr "因素："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Resample images to"
+msgstr "对图像重新取样"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "DPI"
+msgstr "DPI"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Monochrome Images"
+msgstr "单色图像"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Security"
+msgstr "安全"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Encrypt PDF documents to protect its contents"
+msgstr "加密PDF以保护其内容"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Require a password to open the PDF document"
+msgstr "打开PDF文件需要密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Set Passwords"
+msgstr "设置密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Encryption Level"
+msgstr "加密等级"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Low (128 Bit)"
+msgstr "低(128 Bit)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "- Unsecure. Use only for compatibility."
+msgstr "- 不安全。仅使用于兼容性。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Medium (128 Bit AES)"
+msgstr "中(128 Bit AES)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "High (256 Bit AES)"
+msgstr "高 (256 Bit AES)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "- Only available in PDFCreator Plus and Business"
+msgstr "- 仅在PDFCreator加强版和商业版可用"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "More info"
+msgstr "更多信息"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Allow the user"
+msgstr "允许用户"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to copy content from the document"
+msgstr "从文件复制内容"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to print the document"
+msgstr "打印文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "restrict to low quality"
+msgstr "对低质量限制"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to use a screen reader"
+msgstr "使用屏幕阅读器"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit the document"
+msgstr "编辑文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit comments"
+msgstr "编辑注释"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to fill forms"
+msgstr "填写表格"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "to edit the assembly"
+msgstr "编辑合集"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Signature"
+msgstr "签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Sign PDF document with a digital signature"
+msgstr "对PDF文件添加数字签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Certificate File:"
+msgstr "证书文件："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Set Password"
+msgstr "设置密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Reason:"
+msgstr "原因："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Contact:"
+msgstr "联系："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Location:"
+msgstr "位置："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Allow multiple signing"
+msgstr "允许多个签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Time Server URL:"
+msgstr "时间服务器URL："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Default Time Server"
+msgstr "默认打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Secured Time Server"
+msgstr "安全的时间服务器"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "User Name:"
+msgstr "使用者名称："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Display signature in document"
+msgstr "在文件中显示签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Page:"
+msgstr "页面："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Left X:"
+msgstr "左 X："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Right X:"
+msgstr "右 X："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Left Y:"
+msgstr "左 Y："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Right Y:"
+msgstr "右 Y："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PDF Signature"
+msgstr "PDF 签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Select certificate file"
+msgstr "选取认证文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "PFX/P12 files"
+msgstr "PFX/P12 文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "All files"
+msgstr "清除日志文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "The certificate file does not exist."
+msgstr "认证文件不存在。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Password for Time Server"
+msgstr "时间服务器密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Translations.PdfTabTranslation
+msgid "Time Server Password:"
+msgstr "时间服务器密码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid ""
+"PDFCreator is free software consisting of multiple components with "
+"individual licenses. Please read the license section in the manual for "
+"further information on these licenses."
+msgstr "免费的PDFCreator软件由多个模块组成且各有其授权。请阅读帮助手册的授权章节以获取更详细的授权信息。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid "About PDFCreator"
+msgstr "关于PDFCreator"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.AboutWindowTranslation
+msgid "User Manual"
+msgstr "帮助手册"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Admin privileges required"
+msgstr "需要有管理员权限"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation
+msgid "Cancel"
+msgstr "取消"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Debug"
+msgstr "调试"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Help"
+msgstr "帮助"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "INI files (*.ini)|*.ini"
+msgstr "ini文件 (*.ini)|*.ini"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Invalid settings"
+msgstr "无效的设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "The file does not appear to contain valid PDFCreator settings."
+msgstr "该文件没有包含有效的打印机设置。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"By loading the file all settings and profiles will be overwritten. Do you "
+"want to continue?"
+msgstr "加载文件会导致所有设置值及设置文件被覆盖。您确定要继续吗？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid ""
+"This operation requires admin privileges and it looks like you are not an "
+"admin. Do you want to continue anyway?\r\n"
+"Note: It is safe to continue even if you are unsure if you have appropriate "
+"rights, but the operation will not be completed."
+msgstr ""
+"此项操作需要管理者权限，但您似乎并非管理员。您是否要继续？注意：即使您不确定该不该继续，继续操作仍是安全的，但是有可能会造成此项操作未被完整执行。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Overwrite all settings"
+msgstr "覆盖所有设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Printers"
+msgstr "打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Save"
+msgstr "保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation
+msgid "Operation failed. You probably do not have sufficient permissions."
+msgstr "操作失败。您可能沒有足夠的权限。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "PDFCreator Settings"
+msgstr "PDFCreator 设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Title"
+msgstr "标题"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "Defective profile:"
+msgstr "有缺陷的配置文件："
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "Defective Profiles"
+msgstr "有缺陷的配置文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile:"
+msgstr "配置文件："
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid ""
+"Do you want to return and edit the settings or\r\n"
+"ignore the error and save anyway?"
+msgstr "你想返回重新设置或者是忽略错误并保存？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "_Edit"
+msgstr "_编辑"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.DefectiveProfilesWindowTranslation
+msgid "_Ignore"
+msgstr "_忽略"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "To get help, hit F1 or the question mark."
+msgstr "按F1键或点击问号取得帮助说明。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "1. Set up your profiles and settings here"
+msgstr "1. 在此设置配置文件及设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "2. Print any document to the printer 'PDFCreator'."
+msgstr "2. 打印任何文件到'PDFCreator'打印机 。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid "3. Save your PDF or send it as mail."
+msgstr "3. 保存PDF或以电子邮件发送此文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation
+msgid ""
+"PDFCreator allows to create PDF documents from any application that is able "
+"to print. Creating a PDF document is easy:"
+msgstr "你可以通过PDFCreator 的打印功能在任何软件创建PDF文件。创建PDF文件就是这样简单："
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.MainWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile Settings"
+msgstr "配置设定"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Continue"
+msgstr "继续"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Delete"
+msgstr "删除"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Files"
+msgstr "文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Merge All"
+msgstr "合并全部"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Merge"
+msgstr "合并"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Pages"
+msgstr "页面"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ManagePrintJobsWindowTranslation
+msgid "Manage Print Jobs"
+msgstr "管理打印动作"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "We highly value that you are using PDFCreator!"
+msgstr "我们对您使用PDFCreator表示感谢！"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "No, thanks"
+msgstr "不，谢谢"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "More Information"
+msgstr "更多信息"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid ""
+"For power users like you, we recommend PDFCreator Plus to support the future "
+"development and benefit from exclusive features and priority support."
+msgstr "对于您这样的大力支持者，我们建议选用PDFCreator Plus以获得更多特性与优先的技术支持，并能够给予我们良好的发展。"
+
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid ""
+"You have already converted {0} file with PDFCreator. Thank you very much!"
+msgid_plural ""
+"You have already converted {0} files with PDFCreator. Thank you very much!"
+msgstr[0] "您已经用PDFCreator完成{0}文件的转换。感谢您的使用！"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
+msgid "Try PDFCreator Plus!"
+msgstr "尝试PDFCreator Plus！"
+
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+# pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "There is {0} more Job waiting"
+msgid_plural "There are {0} more Jobs waiting"
+msgstr[0] "还有 {0} 等更多操作等待中"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "Print more documents to merge or rearrange them"
+msgstr "打印更多文件以进行合并和排列"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Author"
+msgstr "_作者"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Cancel"
+msgstr "取消"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "E-Mail"
+msgstr "电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Keywords"
+msgstr "_关键字"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Merge"
+msgstr "合并"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Metadata"
+msgstr "_元数据"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Profile"
+msgstr "_配置文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Save"
+msgstr "保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgctxt "PrintJobWindowButton"
+msgid "Settings"
+msgstr "设置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Subject"
+msgstr "_主题"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PrintJobViewModelTranslation
+msgid "_Title"
+msgstr "_标题"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ActionsTabTranslation
+msgid "Actions"
+msgstr "动作"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Auto-Save"
+msgstr "自动保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Delete profile"
+msgstr "删除配置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid ""
+"The profile '{0}' is assigned to the printer '{1}'. If you delete this "
+"profile, the printer will use the default profile instead. Do you want to "
+"proceed?"
+msgstr "配置文件 '{0}' 是分配给打印机 '{1}'。如果删除此配置，打印机将改用默认的配置。是否要继续？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Document"
+msgstr "文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Please enter profile name:"
+msgstr "请输入配置名称："
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Image Formats"
+msgstr "图像格式"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "The entered profile name is invalid or does already exist."
+msgstr "输入的配置名称为无效或已经存在。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "New Profile"
+msgstr "新的配置"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "PDF"
+msgstr "PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Printer assignment"
+msgstr "打印机任务"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Profile name"
+msgstr "配置名称"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Do you really want to the delete '{0}'?"
+msgstr "您是否确定删除 '{0}' 打印机？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Do you really want to cancel the settings and discard the changes?"
+msgstr "你真的想要取消设置并放弃更改吗？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation
+msgid "Unsaved changes"
+msgstr "更改未保存"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "Download"
+msgstr "下载"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid "No application is associated to open PDF files."
+msgstr "无关联程序来开启PDF文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.RecommendPdfArchitectWindowTranslation
+msgid ""
+"We recommend PDF Architect, our free PDF Viewer and Editor.\r\n"
+"The free edition contains a viewer and basic editing capabilities. "
+"Furthermore, you can buy optional modules, which extend the functionality "
+"according to your requirements and even provide OCR."
+msgstr ""
+"我们建议尝试PDF Architect，一个免费的PDF阅读器和编辑器。\n"
+"免费版包含阅读器和基本编辑功能。更多特性，你可以通过购买模块实现甚至，功能扩展甚至提供文字识别OCR。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Licensing was succesful."
+msgstr "已授权成功。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Do you want to make the license available for all users on your system?"
+msgstr "是否让该许可证在本机系统内的所有用户生效？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "An error occured while storing license for all users."
+msgstr "当部署许可证至全部用户时发生了一个错误。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.StoreLicenseForAllUsersWindowTranslation
+msgid "Store license for all users was successful."
+msgstr "已成功为全部用户部署许可证。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.InputBoxWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Cancel"
+msgstr "_取消"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "The update will be started when you close PDFCreator"
+msgstr "当关闭 PDFCreator 时会开始更新操作"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "Loading Update..."
+msgstr "加载更新..."
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.UpdateDownloadWindowTranslation
+msgid "PDFCreator Plus Updater"
+msgstr "PDFCreator Plus更新程序"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "Welcome"
+msgstr "欢迎"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid ""
+"The improvements of this version are listed in the \"What's new?\" section "
+"of the manual. For latest information about our products, join us on "
+"facebook or google+."
+msgstr "此版本的改进项目在手册的 \"What's new?\" 章节里。想要知道最新的产品信息，请关注我们的 Facebook 或 Google+。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "Thank you for downloading PDFCreator."
+msgstr "感谢你下载使用PDFCreator。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.WelcomeWindowTranslation
+msgid "What's new?"
+msgstr "什么新特性？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "OK"
+msgstr "确定"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "Owner password (for editing):"
+msgstr "拥有者密码 (编辑用)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid ""
+"An owner password is required to set the user passwords. Leave one or both "
+"passwords empty to get a request during the print job (passwords will not be "
+"saved)."
+msgstr "拥有者密码必须设置用户密码。继续打印会要求一个或两个密码不为空（密码不会被保存）。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Skip"
+msgstr "跳过"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "Encryption Passwords"
+msgstr "加密密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation
+msgid "User password (for opening):"
+msgstr "使用者密码 (打开用)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.InputBoxWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_OK"
+msgstr "_确认"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "More information"
+msgstr "更多信息"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "No"
+msgstr "否"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "Retry"
+msgstr "重试"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid ""
+"Wrong license key syntax.\r\n"
+"It must look like '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'.\r\n"
+"Valid characters are: A-Z, 0-9 and the dash."
+msgstr ""
+"错误的许可证密钥语法。\n"
+"它必须类似 '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'。\n"
+"有效的字符是：A-Z, 0-9和横线-。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "License key"
+msgstr "许可证密钥"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Paste the response code here:"
+msgstr "在此处粘贴响应代码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
+msgid "Request an activation code on our website:"
+msgstr "在我们网站上请求一个激活码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid ""
+"Leave password empty to get a request during the print job (password will "
+"not be saved)."
+msgstr "打印时会要求输入密码(这些密码不会被保存)。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation
+msgid "Signature _password:"
+msgstr "签名 _密码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation
+msgid "Authenticate with Dropbox"
+msgstr "认证Dropbox"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxAuthenticationWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Dropbox"
+msgstr "网络存储Dropbox"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Copy"
+msgstr "复制"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "Links copied successfully"
+msgstr "链接复制成功"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid ""
+"Please note: Everyone who recieves this link will be able to access the file"
+msgstr "请注意：若任何人获取到该链接则都可以访问这个文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.DropboxSharedLinksWindowTranslation
+msgid "The following links have been created for your document:"
+msgstr "你的文件链接已创建如下："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "Attach pdfforge signature"
+msgstr "添加pdfforge签名"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "_Text:"
+msgstr "_文本："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "_Subject:"
+msgstr "_主题："
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Edit E-Mail Text"
+msgstr "编辑电子邮件文本"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EditEmailTextWindowTranslation
+msgid "Use Html"
+msgstr "使用HTML"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Remove"
+msgstr "_移除"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.PasswordWindowTranslation
+msgid "_Skip"
+msgstr "_跳过"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid "{0} Update"
+msgstr "{0}更新"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"There was a problem during the download. Do you want to download the update "
+"from the website instead?"
+msgstr "下载时遇到问题，是否改为在网站上进行下载更新？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"The MD5 hash of the downloaded file does not match the expected hash. It is "
+"possible that the file has been damaged during the download. Do you want to "
+"retry the download?"
+msgstr "下载的软件 MD5 检验码不符合，可能下载时损坏了。是否重试下载？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"Failure in update-process.\r\n"
+"Please check your internet-connection and retry later."
+msgstr ""
+"更新过程失败。\n"
+"请检查你的网络连接后重试。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid ""
+"The new version {0} is available.\r\n"
+"Would you like to download the new version?"
+msgstr ""
+"新版本{0}已发布。\n"
+"是否下载新版本？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.UpdateManagerTranslation
+msgid "You already have the most recent version."
+msgstr "你已经有最新版本。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer '{0}' could not be installed."
+msgstr "打印机'{0}'未被安装。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer '{0}' could not be renamed in '{1}'."
+msgstr "打印机'{0}'未能重命名为'{1}'。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid ""
+"You may not delete the last printer. Uninstall PDFCreator if you really want "
+"to remove all related printers."
+msgstr "你可能无法删除最新的打印机。如果要删除所有相关的打印机必须重新安 PDFCreator。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "Please enter printer name:"
+msgstr "请输入打印机名称："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid ""
+"A printer with the name '{0}' is already installed on your system. Please "
+"enter a new printer name:"
+msgstr "打印机名称 '{0}' 已经存在，请输入新的打印机名称："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The printer name contains invalid characters."
+msgstr "打印机名称包含非法字符。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrinterActionsAssistantTranslation
+msgid "The name is invalid or a printer with this name already exists"
+msgstr "此为无效名称或名称已经存在"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "and {0} more."
+msgstr "还有{0}等。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid ""
+"You have tried to convert directories here. This is currently not supported."
+msgstr "你正在尝试转换目录。目前并不支持此项功能。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "The following files can't be converted:"
+msgstr "下列文件无法转换："
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid "Do you want to proceed anyway?"
+msgstr "你想继续进行吗？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations.PrintFilesTranslation
+msgid ""
+"PDFCreator needs to temporarily change the default printer to be able to "
+"convert the file. Do you want to proceed?"
+msgstr "PDFCreator 需要临时更改默认打印机来进行文件转换。您要继续吗？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid ""
+"Add an attachment to your documents.\r\n"
+"The attachment file must be a PDF file and may contain multiple pages."
+msgstr ""
+"添加附件在你的文件。\n"
+"附件必须是PDF文件并可以包含多页。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Add attachment"
+msgstr "加入附件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "PDF files"
+msgstr "PDF文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Select attachment file"
+msgstr "选择附件文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.AttachmentSettingsAndActionTranslation
+msgid "Attachment file (PDF):"
+msgstr "附件文件 (PDF)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid ""
+"Add a background to your PDF documents.\r\n"
+"The background file must be a PDF file and may contain multiple pages."
+msgstr ""
+"为你的PDF文件添加背景。\n"
+"背景文件必须是一个 PDF 文件并且可能包含多个页面。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background (only for PDF)"
+msgstr "加入背景 (仅PDF)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Select background file"
+msgstr "选取背景文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Background File (PDF):"
+msgstr "背景文件 (PDF)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Repetition:"
+msgstr "重复："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background to attachment"
+msgstr "在附件上加入背景"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.BackgroundSettingsAndActionTranslation
+msgid "Add background to cover"
+msgstr "在封面上加入背景"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid ""
+"Add a cover to your documents.\r\n"
+"The cover file must be a PDF file and may contain multiple pages."
+msgstr ""
+"为你的PDF文件添加一个封面。\n"
+"封面文件必须是一个 PDF 文件并且可能包含多个页面。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Add cover"
+msgstr "新增打印机"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Select cover file"
+msgstr "选取封面文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.CoverSettingsTranslation
+msgid "Cover file (PDF):"
+msgstr "封面文件 (PDF)："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Upload to Dropbox"
+msgstr "上传至Dropbox"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid ""
+"Create a link to share the uploaded files. Anyone with the link can view "
+"this file."
+msgstr "为已上传的文件创建一个链接，每个人可以点击链接查看该文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Please select Dropbox Account:"
+msgstr "请选择Dropbox账户："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Please define folder:"
+msgstr "请定义文件夹："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.DropboxSettingsAndActionTranslation
+msgid "Don't overwrite files (adds an increasing number in case of conflict)."
+msgstr "请勿覆盖文件（可在文件名添加一个数字防止冲突）。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Check e-mail client"
+msgstr "检查电子邮件客户端"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid ""
+"Opens a new e-mail in the default client. There you can add recipients, text "
+"and other information and then send the mail to your contacts."
+msgstr "在默认的电子邮件客户端新建一封电子邮件。你可以加入收件人、内容和其他信息再发送。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Open e-mail client"
+msgstr "开启电子邮件客户端"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Could not find MAPI client (e.g. Thunderbird or Outlook)."
+msgstr "找不到 MAPI 客户端 (如 Thunderbird 或 Outlook)。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation
+msgid "Check E-Mail Client"
+msgstr "检查电子邮件客户端"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Multiple recipients are separated by commas"
+msgstr "以逗号分隔多个收件人"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.EmailClientActionSettingsAndActionTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Recipients:"
+msgstr "收件人："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid ""
+"The SMTP e-mail action allows to directly send files via e-mail without "
+"further user interaction. Notice: This action is intended for advanced users "
+"and requires careful attention as it can silently send the converted "
+"documents via e-mail to the configured recipients."
+msgstr ""
+"SMTP "
+"电子邮件动作允许直接通过电子邮件传送文件且不再询问。注意：此动作是供进阶者使用，由于会自动通过电子邮件传送转换过后的文件给已设置的收件人，必须小心使用。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send e-mail over SMTP"
+msgstr "通过 SMTP 发送电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send test mail"
+msgstr "发送测试电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Test mail sent to {0}."
+msgstr "测试邮件发送给 {0}。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Smtp Password:"
+msgstr "SMTP密码："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Set Smtp Password"
+msgstr "设置SMTP密码"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "E-Mail Address:"
+msgstr "电子邮件地址："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Port:"
+msgstr "端口："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "Send Test Mail"
+msgstr "发送测试电子邮件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation,
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Server:"
+msgstr "服务器："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.SmtpSettingsAndActionControlTranslation
+msgid "SSL"
+msgstr "SSL"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid ""
+"The FTP action allows to upload the created documents to a server via FTP."
+msgstr "FTP 动作允许你通过 FTP 上传文件到服务器。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Upload with FTP"
+msgstr "使用FTP上传"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Directory:"
+msgstr "目录："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.FtpActionSettingsAndActionTranslation
+msgid "Don't overwrite files (adds an increasing number in case of conflict)"
+msgstr "勿覆盖文件 (加入一个数字以防止发生冲突)"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid ""
+"PDF Architect is not installed.\r\n"
+"Do You want to download it from pdfforge.org?"
+msgstr ""
+"PDF Architect未安装。\n"
+"你想从pdfforge.org下载安装吗？"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open document after saving."
+msgstr "保存后打开文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open document"
+msgstr "打开文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Open PDF files with PDF Architect"
+msgstr "用PDF Architect打开PDF文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Obtain powerful modules to do more like"
+msgstr "获得强大的功能模块去做更多事情"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Convert PDFs to Word, Excel and more"
+msgstr "转换PDF为 Word、Excel等及其他格式"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Edit PDFs like with a word processor"
+msgstr "像使用文字处理系统来编辑PDF"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.OpenViewerSettingsAndActionTranslation
+msgid "Our full-featured PDF Editor"
+msgstr "我们的多功能PDF编辑器"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid ""
+"The script action runs a custom script or application after the conversion. "
+"This allows you to further process the output."
+msgstr "此动作将在转换后执行自定义的脚本。这可让你稍后处理所输出的文件。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Run script"
+msgstr "执行脚本"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Executable files"
+msgstr "执行文件"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Select script file"
+msgstr "选取脚本"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Additional Script Parameters:"
+msgstr "额外的脚本参数："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Script Call Preview:"
+msgstr "脚本调用预览："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Script File:"
+msgstr "脚本文件："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.ScriptActionSettingsAndActionTranslation
+msgid "Wait until the script execution has ended"
+msgstr "直到脚本执行结束"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Parse the document for UserTokens and set their values."
+msgstr "为用户令牌解析文档和设置它们的值。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Activate UserTokens"
+msgstr "激活用户令牌"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "Please note:"
+msgstr "请注意："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"The user tokens feature is currently in beta status, and it is not "
+"considered stable. You are welcome to test and use it. If you should "
+"encounter any questions or problems, please feel free to contact our "
+"support. If you can also attach the document in which you experience the "
+"problems, we can help you in solving them."
+msgstr ""
+"用户令牌的特性目前正在测试阶段，暂未稳定。欢迎你测试和使用，如果你有任何问题，请联系我们提供帮助，如果可以提供复制问题的文件，我们就可以更好地为你解决它。"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"Define your own tokens directly in the original document with the following "
+"pattern: \"[[[UserTokenName: User token value]]]\". Afterwards the definied "
+"value can be called via the following token: \"<User:UserTokenName>\". The "
+"original pattern will be removed from the created document. You can define "
+"any number of user tokens. You can find more information in the user guide:"
+msgstr ""
+"直接在原来的文件与以下模式中定义您自己的令牌： \"[[[UserTokenName: User token value]]]\""
+"。之后可以通过下面的令牌定义参数：\"<User:UserTokenName>\""
+"。从创建的文档将删除原有的模式。你可以定义任意数量的用户令牌。您可以在用户指南中找到更多信息："
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid ""
+"The extraction of user tokens is available in the business editions of "
+"PDFCreator"
+msgstr "提取的用户令牌在PDFCreator商业版里是有效的"
+
+#: pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations.UserTokenActionViewModelTranslation
+msgid "More on user tokens"
+msgstr "更多尽在用户令牌"
+
+#: pdfforge.PDFCreator.UI.Views.Translations.TokenHintPanelTranslation
+msgid "See hint on tokens"
+msgstr "见令牌上的提示"
+
+# pdfforge.PDFCreatorShell.ContextMenuTranslation
+# pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "and {0} more file/directory"
+msgid_plural "and {0} more files/directories"
+msgstr[0] "还有{0}更多文件/文件夹"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "&Convert with PDFCreator"
+msgstr "用PDFCreator转换"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid "Hint"
+msgstr "提示"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid ""
+"Couldn't find PDFCreator in your system. Please check if you have installed "
+"it."
+msgstr "在系统无法找到PDFCreator。请确认您是否已经有安装成功。"
+
+#: pdfforge.PDFCreatorShell.ContextMenuTranslation
+msgid ""
+"At least one of the selected items is not convertible! For more information "
+"about the unprintable files, see the list below."
+msgstr "至少一个选定的项目不是可转换的 ！有关打印文件的详细信息，请参阅下面的列表。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "PDF Architect could not open output file."
+msgstr "PDF Architect无法打开输出的文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "System could not open output file."
+msgstr "系统无法打开输出文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No compatible e-mail client installed."
+msgstr "无已安装的兼容的电子邮件客户端。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Unknown error in e-mail client action."
+msgstr "电子邮件客户端发生未知错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No certification file is specified."
+msgstr "没有指定证书文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Certificate file does not exist."
+msgstr "证书文件不存在。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without certificate password."
+msgstr "无证书密码自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Secured Time Server without user name."
+msgstr "没有用户名的安全时间服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Secured Time Server without password."
+msgstr "没有密码的安全时间服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The certificate password is wrong."
+msgstr "证书密码错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The certificate has no private key."
+msgstr "证书没有私钥。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Not enough space for signature."
+msgstr "没有足够空间签名。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched signing without certification password."
+msgstr "发起的签名没有认证密码。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while signing. Can not connect to time server."
+msgstr "签名时发生错误。无法连接时间服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while signing the document."
+msgstr "当文件签名时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The default printer is invalid."
+msgstr "打印机名称包含无效字符。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The selected printer is invalid."
+msgstr "选择的打印机是无效的。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while printing the file."
+msgstr "打印文件时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No script file is specified."
+msgstr "没有指定的脚本文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Script file does not exist."
+msgstr "脚本文件不存在。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Script file contains illegal characters."
+msgstr "打印机名称包含无效字符。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while running the script action."
+msgstr "在运行脚本动作时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail address is specified."
+msgstr "没有指定电子邮件SMTP地址。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail recipients are specified."
+msgstr "没有指定的SMTP电子邮件的收件人。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail server is specified."
+msgstr "没有指定SMTP电子邮件服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Invalid SMTP port."
+msgstr "无效的SMTP端口。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No SMTP e-mail user name is specified."
+msgstr "没有指定SMTP电子邮件用户名。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "E-mail over SMTP could not be delivered to one or more recipients."
+msgstr "电子邮件通过SMTP无法传递到一个或多个收件人。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not authorize to SMTP server."
+msgstr "无法授权到 SMTP 服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "User cancelled retyping SMTP e-mail password."
+msgstr "用户取消了重新输入 SMTP 电子邮件的密码。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No password provided for E-mail over SMTP."
+msgstr "在SMTP电子邮件没有提供密码。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while sending e-mail over SMTP."
+msgstr "当电子邮件通过SMTP发送发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No background file is specified."
+msgstr "未指定背景文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background file does not exist."
+msgstr "背景文件不存在。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background file is no PDF file."
+msgstr "背景文件不是PDF文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not open cover file."
+msgstr "无法打开封面文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not open attachment file."
+msgstr "无法打开附件文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while adding background to the document."
+msgstr "当添加背景文件时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server is not specified."
+msgstr "FTP服务器未指定。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server user name is not specified."
+msgstr "FTP服务器用户名未指定。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "FTP server password is not specified."
+msgstr "FTP服务器密码未指定。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not login to FTP server."
+msgstr "无法登陆FTP服务器。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Failure in directory on FTP server."
+msgstr "进入FTP服务器上的目录失败。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not read from FTP directory to ensure unique filenames."
+msgstr "无法读取 FTP 目录以确保唯一的文件名。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not upload file to FTP."
+msgstr "无法上传文件至FTP。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Could not login to FTP server. Please check your Internet connection."
+msgstr "无法登陆FTP服务器。请检查你的网络连接。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without FTP server password."
+msgstr "在没有FTP服务器密码的情况下自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "User cancelled retyping FTP password."
+msgstr "用户取消重新输入FTP密码。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading file to FTP server."
+msgstr "当上传文件至FTP服务器时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The specified Dropbox account is not configured."
+msgstr "指定的Dropbox帐号未配置。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The specified Dropbox access token is not configured."
+msgstr "指定的Dropbox帐号的访问令牌未配置。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "These characters are not allowed as Dropbox folder name: < > : ? * \" |"
+msgstr "这些字符不允许在Dropbox文件夹名称中出现：< > : ? * \" |"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without target directory."
+msgstr "没有目标目录自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without filename template."
+msgstr "在没有文件名模板的情况下自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No cover file is specified."
+msgstr "未指定封面文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Cover file does not exist."
+msgstr "封面文件不存在。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The cover file is no PDF file."
+msgstr "封面文件不是PDF文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No attachment file is specified."
+msgstr "未指定附件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment file does not exist."
+msgstr "附件不存在。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment file is no PDF file."
+msgstr "附件不是PDF文件。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No stamp text is specified."
+msgstr "未指定水印文本。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "No stamp font is specified."
+msgstr "未指定水印字体。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without owner password."
+msgstr "没有拥有者密码仍自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Automatic saving without user password."
+msgstr "没有使用者密码仍自动保存。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while encrypting the document."
+msgstr "加密文档时出错。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched encryption without owner password."
+msgstr "无拥有者密码仍进行加密。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Launched encryption without user password."
+msgstr "无使用者密码仍进行加密。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Missing output file for PDF processing."
+msgstr "处理PDF进程中输出文件丢失。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while processing the document."
+msgstr "处理文件过程中出现错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Preselected folder for save dialog is empty."
+msgstr "在保存对话框中预先选定的文件夹是空的。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while copying the output file."
+msgstr "复制输出文件时出错。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Internal Ghostscript error."
+msgstr "内部Ghostscript发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Unknown internal error."
+msgstr "未知内部错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error during PDF/A conversion."
+msgstr "当转换PDF/A时发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading the document to Dropbox."
+msgstr "当上传文件至Dropbox发生错误。"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Error while uploading and sharing the document to Dropbox."
+msgstr "当上传和分享文档到 Dropbox 时出错。"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Auto-Detect"
+msgstr "自动侦测"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Portrait"
+msgstr "纵向"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
+msgid "Landscape"
+msgstr "布局"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "No repetition"
+msgstr "不允许重复"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "Repeat all pages"
+msgstr "重复全部页面"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
+msgid "Repeat last page"
+msgstr "重复最后页面"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "RGB"
+msgstr "RGB"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "CMYK"
+msgstr "CMYK"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
+msgid "Grayscale"
+msgstr "灰阶"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "Automatic"
+msgstr "自动"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Maximum)"
+msgstr "JPEG (最大)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (High)"
+msgstr "JPEG (高)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Medium)"
+msgstr "JPEG (中等)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Low)"
+msgstr "JPEG (低)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Minimum)"
+msgstr "JPEG (最小)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "JPEG (Manual)"
+msgstr "JPEG (手动)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
+msgid "ZIP"
+msgstr "ZIP"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "CCITT Fax"
+msgstr "CCITT Fax"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "ZIP Compression"
+msgstr "ZIP压缩"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
+msgid "Run Length Compression"
+msgstr "运行长度压缩"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Neither document outline nor thumbnail images visible"
+msgstr "文件缩略图和图像轮廓均不可见"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Document outline visible"
+msgstr "文件轮廓可见"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Thumbnail images visible"
+msgstr "缩略图可见"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Fullscreen mode"
+msgstr "全屏模式"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Optional content group panel visible"
+msgstr "可选内容组面板可见"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
+msgid "Attachments panel visible"
+msgstr "附件面板可见"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "No duplex printing"
+msgstr "不使用双面打印"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "Long edge turn"
+msgstr "长边翻转"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
+msgid "Short edge turn"
+msgstr "短边翻转"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "16 Million Colors (24 Bit)"
+msgstr "16百万色 (24位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor,
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Grayscale (8 Bit)"
+msgstr "灰阶 (8位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Single page view"
+msgstr "单页视图"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating page view (one page)"
+msgstr "浮动页视图（单页）"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Double page view (odd pages left)"
+msgstr "双页视图（奇数页在左）"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Double page view (odd pages right)"
+msgstr "双页视图（奇数页在右）"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating double page view (odd pages left)"
+msgstr "浮动双页视图（奇数页在左）"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
+msgid "Floating double page view (odd pages right)"
+msgstr "浮动双页视图（奇数页在右）"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "16 Million Colors with Transparency (32 Bit)"
+msgstr "16百万色含透明度 (32位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "256 Colors (8 Bit)"
+msgstr "256色 (8位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "16 Color (4 Bit)"
+msgstr "16色 (4位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
+msgid "Black & White (2 Bit)"
+msgstr "黑 & 白(2位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "Replace"
+msgstr "替换于"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "Start"
+msgstr "开始"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "End"
+msgstr "结束"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
+msgid "RegEx"
+msgstr "正则表达式"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "default printer"
+msgstr "默认打印机"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "printer dialog"
+msgstr "打印机对话框"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
+msgid "select printer ->"
+msgstr "选择打印机 ->"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "First Page"
+msgstr "首页"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "Last Page"
+msgstr "尾页"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
+msgid "Custom Page"
+msgstr "自定页"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "4096 Colors (12 Bit)"
+msgstr "4096色 (12位)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit G3 Fax)"
+msgstr "黑 & 白(2 Bit G3 传真)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit G4 Fax)"
+msgstr "黑 & 白(2 Bit G4 传真)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
+msgid "Black & White (2 Bit LZW)"
+msgstr "黑 & 白(2 Bit LZW)"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Daily"
+msgstr "每日"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Weekly"
+msgstr "每周"
+
+#: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
+msgid "Monthly"
+msgstr "每月"

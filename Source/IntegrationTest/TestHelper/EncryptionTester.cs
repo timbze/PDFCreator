@@ -13,13 +13,14 @@ namespace PDFCreator.TestUtilities
     {
         /// <summary>
         ///     Test if the testfile can be opened and/or edited according to the security settings in the profile.
-        ///     Test is done with the given passwords, without password and with a bad password.
+        ///     Test is done with the given job.Passwords, without password and with a bad password.
         /// </summary>
-        /// <param name="testFile">PDF testfile</param>
-        /// <param name="profile">Profile used for processing</param>
-        /// <param name="passwords">Passwords used for processing</param>
-        public static void MakePasswordTest(string testFile, ConversionProfile profile, JobPasswords passwords)
+        public static void DoPasswordTest(Job job)
         {
+            var profile = job.Profile;
+            var testFile = job.OutputFiles[0];
+            var passwords = job.Passwords;
+
             var askUserPw = profile.PdfSettings.Security.Enabled && profile.PdfSettings.Security.RequireUserPassword;
 
             //Owner password
@@ -35,7 +36,7 @@ namespace PDFCreator.TestUtilities
 
             //Without password 
             //File can be opened without password if no user password is requested (or security is disabled (of course...)).
-            //File can only be opened with a bad password is user pw is required.
+            //File can only be opened with a bad password if user pw is required.
             //Note: If encryption is disabled, the files can be opened with PdfReader using any password.
             //      If encryption is enabled, it is not possible, although no password is required. 
             //File can be edited without (or bad) password if no owner password is requested (respectively security is disabled).
@@ -116,10 +117,10 @@ namespace PDFCreator.TestUtilities
         ///     Checks for the correct PDF version and permission value, according to the pdf security settings.
         /// </summary>
         /// <param name="job">Job with PDF Testfile, current Profile and OwnerPassword</param>
-        public static void MakeSecurityTest(Job job)
+        public static void DoSecurityTest(Job job, bool IsIText)
         {
             foreach (var file in job.OutputFiles)
-                MakeSecurityTest(file, job.Profile, job.Passwords.PdfOwnerPassword);
+                DoSecurityTest(file, job.Profile, job.Passwords.PdfOwnerPassword, IsIText);
         }
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace PDFCreator.TestUtilities
         /// <param name="file">PDF Testfile</param>
         /// <param name="profile">Profile used for processing</param>
         /// <param name="ownerPassword">Owner Password to open secured file (set any value except NULL if encryption was disabled)</param>
-        public static void MakeSecurityTest(string file, ConversionProfile profile, string ownerPassword)
+        public static void DoSecurityTest(string file, ConversionProfile profile, string ownerPassword, bool isIText)
         {
             if (!profile.PdfSettings.Security.Enabled)
             {
@@ -144,21 +145,7 @@ namespace PDFCreator.TestUtilities
 
             var pdfReader = new PdfReader(file, Encoding.Default.GetBytes(ownerPassword));
 
-            switch (profile.PdfSettings.Security.EncryptionLevel)
-            {
-                case EncryptionLevel.Rc40Bit:
-                    Assert.AreEqual(PdfWriter.VERSION_1_4, pdfReader.PdfVersion, "Not PDF-Version 1.4 for Low40Bit");
-                    Assert.AreEqual(0, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for Low40Bit");
-                    break;
-                case EncryptionLevel.Rc128Bit:
-                    Assert.AreEqual(PdfWriter.VERSION_1_4, pdfReader.PdfVersion, "Not PDF-Version 1.4 for Medium128Bit");
-                    Assert.AreEqual(1, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for Medium128Bit");
-                    break;
-                case EncryptionLevel.Aes128Bit:
-                    Assert.AreEqual(PdfWriter.VERSION_1_6, pdfReader.PdfVersion, "Not PDF-Version 1.6 for High128BitAES");
-                    Assert.AreEqual(2, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for High128BitAES");
-                    break;
-            }
+            CheckEncryptionLevel(profile, isIText, pdfReader);
 
             #region check permissions
 
@@ -228,6 +215,30 @@ namespace PDFCreator.TestUtilities
                     "Unrequested Allow-ScreenReaders is set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
 
             #endregion
+        }
+
+        private static void CheckEncryptionLevel(ConversionProfile profile, bool IsIText, PdfReader pdfReader)
+        {
+            switch (profile.PdfSettings.Security.EncryptionLevel)
+            {
+                case EncryptionLevel.Rc40Bit:
+                    Assert.AreEqual(0, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 40Bit");
+                    break;
+                case EncryptionLevel.Rc128Bit:
+                    Assert.AreEqual(1, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 128Bit");
+                    break;
+                case EncryptionLevel.Aes128Bit:
+                    Assert.AreEqual(2, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 128BitAES");
+                    break;
+                case EncryptionLevel.Aes256Bit:
+                    if (IsIText)
+                    {
+                        Assert.AreEqual(2, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 256AES => 128BitAES");
+                        break;
+                    }
+                    Assert.AreEqual(3, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 256AES => 128BitAES");
+                    break;
+            }
         }
     }
 }

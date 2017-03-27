@@ -1,10 +1,8 @@
 ﻿using System.IO;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.Editions.PDFCreator;
 using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs

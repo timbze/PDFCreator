@@ -91,64 +91,62 @@ namespace pdfforge.PDFCreator.Utilities
         {
             var win8Version = new Version(6, 2, 9200, 0);
 
-            // On Windows 8 and above, we have to detect the verbs by the associated ProgID
+            var verbs = GetCoreVerbs(extension);
+
+            // On Windows 8 and above, we have to filter verbs with no valid command (UWP Apps)
             if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
                 Environment.OSVersion.Version >= win8Version)
             {
-                string progId = AssocQueryString(AssocStr.ASSOCSTR_PROGID, extension);
-
-                if (string.IsNullOrWhiteSpace(progId))
-                    return new string[] {};
-
-                return GetVerbsByProgId(progId);
+                return verbs.Where(verb => ValidateExtension(extension, verb)).ToArray(); ;
             }
 
-            var psi = new ProcessStartInfo(@"C:\files" + extension);
-            return psi.Verbs;
+            return verbs;
         }
 
-        private string[] GetVerbsByProgId(string progId)
+        /// <summary>
+        /// Get verbs from .Net Framework
+        /// </summary>
+        /// <param name="extension">file extension, i.e. "png"</param>
+        /// <returns>An array of shell verbs that are registered for the extension</returns>
+        private string[] GetCoreVerbs(string extension)
         {
-            var verbs = new List<string>();
-
-            if (string.IsNullOrEmpty(progId))
-                return verbs.ToArray();
-
-            using (var key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(progId + "\\shell"))
-            {
-                if (key != null)
-                {
-                    var names = key.GetSubKeyNames();
-                    verbs.AddRange(
-                        names.Where(
-                            name =>
-                                string.Compare(
-                                    name,
-                                    "new",
-                                    StringComparison.OrdinalIgnoreCase)
-                                != 0));
-                }
-            }
-
-            return verbs.ToArray();
+            var si = new ProcessStartInfo(@"X:\file." + extension);
+            return si.Verbs;
         }
 
-        private string AssocQueryString(AssocStr association, string extension)
+        /// <summary>
+        /// Shell verbs are only properly registered, if 
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <param name="verb"></param>
+        /// <returns></returns>
+        private bool ValidateExtension(string extension, string verb)
+        {
+            try
+            {
+                string command = AssocQueryString(AssocStr.Command, @"X:\file." + extension, verb);
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                return false;
+            }
+        }
+
+        private string AssocQueryString(AssocStr association, string extension, string verb)
         {
             uint length = 0;
-            uint ret = AssocQueryString(
-                AssocF.None, association, extension, "printto", null, ref length);
-            if (ret != 1) //expected S_FALSE
+            var ret = AssocQueryString(AssocF.None, association, extension, verb, null, ref length);
+            if (ret != HRESULT.S_FALSE) //expected S_FALSE to indicate the required amount of memory (ref length)
             {
-                throw new Win32Exception();
+                return "";
             }
 
             var sb = new StringBuilder((int)length);
-            ret = AssocQueryString(
-                AssocF.None, association, extension, null, sb, ref length);
-            if (ret != 0) //expected S_OK
+            ret = AssocQueryString(AssocF.None, association, extension, verb, sb, ref length);
+            if (ret != HRESULT.S_OK) //expected S_OK
             {
-                throw new Win32Exception();
+                throw new Win32Exception((int)ret);
             }
 
             return sb.ToString();
@@ -157,7 +155,7 @@ namespace pdfforge.PDFCreator.Utilities
         #region Shell Lightweight API
 
         [DllImport("Shlwapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern uint AssocQueryString(
+        private static extern HRESULT AssocQueryString(
            AssocF flags,
            AssocStr str,
            string pszAssoc,
@@ -165,6 +163,8 @@ namespace pdfforge.PDFCreator.Utilities
            [Out] StringBuilder pszOut,
            ref uint pcchOut);
 
+        // ReSharper disable InconsistentNaming
+        // ReSharper disable UnusedMember.Local
         [Flags]
         private enum AssocF
         {
@@ -213,6 +213,14 @@ namespace pdfforge.PDFCreator.Utilities
             ASSOCSTR_MAX
         }
 
+        enum HRESULT : long
+        {
+            S_FALSE = 0x0001,
+            S_OK = 0x0000,
+            E_INVALIDARG = 0x80070057,
+            E_OUTOFMEMORY = 0x8007000E,
+            E_NO_APPLICATION_ASSOCIATED = 0x80070483
+        }
         #endregion
     }
 }

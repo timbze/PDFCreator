@@ -1,18 +1,12 @@
-﻿using System;
-using System.Windows;
-using pdfforge.DynamicTranslator;
+﻿using System.Windows;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Windows
 {
     public partial class MainWindow : Window
     {
-        private readonly ITranslator _translator;
-
-        public MainWindow(MainWindowViewModel viewModel, ITranslator translator, ViewCustomization customization)
+        public MainWindow(MainWindowViewModel viewModel, ViewCustomization customization)
         {
-            _translator = translator;
-            viewModel.TranslationChanged += (sender, args) => _translator.Translate(this);
             DataContext = viewModel;
             
             InitializeComponent();
@@ -23,8 +17,6 @@ namespace pdfforge.PDFCreator.UI.Views.Windows
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _translator.Translate(this);
-
             ((MainWindowViewModel) DataContext).WelcomeCommand.Execute(null);
         }
 

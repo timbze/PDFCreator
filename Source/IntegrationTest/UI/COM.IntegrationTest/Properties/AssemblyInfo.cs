@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("COM.IntegrationTest")]
-[assembly: AssemblyCopyright("Copyright pdfforge GmbH 2016")]
+[assembly: AssemblyCopyright("Copyright pdfforge GmbH 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

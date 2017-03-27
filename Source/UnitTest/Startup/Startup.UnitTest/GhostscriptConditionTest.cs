@@ -2,8 +2,8 @@
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
+using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -16,7 +16,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var gsDiscovery = Substitute.For<IGhostscriptDiscovery>();
             gsDiscovery.GetGhostscriptInstance().Returns(new GhostscriptVersion("", "", ""));
 
-            var ghostscriptCondition = new GhostscriptCondition(gsDiscovery, new SectionNameTranslator());
+            var ghostscriptCondition = new GhostscriptCondition(gsDiscovery, new StartupTranslation());
 
             var result = ghostscriptCondition.Check();
 
@@ -30,7 +30,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var gsDiscovery = Substitute.For<IGhostscriptDiscovery>();
             gsDiscovery.GetGhostscriptInstance().Returns((GhostscriptVersion) null);
 
-            var ghostscriptCondition = new GhostscriptCondition(gsDiscovery, new SectionNameTranslator());
+            var ghostscriptCondition = new GhostscriptCondition(gsDiscovery, new StartupTranslation());
 
             var result = ghostscriptCondition.Check();
 

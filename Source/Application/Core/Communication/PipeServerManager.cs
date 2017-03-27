@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using NLog;
+using pdfforge.Communication;
 
 namespace pdfforge.PDFCreator.Core.Communication
 {

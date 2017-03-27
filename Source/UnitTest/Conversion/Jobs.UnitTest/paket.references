@@ -4,3 +4,4 @@ RhinoMocks
 SystemInterface
 DataStorage
 SystemWrapper
+pdfforge.Mail

@@ -11,7 +11,7 @@
         xmlns:dialogs="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Dialogs;assembly=PDFCreator.DesignTimeViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance dialogs:DesignTimeEditEmailTextWindowViewModel, IsDesignTimeCreatable=True}"
-        Title="Edit E-Mail Text"
+        Title="{Binding Translation.Title}"
         MinHeight="400"
         Height="481"
         MinWidth="400"
@@ -40,18 +40,18 @@
                                                          Command="{Binding SubjectTextViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
-                <TextBlock Name="AddSubjectTokenText" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0">Add Token:</TextBlock>
-                <Label Name="SubjectLabel" Target="{Binding ElementName=SubjectText}">_Subject:</Label>
+                <TextBlock Text="{Binding Translation.AddSubjectTokenText}" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0"></TextBlock>
+                <Label Content="{Binding Translation.SubjectLabelContent}" Target="{Binding ElementName=SubjectText}"></Label>
             </DockPanel>
             <views:BindableTextBox x:Name="SubjectText" Margin="0,5,0,2" Text="{Binding SubjectTextViewModel.Text}"
                                    BindableSelectionStart="{Binding SubjectTextViewModel.CurrentCursorPos}" />
             <DockPanel LastChildFill="False">
                 <Label DockPanel.Dock="Left">
-                    <TextBlock Name="SubjectPreviewTextBlock">Preview:</TextBlock>
+                    <TextBlock Text="{Binding Translation.SubjectPreviewText}"/>
                 </Label>
                 <userControls:TokenHintPanel DockPanel.Dock="Right"
                                              TextWithToken="{Binding Text, ElementName=SubjectText}"
-                                             Translator="{Binding Translator}" Margin="0 0 0 2" />
+                                             Margin="0 0 0 2" />
             </DockPanel>
             <TextBox IsReadOnly="True">
                 <TextBox.Text>
@@ -71,8 +71,8 @@
                                                          Command="{Binding BodyTextViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
-                <TextBlock Name="AddBodyTokenText" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0">Add Token:</TextBlock>
-                <Label Name="BodyTextLabel" Target="{Binding ElementName=BodyText}">_Text:</Label>
+                <TextBlock Text="{Binding Translation.AddBodyTokenText}" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0"></TextBlock>
+                <Label Content="{Binding Translation.BodyTextLabelContent}" Target="{Binding ElementName=BodyText}"></Label>
             </DockPanel>
         </StackPanel>
         <views:BindableTextBox x:Name="BodyText" Grid.Row="1" AcceptsReturn="True" Margin="0,0,0,2"
@@ -80,10 +80,13 @@
                                BindableSelectionStart="{Binding BodyTextViewModel.CurrentCursorPos}" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         <DockPanel Grid.Row="2" LastChildFill="False">
             <Label DockPanel.Dock="Left">
-                <TextBlock Name="BodyPreviewTextBlock">Preview:</TextBlock>
+                <TextBlock Text="{Binding Translation.BodyPreviewText}"></TextBlock>
             </Label>
+            <StackPanel DockPanel.Dock="Right">
+                <CheckBox  IsChecked="{Binding Interaction.Html}" Content="{Binding Translation.UseHtml}" />
+            </StackPanel>
             <userControls:TokenHintPanel DockPanel.Dock="Right" TextWithToken="{Binding Text, ElementName=BodyText}"
-                                         Translator="{Binding Translator}" Margin="0 0 0 2" />
+                                          Margin="0 0 0 2" />
         </DockPanel>
         <TextBox Name="FinalBodyText" Grid.Row="3" IsReadOnly="True"  VerticalScrollBarVisibility="Auto" TextWrapping="Wrap">
             <MultiBinding Converter="{StaticResource TokenReplacerConverterWithFooter}">
@@ -103,10 +106,10 @@
                 </Style>
             </DockPanel.Resources>
 
-            <Button Name="CancelButton" DockPanel.Dock="Right" IsCancel="True">_Cancel</Button>
-            <Button Name="OkButton" DockPanel.Dock="Right" Command="{Binding OkCommand}">_OK</Button>
-            <CheckBox Name="AttachSignature" DockPanel.Dock="Left" Margin="0 10" IsChecked="{Binding AddSignature}">
-                <TextBlock Name="AttachSignatureText" TextWrapping="Wrap">Attach pdfforge Signature</TextBlock>
+            <Button Content="{Binding Translation.CancelButtonContent}" DockPanel.Dock="Right" IsCancel="True"></Button>
+            <Button Content="{Binding Translation.OkButtonContent}" DockPanel.Dock="Right" Command="{Binding OkCommand}"></Button>
+            <CheckBox DockPanel.Dock="Left" Margin="0 10" IsChecked="{Binding AddSignature}">
+                <TextBlock Text="{Binding Translation.AttachSignatureText}" TextWrapping="Wrap"></TextBlock>
             </CheckBox>
         </DockPanel>
     </Grid>

@@ -3,3 +3,5 @@ NSubstitute
 DataStorage
 SystemInterface
 RhinoMocks
+AutoFixture
+AutoFixture.AutoNSubstitute

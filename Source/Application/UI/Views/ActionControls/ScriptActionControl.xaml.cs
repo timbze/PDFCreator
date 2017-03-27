@@ -7,7 +7,6 @@ namespace pdfforge.PDFCreator.UI.Views.ActionControls
         public ScriptActionControl(ScriptActionViewModel viewModel) : base(viewModel)
         {
             InitializeComponent();
-            viewModel.Translator.Translate(this);
         }
     }
 }

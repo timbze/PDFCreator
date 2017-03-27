@@ -1,0 +1,541 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+
+msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgstr ""
+
+msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+
+msgid "The setup will be canceled."
+msgstr ""
+
+msgid "Do you want to cancel the setup?"
+msgstr ""
+
+msgid "The following applications have to be closed to proceed with the uninstallation:"
+msgstr ""
+
+msgid "Compact installation"
+msgstr ""
+
+msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+
+msgid "Custom installation"
+msgstr ""
+
+msgid "Donate to PDFCreator"
+msgstr ""
+
+msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
+msgstr ""
+
+msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+
+msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+
+msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
+msgstr ""
+
+msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
+msgstr ""
+
+msgid "PDFCreator download"
+msgstr ""
+
+msgid "Download the latest version..."
+msgstr ""
+
+msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
+msgstr ""
+
+msgid "Expert settings"
+msgstr ""
+
+msgid "Set installation directory and additional options"
+msgstr ""
+
+msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
+msgstr ""
+
+msgid "Please choose a printer name."
+msgstr ""
+
+msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
+msgstr ""
+
+msgid "There already exists a printer with this name. Please choose another name."
+msgstr ""
+
+msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
+msgstr ""
+
+msgid "For &all users"
+msgstr ""
+
+msgid "For the &current user only"
+msgstr ""
+
+msgid "Full installation"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Install printer"
+msgstr ""
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr ""
+
+msgid "Install printer driver"
+msgstr ""
+
+msgid "Install printer monitor"
+msgstr ""
+
+msgid "Install printer port"
+msgstr ""
+
+msgid "Offline activation instructions"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Please wait. Checking license key..."
+msgstr ""
+
+msgid "The activation is too old! Please renew your activation."
+msgstr ""
+
+msgid "Empty answer from license server!"
+msgstr ""
+
+msgid "Invalid answer from license server!"
+msgstr ""
+
+msgid "This version is not covered by your license key! Please renew your license on %1."
+msgstr ""
+
+msgid "No answer from license server!"
+msgstr ""
+
+msgid "An unknown error is occurred!"
+msgstr ""
+
+msgid "Wrong answer from license server!"
+msgstr ""
+
+msgid "The computer time seems to be incorrectly set! Please check your system time."
+msgstr ""
+
+msgid "License server answer not valid for this computer!"
+msgstr ""
+
+msgid "The license is not valid for the given product!"
+msgstr ""
+
+msgid "License key validation"
+msgstr ""
+
+msgid "Enter the valid license key"
+msgstr ""
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr ""
+
+msgid "An error occurred validating the license key!"
+msgstr ""
+
+msgid "Invalid license answer hash!"
+msgstr ""
+
+msgid "Invalid license key!"
+msgstr ""
+
+msgid "License key"
+msgstr ""
+
+msgid "Please enter the license key."
+msgstr ""
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr ""
+
+msgid "Licensee"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
+msgstr ""
+
+msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+
+msgid "Offline activation string:"
+msgstr ""
+
+msgid "Offline license check"
+msgstr ""
+
+msgid "License server answer:"
+msgstr ""
+
+msgid "The machine or the user is blocked!"
+msgstr ""
+
+msgid "The authorization is failed!"
+msgstr ""
+
+msgid "An invalid license key is provided!"
+msgstr ""
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "The product %1 does not exist!"
+msgstr ""
+
+msgid "The version %1 is not supported! Please use the latest version from here %2."
+msgstr ""
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr ""
+
+msgid "License agreement"
+msgstr ""
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr ""
+
+msgid "PDFCreator log file"
+msgstr ""
+
+msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+
+msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr ""
+
+msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+
+msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
+msgstr ""
+
+msgid "Other tasks:"
+msgstr ""
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr ""
+
+msgid "This patch is for an older application version. You cannot use this patch."
+msgstr ""
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr ""
+
+msgid "Edit pages"
+msgstr ""
+
+msgid "Edit texts and fonts"
+msgstr ""
+
+msgid "Split and merge"
+msgstr ""
+
+msgid "PDF to Word"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Convert"
+msgstr ""
+
+msgid "Edit & Insert"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Secure & Sign"
+msgstr ""
+
+msgid "Forms"
+msgstr ""
+
+msgid "Try out the new PDF Architect"
+msgstr ""
+
+msgid "A shortcut has been added to your desktop."
+msgstr ""
+
+msgid "Install PDF Architect with great free features"
+msgstr ""
+
+msgid "Rotate, move and delete pages"
+msgstr ""
+
+msgid "Merge multiple PDFs"
+msgstr ""
+
+msgid "Free features:"
+msgstr ""
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr ""
+
+msgid "New in PDF Architect {0}:"
+msgstr ""
+
+msgid "Automatic E-Sign workflows"
+msgstr ""
+
+msgid "Verify and remove signatures"
+msgstr ""
+
+msgid "Already installed"
+msgstr ""
+
+msgid "Automatic updates"
+msgstr ""
+
+msgid "Default application for PDF files"
+msgstr ""
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr ""
+
+msgid "Firefox integration"
+msgstr ""
+
+msgid "Internet Explorer integration"
+msgstr ""
+
+msgid "MS Outlook previewer integration"
+msgstr ""
+
+msgid "Windows Explorer integration"
+msgstr ""
+
+msgid "No thanks"
+msgstr ""
+
+msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
+msgstr ""
+
+msgid "PDFCreator setup"
+msgstr ""
+
+msgid "Setup is being prepared..."
+msgstr ""
+
+msgid "Printer"
+msgstr ""
+
+msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+
+msgid "Printer name"
+msgstr ""
+
+msgid "Choosing a printer name."
+msgstr ""
+
+msgid "Please choose a name for the printer."
+msgstr ""
+
+msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
+msgstr ""
+
+msgid "This process might take several minutes."
+msgstr ""
+
+msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
+msgstr ""
+
+msgid "application files"
+msgstr ""
+
+msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr ""
+
+msgid "Please restart your system first to continue setup."
+msgstr ""
+
+msgid "PDFCreator settings"
+msgstr ""
+
+msgid "Show help after setup"
+msgstr ""
+
+msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
+msgstr ""
+
+msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
+msgstr ""
+
+msgid "This version doesn't support the server mode. Do you want install this version anyway?"
+msgstr ""
+
+msgid "Delete all application settings?"
+msgstr ""
+
+msgid "Uninstall the printer with all its components."
+msgstr ""
+
+msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
+msgstr ""
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr ""
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr ""
+
+msgid "Bad request (400)"
+msgstr ""
+
+msgid "Access denied (401)"
+msgstr ""
+
+msgid "File not found (404)"
+msgstr ""
+
+msgid "Proxy authentication required (407)"
+msgstr ""
+
+msgid "Server internal error (500)"
+msgstr ""
+
+msgid "Bad gateway (502)"
+msgstr ""
+
+msgid "Service temporarily unavailable (503)"
+msgstr ""
+
+msgid "Cancelling download..."
+msgstr ""
+
+msgid "Cannot connect"
+msgstr ""
+
+msgid "Connecting..."
+msgstr ""
+
+msgid "Current file"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Download cancelled"
+msgstr ""
+
+msgid "Download complete"
+msgstr ""
+
+msgid "Download failed"
+msgstr ""
+
+msgid "Downloading..."
+msgstr ""
+
+msgid "Elapsed time:"
+msgstr ""
+
+msgid "File:"
+msgstr ""
+
+msgid "The following files were not downloaded:"
+msgstr ""
+
+msgid "Downloading additional files"
+msgstr ""
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "Getting file information..."
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "HTTP error %d"
+msgstr ""
+
+msgid "Ignore"
+msgstr ""
+
+msgid "Initializing..."
+msgstr ""
+
+msgid "KB"
+msgstr ""
+
+msgid "KB/s"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MB/s"
+msgstr ""
+
+msgid "Remaining time:"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
+msgstr ""
+
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
+msgstr ""
+
+msgid "Speed:"
+msgstr ""
+
+msgid "Starting download..."
+msgstr ""
+
+msgid "Status:"
+msgstr ""
+
+msgid "Total progress"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "%.2f of %.2f"
+msgstr ""
+
+msgid "Setup has finished installing [name] on your computer."
+msgstr ""
+

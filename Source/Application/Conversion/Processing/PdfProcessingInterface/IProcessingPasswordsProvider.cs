@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
 {

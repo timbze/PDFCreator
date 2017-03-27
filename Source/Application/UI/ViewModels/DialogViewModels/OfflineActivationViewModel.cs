@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
@@ -19,24 +19,38 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
         private readonly LicenseKeySyntaxChecker _licenseKeySyntaxChecker = new LicenseKeySyntaxChecker();
         private readonly IProcessStarter _processStarter;
         private readonly IUserGuideHelper _userGuideHelper;
-        private readonly IActivationHelper _activationHelper;
+        private readonly IOfflineActivator _offlineActivator;
+        private OfflineActivationViewModelTranslation _translation;
 
-        public OfflineActivationViewModel(IProcessStarter process, IUserGuideHelper userGuideHelper, IActivationHelper activationHelper, ITranslator translator)
+        public OfflineActivationViewModel(IProcessStarter process, IUserGuideHelper userGuideHelper, IOfflineActivator offlineActivator, OfflineActivationViewModelTranslation translation)
         {
             _processStarter = process;
             _userGuideHelper = userGuideHelper;
-            _activationHelper = activationHelper;
-            _invalidLicenseKeySyntaxMessage = translator.GetTranslation("OfflineActivationViewModel",
-                "InvalidLicenseKeySyntax");
+            _offlineActivator = offlineActivator;
+            Translation = translation;
+            _invalidLicenseKeySyntaxMessage = translation.InvalidLicenseKeySyntax;
 
             OkCommand = new DelegateCommand(OkCommandExecute, OkCommandCanExecute);
             OpenOfflineActivationUrlCommand = new DelegateCommand(OpenOfflineActivationUrlCommandExecute);
             ShowHelpCommand = new DelegateCommand<KeyEventArgs>(ShowHelpCommandExecute);
         }
 
+
+        public OfflineActivationViewModelTranslation Translation
+        {
+            get { return _translation; }
+            set
+            {
+                _translation = value;
+                RaisePropertyChanged(nameof(Translation));
+            }
+        }
+
         public DelegateCommand OkCommand { get; }
         public DelegateCommand OpenOfflineActivationUrlCommand { get; }
         public DelegateCommand<KeyEventArgs> ShowHelpCommand { get; }
+
+        public string OfflineActivationUrl => Urls.OfflineActivationUrl;
 
         public string LicenseServerAnswer
         {
@@ -69,7 +83,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
             get
             {
                 if (LicenseKeyIsValid)
-                    return _activationHelper.GetOfflineActivationString(LicenseKey.Trim());
+                    return _offlineActivator.BuildOfflineActivationString(LicenseKey.Trim());
 
                 return _invalidLicenseKeySyntaxMessage;
             }
@@ -90,7 +104,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
         {
             try
             {
-                _processStarter.Start(Urls.OfflineActivationUrl);
+                _processStarter.Start(OfflineActivationUrl);
             }
             catch (Exception)
             {

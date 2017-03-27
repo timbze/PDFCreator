@@ -1,8 +1,9 @@
 ﻿using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
+using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels;
 using pdfforge.PDFCreator.Utilities.Tokens;
@@ -13,14 +14,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
     {
         private readonly string _signatureText;
 
-        public EditEmailTextViewModel(ITranslator translator)
+        public EditEmailTextViewModel(EditEmailTextWindowTranslation translation, IMailSignatureHelper mailSignatureHelper, TokenHelper tokenHelper)
         {
-            Translator = translator;
-            var tokenHelper = new TokenHelper(translator);
+            Translation = translation;
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
             var tokens = tokenHelper.GetTokenListForEmail();
 
-            var mailSignatureHelper = new MailSignatureHelper(translator);
             _signatureText = mailSignatureHelper.ComposeMailSignature();
 
             SubjectTextViewModel = new TokenViewModel(
@@ -38,7 +37,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
 
         public TokenReplacer TokenReplacer { get; set; }
 
-        public ITranslator Translator { get; }
+        public EditEmailTextWindowTranslation Translation { get; }
 
         public TokenViewModel BodyTextViewModel { get; set; }
 

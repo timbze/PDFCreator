@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SystemInterface.IO;
 using NSubstitute;
@@ -9,11 +10,13 @@ using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Core.Services.Translation;
+using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
-using Arg = NSubstitute.Arg;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
 {
@@ -26,6 +29,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         private IPath _path;
         private ConversionProfile _profile;
         private IList<IInteraction> _interactions;
+        private IMailSignatureHelper _mailSignatureHelper;
+        private string _mailSignature = "___ " + Environment.NewLine + "Signature";
 
         [SetUp]
         public void Setup()
@@ -55,16 +60,20 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             _smtpAction = Substitute.For<ISmtpMailAction>();
             _smtpAction.Check(_profile, Arg.Any<Accounts>()).Returns(x => new ActionResult());
             _smtpAction.ProcessJob(Arg.Any<Job>()).Returns(x => new ActionResult());
+
+            _mailSignatureHelper = Substitute.For<IMailSignatureHelper>();
+            _mailSignatureHelper.ComposeMailSignature().Returns(_mailSignature);
         }
 
         private SmtpTestEmailAssistant BuildAssistant()
         {
-            return new SmtpTestEmailAssistant(new SectionNameTranslator(), _interactionInvoker, _file, _smtpAction, _path);
+            return new SmtpTestEmailAssistant(new SmtpSettingsAndActionControlTranslation(), _interactionInvoker, _file, _smtpAction, _path, _mailSignatureHelper, new ErrorCodeInterpreter(new TranslationFactory()));
         }
 
         [Test]
         public void WhenSuccessful_ShowsSuccessMessage()
         {
+            var translation = new SmtpSettingsAndActionControlTranslation();
             var assistant = BuildAssistant();
 
             assistant.SendTestMail(_profile, new Accounts());
@@ -74,8 +83,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             var messageInteraction =
                 _interactions.Where(x => x is MessageInteraction).Cast<MessageInteraction>().First();
 
-            Assert.AreEqual("SmtpEmailActionSettings\\SendTestMail", messageInteraction.Title);
-            Assert.AreEqual("SmtpEmailActionSettings\\TestMailSent", messageInteraction.Text);
+            Assert.AreEqual(translation.SendTestMail, messageInteraction.Title);
+            Assert.AreEqual(translation.GetTestMailSentFormattedTranslation(string.Empty), messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Info, messageInteraction.Icon);
         }
 
@@ -127,6 +136,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         [Test]
         public void WhenProfileInvalid_DisplaysErrorMessage()
         {
+            var translation = new SmtpSettingsAndActionControlTranslation();
             var expectedError = ErrorCode.Smtp_NoPasswordSpecified;
             _smtpAction.Check(_profile, Arg.Any<Accounts>()).Returns(x => new ActionResult(expectedError));
             var assistant = BuildAssistant();
@@ -138,8 +148,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
                 _interactions.Where(x => x is MessageInteraction).Cast<MessageInteraction>().First();
 
             var errorCodeInt = (int) expectedError;
-            Assert.AreEqual("SmtpEmailActionSettings\\SendTestMail", messageInteraction.Title);
-            Assert.AreEqual($"ErrorCodes\\{errorCodeInt}", messageInteraction.Text);
+            Assert.AreEqual(translation.SendTestMail, messageInteraction.Title);
+            Assert.AreEqual(TranslationAttribute.GetValue(expectedError), messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
         }
 
@@ -162,6 +172,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         [Test]
         public void WhenSendingMailFails_ShowsErrorMessage()
         {
+            var translation = new SmtpSettingsAndActionControlTranslation();
             var expectedError = ErrorCode.Smtp_AuthenticationDenied;
             _smtpAction.ProcessJob(Arg.Any<Job>()).Returns(new ActionResult(expectedError));
             var assistant = BuildAssistant();
@@ -172,9 +183,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             var messageInteraction =
                 _interactions.Where(x => x is MessageInteraction).Cast<MessageInteraction>().First();
 
-            var errorCodeInt = (int)expectedError;
-            Assert.AreEqual("SmtpEmailActionSettings\\SendTestMail", messageInteraction.Title);
-            Assert.AreEqual($"ErrorCodes\\{errorCodeInt}", messageInteraction.Text);
+            Assert.AreEqual(translation.SendTestMail, messageInteraction.Title);
+            Assert.AreEqual(TranslationAttribute.GetValue(expectedError), messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
         }
     }

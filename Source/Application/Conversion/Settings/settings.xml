@@ -155,6 +155,9 @@
           <value name="Enabled" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
             <comment>Enables the EmailClient action</comment>
           </value>
+          <value name="Html" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
+            <comment>Use html for E-mail body</comment>
+          </value>
           <value name="Recipients" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
             <comment>The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org</comment>
           </value>
@@ -176,6 +179,9 @@
           <value name="Enabled" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
             <comment>If true, this action will be executed</comment>
           </value>
+          <value name="Html" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
+            <comment>Use html for E-mail body</comment>
+          </value>
           <value name="Password" type="password" defaultvalue="">
             <comment>Password that is used to authenticate at the server</comment>
           </value>
@@ -184,9 +190,6 @@
           </value>
           <value name="Recipients" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
             <comment>The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org</comment>
-          </value>
-          <value name="SameTextAsClientMail" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
-            <comment>If true, the body of the EmailClient action will be used</comment>
           </value>
           <value name="Server" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
             <comment>Hostname or IP address of the SMTP server</comment>
@@ -379,9 +382,6 @@
           </value>
           <value name="DocumentView" type="value" datatype="Enum" enumname="DocumentView" defaultvalue="DocumentView.NoOutLineNoThumbnailImages" islist="False">
             <comment>Defines which controls will be opened in the reader. Valid values are: NoOutLineNoThumbnailImages,Outline, ThumbnailImages, FullScreen, ContentGroupPanel ,AttachmentsPanel</comment>
-          </value>
-          <value name="FastWebView" type="value" datatype="Bool" enumname="" defaultvalue="true" islist="False">
-            <comment>If true, the PDF will be linearized, which allows the first pages to be displayed even if the rest of the document still is loading.</comment>
           </value>
           <value name="PageOrientation" type="value" datatype="Enum" enumname="PageOrientation" defaultvalue="PageOrientation.Automatic" islist="False">
             <comment>Define how pages are automatically rotated. Valid values are: Automatic, Portrait, Landscape</comment>

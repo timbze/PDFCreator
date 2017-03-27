@@ -80,9 +80,9 @@ namespace pdfforge.PDFCreator.Core.Workflow
             }
             catch (ProcessingException ex)
             {
-                _logger.Error("Error " + ex.ErrorCode + ": " + ex.Message);
+                 _logger.Error("Error " + ex.ErrorCode + ": " + ex.Message);
                 ErrorNotifier.Notify(new ActionResult(ex.ErrorCode));
-                _workflowResult = WorkflowResult.Error;
+                                  _workflowResult = WorkflowResult.Error;
             }
             catch (ManagePrintJobsException)
             {

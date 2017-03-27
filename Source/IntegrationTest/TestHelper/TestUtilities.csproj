@@ -55,6 +55,8 @@
     <Compile Include="IntegrationTestBootstrapper.cs" />
     <Compile Include="PaketGhostscriptDiscovery.cs" />
     <Compile Include="ParameterHelper.cs" />
+    <Compile Include="PdfReaderHelper.cs" />
+    <Compile Include="PdfVersionTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +132,9 @@
     <None Include="app.config" />
     <None Include="paket.references" />
     <None Include="pdfforge.snk" />
+    <None Include="TestFiles\PDFCreatorTestpagePDFA1b.pdf" />
+    <None Include="TestFiles\PDFCreatorTestpagePDFA2b.pdf" />
+    <None Include="TestFiles\Signature\CertificationFileP12.p12" />
     <None Include="TestFiles\FourRotatingPDFCreatorTestpagesPDF.pdf" />
     <None Include="TestFiles\PageRotation0PDF.pdf" />
     <None Include="TestFiles\PageRotation180PDF.pdf" />
@@ -145,11 +150,10 @@
     <None Include="TestFiles\EmptyPagePS.ps" />
     <None Include="TestFiles\LandscapePagePS.ps" />
     <None Include="TestFiles\PDFCreatorTestpagePDF.pdf" />
-    <None Include="TestFiles\PDFCreatorTestpagePDFA.pdf" />
     <None Include="TestFiles\PDFCreatorTestpagePS.ps" />
     <None Include="TestFiles\PortraitPagePS.ps" />
     <None Include="TestFiles\ScriptCopyFilesToDirectoryCMD.cmd" />
-    <None Include="TestFiles\Signature\CertificationFileP12.p12" />
+    <None Include="TestFiles\Signature\CertificationFile_ExpiredP12.p12" />
     <None Include="TestFiles\SixEmptyPages.Pdf" />
     <None Include="TestFiles\SixEmptyPagesAttachment3PagesPDF.pdf" />
     <None Include="TestFiles\ThreePDFCreatorTestpagesPDF.pdf" />

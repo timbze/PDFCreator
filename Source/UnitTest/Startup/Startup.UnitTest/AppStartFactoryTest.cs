@@ -1,5 +1,4 @@
-﻿using SystemInterface;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Controller;
@@ -8,7 +7,6 @@ using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
-using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Utilities;
 
@@ -35,6 +33,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _resolver.ResolveAppStart<NewPdfJobStart>().Returns(x => new NewPdfJobStart(null, null, starter, null, null));
             _resolver.ResolveAppStart<NewPrintJobStart>().Returns(x => new NewPrintJobStart(null, null, null, starter, null));
             _resolver.ResolveAppStart<InitializeDefaultSettingsStart>().Returns(x => new InitializeDefaultSettingsStart(null, null, null, Substitute.For<IInstallationPathProvider>(), Substitute.For<IDataStorageFactory>()));
+            _resolver.ResolveAppStart<StoreLicenseForAllUsersStart>().Returns(x => new StoreLicenseForAllUsersStart(null, null, new InstallationPathProvider("", "", "")));
 
             // TODO: Add tests of thr Run() method as it is testable now
         }
@@ -385,6 +384,21 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             appStartFactory.CreateApplicationStart(args);
 
             _resolver.Received().ResolveAppStart<StoreLicenseForAllUsersStart>();
+        }
+
+        [Test]
+        public void Called_WithStoreLicenseForAllUsersWithLicenseServerCode_AppStartContainsCode()
+        {
+            var code = "abcdefg";
+            var licenseKey = "MY-KEY";
+
+            string[] args = { @"/StoreLicenseForAllUsers", @"/LicenseServerCode=" + code, @"/LicenseKey=" + licenseKey };
+
+            var appStartFactory = BuildAppStartFactory();
+            var appStart = (StoreLicenseForAllUsersStart) appStartFactory.CreateApplicationStart(args);
+
+            Assert.AreEqual(code, appStart.LicenseServerCode);
+            Assert.AreEqual(licenseKey, appStart.LicenseKey);
         }
     }
 }

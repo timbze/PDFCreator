@@ -1,5 +1,4 @@
 NLog
-DynamicTranslator
 SystemWrapper
 SystemInterface
 SimpleInjector

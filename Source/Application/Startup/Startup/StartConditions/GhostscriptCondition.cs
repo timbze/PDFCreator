@@ -1,5 +1,5 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.PDFCreator.Conversion.Ghostscript;
+﻿using pdfforge.PDFCreator.Conversion.Ghostscript;
+using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
@@ -7,18 +7,18 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
     public class GhostscriptCondition : IStartupCondition
     {
         private readonly IGhostscriptDiscovery _ghostscriptDiscovery;
-        private readonly ITranslator _translator;
+        private readonly StartupTranslation _translation;
 
-        public GhostscriptCondition(IGhostscriptDiscovery ghostscriptDiscovery, ITranslator translator)
+        public GhostscriptCondition(IGhostscriptDiscovery ghostscriptDiscovery, StartupTranslation translation)
         {
             _ghostscriptDiscovery = ghostscriptDiscovery;
-            _translator = translator;
+            _translation = translation;
         }
 
         public StartupConditionResult Check()
         {
             if (!GhoscriptIsInstalled())
-                return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.GhostScriptNotFound, _translator.GetTranslation("Startup", "NoSupportedGSFound"));
+                return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.GhostScriptNotFound, _translation.NoSupportedGSFound);
 
             return StartupConditionResult.BuildSuccess();
         }

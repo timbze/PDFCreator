@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Dialogs
@@ -9,7 +8,7 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
     {
         private readonly SignaturePasswordViewModel _viewModel;
 
-        public SignaturePasswordWindow(SignaturePasswordViewModel viewModel, ITranslator translator)
+        public SignaturePasswordWindow(SignaturePasswordViewModel viewModel)
         {
             _viewModel = viewModel;
 
@@ -19,8 +18,6 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
             DataContext = viewModel;
 
             InitializeComponent();
-
-            translator.Translate(this);
 
             // As password boxes do not allow bindings, we need to update it manually, when the password was set in the interaction
             viewModel.PropertyChanged += (sender, args) =>

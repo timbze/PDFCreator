@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
@@ -21,20 +21,23 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         private readonly IUserGuideHelper _userGuideHelper;
         private readonly IVersionHelper _versionHelper;
         private readonly ApplicationNameProvider _applicationNameProvider;
+        private readonly ITranslationFactory _translationFactory;
         private bool _applicationSettingsEnabled;
 
         public MainWindowViewModel(ISettingsManager settingsManager, IInteractionInvoker interactionInvoker, IUserGuideHelper userGuideHelper, 
-             IVersionHelper versionHelper, DragAndDropEventHandler dragAndDrop, WelcomeCommand welcomeCommand, ApplicationNameProvider applicationNameProvider)
+             IVersionHelper versionHelper, DragAndDropEventHandler dragAndDrop, WelcomeCommand welcomeCommand, ApplicationNameProvider applicationNameProvider, MainWindowTranslation mainWindowTranslation, ITranslationFactory translationFactory)
         {
             _settingsManager = settingsManager;
             _interactionInvoker = interactionInvoker;
             _userGuideHelper = userGuideHelper;
             _versionHelper = versionHelper;
             _applicationNameProvider = applicationNameProvider;
+            _translationFactory = translationFactory;
 
             ApplicationSettingsCommand = new DelegateCommand(ExecuteApplicationSettingsCommand);
             ProfileSettingsCommand = new DelegateCommand(ExecuteProfileSettings);
             WelcomeCommand = welcomeCommand;
+            Translation = mainWindowTranslation;
             AboutWindowCommand = new DelegateCommand(ExecuteAboutWindow);
             HelpCommand = new DelegateCommand<KeyEventArgs>(ExecuteHelpCommand);
 
@@ -62,6 +65,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         public ICommand AboutWindowCommand { get; private set; }
 
         public ICommand WelcomeCommand { get; private set; }
+        public MainWindowTranslation Translation { get; private set; }
 
         public ICommand HelpCommand { get; private set; }
 
@@ -70,8 +74,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         public ICommand DragDropCommand { get; }
 
         public string ApplicationNameText => _applicationNameProvider.ApplicationName + " " + _versionHelper.FormatWithTwoDigits();
-
-        public event EventHandler TranslationChanged;
 
         private void ExecuteHelpCommand(KeyEventArgs e)
         {
@@ -111,7 +113,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
                 _settingsManager.ApplyAndSaveSettings(interaction.Settings);
             }
 
-            TranslationChanged?.Invoke(this, new EventArgs());
+            Translation = _translationFactory.CreateTranslation<MainWindowTranslation>();
+            RaisePropertyChanged(nameof(Translation));
 
             LoggingHelper.ChangeLogLevel(interaction.Settings.ApplicationSettings.LoggingLevel);
         }

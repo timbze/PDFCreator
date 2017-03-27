@@ -3,10 +3,8 @@ using System.IO;
 using System.Net;
 using FtpLib;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Actions;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Editions.PDFCreator;
 using PDFCreator.TestUtilities;
 using SimpleInjector;
 

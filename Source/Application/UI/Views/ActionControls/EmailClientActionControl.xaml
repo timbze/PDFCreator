@@ -12,17 +12,17 @@
 
     <StackPanel>
         <Label>
-            <TextBlock Name="RecipientsText">Recipients:</TextBlock>
+            <TextBlock Text="{Binding Translation.RecipientsText}"></TextBlock>
         </Label>
-        <TextBox Name="RecipientsTextBox" Text="{Binding CurrentProfile.EmailClientSettings.Recipients}" />
+        <TextBox  Text="{Binding CurrentProfile.EmailClientSettings.Recipients}" />
         <Label>
-            <TextBlock Name="MultipleRecipientsHintText" Margin="0 -3 0 0" TextWrapping="Wrap">Multiple recipients are separated by commas</TextBlock>
+            <TextBlock Text="{Binding Translation.MultipleRecipientsHintText}" Margin="0 -3 0 0" TextWrapping="Wrap"></TextBlock>
         </Label>
         <Button Margin="0 10 0 0" Padding="5" Command="{Binding EditEmailTextCommand}">
-            <TextBlock Name="EditEmailButtonText">Edit E-Mail Text</TextBlock>
+            <TextBlock Text="{Binding Translation.EditEmailButtonText}"></TextBlock>
         </Button>
         <Button Padding="5" Margin="0 20 0 0" Command="{Binding EmailClientTestCommand}">
-            <TextBlock Name="CheckMailClientButtonText"> Check E-Mail Client</TextBlock>
+            <TextBlock Text="{Binding Translation.CheckMailClientButtonText}"> </TextBlock>
         </Button>
     </StackPanel>
 </actionViewModels:ActionControl>

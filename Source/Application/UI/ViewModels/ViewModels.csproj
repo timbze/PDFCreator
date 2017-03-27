@@ -45,6 +45,9 @@
     <None Include="Images\donate.png" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SimpleInjector">
+      <HintPath>..\..\..\..\packages\SimpleInjector\lib\net40-client\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -72,26 +75,87 @@
     <Compile Include="Assistants\PrintFileAssistant.cs" />
     <Compile Include="Assistants\RepairPrinterAssistant.cs" />
     <Compile Include="Assistants\RepairSpoolFolderAssistant.cs" />
+    <Compile Include="Assistants\Translations\PrinterActionsAssistantTranslation.cs" />
+    <Compile Include="Assistants\Translations\PrintFilesTranslation.cs" />
     <Compile Include="Assistants\UacAssistant.cs" />
     <Compile Include="Assistants\Update\ApplicationVersion.cs" />
     <Compile Include="Assistants\Update\DisabledUpdateAssistant.cs" />
     <Compile Include="Assistants\Update\UpdateAssistant.cs" />
     <Compile Include="Assistants\Update\UpdateInformationProvider.cs" />
     <Compile Include="Assistants\Update\UpdateLauncher.cs" />
+    <Compile Include="Converter\EnumToDescriptionConverter.cs" />
     <Compile Include="DialogViewModels\DropboxAuthenticationWindowViewModel.cs" />
+    <Compile Include="DialogViewModels\DropboxSharedLinksViewModel.cs" />
+    <Compile Include="DialogViewModels\Translations\EncryptionPasswordsWindowTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\InputBoxWindowTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\MessageWindowTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\OfflineActivationViewModelTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\SignaturePasswordWindowTranslation.cs" />
     <Compile Include="DialogViewModels\UpdateAvailableViewModel.cs" />
     <Compile Include="Helper\IPlusHintHelper.cs" />
+    <Compile Include="Helper\MailSignatureHelperLicensed.cs" />
     <Compile Include="Helper\PlusHintHelper.cs" />
     <Compile Include="Helper\PlusHintHelperDisabled.cs" />
     <Compile Include="MainWindowThreadLauncher.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SettingsLoader.cs" />
     <Compile Include="SettingsManager.cs" />
+    <Compile Include="WindowViewModels\Translations\AboutWindowTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\ActionsTabTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\ApplicationSettingsWindowTranslation.cs" />
+    <Compile Include="Translations\ApplicationTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\AttachmentSettingsAndActionTranslation.cs" />
+    <Compile Include="Translations\AutosaveTabTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\BackgroundSettingsAndActionTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\CoverSettingsAndActionTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\DefectiveProfilesWindowTranslation.cs" />
+    <Compile Include="Translations\DocumentTabTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\DropboxAuthenticationWindowTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\DropboxSettingsAndActionTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\DropboxSharedLinksWindowTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\EditEmailTextWindowTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\EmailClientSettingsAndActionTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\EmailSmtpActionControlTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\FtpActionSettingsAndActionTranslation.cs" />
+    <Compile Include="Translations\ImageFormatsTabTranslation.cs" />
+    <Compile Include="Translations\InteractiveWorkflowTranslation.cs" />
+    <Compile Include="Translations\MailSignatureHelperTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\MainWindowTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\ManagePrintJobsWindowTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\OpenViewerSettingsAndActionTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\PasswordWindowTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\PlusHintViewModelTranslation.cs" />
+    <Compile Include="Translations\PrintActionSettingsAndActionTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\PrintJobViewModelTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\ProfileSettingsWindowTranslation.cs" />
+    <Compile Include="Translations\SaveTabTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\ScriptActionSettingsAndActionTranslation.cs" />
+    <Compile Include="Translations\TokenPlaceHoldersTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\RecommendPdfArchitectWindowTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\StoreLicenseForAllUsersWindowTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\UpdateDownloadWindowTranslation.cs" />
+    <Compile Include="DialogViewModels\Translations\UpdateManagerTranslation.cs" />
+    <Compile Include="ActionViewModels\Translations\UserTokenActionSettingsAndActionTranslation.cs" />
+    <Compile Include="WindowViewModels\Translations\WelcomeWindowTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\DebugTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\GeneralTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\LicenseTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\PdfArchitectTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\PrinterTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ApplicationSettings\Translations\TitleTabTranslation.cs" />
+    <Compile Include="Translations\PdfTabTranslation.cs" />
+    <Compile Include="UserControlViewModels\ProfileSettings\SecurityOptionsProvider.cs" />
     <Compile Include="WindowViewModels\ButtonDisplayOptions.cs" />
     <Compile Include="WindowViewModels\LicenseOptionProvider.cs" />
     <Compile Include="WindowViewModels\StoreLicenseForAllUsersWindowViewModel.cs" />
     <Compile Include="WorkflowQuery\AutosaveTargetFileNameComposer.cs" />
     <Compile Include="WorkflowQuery\InteractiveConversionProgress.cs" />
     <Compile Include="WorkflowQuery\InteractiveFileNameQuery.cs" />
+    <Compile Include="WorkflowQuery\DropboxSharedLinksProvider.cs" />
     <Compile Include="WorkflowQuery\InteractiveFtpPasswordProvider.cs" />
     <Compile Include="WorkflowQuery\InteractiveProcessingPasswordsProvider.cs" />
     <Compile Include="WorkflowQuery\InteractiveSmtpPasswordProvider.cs" />
@@ -120,18 +184,13 @@
     <Compile Include="Assistants\SmtpTestEmailAssistant.cs" />
     <Compile Include="Helper\FontHelper.cs" />
     <Compile Include="Helper\HelpTopic.cs" />
-    <Compile Include="Helper\MailSignatureHelper.cs" />
+    <Compile Include="Helper\MailSignatureHelperFreeVersion.cs" />
     <Compile Include="Helper\OpenFileHelper.cs" />
     <Compile Include="Helper\TokenHelper.cs" />
     <Compile Include="Assistants\Update\UpdateEventArgs.cs" />
     <Compile Include="Helper\UserGuideHelper.cs" />
     <Compile Include="ManagePrintJobExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="UserControlViewModels\ApplicationSettings\ApplicationSettingsViewModelBundle.cs" />
     <Compile Include="UserControlViewModels\ApplicationSettings\PdfArchitectTabViewModel.cs" />
     <Compile Include="UserControlViewModels\TokenViewModel.cs" />
@@ -215,10 +274,6 @@
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Conversion\Mail\Mail.csproj">
-      <Project>{884d14eb-6d78-41d8-b022-968209dd6ce4}</Project>
-      <Name>Mail</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Services\Services.csproj">
       <Project>{c6058628-42b2-4cf6-a4be-622ad45f6e42}</Project>
       <Name>Services</Name>
@@ -243,8 +298,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Choose>
@@ -261,8 +316,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="DynamicTranslator">
-          <HintPath>..\..\..\..\packages\DynamicTranslator\lib\DynamicTranslator.dll</HintPath>
+        <Reference Include="HtmlAgilityPack">
+          <HintPath>..\..\..\..\packages\HtmlAgilityPack\lib\Net40\HtmlAgilityPack.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -272,8 +327,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
       <ItemGroup>
-        <Reference Include="LicenseValidator">
-          <HintPath>..\..\..\..\packages\LicenseValidator\lib\LicenseValidator.dll</HintPath>
+        <Reference Include="LicenseValidator.Interface">
+          <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -296,6 +351,28 @@
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Optional">
+          <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net40\Optional.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="pdfforge.Mail">
+          <HintPath>..\..\..\..\packages\pdfforge.Mail\lib\pdfforge.Mail.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -334,6 +411,17 @@
       <ItemGroup>
         <Reference Include="SystemWrapper">
           <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+      <ItemGroup>
+        <Reference Include="Translatable">
+          <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

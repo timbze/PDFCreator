@@ -1,5 +1,5 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
@@ -8,17 +8,17 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
 
-        public AttatchmentActionViewModel(ITranslator translator, IOpenFileInteractionHelper openFileInteractionHelper)
+        public AttatchmentActionViewModel(IOpenFileInteractionHelper openFileInteractionHelper, AttachmentSettingsAndActionTranslation translations)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
-            Translator = translator;
+            Translation = translations;
 
-            DisplayName = Translator.GetTranslation("AttachmentSettings", "DisplayName");
-            Description = Translator.GetTranslation("AttachmentSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
             SelectAttatchmenCommand = new DelegateCommand(SelectAttatchmentExecute);
         }
 
-        public ITranslator Translator { get; }
+        public AttachmentSettingsAndActionTranslation Translation { get; }
 
         public DelegateCommand SelectAttatchmenCommand { get; set; }
 
@@ -34,10 +34,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void SelectAttatchmentExecute(object obj)
         {
-            var title = Translator.GetTranslation("AttachmentSettings", "SelectAttachmentFile");
-            var filter = Translator.GetTranslation("AttachmentSettings", "PDFFiles")
+            var title = Translation.SelectAttachmentFile;
+            var filter = Translation.PDFFiles
                          + @" (*.pdf)|*.pdf|"
-                         + Translator.GetTranslation("AttachmentSettings", "AllFiles")
+                         + Translation.AllFiles
                          + @" (*.*)|*.*";
 
             CurrentProfile.AttachmentPage.File = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.AttachmentPage.File, title, filter);

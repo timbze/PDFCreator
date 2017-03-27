@@ -28,31 +28,28 @@
         </Style>
     </actionViewModels:ActionControl.Resources>
     <StackPanel Margin="5,5,5,5" VerticalAlignment="Top" HorizontalAlignment="Left">
-        <CheckBox Name="OpenWithArchitectCheckBox" Command="{Binding OpenWithArchictectCommand}"
-                  IsChecked="{Binding CurrentProfile.OpenWithPdfArchitect, Mode=TwoWay}">
-            Open PDF files with PDF Architect
+        <CheckBox Command="{Binding OpenWithArchictectCommand}"
+                  IsChecked="{Binding CurrentProfile.OpenWithPdfArchitect, Mode=TwoWay}" Content="{Binding Translation.OpenWithArchitectCheckBoxContent}">
         </CheckBox>
         <StackPanel Margin="5,20,5,0"
                     Visibility="{Binding Path=ShowArchitect, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock FontWeight="ExtraBlack" FontSize="15" HorizontalAlignment="Center">PDF Architect</TextBlock>
-                <TextBlock Margin="0,5,0,0" Name="PdfArchitectIntroText" TextWrapping="Wrap" FontSize="14"
+                <TextBlock Margin="0,5,0,0" Text="{Binding Translation.PdfArchitectIntroText}" TextWrapping="Wrap" FontSize="14"
                            FontWeight="Bold">
-                    Our full-featured PDF Editor
                 </TextBlock>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
-                <TextBlock Name="PdfArchitectFreeText" FontWeight="Bold">FREE features include:</TextBlock>
-                <TextBlock Name="PdfArchitectSplitAndMergeText" TextWrapping="Wrap">Split and merge PDFs</TextBlock>
-                <TextBlock Name="PdfArchitectViewAndPrintText" TextWrapping="Wrap">View and print PDFs</TextBlock>
-                <TextBlock Name="PdfArchitectAddModulesText" TextWrapping="Wrap" Margin="0,10,0,0" FontWeight="Bold">Obtain powerful modules to do more like</TextBlock>
-                <TextBlock Name="PdfArchitectEditText" TextWrapping="Wrap">Edit PDFs like with a word processor</TextBlock>
-                <TextBlock Name="PdfArchitectConvertBackText" TextWrapping="Wrap">Convert PDFs to Word, Excel and more</TextBlock>
-                <TextBlock Name="PdfArchitectOcrText" TextWrapping="Wrap">Text recognition (OCR)</TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectFreeText}"  FontWeight="Bold"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectSplitAndMergeText}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectViewAndPrintText}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectAddModulesText}" TextWrapping="Wrap" Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectEditText}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectConvertBackText}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text ="{Binding Translation.PdfArchitectOcrText}" TextWrapping="Wrap"></TextBlock>
             </StackPanel>
-            <Button HorizontalAlignment="Center" Padding="10" Margin="15" MinWidth="150" Name="GetPdfArchitectButton"
+            <Button HorizontalAlignment="Center" Padding="10" Margin="15" MinWidth="150" Content ="{Binding Translation.GetPdfArchitectButtonContent}"
                     Command="{Binding GetArchictectCommand}">
-                More on PDF Architect
             </Button>
         </StackPanel>
     </StackPanel>

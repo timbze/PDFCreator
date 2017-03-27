@@ -1,52 +1,66 @@
-﻿using System.ComponentModel;
-using SystemInterface.IO;
+﻿using SystemInterface.IO;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
-using Rhino.Mocks;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.ApplicationSettings
 {
     [TestFixture]
     public class PdfTabViewModelTest
     {
+        private IPdfProcessor _pdfProcessor;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _pdfProcessor = Substitute.For<IPdfProcessor>();
+        }
         private PdfTabViewModel BuildViewModel()
         {
-            return new PdfTabViewModel(Substitute.For<ITranslator>(), Substitute.For<IInteractionInvoker>(), Substitute.For<IFile>(), Substitute.For<IOpenFileInteractionHelper>());
-        }
-
-        [TestCase(EncryptionLevel.Rc40Bit, Result = "1.4")]
-        [TestCase(EncryptionLevel.Rc128Bit, Result = "1.4")]
-        [TestCase(EncryptionLevel.Aes128Bit, Result = "1.6")]
-        public string PdfVersion_WithEncryptionEnabled_ReturnsExpectedValue(EncryptionLevel encryptionLevel)
-        {
-            var profile = new ConversionProfile();
-            profile.PdfSettings.Security.Enabled = true;
-            profile.PdfSettings.Security.EncryptionLevel = encryptionLevel;
-
-            var pdfTabViewModel = BuildViewModel();
-            pdfTabViewModel.CurrentProfile = profile;
-
-            return pdfTabViewModel.PdfVersion;
+            return new PdfTabViewModel(new PdfTabTranslation(), Substitute.For<IInteractionInvoker>(), Substitute.For<IFile>(), 
+                Substitute.For<IOpenFileInteractionHelper>(), new EditionHintOptionProvider(false), 
+                _pdfProcessor, Substitute.For<IUserGuideHelper>());
         }
 
         [Test]
-        public void Aes128BitEncryption_BooleanPropertiesToEnumTest()
+        public void PdfVersion_IsDeterminedByPDFProcessor()
+        {
+            var profile = new ConversionProfile();
+            _pdfProcessor.DeterminePdfVersion(profile).Returns("1.4 from PDFProcessor");
+            var pdfTabViewModel = BuildViewModel();
+            pdfTabViewModel.CurrentProfile = profile;
+
+            Assert.AreEqual("1.4 from PDFProcessor", pdfTabViewModel.PdfVersion);
+        }
+
+        [Test]
+        public void PdfVersion_CurrentProfileIsNull_Returns1dot4()
+        {
+            _pdfProcessor.DeterminePdfVersion(Arg.Any<ConversionProfile>()).Returns("Not 1.4!!");
+            var pdfTabViewModel = BuildViewModel();
+            pdfTabViewModel.CurrentProfile = null;
+
+            Assert.AreEqual("1.4", pdfTabViewModel.PdfVersion);
+        }
+
+        [Test]
+        public void Aes256BitEncryption_BooleanPropertiesToEnumTest()
         {
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
 
             pdfTabViewModel.HighEncryptionEnabled = true;
 
-            Assert.AreEqual(EncryptionLevel.Aes128Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "HighEncryptionEnabled but EncryptionLevel is not High128BitAes");
-            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled, "LowEncryptionEnabled true for 128BitAes encryption");
-            Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled, "MediumEncryptionEnabled true for 128BitAes encryption");
+            Assert.AreEqual(EncryptionLevel.Aes256Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "HighEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled, "LowEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled, "MediumEncryptionEnabled");
         }
 
         [Test]
@@ -93,11 +107,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Aes128Bit;
 
             Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled,
-                "LowEncryptionEnabled true for 128BitAes encryption");
-            Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled,
-                "MediumEncryptionEnabled true for 128BitAes encryption");
-            Assert.IsTrue(pdfTabViewModel.HighEncryptionEnabled,
-                "HighEncryptionEnabled false for 128BitAes encryption");
+                "LowEncryptionEnabled");
+            Assert.IsTrue(pdfTabViewModel.MediumEncryptionEnabled,
+                "MediumEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled,
+                "HighEncryptionEnabled");
         }
 
         [Test]
@@ -118,9 +132,9 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
 
-            var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>();
+            //var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            pdfTabViewModel.PropertyChanged += eventStub.OnEventRaised;
+            //pdfTabViewModel.PropertyChanged += Raise.EventWith(new object(), new PropertyChangedEventArgs()); ;//eventStub.OnEventRaised);
 
             var lowEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "LowEncryptionEnabled");
             var mediumEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "MediumEncryptionEnabled");
@@ -146,39 +160,16 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         }
 
         [Test]
-        public void PdfVersion_WhenProfileIsNull_Returns1point4()
-        {
-            var pdfTabViewModel = BuildViewModel();
-            pdfTabViewModel.CurrentProfile = null;
-
-            var version = pdfTabViewModel.PdfVersion;
-
-            Assert.AreEqual("1.4", version);
-        }
-
-        [Test]
-        public void PdfVersion_WithoutEncryption_Returns1point4()
-        {
-            var profile = new ConversionProfile();
-            var pdfTabViewModel = BuildViewModel();
-            pdfTabViewModel.CurrentProfile = profile;
-
-            var version = pdfTabViewModel.PdfVersion;
-
-            Assert.AreEqual("1.4", version);
-        }
-
-        [Test]
-        public void Rc128BitEncryption_BooleanPropertiesToEnumTest()
+        public void Aes128BitEncryption_BooleanPropertiesToEnumTest()
         {
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
 
             pdfTabViewModel.MediumEncryptionEnabled = true;
 
-            Assert.AreEqual(EncryptionLevel.Rc128Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "MediumEncryptionEnabled but EncryptionLevel is not Medium128Bit");
-            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled, "LowEncryptionEnabled true for 128Bit encryption");
-            Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled, "HighEncryptionEnabled true for 128Bit encryption");
+            Assert.AreEqual(EncryptionLevel.Aes128Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "MediumEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled, "LowEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled, "HighEncryptionEnabled");
         }
 
         [Test]
@@ -224,12 +215,12 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Rc128Bit;
 
-            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled,
-                "LowEncryptionEnabled true for 128Bit encryption");
-            Assert.IsTrue(pdfTabViewModel.MediumEncryptionEnabled,
-                "MediumEncryptionEnabled false for 128Bit encryption");
+            Assert.IsTrue(pdfTabViewModel.LowEncryptionEnabled,
+                "LowEncryptionEnabled");
+            Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled,
+                "MediumEncryptionEnabled");
             Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled,
-                "HighEncryptionEnabled true for 128Bit encryption");
+                "HighEncryptionEnabled");
         }
 
         [Test]
@@ -250,9 +241,9 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
 
-            var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>();
+            //var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>();
 
-            pdfTabViewModel.PropertyChanged += eventStub.OnEventRaised;
+            //pdfTabViewModel.PropertyChanged += eventStub.OnEventRaised;
 
             var lowEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "LowEncryptionEnabled");
             var mediumEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "MediumEncryptionEnabled");
@@ -285,7 +276,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             pdfTabViewModel.LowEncryptionEnabled = true;
 
-            Assert.AreEqual(EncryptionLevel.Rc40Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "LowEncryptionEnabled but EncryptionLevel is not Low40Bit");
+            Assert.AreEqual(EncryptionLevel.Rc128Bit, pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel, "LowEncryptionEnabled but EncryptionLevel is not Rc128Bit");
             Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled, "MediumEncryptionEnabled true for low encryption");
             Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled, "HighEncryptionEnabled true for low encryption");
         }
@@ -326,19 +317,19 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         }
 
         [Test]
-        public void Rc40BitEncryption_EnumToBooleanPropertiesTest()
+        public void Aes256BitEncryption_EnumToBooleanPropertiesTest()
         {
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
 
-            pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Rc40Bit;
+            pdfTabViewModel.CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Aes256Bit;
 
-            Assert.IsTrue(pdfTabViewModel.LowEncryptionEnabled,
-                "LowEncryptionEnabled false for low encryption");
+            Assert.IsFalse(pdfTabViewModel.LowEncryptionEnabled,
+                "LowEncryptionEnabled");
             Assert.IsFalse(pdfTabViewModel.MediumEncryptionEnabled,
-                "MediumEncryptionEnabled true for low encryption");
-            Assert.IsFalse(pdfTabViewModel.HighEncryptionEnabled,
-                "HighEncryptionEnabled true for low encryption");
+                "MediumEncryptionEnabled");
+            Assert.IsTrue(pdfTabViewModel.HighEncryptionEnabled,
+                "HighEncryptionEnabled");
         }
 
         [Test]
@@ -358,10 +349,6 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         {
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
-
-            var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>();
-
-            pdfTabViewModel.PropertyChanged += eventStub.OnEventRaised;
 
             var lowEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "LowEncryptionEnabled");
             var mediumEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "MediumEncryptionEnabled");
@@ -391,10 +378,6 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         {
             var pdfTabViewModel = BuildViewModel();
             pdfTabViewModel.CurrentProfile = new ConversionProfile();
-
-            var eventStub = MockRepository.GenerateStub<IEventHandler<PropertyChangedEventArgs>>();
-
-            pdfTabViewModel.PropertyChanged += eventStub.OnEventRaised;
 
             var lowEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "LowEncryptionEnabled");
             var mediumEncryptionEnabledPropertyListener = new PropertyChangedListenerMock(pdfTabViewModel, "MediumEncryptionEnabled");

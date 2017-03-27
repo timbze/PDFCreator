@@ -34,9 +34,23 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             }
         }
 
+        private Tuple<int, string> GetPdfAConformance(OutputFormat outputFormat)
+        {
+            if (!outputFormat.ToString().ToUpper().StartsWith("PDFA"))
+                return null;
+
+            switch (outputFormat)
+            {
+                case OutputFormat.PdfA1B: return Tuple.Create(1, "B");
+                case OutputFormat.PdfA2B: return Tuple.Create(2, "B");
+                default: throw new NotImplementedException($"Determining conformance for {outputFormat} was not implemented");
+            }
+        }
+
         private void DoUpdateXmpMetadata(PdfStamper stamper, ConversionProfile profile)
         {
-            if (profile.OutputFormat != OutputFormat.PdfA2B)
+            if ((profile.OutputFormat != OutputFormat.PdfA1B)
+             && (profile.OutputFormat != OutputFormat.PdfA2B))
                 return;
 
             Logger.Debug("Start updateing XMP Metadata for PDF/A");
@@ -89,15 +103,17 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             if (reader.Info.ContainsKey("Creator"))
                 ms.Creator = reader.Info["Creator"];
 
-            string xmlKeywords = "", xmlKeywords2 = "";
+            string /*xmlKeywords = "",*/ xmlKeywords2 = "";
             if (reader.Info.ContainsKey("Keywords"))
             {
                 ms.Keywords = reader.Info["Keywords"];
+                /*
                 xmlKeywords = "    <dc:subject>\n" +
                               "     <rdf:Bag>\n" +
                               "      <rdf:li>" + ms.Keywords + "</rdf:li>\n" +
                               "     </rdf:Bag>\n" +
                               "    </dc:subject>\n";
+                */
                 xmlKeywords2 = "    <pdf:Keywords>" + ms.Keywords + "</pdf:Keywords>\n";
             }
 
@@ -129,10 +145,12 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                            "    </dc:title>\n";
             }
 
+            var conformance = GetPdfAConformance(profile.OutputFormat);
+
             var metadataStr = "<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>\n" +
                               " <x:xmpmeta xmlns:x='adobe:ns:meta/' x:xmptk='Adobe XMP Core 4.2.1-c041 52.342996, 2008/05/07-20:48:00'>\n" +
                               "  <rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n" +
-                              "   <rdf:Description rdf:about='' xmlns:pdfaid='http://www.aiim.org/pdfa/ns/id/'>\n" +
+                              "   <rdf:Description rdf:about='' xmlns:pdfaid='http://www.aiim.org/pdfa/ns/id/' pdfaid:part='" + conformance.Item1 + "' pdfaid:conformance='" + conformance.Item2 + "'>\n" +
                               pdfa +
                               pdfaConformance +
                               "   </rdf:Description>\n" +
@@ -144,7 +162,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                               "   </rdf:Description>\n" +
                               "   <rdf:Description rdf:about=''\n" +
                               "     xmlns:dc='http://purl.org/dc/elements/1.1/'>\n" +
-                              "    <dc:format>application/pdf</dc:format>\n" + xmlTitle + xmlSubject + xmlAuthor + xmlKeywords +
+                              "    <dc:format>application/pdf</dc:format>\n" + xmlTitle + xmlSubject + xmlAuthor + //xmlKeywords +
                               "   </rdf:Description>\n" +
                               "   <rdf:Description rdf:about=''\n" +
                               "     xmlns:xmpMM='http://ns.adobe.com/xap/1.0/mm/'\n" +

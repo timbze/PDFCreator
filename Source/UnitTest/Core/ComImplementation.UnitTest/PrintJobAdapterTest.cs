@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using SystemInterface.IO;
-using SystemInterface.Reflection;
 using SystemWrapper.IO;
 using NSubstitute;
 using NUnit.Framework;
@@ -17,9 +16,8 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
-using pdfforge.PDFCreator.UI.COM;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 using ThreadPool = pdfforge.PDFCreator.Core.ComImplementation.ThreadPool;
 
 namespace ComImplementation.UnitTest
@@ -96,7 +94,7 @@ namespace ComImplementation.UnitTest
 
             _directory = Substitute.For<IDirectory>();
 
-            var printJobAdapter = new PrintJobAdapter(settingsProvider, comWorkflowFactory, new ThreadPool(), _jobInfoQueue, new ErrorCodeInterpreter(new SectionNameTranslator()), new PathWrapSafe(), _directory);
+            var printJobAdapter = new PrintJobAdapter(settingsProvider, comWorkflowFactory, new ThreadPool(), _jobInfoQueue, new ErrorCodeInterpreter(new TranslationFactory()), new PathWrapSafe(), _directory);
             printJobAdapter.Job = _job;
 
             return printJobAdapter;

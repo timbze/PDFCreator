@@ -28,6 +28,7 @@ namespace pdfforge.PDFCreator.Utilities
         // Tuple format: Item1: DisplayName in Registry, Item2: name of the exe file that has to exist in the InstallLocation
         private readonly Tuple<string, string>[] _pdfArchitectCandidates =
         {
+            new Tuple<string, string>("PDF Architect 5", "architect.exe"),
             new Tuple<string, string>("PDF Architect 4", "architect.exe"),
             new Tuple<string, string>("PDF Architect 3", "PDF Architect 3.exe"),
             new Tuple<string, string>("PDF Architect 3", "architect.exe"),
@@ -58,10 +59,12 @@ namespace pdfforge.PDFCreator.Utilities
         {
             foreach (var pdfArchitectCandidate in _pdfArchitectCandidates)
             {
+
                 var installationPath = TryFindInstallationPath(pdfArchitectCandidate.Item1, pdfArchitectCandidate.Item2);
 
                 if (installationPath != null)
                     return installationPath;
+
             }
 
             return null;
@@ -88,16 +91,16 @@ namespace pdfforge.PDFCreator.Utilities
                     //Let's go through the registry keys and get the info we need:
                     foreach (var skName in rk.GetSubKeyNames())
                     {
-                        using (var sk = rk.OpenSubKey(skName))
+                        try
                         {
-                            if (sk == null)
-                                continue;
-
-                            try
+                            using (var sk = rk.OpenSubKey(skName))
                             {
-                                //first look for PDF Architect 3
+                                var displayNameKey = sk?.GetValue("DisplayName");
+                                if (displayNameKey == null)
+                                    continue;
+
                                 //If the key has value, continue, if not, skip it:
-                                var displayName = sk.GetValue("DisplayName").ToString();
+                                var displayName = displayNameKey.ToString();
                                 if (displayName.StartsWith(msiDisplayName, StringComparison.OrdinalIgnoreCase) &&
                                     !displayName.Contains("Enterprise") &&
                                     sk.GetValue("Publisher").ToString().Contains("pdfforge") &&
@@ -113,10 +116,10 @@ namespace pdfforge.PDFCreator.Utilities
                                     return null;
                                 }
                             }
-                            catch (Exception)
-                            {
-                                // ignored
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // ignored
                         }
                     }
                 }

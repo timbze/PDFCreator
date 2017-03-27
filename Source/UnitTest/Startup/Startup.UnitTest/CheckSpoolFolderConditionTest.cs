@@ -4,7 +4,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void WhenSpoolFolderIsAccessible_Success()
         {
             _spoolFolderAccess.CanAccess().Returns(true);
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, null, new SectionNameTranslator(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, null, new ApplicationTranslation(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 
@@ -38,7 +38,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void RepairDoesNotRegainAccess_FailsWithSpoolFolderInaccessible()
         {
             _spoolFolderAccess.CanAccess().Returns(false);
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new SectionNameTranslator(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new ApplicationTranslation(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 
@@ -57,7 +57,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 .When(x => x.TryRepairSpoolPath())
                 .Do(x => isAccessible = true);
 
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new SectionNameTranslator(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new ApplicationTranslation(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 

@@ -1,17 +1,18 @@
 using System;
-using pdfforge.LicenseValidator;
+using Optional;
+using pdfforge.LicenseValidator.Interface.Data;
 
 namespace pdfforge.PDFCreator.Core.Services.Licensing
 {
     public class ActivationResponseEventArgs : EventArgs
     {
-        public ActivationResponseEventArgs(Activation activation, bool isLicenseValid)
+        public ActivationResponseEventArgs(Option<Activation, LicenseError> activation)
         {
             Activation = activation;
-            IsLicenseValid = isLicenseValid;
+            IsLicenseValid = activation.Map(a => a.IsActivationStillValid()).ValueOr(false);
         }
 
-        public Activation Activation { get; }
+        public Option<Activation, LicenseError> Activation { get; }
         public bool IsLicenseValid { get; }
     }
 }

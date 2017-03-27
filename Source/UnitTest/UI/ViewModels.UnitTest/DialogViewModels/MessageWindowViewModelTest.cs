@@ -2,10 +2,10 @@
 using System.Media;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
@@ -16,14 +16,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [SetUp]
         public void Setup()
         {
-            _translator = Substitute.For<ITranslator>();
-            _translator.GetTranslation(Arg.Any<string>(), Arg.Any<string>()).Returns(info => info.ArgAt<string>(1));
             _soundPlayer = Substitute.For<ISoundPlayer>();
-            _viewModel = new MessageWindowViewModel(_translator, _soundPlayer);
+            _viewModel = new MessageWindowViewModel(new MessageWindowTranslation(), _soundPlayer);
         }
 
         private MessageWindowViewModel _viewModel;
-        private ITranslator _translator;
         private ISoundPlayer _soundPlayer;
 
         [TestCase(MessageOptions.OK, MessageResponse.OK)]
@@ -61,9 +58,9 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             Assert.IsTrue(finishWasCalled);
         }
 
-        [TestCase(MessageOptions.MoreInfoCancel, "MoreInfo", null, "Cancel")]
-        [TestCase(MessageOptions.OK, "Ok", null, null)]
-        [TestCase(MessageOptions.OKCancel, "Ok", null, "Cancel")]
+        [TestCase(MessageOptions.MoreInfoCancel, "More information", null, "Cancel")]
+        [TestCase(MessageOptions.OK, "OK", null, null)]
+        [TestCase(MessageOptions.OKCancel, "OK", null, "Cancel")]
         [TestCase(MessageOptions.RetryCancel, "Retry", null, "Cancel")]
         [TestCase(MessageOptions.YesNo, "Yes", null, "No")]
         public void ButtonContentsAreSetAccordingToInteraction(MessageOptions option, string left, string middle, string right)

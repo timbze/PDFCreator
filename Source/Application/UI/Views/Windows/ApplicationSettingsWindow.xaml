@@ -9,7 +9,7 @@
         xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Views.UserControls"
         xmlns:applicationSettings="clr-namespace:pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings"
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
-        Title="PDFCreator Settings"
+        Title="{Binding Translation.Title, Mode=OneWay}"
         MinHeight="591"
         MinWidth="670"
         Width="771"
@@ -43,7 +43,7 @@
         <DockPanel Background="{StaticResource TitleBarGrayBrush}" Height="64" VerticalAlignment="Top"
                    LastChildFill="True">
             <ContentControl Margin="10" Content="{StaticResource PDFCreatorLogo}" Height="45" />
-            <TextBlock Name="TitleText" Text="Application Settings" HorizontalAlignment="Left"
+            <TextBlock Text="{Binding Translation.TitleText, Mode=OneWay}" HorizontalAlignment="Left"
                        VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Foreground="#FFFAFAFA"
                        FontFamily="Calibri" />
         </DockPanel>
@@ -57,7 +57,7 @@
             </TabControl.Resources>
             <TabItem Template="{StaticResource FancyTabItem}" Name="GeneralTab">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="GeneralTabText" Text="General">
+                    <userControls:TabHeaderControl Text="{Binding Translation.GeneralTabText, Mode=OneWay}">
                         <ContentControl Content="{StaticResource GeneralSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -68,7 +68,7 @@
             <TabItem Template="{StaticResource FancyTabItem}" Name="PrinterTab"
                      IsEnabled="{Binding PrinterTabIsEnabled}" Style="{StaticResource GpoStyle}">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="PrintersTabText" Text="Printers">
+                    <userControls:TabHeaderControl Text="{Binding Translation.PrintersTabText, Mode=OneWay}">
                         <ContentControl Content="{StaticResource PrinterSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -78,7 +78,7 @@
             <TabItem Template="{StaticResource FancyTabItem}" Name="TitleTab" IsEnabled="{Binding TitleTabIsEnabled}"
                      Style="{StaticResource GpoStyle}">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="TitleTabText" Text="Title">
+                    <userControls:TabHeaderControl Text="{Binding Translation.TitleTabText, Mode=OneWay}">
                         <ContentControl Margin="2" Content="{StaticResource TitleSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -100,7 +100,7 @@
             <TabItem Template="{StaticResource FancyTabItem}" Name="DebugTab" IsEnabled="{Binding DebugTabIsEnabled}"
                      Style="{StaticResource GpoStyle}">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="DebugTabText" Text="Debug">
+                    <userControls:TabHeaderControl Text="{Binding Translation.DebugTabText, Mode=OneWay}">
                         <ContentControl Content="{StaticResource DebugSettings}" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -110,7 +110,7 @@
             <TabItem Template="{StaticResource FancyTabItem}" Name="LicenseTab" Style="{StaticResource GpoStyle}"
                      Visibility="{Binding LicenseTabVisibility}">
                 <TabItem.Header>
-                    <userControls:TabHeaderControl x:Name="LicenseTabText" Text="License">
+                    <userControls:TabHeaderControl Text="{Binding Translation.LicenseTabText, Mode=OneWay}">
                         <ContentControl Content="{StaticResource LicenseIcon}" Margin="0 2 2 0" />
                     </userControls:TabHeaderControl>
                 </TabItem.Header>
@@ -131,16 +131,12 @@
             </TabItem>
         </TabControl>
         <DockPanel Grid.Row="2" LastChildFill="False">
-            <Button Name="CancelButton" DockPanel.Dock="Right" MinWidth="150" Margin="10" IsCancel="True" TabIndex="0">Cancel</Button>
-            <Button Name="SaveButton" DockPanel.Dock="Right" MinWidth="150" Margin="10"
+            <Button DockPanel.Dock="Right" MinWidth="150" Margin="10" IsCancel="True" TabIndex="0" Content="{Binding Translation.CancelButtonContent, Mode=OneWay}"/>
+            <Button DockPanel.Dock="Right" MinWidth="150" Margin="10"
                     Command="{Binding SaveSettingsCommand}"
-                    TabIndex="1">
-                Save
-            </Button>
-            <Button Name="HelpButton" DockPanel.Dock="Left" MinWidth="150" Margin="12 10" Click="HelpButton_OnClick"
-                    TabIndex="2">
-                Help
-            </Button>
+                    TabIndex="1" Content="{Binding Translation.SaveButtonContent, Mode=OneWay}" />
+            <Button DockPanel.Dock="Left" MinWidth="150" Margin="12 10" Click="HelpButton_OnClick"
+                    TabIndex="2" Content="{Binding Translation.HelpButtonContent, Mode=OneWay}" />
         </DockPanel>
     </Grid>
 </Window>

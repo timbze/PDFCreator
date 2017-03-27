@@ -2,5 +2,5 @@
 DataStorage
 NSubstitute
 Obsidian
-DynamicTranslator
 SimpleInjector
+Translatable

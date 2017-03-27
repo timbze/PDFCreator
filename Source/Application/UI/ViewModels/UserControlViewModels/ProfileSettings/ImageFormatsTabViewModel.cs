@@ -1,29 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using pdfforge.DynamicTranslator;
+﻿using System.Windows;
 using pdfforge.Obsidian;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
 {
     public class ImageFormatsTabViewModel : CurrentProfileViewModel
     {
-        public ImageFormatsTabViewModel(ITranslator translator)
+        public ImageFormatsTabViewModel(ImageFormatsTabTranslation translation)
         {
-            Translator = translator;
+            Translation = translation;
             LostFocusCommand = new DelegateCommand<RoutedEventArgs>(OnLostFocus);
         }
 
         public DelegateCommand<RoutedEventArgs> LostFocusCommand { get; set; }
 
-        public ITranslator Translator { get; }
-
-        public IEnumerable<EnumValue<JpegColor>> JpegColorValues => Translator.GetEnumTranslation<JpegColor>();
-
-        public IEnumerable<EnumValue<PngColor>> PngColorValues => Translator.GetEnumTranslation<PngColor>();
-
-        public IEnumerable<EnumValue<TiffColor>> TiffColorValues => Translator.GetEnumTranslation<TiffColor>();
+        public ImageFormatsTabTranslation Translation { get; }
 
         private void OnLostFocus(RoutedEventArgs obj)
         {

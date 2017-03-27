@@ -8,7 +8,7 @@ using SystemWrapper;
 using SystemWrapper.IO;
 using SystemWrapper.Microsoft.Win32;
 using pdfforge.DataStorage;
-using pdfforge.DynamicTranslator;
+using pdfforge.Mail;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Actions;
@@ -23,8 +23,6 @@ using pdfforge.PDFCreator.Conversion.Ghostscript.Conversion;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Mail;
-using pdfforge.PDFCreator.Conversion.Processing.ITextProcessing;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.Controller;
@@ -48,6 +46,7 @@ using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery;
 using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
@@ -61,6 +60,7 @@ using pdfforge.PDFCreator.Utilities.Registry;
 using pdfforge.PDFCreator.Utilities.Threading;
 using pdfforge.PDFCreator.Utilities.UserGuide;
 using SimpleInjector;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Editions.EditionBase
 {
@@ -71,6 +71,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
         protected abstract string EditionName { get; }
         protected abstract bool HideLicensing { get; }
         protected abstract bool ShowWelcomeWindow { get; }
+        protected abstract bool ShowOnlyForPlusAndBusinessHint { get; }
         protected abstract ButtonDisplayOptions ButtonDisplayOptions { get; }
 
         public void ConfigureContainer(Container container, WindowRegistry windowRegistry)
@@ -80,6 +81,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             RegisterActivationHelper(container);
             container.RegisterSingleton(() => new ApplicationNameProvider(EditionName));
             container.RegisterSingleton(() => new LicenseOptionProvider(HideLicensing));
+            container.RegisterSingleton(() => new EditionHintOptionProvider(ShowOnlyForPlusAndBusinessHint));
             container.RegisterSingleton(() => ButtonDisplayOptions);
             container.RegisterSingleton(() => new DropboxAppData(Data.Decrypt("r4IH27xLkSb2FWkNUcPfwA=="), "https://www.dropbox.com/1/oauth2/redirect_receiver"));
 
@@ -155,8 +157,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<IOpenFileInteractionHelper, OpenFileInteractionHelper>();
             container.Register<IPDFCreatorNameProvider, PDFCreatorNameProvider>();
 
-            container.Register<IPdfProcessor, ITextPdfProcessor>();
-
             container.RegisterSingleton<IJobInfoQueueManager, JobInfoQueueManager>();
             container.Register<IJobInfoQueue, JobInfoQueue>(Lifestyle.Singleton);
             container.Register<IThreadManager, ThreadManager>(Lifestyle.Singleton);
@@ -184,7 +184,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<IPrinterActionsAssistant, PrinterActionsAssistant>();
             container.Register<IRepairPrinterAssistant, RepairPrinterAssistant>();
             container.Register<IDispatcher, DispatcherWrapper>();
-            container.RegisterSingleton<ILanguageDetector, LanguageDetector>();
             container.RegisterSingleton<ISettingsMover, SettingsMover>();
             container.RegisterSingleton<IRegistryUtility, RegistryUtility>();
             container.Register<IMaybePipedApplicationStarter, MaybePipedApplicationStarter>();
@@ -202,7 +201,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<IManagePrintJobExceptionHandler, ManagePrintJobExceptionHandler>();
             container.Register<IPdfCreatorCleanUp, PdfCreatorCleanUp>();
 
-            container.Register<IMailSignatureHelper, MailSignatureHelper>();
             container.Register<ISpooledJobFinder, SpooledJobFinder>();
 
             container.Register<IFtpConnectionFactory, FtpConnectionFactory>();
@@ -213,22 +211,24 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<IJobFinishedHandler, JobFinishedHandler>();
 
             container.Register<IDropboxService, DropboxService>();
+            container.Register<IDropboxSharedLinksProvider, DropboxSharedLinksProvider>();
             container.Register<IWinInetHelper, WinInetHelper>();
             container.RegisterSingleton<ITitleReplacerProvider, SettingsTitleReplacerProvider>();
 
             RegisterFolderProvider(container);
             RegisterUserGuideHelper(container);
             RegisterTranslator(container);
+            RegisterMailSigantureHelper(container);
             RegisterSettingsHelper(container);
             RegisterStartupConditions(container);
             RegisterActions(container);
             RegisterActionChecks(container);
             RegisterFileNameQuery(container);
             RegisterUpdateAssistant(container);
-
+            RegisterPdfProcessor(container);
             RegisterUserTokenExtractor(container);
             RegisterPlusHintHelper(container);
-
+            
             container.RegisterSingleton(BuildCustomization);
         }
 
@@ -237,6 +237,13 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
         protected abstract void RegisterActivationHelper(Container container);
 
         protected abstract void RegisterUserTokenExtractor(Container container);
+
+        protected abstract void RegisterPdfProcessor(Container container);
+
+        protected virtual void RegisterMailSigantureHelper(Container container)
+        {
+            container.Register<IMailSignatureHelper, MailSignatureHelperLicensed>();
+        }
 
         protected virtual void RegisterPlusHintHelper(Container container)
         {
@@ -295,7 +302,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
         {
             var defaultConditions = new[]
             {
-                typeof(TranslationCondition),
                 typeof(SpoolerRunningCondition),
                 typeof(CheckSpoolFolderCondition),
                 typeof(GhostscriptCondition),
@@ -342,14 +348,22 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
         private void RegisterTranslator(Container container)
         {
-            var registration = Lifestyle.Singleton.CreateRegistration<TranslationProxy>(container);
-
-            container.AddRegistration(typeof(TranslationProxy), registration);
-            container.AddRegistration(typeof(ITranslator), registration);
-
-            registration = Lifestyle.Singleton.CreateRegistration<TranslationHelper>(container);
+            var registration = Lifestyle.Singleton.CreateRegistration<TranslationHelper>(container);
+            container.AddRegistration(typeof(BaseTranslationHelper), registration);
             container.AddRegistration(typeof(TranslationHelper), registration);
             container.AddRegistration(typeof(ILanguageProvider), registration);
+
+            var translationFactory = new TranslationFactory();
+            registration = Lifestyle.Singleton.CreateRegistration(() => translationFactory, container);
+            container.AddRegistration(typeof(TranslationFactory), registration);
+            container.AddRegistration(typeof(ITranslationFactory), registration);
+
+            var translatables = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(t => typeof(ITranslatable).IsAssignableFrom(t) && !t.IsAbstract).ToList();
+            foreach (var t in translatables)
+            {
+                var reg = Lifestyle.Transient.CreateRegistration(t, () => translationFactory.CreateTranslation(t), container);
+                container.AddRegistration(t, reg);
+            }
         }
 
         protected abstract SettingsProvider CreateSettingsProvider();
@@ -362,6 +376,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             var registration = Lifestyle.Singleton.CreateRegistration(CreateSettingsProvider, container);
             container.AddRegistration(typeof(SettingsProvider), registration);
             container.AddRegistration(typeof(ISettingsProvider), registration);
+            container.AddRegistration(typeof(IApplicationLanguageProvider), registration);
         }
 
         public void RegisterInteractions(WindowRegistry windowRegistry)
@@ -389,6 +404,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             windowRegistry.RegisterInteraction(typeof(DropboxInteraction), typeof(DropboxAuthenticationWindow));
             windowRegistry.RegisterInteraction(typeof(UpdateAvailableInteraction), typeof(UpdateAvailableWindow));
             windowRegistry.RegisterInteraction(typeof(StoreLicenseForAllUsersInteraction), typeof(StoreLicenseForAllUsersWindow));
+            windowRegistry.RegisterInteraction(typeof(DropboxSharedLinksInteraction), typeof(DropboxSharedLinksWindow));
         }
     }
 }

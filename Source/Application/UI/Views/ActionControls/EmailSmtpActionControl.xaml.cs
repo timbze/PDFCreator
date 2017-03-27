@@ -7,7 +7,6 @@ namespace pdfforge.PDFCreator.UI.Views.ActionControls
         public EmailSmtpActionControl(EmailSmtpActionViewModel viewModel) : base(viewModel)
         {
             InitializeComponent();
-            viewModel.Translator.Translate(this);
         }
     }
 }

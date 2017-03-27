@@ -15,7 +15,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ProfileSettings
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var viewModel = DataContext as ImageFormatsTabViewModel;
-            viewModel?.Translator.Translate(this);
         }
     }
 }

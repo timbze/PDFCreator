@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance windows:DesignTimeDefectiveProfilesWindowViewModel, IsDesignTimeCreatable=True}"
         Icon="/PDFCreator.Views;component/PDFCreator.ico"
-        Title="Defective Profiles"
+        Title="{Binding Translation.DefectiveProfiles}"
         Background="{x:Static SystemColors.ControlBrush}"
         Width="400"
         MinHeight="250"
@@ -30,11 +30,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Text="{Binding DefectiveProfilesText}" />
         <ListView Grid.Row="1" ItemsSource="{Binding ProfileErrors}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Profile" DisplayMemberBinding="{Binding Error}" />
+                    <GridViewColumn Header="{Binding Translation.Profile}" DisplayMemberBinding="{Binding Error}" />
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
@@ -49,11 +48,11 @@
         </ListView>
 
         <TextBlock Name="DefectiveProfileWarning" Margin="0 5" Grid.Row="2" TextWrapping="Wrap"
-                   Text="Do you want to return and edit the settings or ignore the errors and save anyway?" />
+                   Text="{Binding Translation.DefectiveProfileWarningText}" />
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right">
-            <Button Name="IgnoreButton" Command="{Binding IgnoreErrorsCommand}">_Ignore</Button>
-            <Button Name="EditButton" IsDefault="True" IsCancel="True">_Edit</Button>
+            <Button Name="IgnoreButton" Command="{Binding IgnoreErrorsCommand}" Content="{Binding Translation.Ignore}" />
+            <Button Name="EditButton" IsDefault="True" IsCancel="True" Content="{Binding Translation.Edit}"/>
         </StackPanel>
     </Grid>
 </Window>

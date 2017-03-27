@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SystemInterface.Diagnostics;
+﻿using SystemInterface.Diagnostics;
 using SystemWrapper.Diagnostics;
 
 namespace pdfforge.PDFCreator.Utilities.Process

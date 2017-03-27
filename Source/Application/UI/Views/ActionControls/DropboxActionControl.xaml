@@ -30,7 +30,7 @@
         <HeaderedContentControl Name="TitleDropbox" Template="{StaticResource HeaderPanelTemplate}"
                                 Header="Dropbox" />
 
-        <Label Name="DropboxAccountSelect" Grid.Row="0" Grid.Column="0">Please select Dropbox Account:</Label>
+        <Label Content="{Binding Translation.DropboxAccountSelectContent}" Grid.Row="0" Grid.Column="0"></Label>
 
         <DockPanel>
             <Button DockPanel.Dock="Right" Command="{Binding RemoveDropboxAccountCommand}" Height="25" Width="25"
@@ -46,10 +46,11 @@
                       SelectedValue="{Binding CurrentProfile.DropboxSettings.AccountId}"
                       ItemsSource="{Binding DropboxAccounts}" IsSynchronizedWithCurrentItem="True" />
         </DockPanel>
-        <Label Name="DropboxSharedFolderName" Grid.Row="0" Grid.Column="0">Please define folder:</Label>
-        <views:BindableTextBox x:Name="DropboxSharedFolder" Text="{Binding TokenViewModel.Text}" />
+        <Label Content="{Binding Translation.DropboxSharedFolderNameContent}" Grid.Row="0" Grid.Column="0"></Label>
+        <views:BindableTextBox x:Name="DropboxSharedFolder" Text="{Binding TokenViewModel.Text}" 
+                               BindableSelectionStart="{Binding TokenViewModel.CurrentCursorPos}" />
         <DockPanel Margin="15 5 0 0">
-            <Label Name="AddDropboxTokenLabel">Add Token:</Label>
+            <Label Content="{Binding Translation.AddDropboxTokenLabelContent}"></Label>
             <ComboBox Name="AddTokenComboBox" Margin="5 0 0 0" VerticalAlignment="Center"
                       ItemsSource="{Binding TokenViewModel.TokenList}"
                       SelectedItem="{Binding TokenViewModel.SelectedToken}">
@@ -60,7 +61,7 @@
             </ComboBox>
 
         </DockPanel>
-        <Label Name="SharedDropboxDirectoryPreview" DockPanel.Dock="Left">Preview:</Label>
+        <Label Content="{Binding Translation.SharedDropboxDirectoryPreviewContent}" DockPanel.Dock="Left"></Label>
         <TextBox x:Name="DropboxSharedFolderPreviewText" IsEnabled="False">
             <MultiBinding Converter="{StaticResource TokenReplacerConverter}">
                 <Binding ElementName="DropboxSharedFolder" Path="Text" UpdateSourceTrigger="PropertyChanged" />
@@ -68,12 +69,11 @@
             </MultiBinding>
         </TextBox>
         <CheckBox Margin="0 10" IsChecked="{Binding CurrentProfile.DropboxSettings.EnsureUniqueFilenames}">
-            <TextBlock Name="EnsureUniqueDropboxFilenamesText" TextWrapping="Wrap"
-                       Text="Don't overwrite files (adds an increasing number in case of conflict)" />
+            <TextBlock  TextWrapping="Wrap" Text="{Binding Translation.EnsureUniqueDropboxFilenamesText}"/>
         </CheckBox>
 
         <CheckBox Margin="0 10 0 0" IsChecked="{Binding CurrentProfile.DropboxSettings.CreateShareLink}">
-            <TextBlock Name="CreateShareLinkText" TextWrapping="Wrap">Create a link to share the uploaded files. Anyone with the link can view this file.</TextBlock>
+            <TextBlock Text="{Binding Translation.CreateShareLinkText}" TextWrapping="Wrap" />
         </CheckBox>
 
     </StackPanel>

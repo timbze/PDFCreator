@@ -48,6 +48,12 @@ namespace pdfforge.PDFCreator.Core.Workflow
         /// <param name="jobInfo">The JobInfo to add</param>
         public void Add(JobInfo jobInfo)
         {
+            if (jobInfo.SourceFiles.Count == 0)
+            {
+                _logger.Warn("The file '{0}' has no source files", jobInfo.InfFile);
+                return;
+            }
+
             var jobFile = Path.GetFullPath(jobInfo.InfFile);
             _logger.Debug("New JobInfo: " + jobFile);
             _logger.Debug("DocumentTitle: " + jobInfo.SourceFiles[0].DocumentTitle);

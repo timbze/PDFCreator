@@ -12,14 +12,14 @@
     <Grid>
         <StackPanel>
             <Label>
-                <TextBlock Name="AttachmentFileText">Attachment file (PDF):</TextBlock>
+                <TextBlock Text="{Binding Translation.AttachmentFileText}"></TextBlock>
             </Label>
             <DockPanel>
                 <Button DockPanel.Dock="Right" Margin="5 0 0 0" MinWidth="25"
                         Command="{Binding SelectAttatchmenCommand}">
                     ...
                 </Button>
-                <TextBox Name="AttachmentFileTextBox" Text="{Binding CurrentProfile.AttachmentPage.File}" />
+                <TextBox Text="{Binding CurrentProfile.AttachmentPage.File}" />
             </DockPanel>
         </StackPanel>
     </Grid>

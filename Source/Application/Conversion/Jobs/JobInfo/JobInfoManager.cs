@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using pdfforge.DataStorage;
 using pdfforge.DataStorage.Storage;
-using pdfforge.PDFCreator.Conversion.Settings;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 {
@@ -151,10 +150,6 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
             {
                 metadata.PrintJobAuthor = sourceFiles[0].Author;
                 metadata.PrintJobName = titleReplacer.Replace(sourceFiles[0].DocumentTitle);
-                metadata.Title = ""; //Set to avoid null exception when replacing tokens
-                metadata.Author = "";
-                metadata.Subject = "";
-                metadata.Keywords = "";
 
                 jobInfo.JobType = sourceFiles[0].Type;
             }

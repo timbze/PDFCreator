@@ -8,7 +8,6 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {

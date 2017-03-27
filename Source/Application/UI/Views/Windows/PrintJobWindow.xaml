@@ -45,18 +45,18 @@
         <StackPanel Margin="20 0">
             <ContentControl Content="{StaticResource pdfforge}" Width="150" HorizontalAlignment="Right"
                             Margin="10 15 0 -15" IsTabStop="False" />
-            <Label Target="{Binding ElementName=TitleText}" Name="TitleLabel">_Title</Label>
+            <Label Target="{Binding ElementName=TitleText}" Content="{Binding Translation.TitleLabel}" />
             <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
-            <Label Target="{Binding ElementName=ProfileCombo}" Name="ProfileLabel">_Profile</Label>
+            <Label Target="{Binding ElementName=ProfileCombo}" Content="{Binding Translation.ProfileLabel}" />
             <ComboBox Name="ProfileCombo" ItemsSource="{Binding ProfilesView}" DisplayMemberPath="Name"
                       IsSynchronizedWithCurrentItem="True" />
-            <Expander Name="MetadataExpander" Header="_Metadata" Margin="0 20 0 10" Height="175" IsExpanded="True">
+            <Expander Header="{Binding Translation.MetadataExpander}" Margin="0 20 0 10" Height="175" IsExpanded="True">
                 <StackPanel>
-                    <Label Target="{Binding ElementName=SubjectText}" Name="SubjectLabel">_Subject</Label>
+                    <Label Target="{Binding ElementName=SubjectText}" Content="{Binding Translation.SubjectLabel}"/>
                     <TextBox Name="SubjectText" Text="{Binding Metadata.Subject}" />
-                    <Label Target="{Binding ElementName=KeywordsText}" Name="KeywordsLabel">_Keywords</Label>
+                    <Label Target="{Binding ElementName=KeywordsText}" Content="{Binding Translation.KeywordsLabel}"/>
                     <TextBox Name="KeywordsText" Text="{Binding Metadata.Keywords}" />
-                    <Label Target="{Binding ElementName=AuthorText}" Name="AuthorLabel">_Author</Label>
+                    <Label Target="{Binding ElementName=AuthorText}" Content="{Binding Translation.AuthorLabel}"/>
                     <TextBox Name="AuthorText" Text="{Binding Metadata.Author}" />
                 </StackPanel>
             </Expander>
@@ -99,13 +99,19 @@
                         <Setter Property="Width" Value="86" />
                         <Setter Property="FontWeight" Value="Bold" />
                         <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="TextAlignment" Value="Center" />
                     </Style>
                 </StackPanel.Resources>
-                <Label Name="CancelLabel">Cancel</Label>
-                <Label Name="SettingsLabel">Settings</Label>
-                <Label Name="MergeJobsLabel">Merge</Label>
-                <Label Name="EmailLabel">E-Mail</Label>
-                <Label Name="SaveLabel">Save</Label>
+                <Label><TextBlock Text="{Binding Translation.CancelLabel}" /></Label>
+                <Label><TextBlock Text="{Binding Translation.SettingsLabel}" /></Label>
+                <Label><TextBlock Text="{Binding Translation.MergeJobsLabel}" /></Label>
+                <Label><TextBlock Text="{Binding Translation.EmailLabel}" /></Label>
+                <Label><TextBlock Text="{Binding Translation.SaveLabel}" /></Label>
             </StackPanel>
         </StackPanel>
     </Grid>

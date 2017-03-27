@@ -120,30 +120,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
         }
 
         [Test]
-        public void ParametersTest_FastWebView()
-        {
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            _pdfDevice.Job.Profile.PdfSettings.FastWebView = true;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.Contains("-dFastWebView=true", _parameterStrings, "Missing parameter.");
-
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            _pdfDevice.Job.Profile.PdfSettings.FastWebView = false;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.False(_parameterStrings.Contains("-dFastWebView=true"), "Fast web view parameter falsely set.");
-
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.PdfA1B;
-            _pdfDevice.Job.Profile.PdfSettings.FastWebView = true;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.False(_parameterStrings.Contains("-dFastWebView=true"), "PdfA-1b must not contain fast web view parameter.");
-
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.PdfA2B;
-            _pdfDevice.Job.Profile.PdfSettings.FastWebView = true;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.False(_parameterStrings.Contains("-dFastWebView=true"), "PdfA-2b must not contain fast web view parameter.");
-        }
-
-        [Test]
         public void ParametersTest_PageOrientation_Landscape()
         {
             _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;

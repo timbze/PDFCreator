@@ -14,6 +14,7 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string AccessToken = string.Empty;
 
+
         public Uri GetAuthorizeUri(string appKey, string redirectUri)
         {
             return DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appKey, new Uri(redirectUri), string.Empty);
@@ -29,80 +30,143 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             return AccessToken = result.AccessToken;
         }
 
-        public bool UploadFiles(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames)
+        #region Upload without sharing
+        public bool UploadFiles(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames, string baseFileName)
         {
             try
             {
                 var dbxClient = MakeInstanceOfClient(accessToken);
+                var fullFolder = GetFullFolderToUpload(folder, Path.GetFileNameWithoutExtension(baseFileName), listOfFilePaths.Count());
                 foreach (var pathOfCurrentItem in listOfFilePaths)
                 {
                     var currentFileName = Path.GetFileName(pathOfCurrentItem);
 
                     // path to upload is just /FileName
-                    var pathToUpload = "/" + currentFileName;
+                    var currentFilePath = fullFolder + currentFileName;
                     // if folder to upload is not empty add it to beginning of pathToUpload. 
                     //If it doesnt exists dropbox will create it
-                    if (!string.IsNullOrEmpty(folder))
-                        pathToUpload = "/" + folder + pathToUpload;
+
                     using (var mem = GetFileStream(pathOfCurrentItem))
                     {
                         if (ensureUniqueFilenames)
-                            dbxClient.Files.UploadAsync(pathToUpload, WriteMode.Add.Instance, true, body: mem).Wait();
+                            dbxClient.Files.UploadAsync(currentFilePath, WriteMode.Add.Instance, true, body: mem).Wait();
                         else
-                            dbxClient.Files.UploadAsync(pathToUpload, WriteMode.Overwrite.Instance, true, body: mem).Wait();
+                            dbxClient.Files.UploadAsync(currentFilePath, WriteMode.Overwrite.Instance, true, body: mem).Wait();
                     }
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                // take a look processing exception and make handler here for it
                 Logger.Error("Exception while uploading files to DropBox:\r\n" + ex.Message);
-
                 return false;
             }
         }
 
-        public List<DropboxFileMetaData> UploadFileWithSharing(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames)
+        #endregion
+
+        #region Upload with sharing
+        public DropboxFileMetaData UploadFileWithSharing(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames, string subFolderForMultipleFiles)
         {
             try
             {
-                var result = new List<DropboxFileMetaData>();
+                var result = new DropboxFileMetaData();
                 var dbxClient = MakeInstanceOfClient(accessToken);
+                var folderToUpload = GetFullFolderToUpload(folder, Path.GetFileNameWithoutExtension(subFolderForMultipleFiles), listOfFilePaths.Count());
                 foreach (var pathOfCurrentItem in listOfFilePaths)
                 {
                     var currentFileName = Path.GetFileName(pathOfCurrentItem);
-                    var pathToUpload = "/" + currentFileName;
-                    // if folder to upload is not empty add it to beginning of pathToUpload. 
-                    if (!string.IsNullOrEmpty(folder))
-                        pathToUpload = "/" + folder + pathToUpload;
-                    using (var mem = GetFileStream(pathOfCurrentItem))
+                    var fullPuthToUpload = folderToUpload + currentFileName;
+                    var fileMetaData = UploadOneFile(ensureUniqueFilenames, pathOfCurrentItem, dbxClient, fullPuthToUpload);
+                    if (listOfFilePaths.Count() == 1)
                     {
-                        FileMetadata uploadFileMethaData;
-                        if (ensureUniqueFilenames)
-                            uploadFileMethaData = dbxClient.Files.UploadAsync(pathToUpload, WriteMode.Add.Instance, true, body: mem).Result;
-                        else
-                            uploadFileMethaData = dbxClient.Files.UploadAsync(pathToUpload, WriteMode.Overwrite.Instance, true, body: mem).Result;
-                        var sharedLinkExists = dbxClient.Sharing.ListSharedLinksAsync(uploadFileMethaData.PathDisplay).Result;
-                        if (sharedLinkExists.Links.Any())
-                        {
-                            foreach (var item in sharedLinkExists.Links)
-                                result.Add(new DropboxFileMetaData {FilePath = uploadFileMethaData.PathDisplay, SharedUrl = item.Url});
-                        }
-                        else
-                        {
-                            var sharedLink = dbxClient.Sharing.CreateSharedLinkWithSettingsAsync(uploadFileMethaData.PathDisplay).Result;
-                            result.Add(new DropboxFileMetaData {FilePath = uploadFileMethaData.PathDisplay, SharedUrl = sharedLink.Url});
-                        }
+                        result = MakeSharedLinksOfFile(dbxClient, fileMetaData);
                     }
                 }
+                if (string.IsNullOrEmpty(result.FilePath) || string.IsNullOrEmpty(result.SharedUrl))
+                {
+                    result = MakeSharedLinksOfFolder(dbxClient, folderToUpload);
+                }
+
                 return result;
             }
             catch (Exception ex)
             {
                 Logger.Error("Exception while uploading and sharing file to DropBox:\r\n" + ex.Message);
-                return new List<DropboxFileMetaData>();
+                return new DropboxFileMetaData();
             }
+        }
+
+        private FileMetadata UploadOneFile(bool ensureUniqueFilenames, string pathOfCurrentItem, DropboxClient dbxClient, string fullPuthToUpload)
+        {
+            using (var mem = GetFileStream(pathOfCurrentItem))
+            {
+                return UploadAndGetSharedLink(ensureUniqueFilenames, dbxClient, fullPuthToUpload, mem);
+            }
+        }
+
+        private DropboxFileMetaData MakeSharedLinksOfFolder(DropboxClient dbxClient, string folder)
+        {
+            folder = folder.TrimEnd('/');
+            var f = dbxClient.Sharing.ListSharedLinksAsync(folder).Result.Links;
+
+            if (f.Count > 0)
+                return new DropboxFileMetaData { FilePath = folder, SharedUrl = f.First().Url };
+
+            var x = dbxClient.Sharing.CreateSharedLinkWithSettingsAsync(folder).Result;
+
+            return new DropboxFileMetaData { FilePath = x.PathLower, SharedUrl = x.Url };
+
+        }
+
+        private DropboxFileMetaData MakeSharedLinksOfFile(DropboxClient dbxClient, FileMetadata uploadFileMethaData)
+        {
+            var sharedLinkExists = dbxClient.Sharing.ListSharedLinksAsync(uploadFileMethaData.PathDisplay).Result;
+            if (sharedLinkExists.Links.Any())
+            {
+                return new DropboxFileMetaData { FilePath = uploadFileMethaData.PathDisplay, SharedUrl = sharedLinkExists.Links.First().Url };
+            }
+            var sharedLink = dbxClient.Sharing.CreateSharedLinkWithSettingsAsync(uploadFileMethaData.PathDisplay).Result;
+            return new DropboxFileMetaData { FilePath = uploadFileMethaData.PathDisplay, SharedUrl = sharedLink.Url };
+        }
+
+        private static FileMetadata UploadAndGetSharedLink(bool ensureUniqueFilenames, DropboxClient dbxClient, string fullPuthToUpload,
+        #endregion
+        FileStream mem)
+        {
+            FileMetadata uploadFileMethaData;
+            if (ensureUniqueFilenames)
+                uploadFileMethaData = dbxClient.Files.UploadAsync(fullPuthToUpload, WriteMode.Add.Instance, true, body: mem).Result;
+            else
+                uploadFileMethaData = dbxClient.Files.UploadAsync(fullPuthToUpload, WriteMode.Overwrite.Instance, true, body: mem).Result;
+            return uploadFileMethaData;
+        }
+
+        #region Private members
+
+        /// <summary>
+        /// Creating folder for dropbox upload. 
+        /// If there is more than one file to upload 
+        /// Than upload to folder/commonstrings in output files
+        /// </summary>
+        /// <param name="mainFolder"></param>
+        /// <param name="subFolderForMultipleFiles"></param>
+        /// <param name="numberOfFiles"></param>
+        /// <returns></returns>
+        private string GetFullFolderToUpload(string mainFolder, string subFolderForMultipleFiles, int numberOfFiles)
+        {
+            var folder = "/";
+
+            if (!string.IsNullOrWhiteSpace(mainFolder))
+            {
+                folder += mainFolder + "/";
+            }
+            if (!string.IsNullOrWhiteSpace(subFolderForMultipleFiles) && numberOfFiles > 1)
+            {
+                folder += subFolderForMultipleFiles + "/";
+            }
+
+            return folder;
         }
 
         public DropboxUserInfo GetDropUserInfo()
@@ -116,6 +180,15 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
                     AccountInfo = currentUser.Email + " - " + currentUser.Name.DisplayName
                 };
             return new DropboxUserInfo();
+        }
+
+        public void RevokeToken(string accountAccessToken)
+        {
+
+            using (var dbxClient = MakeInstanceOfClient(accountAccessToken))
+            {
+                dbxClient.Auth.TokenRevokeAsync().Wait();
+            }
         }
 
         private FileStream GetFileStream(string fileUri)
@@ -160,5 +233,7 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             }
             return false;
         }
+
+        #endregion
     }
 }

@@ -20,15 +20,17 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         private readonly string APP_KEY = ParameterHelper.GetPassword("dropbox_api_key");
         private readonly string REDIRECT_URI = ParameterHelper.GetPassword("dropbox_redirectUri");
         private readonly string DROPBOX_ACCESSTOKEN = ParameterHelper.GetPassword("dropbox_accesstoken");
-        private const string DROPBOX_FOLDER = "DropboxTests";
+        private string BASE_FOLDER_NAME = "AdditionalFolder";
         private DropboxClient _dropboxClient;
 
         private DropboxService _dropboxService;
         private List<string> _addedFiles;
+        private List<string> _addedFolders;
 
         [SetUp]
         public void SetUp()
         {
+            string DROPBOX_FOLDER = "DropboxTests";
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _dropboxService = new DropboxService();
@@ -37,9 +39,44 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _th = container.GetInstance<TestHelper>();
             _th.InitTempFolder(DROPBOX_FOLDER);
             _addedFiles = new List<string>();
+            _addedFolders = new List<string>();
             _dropboxClient = new DropboxClient(DROPBOX_ACCESSTOKEN);
         }
 
+        [TearDown]
+        public void CleanUp()
+        {
+            _dropboxClient = new DropboxClient(DROPBOX_ACCESSTOKEN);
+
+            foreach (var file in _addedFiles.Distinct())
+            {
+                _dropboxClient.Files.DeleteAsync(file).Wait();
+            }
+
+            foreach (var file in _addedFolders.Distinct())
+            {
+                _dropboxClient.Files.DeleteAsync("/" + file).Wait();
+            }
+
+            _th.CleanUp();
+        }
+
+        #region General tests
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NoDropboxAccessToken_ThrowsArgumentException()
+        {
+            _dropboxService.ParseAccessToken(new Uri("https://www.dropbox.com/1/oauth2/redirect_receiver#state=eb3399f60f50429b94af8360ec377079&error_description=The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.&error=access_denied"));
+        }
+
+        [Test]
+        public void CanParseAccessToken_ReturnsNonEmptyString()
+        {
+            var url = $"https://www.dropbox.com/1/oauth2/redirect_receiver#access_token=" + DROPBOX_ACCESSTOKEN + "&token_type=bearer&state=1bc3f668b579483caeef4d177871144c&uid=601383411&account_id=dbid%3AAADDGW8GLuF6MWlqODbOkPRcT0GTpWakl8s";
+            var result = _dropboxService.ParseAccessToken(new Uri(url));
+            Assert.AreEqual(DROPBOX_ACCESSTOKEN, result);
+        }
         [Test]
         public void Check_AuthorisationUriCreated_RetursnNonEmptyString()
         {
@@ -65,48 +102,101 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo().AccountId);
         }
+        #endregion
+
+        #region Upload and sharing files
 
         [Test]
-        public void UploadListOfFilesToDropboxFolder_NoUniqueFileNames_ReturnsTrue()
+        public void UploadOneFilesToDropboxAndShareLink_WhenNoAdditionalFolderProvided_CountEqueals1PathIsRoot()
         {
+            var DROPBOX_FOLDER = string.Empty;
+            BASE_FOLDER_NAME = string.Empty;
+            var tempFileName = Guid.NewGuid() + ".pdf";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, tempFileName));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+            _addedFiles.Add(result.FilePath);
+            Assert.AreEqual("/" + tempFileName, result.FilePath);
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void UploadOneFilesToDropboxFolderAndShareLink_WhenAdditinalFolderProvided_CountEquealsOnePathIsRoot()
+        {
+            var DROPBOX_FOLDER = "DropboxSharedFolders";
+            var tempFileName = Guid.NewGuid() + ".pdf";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, tempFileName));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+            _addedFolders.Add(DROPBOX_FOLDER);
+
+            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + tempFileName, result.FilePath);
+            Assert.IsNotNull(result);
+
+        }
+
+
+        [Test]
+        public void Upload2FilesToDropboxRootFolderAndShareLink_WhenNoAdditionalFolderProvided_FolderIsShared()
+        {
+            var DROPBOX_FOLDER = string.Empty;
+            var file1 = Guid.NewGuid() + ".pdf";
+            var file2 = Guid.NewGuid() + ".pdf";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, file1));
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, file2));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+            _addedFolders.Add(BASE_FOLDER_NAME);
+
+            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.FilePath);
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Upload2FilesToDropboxAdditionalFolderAndShareLink_WhenNoAdditionalFolderProvided_AdditionalFolderIsShared()
+        {
+            var DROPBOX_FOLDER = string.Empty;
             _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
             _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
 
-            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames);
-            _addedFiles.AddRange(_th.Job.OutputFiles.Select(path => "/" + DROPBOX_FOLDER + "/" + Path.GetFileName(path)));
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
 
-            Assert.IsTrue(result);
+            _addedFolders.Add(BASE_FOLDER_NAME);
+            Assert.IsNotNull(result);
+            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.FilePath);
         }
 
         [Test]
-        public void UploadListOfFilesToDropboxFolder_NoUniqueFileNames_CountBiggerThan0()
+        public void Upload2FilesToDropboxAdditionalFolderAndShareLink_WhenAdditionalFolderProvided_AdditionalFolderIsShared()
         {
+            string DROPBOX_FOLDER = "DropboxTests";
             _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
-            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
-            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames);
-            Assert.IsTrue(result);
-        }
-
-
-        [Test]
-        public void UploadListOfFilesToDropboxFolderAndShareLink_NoUniqueFileNames_CountBiggerThan0()
-        {
-            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
             _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
 
-            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames);
-            _addedFiles.AddRange(result.Select(s => s.FilePath));
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
 
-            Assert.IsTrue(result.Count > 0);
+            _addedFolders.Add(DROPBOX_FOLDER);
+            Assert.IsNotNull(result);
+            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + BASE_FOLDER_NAME, result.FilePath);
         }
+
 
         [Test]
         public void UploadListOfFilesToDropboxFolderAndShareLink_UniqueFileNames_CountEquals2()
         {
+            string DROPBOX_FOLDER = "DropboxTests";
             _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
             var sameFileName = Guid.NewGuid();
             var file1Content = DateTime.Now.ToShortDateString() + " First file Content";
@@ -115,28 +205,92 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, sameFileName + ".pdf", file2Content));
             _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = true;
 
-            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames);
-            _addedFiles.AddRange(result.Select(s => s.FilePath));
+            var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+            _addedFolders.Add(DROPBOX_FOLDER);
+            Assert.IsNotNull(result);
+        }
 
-            Assert.AreEqual(result.Count, 2);
+
+        #endregion
+
+        #region Only uploading files
+        [Test]
+        public void UploadOneFilesToDropbox_WhenNoAdditionalFolderProvided_ReturnsTrue()
+        {
+            var DROPBOX_FOLDER = string.Empty;
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+            _addedFiles.AddRange(_th.Job.OutputFiles.Select(path => "/" + Path.GetFileName(path)));
+            Assert.IsTrue(result);
+        }
+
+
+        [Test]
+        public void Upload2FilesToDropboxFolder_WhenDropboxFolderDefined_ReturnsTrue()
+        {
+            string DROPBOX_FOLDER = "DropboxTests";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+
+            _addedFolders.Add(DROPBOX_FOLDER);
+            Assert.IsTrue(result);
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void NoDropboxAccessToken_ThrowsArgumentException()
+        public void UploadListOfFilesToDropboxFolder_NoUniqueFileNames_CountBiggerThan0()
         {
-            _dropboxService.ParseAccessToken(new Uri("https://www.dropbox.com/1/oauth2/redirect_receiver#state=eb3399f60f50429b94af8360ec377079&error_description=The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.&error=access_denied"));
+            string DROPBOX_FOLDER = "DropboxTests";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+
+            _addedFolders.Add(DROPBOX_FOLDER);
+            Assert.IsTrue(result);
         }
 
         [Test]
-        public void UploadfFileToDropboxFolder_CheckSumOfUploadedFile_Check()
+        public void UploadfFileToRoot_CheckSumOfUploadedFileAndPathOfFile_Check()
         {
+            var DROPBOX_FOLDER = "DropboxTestsUploadingFiles";
             _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
             var fileName = Guid.NewGuid() + ".pdf";
             var file1Content = DateTime.Now.ToShortDateString() + " First file Content";
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, fileName, file1Content));
 
-            _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames);
+            _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(_th.Job.OutputFiles.FirstOrDefault()))
+                {
+                    var uploadedFileCHeckSum = md5.ComputeHash(stream);
+                    var downloadedFile = _dropboxClient.Files.DownloadAsync("/" + DROPBOX_FOLDER + "/" + fileName).Result;
+                    var downloadedFileHash = md5.ComputeHash(downloadedFile.GetContentAsStreamAsync().Result);
+                    Assert.AreEqual(uploadedFileCHeckSum, downloadedFileHash);
+                }
+            }
+            _addedFolders.Add(DROPBOX_FOLDER);
+
+        }
+
+        [Test]
+        public void UploadfFileToDropboxFolder_CheckSumOfUploadedFile_Check()
+        {
+            var DROPBOX_FOLDER = "DropboxTestsUploadingFiles";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            var fileName = Guid.NewGuid() + ".pdf";
+            var file1Content = DateTime.Now.ToShortDateString() + " First file Content";
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, fileName, file1Content));
+            _addedFolders.Add(DROPBOX_FOLDER);
+
+            _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
 
             using (var md5 = MD5.Create())
             {
@@ -151,23 +305,24 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         }
 
         [Test]
-        public void CanParseAccessToken_ReturnsNonEmptyString()
+        public void UploadListOfFilesToDropboxFolder_NoUniqueFileNames_ReturnsTrue()
         {
-            var url = $"https://www.dropbox.com/1/oauth2/redirect_receiver#access_token=" + DROPBOX_ACCESSTOKEN + "&token_type=bearer&state=1bc3f668b579483caeef4d177871144c&uid=601383411&account_id=dbid%3AAADDGW8GLuF6MWlqODbOkPRcT0GTpWakl8s";
-            var result = _dropboxService.ParseAccessToken(new Uri(url));
-            Assert.AreEqual(DROPBOX_ACCESSTOKEN, result);
+            string DROPBOX_FOLDER = "DropboxTests";
+            _th.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile(DROPBOX_FOLDER, Guid.NewGuid() + ".pdf"));
+            _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
+
+            var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
+
+
+            _addedFolders.Add(DROPBOX_FOLDER);
+            Assert.IsTrue(result);
+
         }
 
-        [TearDown]
-        public void CleanUp()
-        {
+        #endregion
 
-            foreach (var file in _addedFiles)
-            {
-                _dropboxClient = new DropboxClient(DROPBOX_ACCESSTOKEN);
-                _dropboxClient.Files.DeleteAsync(file).Wait();
-            }
-            _th.CleanUp();
-        }
+
     }
 }

@@ -1,18 +1,22 @@
 ﻿using System.Linq;
 using System.Windows.Data;
 using NUnit.Framework;
-using pdfforge.DataStorage;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.ApplicationSettings
 {
     [TestFixture]
     internal class TitleTabViewModelTest
     {
-        private readonly ITranslator _translator = new BasicTranslator("none", Data.CreateDataStorage());
+
+        private TitleTabViewModel BuildTitleTabViewModel()
+        {
+            return new TitleTabViewModel(new TitleTabTranslation(), new TranslationFactory());
+        }
 
         [Test]
         public void TitleReplacementAdd_WithEmptyList_CanExecute()
@@ -20,7 +24,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new TitleReplacement[] {};
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             Assert.IsTrue(titleTabViewModel.TitleAddCommand.CanExecute(null));
@@ -32,7 +36,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new TitleReplacement[] {}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             titleTabViewModel.TitleAddCommand.Execute(null);
@@ -46,7 +50,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new[] {new TitleReplacement(ReplacementType.Replace, "a", "b"), new TitleReplacement(ReplacementType.Replace, "c", "d")}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
             var cv = CollectionViewSource.GetDefaultView(titleTabViewModel.TitleReplacements);
 
@@ -61,7 +65,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new[] {new TitleReplacement(ReplacementType.Replace, "a", "b"), new TitleReplacement(ReplacementType.Replace, "c", "d")}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             var deletedElement = settings.TitleReplacement[0];
@@ -77,7 +81,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new[] {new TitleReplacement(ReplacementType.Replace, "a", "b"), new TitleReplacement(ReplacementType.Replace, "c", "d")}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             var otherElement = settings.TitleReplacement[1];
@@ -94,7 +98,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new[] {new TitleReplacement(ReplacementType.Replace, "a", "b"), new TitleReplacement(ReplacementType.Replace, "c", "d")}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             titleTabViewModel.TitleDeleteCommand.CanExecuteChanged += (sender, args) => wasRaised = true;
@@ -111,7 +115,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new TitleReplacement[] {};
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             Assert.IsFalse(titleTabViewModel.TitleDeleteCommand.CanExecute(null));
@@ -123,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             var settings = new Conversion.Settings.ApplicationSettings();
             settings.TitleReplacement = new[] {new TitleReplacement(ReplacementType.Replace, "a", "b"), new TitleReplacement(ReplacementType.Replace, "c", "d")}.ToList();
 
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
             titleTabViewModel.ApplyTitleReplacements(settings.TitleReplacement);
 
             Assert.IsTrue(titleTabViewModel.TitleDeleteCommand.CanExecute(null));
@@ -132,7 +136,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void TitleReplacementDelete_WithNullList_CannotExecute()
         {
-            var titleTabViewModel = new TitleTabViewModel(_translator);
+            var titleTabViewModel = BuildTitleTabViewModel();
 
             Assert.IsFalse(titleTabViewModel.TitleDeleteCommand.CanExecute(null));
         }

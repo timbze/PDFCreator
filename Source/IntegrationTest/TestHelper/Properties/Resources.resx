@@ -124,8 +124,8 @@
   <data name="Background3PagesPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\Background3PagesPDF.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CertificationFileP12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\TestFiles\Signature\CertificationFileP12.p12;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CertificationFile_ExpiredP12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\TestFiles\Signature\CertificationFile_ExpiredP12.p12;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Cover2PagesPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\Cover2PagesPDF.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -163,9 +163,6 @@
   <data name="PDFCreatorTestpagePDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\PDFCreatorTestpagePDF.pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PDFCreatorTestpagePDFA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\TestFiles\PDFCreatorTestpagePDFA.pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="PDFCreatorTestpagePS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\PDFCreatorTestpagePS.ps;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -184,7 +181,16 @@
   <data name="SixEmptyPagesPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\SixEmptyPages.Pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CertificationFileP12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\testfiles\signature\certificationfilep12.p12;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PDFCreatorTestpagePDFA2b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\testfiles\pdfcreatortestpagepdfa2b.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ThreePDFCreatorTestpagesPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\TestFiles\ThreePDFCreatorTestpagesPDF.pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PDFCreatorTestpagePDFA1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\testfiles\pdfcreatortestpagepdfa1b.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -9,6 +9,7 @@ using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
@@ -25,8 +26,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         private DateTime _lastUpdate;
         private WebClient _webClient;
 
-        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider)
+        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider, UpdateDownloadWindowTranslation translation)
         {
+            Translation = translation;
             _directory = directory;
             _file = file;
             _tempFolderProvider = tempFolderProvider;
@@ -40,6 +42,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         public string DownloadSpeedText { get; protected set; }
 
         public ICommand CancelCommand { get; }
+        public UpdateDownloadWindowTranslation Translation { get; }
 
         protected override void HandleInteractionObjectChanged()
         {

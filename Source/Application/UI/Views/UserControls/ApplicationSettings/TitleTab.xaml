@@ -14,8 +14,8 @@
     <UserControl.Resources>
         <converter:TranslatedEnumConverter x:Key="TranslatedEnumConverter" />
     </UserControl.Resources>
-    <HeaderedContentControl Name="TitleReplacementControl" Margin="5" Template="{StaticResource HeaderPanelTemplate}"
-                            Header="Title Replacement">
+    <HeaderedContentControl Margin="5" Template="{StaticResource HeaderPanelTemplate}"
+                            Header="{Binding Translation.TitleReplacementControlHeader}">
 
         <Grid Margin="0 5">
             <Grid.ColumnDefinitions>
@@ -45,7 +45,13 @@
                       RowEditEnding="DataGrid_OnRowEditEnding">
 
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn x:Name="TypeColoumn" Header="Type">
+                    <DataGridTemplateColumn>
+                        <!-- This is a workaround to allow bindings in the header -->
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataContext.Translation.TypeColoumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
@@ -55,16 +61,22 @@
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
                                 <ComboBox
-                                    ItemsSource="{Binding ViewModel.ReplacementValues,
+                                    ItemsSource="{Binding ViewModel.Translation.ReplacementValues,
                                         RelativeSource={RelativeSource FindAncestor, 
                                         AncestorType={x:Type UserControl }}}"
                                     SelectedValue="{Binding ReplacementType, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                     SelectedValuePath="Value"
-                                    DisplayMemberPath="Name" />
+                                    DisplayMemberPath="Translation" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn x:Name="SearchColumn" Header="Search text" Width="*">
+                    <DataGridTextColumn Width="*">
+                        <!-- This is a workaround to allow bindings in the header -->
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataContext.Translation.SearchColumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.Binding>
                             <Binding Path="Search" NotifyOnValidationError="True" ValidatesOnExceptions="True"
                                      UpdateSourceTrigger="PropertyChanged">
@@ -74,16 +86,23 @@
                             </Binding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
-                    <DataGridTextColumn x:Name="ReplaceColumn" Header="Replace with" Width="*"
-                                        Binding="{Binding Replace}" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding Replace}">
+                        <!-- This is a workaround to allow bindings in the header -->
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataContext.Translation.ReplaceColumnHeader, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <HeaderedContentControl Grid.Row="5" Grid.ColumnSpan="2" Name="TitleReplacementPreview" Margin="5"
-                                    Template="{StaticResource HeaderPanelTemplate}" Header="Preview">
+            <HeaderedContentControl Grid.Row="5" Grid.ColumnSpan="2" Margin="5"
+                                    Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.TitleReplacementPreviewHeader}">
                 <StackPanel>
-                    <TextBlock Margin="0 5 0 0" Name="SampleTitleText">Sample Title:</TextBlock>
+                    <TextBlock Margin="0 5 0 0" Text="{Binding Translation.SampleTitleText}" />
                     <TextBox TextChanged="TitleSample_OnTextChanged" Name="TitleSample">My Document - Editor</TextBox>
-                    <TextBlock Margin="0 5 0 0" Name="PreviewTitleText">Replaced Title:</TextBlock>
+                    <TextBlock Margin="0 5 0 0" Text="{Binding Translation.PreviewTitleText}" />
                     <TextBox IsReadOnly="True" Name="TitlePreview" />
                 </StackPanel>
             </HeaderedContentControl>

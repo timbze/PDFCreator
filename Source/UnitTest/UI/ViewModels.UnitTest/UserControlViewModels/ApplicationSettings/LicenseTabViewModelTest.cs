@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
-using pdfforge.DataStorage;
-using pdfforge.DynamicTranslator;
-using pdfforge.LicenseValidator;
+using Optional;
+using pdfforge.LicenseValidator.Interface.Data;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
-using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.ApplicationSettings
@@ -25,59 +25,70 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [SetUp]
         public void Setup()
         {
-            _licenseCheckerActivation = null;
+            if (Debugger.IsAttached)
+                _timeout = TimeSpan.FromMinutes(5);
+
+            _savedActivation = null;
             _expectedLicenseKey = null;
+            _activationFromServer = null;
 
             _process = Substitute.For<IProcessStarter>();
-            _activationHelper = Substitute.For<IActivationHelper>();
-            _activationHelper.Activation.Returns(_licenseCheckerActivation);
-            _activationHelper.ActivateWithoutSavingActivation(Arg.Any<string>()).Returns(key => _licenseCheckerActivation);
-            _translator = BuildTranslator();
+            _licenseChecker = Substitute.For<ILicenseChecker>();
+            _licenseChecker.GetSavedActivation().Returns(x => _savedActivation.SomeNotNull(LicenseError.NoActivation));
+            _licenseChecker.ActivateWithoutSaving(Arg.Any<string>()).Returns(key => _activationFromServer.SomeNotNull(LicenseError.NoActivation));
+            _offlineActivator = Substitute.For<IOfflineActivator>();
             _interactionInvoker = Substitute.For<IInteractionInvoker>();
-            
-            _dispatcher = Substitute.For<IDispatcher>();
-            _dispatcher.WhenForAnyArgs(x => x.Invoke(Arg.Any<Action>())).Do(x => ((Action) x[0]).Invoke());
-            _dispatcher.WhenForAnyArgs(x => x.BeginInvoke(Arg.Any<Action>())).Do(x => ((Action) x[0]).Invoke());
+
+            _dispatcher = new InvokeImmediatelyDispatcher();
         }
 
         private IProcessStarter _process;
-        private ITranslator _translator;
         private IInteractionInvoker _interactionInvoker;
 
         private string _expectedLicenseKey;
 
-        private readonly TimeSpan _timeout = TimeSpan.FromMilliseconds(150);
+        private TimeSpan _timeout = TimeSpan.FromMilliseconds(150);
 
-        private Activation _licenseCheckerActivation;
+        private Activation _savedActivation;
+        private Activation _activationFromServer;
 
         private const string ValidLicenseKey = "AAAAABBBBBCCCCCDDDDDEEEEEFFFFF";
         private const string ValidLicenseKey_Normalized = "AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-FFFFF";
 
+        private LicenseTabTranslation _translation = new LicenseTabTranslation();
+
         private IDispatcher _dispatcher;
-        private IActivationHelper _activationHelper;
+        private ILicenseChecker _licenseChecker;
+        private IOfflineActivator _offlineActivator;
 
-        private const string ActivationSuccessfulString = "ActivationSuccessful";
-        private const string ActivationSuccessfulMessageString = "ActivationSuccessfulMessage";
-        private const string ActivationFailedString = "ActivationFailed";
-        private const string ActivationFailedMessageString = "ActivationFailedMessage";
-
-        private ITranslator BuildTranslator()
+        private LicenseTabViewModel BuildViewModel()
         {
-            var translationData = Data.CreateDataStorage();
-            translationData.SetValue(@"LicenseTab\LicenseExpiresNever", "Never");
-            translationData.SetValue(@"LicenseTab\ActivationSuccessful", ActivationSuccessfulString);
-            translationData.SetValue(@"LicenseTab\ActivationSuccessfulMessage", ActivationSuccessfulMessageString);
-            translationData.SetValue(@"LicenseTab\ActivationFailed", ActivationFailedString);
-            translationData.SetValue(@"LicenseTab\ActivationFailedMessage", ActivationFailedMessageString);
-
-            foreach (var licenseStatus in Enum.GetValues(typeof (LicenseStatus)))
-            {
-                translationData.SetValue(@"LicenseTab\LicenseStatus." + licenseStatus, StringValueAttribute.GetValue(licenseStatus));
-            }
-
-            // TODO SectionNameTranslator
-            return new BasicTranslator("None", translationData);
+            return new LicenseTabViewModel(_process, _licenseChecker, _offlineActivator, _interactionInvoker, _dispatcher, new LicenseTabTranslation());
         }
+
+
+        private Activation BuildValidActivation(string key)
+        {
+            var activation = new Activation(acceptExpiredActivation: true);
+
+            activation.ActivatedTill = DateTime.Today.AddDays(7);
+            activation.SetResult(Result.OK, "OK");
+            activation.Key = key;
+
+            return activation;
+        }
+
+        private Activation BuildBlockedActivation(string key)
+        {
+            var activation = new Activation(acceptExpiredActivation: true);
+
+            activation.ActivatedTill = DateTime.MinValue;
+            activation.SetResult(Result.BLOCKED, "Blocked");
+            activation.Key = key;
+
+            return activation;
+        }
+
 
         [TestCase("")]
         [TestCase("AAAAA-AAAAA-AAAAA-AAAAA-AAAAA-AAAA")]
@@ -103,16 +114,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             Assert.IsTrue(validationResult.IsValid);
         }
 
-        private LicenseTabViewModel BuildViewModel()
-        {
-            return new LicenseTabViewModel(_process, _activationHelper, _translator, _interactionInvoker, _dispatcher);
-        }
-
         [Test]
         public void ActivationValidTill_ReturnsActivatedTillAsStringInInstalledUICulture()
         {
             var date = DateTime.Now;
-            _activationHelper.Activation.Returns(new Activation { ActivatedTill = date });
+            _savedActivation = new Activation(acceptExpiredActivation: true) { ActivatedTill = date };
 
             var viewModel = BuildViewModel();
 
@@ -122,7 +128,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void ActivationValidTill_WithActivationTillDateMinValue_ReturnsEmptyString()
         {
-            _activationHelper.Activation.Returns(new Activation {ActivatedTill = DateTime.MinValue});
+            _savedActivation = new Activation(acceptExpiredActivation: true) { ActivatedTill = DateTime.MinValue };
 
             var viewModel = BuildViewModel();
 
@@ -138,39 +144,73 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentEditionIsNotValid_LicenseCheckerActivationIsNotValid_UpdateEditionWithGivenKeyDoNotSaveNewEditionAndInformUser()
+        public void SetTranslation_RaiseTranslationAndLicenseStatusTextPropertyChanged()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            var viewModel = BuildViewModel();
+            var propertyChangedEvents = new List<string>();
+            viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
+
+            viewModel.Translation = new LicenseTabTranslation();
+
+            Assert.Contains(nameof(viewModel.Translation), propertyChangedEvents);
+            Assert.Contains(nameof(viewModel.LicenseStatusText), propertyChangedEvents);
+        }
+
+        [Test]
+        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewEditionAndInformUser()
+        {
+            _savedActivation = null;
 
             _expectedLicenseKey = "given-key";
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = true;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
             var messageInteraction = new MessageInteraction("", "", MessageOptions.OKCancel, MessageIcon.None);
             _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
                 x => messageInteraction = x.Arg<MessageInteraction>());
-            _activationHelper.LicenseStatus.Returns(LicenseStatus.Error);
-            
+
+            _activationFromServer = new Activation(acceptExpiredActivation: true);
+            _activationFromServer.Key = _expectedLicenseKey.Replace("-", "");
+            _activationFromServer.SetResult(Result.LICENSE_EXPIRED, "Expired");
+
             var viewModel = BuildViewModel();
-            var propertyChangedEvents = new List<string>();
-            viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
 
             viewModel.OnlineActivationCommand.Execute(null);
 
             viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
-            _activationHelper.DidNotReceive().SaveActivation();
-            Assert.AreEqual(_expectedLicenseKey.Replace("-", ""), viewModel.Activation.Key, "Given key not set in updated license");
+            _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
 
-            Assert.AreEqual(ActivationFailedString, messageInteraction.Title);
+            Assert.AreEqual(_translation.ActivationFailed, messageInteraction.Title);
             Assert.AreEqual(MessageOptions.OK, messageInteraction.Buttons);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentEditionIsNotValid_LicenseCheckerActivationIsValid_SaveNewActivationAndUpdateEditionAndStoreLicenseForAllUsersQuery()
+        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SavesActivation()
+        {
+            _savedActivation = null;
+            _expectedLicenseKey = "given-key";
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
+                x =>
+                {
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
+                });
+            _activationFromServer = BuildValidActivation(_expectedLicenseKey);
+            var viewModel = BuildViewModel();
+
+            viewModel.OnlineActivationCommand.Execute(null);
+
+            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+            _licenseChecker.Received().SaveActivation(_activationFromServer);
+            Assert.AreEqual(_expectedLicenseKey.ToUpper(), viewModel.LicenseKey);
+        }
+
+        [Test]
+        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
         {
             _expectedLicenseKey = "not empty";
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
@@ -180,28 +220,20 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
                     inputInteraction.Success = true;
                     inputInteraction.InputText = _expectedLicenseKey;
                 });
-            _activationHelper
-                .When(x => x.ActivateWithoutSavingActivation(_expectedLicenseKey))
-                .Do(x =>
-                {
-                    _activationHelper.IsLicenseValid.Returns(true);
-                });
-            
+            _licenseChecker.ActivateWithoutSaving(_expectedLicenseKey).Returns(x => BuildValidActivation(_expectedLicenseKey).Some<Activation, LicenseError>());
+
             var viewModel = BuildViewModel();
-            var propertyChangedEvents = new List<string>();
-            viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
 
             viewModel.OnlineActivationCommand.Execute(null);
-
             viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
 
-            _interactionInvoker.Received().Invoke(Arg.Any<StoreLicenseForAllUsersInteraction>());        
+            _interactionInvoker.Received().Invoke(Arg.Any<StoreLicenseForAllUsersInteraction>());
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentEditionIsValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewActivationAndDoNotUpdateEditionAndInformUser()
+        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewActivationAndInformUser()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            _savedActivation = null;
 
             _expectedLicenseKey = "not empty";
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
@@ -215,38 +247,82 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
                 x => messageInteraction = x[0] as MessageInteraction);
             var viewModel = BuildViewModel();
-            var propertyChangedEvents = new List<string>();
-            viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
 
             viewModel.OnlineActivationCommand.Execute(null);
 
             viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
-            _activationHelper.DidNotReceive().SaveActivation();
-            Assert.AreEqual(ActivationFailedString, messageInteraction.Title);
+            _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
+            Assert.AreEqual(_translation.ActivationFailed, messageInteraction.Title);
             Assert.AreEqual(MessageOptions.OK, messageInteraction.Buttons);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentEditionIsValid_LicenseCheckerActivationIsValid_SaveNewActivationAndUpdateEditionAndStoreLicenseForAllUsersQuery()
+        public void OnlineActivationCommand_CurrentActivationIsValid_ReActivationBlocksCurrentKey_SaveNewActivationAndInformUser()
+        {
+            _savedActivation = BuildValidActivation("saved activation key");
+            _activationFromServer = new Activation(true);
+            _activationFromServer.Key = "saved activation key";
+            _activationFromServer.SetResult(Result.BLOCKED, "Blocked");
+
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
+                x =>
+                {
+                    var inputInteraction = x.Arg<InputInteraction>();
+                    inputInteraction.Success = true;
+                    inputInteraction.InputText = "not null or empty";
+                });
+            MessageInteraction messageInteraction = null;
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
+                x => messageInteraction = x[0] as MessageInteraction);
+            var viewModel = BuildViewModel();
+
+            viewModel.OnlineActivationCommand.Execute(null);
+
+            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+            _licenseChecker.Received().SaveActivation(_activationFromServer);
+            Assert.AreEqual(_translation.ActivationFailed, messageInteraction.Title);
+            Assert.AreEqual(MessageOptions.OK, messageInteraction.Buttons);
+            Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
+        }
+
+        [Test]
+        public void OnlineActivationCommand_CurrentActivationIsValid_ActivationWithNewKeyIsBlocked_DoNotSaveNewActivation()
+        {
+            _savedActivation = BuildValidActivation("saved activation key");
+            _activationFromServer = BuildBlockedActivation("Not the saved activation key");
+
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
+                x =>
+                {
+                    var inputInteraction = x.Arg<InputInteraction>();
+                    inputInteraction.Success = true;
+                    inputInteraction.InputText = "not null or empty";
+                });
+
+            MessageInteraction messageInteraction = null;
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
+                x => messageInteraction = x[0] as MessageInteraction);
+            var viewModel = BuildViewModel();
+
+            viewModel.OnlineActivationCommand.Execute(null);
+
+            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+            _licenseChecker.DidNotReceive().SaveActivation(_activationFromServer);
+        }
+
+        [Test]
+        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
         {
             _expectedLicenseKey = "not empty";
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = true;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
-            var messageInteraction = new MessageInteraction("", "", MessageOptions.OKCancel, MessageIcon.None);
-            _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
-                x => messageInteraction = x[0] as MessageInteraction);
 
-            _activationHelper
-                .When(x => x.ActivateWithoutSavingActivation(_expectedLicenseKey))
-                .Do(x =>
-                {
-                    _activationHelper.IsLicenseValid.Returns(true);
-                });
+            _activationFromServer = BuildValidActivation(_expectedLicenseKey);
 
             var viewModel = BuildViewModel();
             var propertyChangedEvents = new List<string>();
@@ -256,22 +332,56 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             var success = viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             Assert.IsTrue(success);
+            _licenseChecker.Received().SaveActivation(_activationFromServer);
             _interactionInvoker.Received().Invoke(Arg.Any<StoreLicenseForAllUsersInteraction>());
         }
 
         [Test]
-        public void OnlineActivationCommand_IsNotExecutableWhileExcuting()
+        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_ShareLicenseForAllUsersDisabled__SaveLicenseAndInformUser()
+        {
+            _expectedLicenseKey = "not empty";
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
+                x =>
+                {
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
+                });
+
+            _activationFromServer = BuildValidActivation(_expectedLicenseKey);
+
+            var viewModel = BuildViewModel();
+
+            viewModel.ShareLicenseForAllUsersEnabled = false; //Important for this test!!!!
+
+            MessageInteraction messageInteraction = null;
+            _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
+                x => messageInteraction = x[0] as MessageInteraction);
+            viewModel.OnlineActivationCommand.Execute(null);
+
+            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+
+            _licenseChecker.Received().SaveActivation(_activationFromServer);
+            _interactionInvoker.Received().Invoke(Arg.Any<MessageInteraction>());
+            _interactionInvoker.DidNotReceive().Invoke(Arg.Any<StoreLicenseForAllUsersInteraction>());
+            Assert.AreEqual(_translation.ActivationSuccessful, messageInteraction.Title);
+            Assert.AreEqual(_translation.ActivationSuccessfulMessage, messageInteraction.Text);
+            Assert.AreEqual(MessageOptions.OK, messageInteraction.Buttons);
+            Assert.AreEqual(MessageIcon.PDFForge, messageInteraction.Icon);
+        }
+
+        [Test]
+        public void OnlineActivationCommand_IsNotExecutableWhileExecuting()
         {
             _expectedLicenseKey = "given-key";
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = true;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
             var enterLicenseCommandIsExecutable = true;
             var viewModel = BuildViewModel();
-            _activationHelper.When(x => x.ActivateWithoutSavingActivation(Arg.Any<string>())).Do(
+            _licenseChecker.When(x => x.ActivateWithoutSaving(Arg.Any<string>())).Do(
                 x => { enterLicenseCommandIsExecutable = viewModel.OnlineActivationCommand.CanExecute(null); });
 
             viewModel.OnlineActivationCommand.Execute(null);
@@ -287,18 +397,19 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = true;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
-            
+
             _interactionInvoker.When(x => x.Invoke(Arg.Any<MessageInteraction>())).Do(
-                x => {
+                x =>
+                {
                 });
             var viewModel = BuildViewModel();
             viewModel.OnlineActivationCommand.Execute(null);
 
             viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
-            _activationHelper.Received().ActivateWithoutSavingActivation(_expectedLicenseKey);
+            _licenseChecker.Received().ActivateWithoutSaving(_expectedLicenseKey);
         }
 
         [Test]
@@ -308,8 +419,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = true;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = true;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
             var viewModel = BuildViewModel();
             var propertyChangedEvents = new List<string>();
@@ -321,7 +432,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             Assert.Contains(nameof(viewModel.IsCheckingLicense), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseKey), propertyChangedEvents);
-            Assert.Contains(nameof(viewModel.LicenseStatus), propertyChangedEvents);
+            Assert.Contains(nameof(viewModel.LicenseStatusForView), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseStatusText), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseExpiryDate), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LastActivationTime), propertyChangedEvents);
@@ -335,31 +446,21 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             _interactionInvoker.When(x => x.Invoke(Arg.Any<InputInteraction>())).Do(
                 x =>
                 {
-                    ((InputInteraction) x[0]).Success = false;
-                    ((InputInteraction) x[0]).InputText = _expectedLicenseKey;
+                    ((InputInteraction)x[0]).Success = false;
+                    ((InputInteraction)x[0]).InputText = _expectedLicenseKey;
                 });
 
             var viewModel = BuildViewModel();
 
             viewModel.OnlineActivationCommand.Execute(null);
 
-            _activationHelper.DidNotReceiveWithAnyArgs().ActivateWithoutSavingActivation("");
-        }
-
-        [Test]
-        public void OnlineActivationCommand_WithoutActivation_IsNotExecutable()
-        {
-            _activationHelper.Activation.Returns((Activation)null);
-
-            var viewModel = BuildViewModel();
-
-            Assert.IsFalse(viewModel.OnlineActivationCommand.CanExecute(null));
+            _licenseChecker.DidNotReceiveWithAnyArgs().ActivateWithoutSaving("");
         }
 
         [Test]
         public void OnlineActivationCommand_WithProductAndActivation_IsExecutable()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            _savedActivation = BuildValidActivation(ValidLicenseKey);
 
             var viewModel = BuildViewModel();
 
@@ -369,7 +470,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void OfflineActivationCommandExecute_OfflineActivationInteractionContainsLicenseKeyWithDashes()
         {
-            _activationHelper.Activation.Returns(new Activation {Key = ValidLicenseKey_Normalized });
+            _savedActivation = new Activation(acceptExpiredActivation: true) { Key = ValidLicenseKey_Normalized };
 
             var viewModel = BuildViewModel();
 
@@ -397,14 +498,14 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             viewModel.OfflineActivationCommand.Execute(null);
 
-            _activationHelper.DidNotReceive().ActivateOfflineActivationStringFromLicenseServer(Arg.Any<string>());
-            _activationHelper.DidNotReceive().SaveActivation();
+            _offlineActivator.DidNotReceive().ActivateOfflineActivationString(Arg.Any<string>());
+            _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
         }
 
         [Test]
         public void OfflineActivationCommandExecute_LicenseCheckerOfflineActivationStringFromLicenseServer_GetsCalledWithExpectedOfflineLsa()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            _savedActivation = null;
 
             var viewModel = BuildViewModel();
 
@@ -419,42 +520,13 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
 
             viewModel.OfflineActivationCommand.Execute(null);
 
-            _activationHelper.Received().ActivateOfflineActivationStringFromLicenseServer(expectedOfflineLsa);
-        }
-
-        [Test]
-        public void OfflineActivationCommandExecute_LicenseCheckerThrowsFormatException_ActivationKeyIsInteractionKey()
-        {
-            _activationHelper.ActivateOfflineActivationStringFromLicenseServer(Arg.Any<string>()).Throws(new FormatException());
-            const string interactionKey = "interactionKey";
-            _interactionInvoker.When(x => x.Invoke(Arg.Any<OfflineActivationInteraction>())).Do(
-                x =>
-                {
-                    var offlineActivationInteraction = x.Arg<OfflineActivationInteraction>();
-                    offlineActivationInteraction.Success = true;
-                    offlineActivationInteraction.LicenseKey = interactionKey;
-                });
-            var viewModel = BuildViewModel();
-
-            viewModel.OfflineActivationCommand.Execute(null);
-
-            Assert.AreEqual(interactionKey, viewModel.Activation.Key);
-        }
-
-        [Test]
-        public void OfflineActivationCommand_WithoutActivation_IsNotExecutable()
-        {
-            _activationHelper.Activation.Returns((Activation)null);
-
-            var viewModel = BuildViewModel();
-
-            Assert.IsFalse(viewModel.OfflineActivationCommand.CanExecute(null));
+            _offlineActivator.Received().ValidateOfflineActivationString(expectedOfflineLsa);
         }
 
         [Test]
         public void OfflineAActivationCommand_WithProductAndActivation_IsExecutable()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            _savedActivation = BuildValidActivation(ValidLicenseKey);
 
             var viewModel = BuildViewModel();
 
@@ -464,10 +536,10 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LastActivation_ReturnsActivatedTillAsStringInInstalledUICulture()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            _savedActivation = new Activation(acceptExpiredActivation: true);
 
             var date = DateTime.Now;
-            _activationHelper.Activation.TimeOfActivation = date;
+            _savedActivation.TimeOfActivation = date;
 
             var viewModel = BuildViewModel();
 
@@ -485,9 +557,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LastActivation_ForDateTimeMinValue_ReturnsEmptyString()
         {
-            _activationHelper.Activation.Returns(new Activation());
+            var activation = new Activation(acceptExpiredActivation: true);
             var date = DateTime.MinValue;
-            _activationHelper.Activation.TimeOfActivation = date;
+            activation.TimeOfActivation = date;
+
+            _savedActivation = activation;
 
             var viewModel = BuildViewModel();
 
@@ -497,8 +571,6 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LastActivation_WithTimeOfActivationOnDateMinValue_ReturnsEmptyString()
         {
-            //_edition.Activation.TimeOfActivation = DateTime.MinValue;
-
             var viewModel = BuildViewModel();
 
             Assert.AreEqual("", viewModel.LastActivationTime);
@@ -507,7 +579,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LicenseExpiryDateString_WithActivationNull_ReturnsEmptyString()
         {
-            _activationHelper.Activation.Returns((Activation) null);
+            _savedActivation = null;
 
             var viewModel = BuildViewModel();
 
@@ -517,19 +589,19 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LicenseExpiryDateString_WithLifetimeLicense_ReturnsNever()
         {
-            _activationHelper.Activation.Returns(new Activation());
-            _activationHelper.Activation.LicenseExpires = new DateTime(2038, 01, 01);
+            _savedActivation = new Activation(acceptExpiredActivation: true);
+            _savedActivation.LicenseExpires = new DateTime(2038, 01, 01);
 
             var viewModel = BuildViewModel();
 
-            Assert.AreEqual("Never", viewModel.LicenseExpiryDate);
+            Assert.AreEqual(_translation.Never, viewModel.LicenseExpiryDate);
         }
 
         [Test]
         public void LicenseExpiryDateString_WithLimitedLicense_ReturnsCorrectDate()
         {
-            _activationHelper.Activation.Returns(new Activation());
-            _activationHelper.Activation.LicenseExpires = DateTime.Now;
+            _savedActivation = new Activation(acceptExpiredActivation: true);
+            _savedActivation.LicenseExpires = DateTime.Now;
 
             var viewModel = BuildViewModel();
 
@@ -539,8 +611,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LicenseExpiryDateString_WithMinExpiryDate_ReturnsEmptyString()
         {
-            _activationHelper.Activation.Returns(new Activation());
-            _activationHelper.Activation.LicenseExpires = DateTime.MinValue;
+            _savedActivation = new Activation(acceptExpiredActivation: true);
+            _savedActivation.LicenseExpires = DateTime.MinValue;
 
             var viewModel = BuildViewModel();
 
@@ -550,8 +622,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LicenseKeyString_WithExpectedLength_IsFormattedWithDashes()
         {
-            _activationHelper.Activation.Returns(new Activation());
-            _activationHelper.Activation.Key = "AAAAABBBBBCCCCCDDDDDEEEEEFFFFF";
+            _savedActivation = new Activation(acceptExpiredActivation: true);
+            _savedActivation.Key = "AAAAABBBBBCCCCCDDDDDEEEEEFFFFF";
 
             var viewModel = BuildViewModel();
 
@@ -561,33 +633,31 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [Test]
         public void LicenseKeyString_WithNullStringKey_ReturnsEmptyString()
         {
-            //_edition.Activation.Key = null;
-
             var viewModel = BuildViewModel();
 
             Assert.AreEqual("", viewModel.LicenseKey);
         }
 
         [Test]
-        public void LicenseKeyString_WithUnexpectedLength_IsFormattedWithDashes()
+        public void LicenseKeyString_WithUnexpectedLength_GetsNormalized()
         {
-            _activationHelper.Activation.Returns(new Activation());
-            _activationHelper.Activation.Key = "AAAAABBBBBCCCCCDDDDDEEEEEF";
+            _savedActivation = new Activation(acceptExpiredActivation: true);
+            _savedActivation.Key = "UNeXPECtEDLENgTH";
 
             var viewModel = BuildViewModel();
 
-            Assert.AreEqual("AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-F", viewModel.LicenseKey);
+            Assert.AreEqual("UNEXP-ECTED-LENGT-H", viewModel.LicenseKey);
         }
 
         [Test]
         public void LicenseStatus_ReturnsStatusFromEdition()
         {
+            _savedActivation = BuildBlockedActivation("Blocked ActivationKey");
+
             var viewModel = BuildViewModel();
 
-            _activationHelper.LicenseStatus.Returns(LicenseStatus.Blocked);
-
-            Assert.AreEqual(LicenseStatus.Blocked, viewModel.LicenseStatus);
-            Assert.AreEqual(StringValueAttribute.GetValue(LicenseStatus.Blocked), viewModel.LicenseStatusText);
+            Assert.AreEqual(LicenseStatusForView.Invalid, viewModel.LicenseStatusForView);
+            Assert.AreEqual(_translation.LicenseStatusBlocked, viewModel.LicenseStatusText);
         }
 
         [Test]

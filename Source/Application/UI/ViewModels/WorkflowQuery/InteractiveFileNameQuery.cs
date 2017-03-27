@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -12,6 +11,7 @@ using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.IO;
 
@@ -22,11 +22,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IOutputFilenameComposer _outputFilenameComposer;
-        private readonly ITranslator _translator;
+        private readonly InteractiveWorkflowTranslation _translation;
 
-        public InteractiveFileNameQuery(ITranslator translator, IInteractionInvoker interactionInvoker, IOutputFilenameComposer outputFilenameComposer)
+        public InteractiveFileNameQuery(InteractiveWorkflowTranslation translation, IInteractionInvoker interactionInvoker, IOutputFilenameComposer outputFilenameComposer)
         {
-            _translator = translator;
+            _translation = translation;
             _interactionInvoker = interactionInvoker;
             _outputFilenameComposer = outputFilenameComposer;
         }
@@ -53,7 +53,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         {
             var interaction = new SaveFileInteraction();
 
-            interaction.Title = _translator.GetTranslation("InteractiveWorkflow", "SelectDestination");
+            interaction.Title = _translation.SelectDestination;
             interaction.Filter = GetAllFilters();
             interaction.FilterIndex = (int) job.Profile.OutputFormat + 1;
             interaction.OverwritePrompt = true;
@@ -123,8 +123,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         private void NotifyUserAboutPathTooLong()
         {
             _logger.Error("Filename (+ path) from savefile dialog is too long.");
-            var message = _translator.GetTranslation("InteractiveWorkflow", "SelectedPathTooLong");
-            var title = _translator.GetTranslation("InteractiveWorkflow", "SelectDestination");
+            var message = _translation.SelectedPathTooLong;
+            var title = _translation.SelectDestination;
 
             ShowMessage(message, title, MessageOptions.OK, MessageIcon.Warning);
         }
@@ -133,7 +133,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         {
             var interaction = new SaveFileInteraction();
 
-            interaction.Title = _translator.GetTranslation("InteractiveWorkflow", "SelectDestination");
+            interaction.Title = _translation.SelectDestination;
 
             interaction.Filter = GetFilterForOutputFormat(job.Profile.OutputFormat);
             interaction.FilterIndex = 1;
@@ -149,14 +149,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
 
         private string GetAllFilters()
         {
-            var filter = _translator.GetTranslation("InteractiveWorkflow", "PdfFile") + @" (*.pdf)|*.pdf";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "PdfA1bFile") + @" (*.pdf)|*.pdf";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "PdfA2bFile") + @" (*.pdf)|*.pdf";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "PdfXFile") + @" (*.pdf)|*.pdf";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "JpegFile") + @" (*.jpg)|*.jpg;*.jpeg;";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "PngFile") + @" (*.png)|*.png;";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "TiffFile") + @" (*.tif)|*.tif;*.tiff";
-            filter += @"|" + _translator.GetTranslation("InteractiveWorkflow", "TextFile") + @" (*.txt)|*.txt;";
+            var filter = _translation.PdfFile + @" (*.pdf)|*.pdf";
+            filter += @"|" + _translation.PdfA1bFile + @" (*.pdf)|*.pdf";
+            filter += @"|" + _translation.PdfA2bFile + @" (*.pdf)|*.pdf";
+            filter += @"|" + _translation.PdfXFile + @" (*.pdf)|*.pdf";
+            filter += @"|" + _translation.JpegFile + @" (*.jpg)|*.jpg;*.jpeg;";
+            filter += @"|" + _translation.PngFile + @" (*.png)|*.png;";
+            filter += @"|" + _translation.TiffFile + @" (*.tif)|*.tif;*.tiff";
+            filter += @"|" + _translation.TextFile + @" (*.txt)|*.txt;";
             return filter;
         }
 
@@ -165,21 +165,21 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
             switch (outputFormat)
             {
                 case OutputFormat.Pdf:
-                    return _translator.GetTranslation("InteractiveWorkflow", "PdfFile") + @" (*.pdf)|*.pdf";
+                    return _translation.PdfFile + @" (*.pdf)|*.pdf";
                 case OutputFormat.PdfA1B:
-                    return _translator.GetTranslation("InteractiveWorkflow", "PdfA1bFile") + @" (*.pdf)|*.pdf";
+                    return _translation.PdfA1bFile + @" (*.pdf)|*.pdf";
                 case OutputFormat.PdfA2B:
-                    return _translator.GetTranslation("InteractiveWorkflow", "PdfA2bFile") + @" (*.pdf)|*.pdf";
+                    return _translation.PdfA2bFile + @" (*.pdf)|*.pdf";
                 case OutputFormat.PdfX:
-                    return _translator.GetTranslation("InteractiveWorkflow", "PdfXFile") + @" (*.pdf)|*.pdf";
+                    return _translation.PdfXFile + @" (*.pdf)|*.pdf";
                 case OutputFormat.Jpeg:
-                    return _translator.GetTranslation("InteractiveWorkflow", "JpegFile") + @" (*.jpg)|*.jpg;*.jpeg;";
+                    return _translation.JpegFile + @" (*.jpg)|*.jpg;*.jpeg;";
                 case OutputFormat.Png:
-                    return _translator.GetTranslation("InteractiveWorkflow", "PngFile") + @" (*.png)|*.png;";
+                    return _translation.PngFile+ @" (*.png)|*.png;";
                 case OutputFormat.Tif:
-                    return _translator.GetTranslation("InteractiveWorkflow", "TiffFile") + @" (*.tif)|*.tif;*.tiff";
+                    return _translation.TiffFile + @" (*.tif)|*.tif;*.tiff";
                 case OutputFormat.Txt:
-                    return _translator.GetTranslation("InteractiveWorkflow", "TextFile") + @" (*.txt)|*.txt;";
+                    return _translation.TextFile + @" (*.txt)|*.txt;";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(outputFormat), outputFormat, null);
             }
@@ -189,7 +189,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         {
             const string title = "PDFCreator";
 
-            var messageText = _translator.GetTranslation("InteractiveWorkflow", "RetypeFilenameMessage");
+            var messageText = _translation.RetypeFilenameMessage;
             var message = $"{currentFileName} \r\n{messageText}";
 
             ShowMessage(message, title, MessageOptions.OK, MessageIcon.Warning);

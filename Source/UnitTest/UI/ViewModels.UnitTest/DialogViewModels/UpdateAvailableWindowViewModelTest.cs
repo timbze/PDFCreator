@@ -4,6 +4,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities.Process;
 
@@ -13,6 +14,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
     public class UpdateAvailableWindowViewModelTest
     {
         private IProcessStarter _processStarter;
+        private readonly UpdateManagerTranslation _updateManagerTranslation = new UpdateManagerTranslation();
 
         [SetUp]
         public void Setup()
@@ -22,7 +24,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
 
         private UpdateAvailableViewModel BuildViewModel(UpdateAvailableInteraction interaction)
         {
-            var viewModel = new UpdateAvailableViewModel(new SectionNameTranslator(), _processStarter, new ApplicationNameProvider("PDFCreator"));
+            var viewModel = new UpdateAvailableViewModel(_updateManagerTranslation, _processStarter, new ApplicationNameProvider("PDFCreator"));
             new InteractionHelper<UpdateAvailableInteraction>(viewModel, interaction);
             return viewModel;
         }
@@ -89,8 +91,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             var interaction = new UpdateAvailableInteraction(updateUrl, "1.0");
             var viewModel = BuildViewModel(interaction);
 
-            Assert.AreEqual("UpdateManager\\NewUpdateMessage", viewModel.Text);
-            Assert.AreEqual("UpdateManager\\ApplicationUpdate", viewModel.Title);
+            Assert.AreEqual(string.Format(_updateManagerTranslation.GetNewUpdateMessage("1.0"), interaction.AvailableVersion), viewModel.Text);
+            Assert.AreEqual(_updateManagerTranslation.GetFormattedTitle(new ApplicationNameProvider("PDFCreator").ApplicationName), viewModel.Title);
         }
 
         [Test]

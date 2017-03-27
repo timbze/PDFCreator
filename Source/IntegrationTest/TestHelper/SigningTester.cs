@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Processing.ITextProcessing;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
@@ -10,22 +13,15 @@ namespace PDFCreator.TestUtilities
 {
     public static class SigningTester
     {
-        public static void TestSignature(Job job, int numberOfSignatures = 1, bool allowMultisigning = false)
+        public static void TestSignature(Job job)
         {
             foreach (var file in job.OutputFiles)
             {
-                TestSignature(file, job.Profile, job.Passwords, numberOfSignatures, allowMultisigning);
+                TestSignature(file, job.Profile, job.Passwords);
             }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="testFile"></param>
-        /// <param name="profile"></param>
-        /// <param name="passwords"></param>
-        /// <param name="numberOfSignatures"></param>
-        /// <param name="allowMultisigning"></param>
-        public static void TestSignature(string testFile, ConversionProfile profile, JobPasswords passwords, int numberOfSignatures, bool allowMultisigning)
+        private static PdfReader BuildPdfReader(string testFile, ConversionProfile profile, JobPasswords passwords)
         {
             PdfReader pdfReader;
             if (profile.PdfSettings.Security.Enabled)
@@ -40,6 +36,13 @@ namespace PDFCreator.TestUtilities
                 pdfReader = new PdfReader(testFile);
             }
 
+            return pdfReader;
+        }
+
+        public static void TestSignature(string testFile, ConversionProfile profile, JobPasswords passwords)
+        {
+            var pdfReader = BuildPdfReader(testFile, profile, passwords);
+
             var af = pdfReader.AcroFields;
             //Stop here if no Signing was requested 
             if (!profile.PdfSettings.Signature.Enabled)
@@ -48,21 +51,19 @@ namespace PDFCreator.TestUtilities
                 return;
             }
             //Proceed with checking the number of signatures
-            Assert.AreEqual(numberOfSignatures, af.GetSignatureNames().Count, "Number of SignatureNames must be " + numberOfSignatures + Environment.NewLine + "(" + testFile + ")");
+            Assert.AreEqual(1, af.GetSignatureNames().Count, "Number of SignatureNames must be 1" + Environment.NewLine + "(" + testFile + ")");
 
-            #region Verify the last or single signature in document, which must be always valid
-
-            var signatureName = af.GetSignatureNames()[numberOfSignatures - 1];
+            var signatureName = af.GetSignatureNames()[0];
             var pk = af.VerifySignature(signatureName);
 
-            Assert.IsTrue(pk.Verify(), "(Last) Signature in document, is not valid.");
-            Assert.IsTrue(af.SignatureCoversWholeDocument(signatureName), "(Last) signature in document, does not cover whole document.");
+            Assert.IsTrue(pk.Verify(), "(Last) Signature is not valid.");
+            Assert.IsTrue(af.SignatureCoversWholeDocument(signatureName), "(Last) signature does not cover whole document.");
 
             var ts = DateTime.Now.ToUniversalTime() - pk.TimeStampDate;
             Assert.IsTrue(Math.Abs(ts.TotalHours) < 1, "Time stamp has a difference bigger than 1h from now." + Environment.NewLine + "(" + testFile + ")");
 
-            Assert.AreEqual(profile.PdfSettings.Signature.SignLocation, pk.Location, "Wrong SignLocation." + Environment.NewLine + "(" + testFile + ")");
-            Assert.AreEqual(profile.PdfSettings.Signature.SignReason, pk.Reason, "Wrong SignReason." + Environment.NewLine + "(" + testFile + ")");
+            Assert.AreEqual(profile.PdfSettings.Signature.SignLocation, pk.Location ?? "", "Wrong SignLocation." + Environment.NewLine + "(" + testFile + ")");
+            Assert.AreEqual(profile.PdfSettings.Signature.SignReason, pk.Reason ?? "", "Wrong SignReason." + Environment.NewLine + "(" + testFile + ")");
 
             if (profile.PdfSettings.Signature.DisplaySignatureInDocument)
             {
@@ -88,49 +89,67 @@ namespace PDFCreator.TestUtilities
             }
             else
             {
-                Assert.AreEqual(1, af.GetFieldPositions(signatureName)[0].page, "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
                 Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetLeft(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
                 Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetBottom(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
                 Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetRight(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
                 Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetTop(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
             }
+        }
 
-            #endregion
+        public static string TestMultipleSigning(Job job, IPdfProcessor pdfProcessor)
+        {
+            return TestMultipleSigning(job.OutputFiles[0], job.Profile, job.Passwords, pdfProcessor);
+        }
 
-            /*
-            var stamper = new PdfStamper(pdfReader, );
+        public static string TestMultipleSigning(string testFile, ConversionProfile profile, JobPasswords passwords, IPdfProcessor pdfProcessor)
+        {
+            var pdfReader = BuildPdfReader(testFile, profile, passwords);
 
-            if (profile.PdfSettings.Signature.AllowMultiSigning)
-                Assert.AreEqual(0, stamper.SignatureAppearance);
-            else
-                Assert.AreEqual(1, stamper.SignatureAppearance);
+            var doubleSignedFile = testFile.Replace(".pdf", "_doubleSignedFile.pdf");
+            var fileStream = new FileStream(doubleSignedFile, FileMode.Create, FileAccess.Write);
+            var tempFile = testFile.Replace(".pdf", "_tempFile.pdf");
+
+            var intendedPdfVersion = pdfProcessor.DeterminePdfVersion(profile);
+            var pdfVersion = PdfWriter.VERSION_1_4;
+            if (intendedPdfVersion == "1.5")
+                pdfVersion = PdfWriter.VERSION_1_5;
+            else if (intendedPdfVersion == "1.6")
+                pdfVersion = PdfWriter.VERSION_1_6;
+            else if (intendedPdfVersion == "1.7")
+                pdfVersion = PdfWriter.VERSION_1_7;
+
+            //Create Stamper in append mode
+            var stamper = PdfStamper.CreateSignature(pdfReader, fileStream, pdfVersion, tempFile, true);
+
+            profile.PdfSettings.Signature.SignaturePage = SignaturePage.LastPage;
+            var signer = new ITextSigner();
+            signer.SignPdfFile(stamper, profile, passwords);
 
             stamper.Close();
-            */
 
+            var doubleSignedPdfReader = BuildPdfReader(doubleSignedFile, profile, passwords);
+            var af = doubleSignedPdfReader.AcroFields;
+            
+            Assert.AreEqual(2, af.GetSignatureNames().Count, "Number of SignatureNames must be 2" + Environment.NewLine + "(" + testFile + ")");
+
+            //There is currently no way for testing multisigning.
+            //-> af.SignatureCoversWholeDocument(firstSignatureName) is always false, since a singature can't cover future signing
+            //-> firstSignature.Verify() returns always true.
             /*
-            //Check validity of previous signatures. They must be valid if multi signing is allowed, otherwise they must be invalid. 
-            for (int i = 1; i < numberOfSignatures; i++)
-            {
-                String previousSignName = af.GetSignatureNames()[i-1];
-                //PdfPKCS7 previousPk = af.VerifySignature(previousSignName);
+            var firstSignatureName = af.GetSignatureNames()[0];
+            var firstSignature = af.VerifySignature(firstSignatureName);
 
-                if (allowMultisigning)
-                {
-                    var sig = af.VerifySignature(previousSignName);
-                    Assert.IsTrue(sig.Verify(), "");
-                    Assert.IsTrue(af.SignatureCoversWholeDocument(previousSignName),
-                        "Last or single signature in document, does not cover whole document , although multi signing was enabled.");
-                }
-                else
-                {
-                    var sig = af.VerifySignature(previousSignName);
-                    Assert.IsFalse(sig.Verify(), "");
-                    Assert.IsFalse(af.SignatureCoversWholeDocument(previousSignName),
-                        "Last or single signature in document, covers whole document , although multi signing was disabled.");
-                }
+            if (profile.PdfSettings.Signature.AllowMultiSigning)
+            {
+                Assert.IsTrue(firstSignature.Verify(), "First signature is invalid altough multi signing was enabled");
             }
-            */
+            else
+            {
+                Assert.IsFalse(firstSignature.Verify(), "First signature is valid altough multi signing was disabled");
+            }
+            //*/
+
+            return doubleSignedFile;
         }
     }
 }

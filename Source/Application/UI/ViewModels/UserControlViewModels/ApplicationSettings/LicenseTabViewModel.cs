@@ -1,72 +1,131 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
-using pdfforge.LicenseValidator;
+using Optional;
+using pdfforge.LicenseValidator.Interface;
+using pdfforge.LicenseValidator.Interface.Data;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings
 {
+    public class LicenseTabOnlineViewModel : LicenseTabViewModel
+    {
+        public LicenseTabOnlineViewModel(IProcessStarter processStarter, ILicenseChecker licenseChecker, 
+            IInteractionInvoker interactionInvoker, IDispatcher dispatcher, LicenseTabTranslation translation) 
+            : base(processStarter, licenseChecker, null, interactionInvoker, dispatcher, translation) 
+                                                  //offlineActivator not required. Set to null. 
+        { }
+
+        public override bool ShowOfflineActivation => false;
+
+        protected override void OfflineActivationCommandExecute(object obj)
+        { /*Do nothing */ }
+
+        protected override bool OfflineActivationCommandCanExecute(object o)
+        { return false; }
+    }
+
+    public class LicenseTabOfflineViewModel : LicenseTabViewModel
+    {
+        public LicenseTabOfflineViewModel(IProcessStarter processStarter, ILicenseChecker licenseChecker, IOfflineActivator offlineActivator,
+            IInteractionInvoker interactionInvoker, IDispatcher dispatcher, LicenseTabTranslation translation)
+            : base(processStarter, licenseChecker, offlineActivator, interactionInvoker, dispatcher, translation)
+        { }
+
+        public override bool ShowOnlineActivation => false;
+
+        protected override void OnlineActivationCommandExecute(object obj)
+        { /*Do nothing */ }
+
+        protected override bool OnlineActivationCommandCanExecute(object o)
+        { return false; }
+    }
+
+
     public class LicenseTabViewModel : ObservableObject
     {
         private readonly IDispatcher _dispatcher;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly LicenseKeySyntaxChecker _licenseKeySyntaxChecker = new LicenseKeySyntaxChecker();
         private readonly IProcessStarter _processStarter;
-        private readonly IActivationHelper _activationHelper;
-        private string _lastActivationKey;
+        private readonly ILicenseChecker _licenseChecker;
+        private readonly IOfflineActivator _offlineActivator;
         private bool _isCheckingLicense;
 
-        public LicenseTabViewModel(IProcessStarter processStarter, IActivationHelper activationHelper, ITranslator translator, IInteractionInvoker interactionInvoker, IDispatcher dispatcher)
+        private LicenseTabTranslation _translation;
+
+        public bool ShareLicenseForAllUsersEnabled { private get; set; }
+
+        public virtual bool ShowOnlineActivation => true; 
+        public virtual bool ShowOfflineActivation => true; 
+
+        public LicenseTabTranslation Translation
         {
+            get { return _translation; }
+            set
+            {
+                _translation = value;
+                RaisePropertyChanged(nameof(Translation));
+                RaisePropertyChanged(nameof(LicenseStatusText));
+            }
+        }
+
+        public LicenseTabViewModel(IProcessStarter processStarter, ILicenseChecker licenseChecker, IOfflineActivator offlineActivator, 
+            IInteractionInvoker interactionInvoker, IDispatcher dispatcher, LicenseTabTranslation translation)
+        {
+            ShareLicenseForAllUsersEnabled = true;
             _processStarter = processStarter;
-            _activationHelper = activationHelper;
+            _licenseChecker = licenseChecker;
+            _offlineActivator = offlineActivator;
+
             _interactionInvoker = interactionInvoker;
             _dispatcher = dispatcher;
-            Translator = translator;
 
-            _lastActivationKey = LicenseKey;
+            _translation = translation;
+
+            Translation = translation;
 
             OnlineActivationCommand = new DelegateCommand(OnlineActivationCommandExecute, OnlineActivationCommandCanExecute);
             OfflineActivationCommand = new DelegateCommand(OfflineActivationCommandExecute, OfflineActivationCommandCanExecute);
             ManageLicensesCommand = new DelegateCommand(ManageLicensesCommandExecute);
+            
+            _activation = licenseChecker.GetSavedActivation();
         }
 
-        public ITranslator Translator { get; }
+        private Option<Activation, LicenseError> _activation;
 
-        public Activation Activation => _activationHelper.Activation;
-
-        public LicenseStatus LicenseStatus
-        {
-            get { return _activationHelper.LicenseStatus; }
-        }
-
-        public string LicenseStatusText
-        {
-            get { return Translator?.GetTranslation("LicenseTab", "LicenseStatus." + LicenseStatus); }
-        }
+        public string Licensee => _activation.Match(a => a.Licensee, e => "");
+        public string MachineId => _activation.Match(a => a.MachineId, e => "");
+        public string LicenseStatusText => DetermineLicenseStatusText(_activation);
+        public LicenseStatusForView LicenseStatusForView => DetermineLicenseStatus(_activation);
 
         public string LicenseExpiryDate
         {
             get
             {
-                if (_activationHelper.Activation == null)
-                    return "";
-                if (_activationHelper.Activation.LicenseExpires.Year > 2035)
-                    return Translator.GetTranslation("LicenseTab", "LicenseExpiresNever");
-                ;
-                if (_activationHelper.Activation.LicenseExpires == DateTime.MinValue)
-                    return "";
-                return _activationHelper.Activation.LicenseExpires.ToShortDateString();
+
+                var activationDate = _activation.Map(a =>
+                {
+                    if (a.LicenseExpires.Year > 2035)
+                        return Translation.Never;
+                    
+                    if (a.LicenseExpires == DateTime.MinValue)
+                        return "";
+                    return a.LicenseExpires.ToShortDateString();
+                });
+
+                return activationDate.ValueOr("");
             }
         }
 
@@ -74,11 +133,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
         {
             get
             {
-                if (_activationHelper.Activation == null)
-                    return "";
-                if (_activationHelper.Activation.ActivatedTill == DateTime.MinValue)
-                    return "";
-                return _activationHelper.Activation.ActivatedTill.ToString(CultureInfo.InstalledUICulture);
+                return _activation
+                    .Filter(a => a.ActivatedTill > DateTime.MinValue, LicenseError.NoActivation)
+                    .Match(
+                    some: a => a.ActivatedTill.ToString(CultureInfo.InstalledUICulture),
+                    none: e => "");
             }
         }
 
@@ -86,11 +145,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
         {
             get
             {
-                if (_activationHelper.Activation == null)
-                    return "";
-                if (_activationHelper.Activation?.TimeOfActivation == DateTime.MinValue)
-                    return "";
-                return _activationHelper.Activation.TimeOfActivation.ToString(CultureInfo.InstalledUICulture);
+                var activation = _activation.Filter(a => a.TimeOfActivation > DateTime.MinValue, LicenseError.NoActivation);
+
+                return activation.Match(
+                    some: a => a.TimeOfActivation.ToString(CultureInfo.InstalledUICulture),
+                    none: e => "");
             }
         }
 
@@ -108,11 +167,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
                 _isCheckingLicense = value;
                 RaisePropertyChanged(nameof(IsCheckingLicense));
                 RaisePropertyChanged(nameof(LicenseKey));
-                RaisePropertyChanged(nameof(LicenseStatus));
                 RaisePropertyChanged(nameof(LicenseStatusText));
+                RaisePropertyChanged(nameof(LicenseStatusForView));
                 RaisePropertyChanged(nameof(LicenseExpiryDate));
                 RaisePropertyChanged(nameof(ActivationValidTill));
                 RaisePropertyChanged(nameof(LastActivationTime));
+                RaisePropertyChanged(nameof(Licensee));
+                RaisePropertyChanged(nameof(MachineId));
                 _dispatcher.BeginInvoke(OnlineActivationCommand.RaiseCanExecuteChanged);
                 _dispatcher.BeginInvoke(OfflineActivationCommand.RaiseCanExecuteChanged);
             }
@@ -124,52 +185,59 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
         {
             get
             {
-                if (_activationHelper.Activation?.Key == null)
-                    return "";
-                return _licenseKeySyntaxChecker.NormalizeLicenseKey(_activationHelper.Activation.Key);
+                return _activation.Match(
+                        some: a => _licenseKeySyntaxChecker.NormalizeLicenseKey(a.Key),
+                        none: e => "");
             }
         }
 
-        private void OfflineActivationCommandExecute(object obj)
+        protected virtual void OfflineActivationCommandExecute(object obj)
         {
-            var interaction = new OfflineActivationInteraction(_lastActivationKey);
+            if (_offlineActivator == null)
+                return;
+
+            var lastActivationKey = LicenseKey;
+
+            if (string.IsNullOrWhiteSpace(lastActivationKey))
+            {
+                lastActivationKey = _licenseChecker.GetSavedLicenseKey().ValueOr("");
+            }
+
+            var interaction = new OfflineActivationInteraction(lastActivationKey);
             _interactionInvoker.Invoke(interaction);
 
             if (interaction.Success)
             {
-                _lastActivationKey = interaction.LicenseKey;
-                Activation activation;
+                var activation = _offlineActivator.ValidateOfflineActivationString(interaction.LicenseServerAnswer);
 
                 try
                 {
-                    activation = _activationHelper.ActivateOfflineActivationStringFromLicenseServer(interaction.LicenseServerAnswer);
+                    activation.MatchSome(a => _offlineActivator.SaveActivation(a));
                 }
-                catch (FormatException)
+                catch (SecurityException)
                 {
-                    activation = new Activation();
-                    activation.Key = interaction.LicenseKey;
                 }
-                
+
+                //Just to show in UI
+                //LicenseChecker in UpdateActivation can't save activation
                 UpdateActivation(activation);
-                IsCheckingLicense = false;
-                LicenseCheckFinishedEvent.Set();
             }
+
+            IsCheckingLicense = false;
+            LicenseCheckFinishedEvent.Set();
         }
 
-        private bool OnlineActivationCommandCanExecute(object o)
+        protected virtual bool OnlineActivationCommandCanExecute(object o)
         {
-            if (IsCheckingLicense)
-                return false;
-
-            return _activationHelper.Activation != null;
+            return (!IsCheckingLicense);
         }
 
-        private bool OfflineActivationCommandCanExecute(object o)
+        protected virtual bool OfflineActivationCommandCanExecute(object o)
         {
             return OnlineActivationCommandCanExecute(o);
         }
 
-        private void OnlineActivationCommandExecute(object o)
+        protected virtual void OnlineActivationCommandExecute(object o)
         {
             var key = QueryLicenseKey();
 
@@ -181,18 +249,25 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
 
         private string QueryLicenseKey()
         {
-            var title = Translator.GetTranslation("pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings.LicenseTab", "EnterLicenseKeyButton.Text");
-            var questionText = Translator.GetTranslation("pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings", "EnterLicenseKeyText");
+            var lastActivationKey = LicenseKey;
+
+            if (string.IsNullOrWhiteSpace(lastActivationKey))
+            {
+                lastActivationKey = _licenseChecker.GetSavedLicenseKey().ValueOr("");
+            }
+
+            var title = Translation.EnterLicenseKey;
+            var questionText = Translation.EnterLicenseKeyColon;
+
+            
 
             var inputInteraction = new InputInteraction(title, questionText, ValidateLicenseKey);
-            inputInteraction.InputText = _lastActivationKey;
+            inputInteraction.InputText = lastActivationKey;
 
             _interactionInvoker.Invoke(inputInteraction);
 
             if (!inputInteraction.Success)
                 return null;
-
-            _lastActivationKey = inputInteraction.InputText;
 
             return inputInteraction.InputText;
         }
@@ -205,14 +280,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             switch (validationResult)
             {
                 case ValidationResult.InvalidCharacters:
-                    message = Translator.GetTranslation("pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings",
-                        "LicenseKeyContainsIllegalCharacters");
+                    message = Translation.LicenseKeyContainsIllegalCharacters;
                     return new InputValidation(false, message);
                 case ValidationResult.WrongFormat:
-                    message = Translator.GetFormattedTranslation(
-                        "pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings",
-                        "LicenseKeyHasWrongFormat",
-                        "AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-12345");
+                    message = Translation.GetLicenseKeyHasWrongFormatMessage("AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-12345");
                     return new InputValidation(false, message);
                 case ValidationResult.Valid:
                     break;
@@ -231,8 +302,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             IsCheckingLicense = true;
             try
             {
-                var activation = _activationHelper.ActivateWithoutSavingActivation(key.Replace("-", "")); 
-                _dispatcher.Invoke(() => UpdateActivation(activation));
+                var activation = _licenseChecker.ActivateWithoutSaving(key.Replace("-", "")); 
+                _dispatcher.BeginInvoke(() => UpdateActivation(activation));
             }
             finally
             {
@@ -241,66 +312,146 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             }
         }
 
-        private void UpdateActivation(Activation activation)
+        private void UpdateActivation(Option<Activation,LicenseError> activation)
         {
-            var oldActivation = _activationHelper.Activation;
-            var oldActivationWasValid = _activationHelper.IsLicenseValid;
-            var resetActivation = false;
-            activation = activation?? new Activation();
-            _activationHelper.Activation = activation;
+            var oldKey = _activation.Match(a => a.Key, e => "");
 
             //Save only valid activation. Invalid activations might throw exceptions during saving.
-            if (_activationHelper.IsLicenseValid)
+            if (activation.Exists(a => a.IsLicenseStillValid()))
             {
-                _activationHelper.SaveActivation();
+                activation.MatchSome(a =>
+                {
+                    _activation = activation;
+                    _licenseChecker.SaveActivation(a);
+                });
             }
             //Save activation if current key is blocked
-            else if ((activation.Result == Result.BLOCKED) 
-                && oldActivation.Key.Equals(activation.Key))
+            else if (activation.Exists(a => (a.Result == Result.BLOCKED) && a.Key == oldKey))
             {
-                _activationHelper.SaveActivation();
-            }
-            //Reset license if the old one was valid
-            else if (oldActivationWasValid)
-            {
-                //Do the reset after user notification
-                resetActivation = true;
-            }
-            //set key in invalid activation to make it visible in view   
-            else
-            {
-                _activationHelper.Activation.Key = _lastActivationKey;
+                activation.MatchSome(a =>
+                {
+                    _activation = activation;
+                    _licenseChecker.SaveActivation(a);
+                });
             }
             
             //Notify user
-            InvokeActivationResponse();
+            InvokeActivationResponse(activation);
 
-            //Reset license if the old one was valid
-            if (resetActivation)
-            {
-                _activationHelper.Activation = oldActivation;
-            }
-
-            CloseLicenseWindowEvent?.Invoke(this, new ActivationResponseEventArgs(_activationHelper.Activation, _activationHelper.IsLicenseValid));
+            CloseLicenseWindowEvent?.Invoke(this, new ActivationResponseEventArgs(activation));
         }
 
         public delegate void CloseLicenseWindow(object sender, ActivationResponseEventArgs e);
         public event CloseLicenseWindow CloseLicenseWindowEvent;
 
-        private void InvokeActivationResponse()
+        private void InvokeActivationResponse(Option<Activation, LicenseError> activation)
         {
-            if (_activationHelper.IsLicenseValid)
+            if (!activation.Exists(a => a.IsActivationStillValid()))
             {
-                StoreLicenseForAllUsersQuery();
+                var failedTitle = Translation.ActivationFailed;
+                var failedMessage = Translation.ActivationFailedMessage  + Environment.NewLine + DetermineLicenseStatusText(activation);
+                var failedInteraction = new MessageInteraction(failedMessage, failedTitle, MessageOptions.OK, MessageIcon.Error);
+                _interactionInvoker.Invoke(failedInteraction);
+            }
+            else if (ShareLicenseForAllUsersEnabled)
+            {
+                //StoreLicenseForAllUsersQuery is also a Successfull Message
+                activation.MatchSome(StoreLicenseForAllUsersQuery);
             }
             else
             {
-                var title = Translator.GetTranslation("LicenseTab", "ActivationFailed");
-                var message = Translator.GetTranslation("LicenseTab", "ActivationFailedMessage");
-                message += "\r\n" + Translator.GetTranslation("LicenseTab", "LicenseStatus." + _activationHelper.LicenseStatus);
+                var successTitle = Translation.ActivationSuccessful;
+                var successMessage = Translation.ActivationSuccessfulMessage;
+                var successInteraction = new MessageInteraction(successMessage, successTitle, MessageOptions.OK, MessageIcon.PDFForge);
+                _interactionInvoker.Invoke(successInteraction);
+            }
+        }
 
-                var interaction = new MessageInteraction(message, title, MessageOptions.OK, MessageIcon.Error);
-                _interactionInvoker.Invoke(interaction);
+
+        private string DetermineLicenseStatusText(Option<Activation, LicenseError> activation)
+        {
+            return activation.Match(DetermineLicenseStatusText, e => Translation.LicenseStatusNoLicense);
+        }
+
+        private string DetermineLicenseStatusText(Activation activation)
+        {
+            switch (activation.Result)
+            {
+                case Result.OK:
+                    //Activation must be checked before license
+                    if (!activation.IsActivationStillValid())
+                        return Translation.LicenseStatusActivationExpired;
+
+                    if (!activation.IsLicenseStillValid())
+                        return activation.LicenseType == LicenseType.PERPETUAL
+                            ? Translation.LicenseStatusValidForVersionButLicenseExpired
+                            : Translation.LicenseStatusLicenseExpired; 
+
+                    return Translation.LicenseStatusValid;
+                case Result.BLOCKED:
+                    return Translation.LicenseStatusBlocked;
+                case Result.LICENSE_EXPIRED:
+                    return Translation.LicenseStatusVersionNotCoveredByLicense;
+                case Result.LICENSE_LIMIT_REACHED:
+                    return Translation.LicenseStatusNumberOfActivationsExceeded;
+                case Result.INVALID_LICENSE_KEY:
+                    return Translation.LicenseStatusInvalidLicenseKey;
+                case Result.NO_LICENSE_KEY:
+                    return Translation.LicenseStatusNoLicenseKey;
+                case Result.NO_SERVER_CONNECTION:
+                    return Translation.LicenseStatusNoServerConnection;
+                case Result.PRODUCT_MISMATCH:
+                    //Do not interpret. 
+                    //Reactivation will cause an UnknownKey and not ProductMismatch, 
+                    //which is inconsistant/irritating for the user.  
+                case Result.AUTH_FAILED:
+                case Result.UNKNOWN_VERSION:
+                case Result.NO_HX_DLL:
+                case Result.MACHINE_MISMATCH:
+                case Result.VERSION_MISMATCH:
+                case Result.NO_ACTIVATION:
+                case Result.ERROR:
+                default:
+                    return Translation.LicenseStatusError;
+            }
+        }
+
+        private LicenseStatusForView DetermineLicenseStatus(Option<Activation, LicenseError> activation)
+        {
+            return activation.Match(DetermineLicenseStatus, e => LicenseStatusForView.Invalid);
+        }
+
+        private LicenseStatusForView DetermineLicenseStatus(Activation activation)
+        {
+            switch (activation.Result)
+            {
+                case Result.OK:
+                    //Activation must be checked before license
+                    if (!activation.IsActivationStillValid())
+                        return LicenseStatusForView.Invalid;
+
+                    if (!activation.IsLicenseStillValid())
+                        return activation.LicenseType == LicenseType.PERPETUAL
+                            ? LicenseStatusForView.ValidForVersionButLicenseExpired
+                            : LicenseStatusForView.Invalid;
+
+                    return LicenseStatusForView.Valid;
+                case Result.BLOCKED:
+                case Result.LICENSE_EXPIRED:
+                case Result.LICENSE_LIMIT_REACHED:
+                case Result.INVALID_LICENSE_KEY:
+                case Result.NO_LICENSE_KEY:
+                case Result.NO_SERVER_CONNECTION:
+                case Result.PRODUCT_MISMATCH:
+                case Result.AUTH_FAILED:
+                case Result.UNKNOWN_VERSION:
+                case Result.NO_HX_DLL:
+                case Result.MACHINE_MISMATCH:
+                case Result.VERSION_MISMATCH:
+                case Result.NO_ACTIVATION:
+                case Result.ERROR:
+                default:
+                    return LicenseStatusForView.Invalid;
             }
         }
 
@@ -314,10 +465,17 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             {   }
         }
 
-        private void StoreLicenseForAllUsersQuery()
+        private void StoreLicenseForAllUsersQuery(Activation activation)
         {
-            var interaction = new StoreLicenseForAllUsersInteraction();
+            var interaction = new StoreLicenseForAllUsersInteraction(activation.LSA, activation.Key);
             _interactionInvoker.Invoke(interaction);
         }
+    }
+
+    public enum LicenseStatusForView
+    {
+        Valid,
+        ValidForVersionButLicenseExpired,
+        Invalid
     }
 }

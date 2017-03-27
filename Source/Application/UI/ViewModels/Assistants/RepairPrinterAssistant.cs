@@ -3,12 +3,14 @@ using System.Linq;
 using SystemInterface.IO;
 using SystemWrapper.IO;
 using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Printing.Printer;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 {
@@ -23,29 +25,33 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly IAssemblyHelper _assemblyHelper;
+        private readonly IPDFCreatorNameProvider _nameProvider;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         private readonly IPrinterHelper _printerHelper;
-        private readonly ITranslator _translator;
+        private readonly ApplicationTranslation _translation;
         private readonly IShellExecuteHelper _shellExecuteHelper;
         private readonly IFile _file;
 
-        public RepairPrinterAssistant(IInteractionInvoker interactionInvoker, IPrinterHelper printerHelper, ITranslator translator, IShellExecuteHelper shellExecuteHelper, IFile file, IAssemblyHelper assemblyHelper)
+        public RepairPrinterAssistant(IInteractionInvoker interactionInvoker, IPrinterHelper printerHelper, IShellExecuteHelper shellExecuteHelper, IFile file, IAssemblyHelper assemblyHelper, IPDFCreatorNameProvider nameProvider, ITranslationFactory iTranslationFactory)
         {
             _interactionInvoker = interactionInvoker;
             _printerHelper = printerHelper;
-            _translator = translator;
+            _translation = iTranslationFactory.CreateTranslation<ApplicationTranslation>(); ;
             _shellExecuteHelper = shellExecuteHelper;
             _file = file;
             _assemblyHelper = assemblyHelper;
+            _nameProvider = nameProvider;
         }
+
+        public string DefaultPrinterName { get; set; } = "PDFCreator";
 
         public bool TryRepairPrinter(IEnumerable<string> printerNames)
         {
             Logger.Error("It looks like the printers are broken. This needs to be fixed to allow PDFCreator to work properly");
 
-            var title = _translator.GetTranslation("Application", "RepairPrinterNoPrintersInstalled");
-            var message = _translator.GetTranslation("Application", "RepairPrinterAskUserUac");
+            var title = _translation.RepairPrinterNoPrintersInstalled;
+            var message = _translation.RepairPrinterAskUserUac;  
 
             Logger.Debug("Asking to start repair..");
 
@@ -58,15 +64,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                 if (!_file.Exists(printerHelperPath))
                 {
                     Logger.Error("PrinterHelper.exe does not exist!");
-                    title = _translator.GetTranslation("Application", "Error");
-                    message = _translator.GetFormattedTranslation("Application", "SetupFileMissing", _pathSafe.GetFileName(printerHelperPath));
+                    title = _translation.Error;
+                    message = _translation.GetSetupFileMissingMessage(_pathSafe.GetFileName(printerHelperPath));
 
                     ShowMessage(message, title, MessageOptions.OK, MessageIcon.Error);
                     return false;
                 }
 
                 Logger.Debug("Reinstalling Printers...");
-                var pdfcreatorPath = _pathSafe.Combine(applicationPath, "PDFCreator.exe");
+                var pdfcreatorPath = _nameProvider.GetPortApplicationPath();
 
                 var printerNameString = GetPrinterNameString(printerNames);
 
@@ -97,7 +103,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             var printers = printerNames.ToList();
 
             if (!printers.Any())
-                printers.Add("PDFCreator");
+                printers.Add(DefaultPrinterName);
 
             return string.Join(" ", printers.Select(printerName => "\"" + printerName + "\""));
         }

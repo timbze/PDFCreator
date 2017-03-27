@@ -3,10 +3,7 @@
                     xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.Converter;assembly=PDFCreator.ViewModels">
     <Style x:Key="GpoStyle" TargetType="FrameworkElement" x:Shared="False">
         <Style.Resources>
-            <converter:TranslatorConverter
-                x:Key="TranslatorConverter"
-                TranslationSection="Application"
-                TranslationKey="SetByAdministrator" />
+            <converter:TranslatorConverter x:Key="TranslatorConverter"/>
         </Style.Resources>
         <Setter Property="ToolTipService.ToolTip">
             <Setter.Value>

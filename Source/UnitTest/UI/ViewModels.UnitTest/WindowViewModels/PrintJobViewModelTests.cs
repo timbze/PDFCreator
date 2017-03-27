@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DataStorage;
 using pdfforge.DataStorage.Storage;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -15,25 +12,16 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using Rhino.Mocks;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
 {
     [TestFixture]
     public class PrintJobViewModelTests
     {
-        [SetUp]
-        public void Setup()
-        {
-            _translationData = Data.CreateDataStorage();
-            _translationData.SetValue(@"PrintJobWindow\OneMoreJobWaiting", "One more Job waiting");
-            _translationData.SetValue(@"PrintJobWindow\MoreJobsWaiting", "There are {0} more Jobs waiting");
-            _translationData.SetValue(@"PrintJobWindow\NoJobsWaiting", "Print more documents to merge or rearrange them");
-        }
-
-        private Data _translationData;
-
         private PrintJobViewModel CreateSomePrintJobViewModel(string applicationName = "PDFCreator")
         {
             return CreateSomePrintJobViewModelWithQueue(MockRepository.GenerateStub<IJobInfoQueue>(), applicationName);
@@ -74,11 +62,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
             var settingsManager = Substitute.For<ISettingsManager>();
             settingsManager.GetSettingsProvider().Returns(settingsHelper);
 
-            var translator = new BasicTranslator("default", _translationData);
+            var translator = new TranslationFactory();
 
             var userGuideHelper = Substitute.For<IUserGuideHelper>();
 
-            var printJobViewModel = new PrintJobViewModel(settingsManager, jobInfoQueue, translator, new DragAndDropEventHandler(MockRepository.GenerateStub<IFileConversionHandler>()), MockRepository.GenerateStub<IInteractionInvoker>(), userGuideHelper, new ApplicationNameProvider(applicationName));
+            var printJobViewModel = new PrintJobViewModel(settingsManager, jobInfoQueue, new PrintJobViewModelTranslation(), new DragAndDropEventHandler(MockRepository.GenerateStub<IFileConversionHandler>()), MockRepository.GenerateStub<IInteractionInvoker>(), userGuideHelper, new ApplicationNameProvider(applicationName), new InvokeImmediatelyDispatcher());
             printJobViewModel.SetInteraction(interaction);
             printJobViewModel.FinishInteraction = () => { };
 
@@ -97,11 +85,9 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
             var settingsManager = Substitute.For<ISettingsManager>();
             settingsManager.GetSettingsProvider().Returns(settingsHelper);
 
-            var translator = new BasicTranslator("default", _translationData);
-
             var userGuideHelper = Substitute.For<IUserGuideHelper>();
 
-            var printJobViewModel = new PrintJobViewModel(settingsManager, queue, translator, new DragAndDropEventHandler(Substitute.For<IFileConversionHandler>()), MockRepository.GenerateStub<IInteractionInvoker>(), userGuideHelper, new ApplicationNameProvider("PDFCreator"));
+            var printJobViewModel = new PrintJobViewModel(settingsManager, queue, new PrintJobViewModelTranslation(), new DragAndDropEventHandler(Substitute.For<IFileConversionHandler>()), MockRepository.GenerateStub<IInteractionInvoker>(), userGuideHelper, new ApplicationNameProvider("PDFCreator"), new InvokeImmediatelyDispatcher());
 
             var interaction = new PrintJobInteraction(null, preselectedProfile);
 
@@ -250,10 +236,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
         {
             var queueStub = MockRepository.GenerateStub<IJobInfoQueue>();
             queueStub.Stub(x => x.Count).Return(2);
+            var translation = new PrintJobViewModelTranslation();
 
             var printJobViewModel = CreateSomePrintJobViewModelWithQueue(queueStub);
 
-            Assert.AreEqual("One more Job waiting", printJobViewModel.PendingJobsText);
+            Assert.AreEqual(translation.FormatMoreJobsWaiting(1), printJobViewModel.PendingJobsText);
         }
 
         [Test]

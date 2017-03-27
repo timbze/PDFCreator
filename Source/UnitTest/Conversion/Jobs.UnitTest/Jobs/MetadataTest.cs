@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Utilities;
 using Rhino.Mocks;
 

@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.Converter;assembly=PDFCreator.ViewModels"
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
-        Title="About PDFCreator"
+        Title="{Binding Translation.Title}"
         Height="330" Width="700"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
@@ -62,7 +62,7 @@
                        Text="{Binding ApplicationName}" />
             <TextBlock DockPanel.Dock="Top" FontSize="12" FontWeight="Bold" Foreground="#888" Padding="10 0"
                        Text="{Binding VersionText}" />
-            <TextBlock DockPanel.Dock="Bottom" VerticalAlignment="Bottom" TextWrapping="Wrap" Name="LicenseInfo">PDFCreator is free software consisting of multiple components with individual licenses. Please read the license section in the manual for further information on these licenses.</TextBlock>
+            <TextBlock DockPanel.Dock="Bottom" VerticalAlignment="Bottom" TextWrapping="Wrap" Text ="{Binding Translation.LicenseInfoText}"></TextBlock>
             <StackPanel DockPanel.Dock="Top" Name="CustomizationPanel" Visibility="Visible" VerticalAlignment="Center">
                 <TextBlock Name="CustomText" HorizontalAlignment="Center" Margin="0 5 0 5">Licensed for:</TextBlock>
                 <Image Name="CustomImage" MaxWidth="400" MaxHeight="90" />
@@ -78,10 +78,9 @@
                 <SolidColorBrush Opacity="0.05" Color="Black" />
             </UniformGrid.Background>
             <Button Style="{StaticResource NoChromeButton}" Name="UserManualButton"
-                    Command="{Binding ShowManualCommand}">
-                User Manual
+                    Command="{Binding ShowManualCommand}" Content ="{Binding Translation.UserManualButtonContent}">
             </Button>
-            <Button Style="{StaticResource NoChromeButton}" Name="LicenseButton" Command="{Binding ShowLicenseCommand}">License</Button>
+            <Button Style="{StaticResource NoChromeButton}" Command="{Binding ShowLicenseCommand}" Content ="{Binding Translation.LicenseButtonContent}"></Button>
             <Button Style="{StaticResource NoChromeButton}" Name="DonateButton" Command="{Binding DonateCommand}">
                 <Image
                     Source="{Binding Source={x:Static properties1:Resources.donate}, Converter={StaticResource BitmapToBitmapsourceConverter}}"

@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Actions.Queries;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -9,6 +8,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.Query;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
 {
@@ -16,11 +16,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
     {
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ITranslator _translator;
+        private readonly SmtpSettingsAndActionControlTranslation _translation;
 
-        public InteractiveSmtpPasswordProvider(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public InteractiveSmtpPasswordProvider(SmtpSettingsAndActionControlTranslation translation, IInteractionInvoker interactionInvoker)
         {
-            _translator = translator;
+            _translation = translation;
             _interactionInvoker = interactionInvoker;
         }
 
@@ -79,16 +79,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WorkflowQuery
         private PasswordInteraction CreateAndInvokeInteraction(Job job, bool retype)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(_translator.GetTranslation("pdfforge.PDFCreator.UI.Views.ActionControls.EmailClientActionControl","RecipientsText.Text"));
+            sb.AppendLine(_translation.RecipientsText);
             sb.AppendLine(job.Profile.EmailSmtpSettings.Recipients);
             if (retype)
             {
                 sb.AppendLine();
-                sb.AppendLine(_translator.GetTranslation("InteractiveWorkflow", "RetypeSmtpPwMessage"));
+                sb.AppendLine(_translation.RetypeSmtpPwMessage);
             }
 
-            var title = _translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordTitle");
-            var description = _translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordDescription");
+            var title = _translation.SmtpPasswordTitle;
+            var description = _translation.SmtpPasswordDescription;
 
             var button = retype ? PasswordMiddleButton.None : PasswordMiddleButton.Skip;
             var interaction = new PasswordInteraction(button, title, description, false)

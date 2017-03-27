@@ -1,9 +1,8 @@
-﻿using pdfforge.Obsidian;
-using pdfforge.PDFCreator.Core.Services.Translation;
-using pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper;
+﻿using pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper;
 using pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ProfileSettings;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows
 {
@@ -11,7 +10,7 @@ namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows
     {
         public DesignTimeProfileSettingsViewModel()
             : base(new DesignTimeInteractionInvoker(),
-                new TranslationProxy(),
+                new ProfileSettingsWindowTranslation(), 
                 null,
                 new ProfileSettingsViewModelBundle(
                     new DesignTimeDocumentTabViewModel(),

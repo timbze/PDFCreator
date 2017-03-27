@@ -3,7 +3,6 @@ using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.Editions.PDFCreator;
 using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow

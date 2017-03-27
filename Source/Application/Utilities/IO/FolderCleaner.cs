@@ -48,42 +48,60 @@ namespace pdfforge.PDFCreator.Utilities.IO
         private void Clean(string folder, TimeSpan minAge)
         {
             var folders = new DirectoryInfo(folder).GetDirectories();
-            foreach (var dir in folders)
+            foreach (var item in folders)
             {
-                var subFolder = dir.FullName;
-                Clean(subFolder, minAge);
-                if (!Directory.EnumerateFileSystemEntries(subFolder).Any())
+                if (Directory.Exists(item.FullName))
                 {
-                    try
-                    {
-                        var directory = new DirectoryInfo(subFolder);
-                        var folderAge = DateTime.UtcNow - directory.CreationTimeUtc;
-
-                        if (folderAge >= minAge)
-                            Directory.Delete(subFolder);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleException(subFolder, ex);
-                    }
+                    Clean(item.FullName, minAge);
+                    if (!Directory.EnumerateFileSystemEntries(item.FullName).Any())
+                        DeleteFolder(minAge, item.FullName);
                 }
             }
 
-            var files = new DirectoryInfo(folder).GetFiles();
-            foreach (var file in files)
+            DeleteFiles(folder, minAge);
+        }
+
+        private void DeleteFolder(TimeSpan minAge, string subFolder)
+        {
+            if (Directory.Exists(subFolder) && !Directory.EnumerateFileSystemEntries(subFolder).Any())
             {
                 try
                 {
-                    var fileAge = DateTime.UtcNow - file.CreationTimeUtc;
-                    if (fileAge >= minAge)
-                        File.Delete(file.FullName);
+                    var directory = new DirectoryInfo(subFolder);
+                    var folderAge = DateTime.UtcNow - directory.CreationTimeUtc;
+
+                    if (folderAge >= minAge)
+                        Directory.Delete(subFolder);
                 }
                 catch (Exception ex)
                 {
-                    HandleException(file.FullName, ex);
+                    HandleException(subFolder, ex);
                 }
             }
         }
+
+        private void DeleteFiles(string folder, TimeSpan minAge)
+        {
+            if (Directory.Exists(folder))
+            {
+                var files = new DirectoryInfo(folder).GetFiles();
+                foreach (var item in files)
+                {
+                    try
+                    {
+                        var fileAge = DateTime.UtcNow - item.CreationTimeUtc;
+                        if (File.Exists(item.FullName) && fileAge >= minAge)
+                            File.Delete(item.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleException(item.FullName, ex);
+                    }
+                }
+            }
+        }
+
+
 
         private void HandleException(string path, Exception ex)
         {

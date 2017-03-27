@@ -19,7 +19,7 @@
         <DockPanel LastChildFill="True">
             <StackPanel DockPanel.Dock="Left">
                 <Label>
-                    <TextBlock Name="ScriptFileText">Script file:</TextBlock>
+                    <TextBlock Text="{Binding Translation.ScriptFileText}" ></TextBlock>
                 </Label>
                 <DockPanel>
                     <Button DockPanel.Dock="Right" Command="{Binding BrowseScriptCommand}" MinWidth="25"
@@ -34,7 +34,7 @@
         </DockPanel>
         <DockPanel Margin="15 5 0 0">
             <Label>
-                <TextBlock Name="AddScriptTokenText">Add Token:</TextBlock>
+                <TextBlock Text="{Binding Translation.AddScriptTokenText}"></TextBlock>
             </Label>
             <ComboBox Margin="5 0 0 0" VerticalAlignment="Center" Name="AddScriptTokenComboBox"
                       ItemsSource="{Binding ScriptFileTokenViewModel.TokenList}"
@@ -47,7 +47,7 @@
         </DockPanel>
         <StackPanel Margin="0 5 0 0">
             <Label>
-                <TextBlock Name="AdditionalParametersText" TextWrapping="Wrap">Additional parameters:</TextBlock>
+                <TextBlock Text="{Binding Translation.AdditionalParametersText}" TextWrapping="Wrap"></TextBlock>
             </Label>
             <views:BindableTextBox x:Name="AdditionalParametersTextBox"
                                    BindableSelectionStart="{Binding ParameterTokenViewModel.CurrentCursorPos}"
@@ -55,7 +55,7 @@
         </StackPanel>
         <DockPanel Margin="15 5 0 0">
             <Label>
-                <TextBlock Name="AddParameterTokenText">Add Token:</TextBlock>
+                <TextBlock Text="{Binding Translation.AddParameterTokenText}"></TextBlock>
             </Label>
             <ComboBox Name="AddParameterTokenComboBox" VerticalAlignment="Center" Margin="5 0 0 0"
                       ItemsSource="{Binding ParameterTokenViewModel.TokenList}"
@@ -68,15 +68,14 @@
         </DockPanel>
         <DockPanel LastChildFill="False">
             <Label>
-                <TextBlock DockPanel.Dock="Left" Name="ScriptCallPreviewText" TextWrapping="Wrap">Sample script call:</TextBlock>
+                <TextBlock DockPanel.Dock="Left" Text="{Binding Translation.ScriptCallPreviewText}" TextWrapping="Wrap"></TextBlock>
             </Label>
             <userControls:TokenHintPanel DockPanel.Dock="Right"
-                                         TextWithToken="{Binding Text, ElementName=AdditionalParametersTextBox}"
-                                         Translator="{Binding Translator}" />
+                                         TextWithToken="{Binding Text, ElementName=AdditionalParametersTextBox}" />
         </DockPanel>
-        <TextBox Name="ScriptCallPreviewTextBox" IsReadOnly="True" Text="{Binding PreviewScriptCall}" />
+        <TextBox  Name="ScriptCallPreviewTextBox" IsReadOnly="True" Text="{Binding PreviewScriptCall}" />
         <CheckBox IsChecked="{Binding CurrentProfile.Scripting.WaitForScript}" Margin="0 10 0 0">
-            <TextBlock Name="WaitForScript" TextWrapping="Wrap">Wait until the script execution has ended</TextBlock>
+            <TextBlock Text="{Binding Translation.WaitForScriptText}" TextWrapping="Wrap"></TextBlock>
         </CheckBox>
     </StackPanel>
 </actionViewModels:ActionControl>

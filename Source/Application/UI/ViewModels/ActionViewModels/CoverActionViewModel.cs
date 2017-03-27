@@ -1,5 +1,5 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
@@ -8,18 +8,18 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
 
-        public CoverActionViewModel(ITranslator translator, IOpenFileInteractionHelper openFileInteractionHelper)
+        public CoverActionViewModel(CoverSettingsTranslation translation, IOpenFileInteractionHelper openFileInteractionHelper)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
-            Translator = translator;
+            Translation = translation;
 
             SelectCoverCommand = new DelegateCommand(SelectCoverExecute);
 
-            DisplayName = Translator.GetTranslation("CoverSettings", "DisplayName");
-            Description = Translator.GetTranslation("CoverSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
 
-        public ITranslator Translator { get; }
+        public CoverSettingsTranslation Translation { get; }
 
         public DelegateCommand SelectCoverCommand { get; set; }
 
@@ -35,10 +35,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void SelectCoverExecute(object obj)
         {
-            var title = Translator.GetTranslation("CoverSettings", "SelectCoverFile");
-            var filter = Translator.GetTranslation("CoverSettings", "PDFFiles")
+            var title = Translation.SelectCoverFile;
+            var filter = Translation.PDFFiles
                          + @" (*.pdf)|*.pdf|"
-                         + Translator.GetTranslation("CoverSettings", "AllFiles")
+                         + Translation.AllFiles
                          + @" (*.*)|*.*";
             CurrentProfile.CoverPage.File = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.CoverPage.File, title, filter);
             RaisePropertyChanged(nameof(CurrentProfile));

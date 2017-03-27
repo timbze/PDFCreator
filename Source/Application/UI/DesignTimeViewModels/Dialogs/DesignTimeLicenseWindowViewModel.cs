@@ -8,7 +8,7 @@ namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Dialogs
 {
     public class DesignTimeLicenseWindowViewModel : LicenseWindowViewModel
     {
-        public DesignTimeLicenseWindowViewModel() : base(new DesignTimeLicenseTabViewModel(),  new ApplicationNameProvider("PDFCreator"), new VersionHelper(new AssemblyHelper()), new DesignTimeUserGuideHelper(), new DesignTimeActivationHelper())
+        public DesignTimeLicenseWindowViewModel() : base(new DesignTimeLicenseTabViewModel(),  new ApplicationNameProvider("PDFCreator"), new VersionHelper(new AssemblyHelper()), new DesignTimeUserGuideHelper())
         {
         }
     }

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using pdfforge.DataStorage;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
+using pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing;
 using pdfforge.PDFCreator.Core.GpoAdapter;
 using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -19,6 +23,7 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
         protected override string EditionName => "PDFCreator Custom";
         protected override bool HideLicensing => true;
         protected override bool ShowWelcomeWindow => false;
+        protected override bool ShowOnlyForPlusAndBusinessHint => false;
         protected override ButtonDisplayOptions ButtonDisplayOptions => new ButtonDisplayOptions(true, true);
 
         public bool ValidOnTerminalServer => Customization.ApplyCustomization.Equals("true", StringComparison.InvariantCultureIgnoreCase);
@@ -30,8 +35,8 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
 
         protected override void RegisterActivationHelper(Container container)
         {
-            container.RegisterSingleton<ILicenseServerHelper, UnlicensedLicenseServerHelper>();
-            container.RegisterSingleton<IActivationHelper, UnlicensedActivationHelper>();
+            container.Register<ILicenseChecker, UnlicensedLicenseChecker>();
+            container.Register<IOfflineActivator, UnlicensedOfflineActivator>();
         }
 
         protected override void RegisterUserTokenExtractor(Container container)
@@ -44,6 +49,8 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
         {
             if (!ValidOnTerminalServer)
                 defaultConditions.Add(typeof(TerminalServerNotAllowedCondition));
+
+            defaultConditions.Add(typeof(PdfToolsLicensingStartUpCondition));
 
             return defaultConditions;
         }
@@ -62,6 +69,12 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
         protected override SettingsProvider CreateSettingsProvider()
         {
             return new GpoAwareSettingsProvider();
+        }
+
+        protected override void RegisterPdfProcessor(Container container)
+        {
+            container.Register<IPdfProcessor, PdfToolsPdfProcessor>();
+            container.Register<IPdfToolsLicensing>(() => new PdfToolsLicensing(Data.Decrypt));
         }
     }
 }

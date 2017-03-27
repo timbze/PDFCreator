@@ -4,18 +4,16 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Windows
 {
     public partial class AboutWindow : Window
     {
-        public AboutWindow(AboutWindowViewModel aboutWindowViewModel, ITranslator translator, ViewCustomization customization)
+        public AboutWindow(AboutWindowViewModel aboutWindowViewModel, ViewCustomization customization)
         {
             DataContext = aboutWindowViewModel;
             InitializeComponent();
-            translator.Translate(this);
             ApplyCustomization(customization);
         }
 

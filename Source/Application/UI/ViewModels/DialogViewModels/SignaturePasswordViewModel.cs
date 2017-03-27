@@ -5,6 +5,7 @@ using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
 {
@@ -12,8 +13,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
     {
         private readonly ISignaturePasswordCheck _signaturePasswordCheck;
 
-        public SignaturePasswordViewModel(ISignaturePasswordCheck passwordCheck)
+        public SignaturePasswordViewModel(ISignaturePasswordCheck passwordCheck, SignaturePasswordWindowTranslation translation)
         {
+            Translation = translation;
             _signaturePasswordCheck = passwordCheck;
 
             StorePasswordCommand = new DelegateCommand(ExecuteStorePasswordCommand, CanExecuteStorePasswordCommand);
@@ -21,6 +23,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
             RemovePasswordCommand = new DelegateCommand(ExecuteRemovePasswordCommand);
         }
 
+        public SignaturePasswordWindowTranslation Translation { get; }
         public DelegateCommand StorePasswordCommand { get; }
         public DelegateCommand SkipCommand { get; private set; }
         public DelegateCommand RemovePasswordCommand { get; private set; }

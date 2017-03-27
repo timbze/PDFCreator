@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -11,13 +11,13 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
     {
         private readonly IRepairPrinterAssistant _repairPrinterAssistant;
         private readonly ISettingsLoader _settingsLoader;
-        private readonly ITranslator _translator;
+        private readonly ApplicationTranslation _translation;
 
-        public PrinterInstalledCondition(IRepairPrinterAssistant repairPrinterAssistant, ISettingsLoader settingsLoader, ITranslator translator)
+        public PrinterInstalledCondition(IRepairPrinterAssistant repairPrinterAssistant, ISettingsLoader settingsLoader, ApplicationTranslation translation)
         {
             _repairPrinterAssistant = repairPrinterAssistant;
             _settingsLoader = settingsLoader;
-            _translator = translator;
+            _translation = translation;
         }
 
         public StartupConditionResult Check()
@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 
             var printers = LoadPrinterNames();
             if (!_repairPrinterAssistant.TryRepairPrinter(printers))
-                return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.PrintersBroken, _translator.GetTranslation("Application", "RepairPrinterFailed"));
+                return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.PrintersBroken, _translation.RepairPrinterFailed);
             return StartupConditionResult.BuildSuccess();
         }
 

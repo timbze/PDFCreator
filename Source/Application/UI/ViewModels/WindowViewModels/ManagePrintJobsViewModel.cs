@@ -5,31 +5,33 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
+using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
     public class ManagePrintJobsViewModel : InteractionAwareViewModelBase<ManagePrintJobsInteraction>
     {
-        private readonly Dispatcher _currentThreadDispatcher;
         private readonly DragAndDropEventHandler _dragAndDrop;
         private readonly IJobInfoManager _jobInfoManager;
+        private readonly IDispatcher _dispatcher;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly ObservableCollection<JobInfo> _jobInfos;
+        private ManagePrintJobsWindowTranslation _translation;
 
-        public ManagePrintJobsViewModel(IJobInfoQueue jobInfoQueue, DragAndDropEventHandler dragAndDrop, IJobInfoManager jobInfoManager)
+        public ManagePrintJobsViewModel(IJobInfoQueue jobInfoQueue, DragAndDropEventHandler dragAndDrop, IJobInfoManager jobInfoManager, IDispatcher dispatcher, ManagePrintJobsWindowTranslation translation)
         {
-            _currentThreadDispatcher = Dispatcher.CurrentDispatcher;
             _jobInfoQueue = jobInfoQueue;
             _dragAndDrop = dragAndDrop;
             _jobInfoManager = jobInfoManager;
+            _dispatcher = dispatcher;
+            _translation = translation;
             _jobInfoQueue.OnNewJobInfo += OnNewJobInfo;
 
             ListSelectionChangedCommand = new DelegateCommand(ListSelectionChanged);
@@ -46,12 +48,22 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
             _jobInfos = new ObservableCollection<JobInfo>();
             JobInfos = new CollectionView(_jobInfos);
-            JobInfos.CurrentChanged += CurrentJobInfoChanged;
-
+            JobListSelectionChanged = new DelegateCommand(ListItemCHange);
             foreach (var jobInfo in _jobInfoQueue.JobInfos)
             {
                 AddJobInfo(jobInfo);
             }
+        }
+
+        private void ListItemCHange(object obj)
+        {
+            RaiseRefreshView();
+        }
+
+        public ManagePrintJobsWindowTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
         }
 
         public CollectionView JobInfos { get; }
@@ -66,6 +78,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         public DelegateCommand<DragEventArgs> DragEnterCommand { get; }
         public DelegateCommand<DragEventArgs> DropCommand { get; }
         public DelegateCommand<KeyEventArgs> KeyDownCommand { get; }
+
+        public DelegateCommand JobListSelectionChanged { get; set; }
 
         private void ListSelectionChanged(object obj)
         {
@@ -99,15 +113,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
             _jobInfoQueue.OnNewJobInfo -= OnNewJobInfo;
         }
 
-        private void CurrentJobInfoChanged(object sender, EventArgs e)
-        {
-            RaiseRefreshView();
-        }
-
         private void OnNewJobInfo(object sender, NewJobInfoEventArgs e)
         {
             Action<JobInfo> addMethod = AddJobInfo;
-            _currentThreadDispatcher.Invoke(addMethod, e.JobInfo);
+            _dispatcher.BeginInvoke(addMethod, e.JobInfo);
         }
 
         private void AddJobInfo(JobInfo jobInfo)
@@ -225,15 +234,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private bool CanExecuteMoveUp(object o)
         {
-            var jobs = o as IEnumerable<object>;
-            if (jobs == null)
+            var selectedJobs = (o as IEnumerable<object>)?.ToList();
+            if (selectedJobs == null)
+            {
                 return false;
+            }
 
-            var jobList = jobs.ToList();
-            if (jobList.Count != 1)
+            if (selectedJobs.Count != 1)
+            {
                 return false;
+            }
 
-            return _jobInfos.IndexOf((JobInfo) jobList.First()) > 0;
+            var indexOfSelectedElement = _jobInfos.IndexOf((JobInfo)selectedJobs.First());
+            // if indexofselected element is not on the bottom of list we can move up (meaning it is not first element in list)
+            return indexOfSelectedElement > 0;
         }
 
         private void ExecuteMoveDown(object o)
@@ -254,15 +268,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private bool CanExecuteMoveDown(object o)
         {
-            var jobs = o as IEnumerable<object>;
-            if (jobs == null)
+            var selectedJobs = (o as IEnumerable<object>)?.ToList();
+            if (selectedJobs == null)
+            {
                 return false;
+            }
 
-            var jobList = jobs.ToList();
-            if (jobList.Count != 1)
+            if (selectedJobs.Count != 1)
+            {
                 return false;
+            }
 
-            return _jobInfos.IndexOf((JobInfo) jobList.First()) < _jobInfos.Count - 1;
+            var indexOfSelectedElement = _jobInfos.IndexOf((JobInfo)selectedJobs.First());
+            // if indexofselected element is not on the bottom of list we can move up
+            return indexOfSelectedElement < _jobInfos.Count -1;
         }
 
         private void MoveJob(JobInfo jobInfo, int positionDifference)

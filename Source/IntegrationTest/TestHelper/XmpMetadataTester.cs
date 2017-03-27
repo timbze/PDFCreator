@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -7,6 +8,7 @@ using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace PDFCreator.TestUtilities
 {
@@ -15,10 +17,10 @@ namespace PDFCreator.TestUtilities
         public static void CheckForXMPMetadataUpdateStrings(Job job)
         {
             foreach (var file in job.OutputFiles)
-                CheckForXMPMetadataUpdateStrings(file, job.JobInfo.Metadata, job.Profile.PdfSettings.Security.Enabled, job.Passwords.PdfOwnerPassword);
+                CheckForXMPMetadataUpdateStrings(file, job.JobInfo.Metadata, job.Profile.OutputFormat, job.Profile.PdfSettings.Security.Enabled, job.Passwords.PdfOwnerPassword);
         }
 
-        public static void CheckForXMPMetadataUpdateStrings(string file, Metadata metadata, bool encryption, string ownerPassword)
+        public static void CheckForXMPMetadataUpdateStrings(string file, Metadata metadata, OutputFormat format, bool encryption, string ownerPassword)
         {
             if (encryption)
             {
@@ -28,9 +30,11 @@ namespace PDFCreator.TestUtilities
             var content = File.ReadAllText(file);
             var regex = new Regex(@"(<.xpacket begin=[\s\S]*?<.xpacket end=.+>)");
             var matches = regex.Matches(content);
-            var xmlString = matches[matches.Count - 1].ToString();
 
-            Assert.IsNotNullOrEmpty(xmlString, "Missing XMP Metadata starting and ending  with \'<?xpacket\'.");
+            string xmlString;
+            Assert.DoesNotThrow(() => { xmlString = matches[matches.Count - 1].ToString();},
+                "Missing XMP Metadata starting and ending  with \'<?xpacket\'.");
+            xmlString = matches[matches.Count - 1].ToString();
 
             //Check if xmp structure is valid
             var doc = new XmlDocument();
@@ -49,7 +53,8 @@ namespace PDFCreator.TestUtilities
 
             var node = doc.SelectSingleNode("//pdfaid:part", nsmgr);
             Assert.NotNull(node, "PDF/A id part is not set.");
-            Assert.AreEqual("2", node.InnerText.Trim(), "PDF/A id part is not set properly.");
+            var part = format == OutputFormat.PdfA1B ? "1" : "2";
+            Assert.AreEqual(part, node.InnerText.Trim(), "PDF/A id part is not set properly.");
 
             node = doc.SelectSingleNode("//pdfaid:conformance", nsmgr);
             Assert.NotNull(node, "PDF/A id conformance is not set.");
@@ -57,10 +62,9 @@ namespace PDFCreator.TestUtilities
 
             node = doc.SelectSingleNode("//xmp:CreateDate", nsmgr);
             Assert.NotNull(node, "Creation date is not set.");
-            Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), @"[1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]([\+\-Z][0-2][0-9]:[0-5][0-9]){0,1}"), "Creation date in wrong format.");
-            var creationDate = PdfDate.Decode(reader.Info["CreationDate"]);
-            var createDate = creationDate.ToString("yyyy-MM-ddTHH:mm:ss") + @"([\+\-Z][0-2][0-9]:[0-5][0-9]){0,1}";
-            Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), createDate), "Creation date is wrong.\r\nExpected: " + createDate + "\r\nBut was: " + node.InnerText.Trim());
+            var expectedDate = PdfDate.Decode(reader.Info["CreationDate"]);
+            var creationDate = DateTime.Parse(node.InnerText.Trim());
+            Assert.AreEqual(expectedDate, creationDate, "Creation date is wrong.");
 
             node = doc.SelectSingleNode("//xmp:ModifyDate", nsmgr);
             Assert.NotNull(node, "Modify date is not set.");
@@ -78,22 +82,20 @@ namespace PDFCreator.TestUtilities
             node = doc.SelectSingleNode("//dc:creator/rdf:Seq/rdf:li", nsmgr);
             Assert.NotNull(node, "Creator is not set.");
             Assert.AreEqual(metadata.Author, node.InnerText.Trim(), "Creator (Author) is not set properly.");
-
-            node = doc.SelectSingleNode("//dc:subject/rdf:Bag/rdf:li", nsmgr);
-            Assert.NotNull(node, "Subject (Keywords) is not set.");
-            Assert.AreEqual(metadata.Keywords, node.InnerText.Trim(), "Subject (Keywords) is not set properly.");
-
-            node = doc.SelectSingleNode("//xmpMM:DocumentID", nsmgr);
-            Assert.NotNull(node, "Document ID is not set.");
-            Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), "uuid:[0-9A-Z]{32}"), "Document ID in wrong format.");
-
+            
             node = doc.SelectSingleNode("//pdf:Producer", nsmgr);
             Assert.NotNull(node, "PDF producer is not set.");
             Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), "PDFCreator [0-9].[0-9].[0-9].[0-9].*"), "PDF producer is not PDFCreator X.X.X.X.");
-
+            
             node = doc.SelectSingleNode("//pdf:Keywords", nsmgr);
             Assert.NotNull(node, "PDF Keywords are not set.");
-            Assert.AreEqual(metadata.Keywords, node.InnerText.Trim(), "Keywords (in <pdf:Keywords>)  are not set properly.");
+            Assert.AreEqual(metadata.Keywords, node.InnerText.Trim(), "Keywords are not set properly.");
+
+            /* 
+            node = doc.SelectSingleNode("//xmpMM:DocumentID", nsmgr);
+            Assert.NotNull(node, "Document ID is not set.");
+            Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), @"uuid:[0-9A-Za-z\-]{32,}"), "Document ID in wrong format.");
+            //*/
         }
 
         private void ValidXSD(string xmlString)

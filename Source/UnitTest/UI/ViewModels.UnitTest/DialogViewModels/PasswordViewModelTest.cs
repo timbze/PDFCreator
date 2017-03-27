@@ -2,6 +2,7 @@
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
@@ -12,7 +13,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void CanRemovePassword_WithRemovePasswordEnabled_IsTrue()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -22,7 +23,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void CanRemovePassword_WithSkipEnabled_IsFalse()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Skip, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -32,7 +33,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void CanSkip_WithRemovePasswordEnabled_IsFalse()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -42,7 +43,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void CanSkip_WithSkipEnabled_IsTrue()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Skip, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -53,7 +54,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         public void FtpPassword_OnSet_WritesToInteractionAndCallCanExecuteChanged()
         {
             var interacton = new PasswordInteraction(PasswordMiddleButton.Skip, "", "");
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             viewModel.SetInteraction(interacton);
 
             var canExecuteChanged = false;
@@ -68,14 +69,14 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_CanExecute_WithoutInteraction_IsFalse()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             Assert.IsFalse(viewModel.OkCommand.CanExecute(null));
         }
 
         [Test]
         public void OkCommand_CanExecute_WithPassword_IsTrue()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             viewModel.SetInteraction(new PasswordInteraction(PasswordMiddleButton.Remove, "", "") {Password = "myPassword"});
             Assert.IsTrue(viewModel.OkCommand.CanExecute(null));
         }
@@ -83,7 +84,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OkCommand_OnExecute_CompletesInteraction()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Skip, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -96,7 +97,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OnInteractionSet_SetsPasswordsInView()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var canExecuteChanged = false;
             viewModel.OkCommand.CanExecuteChanged += (sender, args) => canExecuteChanged = true;
             var interaction = new PasswordInteraction(PasswordMiddleButton.Skip, "", "") {Password = "thePassword"};
@@ -112,7 +113,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void RemoveCommand_OnExecute_FinishesInteraction()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, "", "") {Password = "MyPassword"};
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
 
@@ -126,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void SkipCommand_OnExecute_FinishesInteraction()
         {
-            var viewModel = new PasswordViewModel();
+            var viewModel = new PasswordViewModel(new PasswordWindowTranslation());
             var interaction = new PasswordInteraction(PasswordMiddleButton.Skip, "", "");
             var helper = new InteractionHelper<PasswordInteraction>(viewModel, interaction);
             viewModel.Password = "myPassword";

@@ -3,13 +3,17 @@ using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
 {
     public class PasswordViewModel : InteractionAwareViewModelBase<PasswordInteraction>
     {
-        public PasswordViewModel()
+        private  PasswordWindowTranslation _translation;
+
+        public PasswordViewModel(PasswordWindowTranslation translation)
         {
+            _translation = translation;
             OkCommand = new DelegateCommand(ExecuteOk, CanExecuteOk);
             RemoveCommand = new DelegateCommand(ExecuteRemove);
             SkipCommand = new DelegateCommand(ExecuteSkip);
@@ -26,6 +30,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
                 Interaction.Password = value;
                 OkCommand.RaiseCanExecuteChanged();
             }
+        }
+
+        public PasswordWindowTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
         }
 
         public bool ShowIntroText => !string.IsNullOrWhiteSpace(Interaction?.IntroText);

@@ -1,7 +1,7 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels;
 using pdfforge.PDFCreator.Utilities.Tokens;
@@ -12,17 +12,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
     {
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public FtpActionViewModel(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public FtpActionViewModel(FtpActionSettingsAndActionTranslation translation, IInteractionInvoker interactionInvoker, TokenHelper tokenHelper)
         {
             _interactionInvoker = interactionInvoker;
-            Translator = translator;
+            Translation = translation;
 
             SetPasswordCommand = new DelegateCommand(SetPasswordExecute);
 
-            DisplayName = Translator.GetTranslation("FtpActionSettings", "DisplayName");
-            Description = Translator.GetTranslation("FtpActionSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
 
-            var tokenHelper = new TokenHelper(Translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
             TokenViewModel = new TokenViewModel(x => CurrentProfile.Ftp.Directory = x, () => CurrentProfile?.Ftp.Directory, TokenReplacer.GetTokenNames(true));
@@ -30,7 +29,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         public TokenViewModel TokenViewModel { get; set; }
 
-        public ITranslator Translator { get; }
+        public FtpActionSettingsAndActionTranslation Translation { get; }
 
         public TokenReplacer TokenReplacer { get; set; }
 
@@ -64,8 +63,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void SetPasswordExecute(object obj)
         {
-            var title = Translator.GetTranslation("FtpActionSettings", "PasswordTitle");
-            var passwordDescription = Translator.GetTranslation("FtpActionSettings", "PasswordDescription");
+            var title = Translation.PasswordTitle;
+            var passwordDescription = Translation.PasswordDescription;
 
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, title, passwordDescription);
             interaction.Password = Password;

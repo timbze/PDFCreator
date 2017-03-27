@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
 using SystemInterface.IO;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -9,9 +8,10 @@ using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services.Translation;
+using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 {
@@ -25,17 +25,21 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private readonly IFile _file;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IPath _path;
+        private readonly IMailSignatureHelper _mailSignatureHelper;
+        private readonly ErrorCodeInterpreter _errorCodeInterpreter;
         private readonly ISmtpMailAction _smtpMailAction;
-        private readonly ITranslator _translator;
+        private readonly SmtpSettingsAndActionControlTranslation _translation;
 
-        public SmtpTestEmailAssistant(ITranslator translator, IInteractionInvoker interactionInvoker, IFile file,
-            ISmtpMailAction smtpMailAction, IPath path)
+        public SmtpTestEmailAssistant(SmtpSettingsAndActionControlTranslation translation, IInteractionInvoker interactionInvoker, IFile file,
+            ISmtpMailAction smtpMailAction, IPath path, IMailSignatureHelper mailSignatureHelper, ErrorCodeInterpreter errorCodeInterpreter)
         {
             _file = file;
-            _translator = translator;
+            _translation = translation;
             _interactionInvoker = interactionInvoker;
             _smtpMailAction = smtpMailAction;
             _path = path;
+            _mailSignatureHelper = mailSignatureHelper;
+            _errorCodeInterpreter = errorCodeInterpreter;
         }
 
         public void SendTestMail(ConversionProfile profile, Accounts accounts)
@@ -43,8 +47,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             var currentProfile = profile.Copy();
 
             currentProfile.AutoSave.Enabled = false;
-
-            var signatureHelper = new MailSignatureHelper(_translator);
 
             var actionResult = _smtpMailAction.Check(currentProfile, accounts);
 
@@ -55,7 +57,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             }
 
             var jobTranslations = new JobTranslations();
-            jobTranslations.EmailSignature = signatureHelper.ComposeMailSignature(currentProfile.EmailSmtpSettings);
+            jobTranslations.EmailSignature = _mailSignatureHelper.ComposeMailSignature();
 
             var job = CreateJob(jobTranslations, currentProfile, accounts);
 
@@ -84,13 +86,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             }
 
             var sb = new StringBuilder();
-            sb.AppendLine(
-                _translator.GetTranslation("pdfforge.PDFCreator.UI.Views.ActionControls.EmailClientActionControl",
-                    "RecipientsText.Text"));
+            sb.AppendLine(_translation.RecipientsText);
             sb.AppendLine(profile.EmailSmtpSettings.Recipients);
 
-            var title = _translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordTitle");
-            var description = _translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordDescription");
+            var title = _translation.SmtpPasswordTitle;
+            var description = _translation.SmtpPasswordDescription;
 
             var interaction = new PasswordInteraction(PasswordMiddleButton.None, title, description, false);
             interaction.IntroText = sb.ToString();
@@ -116,8 +116,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         {
             if (actionResult.IsSuccess)
             {
-                var title = _translator.GetTranslation("SmtpEmailActionSettings", "SendTestMail");
-                var message = _translator.GetFormattedTranslation("SmtpEmailActionSettings", "TestMailSent", recipients);
+                var title = _translation.SendTestMail;
+                var message = _translation.GetTestMailSentFormattedTranslation(recipients);
                 DisplayMessage(message, title, MessageIcon.Info);
             }
             else
@@ -128,15 +128,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
         private void DisplayErrorMessage(ActionResult actionResult)
         {
-            var title = _translator.GetTranslation("SmtpEmailActionSettings", "SendTestMail");
+            var title = _translation.SendTestMail;
             var message = GetErrorMessage(actionResult.First());
             DisplayMessage(message, title, MessageIcon.Error);
         }
 
         private string GetErrorMessage(ErrorCode errorCode)
         {
-            var errorCodeInterpreter = new ErrorCodeInterpreter(_translator);
-            return errorCodeInterpreter.GetFirstErrorText(new ActionResult(errorCode), withNumber: false);
+            return _errorCodeInterpreter.GetFirstErrorText(new ActionResult(errorCode), withNumber: false);
         }
 
         private void DisplayMessage(string message, string title, MessageIcon icon)

@@ -18,8 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
-        <HeaderedContentControl Name="MetadataControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Metadata">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.MetadataControlHeader}">
             <Grid Margin="0,5,0,0">
                 <Grid.Resources>
                     <Style TargetType="TextBox">
@@ -61,26 +60,24 @@
                 </Grid.RowDefinitions>
 
                 <!--title part-->
-
                 <!--Title text-->
-                <!--author label-->
-                <Label Name="TitleLabel" Grid.Row="0" Grid.Column="0"  FontWeight="Bold">Title:</Label>
+
+                <Label Content="{Binding Translation.TitleLabelContent}" Grid.Row="0" Grid.Column="0"  FontWeight="Bold"></Label>
                 <!--Title textbox-->
                 <views:BindableTextBox x:Name="TitleTextBox" Grid.Row="0" Grid.Column="1" 
                                        Text="{Binding TitleViewModel.Text}" 
                                        BindableSelectionStart="{Binding TitleViewModel.CurrentCursorPos}" />
                 <!--Title token label-->
-                <Label Name="TitleTokenLabel" Grid.Row="0" Grid.Column="2"  >Add Token:</Label>
+                <Label Name="TitleTokenLabel"  Content="{Binding Translation.TitleTokenLabelContent}" Grid.Row="0" Grid.Column="2"></Label>
                 <!--Title token combobox-->
-                <ComboBox 
-                    Name="TitleTokensComboBox" Grid.Row="0" Grid.Column="3"  ItemsSource="{Binding TitleViewModel.TokenList}" SelectedItem="{Binding TitleViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True">
+                <ComboBox Grid.Row="0" Grid.Column="3"  ItemsSource="{Binding TitleViewModel.TokenList}" SelectedItem="{Binding TitleViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True">
                     <i:Interaction.Behaviors>
                         <obsidian:EventToCommandBehavior Event="SelectionChanged"
                         Command="{Binding TitleViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
                 <!--Title preview label-->
-                <Label Foreground="DarkGray"  Name="TitlePreviewLabel" Grid.Row="1" Grid.Column="0" Padding="5,0,0,13">Preview:</Label>
+                <Label Foreground="DarkGray" Content="{Binding Translation.TitlePreviewLabelContent}"  Grid.Row="1" Grid.Column="0" Padding="5,0,0,13"></Label>
                 <!--Title preview textbox-->
                 <TextBox Name="TitlePreviewText" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False" >
                     <TextBox.Text>
@@ -91,26 +88,25 @@
                     </TextBox.Text>
                 </TextBox>
                 <!--Title preview tokenhintpanel-->
-                <userControls:TokenHintPanel Grid.Row="1" Grid.Column="3" TextWithToken="{Binding Text, ElementName=TitleTextBox}" Translator="{Binding Translator}" />
+                <userControls:TokenHintPanel Grid.Row="1" Grid.Column="3" TextWithToken="{Binding Text, ElementName=TitleTextBox}" />
                 <!--author part-->
 
                 <!--author label-->
-                <Label Name="AuthorLabel" Grid.Row="2" Grid.Column="0" FontWeight="Bold">Author:</Label>
+                <Label Grid.Row="2" Grid.Column="0" FontWeight="Bold" Content="{Binding Translation.AuthorLabelContent}"></Label>
                 <!--author textbox-->
                 <views:BindableTextBox x:Name="AuthorTextBox" Grid.Row="2" Grid.Column="1"
                                        Text="{Binding AuthorViewModel.Text}" BindableSelectionStart="{Binding AuthorViewModel.CurrentCursorPos}"/>
                 <!--author token label-->
-                <Label Name="AuthorTokenLabel" Grid.Row="2" Grid.Column="2" >Add Token:</Label>
+                <Label Content="{Binding Translation.AuthorTokenLabelContent}" Grid.Row="2" Grid.Column="2" ></Label>
                 <!--author token combobox-->
-                <ComboBox 
-                    Name="AuthorTokensComboBox" Grid.Row="2" Grid.Column="3"  ItemsSource="{Binding AuthorViewModel.TokenList}" SelectedItem="{Binding AuthorViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True">
+                <ComboBox Name="AuthorTokensComboBox" Grid.Row="2" Grid.Column="3"  ItemsSource="{Binding AuthorViewModel.TokenList}" SelectedItem="{Binding AuthorViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True">
                     <i:Interaction.Behaviors>
                         <obsidian:EventToCommandBehavior Event="SelectionChanged"
                         Command="{Binding AuthorViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
                 <!--author preview label-->
-                <Label Foreground="DarkGray"  Name="AuthorPreviewLabel" Grid.Row="3" Grid.Column="0" Padding="5,0,0,13">Preview:</Label>
+                <Label Foreground="DarkGray" Content="{Binding Translation.AuthorPreviewLabelContent}" Grid.Row="3" Grid.Column="0" Padding="5,0,0,13"></Label>
                 <!--author preview textbox-->
                 <TextBox Name="AuthorPreviewText" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  IsEnabled="False">
                     <TextBox.Text>
@@ -121,28 +117,27 @@
                     </TextBox.Text>
                 </TextBox>
                 <!--author preview tokenhintpanel-->
-                <userControls:TokenHintPanel Grid.Row="3" Grid.Column="3" TextWithToken="{Binding Text, ElementName=AuthorTextBox}" Translator="{Binding Translator}" />
+                <userControls:TokenHintPanel Grid.Row="3" Grid.Column="3" TextWithToken="{Binding Text, ElementName=AuthorTextBox}" />
 
                 <!--Subject part-->
 
                 <!--subject label-->
-                <Label Name="SubjectLabel" Grid.Row="4" Grid.Column="0"  FontWeight="Bold">Subject:</Label>
+                <Label Content="{Binding Translation.SubjectLabelContent}" Grid.Row="4" Grid.Column="0"  FontWeight="Bold"></Label>
                 <!--subject textbox-->
                 <views:BindableTextBox x:Name="SubjectTextBox" Grid.Row="4" Grid.Column="1" 
                                        Text="{Binding SubjectViewModel.Text}" 
                                        BindableSelectionStart="{Binding SubjectViewModel.CurrentCursorPos}" />
                 <!--subject token label-->
-                <Label Name="SubjectTokenLabel" Grid.Row="4" Grid.Column="2">Add Token:</Label>
+                <Label Content="{Binding Translation.SubjectTokenLabelContent}" Grid.Row="4" Grid.Column="2"></Label>
                 <!--subject token combobox-->
-                <ComboBox 
-                    Name="SubjectTokensComboBox" Grid.Row="4" Grid.Column="3" ItemsSource="{Binding SubjectViewModel.TokenList}" SelectedItem="{Binding SubjectViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True"  >
+                <ComboBox Grid.Row="4" Grid.Column="3" ItemsSource="{Binding SubjectViewModel.TokenList}" SelectedItem="{Binding SubjectViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True"  >
                     <i:Interaction.Behaviors>
                         <obsidian:EventToCommandBehavior Event="SelectionChanged"
                         Command="{Binding SubjectViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
                 <!--Subject preview label-->
-                <Label Foreground="DarkGray" Name="SubjectPreviewLabel" Grid.Row="5" Grid.Column="0" Padding="5,0,0,13">Preview:</Label>
+                <Label Foreground="DarkGray" Content="{Binding Translation.SubjectPreviewLabelContent}" Name="SubjectPreviewLabel" Grid.Row="5" Grid.Column="0" Padding="5,0,0,13"></Label>
                 <!--subject preview textbox-->
                 <TextBox Name="SubjectPreviewText"  Grid.Row="5" Grid.Column="1"  Grid.ColumnSpan="2" IsEnabled="False" VerticalAlignment="Top" >
                     <TextBox.Text>
@@ -154,24 +149,23 @@
                 </TextBox>
 
                 <!--subject preview token hint panel-->
-                <userControls:TokenHintPanel Grid.Row="5" Grid.Column="3" TextWithToken="{Binding Text, ElementName=SubjectTextBox}" Translator="{Binding Translator}" />
+                <userControls:TokenHintPanel Grid.Row="5" Grid.Column="3" TextWithToken="{Binding Text, ElementName=SubjectTextBox}" />
 
                 <!--Keyword part-->
-                <Label Name="KeywordLabel" Grid.Row="6" Grid.Column="0" FontWeight="Bold">Keyword:</Label>
+                <Label Content="{Binding Translation.KeywordLabelContent}" Grid.Row="6" Grid.Column="0" FontWeight="Bold"></Label>
                 <views:BindableTextBox x:Name="KeywordTextBox" Grid.Row="6" Grid.Column="1"  
                                        Text="{Binding KeywordViewModel.Text}" 
                                        BindableSelectionStart="{Binding KeywordViewModel.CurrentCursorPos}" />
 
-                <Label Name="KeywordTokenLabel" Grid.Row="6" Grid.Column="2">Add Token:</Label>
+                <Label Content="{Binding Translation.KeywordTokenLabelContent}" Grid.Row="6" Grid.Column="2"></Label>
                 <!--combobox choose token for keyword-->
-                <ComboBox 
-                    Name="KeywordsTokensComboBox" Grid.Row="6" Grid.Column="3" ItemsSource="{Binding KeywordViewModel.TokenList}" SelectedItem="{Binding KeywordViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True" >
+                <ComboBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding KeywordViewModel.TokenList}" SelectedItem="{Binding KeywordViewModel.SelectedToken}" IsSynchronizedWithCurrentItem="True" >
                     <i:Interaction.Behaviors>
                         <obsidian:EventToCommandBehavior Event="SelectionChanged" Command="{Binding KeywordViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
                 <!--label for token preview-->
-                <Label Foreground="DarkGray"  Name="KeywordPreviewLabel" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Padding="5,0,0,13">Preview:</Label>
+                <Label Foreground="DarkGray"  Content="{Binding Translation.KeywordPreviewLabelContent}" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Padding="5,0,0,13"></Label>
                 <!--token preview for keyword-->
                 <TextBox Name="KeywordPreviewText" Grid.Row="7" Grid.Column="1"  Grid.ColumnSpan="2" IsEnabled="False" VerticalAlignment="Top">
                     <TextBox.Text>
@@ -182,17 +176,14 @@
                     </TextBox.Text>
                 </TextBox>
                 <!--token info-->
-                <userControls:TokenHintPanel Grid.Row="7" Grid.Column="3" TextWithToken="{Binding Text, ElementName=KeywordTextBox}" Translator="{Binding Translator}"  Height="36"/>
+                <userControls:TokenHintPanel Grid.Row="7" Grid.Column="3" TextWithToken="{Binding Text, ElementName=KeywordTextBox}" Height="36"/>
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Name="StampControl" Margin="0,5,0,0" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Stamp">
+        <HeaderedContentControl Margin="0,5,0,0" Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.StampControlHeader}">
             <StackPanel>
-                <CheckBox Name="StampCheckBox" Margin="0 5 0 0"
-                          IsChecked="{Binding CurrentProfile.Stamping.Enabled, Mode=TwoWay}">
-                    Add a stamp text on top of all pages
-                </CheckBox>
+                <CheckBox Name="StampCheckBox" Margin="0 5 0 0" Content="{Binding Translation.StampCheckBoxContent}" IsChecked="{Binding CurrentProfile.Stamping.Enabled, Mode=TwoWay}"></CheckBox>
                 <Grid IsEnabled="{Binding ElementName=StampCheckBox, Path=IsChecked}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*" />
@@ -205,14 +196,13 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Label Name="StampTextLabel" Grid.Row="1" Grid.Column="0" Margin="0 0 5 0">Stamp Text:</Label>
-                    <Label Name="StampFontLabel" Grid.Row="1" Grid.Column="1" Margin="0 0 5 0">Font:</Label>
-                    <Label Name="StampFontColorLabel" Grid.Row="1" Grid.Column="2" Margin="0 0 5 0">Color:</Label>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0 0 5 0" Content="{Binding Translation.StampTextLabelContent}"></Label>
+                    <Label Grid.Row="1" Grid.Column="1" Margin="0 0 5 0" Content="{Binding Translation.StampFontLabelContent}"></Label>
+                    <Label Grid.Row="1" Grid.Column="2" Margin="0 0 5 0" Content="{Binding Translation.StampFontColorLabelContent}"></Label>
                     <TextBox Name="StampText"
                              Grid.Row="2" Grid.Column="0" Margin="0 0 5 0"
-                             Text="{Binding CurrentProfile.Stamping.StampText, Mode=TwoWay}" 
-                             TextChanged="TextBoxBase_OnTextChanged"
-                             />
+                             Text="{Binding CurrentProfile.Stamping.StampText, Mode=TwoWay}"   
+                             TextChanged="TextBoxBase_OnTextChanged"/>
                     <Button Grid.Row="2" Grid.Column="1" Margin="0 0 5 0" Content="{Binding FontButtonText}"
                             Command="{Binding ChooseStampFont}" Width="150" />
                     <Button Grid.Row="2" Grid.Column="2" Command="{Binding ChooseStampColor}">
@@ -226,16 +216,15 @@
                     <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 5 0 0"
                                 Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox Name="StampFontAsOutlineCheckBox" 
+                            <CheckBox Content="{Binding Translation.StampFontAsOutlineCheckBoxContent}"
                                   IsChecked="{Binding CurrentProfile.Stamping.FontAsOutline}" Margin="0,5,0,0">
-                                Draw font as outline
                             </CheckBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
                                     IsEnabled="{Binding ElementName=StampFontAsOutlineCheckBox, Path=IsChecked}">
                             <Label Margin="5,0,5,0">-</Label>
-                            <Label Name="StampOutlineWidthLabel">Width:</Label>
+                            <Label Content="{Binding Translation.StampOutlineWidthLabelContent}"></Label>
                             <TextBox Text="{Binding CurrentProfile.Stamping.FontOutlineWidth}"
                                       Margin="5 0 0 0" Width="40" Height="20" VerticalAlignment="Center" />
                         </StackPanel>

@@ -5,9 +5,9 @@ using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Services.Translation;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
@@ -17,12 +17,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         private readonly LicenseOptionProvider _licenseOption;
 
         public EventHandler SettingsChanged;
+        private ApplicationSettingsWindowTranslation _translation;
 
-        public ApplicationSettingsViewModel(ApplicationSettingsViewModelBundle viewModelBundle, TranslationHelper translationHelper, LicenseOptionProvider licenseOption)
+        public ApplicationSettingsViewModel(ApplicationSettingsViewModelBundle viewModelBundle, TranslationHelper translationHelper, LicenseOptionProvider licenseOption, ApplicationSettingsWindowTranslation translation)
         {
             _translationHelper = translationHelper;
             _licenseOption = licenseOption;
             ViewModelBundle = viewModelBundle;
+            Translation = translation;
 
             SaveSettingsCommand = new DelegateCommand(SaveSettingsExecute);
             ClosingCommand = new DelegateCommand(OnClosing);
@@ -35,6 +37,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         }
 
         public ApplicationSettingsViewModelBundle ViewModelBundle { get; }
+
+        public ApplicationSettingsWindowTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
+        }
 
         public DelegateCommand SaveSettingsCommand { get; set; }
         public DelegateCommand ClosingCommand { get; set; }
@@ -125,7 +133,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
             ViewModelBundle.GeneralTabViewModel.SetSettingsAndRaiseNotifications(Interaction.Settings, Interaction.GpoSettings);
             ViewModelBundle.PrinterTabViewModel.SetSettingsAndRaiseNotifications(Interaction.Settings, Interaction.GpoSettings);
             ViewModelBundle.DebugTabViewModel.SetSettingsAndRaiseNotifications(Interaction.Settings.ApplicationSettings, Interaction.GpoSettings);
-            // TODO LicenseTabViewModel ?
 
             ViewModelBundle.TitleTabViewModel.ApplyTitleReplacements(Interaction.Settings.ApplicationSettings.TitleReplacement);
 

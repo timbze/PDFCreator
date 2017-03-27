@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using SystemInterface.IO;
 using SystemWrapper.IO;
 using NLog;
-using pdfforge.DynamicTranslator;
-using pdfforge.PDFCreator.Conversion.Mail;
+using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
 
@@ -52,8 +50,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Helper
             }
 
             eMail.Subject = clientSettings.Subject;
-
-            eMail.Body = clientSettings.Content + _mailSignatureHelper.ComposeMailSignature(clientSettings);
+            eMail.Html = clientSettings.Html;
+            eMail.Body = clientSettings.Content;
+            if (clientSettings.AddSignature)
+            {
+                var signature = _mailSignatureHelper.ComposeMailSignature();
+                if (clientSettings.Html)
+                    signature = signature.Replace(Environment.NewLine, "<br/>");
+                eMail.Body += signature;
+            }
 
             try
             {

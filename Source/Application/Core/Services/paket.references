@@ -1,4 +1,7 @@
-LicenseValidator
+LicenseValidator.Interface
 Tartaros
-DynamicTranslator
 DataStorage
+NGettext
+Translatable
+Translatable.NGettext
+NLog

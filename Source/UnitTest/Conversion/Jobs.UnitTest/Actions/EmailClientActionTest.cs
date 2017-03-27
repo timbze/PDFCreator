@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Actions;
+using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Mail;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities.Tokens;
 

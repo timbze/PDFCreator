@@ -5,8 +5,7 @@ description
     PDFCreator Settings classes
 dependencies
 	DataStorage = LOCKEDVERSION
-	SystemInterface = LOCKEDVERSION
-	SystemWrapper = LOCKEDVERSION
+	Translatable = LOCKEDVERSION
 files
 	bin/Release/PDFCreator.Settings.dll ==> lib
 references

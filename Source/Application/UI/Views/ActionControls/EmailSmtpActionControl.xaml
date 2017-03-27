@@ -22,11 +22,11 @@
     </actionViewModels:ActionControl.Resources>
     <StackPanel Margin="0,0,0,-28">
         <Label>
-            <TextBlock Name="EmailAddressText">E-Mail Address:</TextBlock>
+            <TextBlock Text="{Binding Translation.EmailAddressText}"></TextBlock>
         </Label>
         <TextBox Text="{Binding CurrentProfile.EmailSmtpSettings.Address}" />
         <Label>
-            <TextBlock Name="UsernameText">Username:</TextBlock>
+            <TextBlock Text="{Binding Translation.UsernameText}"></TextBlock>
         </Label>
         <TextBox Text="{Binding CurrentProfile.EmailSmtpSettings.UserName}" />
         <Grid>
@@ -41,44 +41,37 @@
             </Grid.RowDefinitions>
 
             <Label>
-                <TextBlock Name="ServerText">SMTP Server:</TextBlock>
+                <TextBlock Text="{Binding Translation.ServerText}"></TextBlock>
             </Label>
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding CurrentProfile.EmailSmtpSettings.Server}" />
             <Label Grid.Row="0" Grid.Column="1">
-                <TextBlock Name="PortText">Port:</TextBlock>
+                <TextBlock Text="{Binding Translation.PortText}"></TextBlock>
             </Label>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="5 0" MinWidth="30"
                      Text="{Binding CurrentProfile.EmailSmtpSettings.Port}" />
             <CheckBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
                       IsChecked="{Binding CurrentProfile.EmailSmtpSettings.Ssl}">
-                <TextBlock Name="SslText">SSL</TextBlock>
+                <TextBlock Text="{Binding Translation.SslText}"></TextBlock>
             </CheckBox>
         </Grid>
 
         <Button Padding="5" Margin="0 10 0 0" Command="{Binding SetPasswordCommand}">
-            <TextBlock Name="SetPasswordText">Set Password</TextBlock>
+            <TextBlock Text="{Binding Translation.SetPasswordText}"></TextBlock>
         </Button>
         <Label Margin="0 5 0 0">
-            <TextBlock Name="RecipientsText">Recipients:</TextBlock>
+            <TextBlock Text="{Binding Translation.RecipientsText}" ></TextBlock>
         </Label>
-        <TextBox Name="RecipientsTextBox" Text="{Binding CurrentProfile.EmailSmtpSettings.Recipients}" />
+        <TextBox  Text="{Binding CurrentProfile.EmailSmtpSettings.Recipients}" />
         <Label>
-            <TextBlock Name="MultipleRecipientsHintText" Margin="0 -3 0 0" TextWrapping="Wrap">Multiple recipients are separated by commas</TextBlock>
+            <TextBlock  Text="{Binding Translation.MultipleRecipientsHintText}" Margin="0 -3 0 0" TextWrapping="Wrap"></TextBlock>
         </Label>
         <Button
             IsEnabled="{Binding ElementName=UseSameMailCheckBox,Path=IsChecked,Converter={StaticResource AreEqualConverter}}"
             Margin="0 5 0 0" Padding="5" Command="{Binding EditMailTextCommand}">
-            <TextBlock Name="EditMailButtonText">Edit E-Mail Text</TextBlock>
+            <TextBlock Text="{Binding Translation.EditMailButtonText}"></TextBlock>
         </Button>
-
-        <CheckBox Name="UseSameMailCheckBox" Margin="0 5"
-                  IsChecked="{Binding CurrentProfile.EmailSmtpSettings.SameTextAsClientMail}"
-                  Visibility="{Binding DisplayMailClientTextCheckbox, Converter={StaticResource BoolToVisibilityConverter}}">
-            <TextBlock Name="UseSameMailText" TextWrapping="Wrap">Use same text as in mail client action</TextBlock>
-        </CheckBox>
-
         <Button Padding="5" Margin="0 10 0 0" Command="{Binding TestSmtpCommand}">
-            <TextBlock Name="SendTestMailButtonText">Send test mail</TextBlock>
+            <TextBlock Text="{Binding Translation.SendTestMailButtonText}"></TextBlock>
         </Button>
     </StackPanel>
 </actionViewModels:ActionControl>

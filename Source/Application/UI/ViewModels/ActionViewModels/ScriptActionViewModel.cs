@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Actions;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels;
 using pdfforge.PDFCreator.Utilities.Tokens;
@@ -15,17 +15,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
         private readonly IScriptActionHelper _scriptActionHelper;
 
-        public ScriptActionViewModel(ITranslator translator, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper)
+        public ScriptActionViewModel(ScriptActionSettingsAndActionTranslation translation, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper, TokenHelper tokenHelper)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
             _scriptActionHelper = scriptActionHelper;
-            Translator = translator;
+            Translation = translation;
 
-            var tokenHelper = new TokenHelper(Translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
-            DisplayName = Translator.GetTranslation("ScriptActionSettings", "DisplayName");
-            Description = Translator.GetTranslation("ScriptActionSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
 
             var tokens = new List<string>(TokenReplacer.GetTokenNames(true));
             ParameterTokenViewModel = new TokenViewModel(x => CurrentProfile.Scripting.ParameterString = x, () => CurrentProfile?.Scripting.ParameterString, tokens);
@@ -40,7 +39,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         public TokenViewModel ParameterTokenViewModel { get; set; }
 
-        public ITranslator Translator { get; }
+        public ScriptActionSettingsAndActionTranslation Translation { get; }
 
         public TokenReplacer TokenReplacer { get; }
 
@@ -94,10 +93,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void BrowseScriptExecute(object obj)
         {
-            var title = Translator.GetTranslation("ScriptActionSettings", "SelectScriptTitle");
-            var filter = Translator.GetTranslation("ScriptActionSettings", "ExecutableFiles")
+            var title = Translation.SelectScriptTitle;
+            var filter = Translation.ExecutableFiles
                          + @" (*.exe, *.bat, *.cmd)|*.exe;*.bat;*.cmd|"
-                         + Translator.GetTranslation("ScriptActionSettings", "AllFiles")
+                         + Translation.AllFiles
                          + @"(*.*)|*.*";
 
             var result = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.Scripting.ScriptFile, title, filter);

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using SystemInterface;
 
 namespace pdfforge.PDFCreator.Utilities.Tokens
 {

@@ -32,11 +32,15 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
             parameters.Add("-dPDFSETTINGS=/default");
             parameters.Add("-dEmbedAllFonts=true");
 
+            /* FastWebView=true causes crashes in Ghostscript 9.20 so it has been removed for now, GS uses fastwebview=false by defrault
+
             if (!(Job.Profile.OutputFormat.Equals(OutputFormat.PdfA2B) || Job.Profile.OutputFormat.Equals(OutputFormat.PdfA1B))
                 && Job.Profile.PdfSettings.FastWebView)
             {
+
                 parameters.Add("-dFastWebView=true");
             }
+            */
 
             /* Parameters that are recommended for better quality of pictures
              * - without obvious effect

@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
+using SystemWrapper.IO;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.DataStorage.Storage;
+using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
@@ -23,6 +25,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.DirectConversion
             _th = container.GetInstance<TestHelper>();
             _th.InitTempFolder("PsFileHelperTest");
             _testSpoolfolder = Path.Combine(_th.TmpTestFolder, "TestSpoolFolder");
+            var spoolerProvider = Substitute.For<ISpoolerProvider>();
+            spoolerProvider.SpoolFolder.Returns(_testSpoolfolder);
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
             _psTestFile = _th.TmpPsFiles[0];
 
@@ -30,7 +34,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.DirectConversion
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
             settingsProvider.Settings.Returns(settings);
 
-            _directConversionBase = new PsDirectConversion(settingsProvider, new JobInfoManager(null));
+            _directConversionBase = new PsDirectConversion(settingsProvider, new JobInfoManager(null), spoolerProvider, new FileWrap(), new DirectoryWrap(), new PathWrapSafe());
         }
 
         [TearDown]
@@ -112,7 +116,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.DirectConversion
         [Test]
         public void TransfrormToInfFile_WithoutPrinter_PrinterNameInPsFileIsPDFCreator()
         {
-            var infFile = _directConversionBase.TransformToInfFile(_psTestFile, _testSpoolfolder);
+            var infFile = _directConversionBase.TransformToInfFile(_psTestFile);
 
             var content = File.ReadAllLines(infFile);
             Assert.Contains("PrinterName=PDFCreator", content);
@@ -121,7 +125,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.DirectConversion
         [Test]
         public void TransfrormToInfFile_WithPrinter_PrinterNameInPsFileIsPDFCreator()
         {
-            var infFile = _directConversionBase.TransformToInfFile(_psTestFile, _testSpoolfolder, "SomePrinerName");
+            var infFile = _directConversionBase.TransformToInfFile(_psTestFile, "SomePrinerName");
 
             var content = File.ReadAllLines(infFile);
             Assert.Contains("PrinterName=SomePrinerName", content);

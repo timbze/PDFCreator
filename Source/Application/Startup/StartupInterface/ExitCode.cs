@@ -22,6 +22,9 @@
         PrintFileNotPrintable = 63,
         PrintFileCouldNotBePrinted = 64,
         MissingActivation = 71,
-        NoAccessPrivileges = 72
+        NoAccessPrivileges = 72,
+        InvalidPdfToolsSecureLicense = 81,
+        InvalidPdfToolsPdf2PdfLicense = 82,
+        InvalidPdfToolsDocumentLicense = 83,
     }
 }

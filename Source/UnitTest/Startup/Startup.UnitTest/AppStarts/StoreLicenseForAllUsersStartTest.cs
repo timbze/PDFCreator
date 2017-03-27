@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Security;
+using SystemInterface.Microsoft.Win32;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
-using pdfforge.LicenseValidator;
-using pdfforge.PDFCreator.Core.Services.Licensing;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
 
@@ -14,32 +13,36 @@ namespace pdfforge.PDFCreator.UnitTest.Startup.AppStarts
     public class StoreLicenseForAllUsersStartTest
     {
         private StoreLicenseForAllUsersStart _storeLicenseForAllUsersStart;
-        private ICheckAllStartupConditions _checkAllStartupConditions; 
-        private IActivationHelper _activationHelper ;
-        private ILicenseServerHelper _licenseServerHelper;
-        private ILicenseChecker _licenseChecker;
-        private Activation _activation;
+        private IRegistry _registry;
+        private string _licenseServerString;
+        private ICheckAllStartupConditions _checkAllStartupConditions;
+        private string _licenseKey;
+
+        private const string RegistryPath = @"SOFTWARE\\test\pdfforge\\PDFCreator";
 
         [SetUp]
         public void SetUp()
         {
             _checkAllStartupConditions = Substitute.For<ICheckAllStartupConditions>();
-            _activation = new Activation();
-            _activationHelper = Substitute.For<IActivationHelper>();
-            _activationHelper.Activation.Returns(_activation);
-            _licenseServerHelper = Substitute.For<ILicenseServerHelper>();
-            _licenseChecker = Substitute.For<ILicenseChecker>();
-            _licenseServerHelper.BuildLicenseChecker(RegistryHive.LocalMachine)
-                .Returns(_licenseChecker);
 
-            _storeLicenseForAllUsersStart = new StoreLicenseForAllUsersStart(_checkAllStartupConditions, _activationHelper, _licenseServerHelper);
+            _licenseServerString = "LSA";
+            _licenseKey = "MY-LICENSE-KEY";
+
+            _registry = Substitute.For<IRegistry>();
+
+            var pathProvider = Substitute.For<IInstallationPathProvider>();
+            pathProvider.ApplicationRegistryPath.Returns(RegistryPath);
+
+            _storeLicenseForAllUsersStart = new StoreLicenseForAllUsersStart(_checkAllStartupConditions, _registry, pathProvider);
+            _storeLicenseForAllUsersStart.LicenseServerCode = _licenseServerString;
+            _storeLicenseForAllUsersStart.LicenseKey = _licenseKey;
         }
 
         [Test]
-        public void Run_ActivationIsNull_ReturnsStartupResultMissingActivation()
+        public void Run_ActivationIsNone_ReturnsStartupResultMissingActivation()
         {
-            _activationHelper.Activation.ReturnsNull();
-
+            _storeLicenseForAllUsersStart.LicenseServerCode = null;
+            
             var result = _storeLicenseForAllUsersStart.Run();
 
             Assert.AreEqual(ExitCode.MissingActivation, result);
@@ -50,14 +53,15 @@ namespace pdfforge.PDFCreator.UnitTest.Startup.AppStarts
         {
             var result = _storeLicenseForAllUsersStart.Run();
 
-            _licenseChecker.Received().SaveActivation(_activation);
+            _registry.Received(1).SetValue("HKEY_LOCAL_MACHINE\\" + RegistryPath, "License", _licenseKey);
+            _registry.Received(1).SetValue("HKEY_LOCAL_MACHINE\\" + RegistryPath, "LSA", _licenseServerString);
             Assert.AreEqual(ExitCode.Ok, result);
         }
 
         [Test]
         public void Run_LicenseCheckerSaveActivationThrowsSecurityException_StartUpResultIsNoAccessPrivileges()
         {
-            _licenseChecker.When(x => x.SaveActivation(_activation)).Do(x => { throw new SecurityException(); });
+            _registry.When(x => x.SetValue(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>())).Do(x => { throw new SecurityException(); });
 
             var result = _storeLicenseForAllUsersStart.Run();
 
@@ -67,7 +71,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup.AppStarts
         [Test]
         public void Run_LicenseCheckerSaveActivationThrowsException_StartUpResultIsUnknown()
         {
-            _licenseChecker.When(x => x.SaveActivation(_activation)).Do(x => { throw new Exception(); });
+            _registry.When(x => x.SetValue(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>())).Do(x => { throw new Exception(); });
 
             var result = _storeLicenseForAllUsersStart.Run();
 

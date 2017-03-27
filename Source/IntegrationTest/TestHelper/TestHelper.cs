@@ -199,7 +199,7 @@ namespace PDFCreator.TestUtilities
         ///     Note: The INF- and the PS file will be created with the content of the PDFCreatorTestpage
         /// </summary>
         /// <param name="testFileAsOutput">Testfile setted as output</param>
-        public void GenerateGsJob_WithSettedOutput(TestFile testFileAsOutput)
+        public void GenerateGsJob_WithSetOutput(TestFile testFileAsOutput)
         {
             var testFile = GenerateTestFile(testFileAsOutput);
 
@@ -212,7 +212,11 @@ namespace PDFCreator.TestUtilities
                     _profile.OutputFormat = OutputFormat.Pdf;
                     GenerateGsJob(PSfiles.SixEmptyPages, _profile.OutputFormat);
                     break;
-                case TestFile.PDFCreatorTestpagePdfA:
+                case TestFile.TestpagePDFA1b:
+                    _profile.OutputFormat = OutputFormat.PdfA1B;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+                case TestFile.TestpagePDFA2b:
                     _profile.OutputFormat = OutputFormat.PdfA2B;
                     GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
                     break;
@@ -346,6 +350,10 @@ namespace PDFCreator.TestUtilities
                     testfilePath = testfilePath.Replace(".pdf", ".p12");
                     File.WriteAllBytes(testfilePath, Resources.CertificationFileP12);
                     break;
+                case TestFile.CertificationFile_ExpiredP12:
+                    testfilePath = testfilePath.Replace(".pdf", ".p12");
+                    File.WriteAllBytes(testfilePath, Resources.CertificationFile_ExpiredP12);
+                    break;
                 case TestFile.Cover2PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Cover2PagesPDF);
                     break;
@@ -373,8 +381,11 @@ namespace PDFCreator.TestUtilities
                 case TestFile.PDFCreatorTestpagePDF:
                     File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDF);
                     break;
-                case TestFile.PDFCreatorTestpagePdfA:
-                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDFA);
+                case TestFile.TestpagePDFA1b:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDFA1b);
+                    break;
+                case TestFile.TestpagePDFA2b:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDFA2b);
                     break;
                 case TestFile.PortraitLandscapeLandscapeLandscapePortraitPDF:
                     File.WriteAllBytes(testfilePath, Resources.PortraitLandscapeLandscapeLandscapePortraitPDF);
@@ -410,13 +421,15 @@ namespace PDFCreator.TestUtilities
         Cover2PagesSixEmptyPagesPDF,
         Cover2PagesSixEmptyPagesAttachment3PagesPDF,
         CertificationFileP12,
+        CertificationFile_ExpiredP12,
         FourRotatingPDFCreatorTestpagesPDF,
         PageRotation0PDF,
         PageRotation180PDF,
         PageRotation270PDF,
         PageRotation90PDF,
         PDFCreatorTestpagePDF,
-        PDFCreatorTestpagePdfA,
+        TestpagePDFA1b,
+        TestpagePDFA2b,
         PortraitLandscapeLandscapeLandscapePortraitPDF,
         SixEmptyPagesPDF,
         SixEmptyPagesAttachment3PagesPDF,

@@ -8,7 +8,7 @@
              d:DesignHeight="400" d:DesignWidth="500"
              d:DataContext="{d:DesignInstance applicationSettings:DesignTimeDebugTabViewModel, IsDesignTimeCreatable=True}">
     <StackPanel>
-        <HeaderedContentControl Name="LoggingControl" Template="{StaticResource HeaderPanelTemplate}" Header="Logging">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.LoggingControlHeader}">
             <StackPanel Margin="0 5 0 0" HorizontalAlignment="Left">
                 <StackPanel.Triggers>
                     <EventTrigger SourceName="ClearLogFileButton" RoutedEvent="Button.Click">
@@ -26,61 +26,50 @@
                         </BeginStoryboard>
                     </EventTrigger>
                 </StackPanel.Triggers>
-                <TextBlock Name="LoggingLevelLabel" TextWrapping="Wrap">Logging Level:</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.LoggingLevelLabelText}" />
                 <ComboBox Margin="0 5 0 0" Width="195" HorizontalAlignment="Left"
-                          SelectedValue="{Binding ApplicationSettings.LoggingLevel}" SelectedValuePath="Value"
-                          DisplayMemberPath="Name" ItemsSource="{Binding LoggingValues}" />
+                          SelectedValue="{Binding ApplicationSettings.LoggingLevel}"
+                          ItemsSource="{Binding LoggingValues}" />
                 <UniformGrid Columns="2" Margin="0 5 0 0" Width="400">
-                    <Button Name="ShowLogFileButton" Margin="0 0 5 0" Padding="5"
-                            Command="{Binding ShowLogFileCommand}">
-                        Show Log File
-                    </Button>
+                    <Button Margin="0 0 5 0" Padding="5"
+                            Command="{Binding ShowLogFileCommand}" Content="{Binding Translation.ShowLogFileButtonContent}" />
                     <Button Name="ClearLogFileButton" Margin="5 0 0 0" Padding="5"
                             Command="{Binding ClearLogFileCommand}"
-                            Content="Clear Log File" />
+                            Content="{Binding Translation.ClearLogFileButtonContent}" />
                 </UniformGrid>
                 <StackPanel Name="LogFileClearedPanel" Orientation="Horizontal" HorizontalAlignment="Right"
                             VerticalAlignment="Center" Margin="0 5 0 0" Opacity="0">
                     <ContentControl Content="{StaticResource InfoIcon}" Width="15" Height="15"
                                     VerticalAlignment="Center" />
-                    <TextBlock Name="LogFileClearedTextBlock" Text="Log File cleared" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding Translation.LogFileClearedText}" VerticalAlignment="Center"
                                Margin="5 0 0 0" />
                 </StackPanel>
             </StackPanel>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="TestPagesControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Test Pages">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.TestPagesControlHeader}">
             <UniformGrid Columns="2" Margin="0 5 0 0" Width="400" HorizontalAlignment="Left">
-                <Button Name="PdfCreatorTestpageButton" Margin="0 0 5 0" Padding="5"
-                        Command="{Binding PrintPdfCreatorTestpageCommand}">
-                    Print PDFCreator test page
-                </Button>
-                <Button Name="WindowsTestpageButton" Margin="5 0 0 0" Padding="5"
-                        Command="{Binding PrintWindowsTestpageCommand}">
-                    Print Windows test page
-                </Button>
+                <Button Margin="0 0 5 0" Padding="5"
+                        Command="{Binding PrintPdfCreatorTestpageCommand}" Content="{Binding Translation.PdfCreatorTestpageButtonContent}" />
+                <Button Margin="5 0 0 0" Padding="5"
+                        Command="{Binding PrintWindowsTestpageCommand}" Content="{Binding Translation.WindowsTestpageButtonContent}" />
             </UniformGrid>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="DefaultSettingsControl" Margin="0 20 0 0"
-                                Template="{StaticResource HeaderPanelTemplate}" Header="Default Settings">
+        <HeaderedContentControl Margin="0 20 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.DefaultSettingsControlHeader}">
             <UniformGrid Columns="2" Margin="0 5 0 0" Width="400" HorizontalAlignment="Left">
-                <Button Name="DefaultSettingsButton" Margin="0 0 5 0" Padding="5"
-                        Command="{Binding RestoreDefaultSettingsCommand}">
-                    Restore
-                </Button>
+                <Button Margin="0 0 5 0" Padding="5"
+                        Command="{Binding RestoreDefaultSettingsCommand}" Content="{Binding Translation.DefaultSettingsButtonContent}" />
             </UniformGrid>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="ExportSettingsControl" Margin="0 20 0 0"
-                                Template="{StaticResource HeaderPanelTemplate}" Header="Export Settings">
+        <HeaderedContentControl Margin="0 20 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.ExportSettingsControlHeader}">
             <UniformGrid Columns="2" Margin="0 5 0 0" Width="400" HorizontalAlignment="Left">
-                <Button Name="SaveSettingsButton" Margin="0 0 5 0" Padding="5"
-                        Command="{Binding SaveIniSettingsCommand}">
-                    Save settings to ini file
-                </Button>
+                <Button Margin="0 0 5 0" Padding="5"
+                        Command="{Binding SaveIniSettingsCommand}" Content="{Binding Translation.SaveSettingsButtonContent}" />
                 <StackPanel Style="{StaticResource GpoStyle}" IsEnabled="{Binding ProfileManagementIsEnabled}">
-                    <Button Name="LoadSettingsButton" Margin="5 0 0 0" Padding="5"
-                            Command="{Binding LoadIniSettingsCommand}">
-                        Load settings from ini file
+                    <Button Margin="5 0 0 0" Padding="5"
+                            Command="{Binding LoadIniSettingsCommand}" Content="{Binding Translation.LoadSettingsButtonContent}">
                     </Button>
                 </StackPanel>
             </UniformGrid>

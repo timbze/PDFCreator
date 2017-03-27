@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Assistants.Translations;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
@@ -20,19 +20,19 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
     public class PrintFileAssistant : PrintFileHelperBase
     {
         private readonly IInteractionInvoker _interactionInvoker;
-        private readonly ITranslator _translator;
+        private readonly PrintFilesTranslation _translation;
 
-        public PrintFileAssistant(IInteractionInvoker interactionInvoker, IPrinterHelper printerHelper, ISettingsProvider settingsProvider, ITranslator translator, IFileAssoc fileAssoc)
+        public PrintFileAssistant(IInteractionInvoker interactionInvoker, IPrinterHelper printerHelper, ISettingsProvider settingsProvider, PrintFilesTranslation translation, IFileAssoc fileAssoc)
             : base(printerHelper, settingsProvider, fileAssoc)
         {
             _interactionInvoker = interactionInvoker;
-            _translator = translator;
+            _translation = translation;
         }
 
         protected override void DirectoriesNotSupportedHint()
         {
             const string caption = "PDFCreator";
-            var message = _translator.GetTranslation("PrintFiles", "DirectoriesNotSupported");
+            var message = _translation.DirectoriesNotSupported;
             ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Warning);
         }
 
@@ -48,16 +48,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             var fileList =
                 new List<string>(unprintable.Select(p => Path.GetFileName(p.Filename)).Take(Math.Min(3, unprintable.Count)));
             const string caption = "PDFCreator";
-            var message =
-                _translator.GetTranslation("PrintFiles", "NotPrintableFiles") +
-                "\r\n";
+            var message = _translation.NotPrintableFiles + System.Environment.NewLine;
+
 
             message += string.Join("\r\n", fileList.ToArray());
 
             if (fileList.Count < unprintable.Count)
-                message += "\r\n" + _translator.GetFormattedTranslation("PrintFiles", "AndXMore", unprintable.Count - fileList.Count);
+                message += "\r\n" + _translation.GetAndxMoreMessage(unprintable.Count - fileList.Count);
 
-            message += "\r\n\r\n" + _translator.GetTranslation("PrintFiles", "ProceedAnyway");
+            message += "\r\n\r\n" + _translation.ProceedAnyway;
 
             var result = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Warning);
 
@@ -67,7 +66,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         protected override bool QuerySwitchDefaultPrinter()
         {
             var message =
-                _translator.GetTranslation("PrintFileHelper", "AskSwitchDefaultPrinter");
+                _translation.AskSwitchDefaultPrinter;
             const string caption = "PDFCreator";
 
             var response = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Question);

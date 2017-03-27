@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using SystemInterface.IO;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
@@ -14,6 +13,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings
@@ -28,15 +28,17 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
         private readonly ISettingsManager _settingsManager;
         private ISettingsProvider _settingsProvider;
         private readonly ITestPageHelper _testPageHelper;
+        private DebugTabTranslation _translation;
 
-        public DebugTabViewModel(ITranslator translator, ISettingsManager settingsManager, ITestPageHelper testPageHelper, IFile fileWrap, IProcessStarter processStarter, IInteractionInvoker invoker, IPrinterHelper printerHelper, IIniSettingsAssistant iniSettingsAssistant)
+        public DebugTabViewModel(ISettingsManager settingsManager, ITestPageHelper testPageHelper, IFile fileWrap, IProcessStarter processStarter, IInteractionInvoker invoker, IPrinterHelper printerHelper, IIniSettingsAssistant iniSettingsAssistant, DebugTabTranslation translation)
         {
             _fileWrap = fileWrap;
             _processStarter = processStarter;
             _invoker = invoker;
             _printerHelper = printerHelper;
             _iniSettingsAssistant = iniSettingsAssistant;
-            Translator = translator;
+            _translation = translation;
+
             _settingsManager = settingsManager;
             _settingsProvider = settingsManager.GetSettingsProvider();
             _testPageHelper = testPageHelper;
@@ -50,7 +52,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             RestoreDefaultSettingsCommand = new DelegateCommand(ExecuteRestoreDefaultSettings);
         }
 
-        public ITranslator Translator { get; }
+        public DebugTabTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
+        }
+
 
         public ICommand ShowLogFileCommand { get; }
         public ICommand ClearLogFileCommand { get; }
@@ -62,8 +69,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
 
         public IGpoSettings GpoSettings { get; private set; }
         public Conversion.Settings.ApplicationSettings ApplicationSettings { get; private set; }
-
-        public IEnumerable<EnumValue<LoggingLevel>> LoggingValues => Translator.GetEnumTranslation<LoggingLevel>();
 
         public bool ProfileManagementIsEnabled
         {
@@ -124,18 +129,19 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             }
             else
             {
-                var caption = Translator.GetTranslation("ApplicationSettingsWindow", "NoLogFile");
-                var message = Translator.GetTranslation("ApplicationSettingsWindow", "NoLogFileAvailable");
+                var caption = Translation.NoLogFile;
+                var message = Translation.NoLogFileAvailable;
 
                 var interaction = new MessageInteraction(message, caption, MessageOptions.OK, MessageIcon.Warning);
                 _invoker.Invoke(interaction);
             }
         }
 
+        public IEnumerable<LoggingLevel> LoggingValues => Enum.GetValues(typeof(LoggingLevel)) as LoggingLevel[];
         private void ExecuteRestoreDefaultSettings(object obj)
         {
-            var title = Translator.GetTranslation("ApplicationSettingsWindow", "RestoreDefaultSettingsTitle");
-            var message = Translator.GetTranslation("ApplicationSettingsWindow", "RestoreDefaultSettingsMessage");
+            var title = Translation.RestoreDefaultSettingsTitle;
+            var message = Translation.RestoreDefaultSettingsMessage;
             var messageInteraction = new MessageInteraction(message, title, MessageOptions.YesNo, MessageIcon.Question);
             _invoker.Invoke(messageInteraction);
             if (messageInteraction.Response == MessageResponse.Yes)
@@ -170,8 +176,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
             if (!AppSettingsAreModified())
                 return true; //No changes -> proceed
 
-            var message = Translator.GetTranslation("ApplicationSettingsWindow", "AskSaveModifiedSettings");
-            var caption = Translator.GetTranslation("ApplicationSettingsWindow", "AppSettings");
+            var message = Translation.AskSaveModifiedSettings;
+            var caption = Translation.AppSettings;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Question);
 

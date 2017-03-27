@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 {
@@ -12,15 +13,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private readonly ISystemPrinterProvider _systemPrinterProvider;
         private bool _printerDialogOptionEnabled = true; 
 
-        public PrintActionViewModel(ITranslator translator, ISystemPrinterProvider systemPrinterProvider)
+        public PrintActionViewModel(PrintActionSettingsAndActionTranslation translation, ISystemPrinterProvider systemPrinterProvider)
         {
             _systemPrinterProvider = systemPrinterProvider;
-            Translator = translator;
+            Translation = translation;
 
-            DisplayName = Translator.GetTranslation("PrintActionSettings", "DisplayName");
-            Description = Translator.GetTranslation("PrintActionSettings", "Description");
-
-            SelectPrinterValues = Translator.GetEnumTranslation<SelectPrinter>();
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
@@ -35,7 +34,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         }
 
 
-        public ITranslator Translator { get; }
+        public PrintActionSettingsAndActionTranslation Translation { get; }
 
         public override bool IsEnabled
         {
@@ -48,10 +47,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         }
 
         public IEnumerable<string> InstalledPrinters => _systemPrinterProvider.GetInstalledPrinters();
-
-        public IEnumerable<EnumValue<SelectPrinter>> SelectPrinterValues { get; set; }
-
-        public IEnumerable<EnumValue<DuplexPrint>> DuplexPrintValues => Translator.GetEnumTranslation<DuplexPrint>();
 
         protected override void HandleCurrentProfileChanged()
         {
@@ -67,11 +62,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void UpdatePrinterValues()
         {
-            SelectPrinterValues = Translator.GetEnumTranslation<SelectPrinter>();
             if (!PrinterDialogOptionEnabled)
-                SelectPrinterValues = SelectPrinterValues.Where(x => x.Value != SelectPrinter.ShowDialog);
+                Translation.SelectPrinterValues = (EnumTranslation<SelectPrinter>[]) Translation.SelectPrinterValues.Where(x => x.Value != SelectPrinter.ShowDialog);
 
-            RaisePropertyChanged(nameof(SelectPrinterValues));
+            RaisePropertyChanged(nameof(Translation.SelectPrinterValues));
         }
 
         public override HelpTopic GetContextBasedHelpTopic()

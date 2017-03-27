@@ -5,7 +5,6 @@ using SystemWrapper.IO;
 using SystemWrapper.Microsoft.Win32;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
@@ -13,13 +12,13 @@ using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Printing;
 using pdfforge.PDFCreator.Core.Printing.Port;
 using pdfforge.PDFCreator.Core.Printing.Printer;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 {
@@ -38,10 +37,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 
             var settingsProvider = new DefaultSettingsProvider();
 
-            var translationHelper = new TranslationHelper(new TranslationProxy(), settingsProvider, new AssemblyHelper());
+            var translationHelper = new TranslationHelper(settingsProvider, new AssemblyHelper(), new TranslationFactory());
             translationHelper.InitTranslator("None");
 
-            var settingsLoader = new SettingsLoader(translationHelper, Substitute.For<ISettingsMover>(), installationPathProvider, Substitute.For<ILanguageDetector>(), Substitute.For<IPrinterHelper>(), Substitute.For<ITranslator>());
+            var settingsLoader = new SettingsLoader(translationHelper, Substitute.For<ISettingsMover>(), installationPathProvider, Substitute.For<IPrinterHelper>());
 
             var settingsManager = new SettingsManager(settingsProvider, settingsLoader);
             settingsManager.LoadAllSettings();

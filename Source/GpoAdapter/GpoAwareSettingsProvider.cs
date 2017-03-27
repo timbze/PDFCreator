@@ -15,9 +15,12 @@ namespace pdfforge.PDFCreator.Core.GpoAdapter
 
         public override string GetApplicationLanguage()
         {
-            return string.IsNullOrWhiteSpace(GpoSettings.Language)
-                ? Settings.ApplicationSettings.Language
-                : GpoSettings.Language;
+            if (!string.IsNullOrWhiteSpace(GpoSettings.Language))
+            {
+                return GpoSettings.Language;
+            }
+
+            return Settings == null ? "en" : Settings.ApplicationSettings.Language;
         }
     }
 }

@@ -16,7 +16,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ProfileSettings
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var viewModel = DataContext as DocumentTabViewModel;
-            viewModel?.Translator.Translate(this);
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)

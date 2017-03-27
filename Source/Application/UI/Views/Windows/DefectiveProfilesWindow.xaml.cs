@@ -1,19 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Windows
 {
     public partial class DefectiveProfilesWindow : Window
     {
-        public DefectiveProfilesWindow(DefectiveProfilesWindowViewModel viewModel, ITranslator translator)
+        public DefectiveProfilesWindow(DefectiveProfilesWindowViewModel viewModel)
         {
             DataContext = viewModel;
 
             InitializeComponent();
-
-            translator.Translate(this);
         }
 
         private void CommandBinding_CopyExecuted(object sender, ExecutedRoutedEventArgs e)

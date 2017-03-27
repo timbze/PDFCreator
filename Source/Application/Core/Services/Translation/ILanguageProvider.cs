@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using pdfforge.DynamicTranslator;
 
 namespace pdfforge.PDFCreator.Core.Services.Translation
 {
@@ -9,5 +8,6 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         IEnumerable<Language> GetAvailableLanguages();
         bool HasTranslation(string language);
         Language FindBestLanguage(CultureInfo culture);
+        Language FindBestLanguage(string language);
     }
 }

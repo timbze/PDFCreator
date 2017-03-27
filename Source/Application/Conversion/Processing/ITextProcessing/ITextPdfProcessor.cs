@@ -3,19 +3,14 @@ using SystemInterface.IO;
 using iTextSharp.text.pdf;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
+using pdfforge.PDFCreator.Conversion.Settings;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 {
     public class ITextPdfProcessor : PdfProcessorBase
     {
-        public ITextPdfProcessor(IFile file, IProcessingPasswordsProvider passwordsProvider)
-        {
-            File = file;
-            PasswordsProvider = passwordsProvider;
-        }
-
-        protected override IFile File { get; }
-        protected override IProcessingPasswordsProvider PasswordsProvider { get; }
+        public ITextPdfProcessor(IFile file, IProcessingPasswordsProvider passwordsProvider) : base(file, passwordsProvider)
+        {  }
 
         /// <summary>
         ///     Determines number of pages in PDF file
@@ -30,14 +25,27 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             return numberOfPages;
         }
 
+        private char DeterminePdfVersionForPdfStamper(ConversionProfile profile)
+        {
+            var intendedPdfVersion = DeterminePdfVersion(profile);
+            if (intendedPdfVersion == "1.7")
+                return PdfWriter.VERSION_1_7;
+            if (intendedPdfVersion == "1.6")
+                return PdfWriter.VERSION_1_6;
+            if (intendedPdfVersion == "1.5")
+                return PdfWriter.VERSION_1_5;
+
+            return PdfWriter.VERSION_1_4;
+        }
+
         protected override void DoProcessPdf(Job job)
         {
             string preProcessFile = null;
             try
             {
                 var pdfFile = job.TempOutputFiles.First();
-                preProcessFile = MoveFileToPreProcessFile(pdfFile);
-                var version = DeterminePdfVersion(job.Profile.PdfSettings);
+                preProcessFile = MoveFileToPreProcessFile(pdfFile, "PreProcess");
+                var version = DeterminePdfVersionForPdfStamper(job.Profile);
                 using (var stamper = StamperCreator.CreateStamperAccordingToEncryptionAndSignature(preProcessFile, pdfFile, job.Profile, version))
                 {
                     var encrypter = new Encrypter();
@@ -50,7 +58,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                     var backgroundAdder = new BackgroundAdder();
                     backgroundAdder.AddBackground(stamper, job.Profile);
 
-                    var signer = new Signer();
+                    var signer = new ITextSigner();
                     signer.SignPdfFile(stamper, job.Profile, job.Passwords);
                     //Signing after adding background and update metadata
 

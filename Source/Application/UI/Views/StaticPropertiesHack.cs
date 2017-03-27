@@ -1,35 +1,41 @@
-﻿using pdfforge.DynamicTranslator;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.PDFCreator.Core.Services;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.ViewModels.Converter;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.UI.Views.UserControls;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.Views
 {
     public class StaticPropertiesHack : IStaticPropertiesHack
     {
-        private readonly ITranslator _translator;
         private readonly IUserGuideHelper _userGuideHelper;
-        private readonly IActivationHelper _activationHelper;
+        private readonly ILicenseChecker _licenseChecker;
+        private readonly ITranslationFactory _translationFactory;
 
-        public StaticPropertiesHack(ITranslator translator, IUserGuideHelper userGuideHelper, IActivationHelper activationHelper)
+        public StaticPropertiesHack(IUserGuideHelper userGuideHelper, ILicenseChecker licenseChecker, ITranslationFactory translationFactory)
         {
-            _translator = translator;
             _userGuideHelper = userGuideHelper;
-            _activationHelper = activationHelper;
+            _licenseChecker = licenseChecker;
+            _translationFactory = translationFactory;
         }
 
         public void SetStaticProperties()
         {
             // THIS SHOULD USUALLY NOT BE DONE!
-
-            TranslatorConverter.Translator = _translator;
+            TokenHintPanel.TranslationFactory = _translationFactory;
             TokenHintPanel.UserGuideHelper = _userGuideHelper;
-            ErrorReportHelper.ActivationHelper = _activationHelper;
-
+            ErrorReportHelper.LicenseChecker = _licenseChecker;
+            TranslatorConverter.Translation = _translationFactory.CreateTranslation<ApplicationTranslation>();
+            _translationFactory.TranslationChanged += (sender, args) =>
+            {
+                TranslatorConverter.Translation = _translationFactory.CreateTranslation<ApplicationTranslation>();
+            };
             // TODO find a better way using WPF resources
         }
+
+
     }
 }

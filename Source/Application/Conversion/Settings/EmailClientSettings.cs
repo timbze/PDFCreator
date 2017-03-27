@@ -1,8 +1,5 @@
-using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
-using System.Collections.Generic;
 using System.Text;
-using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -31,6 +28,11 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public bool Enabled { get; set; }
 		
 		/// <summary>
+		/// Use html for E-mail body
+		/// </summary>
+		public bool Html { get; set; }
+		
+		/// <summary>
 		/// The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org
 		/// </summary>
 		public string Recipients { get; set; }
@@ -45,6 +47,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			AddSignature = true;
 			Content = "";
 			Enabled = false;
+			Html = false;
 			Recipients = "";
 			Subject = "";
 		}
@@ -59,6 +62,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { AddSignature = bool.Parse(data.GetValue(@"" + path + @"AddSignature")); } catch { AddSignature = true;}
 			try { Content = Data.UnescapeString(data.GetValue(@"" + path + @"Content")); } catch { Content = "";}
 			try { Enabled = bool.Parse(data.GetValue(@"" + path + @"Enabled")); } catch { Enabled = false;}
+			try { Html = bool.Parse(data.GetValue(@"" + path + @"Html")); } catch { Html = false;}
 			try { Recipients = Data.UnescapeString(data.GetValue(@"" + path + @"Recipients")); } catch { Recipients = "";}
 			try { Subject = Data.UnescapeString(data.GetValue(@"" + path + @"Subject")); } catch { Subject = "";}
 		}
@@ -68,6 +72,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"AddSignature", AddSignature.ToString());
 			data.SetValue(@"" + path + @"Content", Data.EscapeString(Content));
 			data.SetValue(@"" + path + @"Enabled", Enabled.ToString());
+			data.SetValue(@"" + path + @"Html", Html.ToString());
 			data.SetValue(@"" + path + @"Recipients", Data.EscapeString(Recipients));
 			data.SetValue(@"" + path + @"Subject", Data.EscapeString(Subject));
 		}
@@ -79,6 +84,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.AddSignature = AddSignature;
 			copy.Content = Content;
 			copy.Enabled = Enabled;
+			copy.Html = Html;
 			copy.Recipients = Recipients;
 			copy.Subject = Subject;
 			
@@ -93,6 +99,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!AddSignature.Equals(v.AddSignature)) return false;
 			if (!Content.Equals(v.Content)) return false;
 			if (!Enabled.Equals(v.Enabled)) return false;
+			if (!Html.Equals(v.Html)) return false;
 			if (!Recipients.Equals(v.Recipients)) return false;
 			if (!Subject.Equals(v.Subject)) return false;
 			
@@ -106,6 +113,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("AddSignature=" + AddSignature.ToString());
 			sb.AppendLine("Content=" + Content.ToString());
 			sb.AppendLine("Enabled=" + Enabled.ToString());
+			sb.AppendLine("Html=" + Html.ToString());
 			sb.AppendLine("Recipients=" + Recipients.ToString());
 			sb.AppendLine("Subject=" + Subject.ToString());
 			

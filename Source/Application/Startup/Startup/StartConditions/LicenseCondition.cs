@@ -1,11 +1,12 @@
 ﻿using System;
 using NLog;
-using pdfforge.DynamicTranslator;
-using pdfforge.LicenseValidator;
+using Optional;
+using pdfforge.LicenseValidator.Interface;
+using pdfforge.LicenseValidator.Interface.Data;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
+using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -18,16 +19,16 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly ISettingsManager _settingsManager;
-        private readonly ITranslator _translator;
-        private readonly IActivationHelper _activationHelper;
+        private readonly ProgramTranslation _translation;
+        private readonly ILicenseChecker _licenseChecker;
         private readonly IVersionHelper _versionHelper;
         private readonly ApplicationNameProvider _applicationNameProvider;
 
-        public LicenseCondition(ISettingsManager settingsManager, ITranslator translator, IActivationHelper activationHelper, IInteractionInvoker interactionInvoker, IVersionHelper versionHelper, ApplicationNameProvider applicationNameProvider)
+        public LicenseCondition(ISettingsManager settingsManager, ProgramTranslation translation, ILicenseChecker licenseChecker, IInteractionInvoker interactionInvoker, IVersionHelper versionHelper, ApplicationNameProvider applicationNameProvider)
         {
             _settingsManager = settingsManager;
-            _translator = translator;
-            _activationHelper = activationHelper;
+            _translation = translation;
+            _licenseChecker = licenseChecker;
             _interactionInvoker = interactionInvoker;
             _versionHelper = versionHelper;
             _applicationNameProvider = applicationNameProvider;
@@ -35,9 +36,9 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 
         public StartupConditionResult Check()
         {
-            RenewActivation();
+            var activation = RenewActivation();
 
-            if (_activationHelper.IsLicenseValid)
+            if (activation.Exists(a => a.IsActivationStillValid()))
                 return StartupConditionResult.BuildSuccess();
 
             _logger.Error("Invalid or expired license.");
@@ -49,14 +50,12 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 
             if (settingsProvider.GpoSettings.HideLicenseTab)
             {
-                var errorMessage = _translator.GetFormattedTranslation("Program",
-                    "LicenseInvalidGpoHideLicenseTab",
-                    editionWithVersionNumber);
+                var errorMessage = _translation.GetFormattedLicenseInvalidGpoHideLicenseTab(editionWithVersionNumber);
                 return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.LicenseInvalidAndHiddenWithGpo, errorMessage);
             }
 
             var caption = _applicationNameProvider.ApplicationName;
-            var message = _translator.GetFormattedTranslation("Program", "LicenseInvalid", editionWithVersionNumber);
+            var message = _translation.GetFormattedLicenseInvalidTranslation(editionWithVersionNumber);
             var result = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Exclamation);
             if (result != MessageResponse.Yes)
                 return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.LicenseInvalidAndNotReactivated, "The license is invalid!", showMessage:false);
@@ -65,31 +64,37 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
             _interactionInvoker.Invoke(interaction);
 
             //Check latest edition for validity
-            _activationHelper.LoadActivation();
+            activation = _licenseChecker.GetSavedActivation();
 
-            if (_activationHelper.IsLicenseValid)
+            if (activation.Exists(a => a.IsActivationStillValid()))
                 return StartupConditionResult.BuildSuccess();
 
-            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.LicenseInvalidAfterReactivation, _translator.GetFormattedTranslation("Program", "LicenseInvalidAfterReactivation", _applicationNameProvider.ApplicationName));
+            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.LicenseInvalidAfterReactivation, _translation.GetFormattedLicenseInvalidAfterReactivationTranslation(_applicationNameProvider.ApplicationName));
         }
 
-        private void RenewActivation()
+        private Option<Activation, LicenseError> RenewActivation()
         {
-            _activationHelper.LoadActivation();
+            var activation = _licenseChecker.GetSavedActivation();
 
-            var lastActivation = _activationHelper.Activation;
+            if (activation.Exists(a => a.ActivationMethod == ActivationMethod.Offline))
+                return activation;
 
-            if (lastActivation == null)
-                return;
+            if (activation.Exists(IsActivationPeriodStillValid))
+                return activation;
 
-            if (lastActivation.ActivationMethod == ActivationMethod.Offline)
-                return;
+            var licenseKey = activation.Match(
+                some: a => a.Key.Some<string, LicenseError>(),
+                none: e => _licenseChecker.GetSavedLicenseKey());
 
-            var remainingActivationTime = lastActivation.ActivatedTill - DateTime.Now;
-            if (remainingActivationTime > TimeSpan.FromDays(4))
-                return;
+            return licenseKey.Match(
+                some: key => _licenseChecker.ActivateWithKey(key),
+                none: e => Option.None<Activation, LicenseError>(LicenseError.NoLicenseKey));
+        }
 
-            _activationHelper.RenewActivation();
+        private bool IsActivationPeriodStillValid(Activation activation)
+        {
+            var remainingActivationTime = activation.ActivatedTill - DateTime.Now;
+            return remainingActivationTime >= TimeSpan.FromDays(4);
         }
 
         private MessageResponse ShowMessage(string message, string title, MessageOptions options, MessageIcon icon)

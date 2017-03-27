@@ -2,9 +2,9 @@
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
@@ -15,8 +15,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         private readonly ButtonDisplayOptions _buttonDisplayOptions;
         private readonly IUserGuideHelper _userGuideHelper;
 
-        public WelcomeWindowViewModel(IProcessStarter processStarter, ButtonDisplayOptions buttonDisplayOptions, IUserGuideHelper userGuideHelper)
+        public WelcomeWindowViewModel(IProcessStarter processStarter, ButtonDisplayOptions buttonDisplayOptions, IUserGuideHelper userGuideHelper, WelcomeWindowTranslation translation)
         {
+            Translation = translation;
             _processStarter = processStarter;
             _buttonDisplayOptions = buttonDisplayOptions;
             _userGuideHelper = userGuideHelper;
@@ -31,6 +32,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         public DelegateCommand WhatsNewCommand { get; }
         public DelegateCommand FacebookCommand { get; }
         public DelegateCommand GooglePlusCommand { get; }
+        public WelcomeWindowTranslation Translation { get; }
 
         public void WhatsNewCommandExecute(object obj)
         {

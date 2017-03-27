@@ -10,8 +10,10 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.ApplicationSettings
 {
@@ -21,7 +23,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
         [SetUp]
         public void SetUp()
         {
-            _translationHelper = new TranslationHelper(new TranslationProxy(), new DefaultSettingsProvider(), new AssemblyHelper());
+            _translationHelper = new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(), new TranslationFactory());
             _translationHelper.InitEmptyTranslator();
 
             _printerActionAssistant = Substitute.For<IPrinterActionsAssistant>();
@@ -69,7 +71,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.UserControlViewModels.Appli
             if (profiles != null)
                 settings.ConversionProfiles = profiles;
 
-            var viewModel = new PrinterTabViewModel(_printerProvider, new TranslationProxy(), _printerActionAssistant, null, null, printerHelper);
+            var viewModel = new PrinterTabViewModel(_printerProvider, _printerActionAssistant, null, null, printerHelper, new PrinterTabTranslation());
 
             viewModel.SetSettingsAndRaiseNotifications(settings, null);
 

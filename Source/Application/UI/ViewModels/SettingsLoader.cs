@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using Microsoft.Win32;
 using NLog;
 using pdfforge.DataStorage;
 using pdfforge.DataStorage.Storage;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Services.Translation;
@@ -24,22 +22,18 @@ namespace pdfforge.PDFCreator.UI.ViewModels
     public class SettingsLoader : ISettingsLoader
     {
         private readonly IInstallationPathProvider _installationPathProvider;
-        private readonly ILanguageDetector _languageDetector;
         private readonly ILanguageProvider _languageProvider;
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPrinterHelper _printerHelper;
-        private readonly ITranslator _translator;
         private readonly ISettingsMover _settingsMover;
 
-        public SettingsLoader(ILanguageProvider languageProvider, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, ILanguageDetector languageDetector, IPrinterHelper printerHelper, ITranslator translator)
+        public SettingsLoader(ILanguageProvider languageProvider, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, IPrinterHelper printerHelper)
         {
             _languageProvider = languageProvider;
             _settingsMover = settingsMover;
             _installationPathProvider = installationPathProvider;
-            _languageDetector = languageDetector;
             _printerHelper = printerHelper;
-            _translator = translator;
         }
 
         public int SettingsVersion => new ApplicationProperties().SettingsVersion;
@@ -68,13 +62,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels
                 settings.LoadData(regStorage, "", settingsUpgrader.UpgradeSettings);
             }
 
+            if (!_languageProvider.HasTranslation(settings.ApplicationSettings.Language))
+            {
+                var language = _languageProvider.FindBestLanguage(CultureInfo.CurrentCulture);
+                settings.ApplicationSettings.Language = language.Iso2;
+            }
+
             if (!CheckValidSettings(settings))
             {
-                var defaultLanguage = _languageDetector.FindDefaultLanguage();
-                if (!_languageProvider.HasTranslation(defaultLanguage))
-                    defaultLanguage = "English";
-
-                var defaultSettings = profileBuilder.CreateDefaultSettings(FindPrimaryPrinter(), regStorage, defaultLanguage);
+                var defaultSettings = profileBuilder.CreateDefaultSettings(FindPrimaryPrinter(), regStorage, settings.ApplicationSettings.Language);
 
                 if (DefaultUserSettingsExist())
                 {
@@ -90,36 +86,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels
             CheckPrinterMappings(settings);
             CheckTitleReplacement(settings);
 
-            if (settings.ApplicationSettings.Language == "")
-            {
-                var language = _languageProvider.FindBestLanguage(CultureInfo.CurrentCulture);
-
-                if (language != null)
-                {
-                    settings.ApplicationSettings.Language = Path.GetFileNameWithoutExtension(language.FileName);
-                }
-            }
-
-            TranslateProfilenames(settings);
-
             LogProfiles(settings);
 
             return settings;
-        }
-
-        private void TranslateProfilenames(PdfCreatorSettings settings)
-        {
-            foreach (var profile in settings.ConversionProfiles)
-            {
-                try
-                {
-                    profile.Name = _translator.GetTranslation("ProfileNameByGuid", profile.Guid);
-                }
-                catch
-                {
-                    _logger.Trace($"Profile '{profile.Guid}' has no translation");
-                }
-            }
         }
 
         private PdfCreatorSettings LoadDefaultUserSettings(PdfCreatorSettings defaultSettings, DefaultProfileBuilder profileBuilder,

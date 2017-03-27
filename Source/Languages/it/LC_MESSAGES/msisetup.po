@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A newer version of [ProductName] is already installed."
+msgstr "Una versione più recente di [ProductName] è già installata."
+
+msgid "Main program"
+msgstr "Programma principale"
+
+msgid "Program files"
+msgstr "File di programma"
+
+msgid "You need to be an administrator to install PDFCreator."
+msgstr "È necessario essere un amministratore per installare PDFCreator."
+
+msgid ""
+"This application requires .NET Framework 4.0. Please install the .NET "
+"Framework then run this installer again."
+msgstr ""
+"Questa applicazione richiede .NET Framework 4.0. Si prega di installare il ."
+"NET Framework quindi eseguire nuovamente il programma di installazione."
+
+msgid "PDFCreator requires Windows XP SP3 or above!"
+msgstr "PDFCreator richiede Windows XP SP3 o superiore!"

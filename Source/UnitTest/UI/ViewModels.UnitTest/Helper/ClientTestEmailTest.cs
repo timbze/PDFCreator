@@ -5,7 +5,7 @@ using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Mail;
+using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
@@ -54,6 +54,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Helper
             _emailClientSettings.Recipients = "recipient";
             _emailClientSettings.Content = "content";
             _emailClientSettings.Subject = "subject";
+            _emailClientSettings.Html = true;
 
             var currentEmail = new Email();
             _emailClient.When(x => x.ShowEmailClient(Arg.Any<Email>())).Do(
@@ -68,6 +69,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Helper
             Assert.IsTrue(currentEmail.To.Contains("recipient"), "Wrong recipient");
             Assert.AreEqual("content", currentEmail.Body, "Wrong mail body");
             Assert.AreEqual("subject", currentEmail.Subject, "Wrong subject");
+            Assert.IsTrue(currentEmail.Html, "Wrong Html setting");
         }
 
         [Test]
@@ -80,11 +82,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Helper
                 {
                     currentEmail = x[0] as Email;
                 });
-            _mailSignatureHelper.ComposeMailSignature(_emailClientSettings).Returns("Signature");
+            _mailSignatureHelper.ComposeMailSignature().Returns("Signature");
 
             _clientTestEmail.SendTestEmail(_emailClientSettings);
 
-            _mailSignatureHelper.Received().ComposeMailSignature(_emailClientSettings);
+            _mailSignatureHelper.Received().ComposeMailSignature();
             Assert.AreEqual("contentSignature", currentEmail.Body, "Wrong mail body");
         }
 
@@ -115,7 +117,6 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Helper
         {
             var currentEmail = new Email();
             _pathWrap.GetTempPath().Returns("temp");
-
 
             _emailClient.When(x => x.ShowEmailClient(Arg.Any<Email>())).Do(
                 x =>

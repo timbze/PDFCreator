@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.Converter;assembly=PDFCreator.ViewModels"
-             xmlns:licensing="clr-namespace:pdfforge.PDFCreator.Core.Services.Licensing;assembly=PDFCreator.Services"
              xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Views.UserControls"
-             xmlns:applicationSettings="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ApplicationSettings;assembly=PDFCreator.DesignTimeViewModels"
+             xmlns:viewModel="clr-namespace:pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings;assembly=PDFCreator.ViewModels"
+             xmlns:designTimeViewModel="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ApplicationSettings;assembly=PDFCreator.DesignTimeViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance applicationSettings:DesignTimeLicenseTabViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance designTimeViewModel:DesignTimeLicenseTabViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="385"
              d:DesignWidth="400"
              Loaded="LicenseTab_OnLoaded"
@@ -25,141 +25,149 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
     </UserControl.Resources>
-    <StackPanel>
-        <HeaderedContentControl Name="LicenseHeader" Template="{StaticResource HeaderPanelTemplate}" Header="License">
-            <StackPanel>
-                <DockPanel Margin="0 10 0 5" HorizontalAlignment="Center" LastChildFill="False">
-                    <DockPanel.Resources>
-                        <converter:AreEqualConverter Reference="{x:Static licensing:LicenseStatus.Valid}"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.License}">
+                <StackPanel>
+                    <DockPanel Margin="0 10 0 5" HorizontalAlignment="Center" LastChildFill="False">
+                        <DockPanel.Resources>
+                            <converter:AreEqualConverter Reference="{x:Static viewModel:LicenseStatusForView.Valid}"
                                                      EqualValue="True" NotEqualValue="False"
                                                      x:Key="LicenseStatusIsValidToBoolConverter" />
-                        <converter:AreEqualConverter
-                            Reference="{x:Static licensing:LicenseStatus.ValidForVersionButLicenseExpired}"
+                            <converter:AreEqualConverter
+                            Reference="{x:Static viewModel:LicenseStatusForView.ValidForVersionButLicenseExpired}"
                             EqualValue="True" NotEqualValue="False"
                             x:Key="LicenseStatusIsValidForVersionButLicenseExpiredToBoolConverter" />
-                    </DockPanel.Resources>
-                    <Viewbox DockPanel.Dock="Left" Height="20" Stretch="Uniform">
-                        <Path>
-                            <Path.Style>
-                                <Style TargetType="Path">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding LicenseStatus}"
-                                                     Value="{x:Static licensing:LicenseStatus.Valid}">
-                                            <Setter Property="Data" Value="{StaticResource Accept}" />
-                                            <Setter Property="Fill" Value="#6fae7f" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding LicenseStatus}"
-                                                     Value="{x:Static licensing:LicenseStatus.ValidForVersionButLicenseExpired}">
-                                            <Setter Property="Data" Value="{StaticResource Accept}" />
-                                            <Setter Property="Fill" Value="DarkOrange" />
-                                        </DataTrigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition
-                                                    Binding="{Binding LicenseStatus, Converter={StaticResource LicenseStatusIsValidToBoolConverter}}"
+                        </DockPanel.Resources>
+                        <Viewbox DockPanel.Dock="Left" Height="20" Stretch="Uniform">
+                            <Path>
+                                <Path.Style>
+                                    <Style TargetType="Path">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LicenseStatusForView}"
+                                                     Value="{x:Static viewModel:LicenseStatusForView.Valid}">
+                                                <Setter Property="Data" Value="{StaticResource Accept}" />
+                                                <Setter Property="Fill" Value="#6fae7f" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LicenseStatusForView}"
+                                                     Value="{x:Static viewModel:LicenseStatusForView.ValidForVersionButLicenseExpired}">
+                                                <Setter Property="Data" Value="{StaticResource Accept}" />
+                                                <Setter Property="Fill" Value="DarkOrange" />
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition
+                                                    Binding="{Binding LicenseStatusForView, Converter={StaticResource LicenseStatusIsValidToBoolConverter}}"
                                                     Value="False" />
-                                                <Condition
-                                                    Binding="{Binding LicenseStatus, Converter={StaticResource LicenseStatusIsValidForVersionButLicenseExpiredToBoolConverter}}"
+                                                    <Condition
+                                                    Binding="{Binding LicenseStatusForView, Converter={StaticResource LicenseStatusIsValidForVersionButLicenseExpiredToBoolConverter}}"
                                                     Value="False" />
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Data" Value="{StaticResource Warning}" />
-                                            <Setter Property="Fill" Value="#db3232" />
-                                        </MultiDataTrigger>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Data" Value="{StaticResource Warning}" />
+                                                <Setter Property="Fill" Value="#db3232" />
+                                            </MultiDataTrigger>
 
-                                    </Style.Triggers>
-                                </Style>
-                            </Path.Style>
-                        </Path>
-                    </Viewbox>
-                    <TextBlock DockPanel.Dock="Top" Margin="5 0" FontSize="14" FontWeight="Bold"
-                               Name="LicenseStatusTitle">
-                        License Status:
-                    </TextBlock>
-                    <TextBlock VerticalAlignment="Center" Margin="5 0" Name="LicenseStatusText" TextWrapping="Wrap"
+                                        </Style.Triggers>
+                                    </Style>
+                                </Path.Style>
+                            </Path>
+                        </Viewbox>
+                        <TextBlock DockPanel.Dock="Top" Margin="5 0" FontSize="14" FontWeight="Bold"
+                               Text="{Binding Translation.LicenseStatus}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5 0" TextWrapping="Wrap"
                                Text="{Binding LicenseStatusText}" />
-                </DockPanel>
+                    </DockPanel>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Name="LicenseKeyText">License Key:</Label>
-                    <TextBox IsReadOnly="True" Margin="0 0 10 0" Grid.Column="0" Grid.Row="1"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="{Binding Translation.LicenseKey}" />
+                        <TextBox IsReadOnly="True" Margin="0 0 10 0" Grid.Column="0" Grid.Row="1"
                              Text="{Binding LicenseKey, Mode=OneWay}" />
-                    <Label Grid.Column="1" Grid.Row="0" Name="LicenseExpiresText">Expires:</Label>
-                    <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="1" MinWidth="70"
+                        <Label Grid.Column="1" Grid.Row="0" Content="{Binding Translation.Expires}" />
+                        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="1" MinWidth="70"
                              Text="{Binding LicenseExpiryDate, Mode=OneWay}" />
-                </Grid>
+                    </Grid>
 
-                <Label Name="LicenseeText">Licensee:</Label>
-                <TextBox IsReadOnly="True" Text="{Binding Activation.Licensee}" />
-                <Label Name="MachineIdText">Machine ID:</Label>
-                <TextBox IsReadOnly="True" Text="{Binding Activation.MachineId}" />
+                    <Label Content="{Binding Translation.Licensee}" />
+                    <TextBox IsReadOnly="True" Text="{Binding Licensee, Mode=OneWay}" />
+                    <Label Content="{Binding Translation.MachineId}" />
+                    <TextBox IsReadOnly="True" Text="{Binding MachineId, Mode=OneWay}" />
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Name="ActivatedTillText">Activation valid till:</Label>
-                    <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="1"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="{Binding Translation.ActivatedTill}"/>
+                        <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="1"
                              Text="{Binding ActivationValidTill, Mode=OneWay}" />
-                    <Label Grid.Column="2" Grid.Row="0" Name="ActivationDateText">Last activation:</Label>
-                    <TextBox IsReadOnly="True" Grid.Column="2" Grid.Row="1"
+                        <Label Grid.Column="2" Grid.Row="0" Content="{Binding Translation.LastActivation}" />
+                        <TextBox IsReadOnly="True" Grid.Column="2" Grid.Row="1"
                              Text="{Binding LastActivationTime, Mode=OneWay}" />
-                </Grid>
-                
-                <DockPanel Height="30" HorizontalAlignment="Center" LastChildFill="False" Margin="0 10 0 0"
+                    </Grid>
+
+                    <DockPanel Height="30" HorizontalAlignment="Center" LastChildFill="False" Margin="0 10 0 0"
                            Visibility="{Binding IsCheckingLicense, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Viewbox DockPanel.Dock="Left">
-                        <userControls:BusyAnimationControl />
-                    </Viewbox>
-                    <TextBlock VerticalAlignment="Center" Margin="5" Name="ValidatingLicenseText">Validating license...</TextBlock>
-                </DockPanel>
+                        <Viewbox DockPanel.Dock="Left">
+                            <userControls:BusyAnimationControl />
+                        </Viewbox>
+                        <TextBlock VerticalAlignment="Center" Margin="5" IsHitTestVisible="{Binding Translation.ValidatingLicense}" />
+                    </DockPanel>
 
-                <UniformGrid Columns="2" Rows="2" Height="75">
-                    <UniformGrid.Resources>
-                        <Style x:Key="UacStyle" TargetType="ContentControl">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.4" />
-                                </Trigger>
-                            </Style.Triggers>
-                            <Setter Property="Width" Value="16" />
-                            <Setter Property="Margin" Value="5 0" />
-                        </Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap" />
-                            <Setter Property="MaxWidth" Value="140" />
-                            <Setter Property="TextAlignment" Value="Center" />
-                        </Style>
-                    </UniformGrid.Resources>
+                    <UniformGrid Columns="2" Rows="1" Height="35">
+                        <UniformGrid.Resources>
+                            <Style x:Key="UacStyle" TargetType="ContentControl">
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" Value="0.4" />
+                                    </Trigger>
+                                </Style.Triggers>
+                                <Setter Property="Width" Value="16" />
+                                <Setter Property="Margin" Value="5 0" />
+                            </Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="MaxWidth" Value="140" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                            </Style>
+                        </UniformGrid.Resources>
 
-                    <Button Command="{Binding OnlineActivationCommand}" Margin="0 0 5 5" >
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="OnlineActivationText" TextWrapping="Wrap" TextAlignment="Center">Online Activation</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Command="{Binding OfflineActivationCommand}" Margin="5 0 0 5">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="OfflineActivationText" TextWrapping="Wrap" TextAlignment="Center">Offline activation</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Command="{Binding ManageLicensesCommand}" Margin="0 5 5 0">
-                        <TextBlock Name="ManageLicensesButton" TextWrapping="Wrap" TextAlignment="Center" >Manage licenses</TextBlock>
-                    </Button>
-                </UniformGrid>
-            </StackPanel>
-        </HeaderedContentControl>
-    </StackPanel>
+                        <Button Command="{Binding OnlineActivationCommand}" Margin="0 0 5 0" 
+                                Visibility="{Binding ShowOnlineActivation, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Translation.OnlineActivation}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding OfflineActivationCommand}" Margin="5 0 0 0"
+                                Visibility="{Binding ShowOfflineActivation, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Translation.OfflineActivation}" />
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+                </StackPanel>
+            </HeaderedContentControl>
+        </StackPanel>
+        <TextBlock Grid.Row="1" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="8">
+            <Hyperlink Command="{Binding ManageLicensesCommand}">
+                <TextBlock Text="{Binding Translation.ManageLicenses}" />
+            </Hyperlink>
+        </TextBlock>
+    </Grid>
 </UserControl>

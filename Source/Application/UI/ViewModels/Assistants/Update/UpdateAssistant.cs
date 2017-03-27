@@ -6,13 +6,13 @@ using Microsoft.Win32;
 using NLog;
 using pdfforge.DataStorage;
 using pdfforge.DataStorage.Storage;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Threading;
 
@@ -52,16 +52,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
 
         private readonly string _skipVersionRegistryPath;
         private readonly IThreadManager _threadManager;
-        private readonly ITranslator _translator;
+        private readonly UpdateManagerTranslation _translation;
         private readonly IVersionHelper _versionHelper;
 
         private bool _checkNecessity = true;
 
-        public UpdateAssistant(ISettingsProvider settingsProvider, IInteractionInvoker interactionInvoker, ITranslator translator, IThreadManager threadManager, IVersionHelper versionHelper, IInstallationPathProvider installationPathProvider, IUpdateLauncher updateLauncher, UpdateInformationProvider updateInformationProvider)
+        public UpdateAssistant(ISettingsProvider settingsProvider, IInteractionInvoker interactionInvoker, UpdateManagerTranslation translation, IThreadManager threadManager, IVersionHelper versionHelper, IInstallationPathProvider installationPathProvider, IUpdateLauncher updateLauncher, UpdateInformationProvider updateInformationProvider)
         {
             _settingsProvider = settingsProvider;
             _interactionInvoker = interactionInvoker;
-            _translator = translator;
+            _translation = translation;
             _threadManager = threadManager;
             _versionHelper = versionHelper;
             _updateLauncher = updateLauncher;
@@ -314,15 +314,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants.Update
 
         private void LaunchNoUpdateForm()
         {
-            var caption = _translator.GetTranslation("UpdateManager", "PDFCreatorUpdate");
-            var message = _translator.GetTranslation("UpdateManager", "NoUpdateMessage");
+            var caption = _translation.GetFormattedTitle("PDFCreatorUpdate");
+            var message = _translation.NoUpdateMessage;
             ShowMessage(message, caption, MessageOptions.OK, MessageIcon.PDFCreator);
         }
 
         private void LaunchErrorForm()
         {
-            var caption = _translator.GetTranslation("UpdateManager", "PDFCreatorUpdate");
-            var message = _translator.GetTranslation("UpdateManager", "ErrorMessage");
+            var caption = _translation.GetFormattedTitle("PDFCreatorUpdate");
+            var message = _translation.ErrorMessage;
             ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
         }
 

@@ -18,7 +18,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ApplicationSettings
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var viewModel = DataContext as LicenseTabViewModel;
-            viewModel?.Translator.Translate(this);
         }
 
         private void LicenseTab_OnLoaded(object sender, RoutedEventArgs e)

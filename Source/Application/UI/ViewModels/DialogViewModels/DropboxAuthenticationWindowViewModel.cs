@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using NLog;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
 {
@@ -20,13 +15,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
         private readonly DropboxAppData _dropboxData;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public DropboxAuthenticationWindowViewModel(IDropboxService dropboxService, DropboxAppData dropboxAppData)
+        public DropboxAuthenticationWindowViewModel(IDropboxService dropboxService, DropboxAppData dropboxAppData, DropboxAuthenticationWindowTranslation translation)
         {
             _dropboxService = dropboxService;
             _dropboxData = dropboxAppData;
-
+            Translation = translation;
             CancelDialogCommand = new DelegateCommand(CancelInputDialog);
         }
+        public DropboxAuthenticationWindowTranslation Translation { get; }
 
         protected override void HandleInteractionObjectChanged()
         {
@@ -59,8 +55,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
                 _logger.Info("Cannot parse access token.");
             }
             FinishInteraction();
-
-
         }
 
 

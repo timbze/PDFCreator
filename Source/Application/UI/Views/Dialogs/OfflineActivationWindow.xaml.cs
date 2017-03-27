@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
 
 namespace pdfforge.PDFCreator.UI.Views.Dialogs
@@ -9,11 +8,10 @@ namespace pdfforge.PDFCreator.UI.Views.Dialogs
     /// </summary>
     public partial class OfflineActivationWindow : Window
     {
-        public OfflineActivationWindow(OfflineActivationViewModel viewModel, ITranslator translator)
+        public OfflineActivationWindow(OfflineActivationViewModel viewModel)
         {
             DataContext = viewModel;
             InitializeComponent();
-            translator.Translate(this);
         }
     }
 }

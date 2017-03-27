@@ -4,7 +4,6 @@ using SystemInterface.IO;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.Workflow;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs

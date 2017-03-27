@@ -6,22 +6,21 @@
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance windows:DesignTimeUpdateDownloadWindowViewModel, IsDesignTimeCreatable=True}"
-        Title="PDFCreator Plus Updater"
+        Title="{Binding Translation.Title}"
         Width="399"
         SizeToContent="Height"
         ResizeMode="NoResize"
         Background="{x:Static SystemColors.ControlBrush}">
     <Grid MinHeight="100">
         <StackPanel Margin="10 20 10 10">
-            <TextBlock Name="LoadingUpdateText" Margin="0 3">Loading update...</TextBlock>
+            <TextBlock Text="{Binding Translation.LoadingUpdateText}" Margin="0 3">Loading update...</TextBlock>
             <ProgressBar Name="ProgressBar" Height="20" Maximum="100" Value="{Binding ProgressPercentage, Mode=OneWay}" />
             <TextBlock Name="DownloadSpeedText" HorizontalAlignment="Center" Text="{Binding DownloadSpeedText}" />
-            <TextBlock Name="InstallHint" Margin="0 3" HorizontalAlignment="Center" TextWrapping="Wrap">The update will be started when you close PDFCreator</TextBlock>
+            <TextBlock  Text="{Binding Translation.InstallHintText}" Margin="0 3" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
 
-            <Button Name="CancelButton" DockPanel.Dock="Right" Padding="5" MinWidth="100"
+            <Button DockPanel.Dock="Right" Padding="5" MinWidth="100"
                     Command="{Binding CancelCommand}" IsCancel="True" HorizontalAlignment="Right" Height="40"
-                    Margin="0 20 0 0">
-                _Cancel
+                    Margin="0 20 0 0" Content ="{Binding Translation.CancelButtonContent}">
             </Button>
         </StackPanel>
     </Grid>

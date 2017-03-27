@@ -2,15 +2,18 @@
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
 {
     public class InputBoxWindowViewModel : InteractionAwareViewModelBase<InputInteraction>
     {
+        public InputBoxWindowTranslation Translation { get; }
         private string _validationMessage;
 
-        public InputBoxWindowViewModel()
+        public InputBoxWindowViewModel(InputBoxWindowTranslation translation)
         {
+            Translation = translation;
             TextChangedCommand = new DelegateCommand<TextChangedEventArgs>(OnInputTextChanged);
             ConfirmDialogCommand = new DelegateCommand(ConfirmTextInput, CanConfirmTextInput);
             CancelDialogCommand = new DelegateCommand(CancelInputDialog);

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
+﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
@@ -10,22 +8,18 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
 
-        public BackgroundActionViewModel(ITranslator translator, IOpenFileInteractionHelper openFileInteractionHelper)
+        public BackgroundActionViewModel(BackgroundSettingsAndActionTranslation translation, IOpenFileInteractionHelper openFileInteractionHelper)
         {
+            Translation = translation;
             _openFileInteractionHelper = openFileInteractionHelper;
-            Translator = translator;
-
+            
             SelectBackgroundCommand = new DelegateCommand(SelectBackgroundExecute);
-
-            DisplayName = translator.GetTranslation("BackgroundSettings", "DisplayName");
-            Description = translator.GetTranslation("BackgroundSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
+        public BackgroundSettingsAndActionTranslation Translation { get; private set; }
 
-        public ITranslator Translator { get; }
-
-        public DelegateCommand SelectBackgroundCommand { get; set; }
-
-        public IEnumerable<EnumValue<BackgroundRepetition>> BackgroundRepetitionValues => Translator.GetEnumTranslation<BackgroundRepetition>();
+        public DelegateCommand SelectBackgroundCommand { get; private set; }
 
         public override bool IsEnabled
         {
@@ -39,10 +33,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void SelectBackgroundExecute(object obj)
         {
-            var titel = Translator.GetTranslation("BackgroundSettings", "SelectBackgroundFile");
-            var filter = Translator.GetTranslation("BackgroundSettings", "PDFFiles")
+            var titel = Translation.SelectBackgroundFile;
+            var filter = Translation.PDFFiles
                          + @" (*.pdf)|*.pdf|"
-                         + Translator.GetTranslation("BackgroundSettings", "AllFiles")
+                         + Translation.AllFiles
                          + @" (*.*)|*.*";
 
             CurrentProfile.BackgroundPage.File = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.BackgroundPage.File, titel, filter);

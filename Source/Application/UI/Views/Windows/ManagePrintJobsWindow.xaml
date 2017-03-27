@@ -8,7 +8,7 @@
         xmlns:windows="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.Windows;assembly=PDFCreator.DesignTimeViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance windows:DesignTimeManagePrintJobsVm, IsDesignTimeCreatable=True}"
-        Title="Manage Print Jobs"
+        Title="{Binding Translation.Title}"
         Height="319" Width="623"
         WindowStartupLocation="CenterScreen"
         AllowDrop="True"
@@ -51,17 +51,15 @@
                         <Setter Property="Margin" Value="0 0 8 0" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Name="MergeButton" Padding="5" Command="{Binding MergeJobsCommand}"
+                <Button Content="{Binding Translation.MergeButtonContent}" Padding="5" Command="{Binding MergeJobsCommand}"
                         CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
-                    Merge
                 </Button>
-                <Button Name="MergeAllButton" Padding="5" Command="{Binding MergeAllJobsCommand}"
+                <Button Content="{Binding Translation.MergeAllButtonContent}" Padding="5" Command="{Binding MergeAllJobsCommand}"
                         CommandParameter="{Binding ElementName=JobList, Path=SelectedItems}">
-                    Merge All
                 </Button>
-                <Button Name="DeleteButton" Padding="5" Command="{Binding DeleteJobCommand}"
-                        CommandParameter="{Binding SelectedItems, ElementName=JobList}" Content="Delete" />
-                <Button Name="ContinueButton" Padding="5" IsCancel="True" Content="Continue" />
+                <Button Content="{Binding Translation.DeleteButtonContent}" Padding="5" Command="{Binding DeleteJobCommand}"
+                        CommandParameter="{Binding SelectedItems, ElementName=JobList}"  />
+                <Button Padding="5" IsCancel="True" Content="{Binding Translation.ContinueButtonContent}" />
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Margin="0 0 5 0">
                 <Button Name="MoveUpButton" Padding="5" Command="{Binding MoveUpCommand}"
@@ -77,8 +75,13 @@
                     </Viewbox>
                 </Button>
             </StackPanel>
-            <ListView Name="JobList" ItemsSource="{Binding JobInfos}" IsSynchronizedWithCurrentItem="True">
-
+            <ListView Name="JobList" ItemsSource="{Binding JobInfos}"  IsSynchronizedWithCurrentItem="True" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding JobListSelectionChanged}"
+                            />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <i:Interaction.Behaviors>
                     <beh:EventToCommandBehavior Command="{Binding ListSelectionChangedCommand}"
                                                 Event="SelectionChanged" PassArguments="True" />
@@ -86,11 +89,11 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Title" x:Name="TitleColumn" Width="300"
+                        <GridViewColumn Header="{Binding Translation.TitleColumnHeader}" x:Name="TitleColumn" Width="300"
                                         DisplayMemberBinding="{Binding Metadata.PrintJobName}" />
-                        <GridViewColumn Header="Files" x:Name="FilesColumn" Width="60"
+                        <GridViewColumn Header="{Binding Translation.FilesColumnHeader}" x:Name="FilesColumn" Width="60"
                                         DisplayMemberBinding="{Binding SourceFiles.Count}" />
-                        <GridViewColumn Header="Pages" x:Name="PagesColumn" Width="60"
+                        <GridViewColumn Header="{Binding Translation.PagesColumnHeader}" x:Name="PagesColumn" Width="60"
                                         DisplayMemberBinding="{Binding TotalPages}" />
                     </GridView>
                 </ListView.View>

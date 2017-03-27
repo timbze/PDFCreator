@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
@@ -14,9 +14,9 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly ISmtpTest _smtpTest;
 
-        public EmailSmtpActionViewModel(ITranslator translator, IInteractionInvoker interactionInvoker, ISmtpTest smtpTest)
+        public EmailSmtpActionViewModel(SmtpSettingsAndActionControlTranslation translation, IInteractionInvoker interactionInvoker, ISmtpTest smtpTest)
         {
-            Translator = translator;
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
             _smtpTest = smtpTest;
 
@@ -24,14 +24,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
             SetPasswordCommand = new DelegateCommand(SetPasswordExecute);
             TestSmtpCommand = new DelegateCommand(TextSmtpExecute);
 
-            DisplayName = Translator.GetTranslation("SmtpEmailActionSettings", "DisplayName");
-            Description = Translator.GetTranslation("SmtpEmailActionSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
 
-        public ITranslator Translator { get; }
-
-        // this property is here so the client checkbox can be disabled in PDFCreator Server
-        public bool DisplayMailClientTextCheckbox { get; set; } = true;
+        public SmtpSettingsAndActionControlTranslation Translation { get; }
 
         public DelegateCommand EditMailTextCommand { get; set; }
         public DelegateCommand SetPasswordCommand { get; set; }
@@ -52,11 +49,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private void SetPasswordExecute(object obj)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(Translator.GetTranslation("pdfforge.PDFCreator.UI.Views.ActionControls.EmailClientActionControl", "RecipientsText.Text"));
+            sb.AppendLine(Translation.RecipientsText);
             sb.AppendLine(EmailSmtpSettings.Recipients);
 
-            var title = Translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordTitle");
-            var description = Translator.GetTranslation("EmailClientActionSettings", "SmtpPasswordDescription");
+            var title = Translation.SmtpPasswordTitle;
+            var description = Translation.SmtpPasswordDescription;
 
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, title, description);
             interaction.Password = EmailSmtpSettings.Password;
@@ -81,7 +78,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void EditMailTextExecute(object obj)
         {
-            var interaction = new EditEmailTextInteraction(EmailSmtpSettings.Subject, EmailSmtpSettings.Content, EmailSmtpSettings.AddSignature);
+            var interaction = new EditEmailTextInteraction(EmailSmtpSettings.Subject, EmailSmtpSettings.Content, EmailSmtpSettings.AddSignature, EmailSmtpSettings.Html);
 
             _interactionInvoker.Invoke(interaction);
 
@@ -91,6 +88,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
             EmailSmtpSettings.AddSignature = interaction.AddSignature;
             EmailSmtpSettings.Content = interaction.Content;
             EmailSmtpSettings.Subject = interaction.Subject;
+            EmailSmtpSettings.Html = interaction.Html;
         }
 
         public override HelpTopic GetContextBasedHelpTopic()

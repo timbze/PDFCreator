@@ -20,7 +20,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ProfileSettings
                 return;
 
             viewModel.QueryHelpTopicForCurrentTab = QueryHelpForCurrentTab;
-            viewModel.Translator.Translate(this);
         }
 
         private HelpTopic QueryHelpForCurrentTab()

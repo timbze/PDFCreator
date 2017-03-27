@@ -6,11 +6,13 @@ using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Printing.Printer;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
 {
@@ -25,12 +27,15 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         private IAssemblyHelper _assemblyHelper;
         private string _pdfcreatorPath;
         private string _printerHelperPath;
+        private IPDFCreatorNameProvider _nameProvider;
+        private readonly ApplicationTranslation _applicationTranslation = new ApplicationTranslation();
 
         [SetUp]
         public void Setup()
         {
+            var exeName = "PDFCreator.exe";
             _assemblyFolder = @"X:\Programs\My Folder";
-            _pdfcreatorPath = Path.Combine(_assemblyFolder, "PDFCreator.exe");
+            _pdfcreatorPath = Path.Combine(_assemblyFolder, exeName);
             _printerHelperPath = Path.Combine(_assemblyFolder, "PrinterHelper.exe");
 
             _assemblyHelper = Substitute.For<IAssemblyHelper>();
@@ -40,11 +45,15 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             _printerHelper = Substitute.For<IPrinterHelper>();
             _shellExecuteHelper = Substitute.For<IShellExecuteHelper>();
             _file = Substitute.For<IFile>();
+            _nameProvider = Substitute.For<IPDFCreatorNameProvider>();
+            _nameProvider.GetExeName().Returns(exeName);
+            _nameProvider.GetExePath().Returns(_pdfcreatorPath);
+            _nameProvider.GetPortApplicationPath().Returns(_pdfcreatorPath);
         }
 
         private RepairPrinterAssistant BuildRepairPrinterAssistant()
         {
-            return new RepairPrinterAssistant(_interactionInvoker, _printerHelper, new SectionNameTranslator(), _shellExecuteHelper, _file, _assemblyHelper);
+            return new RepairPrinterAssistant(_interactionInvoker, _printerHelper,  _shellExecuteHelper, _file, _assemblyHelper, _nameProvider, new TranslationFactory());
         }
 
         private void HandleMessageInteraction(MessageOptions optionsType, string message, Action<MessageInteraction> action)
@@ -80,7 +89,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         [Test]
         public void TryRepairPrinter_UserDeclines_NoRepairIsAttempted()
         {
-            HandleMessageInteraction(MessageOptions.YesNo, @"Application\RepairPrinterAskUser", interaction => interaction.Response = MessageResponse.No);
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.No);
             //HandleMessageInteraction(MessageOptions.OK, @"Application\RepairPrinterAskUser", interaction => interaction.Response = MessageResponse.OK);
 
 
@@ -105,7 +114,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
                     isRepaired = true;
                 });
 
-            HandleMessageInteraction(MessageOptions.YesNo, @"Application\RepairPrinterAskUserUac", interaction => interaction.Response = MessageResponse.Yes);
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.Yes);
             _file.Exists(_printerHelperPath).Returns(true);
 
             var repairPrinter = BuildRepairPrinterAssistant();
@@ -121,7 +130,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         [Test]
         public void TryRepairPrinter_WithNoPrinterNames_RestoresPDFCreatorPrinter()
         {
-            HandleMessageInteraction(MessageOptions.YesNo, @"Application\RepairPrinterAskUserUac", interaction => interaction.Response = MessageResponse.Yes);
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.Yes);
             _file.Exists(_printerHelperPath).Returns(true);
 
             var repairPrinter = BuildRepairPrinterAssistant();
@@ -133,12 +142,29 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         }
 
         [Test]
+        public void TryRepairPrinter_WithNoPrinterNamesAndDefaultPrinterNameSet_RestoresDefaultPrinter()
+        {
+            var expectedPrinterName = "My Printer";
+
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.Yes);
+            _file.Exists(_printerHelperPath).Returns(true);
+
+            var repairPrinter = BuildRepairPrinterAssistant();
+            repairPrinter.DefaultPrinterName = expectedPrinterName;
+
+            repairPrinter.TryRepairPrinter(new string[] { });
+
+            _shellExecuteHelper.Received()
+                .RunAsAdmin(Arg.Any<string>(), $"/RepairPrinter \"{expectedPrinterName}\" /PortApplication \"{_pdfcreatorPath}\"");
+        }
+
+        [Test]
         public void TryRepairPrinter_PrinterHelperDoesNotExist_ShowsErrorAndFails()
         {
             var errorWasShown = false;
 
-            HandleMessageInteraction(MessageOptions.YesNo, @"Application\RepairPrinterAskUserUac", interaction => interaction.Response = MessageResponse.Yes);
-            HandleMessageInteraction(MessageOptions.OK, @"Application\SetupFileMissing", interaction => errorWasShown = true);
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.Yes);
+            HandleMessageInteraction(MessageOptions.OK, _applicationTranslation.GetSetupFileMissingMessage("PrinterHelper.exe"), interaction => errorWasShown = true);
             _file.Exists(_printerHelperPath).Returns(false);
 
             var repairPrinter = BuildRepairPrinterAssistant();
@@ -154,7 +180,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         [Test]
         public void TryRepairPrinter_RepairFails_ShowsErrorMessage()
         {
-            HandleMessageInteraction(MessageOptions.YesNo, @"Application\RepairPrinterAskUserUac", interaction => interaction.Response = MessageResponse.Yes);
+            HandleMessageInteraction(MessageOptions.YesNo, _applicationTranslation.RepairPrinterAskUserUac, interaction => interaction.Response = MessageResponse.Yes);
             _file.Exists(_printerHelperPath).Returns(true);
 
             var repairPrinter = BuildRepairPrinterAssistant();

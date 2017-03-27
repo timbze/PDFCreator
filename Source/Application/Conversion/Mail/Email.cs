@@ -14,5 +14,6 @@ namespace pdfforge.PDFCreator.Conversion.Mail
         public string Subject { get; set; }
         public string Body { get; set; }
         public ICollection<Attachment> Attachments { get; private set; }
+        public bool Html { get; set; }
     }
 }

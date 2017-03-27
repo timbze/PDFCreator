@@ -2,7 +2,6 @@
 using SystemInterface.Microsoft.Win32;
 using NLog;
 using pdfforge.PDFCreator.Core.Printing.Port;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Helper

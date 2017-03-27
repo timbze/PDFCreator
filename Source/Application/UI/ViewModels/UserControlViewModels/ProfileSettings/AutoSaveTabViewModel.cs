@@ -1,7 +1,7 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
@@ -10,11 +10,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
     {
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public AutoSaveTabViewModel(ITranslator translator, IInteractionInvoker interactionInvoker)
+        public AutoSaveTabViewModel(IInteractionInvoker interactionInvoker, AutosaveTabTranslation translation, TokenHelper tokenHelper)
         {
-            Translator = translator;
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
-            var tokenHelper = new TokenHelper(Translator);
             TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
             TargetDirectoryViewModel = new TokenViewModel(
@@ -27,7 +26,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         public DelegateCommand BrowseAutoSaveFolderCommand => new DelegateCommand(BrowseAutoSaveFolderExecute);
 
-        public ITranslator Translator { get; }
+        public AutosaveTabTranslation Translation { get; }
 
         public TokenReplacer TokenReplacer { get; set; }
 
@@ -44,7 +43,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
         private void BrowseAutoSaveFolderExecute(object obj)
         {
             var interaction = new FolderBrowserInteraction();
-            interaction.Description = Translator.GetTranslation("ProfileSettingsWindow", "SelectAutoSaveFolder");
+            interaction.Description = Translation.SelectAutoSaveFolder;
             interaction.ShowNewFolderButton = true;
 
             _interactionInvoker.Invoke(interaction);

@@ -1,33 +1,48 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using SystemInterface.IO;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface IPDFCreatorNameProvider
     {
-        string GetName();
+        string GetExeName();
+        string GetExePath();
+        string GetPortApplicationPath();
     }
 
     public class PDFCreatorNameProvider : IPDFCreatorNameProvider
     {
         private readonly IAssemblyHelper _assemblyHelper;
+        private readonly IDirectory _directory;
 
-        public PDFCreatorNameProvider(IAssemblyHelper assemblyHelper)
+        public PDFCreatorNameProvider(IAssemblyHelper assemblyHelper, IDirectory directory)
         {
             _assemblyHelper = assemblyHelper;
+            _directory = directory;
         }
 
-        public string GetName()
+        public string GetExePath()
+        {
+            return _assemblyHelper.GetPdfforgeAssemblyDirectory() + "\\" + GetExeName();
+        }
+
+        public string GetPortApplicationPath()
+        {
+            return GetExePath();
+        }
+
+        public string GetExeName()
         {
             var assemblyDirectory = _assemblyHelper.GetPdfforgeAssemblyDirectory();
-            var directoryInfo = new DirectoryInfo(assemblyDirectory);
 
             // Get files that start with PDFCreator, end with exe and have only one dot (to exclude .vshost.exe and PDFCreator.LicenseService.exe)
-            var candidates = directoryInfo.GetFiles("PDFCreator*.exe")
-                .Where(file => file.Name.Count(c => c == '.') == 1);
+            var candidates = _directory.EnumerateFiles(assemblyDirectory, "PDFCreator*.exe")
+                .Select(x => new FileInfo(x))
+                .Where(file => file.Name.Count(c => c == '.') == 1)
+                .ToList();
 
             if (candidates.Count() != 1)
                 throw new ApplicationException("The assembly directory contains more or less than one PDFCreator*.exe");

@@ -43,14 +43,11 @@
             </TextBlock>
         </DockPanel>
         <StackPanel Height="140" Margin="30 20">
-            <TextBlock Name="IntroductionText" TextWrapping="Wrap" Margin="0 0 0 10">
-                PDFCreator allows to create PDF files from any application that is able to print.
-                Creating a PDF file is easy:
-            </TextBlock>
-            <TextBlock Name="IntroductionStep1Text" Margin="20 3">1. Set up your profiles and settings here.</TextBlock>
-            <TextBlock Name="IntroductionStep2Text" Margin="20 3">2. Print any document to the printer "PDFCreator".</TextBlock>
-            <TextBlock Name="IntroductionStep3Text" Margin="20 3">3. Save your PDF or send it as mail.</TextBlock>
-            <TextBlock Name="IntroductionGetHelpText" Margin="0 10 0 0">To get help, hit F1 or the question mark.</TextBlock>
+            <TextBlock Name="IntroductionText" TextWrapping="Wrap" Margin="0 0 0 10" Text="{Binding Translation.IntroductionText}" />
+            <TextBlock Name="IntroductionStep1Text" Margin="20 3" Text="{Binding Translation.IntroductionStep1Text}"/>
+            <TextBlock Name="IntroductionStep2Text" Margin="20 3" Text="{Binding Translation.IntroductionStep2Text}"/>
+            <TextBlock Name="IntroductionStep3Text" Margin="20 3" Text="{Binding Translation.IntroductionStep3Text}"/>
+            <TextBlock Name="IntroductionGetHelpText" Margin="0 10 0 0" Text="{Binding Translation.IntroductionGetHelpText}"/>
         </StackPanel>
         <DockPanel VerticalAlignment="Bottom">
             <Button DockPanel.Dock="Left" Name="HelpButton" Background="#6B6B6B" Height="50" Width="50" Margin="30 10"
@@ -59,11 +56,11 @@
                     Command="{Binding AboutWindowCommand}">
                 ?
             </Button>
-            <Button DockPanel.Dock="Right" Name="ProfileSettingsButton" Content="Profile Settings"
+            <Button DockPanel.Dock="Right" Name="ProfileSettingsButton" Content="{Binding Translation.ProfileSettingsButtonText}"
                     Style="{StaticResource ButtonStyle}" Command="{Binding ProfileSettingsCommand}" />
             <StackPanel Name="ApplicationSettingsPanel" Style="{StaticResource GpoStyle}"
                         IsEnabled="{Binding ApplicationSettingsEnabled}">
-                <Button DockPanel.Dock="Right" Name="AppSettingsButton" Content="Application Settings"
+                <Button DockPanel.Dock="Right" Name="AppSettingsButton" Content="{Binding Translation.AppSettingsButtonText}"
                         Style="{StaticResource ButtonStyle}" Command="{Binding ApplicationSettingsCommand}" />
             </StackPanel>
         </DockPanel>

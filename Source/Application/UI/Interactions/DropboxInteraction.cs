@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using pdfforge.Obsidian.Interaction;
+﻿using pdfforge.Obsidian.Interaction;
 
 namespace pdfforge.PDFCreator.UI.Interactions
 {

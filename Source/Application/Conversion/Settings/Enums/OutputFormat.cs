@@ -2,7 +2,7 @@
 
 namespace pdfforge.PDFCreator.Conversion.Settings.Enums
 {
-    public enum OutputFormat
+    public enum OutputFormat 
     {
         [Description("PDF")] Pdf,
         [Description("PDF/A-1b")] PdfA1B,

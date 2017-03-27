@@ -13,13 +13,11 @@ namespace pdfforge.PDFCreator.UI.ViewModels.DialogViewModels
     public class LicenseWindowViewModel : InteractionAwareViewModelBase<LicenseInteraction>
     {
         private readonly IUserGuideHelper _userGuideHelper;
-        private readonly IActivationHelper _activationHelper;
 
-        public LicenseWindowViewModel(LicenseTabViewModel licenseTabViewModel, ApplicationNameProvider applicationNameProvider, IVersionHelper versionHelper, IUserGuideHelper userGuideHelper, IActivationHelper activationHelper)
+        public LicenseWindowViewModel(LicenseTabViewModel licenseTabViewModel, ApplicationNameProvider applicationNameProvider, IVersionHelper versionHelper, IUserGuideHelper userGuideHelper)
         {
             LicenseTabViewModel = licenseTabViewModel;
             _userGuideHelper = userGuideHelper;
-            _activationHelper = activationHelper;
             Title = applicationNameProvider.ApplicationName + " " + versionHelper.FormatWithThreeDigits();
 
             ShowHelpCommand = new DelegateCommand<KeyEventArgs>(ShowHelpCommandExecute);

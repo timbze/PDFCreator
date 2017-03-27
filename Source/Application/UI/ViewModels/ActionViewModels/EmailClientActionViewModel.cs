@@ -1,8 +1,8 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
@@ -12,20 +12,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
         private readonly IClientTestEmail _clientTestEmail;
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public EmailClientActionViewModel(ITranslator translator, IInteractionInvoker interactionInvoker, IClientTestEmail clientTestEmail)
+        public EmailClientActionViewModel(EmailClientActionSettingsAndActionTranslation translation, IInteractionInvoker interactionInvoker, IClientTestEmail clientTestEmail)
         {
             _interactionInvoker = interactionInvoker;
             _clientTestEmail = clientTestEmail;
-            Translator = translator;
+            Translation = translation;
 
             EmailClientTestCommand = new DelegateCommand(EmailClientTestExecute);
             EditEmailTextCommand = new DelegateCommand(EditEmailTextExecute);
 
-            DisplayName = Translator.GetTranslation("EmailClientActionSettings", "DisplayName");
-            Description = Translator.GetTranslation("EmailClientActionSettings", "Description");
+            DisplayName = Translation.DisplayName;
+            Description = Translation.Description;
         }
 
-        public ITranslator Translator { get; }
+        public EmailClientActionSettingsAndActionTranslation Translation { get; }
 
         public DelegateCommand EmailClientTestCommand { get; set; }
         public DelegateCommand EditEmailTextCommand { get; set; }
@@ -51,8 +51,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void DisplayNoClientFoundMessage()
         {
-            var caption = Translator.GetTranslation("EmailClientActionSettings", "CheckMailClient");
-            var message = Translator.GetTranslation("EmailClientActionSettings", "NoMapiClientFound");
+            var caption = Translation.CheckMailClient;
+            var message = Translation.NoMapiClientFound;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.OK, MessageIcon.Warning);
             _interactionInvoker.Invoke(interaction);
@@ -60,7 +60,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
 
         private void EditEmailTextExecute(object obj)
         {
-            var interaction = new EditEmailTextInteraction(EmailClientSettings.Subject, EmailClientSettings.Content, EmailClientSettings.AddSignature);
+            var interaction = new EditEmailTextInteraction(EmailClientSettings.Subject, EmailClientSettings.Content, EmailClientSettings.AddSignature, EmailClientSettings.Html);
 
             _interactionInvoker.Invoke(interaction);
 
@@ -70,6 +70,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.ActionViewModels
             EmailClientSettings.AddSignature = interaction.AddSignature;
             EmailClientSettings.Content = interaction.Content;
             EmailClientSettings.Subject = interaction.Subject;
+            EmailClientSettings.Html = interaction.Html;
         }
 
         public override HelpTopic GetContextBasedHelpTopic()

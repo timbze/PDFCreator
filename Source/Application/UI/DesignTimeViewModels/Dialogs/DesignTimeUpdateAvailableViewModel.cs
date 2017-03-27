@@ -1,13 +1,12 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Translation;
+﻿using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Dialogs
 {
     public class DesignTimeUpdateAvailableViewModel : UpdateAvailableViewModel
     {
-        public DesignTimeUpdateAvailableViewModel() : base(new TranslationProxy(), null, new ApplicationNameProvider("PDFCreator"))
+        public DesignTimeUpdateAvailableViewModel() : base(new UpdateManagerTranslation(), null, new ApplicationNameProvider("PDFCreator"))
         {
         }
     }

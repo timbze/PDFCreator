@@ -1,8 +1,5 @@
-using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 using System;
 
@@ -48,11 +45,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public DocumentView DocumentView { get; set; }
 		
 		/// <summary>
-		/// If true, the PDF will be linearized, which allows the first pages to be displayed even if the rest of the document still is loading.
-		/// </summary>
-		public bool FastWebView { get; set; }
-		
-		/// <summary>
 		/// Define how pages are automatically rotated. Valid values are: Automatic, Portrait, Landscape
 		/// </summary>
 		public PageOrientation PageOrientation { get; set; }
@@ -75,7 +67,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			Signature = new Signature();
 			ColorModel = ColorModel.Rgb;
 			DocumentView = DocumentView.NoOutLineNoThumbnailImages;
-			FastWebView = true;
 			PageOrientation = PageOrientation.Automatic;
 			PageView = PageView.OnePage;
 			ViewerStartsOnPage = 1;
@@ -94,7 +85,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			Signature.ReadValues(data, path + @"Signature\");
 			try { ColorModel = (ColorModel) Enum.Parse(typeof(ColorModel), data.GetValue(@"" + path + @"ColorModel")); } catch { ColorModel = ColorModel.Rgb;}
 			try { DocumentView = (DocumentView) Enum.Parse(typeof(DocumentView), data.GetValue(@"" + path + @"DocumentView")); } catch { DocumentView = DocumentView.NoOutLineNoThumbnailImages;}
-			try { FastWebView = bool.Parse(data.GetValue(@"" + path + @"FastWebView")); } catch { FastWebView = true;}
 			try { PageOrientation = (PageOrientation) Enum.Parse(typeof(PageOrientation), data.GetValue(@"" + path + @"PageOrientation")); } catch { PageOrientation = PageOrientation.Automatic;}
 			try { PageView = (PageView) Enum.Parse(typeof(PageView), data.GetValue(@"" + path + @"PageView")); } catch { PageView = PageView.OnePage;}
 			try { ViewerStartsOnPage = int.Parse(data.GetValue(@"" + path + @"ViewerStartsOnPage"), System.Globalization.CultureInfo.InvariantCulture); } catch { ViewerStartsOnPage = 1;}
@@ -108,7 +98,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			Signature.StoreValues(data, path + @"Signature\");
 			data.SetValue(@"" + path + @"ColorModel", ColorModel.ToString());
 			data.SetValue(@"" + path + @"DocumentView", DocumentView.ToString());
-			data.SetValue(@"" + path + @"FastWebView", FastWebView.ToString());
 			data.SetValue(@"" + path + @"PageOrientation", PageOrientation.ToString());
 			data.SetValue(@"" + path + @"PageView", PageView.ToString());
 			data.SetValue(@"" + path + @"ViewerStartsOnPage", ViewerStartsOnPage.ToString(System.Globalization.CultureInfo.InvariantCulture));
@@ -124,7 +113,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.Signature = Signature.Copy();
 			copy.ColorModel = ColorModel;
 			copy.DocumentView = DocumentView;
-			copy.FastWebView = FastWebView;
 			copy.PageOrientation = PageOrientation;
 			copy.PageView = PageView;
 			copy.ViewerStartsOnPage = ViewerStartsOnPage;
@@ -143,7 +131,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!Signature.Equals(v.Signature)) return false;
 			if (!ColorModel.Equals(v.ColorModel)) return false;
 			if (!DocumentView.Equals(v.DocumentView)) return false;
-			if (!FastWebView.Equals(v.FastWebView)) return false;
 			if (!PageOrientation.Equals(v.PageOrientation)) return false;
 			if (!PageView.Equals(v.PageView)) return false;
 			if (!ViewerStartsOnPage.Equals(v.ViewerStartsOnPage)) return false;
@@ -165,7 +152,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine(Signature.ToString());
 			sb.AppendLine("ColorModel=" + ColorModel.ToString());
 			sb.AppendLine("DocumentView=" + DocumentView.ToString());
-			sb.AppendLine("FastWebView=" + FastWebView.ToString());
 			sb.AppendLine("PageOrientation=" + PageOrientation.ToString());
 			sb.AppendLine("PageView=" + PageView.ToString());
 			sb.AppendLine("ViewerStartsOnPage=" + ViewerStartsOnPage.ToString());

@@ -4,7 +4,6 @@ using SystemInterface.Microsoft.Win32;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Printing.Port;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 

@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using NGettext;
 using pdfforge.DataStorage;
-using pdfforge.DynamicTranslator;
+using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
+using Translatable.NGettext;
 
 namespace pdfforge.PDFCreator.Core.Services.Translation
 {
     /// <summary>
     ///     TranslationUtil provides functionality that is used in conjunction with the DynamicTranslator classes.
     /// </summary>
-    public class TranslationHelper : ILanguageProvider
+    public class BaseTranslationHelper : ILanguageProvider
     {
         private readonly IAssemblyHelper _assemblyHelper;
-        private readonly ISettingsProvider _settingsProvider;
-        private readonly TranslationProxy _translationProxy;
-        private LanguageLoader _languageLoader;
-        private ITranslator _tmpTranslator;
+        protected readonly TranslationFactory TranslationFactory;
+        private ILanguageLoader _languageLoader;
 
-        public TranslationHelper(TranslationProxy translationProxy, ISettingsProvider settingsProvider, IAssemblyHelper assemblyHelper)
+        // ReSharper disable once MemberCanBeProtected.Global
+        public BaseTranslationHelper(IAssemblyHelper assemblyHelper, TranslationFactory translationFactory)
         {
-            _translationProxy = translationProxy;
-
-            _settingsProvider = settingsProvider;
-            _settingsProvider.LanguageChanged += SettingsProviderOnLanguageChanged;
             _assemblyHelper = assemblyHelper;
+            TranslationFactory = translationFactory;
         }
 
-        private LanguageLoader LanguageLoader
+        protected ILanguageLoader LanguageLoader
         {
             get
             {
@@ -44,7 +43,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
-        public List<string> PossibleLanguagePaths { get; set; } = new List<string> {"Languages", @"..\..\..\..\..\Languages"};
+        public List<string> PossibleLanguagePaths { get; set; } = new List<string> { "Languages", @"..\..\..\..\..\Languages" };
 
         public IEnumerable<Language> GetAvailableLanguages()
         {
@@ -61,12 +60,6 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             return LanguageLoader.FindBestLanguage(culture);
         }
 
-        private void SettingsProviderOnLanguageChanged(object sender, EventArgs eventArgs)
-        {
-            var applicationLanguage = _settingsProvider.GetApplicationLanguage();
-            InitTranslator(applicationLanguage);
-            TranslateProfileList(_settingsProvider.Settings.ConversionProfiles);
-        }
 
         /// <summary>
         ///     Initialize the Translator for later use in the application
@@ -76,15 +69,58 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         {
             LanguageLoader = BuildLanguageLoader();
 
+            var language = FindBestLanguage(languageName);
+            TranslationFactory.TranslationSource = BuildTranslationSource(language);
+        }
+
+        public ITranslationSource BuildTranslationSource(Language language)
+        {
+            var catalogBuilder = new GettextCatalogBuilder(LanguageLoader.TranslationFolder);
+            var catalog = (Catalog)catalogBuilder.GetCatalog("messages", language.Iso2);
+            return new GettextTranslationSource(catalog);
+        }
+
+        public Language FindBestLanguage(string languageName)
+        {
             if (string.IsNullOrEmpty(languageName))
-                languageName = "english";
+                languageName = "en";
 
-            var translationFile = LanguageLoader.GetTranslationFile(languageName);
+            try
+            {
+                var cultureInfo = new CultureInfo(languageName);
+                return LanguageLoader.FindBestLanguage(cultureInfo);
+            }
+            catch (CultureNotFoundException)
+            {
+            }
 
-            var translator = BuildLanguageTranslator(translationFile);
-            var fallback = BuildLanguageTranslator(Path.Combine(LanguageLoader.TranslationFolder, "english.ini"));
+            var language = LanguageLoader.GetAvailableLanguages().FirstOrDefault(x => x.Iso2 == languageName);
+            if (language != null)
+                return language;
 
-            _translationProxy.Translator = new FallbackTranslator(translator, fallback);
+            return LanguageLoader.FindBestLanguage(new CultureInfo("en"));
+        }
+
+        private Stream GenerateStreamFromString(string s)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        private Data ReadEnglishTranslation()
+        {
+            using (var stream = GenerateStreamFromString(TranslationResources.English))
+            {
+                var data = Data.CreateDataStorage();
+                var iniStorage = new IniStorage();
+                iniStorage.SetData(data);
+                iniStorage.ReadData(stream, clear: true);
+                return data;
+            }
         }
 
         /// <summary>
@@ -95,21 +131,33 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             _languageLoader = BuildLanguageLoader();
         }
 
-        private ITranslator BuildLanguageTranslator(string translationFile)
-        {
-            if ((translationFile == null) || !File.Exists(translationFile))
-                return new BasicTranslator("empty", Data.CreateDataStorage());
-
-            return new BasicTranslator(translationFile);
-        }
-
-        private LanguageLoader BuildLanguageLoader()
+        private ILanguageLoader BuildLanguageLoader()
         {
             var appDir = _assemblyHelper.GetPdfforgeAssemblyDirectory();
 
             var translationPathCandidates = PossibleLanguagePaths.Select(path => Path.Combine(appDir, path)).ToArray();
 
-            return new LanguageLoader(translationPathCandidates);
+            return new GettextLanguageLoader(translationPathCandidates);
+        }
+    }
+
+    public class TranslationHelper : BaseTranslationHelper
+    {
+        private readonly ISettingsProvider _settingsProvider;
+
+        public TranslationHelper(ISettingsProvider settingsProvider, IAssemblyHelper assemblyHelper, TranslationFactory translationFactory) : base(assemblyHelper, translationFactory)
+        {
+            _settingsProvider = settingsProvider;
+
+            _settingsProvider.LanguageChanged += SettingsProviderOnLanguageChanged;
+        }
+
+
+        private void SettingsProviderOnLanguageChanged(object sender, EventArgs eventArgs)
+        {
+            var applicationLanguage = _settingsProvider.GetApplicationLanguage();
+            InitTranslator(applicationLanguage);
+            TranslateProfileList(_settingsProvider.Settings.ConversionProfiles);
         }
 
         /// <summary>
@@ -120,18 +168,18 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         /// <returns>true, if the translation was successfully loaded</returns>
         public bool SetTemporaryTranslation(Language language)
         {
-            var languageFile = Path.Combine(LanguageLoader.TranslationFolder, language.FileName);
-
-            if (!File.Exists(languageFile))
+            if (!HasTranslation(language.Iso2))
                 return false;
 
-            if (_tmpTranslator == null)
-                _tmpTranslator = _translationProxy.Translator;
+            if (_tmpTranslationSource == null)
+                _tmpTranslationSource = TranslationFactory.TranslationSource;
 
-            _translationProxy.Translator = new BasicTranslator(languageFile);
+            TranslationFactory.TranslationSource = BuildTranslationSource(language);
 
             return true;
         }
+
+        private ITranslationSource _tmpTranslationSource;
 
         /// <summary>
         ///     Reverts a temporarily set translation to it's original. If no temporary translation has been set, nothing will be
@@ -139,11 +187,8 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         /// </summary>
         public void RevertTemporaryTranslation()
         {
-            if (_tmpTranslator != null)
-            {
-                _translationProxy.Translator = _tmpTranslator;
-                _tmpTranslator = null;
-            }
+            if (_tmpTranslationSource != null)
+                TranslationFactory.TranslationSource = _tmpTranslationSource;
         }
 
         /// <summary>
@@ -156,7 +201,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             foreach (var p in profiles)
                 try
                 {
-                    var translation = _translationProxy.GetTranslation("ProfileNameByGuid", p.Guid);
+                    var translation = TranslationFactory.CreateTranslation<ProfileNameByGuidTranslation>().GetProfileGuidTranslation(p.Guid);
                     if (!string.IsNullOrEmpty(translation))
                         p.Name = translation;
                 }

@@ -1,11 +1,11 @@
 ﻿using SystemInterface;
 using SystemInterface.IO;
 using NLog;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
@@ -26,14 +26,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private readonly IPath _path;
         private readonly IShellExecuteHelper _shellExecuteHelper;
         private readonly string _tempFolder;
-        private readonly ITranslator _translator;
+        private readonly ApplicationTranslation _translation;
 
-        public RepairSpoolFolderAssistant(IInteractionInvoker interactionInvoker, ITranslator translator,
+        public RepairSpoolFolderAssistant(IInteractionInvoker interactionInvoker, ApplicationTranslation translation,
             ISpoolerProvider spoolerProvider, IShellExecuteHelper shellExecuteHelper, IPath path, IFile file,
             IEnvironment environment, IAssemblyHelper assemblyHelper)
         {
             _interactionInvoker = interactionInvoker;
-            _translator = translator;
+            _translation = translation;
             _shellExecuteHelper = shellExecuteHelper;
             _path = path;
             _file = file;
@@ -52,8 +52,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
             Logger.Debug("UserName is {0}", username);
 
-            var title = _translator.GetTranslation("Application", "SpoolFolderAccessDenied");
-            var message = _translator.GetFormattedTranslation("Application", "SpoolFolderAskToRepair", _tempFolder);
+            var title = _translation.SpoolFolderAccessDenied;
+            var message = _translation.GetSpoolFolderAskToRepairMessage(_tempFolder);
 
             Logger.Debug("Asking to start repair..");
             if (ShowMessage(message, title, MessageOptions.YesNo, MessageIcon.Exclamation) == MessageResponse.Yes)
@@ -69,9 +69,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                 if (!_file.Exists(repairToolPath))
                 {
                     Logger.Error("RepairFolderPermissions.exe does not exist!");
-                    title = _translator.GetTranslation("Application", "RepairToolNotFound");
-                    message = _translator.GetFormattedTranslation("Application", "SetupFileMissing",
-                        _path.GetFileName(repairToolPath));
+                    title = _translation.RepairToolNotFound;
+                    message =_translation.GetSetupFileMissingMessage(_path.GetFileName(repairToolPath));
 
                     ShowMessage(message, title, MessageOptions.OK, MessageIcon.Error);
                     return;
@@ -85,8 +84,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
         public void DisplayRepairFailedMessage()
         {
-            var title = _translator.GetTranslation("Application", "SpoolFolderAccessDenied");
-            var message = _translator.GetFormattedTranslation("Application", "SpoolFolderUnableToRepair", _tempFolder);
+            var title = _translation.SpoolFolderAccessDenied;
+            var message = _translation.GetSpoolFolderUnableToRepairMessage(_tempFolder);
 
             ShowMessage(message, title, MessageOptions.OK, MessageIcon.Exclamation);
         }

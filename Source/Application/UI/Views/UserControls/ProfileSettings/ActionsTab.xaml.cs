@@ -21,7 +21,6 @@ namespace pdfforge.PDFCreator.UI.Views.UserControls.ProfileSettings
                 return;
 
             ViewModel = dataContext;
-            ViewModel.Translator.Translate(this);
         }
     }
 }

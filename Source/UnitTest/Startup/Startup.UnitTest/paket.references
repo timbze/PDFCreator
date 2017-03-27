@@ -3,6 +3,5 @@ NSubstitute
 NLog
 DataStorage
 SystemInterface
-DynamicTranslator
-LicenseValidator
-
+LicenseValidator.Interface
+Translatable

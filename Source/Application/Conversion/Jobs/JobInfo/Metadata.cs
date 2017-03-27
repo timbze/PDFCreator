@@ -17,32 +17,32 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// <summary>
         ///     Title from PrintJob
         /// </summary>
-        public string PrintJobName { get; set; }
+        public string PrintJobName { get; set; } = "";
 
         /// <summary>
         ///     Title of the document
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         /// <summary>
         ///     Author from PrintJob
         /// </summary>
-        public string PrintJobAuthor { get; set; }
+        public string PrintJobAuthor { get; set; } = "";
 
         /// <summary>
         ///     Name of the Author
         /// </summary>
-        public string Author { get; set; }
+        public string Author { get; set; } = "";
 
         /// <summary>
         ///     Subject of the document
         /// </summary>
-        public string Subject { get; set; }
+        public string Subject { get; set; } = "";
 
         /// <summary>
         ///     Keywords that describe the document
         /// </summary>
-        public string Keywords { get; set; }
+        public string Keywords { get; set; } = "";
 
         /// <summary>
         ///     Name of the application that produced the document

@@ -1,9 +1,9 @@
 SimpleInjector
 Obsidian
 NLog
-DynamicTranslator
 SystemWrapper
 SystemInterface
-
-group Setup
-	PrinterHelper
+pdfforge.Mail
+pdfforge.Communication
+Translatable
+DataStorage

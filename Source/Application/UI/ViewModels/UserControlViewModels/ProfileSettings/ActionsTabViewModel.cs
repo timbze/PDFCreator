@@ -1,23 +1,22 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
 {
     public class ActionsTabViewModel : CurrentProfileViewModel
     {
-        public ActionsTabViewModel(ITranslator translator)
+        public ActionsTabViewModel(ActionsTabTranslation translation)
         {
-            Translator = translator;
+            Translation = translation;
             ActionCollectionView = CollectionViewSource.GetDefaultView(Actions);
         }
 
-        public ITranslator Translator { get; }
+        public ActionsTabTranslation Translation { get; }
 
         private ObservableCollection<ActionViewModel> Actions { get; } = new ObservableCollection<ActionViewModel>();
 

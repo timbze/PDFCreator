@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using pdfforge.PDFCreator.Core.Services.Licensing;
+using pdfforge.LicenseValidator.Interface.Data;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.ErrorReport;
 using pdfforge.PDFCreator.Utilities;
@@ -19,18 +20,20 @@ namespace pdfforge.PDFCreator.Core.Services
             _inMemoryLogger = inMemoryLogger;
         }
 
-        public static IActivationHelper ActivationHelper { private get; set; }
+        public static ILicenseChecker LicenseChecker { private get; set; }
 
         private Dictionary<string, string> BuildAdditionalEntries()
         {
             var additionalEntries = new Dictionary<string, string>();
 
-            var activation = ActivationHelper.Activation;
-            if (activation != null && activation.Product != 0)
+            var activation = LicenseChecker.GetSavedActivation();
+            activation
+                .Filter(a => a.Product != 0, LicenseError.UnknownError)
+                .MatchSome(a =>
             {
-                additionalEntries["LicenseKey"] = activation.Key;
-                additionalEntries["MachineID"] = activation.MachineId;
-            }
+                additionalEntries["LicenseKey"] = a.Key;
+                additionalEntries["MachineID"] = a.MachineId;
+            });
 
             return additionalEntries;
         }

@@ -4,19 +4,22 @@ using System.ComponentModel;
 using SystemInterface.IO;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.ActionViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
@@ -57,14 +60,12 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
 
         private ProfileSettingsViewModel CreateProfileSettingsViewModel(PdfCreatorSettings settings)
         {
-            var translator = Substitute.For<ITranslator>();
-            translator.GetTranslation(Arg.Any<string>(), Arg.Any<string>()).Returns(x => x[1]);
 
             var interactionInvoker = Substitute.For<IInteractionInvoker>();
-            var viewModelBundle = BuildViewModelBundle(interactionInvoker, translator);
+            var viewModelBundle = BuildViewModelBundle(interactionInvoker);
             _profileChecker = Substitute.For<IProfileChecker>();
             _profileChecker.ProfileCheckDict(Arg.Any<IList<ConversionProfile>>(), Arg.Any<Accounts>()).Returns(new ActionResultDict());
-            var viewModel = new ProfileSettingsViewModel(_interactionInvoker, translator, _profileChecker, viewModelBundle);
+            var viewModel = new ProfileSettingsViewModel(_interactionInvoker, new ProfileSettingsWindowTranslation(), _profileChecker, viewModelBundle);
 
             var interaction = new ProfileSettingsInteraction(settings, new GpoSettingsDefaults());
             _interactionHelper = new InteractionHelper<ProfileSettingsInteraction>(viewModel, interaction);
@@ -72,14 +73,14 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
             return viewModel;
         }
 
-        private ProfileSettingsViewModelBundle BuildViewModelBundle(IInteractionInvoker invoker, ITranslator translator)
+        private ProfileSettingsViewModelBundle BuildViewModelBundle(IInteractionInvoker invoker)
         {
-            var documentTabViewModel = new DocumentTabViewModel(translator, invoker, Substitute.For<IFontHelper>());
-            var saveTabViewModel = new SaveTabViewModel(translator, invoker);
-            var autoSaveTabViewModel = new AutoSaveTabViewModel(translator, invoker);
-            var actionsTabViewModel = new ActionsTabViewModel(translator);
-            var imageTabViewModel = new ImageFormatsTabViewModel(translator);
-            var pdfTabViewModel = new PdfTabViewModel(translator, invoker, Substitute.For<IFile>(), Substitute.For<IOpenFileInteractionHelper>());
+            var documentTabViewModel = new DocumentTabViewModel(new DocumentTabTranslation(), invoker, Substitute.For<IFontHelper>(), new TokenHelper(new TokenPlaceHoldersTranslation()));
+            var saveTabViewModel = new SaveTabViewModel(new SaveTabTranslation(), invoker, new TokenHelper(new TokenPlaceHoldersTranslation()));
+            var autoSaveTabViewModel = new AutoSaveTabViewModel( invoker, new AutosaveTabTranslation(),  new TokenHelper(new TokenPlaceHoldersTranslation()));
+            var actionsTabViewModel = new ActionsTabViewModel(new ActionsTabTranslation());
+            var imageTabViewModel = new ImageFormatsTabViewModel(new ImageFormatsTabTranslation());
+            var pdfTabViewModel = new PdfTabViewModel(new PdfTabTranslation(), invoker, Substitute.For<IFile>(), Substitute.For<IOpenFileInteractionHelper>(), new EditionHintOptionProvider(true), Substitute.For<IPdfProcessor>(), Substitute.For<IUserGuideHelper>());
 
             return new ProfileSettingsViewModelBundle(documentTabViewModel, saveTabViewModel, autoSaveTabViewModel, actionsTabViewModel, imageTabViewModel, pdfTabViewModel);
         }

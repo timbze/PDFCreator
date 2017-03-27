@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Threading;
+using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Wrapper
 {
     public interface IDispatcher
     {
-        void Invoke(Action action);
-
-        DispatcherOperation BeginInvoke(Action action);
+        void BeginInvoke(Action action);
+        void BeginInvoke(Action<JobInfo> addMethod, JobInfo jobInfo);
     }
 
     public class DispatcherWrapper : IDispatcher
@@ -19,14 +19,14 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Wrapper
             _dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        public void Invoke(Action action)
+        public void BeginInvoke(Action action)
         {
-            _dispatcher.Invoke(action);
+            _dispatcher.BeginInvoke(action);
         }
 
-        public DispatcherOperation BeginInvoke(Action action)
+        public void BeginInvoke(Action<JobInfo> addMethod, JobInfo jobInfo)
         {
-            return _dispatcher.BeginInvoke(action);
+            _dispatcher.BeginInvoke(addMethod, jobInfo);
         }
     }
 }

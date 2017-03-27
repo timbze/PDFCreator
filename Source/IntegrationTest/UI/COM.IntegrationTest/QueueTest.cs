@@ -14,6 +14,7 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
 using pdfforge.PDFCreator.Utilities;
+using Translatable;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 {
@@ -31,7 +32,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
             _queue = new Queue();
             _queue.Initialize();
 
-            var translationHelper = new TranslationHelper(new TranslationProxy(), new DefaultSettingsProvider(), new AssemblyHelper());
+            var translationHelper = new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(), new TranslationFactory());
             translationHelper.InitTranslator("None");
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());

@@ -48,10 +48,9 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                     stamper.SetEncryption(userPassword, ownerPassword, encryption, PdfWriter.STRENGTH128BITS);
                     break;
                 case EncryptionLevel.Aes128Bit:
+                case EncryptionLevel.Aes256Bit: 
                     stamper.SetEncryption(userPassword, ownerPassword, encryption, PdfWriter.ENCRYPTION_AES_128);
                     break;
-                //default:
-                //    break;
             }
         }
 
@@ -72,7 +71,8 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 permissionValue = permissionValue | PdfWriter.ALLOW_MODIFY_ANNOTATIONS;
 
             if ((profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc128Bit)
-                || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit))
+                || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit)
+                || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes256Bit))
             {
                 if (profile.PdfSettings.Security.AllowPrinting)
                     if (profile.PdfSettings.Security.RestrictPrintingToLowQuality)

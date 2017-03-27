@@ -3,13 +3,13 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using NLog;
+using pdfforge.Communication;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Startup;
 using pdfforge.PDFCreator.UI.Views;
-using pdfforge.PDFCreator.Utilities;
 using SimpleInjector;
 
 namespace pdfforge.PDFCreator.Editions.EditionBase

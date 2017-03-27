@@ -3,6 +3,7 @@ NUnit
 RhinoMocks
 SystemInterface
 DataStorage
-DynamicTranslator
-LicenseValidator
+LicenseValidator.Interface
 Obsidian
+pdfforge.Mail
+Translatable

@@ -18,10 +18,10 @@
                                          NotEqualValue="False" />
         </StackPanel.Resources>
         <Label>
-            <TextBlock Name="SelectPrinterText">Select Printer:</TextBlock>
+            <TextBlock Text="{Binding Translation.SelectPrinterText}"></TextBlock>
         </Label>
-        <ComboBox Name="SelectPrinterComboBox" DisplayMemberPath="Name"
-                  ItemsSource="{Binding SelectPrinterValues}"
+        <ComboBox Name="SelectPrinterComboBox" DisplayMemberPath="Translation"
+                  ItemsSource="{Binding Translation.SelectPrinterValues}"
                   SelectedValue="{Binding CurrentProfile.Printing.SelectPrinter}" SelectedValuePath="Value"
                   Margin="0 0 0 5" />
         <ComboBox Margin="50 0 0 10"
@@ -29,10 +29,10 @@
                   SelectedValue="{Binding CurrentProfile.Printing.PrinterName}"
                   ItemsSource="{Binding InstalledPrinters}" />
         <Label>
-            <TextBlock Name="DuplexPrintingTextBlock" TextWrapping="Wrap">Duplex printing (if supported by the printer)</TextBlock>
+            <TextBlock Text="{Binding Translation.DuplexPrintingText}" TextWrapping="Wrap"></TextBlock>
         </Label>
-        <ComboBox DisplayMemberPath="Name" SelectedValuePath="Value"
+        <ComboBox DisplayMemberPath="Translation" SelectedValuePath="Value"
                   SelectedValue="{Binding CurrentProfile.Printing.Duplex}"
-                  ItemsSource="{Binding DuplexPrintValues}" />
+                  ItemsSource="{Binding Translation.DuplexPrintValues}" />
     </StackPanel>
 </actionViewModels:ActionControl>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using SystemInterface;
 using NLog;
 
 namespace pdfforge.PDFCreator.Utilities.Threading
@@ -13,18 +12,12 @@ namespace pdfforge.PDFCreator.Utilities.Threading
     public class ThreadManager : IThreadManager
     {
         private static readonly object LockObject = new object();
-        private readonly IEnvironment _environment;
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly List<ISynchronizedThread> _threads = new List<ISynchronizedThread>();
 
         private bool _isShuttingDown;
-
-        public ThreadManager(IEnvironment environment)
-        {
-            _environment = environment;
-        }
 
         public Action UpdateAfterShutdownAction { get; set; }
 
@@ -76,18 +69,32 @@ namespace pdfforge.PDFCreator.Utilities.Threading
             {
                 _logger.Debug(_threads.Count + " Threads remaining");
 
-                try
-                {
-                    _threads[0].Join();
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                } // thread has been removed just after checking while condition
+                var firstThread = MaybeFetchFirstThreadUsingLock();
+                firstThread?.Join();
 
                 CleanUpThreads();
             }
 
             _logger.Debug("All synchronized threads have ended");
+        }
+
+        private ISynchronizedThread MaybeFetchFirstThreadUsingLock()
+        {
+            lock (LockObject)
+            {
+                if (_threads.Count == 0)
+                    return null;
+
+                try
+                {
+                    // For some reason, this might be null (seems like a timing issue with concurrency)
+                    return _threads[0];
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    return null;
+                }
+            }
         }
 
         public void Shutdown()

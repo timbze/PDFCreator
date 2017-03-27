@@ -8,7 +8,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
@@ -33,6 +33,8 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         private const string RepairToolPath = AssemblyFolder + @"\RepairFolderPermissions.exe";
         private const string Username = "MyUser";
 
+        private readonly ApplicationTranslation _applicationTranslation = new ApplicationTranslation();
+
         private RepairSpoolFolderAssistant BuildRepairSpoolFolderAssistant()
         {
             var spoolFolderProvider = Substitute.For<ISpoolerProvider>();
@@ -51,7 +53,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
 
             _file.Exists(RepairToolPath).Returns(true);
 
-            return new RepairSpoolFolderAssistant(_interactionInvoker, new SectionNameTranslator(), spoolFolderProvider,
+            return new RepairSpoolFolderAssistant(_interactionInvoker, _applicationTranslation, spoolFolderProvider,
                 _shellExecuteHelper, path, _file, environment, assemblyHelper);
         }
 
@@ -69,7 +71,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             repairSpoolFolderAssistant.DisplayRepairFailedMessage();
 
             Assert.NotNull(interaction, "The interaction was not called");
-            Assert.AreEqual(interaction.Title, "Application\\SpoolFolderAccessDenied");
+            Assert.AreEqual(_applicationTranslation.SpoolFolderAccessDenied, interaction.Title);
             Assert.AreEqual(MessageOptions.OK, interaction.Buttons);
         }
 
@@ -91,7 +93,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             repairSpoolFolderAssistant.TryRepairSpoolPath();
 
             Assert.NotNull(interaction, "The interaction was not called");
-            Assert.AreEqual(interaction.Title, "Application\\SpoolFolderAccessDenied");
+            Assert.AreEqual(_applicationTranslation.SpoolFolderAccessDenied, interaction.Title);
             Assert.AreEqual(MessageOptions.YesNo, interaction.Buttons);
         }
 
@@ -118,7 +120,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             _shellExecuteHelper.DidNotReceive().RunAsAdmin(RepairToolPath, Arg.Any<string>());
 
             Assert.NotNull(interaction);
-            Assert.AreEqual(interaction.Title, "Application\\RepairToolNotFound");
+            Assert.AreEqual(_applicationTranslation.RepairToolNotFound, interaction.Title);
         }
 
         [Test]

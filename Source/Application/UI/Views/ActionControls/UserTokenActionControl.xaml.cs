@@ -7,7 +7,6 @@ namespace pdfforge.PDFCreator.UI.Views.ActionControls
         public UserTokenActionControl(UserTokenActionViewModel viewModel) : base(viewModel)
         {
             InitializeComponent();
-            viewModel.Translator.Translate(this);
         }
     }
 }

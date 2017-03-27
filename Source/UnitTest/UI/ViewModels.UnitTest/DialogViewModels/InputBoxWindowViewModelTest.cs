@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
@@ -11,7 +12,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [SetUp]
         public void Setup()
         {
-            _viewModel = new InputBoxWindowViewModel();
+            _viewModel = new InputBoxWindowViewModel(new InputBoxWindowTranslation());
             _interaction = new InputInteraction("Some Title", "Please answer this question:");
             _interactionHelper = new InteractionHelper<InputInteraction>(_viewModel, _interaction);
         }

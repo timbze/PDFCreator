@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using NSubstitute;
 using NUnit.Framework;
-using pdfforge.DynamicTranslator;
-using pdfforge.LicenseValidator;
+using pdfforge.LicenseValidator.Interface.Data;
+using pdfforge.LicenseValidator.Interface;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.Utilities.Process;
 
@@ -22,12 +22,11 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             _process = Substitute.For<IProcessStarter>();
             _userGuideHelper = Substitute.For<IUserGuideHelper>();
             var product = Product.PdfCreator;
-            _activationHelper = Substitute.For<IActivationHelper>();
-            _activationHelper.Activation.Returns(new Activation() { Product = product });
-            _translator = Substitute.For<ITranslator>();
-            _translator.GetTranslation("OfflineActivationViewModel", "InvalidLicenseKeySyntax")
-                .Returns(InvalidLicenseKeySyntaxMessage);
-            _viewModel = new OfflineActivationViewModel(_process, _userGuideHelper, _activationHelper, _translator);
+
+            _offlineActivator = Substitute.For<IOfflineActivator>();
+            var activation = new Activation(acceptExpiredActivation: true) {Product = product};
+      
+            _viewModel = new OfflineActivationViewModel(_process, _userGuideHelper, _offlineActivator, new OfflineActivationViewModelTranslation());
             _viewModel.FinishInteraction = () => { _finishInteractionWasCalled = true; };
             _propertiesChangedList = new List<string>();
 
@@ -37,15 +36,13 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
 
         private IProcessStarter _process;
         private IUserGuideHelper _userGuideHelper;
-        private ITranslator _translator;
         private OfflineActivationViewModel _viewModel;
         private OfflineActivationInteraction _interaction;
         private List<string> _propertiesChangedList;
         private bool _finishInteractionWasCalled;
-        private IActivationHelper _activationHelper;
+        private IOfflineActivator _offlineActivator;
 
         private const string ValidLicenseKey = "SOMEL-ICENS-KEYTH-ATFIT-STHEP-ATTER";
-        private const string InvalidLicenseKeySyntaxMessage = "Incorrect License Key Syntax Message";
 
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
@@ -96,17 +93,20 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [Test]
         public void OfflineActivationString_InvalidLicenseKey_OfflineActivationStringIsInvalidLicenseKeySyntaxString()
         {
+            var translation = new OfflineActivationViewModelTranslation();
             _interaction.LicenseKey = "InvalidLicenseKeyBecauseOfWrongSyntax";
             _viewModel.SetInteraction(_interaction);
 
-            Assert.AreEqual(InvalidLicenseKeySyntaxMessage, _viewModel.OfflineActivationString);
-            _activationHelper.DidNotReceiveWithAnyArgs().GetOfflineActivationString("");
+
+            Assert.AreEqual(translation.InvalidLicenseKeySyntax, _viewModel.OfflineActivationString);
+            _offlineActivator.DidNotReceiveWithAnyArgs().BuildOfflineActivationString("");
+
         }
 
         [Test]
         public void OfflineActivationString_ValidLicenseKey_CallsLicenseCheckerGetOfflineActivationString()
         {
-            _activationHelper.GetOfflineActivationString(ValidLicenseKey).Returns("OfflineActivationString");
+            _offlineActivator.BuildOfflineActivationString(ValidLicenseKey).Returns("OfflineActivationString");
             Assert.AreEqual("OfflineActivationString", _viewModel.OfflineActivationString);
         }
 
@@ -115,7 +115,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         {
             _viewModel.LicenseKey = " " + ValidLicenseKey + " ";
 
-            _activationHelper.GetOfflineActivationString(ValidLicenseKey).Returns("OfflineActivationString");
+            _offlineActivator.BuildOfflineActivationString(ValidLicenseKey).Returns("OfflineActivationString");
             Assert.AreEqual("OfflineActivationString", _viewModel.OfflineActivationString);
         }
 

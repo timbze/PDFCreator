@@ -29,16 +29,12 @@
                     Visibility="{Binding Path=Interaction.ShowViewerWarning, Converter={StaticResource BoolToVisibilityConverter}}">
             <ContentControl VerticalAlignment="Top" Margin="20,10,0,10" Width="32" Height="32"
                             Content="{StaticResource WarningIcon}" />
-            <TextBlock Name="ErrorText" TextWrapping="Wrap" Margin="10,0,10,0" VerticalAlignment="Center"
-                       MaxWidth="400">
-                No program is assigned to open PDF files.
+            <TextBlock TextWrapping="Wrap" Margin="10,0,10,0" VerticalAlignment="Center" Text="{Binding Translation.ErrorText }" MaxWidth="400">
             </TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1" FlowDirection="LeftToRight" Orientation="Vertical">
-            <TextBlock Name="RecommendText" TextWrapping="Wrap" MaxWidth="450" Margin="10,10,10,0"
+            <TextBlock Text="{Binding Translation.RecommendText }" TextWrapping="Wrap" MaxWidth="450" Margin="10,10,10,0"
                        TextAlignment="Center" LineHeight="10">
-                We recommend PDF Architect, our free PDF Viewer and Editor.
-                <LineBreak />The free Edition contains a viewer and basic editing capabilities. Furthermore, you can buy optional modules for advanced PDF editing and creation.
             </TextBlock>
             <ContentControl Height="56" IsTabStop="False" Content="{StaticResource PDFArchitectLogo}"
                             HorizontalAlignment="Center" Margin="15" />
@@ -46,11 +42,10 @@
         <StackPanel Name="SteckPanel" Grid.Row="2" Background="{x:Static SystemColors.ControlBrush}">
             <StackPanel FlowDirection="LeftToRight" Orientation="Horizontal" HorizontalAlignment="Center"
                         Height="{Binding ElementName=SteckPanel, Path=ActualHeight}">
-                <Button Name="DownloadButton" Command="{Binding DownloadCommand}" MinWidth="140">Download</Button>
-                <Button Name="InfoButton" Command="{Binding InfoCommand}" MinWidth="140">More Info</Button>
-                <Button Name="NoButton" Width="{Binding ElementName=InfoButton, Path=ActualWidth}" MinWidth="140"
+                <Button Content="{Binding Translation.DownloadButtonContent }"  Command="{Binding DownloadCommand}" MinWidth="140"></Button>
+                <Button Content="{Binding Translation.InfoButtonContent}" Command="{Binding InfoCommand}" MinWidth="140"></Button>
+                <Button Content="{Binding Translation.NoButtonContent }" Width="{Binding ElementName=InfoButton, Path=ActualWidth}" MinWidth="140"
                         IsCancel="true">
-                    No, thanks
                 </Button>
             </StackPanel>
         </StackPanel>

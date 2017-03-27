@@ -1,8 +1,5 @@
-using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
-using System.Collections.Generic;
 using System.Text;
-using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -36,6 +33,11 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public bool Enabled { get; set; }
 		
 		/// <summary>
+		/// Use html for E-mail body
+		/// </summary>
+		public bool Html { get; set; }
+		
+		/// <summary>
 		/// Password that is used to authenticate at the server
 		/// </summary>
 		private string _password;
@@ -50,11 +52,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		/// The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org
 		/// </summary>
 		public string Recipients { get; set; }
-		
-		/// <summary>
-		/// If true, the body of the EmailClient action will be used
-		/// </summary>
-		public bool SameTextAsClientMail { get; set; }
 		
 		/// <summary>
 		/// Hostname or IP address of the SMTP server
@@ -82,10 +79,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			Address = "";
 			Content = "";
 			Enabled = false;
+			Html = false;
 			Password = "";
 			Port = 25;
 			Recipients = "";
-			SameTextAsClientMail = false;
 			Server = "";
 			Ssl = false;
 			Subject = "";
@@ -103,10 +100,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { Address = Data.UnescapeString(data.GetValue(@"" + path + @"Address")); } catch { Address = "";}
 			try { Content = Data.UnescapeString(data.GetValue(@"" + path + @"Content")); } catch { Content = "";}
 			try { Enabled = bool.Parse(data.GetValue(@"" + path + @"Enabled")); } catch { Enabled = false;}
+			try { Html = bool.Parse(data.GetValue(@"" + path + @"Html")); } catch { Html = false;}
 			_password = data.GetValue(@"" + path + @"Password");
 			try { Port = int.Parse(data.GetValue(@"" + path + @"Port"), System.Globalization.CultureInfo.InvariantCulture); } catch { Port = 25;}
 			try { Recipients = Data.UnescapeString(data.GetValue(@"" + path + @"Recipients")); } catch { Recipients = "";}
-			try { SameTextAsClientMail = bool.Parse(data.GetValue(@"" + path + @"SameTextAsClientMail")); } catch { SameTextAsClientMail = false;}
 			try { Server = Data.UnescapeString(data.GetValue(@"" + path + @"Server")); } catch { Server = "";}
 			try { Ssl = bool.Parse(data.GetValue(@"" + path + @"Ssl")); } catch { Ssl = false;}
 			try { Subject = Data.UnescapeString(data.GetValue(@"" + path + @"Subject")); } catch { Subject = "";}
@@ -119,10 +116,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"Address", Data.EscapeString(Address));
 			data.SetValue(@"" + path + @"Content", Data.EscapeString(Content));
 			data.SetValue(@"" + path + @"Enabled", Enabled.ToString());
+			data.SetValue(@"" + path + @"Html", Html.ToString());
 			data.SetValue(@"" + path + @"Password", _password);
 			data.SetValue(@"" + path + @"Port", Port.ToString(System.Globalization.CultureInfo.InvariantCulture));
 			data.SetValue(@"" + path + @"Recipients", Data.EscapeString(Recipients));
-			data.SetValue(@"" + path + @"SameTextAsClientMail", SameTextAsClientMail.ToString());
 			data.SetValue(@"" + path + @"Server", Data.EscapeString(Server));
 			data.SetValue(@"" + path + @"Ssl", Ssl.ToString());
 			data.SetValue(@"" + path + @"Subject", Data.EscapeString(Subject));
@@ -137,10 +134,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.Address = Address;
 			copy.Content = Content;
 			copy.Enabled = Enabled;
+			copy.Html = Html;
 			copy.Password = Password;
 			copy.Port = Port;
 			copy.Recipients = Recipients;
-			copy.SameTextAsClientMail = SameTextAsClientMail;
 			copy.Server = Server;
 			copy.Ssl = Ssl;
 			copy.Subject = Subject;
@@ -158,10 +155,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!Address.Equals(v.Address)) return false;
 			if (!Content.Equals(v.Content)) return false;
 			if (!Enabled.Equals(v.Enabled)) return false;
+			if (!Html.Equals(v.Html)) return false;
 			if (!Password.Equals(v.Password)) return false;
 			if (!Port.Equals(v.Port)) return false;
 			if (!Recipients.Equals(v.Recipients)) return false;
-			if (!SameTextAsClientMail.Equals(v.SameTextAsClientMail)) return false;
 			if (!Server.Equals(v.Server)) return false;
 			if (!Ssl.Equals(v.Ssl)) return false;
 			if (!Subject.Equals(v.Subject)) return false;
@@ -178,10 +175,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("Address=" + Address.ToString());
 			sb.AppendLine("Content=" + Content.ToString());
 			sb.AppendLine("Enabled=" + Enabled.ToString());
+			sb.AppendLine("Html=" + Html.ToString());
 			sb.AppendLine("Password=" + Password.ToString());
 			sb.AppendLine("Port=" + Port.ToString());
 			sb.AppendLine("Recipients=" + Recipients.ToString());
-			sb.AppendLine("SameTextAsClientMail=" + SameTextAsClientMail.ToString());
 			sb.AppendLine("Server=" + Server.ToString());
 			sb.AppendLine("Ssl=" + Ssl.ToString());
 			sb.AppendLine("Subject=" + Subject.ToString());

@@ -3,36 +3,40 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings
 {
     public class TitleTabViewModel : ObservableObject
     {
-        private SynchronizedCollection<TitleReplacement> _titleReplacements;
+        public ITranslationFactory TranslationFactory { get; }
 
-        public TitleTabViewModel(ITranslator translator)
+        public TitleTabTranslation Translation
         {
-            Translator = translator;
-            TitleAddCommand = new DelegateCommand(TitleAddCommandExecute);
-            TitleDeleteCommand = new DelegateCommand(TitleDeleteCommandExecute, TitleDeleteCommandCanExecute);
-            ReplacementValues = translator.GetEnumTranslation<ReplacementType>().ToList();
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
         }
 
-        public ITranslator Translator { get; }
+        private SynchronizedCollection<TitleReplacement> _titleReplacements;
+        private TitleTabTranslation _translation;
+
+        public TitleTabViewModel(TitleTabTranslation translation, ITranslationFactory translationFactory)
+        {
+            TranslationFactory = translationFactory;
+            _translation = translation;
+            TitleAddCommand = new DelegateCommand(TitleAddCommandExecute);
+            TitleDeleteCommand = new DelegateCommand(TitleDeleteCommandExecute, TitleDeleteCommandCanExecute);
+        }
 
         public ICollectionView TitleReplacementView { get; private set; }
 
         public DelegateCommand TitleAddCommand { get; set; }
         public DelegateCommand TitleDeleteCommand { get; set; }
-
-        public IList<EnumValue<ReplacementType>> ReplacementValues { get; }
 
         public ObservableCollection<TitleReplacement> TitleReplacements
         {

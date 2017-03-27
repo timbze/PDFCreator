@@ -46,7 +46,7 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
 
         public override string GetApplicationLanguage()
         {
-            return Settings.ApplicationSettings.Language;
+            return Settings == null ? "en" : Settings.ApplicationSettings.Language;
         }
     }
 }

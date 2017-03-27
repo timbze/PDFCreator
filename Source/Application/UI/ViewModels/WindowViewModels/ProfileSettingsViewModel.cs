@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -13,6 +12,7 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
@@ -20,14 +20,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
     {
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IProfileChecker _profileChecker;
-        private readonly ITranslator _translator;
         private IGpoSettings _gpoSettings;
 
-        public ProfileSettingsViewModel(IInteractionInvoker interactionInvoker, ITranslator translator, IProfileChecker profileChecker, ProfileSettingsViewModelBundle viewModelBundle)
+        public ProfileSettingsViewModel(IInteractionInvoker interactionInvoker, ProfileSettingsWindowTranslation translation, IProfileChecker profileChecker, ProfileSettingsViewModelBundle viewModelBundle)
         {
             ViewModelBundle = viewModelBundle;
             _interactionInvoker = interactionInvoker;
-            _translator = translator;
+            Translation = translation;
             _profileChecker = profileChecker;
 
             SaveButtonCommand = new DelegateCommand(SaveExcecute);
@@ -38,6 +37,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
             CurrentProfileChangedCommand = new DelegateCommand(OnCurrentProfileChanged);
         }
+
+        public ProfileSettingsWindowTranslation Translation { get; set; }
 
         public SynchronizedCollection<ConversionProfile> ProfileCollection { get; set; }
 
@@ -150,15 +151,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private string QueryProfileName(string proposedName)
         {
-            var title = _translator.GetTranslation("ProfileSettingsWindow", "ProfileName");
-            var questionText = _translator.GetTranslation("ProfileSettingsWindow", "EnterProfileName");
+            var title = Translation.ProfileName;
+            var questionText = Translation.EnterProfileName;
 
             var inputInteraction = new InputInteraction(title, questionText, ProfilenameIsValid);
 
             if (proposedName != null)
                 inputInteraction.InputText = proposedName;
             else
-                inputInteraction.InputText = _translator.GetTranslation("ProfileSettingsWindow", "NewProfile");
+                inputInteraction.InputText = Translation.NewProfile;
 
             _interactionInvoker.Invoke(inputInteraction);
 
@@ -170,8 +171,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private bool QueryDeleteProfile()
         {
-            var message = _translator.GetFormattedTranslation("ProfileSettingsWindow", "ReallyDeleteProfile", CurrentProfile.Name);
-            var caption = _translator.GetTranslation("ProfileSettingsWindow", "DeleteProfile");
+            var message = Translation.GetReallyDeleteProfileFormattedTranslation(CurrentProfile.Name);
+            var caption = Translation.DeleteProfile;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Question);
             _interactionInvoker.Invoke(interaction);
@@ -181,8 +182,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private bool QueryDiscardUnsavedChanges()
         {
-            var caption = _translator.GetTranslation("ProfileSettingsWindow", "UnsavedChanges");
-            var message = _translator.GetTranslation("ProfileSettingsWindow", "ReallyWantToCancel");
+            var caption = Translation.UnsavedChanges;
+            var message = Translation.ReallyWantToCancel;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Question);
             _interactionInvoker.Invoke(interaction);
@@ -192,8 +193,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         private bool QueryDeleteProfileWithPrinterMapping(string profileName, string printerName)
         {
-            var message = _translator.GetFormattedTranslation("ProfileSettingsWindow", "DeleteProfileWithMappedPrinter", profileName, printerName);
-            var caption = _translator.GetTranslation("ProfileSettingsWindow", "ProfileHasPrinterTitle");
+            var message = Translation.GetDeleteProfileWithMappedPrinterFormattedTranslation(profileName, printerName);
+            var caption = Translation.ProfileHasPrinterTitle;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Question);
             _interactionInvoker.Invoke(interaction);
@@ -282,7 +283,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 
         public InputValidation ProfilenameIsValid(string profileName)
         {
-            var invalidProfileMessage = _translator.GetTranslation("ProfileSettingsWindow", "InvalidProfileName");
+            var invalidProfileMessage = Translation.InvalidProfileName;
 
             if (profileName == null)
                 return new InputValidation(false, invalidProfileMessage);

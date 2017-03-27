@@ -1,3 +1,4 @@
-DynamicTranslator
-LicenseValidator
+LicenseValidator.Interface
 Obsidian
+Translatable
+NLog

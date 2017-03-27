@@ -15,33 +15,34 @@
     <UserControl.Resources>
         <converter:TokenReplacerConverterForFileName x:Key="FileNameTokenReplacerConverter" />
         <converter:TokenReplacerConverterForFolderName x:Key="FolderNameTokenReplacerConverter" />
+        <converter:EnumToDescriptionConverter x:Key="EnumToDescriptionConverter" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
-        <HeaderedContentControl Name="ConversionControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Conversion">
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}" Header= "{Binding Translation.ConversionControlHeader}">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <Label Name="DefaultFileFormatLabel">Set default file format:</Label>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"
-                              SelectedValue="{Binding CurrentProfile.OutputFormat}" SelectedValuePath="Value"
-                              DisplayMemberPath="Name"
-                              ItemsSource="{Binding DefaultFileFormalValues}" Margin="5,0,0,0" />
+                    <Label Content="{Binding Translation.DefaultFileFormatLabelContent}"></Label>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" SelectedValue="{Binding CurrentProfile.OutputFormat}" Width="85" ItemsSource="{Binding DefaultFileFormalValues}" Margin="5,0,0,0" >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=., Converter={StaticResource EnumToDescriptionConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
-                <CheckBox Name="ShowProgressCheckBox" Margin="0,5,0,0"
-                          IsChecked="{Binding CurrentProfile.ShowProgress, Mode=TwoWay}">
-                    Show progress during conversion
+                <CheckBox Margin="0,5,0,0"
+                          IsChecked="{Binding CurrentProfile.ShowProgress, Mode=TwoWay}"  Content= "{Binding Translation.ShowProgressCheckBoxContent}">
                 </CheckBox>
-                <CheckBox Name="SkipPrintDialogCheckBox" Margin="0,5,0,0"
-                          IsChecked="{Binding CurrentProfile.SkipPrintDialog, Mode=TwoWay}">
-                    Skip print dialog (directly proceed to the save dialog)
+                <CheckBox Margin="0,5,0,0"
+                          IsChecked="{Binding CurrentProfile.SkipPrintDialog, Mode=TwoWay}" Content= "{Binding Translation.SkipPrintDialogCheckBoxContent}">
                 </CheckBox>
             </StackPanel>
         </HeaderedContentControl>
 
         <HeaderedContentControl Width="{Binding ElementName=ConversionOpenDocumentStackPanel, Path=Width}"
-                                Name="FilenameControl" Margin="0,5,0,0" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Filename">
+                                Margin="0,5,0,0" Template="{StaticResource HeaderPanelTemplate}"
+                                Header= "{Binding Translation.FilenameControlHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
@@ -53,8 +54,8 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Name="FilenameTemplateLabel" Grid.Row="0" Grid.Column="0">Filename Template:</Label>
-                <Label Name="FilenameTokenLabel" Grid.Row="0" Grid.Column="1">Add Token:</Label>
+                <Label Grid.Row="0" Grid.Column="0" Content="{Binding Translation.FilenameTemplateLabelContent}"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Translation.FilenameTokenLabelContent}"></Label>
                 <views:BindableTextBox x:Name="FilenameTemplateTextBox" Grid.Row="1" Grid.Column="0" Margin="0 0 5 0"
                                        Text="{Binding FileNameViewModel.Text}"
                                        BindableSelectionStart="{Binding FileNameViewModel.CurrentCursorPos}" />
@@ -66,10 +67,9 @@
                                                          Command="{Binding FileNameViewModel.OnSelectionChangedCommand}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
-                <Label Name="FilenamePreviewLabel" Grid.Row="2" Grid.Column="0">Preview:</Label>
+                <Label Grid.Row="2" Grid.Column="0" Content="{Binding Translation.FilenamePreviewLabelContent}"></Label>
                 <userControls:TokenHintPanel Grid.Row="2" Grid.Column="1"
-                                             TextWithToken="{Binding Text, ElementName=FilenameTemplateTextBox}"
-                                             Translator="{Binding Translator}" />
+                                             TextWithToken="{Binding Text, ElementName=FilenameTemplateTextBox}" />
                 <TextBox Name="FilenamePreviewText" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" IsReadOnly="True">
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource FileNameTokenReplacerConverter}">
@@ -82,12 +82,11 @@
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Name="SaveDialogFolderControl" Margin="0,5,0,0"
-                                Template="{StaticResource HeaderPanelTemplate}" Header="Save Dialog Folder">
+        <HeaderedContentControl Margin="0,5,0,0"
+                                Template="{StaticResource HeaderPanelTemplate}"  Header= "{Binding Translation.SaveDialogFolderControlHeader}">
             <StackPanel>
                 <CheckBox Name="SaveDialogFolderCheckBox" Margin="0,5,0,0"
-                          IsChecked="{Binding CurrentProfile.SaveDialog.SetDirectory, Mode=TwoWay}">
-                    Set default output folder (else the last saved file location will be opend)
+                          IsChecked="{Binding CurrentProfile.SaveDialog.SetDirectory, Mode=TwoWay}" Content="{Binding Translation.SaveDialogFolderCheckBoxContent}">
                 </CheckBox>
                 <Grid IsEnabled="{Binding ElementName=SaveDialogFolderCheckBox, Path=IsChecked}">
                     <Grid.ColumnDefinitions>
@@ -101,8 +100,8 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Label Name="SaveDialogFolderTemplateLabel" Grid.Row="1" Grid.Column="0">Folder Template:</Label>
-                    <Label Name="SaveDialogFolderTokenLabel" Grid.Row="1" Grid.Column="1">Add Token:</Label>
+                    <Label Name="SaveDialogFolderTemplateLabel" Grid.Row="1" Grid.Column="0" Content="{Binding Translation.SaveDialogFolderTemplateLabelContent}"></Label>
+                    <Label Name="SaveDialogFolderTokenLabel" Grid.Row="1" Grid.Column="1"  Content="{Binding Translation.SaveDialogFolderTokenLabelContent}"></Label>
                     <DockPanel Grid.Row="2" Grid.Column="0" LastChildFill="True" Margin="0 0 5 0">
                         <Button Width="25" Margin="5,0,0,0" DockPanel.Dock="Right"
                                 Command="{Binding BrowseSaveFolderCommand}">
@@ -119,10 +118,9 @@
                                                              Command="{Binding FolderViewModel.OnSelectionChangedCommand}" />
                         </i:Interaction.Behaviors>
                     </ComboBox>
-                    <Label Name="SaveDialogFolderPreviewLabel" Grid.Row="3" Grid.Column="0">Preview:</Label>
+                    <Label Grid.Row="3" Grid.Column="0" Content="{Binding Translation.SaveDialogFolderPreviewLabelContent}"></Label>
                     <userControls:TokenHintPanel Grid.Row="3" Grid.Column="1"
-                                                 TextWithToken="{Binding Text, ElementName=SaveDialogFolderTextBox}"
-                                                 Translator="{Binding Translator}" />
+                                                 TextWithToken="{Binding Text, ElementName=SaveDialogFolderTextBox}" />
                     <TextBox Name="SaveDialogFolderPreviewText" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                              IsReadOnly="True">
                         <TextBox.Text>

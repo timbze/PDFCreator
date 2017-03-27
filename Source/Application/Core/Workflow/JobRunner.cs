@@ -65,7 +65,6 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 var actions = SetUpActions(job);
 
                 _conversionProgress.Show(job);
-
                 Convert(job);
                 Process(job);
                 _outputFileMover.MoveOutputFiles(job);
@@ -127,7 +126,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
 
             // Shorten the temp folder for GS compatibility
             job.JobTempFolder = PathHelper.GetShortPathName(job.JobTempFolder);
-                //TODO remove this after upgrade to GS 9.19
+            //TODO remove this after upgrade to GS 9.19
         }
 
         private void CallActions(Job job, IEnumerable<IAction> actions)
@@ -170,8 +169,10 @@ namespace pdfforge.PDFCreator.Core.Workflow
         private void Process(Job job)
         {
             if (!_processor.ProcessingRequired(job.Profile))
+            {
+                _logger.Debug("No pdf processing required.");
                 return;
-
+            }
             _processor.ProcessPdf(job);
         }
     }

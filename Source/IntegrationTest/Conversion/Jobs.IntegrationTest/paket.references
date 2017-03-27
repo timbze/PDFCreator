@@ -1,6 +1,5 @@
 BitMiracle.LibTiff.NET
 ftplib
-ImapX
 iTextSharp
 RhinoMocks
 NUnit
@@ -9,3 +8,5 @@ SystemInterface
 NSubstitute
 SimpleInjector
 Dropbox.Api.Net40
+Toolbelt.Net.Smtp.SmtpServerForUnitTest
+AutoFixture

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
+using pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 
@@ -11,15 +11,20 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSet
     {
         private readonly IPdfArchitectCheck _pdfArchitectCheck;
         private readonly IProcessStarter _processStarter;
+        private PdfArchitectTabTranslation _translation;
 
-        public PdfArchitectTabViewModel(ITranslator translator, IPdfArchitectCheck pdfArchitectCheck, IProcessStarter processStarter)
+        public PdfArchitectTabViewModel(IPdfArchitectCheck pdfArchitectCheck, IProcessStarter processStarter, PdfArchitectTabTranslation translation)
         {
             _processStarter = processStarter;
-            Translator = translator;
+            Translation = translation;
             _pdfArchitectCheck = pdfArchitectCheck;
         }
 
-        public ITranslator Translator { get; private set; }
+        public PdfArchitectTabTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
+        }
 
         public ICommand LaunchPdfArchitectCommand => new DelegateCommand(o =>
         {

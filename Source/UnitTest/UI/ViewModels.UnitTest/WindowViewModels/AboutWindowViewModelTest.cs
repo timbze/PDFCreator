@@ -4,6 +4,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
 using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 
@@ -36,7 +37,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.WindowViewModels
                 buttonDisplayOptions = new ButtonDisplayOptions(false, false);
 
             return new AboutWindowViewModel(_process, new ApplicationNameProvider("PDFCreator"),
-                _versionHelper, _userGuideHelper, buttonDisplayOptions);
+                _versionHelper, _userGuideHelper, buttonDisplayOptions, new AboutWindowTranslation());
         }
 
         [Test]

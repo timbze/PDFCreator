@@ -4,48 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:applicationSettings="clr-namespace:pdfforge.PDFCreator.UI.DesignTimeViewModels.UserControls.ApplicationSettings;assembly=PDFCreator.DesignTimeViewModels"
-             xmlns:controller1="clr-namespace:pdfforge.PDFCreator.Core.Controller;assembly=PDFCreator.Controller"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="500"
              d:DataContext="{d:DesignInstance applicationSettings:DesignTimeGeneralTabViewModel, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Storyboard x:Key="StoryboardAddToContextMenu" TargetName="AddToContextMenu">
+            <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:5">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:4.5" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
     </UserControl.Resources>
+
     <StackPanel>
-        <HeaderedContentControl Name="LanguageControl" Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Language">
+
+
+        <HeaderedContentControl Template="{StaticResource HeaderPanelTemplate}"
+                                Header="{Binding Translation.LanguageControlHeader, Mode=OneWay}">
             <StackPanel HorizontalAlignment="Left" MinWidth="250" Style="{StaticResource GpoStyle}"
                         IsEnabled="{Binding LanguageIsEnabled}">
                 <Label>
-                    <TextBlock Name="SelectLanguageLabel" TextWrapping="Wrap">Please select the application language:</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.SelectLanguageLabelText, Mode=OneWay}" />
                 </Label>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox Name="LanguageBox" Width="200" DisplayMemberPath="CommonName"
-                              SelectedValuePath="CommonName" SelectedValue="{Binding CurrentLanguage}"
+                    <ComboBox Width="200" DisplayMemberPath="CommonName"
+                              SelectedValuePath="Iso2" SelectedValue="{Binding CurrentLanguage}"
                               ItemsSource="{Binding Languages}" />
-                    <Button Name="LanguagePreviewButton" Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
-                            Command="{Binding PreviewTranslationCommand}">
-                        Preview
-                    </Button>
+                    <Button Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
+                            Command="{Binding PreviewTranslationCommand}" Content="{Binding Translation.LanguagePreviewButtonContent, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </HeaderedContentControl>
         <HeaderedContentControl
-            Name="UpdateCheckControl" Margin="0 10 0 0" Template="{StaticResource HeaderPanelTemplate}"
-            Header="Update Check" Visibility="{Binding UpdateCheckControlVisibility}">
+            Margin="0 10 0 0" Template="{StaticResource HeaderPanelTemplate}"
+            Header="{Binding Translation.UpdateCheckControlHeader, Mode=OneWay}" Visibility="{Binding UpdateCheckControlVisibility}">
             <StackPanel HorizontalAlignment="Left" MinWidth="250" Style="{StaticResource GpoStyle}"
                         IsEnabled="{Binding UpdateIsEnabled}">
                 <Label Margin="0 0 0 -5">
-                    <TextBlock Name="UpdateIntervalLabel" TextWrapping="Wrap">Check for updates:</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.UpdateIntervalLabelText, Mode=OneWay}" />
                 </Label>
                 <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                    <ComboBox Name="UpdateIntervalComboBox" Width="200" HorizontalAlignment="Left"
+                    <ComboBox Width="200" HorizontalAlignment="Left"
                               SelectedValue="{Binding CurrentUpdateInterval}" SelectedValuePath="Value"
-                              DisplayMemberPath="Name" ItemsSource="{Binding UpdateIntervals}" />
-                    <Button Name="CheckUpdateButton" Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
-                            Command="{Binding UpdateCheckCommand}">
-                        Check now
-                    </Button>
+                              DisplayMemberPath="Translation" ItemsSource="{Binding Translation.UpdateIntervals}" />
+                    <Button Margin="10 0 0 0" MinWidth="80" Padding="3 0 3 0"
+                            Command="{Binding UpdateCheckCommand}" Content="{Binding Translation.CheckUpdateButtonContent, Mode=OneWay}" />
                 </StackPanel>
 
                 <DockPanel Name="UpdateNeverWarning" VerticalAlignment="Center" Margin="0 5 0 0"
@@ -53,55 +62,116 @@
                            LastChildFill="True">
                     <ContentControl DockPanel.Dock="Left" Content="{StaticResource WarningIcon}" Width="15" Height="15"
                                     VerticalAlignment="Center" />
-                    <TextBlock Name="NeverUpdateWarningTextBlock"
-                               Text="Please note that you won't receive any notifications about available updates!"
+                    <TextBlock Text="{Binding Translation.NeverUpdateWarningText}"
                                TextWrapping="Wrap" VerticalAlignment="Center" Margin="5 0 0 0" />
                 </DockPanel>
-                <TextBlock Name="DownloadLatestVersionText" Margin="0 5 0 0">Download the latest version at:</TextBlock>
+                <TextBlock Margin="0 5 0 0" Text="{Binding Translation.DownloadLatestVersionText, Mode=OneWay}" />
                 <TextBlock>
                     <Hyperlink NavigateUri="Look in DownloadHyperlink_OnRequestNavigate"
                                Command="{Binding VisitWebsiteCommand}">
-                        <TextBlock Text="{x:Static controller1:Urls.PdfforgeWebsiteUrl}" />
+                        <TextBlock Text="{Binding PdfforgeWebsiteUrl}" />
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="DefaultPrinterControl" Margin="0 10 0 0"
-                                Template="{StaticResource HeaderPanelTemplate}" Header="Default Printer">
+        <HeaderedContentControl Margin="0 10 0 0"
+                                Template="{StaticResource HeaderPanelTemplate}" Header="{Binding Translation.DefaultPrinterControlHeader, Mode=OneWay}">
             <StackPanel>
                 <Label>
-                    <TextBlock Name="ChangeDefaultPrinterLabel" TextWrapping="Wrap">Allow PDFCreator to temporarily change the default printer</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.ChangeDefaultPrinterLabelText, Mode=OneWay}" />
                 </Label>
-                <ComboBox Name="ChangeDefaultPrinterComboBox" Width="200" HorizontalAlignment="Left"
+                <ComboBox Width="200" HorizontalAlignment="Left"
                           SelectedValue="{Binding ApplicationSettings.AskSwitchDefaultPrinter}"
                           SelectedValuePath="Value" DisplayMemberPath="Name"
                           ItemsSource="{Binding AskSwitchPrinterValues}" />
             </StackPanel>
         </HeaderedContentControl>
-        <HeaderedContentControl Name="MenuIntegrationControl" Margin="0 10 0 0"
+        <HeaderedContentControl Margin="0 10 0 0"
                                 Template="{StaticResource HeaderPanelTemplate}"
-                                Header="Explorer Context Menu Integration">
-            <UniformGrid Columns="2" Margin="0 10 0 0" HorizontalAlignment="Left" Width="410">
-                <Button Margin="0 0 5 0" Padding="5" Command="{Binding AddExplorerIntegrationCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
-                                        Margin="5 0">
-                            <StaticResource ResourceKey="UacShield" />
-                        </ContentControl>
-                        <TextBlock VerticalAlignment="Center" Name="AddMenuIntegrationText">Add</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Margin="5 0 0 0" Padding="5" Command="{Binding RemoveExplorerIntegrationCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
-                                        Margin="5 0">
-                            <StaticResource ResourceKey="UacShield" />
-                        </ContentControl>
-                        <TextBlock VerticalAlignment="Center" Name="RemoveMenuIntegrationText">Remove</TextBlock>
-                    </StackPanel>
-                </Button>
-            </UniformGrid>
+                                Header="{Binding Translation.MenuIntegrationControlHeader, Mode=OneWay}">
 
         </HeaderedContentControl>
+        <Grid Margin="0 10 0 0" HorizontalAlignment="Left" Width="410">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="83*"></ColumnDefinition>
+                <ColumnDefinition Width="122*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="440">
+                </RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Margin="0,0,5,1" Padding="5" Command="{Binding AddExplorerIntegrationCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
+                                        Margin="5 0">
+                        <StaticResource ResourceKey="UacShield" />
+                    </ContentControl>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Translation.AddMenuIntegrationText, Mode=OneWay}" />
+
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="0" Margin="5,0,79,1" Command="{Binding RemoveExplorerIntegrationCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Visibility="{Binding RequiresUacVisibility}" Width="16"
+                                        Margin="5 0">
+                        <StaticResource ResourceKey="UacShield" />
+                    </ContentControl>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Translation.RemoveMenuIntegrationText, Mode=OneWay}" />
+                </StackPanel>
+            </Button>
+
+            <Label Grid.Column="0" Grid.Row="1" Margin="5,0,0,28" Opacity="0">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAddedToExplorer}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Duration="0:0:5">
+                                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+                                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:4.5" />
+                                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+                <TextBlock Name="AddToContextMenu" TextWrapping="Wrap" Text="{Binding Translation.AddToContextMenuText}" ></TextBlock>
+            </Label>
+
+            <Label  Grid.Column="1" Grid.Row="1"  Opacity="0" Margin="0,0,-109,0">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsRemovedFromExplorer}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="Opacity" Duration="0:0:5">
+                                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+                                                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:4.5" />
+                                                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.RemoveFromContextMenuText}" ></TextBlock>
+
+            </Label>
+        </Grid>
+
     </StackPanel>
 </UserControl>

@@ -1,10 +1,10 @@
-﻿using pdfforge.DynamicTranslator;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 {
@@ -21,12 +21,12 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly ISettingsManager _settingsManager;
         private readonly ISettingsProvider _settingsProvider;
-        private readonly ITranslator _translator;
+        private readonly ApplicationSettingsWindowTranslation _translation;
 
-        public IniSettingsAssistant(IInteractionInvoker interactionInvoker, ITranslator translator, ISettingsManager settingsManager, IDataStorageFactory dataStorageFactory, IIniSettingsLoader iniSettingsLoader)
+        public IniSettingsAssistant(IInteractionInvoker interactionInvoker, ApplicationSettingsWindowTranslation translation, ISettingsManager settingsManager, IDataStorageFactory dataStorageFactory, IIniSettingsLoader iniSettingsLoader)
         {
             _interactionInvoker = interactionInvoker;
-            _translator = translator;
+            _translation = translation;
             _settingsManager = settingsManager;
             _settingsProvider = settingsManager.GetSettingsProvider();
             _dataStorageFactory = dataStorageFactory;
@@ -70,8 +70,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
         private void DisplayInvalidSettingsWarning()
         {
-            var message = _translator.GetTranslation("ApplicationSettingsWindow", "InvalidSettingsWarning");
-            var caption = _translator.GetTranslation("ApplicationSettingsWindow", "InvalidSettings");
+            var message = _translation.InvalidSettingsWarning;
+            var caption = _translation.InvalidSettings;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.OK, MessageIcon.Error);
             _interactionInvoker.Invoke(interaction);
@@ -79,8 +79,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
         private bool QueryOverwriteSettings()
         {
-            var message = _translator.GetTranslation("ApplicationSettingsWindow", "LoadSettingsFromFileWarning");
-            var caption = _translator.GetTranslation("ApplicationSettingsWindow", "OverwriteAllSettings");
+            var message = _translation.LoadSettingsFromFileWarning;
+            var caption = _translation.OverwriteAllSettings;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Warning);
             _interactionInvoker.Invoke(interaction);
@@ -92,7 +92,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         {
             var interaction = new OpenFileInteraction();
 
-            interaction.Filter = _translator.GetTranslation("ApplicationSettingsWindow", "IniFileFilter");
+            interaction.Filter = _translation.IniFileFilter;
             interaction.FileName = "PDFCreator.ini";
 
             _interactionInvoker.Invoke(interaction);
@@ -103,7 +103,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private string QuerySaveFileName()
         {
             var interaction = new SaveFileInteraction();
-            interaction.Filter = _translator.GetTranslation("ApplicationSettingsWindow", "IniFileFilter");
+            interaction.Filter = _translation.IniFileFilter;
             interaction.FileName = "PDFCreator.ini";
 
             _interactionInvoker.Invoke(interaction);

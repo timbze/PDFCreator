@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using NLog;
@@ -29,6 +28,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
         /// </summary>
         /// <param name="filename">The full path to the file that shall be printed</param>
         /// <param name="printer">The printer the command will print to</param>
+        /// <param name="fileAssoc">The IFileAssoc implementation used to detect if the is printable</param>
         public PrintCommand(string filename, string printer, IFileAssoc fileAssoc)
         {
             if (filename == null)
@@ -38,8 +38,11 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             Printer = printer;
             _fileAssoc = fileAssoc;
 
+            Logger.Trace($"Checking PrintCommand for '{filename}'");
+
             if (!File.Exists(filename))
             {
+                Logger.Trace($"The file '{filename}' does not exist!");
                 CommandType = PrintType.Unprintable;
                 return;
             }
@@ -47,15 +50,20 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             var extension = Path.GetExtension(filename);
             if (string.IsNullOrEmpty(extension))
             {
+                Logger.Trace("Unprintable: The file as no extension!");
                 CommandType = PrintType.Unprintable;
                 return;
             }
 
             if (!SupportsPrint() && !SupportsPrintTo())
+            {
+                Logger.Trace("Unprintable: The file does not support print or printto!");
                 CommandType = PrintType.Unprintable;
+            }
             else
             {
                 CommandType = SupportsPrintTo() ? PrintType.PrintTo : PrintType.Print;
+                Logger.Trace($"The file is printable: {CommandType}");
             }
         }
 
@@ -101,7 +109,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             var printerHelper = new PrinterHelper();
             if (CommandType == PrintType.Print && Printer != printerHelper.GetDefaultPrinter())
                 throw new InvalidOperationException("The default printer needs to be set in order to print this file");
-
+            
             var p = ProcessWrapperFactory.BuildProcessWrapper(new ProcessStartInfo(Filename));
 
             if (SupportsPrintTo())

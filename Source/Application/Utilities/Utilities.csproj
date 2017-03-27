@@ -50,7 +50,6 @@
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="Ftp\FtpConnectionFactory.cs" />
-    <Compile Include="GlobalMutex.cs" />
     <Compile Include="IO\UniqueFilenameBase.cs" />
     <Compile Include="IShellExecuteHelper.cs" />
     <Compile Include="PathUtil.cs" />

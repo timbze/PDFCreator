@@ -3,6 +3,7 @@ using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
+using pdfforge.PDFCreator.Conversion.Actions.Queries;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
@@ -19,14 +20,18 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile = new ConversionProfile();
             _profile.DropboxSettings.AccountId = accountId;
             _dropboxService = Substitute.For<IDropboxService>();
+            _dropboxSharedLinks = Substitute.For<IDropboxSharedLinksProvider>();
 
             _accounts = new Accounts();
-            _accounts.DropboxAccounts.Add(new DropboxAccount {AccountId = accountId});
-            _accounts.DropboxAccounts.Add(new DropboxAccount {AccountId = accountId, AccessToken = "aaa"});
+            _accounts.DropboxAccounts.Add(new DropboxAccount { AccountId = accountId });
+            _accounts.DropboxAccounts.Add(new DropboxAccount { AccountId = accountId, AccessToken = "aaa" });
+            action = new DropboxAction(_dropboxService, _dropboxSharedLinks);
         }
 
         private Job _job;
+        private DropboxAction action;
         private IDropboxService _dropboxService;
+        private IDropboxSharedLinksProvider _dropboxSharedLinks;
         private readonly string accountId = "myaccountid";
         private readonly string acccessToken = "acccessToken";
         private ConversionProfile _profile;
@@ -42,11 +47,11 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             var profile = new ConversionProfile();
             _job = new Job(new JobInfo(), profile, new JobTranslations(), _accounts);
-            var action = new DropboxAction(_dropboxService);
             Assert.IsTrue(action.Init(_job));
         }
 
 
+        #region Testing isCheck method
         [Test]
         public void Check_DropBox_Settings_AccessToken_IsNullOrEmpty()
         {
@@ -61,17 +66,16 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), accounts);
 
-            var action = new DropboxAction(_dropboxService);
             var result = action.Check(_profile, _accounts);
             Assert.AreEqual(ErrorCode.Dropbox_AccessTokenNotSpecified, result.FirstOrDefault());
         }
+
 
         [Test]
         public void Check_DropBox_Settings_DropboxAptionNotEnabled_ReturnFalse()
         {
             _profile.DropboxSettings.Enabled = false;
 
-            var action = new DropboxAction(_dropboxService);
             var result = action.Check(_profile, new Accounts());
             Assert.AreEqual(result, new ActionResult());
         }
@@ -88,12 +92,47 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _profile.DropboxSettings.Enabled = true;
 
-            var action = new DropboxAction(_dropboxService);
             var result = action.Check(_profile, accounts);
             Assert.AreEqual(result, new ActionResult());
         }
 
+        [Test]
+        public void Check_InvalidDropboxSharedFolderName_ReturnsErrorCodeInvalidFoderName()
+        {
+            _profile.DropboxSettings.Enabled = true;
 
+            var accounts = new Accounts();
+            accounts.DropboxAccounts.Add(new DropboxAccount
+            {
+                AccountId = accountId,
+                AccessToken = acccessToken
+            });
+
+            _profile.DropboxSettings.Enabled = true;
+            _profile.DropboxSettings.SharedFolder = "!pdfforge.";
+            var result = action.Check(_profile, accounts);
+            Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
+        }
+
+
+        [Test]
+        public void Check_EverythingOkWithTokenInsideFolderName_ReturnsTrue()
+        {
+            _profile.DropboxSettings.Enabled = true;
+
+            var accounts = new Accounts();
+            accounts.DropboxAccounts.Add(new DropboxAccount
+            {
+                AccountId = accountId,
+                AccessToken = acccessToken
+            });
+
+            _profile.DropboxSettings.Enabled = true;
+            _profile.DropboxSettings.SharedFolder = "<DateTime> PDfForge";
+            var result = action.Check(_profile, accounts);
+            Assert.AreEqual(result, new ActionResult());
+        }
+        #endregion
         [Test]
         public void Check_Is_DropBoxSetting_Enabled()
         {
@@ -101,9 +140,10 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             profile.DropboxSettings.Enabled = true;
 
             _job = new Job(new JobInfo(), profile, new JobTranslations(), _accounts);
-            var action = new DropboxAction(_dropboxService);
             Assert.IsTrue(action.IsEnabled(profile));
         }
+
+
 
 
         [Test]
@@ -113,10 +153,12 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _job = BuildJob();
 
-            var action = new DropboxAction(_dropboxService);
             var result = action.Check(_profile, new Accounts());
             Assert.AreEqual(ErrorCode.Dropbox_AccountNotSpecified, result.FirstOrDefault());
         }
+
+
+
 
         [Test]
         public void UploadFile_ReturnsActionResult()
@@ -124,14 +166,25 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile.DropboxSettings.Enabled = true;
 
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
-            _job.OutputFiles = new[] {@"C:\Temp\file1.pdf"}.ToList();
-            var action = new DropboxAction(_dropboxService);
+            _job.OutputFiles = new[] { @"C:\Temp\file1.pdf" }.ToList();
 
             action.ProcessJob(_job);
 
             _dropboxService.Received()
-                .UploadFiles("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames);
+                .UploadFiles("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames, _job.JobTempOutputFolder);
         }
+
+        [Test]
+        public void DropBoxSettingsInvalidFolderName_ReturnsErrorDropbox_InvalidFolderName()
+        {
+            _profile.DropboxSettings.Enabled = true;
+            _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
+
+            _profile.DropboxSettings.SharedFolder += ": ?";
+            var result = action.Check(_profile, _job.Accounts);
+            Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
+        }
+
 
         [Test]
         public void UploadFileWithSharedLink_CheckIsTokenReplacerFilledWithLink()
@@ -140,13 +193,11 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile.DropboxSettings.CreateShareLink = true;
 
 
-            var action = new DropboxAction(_dropboxService);
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
-            _dropboxService.UploadFileWithSharing("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, false).Returns(
-                new List<DropboxFileMetaData>
+            _dropboxService.UploadFileWithSharing("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, false, _job.OutputFilenameTemplate).Returns(
+                new DropboxFileMetaData
                 {
-                    new DropboxFileMetaData {FilePath = "/File1.pdf", SharedUrl = "htttps://dropbox.com/File1.pdf"},
-                    new DropboxFileMetaData {FilePath = "/File2.pdf", SharedUrl = "htttps://dropbox.com/File2.pdf"}
+                    FilePath = "/File1.pdf", SharedUrl = "htttps://dropbox.com/File1.pdf"
                 });
 
             action.ProcessJob(_job);
@@ -156,17 +207,42 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         }
 
         [Test]
-        public void UploadFileWithSharedLink_ReturnsActionResult()
+        public void UploadFileWithSharedLink_ReturnsEmptyActionResult()
         {
             _profile.DropboxSettings.Enabled = true;
             _profile.DropboxSettings.CreateShareLink = true;
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
-            _job.OutputFiles = new[] {@"C:\Temp\file1.pdf"}.ToList();
-            var action = new DropboxAction(_dropboxService);
+            _job.OutputFiles = new[] { @"C:\Temp\file1.pdf" }.ToList();
 
             action.ProcessJob(_job);
 
-            _dropboxService.Received().UploadFileWithSharing("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames);
+            _dropboxService.Received().UploadFileWithSharing("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames, _job.OutputFilenameTemplate);
+        }
+
+        [Test]
+        public void UploadFileWithSharedLink_WhenFailsToUpload_ReturnsErrorCode()
+        {
+            _profile.DropboxSettings.Enabled = true;
+            _profile.DropboxSettings.CreateShareLink = true;
+            _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
+            _job.OutputFiles = new[] { @"C:\Temp\file1.pdf" }.ToList();
+
+            _dropboxService.UploadFileWithSharing("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames, string.Empty).Returns(new DropboxFileMetaData());
+            var result = action.ProcessJob(_job);
+            Assert.AreEqual(ErrorCode.Dropbox_Upload_And_Share_Error, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void UploadFile_WhenFailsToUpload_ReturnsErrorCode()
+        {
+            _profile.DropboxSettings.Enabled = true;
+            _profile.DropboxSettings.CreateShareLink = false;
+            _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
+            _job.OutputFiles = new[] { @"C:\Temp\file1.pdf" }.ToList();
+
+            _dropboxService.UploadFiles("", _profile.DropboxSettings.SharedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames, string.Empty).Returns(false);
+            var result = action.ProcessJob(_job);
+            Assert.AreEqual(ErrorCode.Dropbox_Upload_Error, result.FirstOrDefault());
         }
     }
 }

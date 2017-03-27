@@ -1,23 +1,24 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using pdfforge.DynamicTranslator;
+using System.Text;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 {
     public interface IUacAssistant
     {
-        void AddExplorerIntegration();
-        void RemoveExplorerIntegration();
+        bool AddExplorerIntegration();
+        bool RemoveExplorerIntegration();
         bool AddPrinter(string printerName);
         bool RenamePrinter(string oldPrinterName, string newPrinterName);
         bool DeletePrinter(string printerName);
-        bool StoreLicesenForAllUsers();
+        bool StoreLicenseForAllUsers(string licenseServerCode, string licenseKey);
     }
 
     public class UacAssistant : IUacAssistant
@@ -25,24 +26,24 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         private readonly IInteractionInvoker _invoker;
         private readonly IShellExecuteHelper _shellExecuteHelper;
         private readonly IPDFCreatorNameProvider _pdfCreatorNameProvider;
-        private readonly ITranslator _translator;
+        private readonly ApplicationSettingsWindowTranslation _translation;
 
-        public UacAssistant(ITranslator translator, IInteractionInvoker invoker, IShellExecuteHelper shellExecuteHelper, IPDFCreatorNameProvider pdfCreatorNameProvider)
+        public UacAssistant(ApplicationSettingsWindowTranslation translation, IInteractionInvoker invoker, IShellExecuteHelper shellExecuteHelper, IPDFCreatorNameProvider pdfCreatorNameProvider)
         {
-            _translator = translator;
+            _translation = translation;
             _invoker = invoker;
             _shellExecuteHelper = shellExecuteHelper;
             _pdfCreatorNameProvider = pdfCreatorNameProvider;
         }
 
-        public void AddExplorerIntegration()
+        public bool AddExplorerIntegration()
         {
-            CallSetupHelper("/FileExtensions=Add");
+           return CallSetupHelper("/FileExtensions=Add");
         }
 
-        public void RemoveExplorerIntegration()
+        public bool RemoveExplorerIntegration()
         {
-            CallSetupHelper("/FileExtensions=Remove");
+           return CallSetupHelper("/FileExtensions=Remove");
         }
 
         public bool AddPrinter(string printerName)
@@ -65,22 +66,21 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
         /// </summary>
         /// <param name="arguments">Command line arguments that will be passed to SetupHelper.exe</param>
         /// <returns>true, if the action was successful</returns>
-        private void CallSetupHelper(string arguments)
+        private bool CallSetupHelper(string arguments)
         {
             var assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             if (assemblyPath == null)
-                return;
+                return false;
 
             var setupHelperPath = Path.Combine(assemblyPath, "SetupHelper.exe");
 
             if (!File.Exists(setupHelperPath))
             {
-                var message = _translator.GetFormattedTranslation("Application", "SetupFileMissing",
-                    Path.GetFileName(setupHelperPath));
-                var caption = _translator.GetTranslation("ApplicationSettingsWindow", "Error");
+                var message = _translation.GetFormattedSetupFileMissing(Path.GetFileName(setupHelperPath));
+                var caption = _translation.Error;
                 ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
-                return;
+                return false;
             }
 
             if (Environment.OSVersion.Version.Major <= 5)
@@ -88,16 +88,16 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                 var osHelper = new OsHelper();
                 if (!osHelper.UserIsAdministrator())
                 {
-                    var message = _translator.GetTranslation("ApplicationSettingsWindow", "OperationRequiresAdminPrivileges");
-                    var caption = _translator.GetTranslation("ApplicationSettingsWindow", "AdminPrivilegesRequired");
+                    var message = _translation.OperationRequiresAdminPrivileges;
+                    var caption = _translation.AdminPrivilegesRequired;
 
                     var response = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Info);
                     if (response == MessageResponse.No)
-                        return;
+                        return false;
                 }
             }
 
-            CallProgramAsAdmin(setupHelperPath, arguments);
+            return CallProgramAsAdmin(setupHelperPath, arguments);
         }
 
         private bool CallProgramAsAdmin(string path, string arguments)
@@ -106,8 +106,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
             if (result == ShellExecuteResult.RunAsWasDenied)
             {
-                var message = _translator.GetTranslation("ApplicationSettingsWindow", "SufficientPermissions");
-                var caption = _translator.GetTranslation("ApplicationSettingsWindow", "Error");
+                var message = _translation.SufficientPermissions;
+                var caption = _translation.Error;
 
                 ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
 
@@ -141,9 +141,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
 
             if (!File.Exists(applicationPath))
             {
-                var message = _translator.GetFormattedTranslation("Application", "SetupFileMissing",
-                    Path.GetFileName(applicationPath));
-                var caption = _translator.GetTranslation("ApplicationSettingsWindow", "Error");
+                var message = _translation.GetFormattedSetupFileMissing(Path.GetFileName(applicationPath));
+                var caption = _translation.Error;
                 ShowMessage(message, caption, MessageOptions.OK, MessageIcon.Error);
                 return null;
             }
@@ -153,8 +152,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
                 var osHelper = new OsHelper();
                 if (!osHelper.UserIsAdministrator())
                 {
-                    var message = _translator.GetTranslation("ApplicationSettingsWindow", "OperationRequiresAdminPrivileges");
-                    var caption = _translator.GetTranslation("ApplicationSettingsWindow", "AdminPrivilegesRequired");
+                    var message = _translation.OperationRequiresAdminPrivileges;
+                    var caption = _translation.AdminPrivilegesRequired;
 
                     var response = ShowMessage(message, caption, MessageOptions.YesNo, MessageIcon.Info);
                     if (response == MessageResponse.No)
@@ -172,14 +171,15 @@ namespace pdfforge.PDFCreator.UI.ViewModels.Assistants
             return interaction.Response;
         }
 
-        public bool StoreLicesenForAllUsers()
+        public bool StoreLicenseForAllUsers(string licenseServerCode, string licenseKey)
         {
-            return CallPDFCreator("/StoreLicenseForAllUsers");
+            var lsaBase64 = Convert.ToBase64String(Encoding.Default.GetBytes(licenseServerCode));
+            return CallPDFCreator($"/StoreLicenseForAllUsers /LicenseServerCode=\"{lsaBase64}\" /LicenseKey=\"{licenseKey}\"");
         }
 
         private bool CallPDFCreator(string arguments)
         {
-            var pdfCreatorName = _pdfCreatorNameProvider.GetName(); 
+            var pdfCreatorName = _pdfCreatorNameProvider.GetExeName(); 
             var applicationPath = GetApplicationPath(pdfCreatorName);
             if (applicationPath == null)
                 return false;

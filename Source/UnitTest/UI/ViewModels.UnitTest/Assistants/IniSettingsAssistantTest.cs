@@ -1,7 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.DataStorage.Storage;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -9,6 +8,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Assistants;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
 {
@@ -19,7 +19,6 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
         public void Setup()
         {
             _invoker = Substitute.For<IInteractionInvoker>();
-            var translator = Substitute.For<ITranslator>();
             _settingsHelper = Substitute.For<ISettingsProvider>();
             _settingsHelper.Settings.Returns(new PdfCreatorSettings(Substitute.For<IStorage>()));
 
@@ -31,7 +30,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.Assistants
             _dataStorageFactory.BuildIniStorage().Returns(_storage);
 
             _iniSettingsLoader = Substitute.For<IIniSettingsLoader>();
-            _iniSettingsAssistant = new IniSettingsAssistant(_invoker, translator, _settingsManager, _dataStorageFactory, _iniSettingsLoader);
+            _iniSettingsAssistant = new IniSettingsAssistant(_invoker, new ApplicationSettingsWindowTranslation(), _settingsManager, _dataStorageFactory, _iniSettingsLoader);
         }
 
         private IInteractionInvoker _invoker;

@@ -1,33 +1,38 @@
 ﻿using System;
 using System.Security;
-using pdfforge.LicenseValidator;
-using pdfforge.PDFCreator.Core.Services.Licensing;
+using SystemInterface.Microsoft.Win32;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
     public class StoreLicenseForAllUsersStart : AppStartBase
     {
-        private readonly IActivationHelper _activationHelper;
-        private readonly ILicenseServerHelper _licenseServerHelper;
+        private readonly IRegistry _registry;
+        private string _registryPath;
 
-        public StoreLicenseForAllUsersStart(ICheckAllStartupConditions checkAllStartupConditions, IActivationHelper activationHelper, ILicenseServerHelper licenseServerHelper)
+        public string LicenseServerCode { get; set; }
+        public string LicenseKey { get; set; }
+
+        public StoreLicenseForAllUsersStart(ICheckAllStartupConditions checkAllStartupConditions, IRegistry registry, IInstallationPathProvider installationPathProvider)
             : base(checkAllStartupConditions)
         {
-            _activationHelper = activationHelper;
-            _licenseServerHelper = licenseServerHelper;
+            _registry = registry;
+            _registryPath = installationPathProvider.ApplicationRegistryPath;
+            SkipStartupConditionCheck = true;
         }
 
         public override ExitCode Run()
         {
-            var activation = _activationHelper.Activation;
-            if (activation == null)
+            if (string.IsNullOrWhiteSpace(LicenseServerCode))
                 return ExitCode.MissingActivation;
+
+            var regPath = "HKEY_LOCAL_MACHINE\\" + _registryPath;
 
             try
             {
-                var licenseCheckerLm = _licenseServerHelper.BuildLicenseChecker(RegistryHive.LocalMachine);
-                licenseCheckerLm.SaveActivation(activation);
+                _registry.SetValue(regPath, "License", LicenseKey);
+                _registry.SetValue(regPath, "LSA", LicenseServerCode);
             }
             catch (SecurityException)
             {
@@ -37,6 +42,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             {
                 return ExitCode.Unknown;
             }
+            
             return ExitCode.Ok;
         }
     }

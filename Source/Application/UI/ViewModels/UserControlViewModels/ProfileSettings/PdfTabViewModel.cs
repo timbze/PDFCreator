@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Windows.Input;
 using SystemInterface.IO;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.ViewModels.Helper;
+using pdfforge.PDFCreator.UI.ViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSettings
 {
@@ -16,43 +17,37 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
         private readonly IFile _file;
         private readonly IInteractionInvoker _interactionInvoker;
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
+        private readonly IPdfProcessor _pdfProcessor;
+        private readonly IUserGuideHelper _userGuideHelper;
 
-        public PdfTabViewModel(ITranslator translator, IInteractionInvoker interactionInvoker, IFile file, IOpenFileInteractionHelper openFileInteractionHelper)
+        public PdfTabViewModel(PdfTabTranslation translation, IInteractionInvoker interactionInvoker, IFile file, 
+            IOpenFileInteractionHelper openFileInteractionHelper, EditionHintOptionProvider editionHintOptionProvider, 
+            IPdfProcessor pdfProcessor, IUserGuideHelper userGuideHelper)
         {
             _file = file;
             _openFileInteractionHelper = openFileInteractionHelper;
-            Translator = translator;
+            _pdfProcessor = pdfProcessor;
+            Translation = translation;
             _interactionInvoker = interactionInvoker;
+            _userGuideHelper = userGuideHelper;
+            OnlyForPlusAndBusiness = editionHintOptionProvider.ShowOnlyForPlusAndBusinessHint;
             SecurityPasswordCommand = new DelegateCommand(SecurityPasswordExecute);
             ChooseCertificateFileCommand = new DelegateCommand(ChooseCertificateFileExecute);
             DefaultTimeServerCommand = new DelegateCommand(DefaultTimeServerExecute);
         }
 
         public Signature Signature => CurrentProfile.PdfSettings.Signature;
-
-        public ITranslator Translator { get; }
-
+        public PdfTabTranslation Translation { get; }
         public DelegateCommand SecurityPasswordCommand { get; }
         public DelegateCommand ChooseCertificateFileCommand { get; }
         public DelegateCommand DefaultTimeServerCommand { get; }
 
-        public IEnumerable<EnumValue<PageOrientation>> PageOrientationValues => Translator.GetEnumTranslation<PageOrientation>();
-
-        public IEnumerable<EnumValue<ColorModel>> ColorModelValues => Translator.GetEnumTranslation<ColorModel>();
-
-        public IEnumerable<EnumValue<PageView>> PageViewValues => Translator.GetEnumTranslation<PageView>();
-
-        public IEnumerable<EnumValue<DocumentView>> DocumentViewValues => Translator.GetEnumTranslation<DocumentView>();
-
-        public IEnumerable<EnumValue<CompressionColorAndGray>> CompressionColorAndGrayValues => Translator.GetEnumTranslation<CompressionColorAndGray>();
-
-        public IEnumerable<EnumValue<CompressionMonochrome>> CompressionMonochromeValues => Translator.GetEnumTranslation<CompressionMonochrome>();
-
-        public IEnumerable<EnumValue<SignaturePage>> SignaturePageValues => Translator.GetEnumTranslation<SignaturePage>();
+        public bool OnlyForPlusAndBusiness { get; }
 
         public bool EncryptionEnabled
         {
-            get { return CurrentProfile != null && CurrentProfile.PdfSettings.Security.Enabled; }
+            get { return CurrentProfile != null 
+                    && CurrentProfile.PdfSettings.Security.Enabled; }
             set
             {
                 CurrentProfile.PdfSettings.Security.Enabled = value;
@@ -61,17 +56,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
         }
 
         public bool LowEncryptionEnabled
-        {
-            get { return CurrentProfile?.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc40Bit; }
-            set
-            {
-                if (value)
-                    CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Rc40Bit;
-                RaisePropertyChangedForEncryptionProperties();
-            }
-        }
-
-        public bool MediumEncryptionEnabled
         {
             get { return CurrentProfile?.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc128Bit; }
             set
@@ -82,13 +66,24 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
             }
         }
 
-        public bool HighEncryptionEnabled
+        public bool MediumEncryptionEnabled
         {
             get { return CurrentProfile?.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit; }
             set
             {
                 if (value)
                     CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Aes128Bit;
+                RaisePropertyChangedForEncryptionProperties();
+            }
+        }
+
+        public bool HighEncryptionEnabled
+        {
+            get { return CurrentProfile?.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes256Bit; }
+            set
+            {
+                if (value)
+                    CurrentProfile.PdfSettings.Security.EncryptionLevel = EncryptionLevel.Aes256Bit;
                 RaisePropertyChangedForEncryptionProperties();
             }
         }
@@ -148,7 +143,21 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
             set { CurrentProfile.PdfSettings.Security.AllowToEditAssembly = value; }
         }
 
-        public string PdfVersion => CurrentProfile == null ? "1.4" : DeterminePdfVersion(CurrentProfile);
+        public bool SignatureEnabled
+        {
+            get
+            {
+                return CurrentProfile != null
+                       && CurrentProfile.PdfSettings.Signature.Enabled;
+            }
+            set
+            {
+                CurrentProfile.PdfSettings.Signature.Enabled = value;
+                RaisePropertyChanged(nameof(PdfVersion));
+            }
+        }
+
+        public string PdfVersion => CurrentProfile == null ? "1.4" : _pdfProcessor.DeterminePdfVersion(CurrentProfile);
 
         public DelegateCommand TimeServerPasswordCommand => new DelegateCommand(TimeServerPasswordExecute);
         public DelegateCommand SignaturePasswordCommand => new DelegateCommand(SignaturePasswordExecute);
@@ -163,10 +172,10 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         private void ChooseCertificateFileExecute(object obj)
         {
-            var title = Translator.GetTranslation("ProfileSettingsWindow", "SelectCertFile");
-            var filter = Translator.GetTranslation("ProfileSettingsWindow", "PfxP12Files")
+            var title = Translation.SelectCertFile;
+            var filter = Translation.PfxP12Files
                          + @" (*.pfx, *.p12)|*.pfx;*.p12|"
-                         + Translator.GetTranslation("ProfileSettingsWindow", "AllFiles")
+                         + Translation.AllFiles
                          + @" (*.*)|*.*";
 
             Signature.CertificateFile = _openFileInteractionHelper.StartOpenFileInteraction(Signature.CertificateFile, title, filter);
@@ -234,8 +243,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         private void ShowCertFileMessage()
         {
-            var message = Translator.GetTranslation("ProfileSettingsWindow", "CertificateDoesNotExist");
-            var caption = Translator.GetTranslation("ProfileSettingsWindow", "PDFSignature");
+            var caption = Translation.PDFSignature;
+            var message = Translation.CertificateDoesNotExist;
 
             var interaction = new MessageInteraction(message, caption, MessageOptions.OK, MessageIcon.Error);
             _interactionInvoker.Invoke(interaction);
@@ -243,9 +252,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
 
         private void TimeServerPasswordExecute(object obj)
         {
-            var title = Translator.GetTranslation("PdfTab", "TimeServerPasswordTitle");
-            var description = Translator.GetTranslation("PdfTab", "TimeServerPasswordDescription" +
-                                                                  "");
+            var title = Translation.TimeServerPasswordTitle;
+            var description = Translation.TimeServerPasswordDescription;
             var interaction = new PasswordInteraction(PasswordMiddleButton.Remove, title, description, false);
             interaction.Password = CurrentProfile.PdfSettings.Signature.TimeServerPassword;
 
@@ -262,6 +270,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
             RaisePropertyChanged(nameof(CurrentProfile));
         }
 
+        public ICommand OpenPdfToolsUserGuideCommand => new DelegateCommand(OpenPdfToolsUserGuide);
+
+        private void OpenPdfToolsUserGuide(object o)
+        {
+            _userGuideHelper.ShowHelp(HelpTopic.PdfTools);
+        }
+
         private void RaisePropertyChangedForEncryptionProperties()
         {
             RaisePropertyChanged(nameof(EncryptionEnabled));
@@ -274,14 +289,6 @@ namespace pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ProfileSetting
             RaisePropertyChanged(nameof(AllowScreenReadersEnabled));
             RaisePropertyChanged(nameof(AllowEditingAssemblyEnabled));
             RaisePropertyChanged(nameof(PdfVersion));
-        }
-
-        private string DeterminePdfVersion(ConversionProfile profile)
-        {
-            var pdfVersion = "1.4";
-            if (profile.PdfSettings.Security.Enabled && (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Aes128Bit))
-                pdfVersion = "1.6";
-            return pdfVersion;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Utilities;
 

@@ -1,29 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Windows.Data;
-using pdfforge.DynamicTranslator;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
 
 namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
 {
     public class DefectiveProfilesWindowViewModel : InteractionAwareViewModelBase<ProfileProblemsInteraction>
     {
-        private readonly ITranslator _translator;
+        private DefectiveProfilesWindowTranslation _translation;
+        private readonly ErrorCodeInterpreter _errorCodeInterpreter;
 
-        public DefectiveProfilesWindowViewModel(ITranslator translator)
+        public DefectiveProfilesWindowViewModel(DefectiveProfilesWindowTranslation translation, ErrorCodeInterpreter errorCodeInterpreter)
         {
-            _translator = translator;
+            _translation = translation;
+            _errorCodeInterpreter = errorCodeInterpreter;
 
             IgnoreErrorsCommand = new DelegateCommand(IgnoreErrorsExecute);
         }
 
-        public ActionResultDict ProfileProblems { get; private set; }
+        public DefectiveProfilesWindowTranslation Translation
+        {
+            get { return _translation; }
+            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
+        }
 
-        public string DefectiveProfilesText { get; protected set; }
+        public ActionResultDict ProfileProblems { get; private set; }
 
         public IList<ProfileError> ProfileErrors { get; protected set; }
 
@@ -57,24 +63,13 @@ namespace pdfforge.PDFCreator.UI.ViewModels.WindowViewModels
         {
             ProfileProblems = Interaction.ProfileProblems;
 
-            if (Interaction.ProfileProblems.Count > 1)
-                DefectiveProfilesText = _translator.GetTranslation(
-                    "DefectiveProfilesWindow", "DefectiveProfiles");
-            else
-                DefectiveProfilesText = _translator.GetTranslation(
-                    "DefectiveProfilesWindow", "DefectiveProfile");
-
-            RaisePropertyChanged(nameof(DefectiveProfilesText));
-
             ProfileErrors = new List<ProfileError>();
-
-            var errorCodeInterpreter = new ErrorCodeInterpreter(_translator);
 
             foreach (var profileNameActionResult in Interaction.ProfileProblems)
             {
                 foreach (var error in profileNameActionResult.Value)
                 {
-                    var errorText = errorCodeInterpreter.GetErrorText(error, false);
+                    var errorText = _errorCodeInterpreter.GetErrorText(error, false);
                     ProfileErrors.Add(new ProfileError(profileNameActionResult.Key, errorText));
                 }
             }
