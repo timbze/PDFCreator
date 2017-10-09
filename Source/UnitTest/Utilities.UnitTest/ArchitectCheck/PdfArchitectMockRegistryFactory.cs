@@ -1,8 +1,8 @@
+using Rhino.Mocks;
 using System.Collections.Generic;
 using System.IO;
 using SystemInterface.IO;
 using SystemInterface.Microsoft.Win32;
-using Rhino.Mocks;
 
 namespace pdfforge.PDFCreator.Utilities.UnitTest.ArchitectCheck
 {

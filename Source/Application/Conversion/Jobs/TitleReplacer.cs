@@ -1,8 +1,8 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs
 {
@@ -47,6 +47,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             {
                 case ReplacementType.RegEx:
                     if (!string.IsNullOrEmpty(titleReplacement.Replace))
+
                         title = Regex.Replace(title, titleReplacement.Search, titleReplacement.Replace);
                     break;
 
@@ -54,7 +55,6 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
                     if (title.StartsWith(titleReplacement.Search))
                     {
                         title = title.Substring(titleReplacement.Search.Length);
-                        title = titleReplacement.Replace + title;
                     }
                     break;
 
@@ -62,13 +62,12 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
                     if (title.EndsWith(titleReplacement.Search))
                     {
                         title = title.Substring(0, title.LastIndexOf(titleReplacement.Search, StringComparison.InvariantCulture));
-                        title += titleReplacement.Replace;
                     }
                     break;
 
                 case ReplacementType.Replace:
                 default:
-                    title = title.Replace(titleReplacement.Search, titleReplacement.Replace);
+                    title = title.Replace(titleReplacement.Search, "");
                     break;
             }
 

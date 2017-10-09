@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.ConverterInterface;
@@ -14,7 +11,10 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Output;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
+using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 {
@@ -30,7 +30,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             _actionManager = Substitute.For<IActionManager>();
             _jobCleanUp = Substitute.For<IJobCleanUp>();
             _directory = Substitute.For<IDirectory>();
-            _conversionProgress = Substitute.For<IConversionProgress>();
+            _directoryHelper = Substitute.For<IDirectoryHelper>();
         }
 
         private IOutputFileMover _outputFileMover;
@@ -39,7 +39,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         private IActionManager _actionManager;
         private IJobCleanUp _jobCleanUp;
         private IDirectory _directory;
-        private IConversionProgress _conversionProgress;
+        private IDirectoryHelper _directoryHelper;
 
         private const string TempFolder = @"X:\SomeFolder\Temp";
 
@@ -73,8 +73,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                     }
                 });
 
-            return new JobRunner(_outputFileMover, tokenReplacerFactory, _pdfProcessor, converterFactory, _actionManager,
-                _jobCleanUp, tempFolderProvider, _directory, _conversionProgress);
+            return new JobRunner(tokenReplacerFactory, _pdfProcessor, converterFactory, _actionManager,
+                _jobCleanUp, tempFolderProvider, _directory, _directoryHelper);
         }
 
         private Job BuildJob()
@@ -82,26 +82,24 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobInfo = new JobInfo
             {
                 InfFile = @"M:\Spool\aaa-bbb-ccc.inf",
-                JobType = JobType.PsJob,
-                SourceFiles = new[]
-                {
-                    new SourceFileInfo
-                    {
-                        Author = "Author",
-                        ClientComputer = "ClientComputer",
-                        Copies = 1,
-                        DocumentTitle = "My Title",
-                        Filename = @"Q:\Spool\MyFile.ps",
-                        JobCounter = 42,
-                        JobId = 1024,
-                        PrinterName = "PDFCreator",
-                        SessionId = 1,
-                        TotalPages = 1,
-                        Type = JobType.PsJob,
-                        WinStation = "WinStation"
-                    }
-                }
+                JobType = JobType.PsJob
             };
+
+            jobInfo.SourceFiles.Add(new SourceFileInfo
+            {
+                Author = "Author",
+                ClientComputer = "ClientComputer",
+                Copies = 1,
+                DocumentTitle = "My Title",
+                Filename = @"Q:\Spool\MyFile.ps",
+                JobCounter = 42,
+                JobId = 1024,
+                PrinterName = "PDFCreator",
+                SessionId = 1,
+                TotalPages = 1,
+                Type = JobType.PsJob,
+                WinStation = "WinStation"
+            });
 
             var job = new Job(jobInfo, new ConversionProfile(), new JobTranslations(), new Accounts());
 
@@ -127,7 +125,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobRunner = BuildJobRunner();
             var job = BuildJob();
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _actionManager.Received().GetAllApplicableActions(job);
         }
@@ -146,7 +144,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _actionManager.GetAllApplicableActions(job).Returns(actions);
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             foreach (var action in actions)
             {
@@ -160,9 +158,10 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobRunner = BuildJobRunner();
             var job = BuildJob();
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _jobCleanUp.Received().DoCleanUp(job.JobTempFolder, job.JobInfo.SourceFiles, job.JobInfo.InfFile);
+            _directoryHelper.Received().DeleteCreatedDirectories();
         }
 
         [Test]
@@ -171,7 +170,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobRunner = BuildJobRunner();
             var job = BuildJob();
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _outputFileMover.Received().MoveOutputFiles(job);
         }
@@ -184,7 +183,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _pdfProcessor.ProcessingRequired(Arg.Any<ConversionProfile>()).Returns(true);
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _pdfProcessor.Received().ProcessPdf(job);
         }
@@ -197,7 +196,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _pdfProcessor.ProcessingRequired(Arg.Any<ConversionProfile>()).Returns(false);
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _pdfProcessor.DidNotReceive().ProcessPdf(job);
         }
@@ -217,7 +216,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                 if (!isInitialized) throw new Exception();
             });
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _converter.Received().DoConversion(job);
         }
@@ -238,20 +237,9 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _actionManager.GetAllApplicableActions(job).Returns(actions);
 
-            var exception = Assert.Throws<ProcessingException>(() => jobRunner.RunJob(job));
+            var exception = Assert.Throws<ProcessingException>(() => jobRunner.RunJob(job, _outputFileMover));
 
             Assert.AreEqual(errorCode, exception.ErrorCode);
-        }
-
-        [Test]
-        public void RunJob_ShowsConversionProgress()
-        {
-            var jobRunner = BuildJobRunner();
-            var job = BuildJob();
-
-            jobRunner.RunJob(job);
-
-            _conversionProgress.Received().Show(job);
         }
 
         [Test]
@@ -260,7 +248,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobRunner = BuildJobRunner();
             var job = BuildJob();
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             _converter.Received().DoConversion(job);
         }
@@ -273,7 +261,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _outputFileMover.When(x => x.MoveOutputFiles(job)).Do(x => { throw new AbortWorkflowException(""); });
 
-            Assert.Throws<AbortWorkflowException>(() => jobRunner.RunJob(job));
+            Assert.Throws<AbortWorkflowException>(() => jobRunner.RunJob(job, _outputFileMover));
         }
 
         [Test]
@@ -284,7 +272,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             _outputFileMover.When(x => x.MoveOutputFiles(job)).Do(x => { job.OutputFiles.Clear(); });
 
-            Assert.Throws<ProcessingException>(() => jobRunner.RunJob(job));
+            Assert.Throws<ProcessingException>(() => jobRunner.RunJob(job, _outputFileMover));
         }
 
         [Test]
@@ -293,7 +281,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             var jobRunner = BuildJobRunner();
             var job = BuildJob();
 
-            jobRunner.RunJob(job);
+            jobRunner.RunJob(job, _outputFileMover);
 
             Assert.IsTrue(job.Completed);
         }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
+using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Printing.Printing
 {
@@ -109,7 +109,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             var printerHelper = new PrinterHelper();
             if (CommandType == PrintType.Print && Printer != printerHelper.GetDefaultPrinter())
                 throw new InvalidOperationException("The default printer needs to be set in order to print this file");
-            
+
             var p = ProcessWrapperFactory.BuildProcessWrapper(new ProcessStartInfo(Filename));
 
             if (SupportsPrintTo())

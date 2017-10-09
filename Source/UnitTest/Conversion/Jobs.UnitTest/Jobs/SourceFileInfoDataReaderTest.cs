@@ -9,9 +9,8 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
     [TestFixture]
     public class SourceFileInfoDataReaderTest
     {
-
-        [TestCase (JobType.PsJob)]
-        [TestCase (JobType.XpsJob)]
+        [TestCase(JobType.PsJob)]
+        [TestCase(JobType.XpsJob)]
         public void ValidSourceFileInfo_CanBeWrittenAndReadAgain(JobType type)
         {
             var sfi = BuildSourceFileInfo(type);
@@ -33,7 +32,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         {
             var reader = new SourceFileInfoDataReader();
             var data = Data.CreateDataStorage();
-            
+
             var result = reader.ReadSourceFileInfoFromData(@"some\inf\file", data, "theSection");
             Assert.IsNotNull(result);
         }
@@ -77,7 +76,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             Assert.AreEqual(result.Copies, sfi.Copies);
             Assert.AreEqual(result.UserTokenEvaluated, sfi.UserTokenEvaluated);
             Assert.AreEqual(result.UserToken.KeyValueDict, sfi.UserToken.KeyValueDict);
-
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 
 namespace pdfforge.PDFCreator.Core.Services.Logging
 {
@@ -75,7 +75,7 @@ namespace pdfforge.PDFCreator.Core.Services.Logging
 
         private static LogLevel GetLogLevel(LoggingLevel loggingLevel)
         {
-            return LogLevel.FromOrdinal((int) loggingLevel);
+            return LogLevel.FromOrdinal((int)loggingLevel);
         }
     }
 }

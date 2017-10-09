@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
 {
@@ -28,6 +28,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         /// </summary>
         public ConversionProfile Profile { get; set; }
 
+        /// <summary>
+        ///     All currently available accounts (Dropbox, FTP, )
+        /// </summary>
         public Accounts Accounts { get; set; }
 
         public TokenReplacer TokenReplacer { get; set; } = new TokenReplacer();
@@ -84,6 +87,11 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         public bool SkipSaveFileDialog { get; set; }
 
         /// <summary>
+        /// ShareLinks from upload actions like Dropbox
+        /// </summary>
+        public JobShareLinks ShareLinks { get; set; } = new JobShareLinks();
+
+        /// <summary>
         ///     If true, the job has completed execution
         /// </summary>
         public bool Completed { get; set; }
@@ -94,7 +102,10 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         public IList<string> TempOutputFiles { get; set; } = new List<string>();
 
         public event EventHandler<JobCompletedEventArgs> OnJobCompleted;
+
         public event EventHandler<JobProgressChangedEventArgs> OnJobProgressChanged;
+
+        public event EventHandler<JobLoginFailedEventArgs> OnJobHasError;
 
         public void InitMetadataWithTemplates()
         {
@@ -122,6 +133,14 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         public void ReportProgress(int percentProgress)
         {
             OnJobProgressChanged?.Invoke(this, new JobProgressChangedEventArgs(this, percentProgress));
+        }
+
+        public void OnErrorDuringLogin(Action<string> continueAction, Action abortAction, string actionDisplayName)
+        {
+            if (OnJobHasError == null)
+                abortAction();
+            else
+                OnJobHasError(this, new JobLoginFailedEventArgs(continueAction, abortAction, actionDisplayName));
         }
     }
 }

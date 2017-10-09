@@ -1,11 +1,11 @@
-﻿using System;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
+using System;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 {
@@ -23,7 +23,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
             _fixture = new Fixture().Customize(new AutoConfiguredNSubstituteCustomization());
             _applicationPath = @"X:\Program Files\PDFCreator";
             _assemblyHelper = _fixture.Freeze<IAssemblyHelper>();
-            _assemblyHelper.GetPdfforgeAssemblyDirectory().Returns(x => _applicationPath);
+            _assemblyHelper.GetAssemblyDirectory().Returns(x => _applicationPath);
             _directory = _fixture.Freeze<IDirectory>();
         }
 

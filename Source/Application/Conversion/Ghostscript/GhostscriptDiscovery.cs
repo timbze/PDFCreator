@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
 using System.Linq;
 using SystemInterface.IO;
 using SystemWrapper.IO;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript
 {
@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
             _assemblyHelper = assemblyHelper;
         }
 
-        public List<string> PossibleGhostscriptPaths { get; set; } = new List<string> {"Ghostscript", @"..\..\..\..\..\..\packages\setup\Ghostscript"};
+        public List<string> PossibleGhostscriptPaths { get; set; } = new List<string> { "Ghostscript", @"..\..\..\..\..\..\packages\setup\Ghostscript" };
 
         /// <summary>
         ///     Get the internal instance if it exists, otherwise the installed instance in the given version
@@ -35,7 +35,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
         /// <returns>The best matching Ghostscript instance</returns>
         public GhostscriptVersion GetGhostscriptInstance()
         {
-            var applicationPath = _assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var applicationPath = _assemblyHelper.GetAssemblyDirectory();
 
             var paths = PossibleGhostscriptPaths.Select(path => _pathSafe.Combine(applicationPath, path));
 

@@ -1,13 +1,14 @@
-﻿using System;
-using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion
 {
     public interface IDirectConversionHelper
     {
         bool CanConvertDirectly(string file);
+
         void ConvertDirectly(string file);
     }
 

@@ -25,7 +25,7 @@
 
             var settingsUpgrader = new SettingsUpgradeHelper();
 
-            var settings = new DefaultProfileBuilder().CreateEmptySettings(iniStorage);
+            var settings = new DefaultSettingsBuilder().CreateEmptySettings(iniStorage);
             settings.LoadData(iniStorage, iniFile, settingsUpgrader.UpgradeSettings);
 
             return settings;

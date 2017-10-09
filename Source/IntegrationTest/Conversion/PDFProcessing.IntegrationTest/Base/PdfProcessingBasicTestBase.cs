@@ -1,58 +1,38 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using NSubstitute;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
+using System.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 {
     [TestFixture]
-    [Category("LongRunning")]
     public abstract class PdfProcessingBasicTestBase
     {
         private TestHelper _th;
         private IPdfProcessor _pdfProcessor;
 
-        protected abstract IPdfProcessor BuildPdfProcessor(IProcessingPasswordsProvider passwordsProvider);
+        protected abstract IPdfProcessor BuildPdfProcessor();
 
-        private const string OwnerPassword = "owner password from password provider";
-        private const string UserPassword = "user password from password provider";
-        private const string SignaturePassword = "signature password from password provider";
-
+        protected abstract void FinalizePdfProcessor();
 
         [SetUp]
         public void SetUp()
         {
+            _pdfProcessor = BuildPdfProcessor();
+
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _th = container.GetInstance<TestHelper>();
-            _th.InitTempFolder("PDFProcessing_IText_Basic");
-
-            var passwordsProvider = Substitute.For<IProcessingPasswordsProvider>();
-            passwordsProvider.When(x => x.SetEncryptionPasswords(Arg.Any<Job>())).Do(x =>
-            {
-                var job = x[0] as Job;
-                job.Passwords.PdfOwnerPassword = OwnerPassword;
-                job.Passwords.PdfUserPassword = UserPassword;
-            });
-            passwordsProvider.When(x => x.SetSignaturePassword(Arg.Any<Job>())).Do(x =>
-            {
-                var job = x[0] as Job;
-                job.Passwords.PdfSignaturePassword = SignaturePassword;
-            });
-
-            _pdfProcessor = BuildPdfProcessor(passwordsProvider);
+            _th.InitTempFolder($"PDFProcessing_{_pdfProcessor.GetType().Name}_Basic");
         }
 
         [TearDown]
         public void CleanUp()
         {
             _th.CleanUp();
+            FinalizePdfProcessor();
         }
 
         [Test]
@@ -106,31 +86,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             _pdfProcessor.Init(_th.Job);
 
             Assert.IsFalse(_th.Job.Profile.PdfSettings.Security.Enabled);
-        }
-
-        [Test]
-        public void Init_EncryptionPasswords_ComeFromPasswordsProvider()
-        {
-            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpagePs);
-            _th.Profile.OutputFormat = OutputFormat.Pdf;
-            _th.Profile.PdfSettings.Security.Enabled = true;
-
-            _pdfProcessor.Init(_th.Job);
-
-            Assert.AreEqual(OwnerPassword, _th.Job.Passwords.PdfOwnerPassword);
-            Assert.AreEqual(UserPassword, _th.Job.Passwords.PdfUserPassword);
-        }
-
-        [Test]
-        public void Init_SignaturePassword_ComesFromPasswordsProvider()
-        {
-            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpagePs);
-            _th.Profile.OutputFormat = OutputFormat.Pdf;
-            _th.Profile.PdfSettings.Signature.Enabled = true;
-
-            _pdfProcessor.Init(_th.Job);
-
-            Assert.AreEqual(SignaturePassword, _th.Job.Passwords.PdfSignaturePassword);
         }
 
         [Test]
@@ -190,9 +145,9 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         }
 
         [Test]
-        public void CheckIfFileExistsAndTempFilesAreDeleted_AllPdfPropertiesDisabled()
+        public void CheckIfFileExists_AllPdfPropertiesDisabled()
         {
-            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpagePDF);
+            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Job.Profile.OutputFormat = OutputFormat.Pdf;
             //UpdateXMPMetadata disabled if format is not PDF/A
             _th.Job.Profile.PdfSettings.Security.Enabled = false;
@@ -203,22 +158,18 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             _pdfProcessor.ProcessPdf(_th.Job);
 
             Assert.IsTrue(File.Exists(_th.Job.OutputFiles[0]), "Processed file does not exist.");
-            var files = Directory.GetFiles(_th.TmpTestFolder);
-            Assert.AreEqual(1, files.Where(x => x.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase)).ToArray().Length,
-                "TmpTestFolder contains more PDF files than the processed one: "
-                                  + Environment.NewLine + files);
         }
 
         [Test]
-        public void TestingWithJob_CheckIfFileExistsAndTempFilesAreDeleted_AllPdfPropertiesDisabled()
+        public void TestingWithJob_CheckIfFileExists_AllPdfPropertiesDisabled()
         {
-            _th.Profile.OutputFormat = OutputFormat.Pdf; 
+            _th.Profile.OutputFormat = OutputFormat.Pdf;
             //UpdateXMPMetadata disabled if format is not PDF/A
             _th.Profile.PdfSettings.Security.Enabled = false;
             _th.Profile.PdfSettings.Signature.Enabled = false;
             _th.Profile.BackgroundPage.Enabled = false;
 
-            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpagePDF);
+            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             File.Delete(_th.TmpInfFile);
             foreach (string psFile in _th.TmpPsFiles)
                 File.Delete(psFile);
@@ -230,10 +181,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
                 Assert.IsTrue(File.Exists(file), "File does not exist after processing: " + file);
                 File.Delete(file);
             }
-
-            var files = Directory.GetFiles(_th.TmpTestFolder);
-            Assert.IsEmpty(files, "TmpTestFolder should be empty, after deleting processed file, but contained: "
-                                  + Environment.NewLine + files);
         }
 
         [Test]
@@ -300,9 +247,9 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         public void RequireProcessingForPdfX_with_Signing_And_Encryption()
         {
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.PdfX);
-            _th.Job.Profile.PdfSettings.Security.Enabled = true;  //Encryption is illegal for PDF/X 
+            _th.Job.Profile.PdfSettings.Security.Enabled = true;  //Encryption is illegal for PDF/X
                                                                   //but the processing should be triggered
-            _th.Job.Profile.PdfSettings.Signature.Enabled = true; //because of the Signing 
+            _th.Job.Profile.PdfSettings.Signature.Enabled = true; //because of the Signing
             Assert.IsTrue(_pdfProcessor.ProcessingRequired(_th.Job.Profile));
         }
 
@@ -310,7 +257,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         public void RequireProcessingForPdfX_with_Background_And_Encryption()
         {
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.PdfX);
-            _th.Job.Profile.PdfSettings.Security.Enabled = true; //Encryption is illegal for PDF/X 
+            _th.Job.Profile.PdfSettings.Security.Enabled = true; //Encryption is illegal for PDF/X
                                                                  //but the processing should be triggered
             _th.Job.Profile.BackgroundPage.Enabled = true;       //because of the Background
             Assert.IsTrue(_pdfProcessor.ProcessingRequired(_th.Job.Profile));

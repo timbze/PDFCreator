@@ -70,13 +70,13 @@ namespace pdfforge.PDFCreator.Core.Services.Translation {
         ///NativeName=English
         ///Version=2.3
         ///
-        ///[pdfforge.PDFCreator.UI.Views.Windows.AboutWindow]
-        ///LicenseButton.Content=License
-        ///LicenseInfo.Text=PDFCreator is free software consisting of multiple components with individual licenses. Please read the license section in the manual for further information on these licenses.
-        ///Title=About PDFCreator
-        ///UserManualButton.Content=User Manual
-        ///
-        ///[pdfforge.PDFCreator.UI.Views.UserCo [rest of string was truncated]&quot;;.
+        ///[ProfileSettingsWindow]
+        ///AllFiles=All files
+        ///CertificateDoesNotExist=The certificate file does not exist.
+        ///DeleteProfile=Delete profile
+        ///DeleteProfileWithMappedPrinter=The profile &apos;{0}&apos; is assigned to the printer &apos;{1}&apos;. If you delete this profile, the printer will use the default profile instead. Do you want to proceed?
+        ///EnterProfileName=Please enter profile name:
+        ///FontFileNo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string English {
             get {

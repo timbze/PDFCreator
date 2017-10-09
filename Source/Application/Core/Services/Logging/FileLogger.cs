@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
+using System;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Services.Logging
 {

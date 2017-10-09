@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NLog;
+using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
+using System;
 using System.IO;
 using SystemInterface.IO;
-using NLog;
-using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {

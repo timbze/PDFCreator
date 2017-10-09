@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using SystemInterface;
-using SystemInterface.IO;
-using SystemWrapper;
-using SystemWrapper.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -14,6 +7,13 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Tokens;
 using Rhino.Mocks;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using SystemInterface;
+using SystemInterface.IO;
+using SystemWrapper;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -55,9 +55,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             _job = new Job(_jobInfo, new ConversionProfile(), new JobTranslations(), new Accounts());
             _job.NumberOfCopies = 5;
-            _job.NumberOfPages=14;
+            _job.NumberOfPages = 14;
 
-            _job.OutputFiles = new List<string> {"outputFile", "test"};
+            _job.OutputFiles = new List<string> { "outputFile", "test" };
 
             var path = MockRepository.GenerateStub<IPath>();
             path.Stub(p => p.GetFullPath("outputFile")).Return("fullPath");

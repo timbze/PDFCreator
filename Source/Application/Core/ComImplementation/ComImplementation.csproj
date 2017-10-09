@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>pdfforge.PDFCreator.Core.ComImplementation</RootNamespace>
     <AssemblyName>PDFCreator.ComImplementation</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -48,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComTargetFileNameComposer.cs" />
-    <Compile Include="Error\ErrorNotifierCom.cs" />
     <Compile Include="IComWorkflowFactory.cs" />
     <Compile Include="IPrintJobAdapterFactory.cs" />
     <Compile Include="PdfCreatorAdapter.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="PrintJobAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueAdapter.cs" />
+    <Compile Include="ComStartupConditionChecker.cs" />
     <Compile Include="ThreadPool.cs" />
     <Compile Include="ValueReflector.cs" />
   </ItemGroup>
@@ -72,6 +75,10 @@
     <ProjectReference Include="..\..\Conversion\Settings\Settings.csproj">
       <Project>{94936199-C9C7-4A5F-A58E-6123158E84F3}</Project>
       <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Startup\StartupInterface\StartupInterface.csproj">
+      <Project>{1A092466-45AC-4FA5-BC67-25071F20CD59}</Project>
+      <Name>StartupInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Startup\Startup\Startup.csproj">
       <Project>{3157C130-EA8A-45EB-92DB-8615BD66B5C5}</Project>
@@ -115,10 +122,10 @@
   </Target>
   -->
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="NLog">
-          <HintPath>..\..\..\..\packages\NLog\lib\net40\NLog.dll</HintPath>
+          <HintPath>..\..\..\..\packages\NLog\lib\net45\NLog.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -126,7 +133,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SystemInterface">
           <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>

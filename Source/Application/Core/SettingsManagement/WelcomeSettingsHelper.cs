@@ -1,12 +1,13 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Utilities;
+using System;
 using SystemInterface.Microsoft.Win32;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface IWelcomeSettingsHelper
     {
         bool IsFirstRun();
+
         void SetCurrentApplicationVersionAsWelcomeVersionInRegistry();
     }
 
@@ -16,9 +17,9 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
         public const string RegistryValueForWelcomeVersion = @"LatestWelcomeVersion";
 
         private readonly IRegistry _registryWrap;
-        private readonly VersionHelper _versionHelper;
+        private readonly IVersionHelper _versionHelper;
 
-        public WelcomeSettingsHelper(IRegistry registryWrap, VersionHelper versionHelper)
+        public WelcomeSettingsHelper(IRegistry registryWrap, IVersionHelper versionHelper)
         {
             _registryWrap = registryWrap;
             _versionHelper = versionHelper;

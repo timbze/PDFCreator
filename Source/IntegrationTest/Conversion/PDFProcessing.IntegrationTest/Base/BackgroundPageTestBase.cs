@@ -1,15 +1,14 @@
-﻿using System.Diagnostics;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
+using System.Diagnostics;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal abstract class BackgroundPageTestBase
     {
         private TestHelper _th;
@@ -18,21 +17,23 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 
         protected abstract IPdfProcessor BuildPdfProcessor();
 
+        protected abstract void FinalizePdfProcessor();
+
         [SetUp]
         public void SetUp()
         {
+            _pdfProcessor = BuildPdfProcessor();
+
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _th = container.GetInstance<TestHelper>();
-            _th.InitTempFolder("PDFProcessing_IText_Background");
+            _th.InitTempFolder($"PDFProcessing_{_pdfProcessor.GetType().Name}_Background");
 
             _th.Profile.BackgroundPage.File = _th.GenerateTestFile(TestFile.Background3PagesPDF);
             _th.Profile.BackgroundPage.Enabled = true;
 
             _th.Profile.CoverPage.File = _th.GenerateTestFile(TestFile.Cover2PagesPDF);
             _th.Profile.AttachmentPage.File = _th.GenerateTestFile(TestFile.Attachment3PagesPDF);
-
-            _pdfProcessor = BuildPdfProcessor();
         }
 
         [TearDown]
@@ -40,6 +41,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         {
             _reader?.Close();
             _th.CleanUp();
+            FinalizePdfProcessor();
         }
 
         [Test]
@@ -56,7 +58,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             _th.GenerateGsJob_WithSetOutput(TestFile.SixEmptyPagesPDF);
 
             _pdfProcessor.ProcessPdf(_th.Job);
-            
+
             _reader = new PdfReader(_th.Job.OutputFiles[0]);
             var pageText = PdfTextExtractor.GetTextFromPage(_reader, 1).Replace("\n", "").Replace(" ", "");
             Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
@@ -1184,17 +1186,20 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
         }
 
-
         [Test]
-        [Ignore("Only for manual testing")]
+        [Category("Manual")]
         public void OnlyForManualTesting()
         {
+            if (!Debugger.IsAttached)
+                return;
+
             _th.Profile.BackgroundPage.Repetition = BackgroundRepetition.RepeatLastPage;
             _th.Profile.BackgroundPage.File = _th.GenerateTestFile(TestFile.PortraitLandscapeLandscapeLandscapePortraitPDF);
             _th.GenerateGsJob_WithSetOutput(TestFile.SixEmptyPagesPDF);
 
             _pdfProcessor.ProcessPdf(_th.Job);
             Process.Start(_th.Job.OutputFiles[0]);
+            Debugger.Break();
         }
     }
 }

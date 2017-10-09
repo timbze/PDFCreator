@@ -1,12 +1,11 @@
 ﻿using iTextSharp.text.pdf;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class ViewerSettingsTest
     {
         [SetUp]
@@ -21,7 +20,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         [TearDown]
         public void CleanUp()
         {
-            _th.CleanUp();
+            _th?.CleanUp();
         }
 
         private TestHelper _th;
@@ -103,7 +102,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 Assert.AreEqual(0, pdfReader.SimpleViewerPreferences & PdfWriter.PageLayoutTwoPageRight,
                     "PageView: Unrequired TwoPagesOddRight set");
 
-            #endregion
+            #endregion PageView Bits
 
             #region DocumentView Bits
 
@@ -153,7 +152,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 Assert.AreEqual(0, pdfReader.SimpleViewerPreferences & PdfWriter.PageModeUseThumbs,
                     "DocumentView: Unrequired ThumbnailImagese set");
 
-            #endregion
+            #endregion DocumentView Bits
         }
 
         [TestCase(PageView.OneColumn)]
@@ -207,7 +206,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         public int ViewerStartsOnPageTest_withCoverPage(int startPage)
         {
             _th.Profile.CoverPage.Enabled = true;
-            var coverPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePDF);
+            var coverPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Profile.CoverPage.File = coverPage;
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
@@ -224,7 +223,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         public int ViewerStartsOnPageTest_withAttachmentPage(int startPage)
         {
             _th.Profile.AttachmentPage.Enabled = true;
-            var attachmentPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePDF);
+            var attachmentPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Profile.AttachmentPage.File = attachmentPage;
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
@@ -241,11 +240,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         public int ViewerStartsOnPageTest_withCoverAndAttachmentPage(int startPage)
         {
             _th.Profile.CoverPage.Enabled = true;
-            var coverPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePDF);
+            var coverPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Profile.CoverPage.File = coverPage;
 
             _th.Profile.AttachmentPage.Enabled = true;
-            var attachmentPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePDF);
+            var attachmentPage = _th.GenerateTestFile(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Profile.AttachmentPage.File = attachmentPage;
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
@@ -258,10 +257,9 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         private static int GetOpenPage(PdfReader pdfreader)
 
         {
-            var obj = (PdfArray) pdfreader.Catalog.Get(PdfName.OPENACTION);
-            var objNum = (PRIndirectReference) obj[0];
+            var obj = (PdfArray)pdfreader.Catalog.Get(PdfName.OPENACTION);
+            var objNum = (PRIndirectReference)obj[0];
             var desiredPage = pdfreader.GetPdfObject(objNum.Number);
-            int page = -1;
 
             for (int i = 1; i <= pdfreader.NumberOfPages; i++)
             {

@@ -1,9 +1,9 @@
-﻿using System.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using PDFCreator.TestUtilities;
+using System.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 {
@@ -31,7 +31,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         private TestHelper _th;
 
         [Test]
-        [Category("LongRunning")]
         public void TestEnsureUniqueFilename()
         {
             var tempFolder = TempFileHelper.CreateTempFolder("TestEnsureUniqueFilename");

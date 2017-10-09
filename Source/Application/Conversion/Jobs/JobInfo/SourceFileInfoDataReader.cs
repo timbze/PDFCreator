@@ -1,9 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using pdfforge.DataStorage;
+﻿using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
+using System.Globalization;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 {
@@ -141,7 +141,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
                 foreach (var keyValuPair in sourceFileInfo.UserToken.KeyValueDict)
                 {
                     data.SetValue("UserToken_" + section + keyValuPair.Key, keyValuPair.Value);
-                }                
+                }
             }
         }
     }

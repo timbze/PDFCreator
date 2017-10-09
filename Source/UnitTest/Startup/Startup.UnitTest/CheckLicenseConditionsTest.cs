@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using Optional;
 using pdfforge.LicenseValidator.Interface;
@@ -8,14 +6,15 @@ using pdfforge.LicenseValidator.Interface.Data;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UI.ViewModels.Translations;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Linq;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -24,27 +23,33 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
     {
         private IInteractionInvoker _interactionInvoker;
         private IGpoSettings _gpoSettings;
-        private Activation _activation;
+        private Activation _savedActivation;
         private ILicenseChecker _licenseChecker;
+        private string _applicationName = "PDFCreator Free";
+        private string _versionWithTreeDigits = "0.0.0";
+        private string _editionWithVersionNumber;
+        private ProgramTranslation _translation;
 
         [SetUp]
         public void Setup()
         {
-            _activation = new Activation(acceptExpiredActivation: true);
+            _savedActivation = new Activation(acceptExpiredActivation: true);
             _licenseChecker = Substitute.For<ILicenseChecker>();
-            _licenseChecker.GetSavedActivation().Returns(x => _activation.SomeNotNull(LicenseError.NoActivation));
+            _licenseChecker.GetSavedActivation().Returns(x => _savedActivation.SomeNotNull(LicenseError.NoActivation));
             _interactionInvoker = Substitute.For<IInteractionInvoker>();
             _gpoSettings = Substitute.For<IGpoSettings>();
+            _translation = new ProgramTranslation();
+
+            _editionWithVersionNumber = _applicationName + " " + _versionWithTreeDigits;
         }
 
         private LicenseCondition BuildCheckLicenseConditions()
         {
-            var translation = new ApplicationTranslation();
             var versionHelper = Substitute.For<IVersionHelper>();
-            var settingsManager = Substitute.For<ISettingsManager>();
-            settingsManager.GetSettingsProvider().GpoSettings.Returns(x => _gpoSettings);
+            versionHelper.FormatWithThreeDigits().Returns(_versionWithTreeDigits);
+            var applicationNameProvider = new ApplicationNameProvider("Free");
 
-            return new LicenseCondition(settingsManager, new ProgramTranslation(), _licenseChecker, _interactionInvoker, versionHelper, new ApplicationNameProvider("PDFCreator"));
+            return new LicenseCondition(new TranslationFactory(), _licenseChecker, _interactionInvoker, versionHelper, applicationNameProvider, _gpoSettings);
         }
 
         private Activation BuildValidActivation()
@@ -60,11 +65,8 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void ValidActivation_Successful()
         {
-            _activation = BuildValidActivation();
+            _savedActivation = BuildValidActivation();
             var licenseCondition = BuildCheckLicenseConditions();
-
-            // TODO fix all comments!!!!!!!
-            //_activationHelper.IsLicenseValid.Returns(true);
 
             var result = licenseCondition.Check();
 
@@ -76,8 +78,8 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         {
             var licenseCondition = BuildCheckLicenseConditions();
 
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.Valid);
-            _activation.ActivatedTill = DateTime.Now.AddDays(4).AddMinutes(5);
+            _savedActivation = BuildValidActivation();
+            _savedActivation.ActivatedTill = DateTime.Now.AddDays(4).AddMinutes(5);
 
             licenseCondition.Check();
 
@@ -88,10 +90,8 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void WithActivationNull_DoesNotRenew()
         {
-            _activation = null;
+            _savedActivation = null;
             var licenseCondition = BuildCheckLicenseConditions();
-
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.Valid);
 
             licenseCondition.Check();
 
@@ -102,7 +102,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void WithOfflineActivation_DoesNotRenew()
         {
-            _activation.ActivationMethod = ActivationMethod.Offline;
+            _savedActivation.ActivationMethod = ActivationMethod.Offline;
             var licenseCondition = BuildCheckLicenseConditions();
 
             licenseCondition.Check();
@@ -116,48 +116,35 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         {
             var licenseCondition = BuildCheckLicenseConditions();
 
-            _activation.ActivatedTill = DateTime.Now.AddDays(3);
-            _activation.Key = "AAA-BBB-CCC";
+            _savedActivation.ActivatedTill = DateTime.Now.AddDays(3);
+            _savedActivation.Key = "AAA-BBB-CCC";
 
             licenseCondition.Check();
 
             _licenseChecker.DidNotReceive().GetActivation();
-            _licenseChecker.Received().ActivateWithKey(_activation.Key);
+            _licenseChecker.Received().ActivateWithKey(_savedActivation.Key);
         }
 
         [Test]
-        public void WithInvalidLicense_AndLicenseManagementDisabledViaGpo_ShowsError()
+        public void WithInvalidLicense_AndLicenseManagementDisabledViaGpo_ResultIsNotSuccesfullWithCorrespondingErrorAndWithoutInteraction()
         {
+            _savedActivation = null;
             _gpoSettings.HideLicenseTab.Returns(true);
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.NoLicense);
 
             var licenseCondition = BuildCheckLicenseConditions();
 
             var result = licenseCondition.Check();
 
             Assert.IsFalse(result.IsSuccessful);
-            Assert.AreEqual((int)ExitCode.LicenseInvalidAndHiddenWithGpo, result.ExitCode);
-        }
-
-        [Test]
-        public void WithInvalidLicense_AndLicenseManagementDisabledViaGpo_GivesCorrectExitCode()
-        {
-            _gpoSettings.HideLicenseTab.Returns(true);
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.NoLicense);
-
-            var licenseCondition = BuildCheckLicenseConditions();
-
-            var result = licenseCondition.Check();
-
             Assert.IsFalse(_interactionInvoker.ReceivedCalls().Any());
             Assert.AreEqual((int)ExitCode.LicenseInvalidAndHiddenWithGpo, result.ExitCode);
+            Assert.AreEqual(_translation.GetFormattedLicenseInvalidGpoHideLicenseTab(_editionWithVersionNumber), result.Message);
         }
 
         [Test]
         public void WithInvalidLicense_UserDoesNotWantToRenewLicense_FailsWithLicenseInvalidAndNotReactivated()
         {
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.NoLicense);
-
+            _savedActivation = null;
             _interactionInvoker
                 .When(x => x.Invoke(Arg.Any<MessageInteraction>()))
                 .Do(x =>
@@ -165,21 +152,19 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                     var tmpInteraction = x.Arg<MessageInteraction>();
                     tmpInteraction.Response = MessageResponse.No;
                 });
-
             var licenseCondition = BuildCheckLicenseConditions();
 
             var result = licenseCondition.Check();
 
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual((int)ExitCode.LicenseInvalidAndNotReactivated, result.ExitCode);
+            Assert.AreEqual("The license is invalid!", result.Message);
+            Assert.IsFalse(result.ShowMessage);
         }
 
         [Test]
-        public void WithInvalidLicense_UserWantsToRenew_LicenseInteractionIsTriggeredWithKey()
+        public void WithInvalidLicense_UserWantsToRenew_LicenseInteractionIsTriggered()
         {
-            //_activationHelper.LicenseStatus.Returns(LicenseStatus.Error);
-            _activation.Key = "AAA-BBB";
-
             _interactionInvoker
                 .When(x => x.Invoke(Arg.Any<MessageInteraction>()))
                 .Do(x =>
@@ -191,15 +176,12 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var licenseCondition = BuildCheckLicenseConditions();
 
             licenseCondition.Check();
-
             _interactionInvoker.Received().Invoke(Arg.Any<LicenseInteraction>());
         }
 
         [Test]
         public void AfterRenewingLicense_LicenseStillInvalid_FailsWithLicenseInvalidAfterReactivation()
         {
-            _activation.Key = "AAA-BBB";
-
             _interactionInvoker
                 .When(x => x.Invoke(Arg.Any<MessageInteraction>()))
                 .Do(x =>
@@ -207,13 +189,13 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                     var tmpInteraction = x.Arg<MessageInteraction>();
                     tmpInteraction.Response = MessageResponse.Yes;
                 });
-
             var licenseCondition = BuildCheckLicenseConditions();
 
             var result = licenseCondition.Check();
 
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual((int)ExitCode.LicenseInvalidAfterReactivation, result.ExitCode);
+            Assert.AreEqual(_translation.GetFormattedLicenseInvalidAfterReactivationTranslation(_applicationName), result.Message);
         }
 
         [Test]
@@ -229,13 +211,12 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                         messageInteraction.Response = MessageResponse.Yes;
                 });
 
-            _activation.Key = "AAA-BBB";
             // Activation is valid after LicenseInteraction was shown
             _licenseChecker
-                .When(x => x.ActivateWithKey(_activation.Key))
+                .When(x => x.ActivateWithKey(_savedActivation.Key))
                 .Do(x =>
                 {
-                    _activation = BuildValidActivation();
+                    _savedActivation = BuildValidActivation();
                 });
 
             var licenseCondition = BuildCheckLicenseConditions();
@@ -243,6 +224,21 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var result = licenseCondition.Check();
 
             Assert.IsTrue(result.IsSuccessful);
+        }
+
+        [Test]
+        public void WithActivationWithVersionMismatch_RenewsActivation()
+        {
+            var licenseCondition = BuildCheckLicenseConditions();
+
+            _savedActivation.ActivatedTill = DateTime.Now.AddDays(7);
+            _savedActivation.Key = "AAA-BBB-CCC";
+            _savedActivation.SetResult(Result.VERSION_MISMATCH, "Version mismatch");
+
+            licenseCondition.Check();
+
+            _licenseChecker.DidNotReceive().GetActivation();
+            _licenseChecker.Received().ActivateWithKey(_savedActivation.Key);
         }
     }
 }

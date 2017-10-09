@@ -1,15 +1,15 @@
-﻿using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Utilities;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 {
-    class AutoSaveOutputFileMoverTest
+    internal class AutoSaveOutputFileMoverTest
     {
         private Job _job;
         private string[] _singleTempOutputfile;

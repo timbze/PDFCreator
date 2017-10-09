@@ -1,14 +1,15 @@
-﻿using System;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Core.Services
 {
     public interface IPdfCreatorCleanUp
     {
         void CleanTempFolder();
+
         void CleanSpoolFolder();
     }
 

@@ -39,10 +39,17 @@ namespace pdfforge.PDFCreator.Utilities.IO
         /// </summary>
         public void Clean(TimeSpan minAge)
         {
-            if (!Directory.Exists(CleanupFolder))
-                return;
+            try
+            {
+                if (!Directory.Exists(CleanupFolder))
+                    return;
 
-            Clean(CleanupFolder, minAge);
+                Clean(CleanupFolder, minAge);
+            }
+            catch (Exception ex)
+            {
+                HandleException(CleanupFolder, ex);
+            }
         }
 
         private void Clean(string folder, TimeSpan minAge)
@@ -53,8 +60,15 @@ namespace pdfforge.PDFCreator.Utilities.IO
                 if (Directory.Exists(item.FullName))
                 {
                     Clean(item.FullName, minAge);
-                    if (!Directory.EnumerateFileSystemEntries(item.FullName).Any())
-                        DeleteFolder(minAge, item.FullName);
+                    try
+                    {
+                        if (!Directory.EnumerateFileSystemEntries(item.FullName).Any())
+                            DeleteFolder(minAge, item.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleException(item.FullName, ex);
+                    }
                 }
             }
 
@@ -63,7 +77,7 @@ namespace pdfforge.PDFCreator.Utilities.IO
 
         private void DeleteFolder(TimeSpan minAge, string subFolder)
         {
-            if (Directory.Exists(subFolder) && !Directory.EnumerateFileSystemEntries(subFolder).Any())
+            if (Directory.Exists(subFolder))
             {
                 try
                 {
@@ -100,8 +114,6 @@ namespace pdfforge.PDFCreator.Utilities.IO
                 }
             }
         }
-
-
 
         private void HandleException(string path, Exception ex)
         {

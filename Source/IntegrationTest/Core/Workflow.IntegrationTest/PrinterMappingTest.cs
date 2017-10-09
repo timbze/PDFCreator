@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 {
@@ -23,8 +23,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _testHelper.InitTempFolder("MappingTest");
 
             _settings = new PdfCreatorSettings(ini);
-            _settings.ConversionProfiles.Add(new ConversionProfile {Guid = "Profile0", Name = "Profile0"});
-            _settings.ConversionProfiles.Add(new ConversionProfile {Guid = "Profile1", Name = "Profile1"});
+            _settings.ConversionProfiles.Add(new ConversionProfile { Guid = "Profile0", Name = "Profile0" });
+            _settings.ConversionProfiles.Add(new ConversionProfile { Guid = "Profile1", Name = "Profile1" });
 
             _testHelper.GenerateGsJob(PSfiles.EmptyPage, OutputFormat.Pdf);
         }
@@ -45,7 +45,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings.ApplicationSettings.PrinterMappings.Add(new PrinterMapping("InvalidPrinter", "Profile1"));
 
             var job = _jobBuilder.BuildJobFromJobInfo(_testHelper.JobInfo, _settings);
-            
+
             Assert.AreEqual(_settings.ConversionProfiles[0], job.Profile, "Default profile should have been mapped");
         }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using NLog;
-using pdfforge.PDFCreator.Conversion.Actions.Queries;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
@@ -10,106 +6,69 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Ftp;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.ComponentModel;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
-    public class FtpAction : IAction, ICheckable
+    public class FtpAction : RetypePasswordActionBase, ICheckable
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IFtpConnectionFactory _ftpConnectionFactory;
         private readonly IPathUtil _pathUtil;
-        private readonly IFtpPasswordProvider _passwordProvider;
 
-        public FtpAction(IFtpConnectionFactory ftpConnectionFactory, IPathUtil pathUtil, IFtpPasswordProvider passwordProvider)
+        protected override string PasswordText => "FTP";
+
+        public FtpAction(IFtpConnectionFactory ftpConnectionFactory, IPathUtil pathUtil)
         {
             _ftpConnectionFactory = ftpConnectionFactory;
             _pathUtil = pathUtil;
-            _passwordProvider = passwordProvider;
         }
 
-        /// <summary>
-        ///     Upload all output files with ftp
-        /// </summary>
-        /// <param name="job">The job to process</param>
-        /// <returns>An ActionResult to determine the success and a list of errors</returns>
-        public ActionResult ProcessJob(Job job)
-        {
-            Logger.Debug("Launched ftp-Action");
-            try
-            {
-                var result = FtpUpload(job);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Exception while upload file to ftp:\r\n" + ex.Message);
-                return new ActionResult(ErrorCode.Ftp_GenericError);
-            }
-        }
-
-        public bool IsEnabled(ConversionProfile profile)
-        {
-            return profile.Ftp.Enabled;
-        }
-
-        public bool Init(Job job)
-        {
-            return _passwordProvider.SetPassword(job);
-        }
-
-        /// <summary>
-        ///     Check if the profile is configured properly for this action
-        /// </summary>
-        /// <param name="profile">The profile to check</param>
-        /// <returns>ActionResult with configuration problems</returns>
-        public ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public override ActionResult Check(ConversionProfile profile, Accounts accounts)
         {
             var actionResult = new ActionResult();
-            if (profile.Ftp.Enabled)
+            if (!IsEnabled(profile))
+                return actionResult;
+
+            var ftpAccount = accounts.GetFtpAccount(profile);
+            if (ftpAccount == null)
             {
-                if (string.IsNullOrEmpty(profile.Ftp.Server))
-                {
-                    Logger.Error("No FTP server specified.");
-                    actionResult.Add(ErrorCode.Ftp_NoServer);
-                }
+                Logger.Error($"The specified FTP account with ID '{profile.Ftp.AccountId}' is not configured.");
+                actionResult.Add(ErrorCode.Ftp_NoAccount);
 
-                if (string.IsNullOrEmpty(profile.Ftp.UserName))
-                {
-                    Logger.Error("No FTP username specified.");
-                    actionResult.Add(ErrorCode.Ftp_NoUser);
-                }
-
-                if (profile.AutoSave.Enabled)
-                {
-                    if (string.IsNullOrEmpty(profile.Ftp.Password))
-                    {
-                        Logger.Error("Automatic saving without ftp password.");
-                        actionResult.Add(ErrorCode.Ftp_AutoSaveWithoutPassword);
-                    }
-                }
-            }
-            return actionResult;
-        }
-
-        private ActionResult FtpUpload(Job job)
-        {
-            var actionResult = Check(job.Profile, job.Accounts);
-            if (!actionResult)
-            {
-                Logger.Error("Canceled FTP upload action.");
                 return actionResult;
             }
 
-            if (string.IsNullOrEmpty(job.Passwords.FtpPassword))
+            if (string.IsNullOrEmpty(ftpAccount.Server))
             {
-                Logger.Error("No ftp password specified in action");
-                return new ActionResult(ErrorCode.Ftp_NoPassword);
+                Logger.Error("No FTP server specified.");
+                actionResult.Add(ErrorCode.Ftp_NoServer);
             }
 
-            Logger.Debug("Creating ftp connection.\r\nServer: " + job.Profile.Ftp.Server + "\r\nUsername: " +
-                         job.Profile.Ftp.UserName);
+            if (string.IsNullOrEmpty(ftpAccount.UserName))
+            {
+                Logger.Error("No FTP username specified.");
+                actionResult.Add(ErrorCode.Ftp_NoUser);
+            }
 
-            var ftpConnection = _ftpConnectionFactory.BuilConnection(job.Profile.Ftp.Server, job.Profile.Ftp.UserName, job.Passwords.FtpPassword);
+            if (profile.AutoSave.Enabled && string.IsNullOrEmpty(ftpAccount.Password))
+            {
+                Logger.Error("Automatic saving without ftp password.");
+                actionResult.Add(ErrorCode.Ftp_AutoSaveWithoutPassword);
+            }
+
+            return actionResult;
+        }
+
+        protected override ActionResult DoActionProcessing(Job job)
+        {
+            var ftpAccount = job.Accounts.GetFtpAccount(job.Profile);
+
+            Logger.Debug("Creating ftp connection.\r\nServer: " + ftpAccount.Server + "\r\nUsername: " + ftpAccount.UserName);
+
+            var ftpConnection = _ftpConnectionFactory.BuildConnection(ftpAccount.Server, ftpAccount.UserName, job.Passwords.FtpPassword);
 
             try
             {
@@ -124,19 +83,11 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                     ftpConnection.Close();
                     return new ActionResult(ErrorCode.Ftp_ConnectionError);
                 }
-                else if(ex.NativeErrorCode.Equals(12014))
+                if (ex.NativeErrorCode.Equals(12014))
                 {
                     Logger.Error("Can not login to ftp because the password is incorrect. Win32Exception Message:\r\n" + ex.Message);
                     ftpConnection.Close();
-                    var retypeResult = _passwordProvider.RetypePassword(job);
-                    if (retypeResult)
-                    {
-                        return FtpUpload(job);
-                    }
-                    else
-                    {
-                        return retypeResult;
-                    }
+                    return new ActionResult(ErrorCode.PasswordAction_Login_Error);
                 }
 
                 Logger.Error("Win32Exception while login to ftp server:\r\n" + ex.Message);
@@ -159,7 +110,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
             Logger.Debug("Directory on ftp server: " + fullDirectory);
 
-            var directories = fullDirectory.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries);
+            var directories = fullDirectory.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
 
             try
             {
@@ -234,6 +185,16 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
             var validName = new ValidName();
             return validName.MakeValidFtpPath(path);
+        }
+
+        protected override void SetPassword(Job job, string password)
+        {
+            job.Passwords.FtpPassword = password;
+        }
+
+        public override bool IsEnabled(ConversionProfile profile)
+        {
+            return profile.Ftp.Enabled;
         }
     }
 }

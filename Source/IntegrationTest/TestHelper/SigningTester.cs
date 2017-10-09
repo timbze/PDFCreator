@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.ITextProcessing;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.IO;
+using System.Text;
 
 namespace PDFCreator.TestUtilities
 {
@@ -44,7 +44,7 @@ namespace PDFCreator.TestUtilities
             var pdfReader = BuildPdfReader(testFile, profile, passwords);
 
             var af = pdfReader.AcroFields;
-            //Stop here if no Signing was requested 
+            //Stop here if no Signing was requested
             if (!profile.PdfSettings.Signature.Enabled)
             {
                 Assert.AreEqual(0, af.GetSignatureNames().Count, "SignatureName(s) in unsigned file." + Environment.NewLine + "(" + testFile + ")");
@@ -72,36 +72,38 @@ namespace PDFCreator.TestUtilities
                     case SignaturePage.FirstPage:
                         Assert.AreEqual(1, af.GetFieldPositions(signatureName)[0].page, "Signature is not on the first page." + Environment.NewLine + "(" + testFile + ")");
                         break;
+
                     case SignaturePage.CustomPage:
                         if (profile.PdfSettings.Signature.SignatureCustomPage > pdfReader.NumberOfPages)
                             Assert.AreEqual(pdfReader.NumberOfPages, af.GetFieldPositions(signatureName)[0].page, "Signature is not on the requested page." + Environment.NewLine + "(" + testFile + ")");
                         else
                             Assert.AreEqual(profile.PdfSettings.Signature.SignatureCustomPage, af.GetFieldPositions(signatureName)[0].page, "Signature is not on the requested page." + Environment.NewLine + "(" + testFile + ")");
                         break;
+
                     case SignaturePage.LastPage:
                         Assert.AreEqual(pdfReader.NumberOfPages, af.GetFieldPositions(signatureName)[0].page, "Signature is not on the last Page." + Environment.NewLine + "(" + testFile + ")");
                         break;
                 }
-                Assert.AreEqual(profile.PdfSettings.Signature.LeftX, (int) af.GetFieldPositions(signatureName)[0].position.GetLeft(0), "Wrong position for LeftX." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(profile.PdfSettings.Signature.LeftY, (int) af.GetFieldPositions(signatureName)[0].position.GetBottom(0), "Wrong position for LeftY." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(profile.PdfSettings.Signature.RightX, (int) af.GetFieldPositions(signatureName)[0].position.GetRight(0), "Wrong position for RightX." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(profile.PdfSettings.Signature.RightY, (int) af.GetFieldPositions(signatureName)[0].position.GetTop(0), "Wrong position for RightY." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(profile.PdfSettings.Signature.LeftX, (int)af.GetFieldPositions(signatureName)[0].position.GetLeft(0), "Wrong position for LeftX." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(profile.PdfSettings.Signature.LeftY, (int)af.GetFieldPositions(signatureName)[0].position.GetBottom(0), "Wrong position for LeftY." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(profile.PdfSettings.Signature.RightX, (int)af.GetFieldPositions(signatureName)[0].position.GetRight(0), "Wrong position for RightX." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(profile.PdfSettings.Signature.RightY, (int)af.GetFieldPositions(signatureName)[0].position.GetTop(0), "Wrong position for RightY." + Environment.NewLine + "(" + testFile + ")");
             }
             else
             {
-                Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetLeft(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetBottom(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetRight(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
-                Assert.AreEqual(0, (int) af.GetFieldPositions(signatureName)[0].position.GetTop(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(0, (int)af.GetFieldPositions(signatureName)[0].position.GetLeft(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(0, (int)af.GetFieldPositions(signatureName)[0].position.GetBottom(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(0, (int)af.GetFieldPositions(signatureName)[0].position.GetRight(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
+                Assert.AreEqual(0, (int)af.GetFieldPositions(signatureName)[0].position.GetTop(0), "Wrong position for \"invisible\" signature." + Environment.NewLine + "(" + testFile + ")");
             }
         }
 
         public static string TestMultipleSigning(Job job, IPdfProcessor pdfProcessor)
         {
-            return TestMultipleSigning(job.OutputFiles[0], job.Profile, job.Passwords, pdfProcessor);
+            return TestMultipleSigning(job.OutputFiles[0], job.Profile, job.Passwords, pdfProcessor, job.Accounts);
         }
 
-        public static string TestMultipleSigning(string testFile, ConversionProfile profile, JobPasswords passwords, IPdfProcessor pdfProcessor)
+        public static string TestMultipleSigning(string testFile, ConversionProfile profile, JobPasswords passwords, IPdfProcessor pdfProcessor, Accounts accounts)
         {
             var pdfReader = BuildPdfReader(testFile, profile, passwords);
 
@@ -123,13 +125,13 @@ namespace PDFCreator.TestUtilities
 
             profile.PdfSettings.Signature.SignaturePage = SignaturePage.LastPage;
             var signer = new ITextSigner();
-            signer.SignPdfFile(stamper, profile, passwords);
+            signer.SignPdfFile(stamper, profile, passwords, accounts);
 
             stamper.Close();
 
             var doubleSignedPdfReader = BuildPdfReader(doubleSignedFile, profile, passwords);
             var af = doubleSignedPdfReader.AcroFields;
-            
+
             Assert.AreEqual(2, af.GetSignatureNames().Count, "Number of SignatureNames must be 2" + Environment.NewLine + "(" + testFile + ")");
 
             //There is currently no way for testing multisigning.

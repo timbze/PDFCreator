@@ -461,6 +461,9 @@ msgstr ""
 msgid "Downloading..."
 msgstr ""
 
+msgid "Please click here to revoke your previous activations."
+msgstr ""
+
 msgid "Elapsed time:"
 msgstr ""
 

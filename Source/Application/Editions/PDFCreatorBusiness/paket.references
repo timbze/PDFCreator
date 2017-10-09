@@ -6,3 +6,4 @@ SystemInterface
 LicenseValidator
 LicenseValidator.Interface
 DataStorage
+Prism.Wpf

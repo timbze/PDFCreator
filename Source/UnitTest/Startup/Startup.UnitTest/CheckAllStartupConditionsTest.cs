@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -26,13 +26,13 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
         private CheckAllStartupConditions BuildCheckAllStartupConditions(IStartupCondition startupCondition)
         {
-            return BuildCheckAllStartupConditions(new[] {startupCondition});
+            return BuildCheckAllStartupConditions(new[] { startupCondition });
         }
 
         [Test]
         public void Failure_WithShowMessageFalse_ShowsMessageInteraction()
         {
-            var expectedResult = (int) ExitCode.GhostScriptNotFound;
+            var expectedResult = (int)ExitCode.GhostScriptNotFound;
             var message = "some message";
 
             var failingCondition = Substitute.For<IStartupCondition>();
@@ -49,7 +49,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void FailureWithMessage_ShowsMessageInteraction()
         {
-            var expectedResult = (int) ExitCode.GhostScriptNotFound;
+            var expectedResult = (int)ExitCode.GhostScriptNotFound;
             var message = "some message";
 
             var failingCondition = Substitute.For<IStartupCondition>();
@@ -66,14 +66,14 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void WithFailingAfterSuccessfulCheck_ReturnsFailure()
         {
-            var expectedResult = (int) ExitCode.GhostScriptNotFound;
+            var expectedResult = (int)ExitCode.GhostScriptNotFound;
 
             var failingCondition = Substitute.For<IStartupCondition>();
             failingCondition.Check().Returns(StartupConditionResult.BuildErrorWithMessage(expectedResult, ""));
             var successfulCondition = Substitute.For<IStartupCondition>();
             successfulCondition.Check().Returns(StartupConditionResult.BuildSuccess());
 
-            var checker = BuildCheckAllStartupConditions(new[] {successfulCondition, failingCondition});
+            var checker = BuildCheckAllStartupConditions(new[] { successfulCondition, failingCondition });
 
             var ex = Assert.Throws<StartupConditionFailedException>(() => checker.CheckAll());
 
@@ -83,14 +83,14 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void WithFailingBeforeSuccessfulCheck_ReturnsFailure()
         {
-            var expectedResult = (int) ExitCode.GhostScriptNotFound;
+            var expectedResult = (int)ExitCode.GhostScriptNotFound;
 
             var failingCondition = Substitute.For<IStartupCondition>();
             failingCondition.Check().Returns(StartupConditionResult.BuildErrorWithMessage(expectedResult, ""));
             var successfulCondition = Substitute.For<IStartupCondition>();
             successfulCondition.Check().Returns(StartupConditionResult.BuildSuccess());
 
-            var checker = BuildCheckAllStartupConditions(new[] {failingCondition, successfulCondition});
+            var checker = BuildCheckAllStartupConditions(new[] { failingCondition, successfulCondition });
 
             var ex = Assert.Throws<StartupConditionFailedException>(() => checker.CheckAll());
 
@@ -100,7 +100,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void WithFailingCheck_ReturnsThatResult()
         {
-            var expectedResult = (int) ExitCode.GhostScriptNotFound;
+            var expectedResult = (int)ExitCode.GhostScriptNotFound;
             var condition = Substitute.For<IStartupCondition>();
             condition.Check().Returns(StartupConditionResult.BuildErrorWithMessage(expectedResult, ""));
 

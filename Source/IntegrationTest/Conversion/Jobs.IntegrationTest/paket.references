@@ -10,3 +10,4 @@ SimpleInjector
 Dropbox.Api.Net40
 Toolbelt.Net.Smtp.SmtpServerForUnitTest
 AutoFixture
+System.Net.Http.Formatting.Extension

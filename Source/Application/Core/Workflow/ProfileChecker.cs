@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Collections.Generic;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {
     public interface IProfileChecker
     {
-        ActionResultDict ProfileCheckDict(ConversionProfile profile, Accounts accounts);
         ActionResultDict ProfileCheckDict(IList<ConversionProfile> profileList, Accounts accounts);
+
         ActionResult ProfileCheck(ConversionProfile profile, Accounts accounts);
     }
 
@@ -42,15 +42,6 @@ namespace pdfforge.PDFCreator.Core.Workflow
             return nameResultDict;
         }
 
-        public ActionResultDict ProfileCheckDict(ConversionProfile profile, Accounts accounts)
-        {
-            var nameResultDict = new ActionResultDict();
-            var result = ProfileCheck(profile, accounts);
-            nameResultDict.Add(profile.Name, result);
-
-            return nameResultDict;
-        }
-
         public ActionResult ProfileCheck(ConversionProfile profile, Accounts accounts)
         {
             var actionResult = new ActionResult();
@@ -62,7 +53,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             actionResult.AddRange(CheckStampingSettings(profile));
             actionResult.AddRange(CheckEncryptionSettings(profile));
             actionResult.AddRange(CheckBackgroundpageSettings(profile));
-            actionResult.AddRange(CheckSignatureSettings(profile));
+            actionResult.AddRange(CheckSignatureSettings(profile, accounts));
 
             foreach (var actionCheck in _actionChecks)
             {
@@ -79,7 +70,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             if (profile.SaveDialog.SetDirectory
                 && !profile.AutoSave.Enabled) //Skip if Autosave is enabled.
             {
-                if (string.IsNullOrEmpty(profile.SaveDialog.Folder))
+                if (string.IsNullOrEmpty(profile.TargetDirectory))
                 {
                     _logger.Error("Preselected folder for savedialog is empty.");
                     actionResult.Add(ErrorCode.SaveDialog_NoPreselectedFolder);
@@ -95,7 +86,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
 
             if (profile.AutoSave.Enabled)
             {
-                if (string.IsNullOrEmpty(profile.AutoSave.TargetDirectory))
+                if (string.IsNullOrEmpty(profile.TargetDirectory))
                 {
                     _logger.Error("Automatic saving without target directory.");
                     actionResult.Add(ErrorCode.AutoSave_NoTargetDirectory);
@@ -242,7 +233,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             return actionResult;
         }
 
-        public ActionResult CheckSignatureSettings(ConversionProfile profile)
+        public ActionResult CheckSignatureSettings(ConversionProfile profile, Accounts accounts)
         {
             var actionResult = new ActionResult();
 
@@ -271,17 +262,26 @@ namespace pdfforge.PDFCreator.Core.Workflow
                     }
                 }
 
-                if (sign.TimeServerIsSecured)
+                var timeServerAccount = accounts.GetTimeServerAccount(profile);
+                if (timeServerAccount == null)
                 {
-                    if (string.IsNullOrEmpty(sign.TimeServerLoginName))
+                    _logger.Error("The specified time server account for signing is not configured.");
+                    actionResult.Add(ErrorCode.Signature_NoTimeServerAccount);
+                }
+                else
+                {
+                    if (timeServerAccount.IsSecured)
                     {
-                        _logger.Error("Secured Time Server without Login Name.");
-                        actionResult.Add(ErrorCode.ProfileCheck_SecureTimeServerWithoutUsername);
-                    }
-                    if (string.IsNullOrEmpty(sign.TimeServerPassword))
-                    {
-                        _logger.Error("Secured Time Server without Password.");
-                        actionResult.Add(ErrorCode.ProfileCheck_SecureTimeServerWithoutPassword);
+                        if (string.IsNullOrEmpty(timeServerAccount.UserName))
+                        {
+                            _logger.Error("Secured Time Server without Login Name.");
+                            actionResult.Add(ErrorCode.ProfileCheck_SecureTimeServerWithoutUsername);
+                        }
+                        if (string.IsNullOrEmpty(timeServerAccount.Password))
+                        {
+                            _logger.Error("Secured Time Server without Password.");
+                            actionResult.Add(ErrorCode.ProfileCheck_SecureTimeServerWithoutPassword);
+                        }
                     }
                 }
             }

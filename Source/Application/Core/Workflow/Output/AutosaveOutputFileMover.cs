@@ -1,7 +1,8 @@
-using SystemInterface.IO;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Query;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.Workflow.Output
 {
@@ -18,7 +19,7 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         protected override IFile File { get; }
         protected override IPathUtil PathUtil { get; }
 
-        protected override QueryResult<string> HandleFirstFileFailed(Job job)
+        protected override QueryResult<string> HandleFirstFileFailed(string filename, OutputFormat outputFormat)
         {
             return new QueryResult<string>(false, null);
         }

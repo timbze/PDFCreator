@@ -42,7 +42,7 @@ namespace pdfforge.PDFCreator.Utilities
         {
             get
             {
-                var seconds = _totalBytes/BytesPerSecond;
+                var seconds = _totalBytes / BytesPerSecond;
 
                 try
                 {
@@ -59,7 +59,7 @@ namespace pdfforge.PDFCreator.Utilities
         {
             get
             {
-                var seconds = (_totalBytes - _lastByteCount)/BytesPerSecond;
+                var seconds = (_totalBytes - _lastByteCount) / BytesPerSecond;
 
                 try
                 {
@@ -100,7 +100,7 @@ namespace pdfforge.PDFCreator.Utilities
                 totalBytes += speedItem.Bytes;
             }
 
-            BytesPerSecond = totalBytes/totalDuration.TotalSeconds;
+            BytesPerSecond = totalBytes / totalDuration.TotalSeconds;
 
             if (double.IsNaN(BytesPerSecond))
                 BytesPerSecond = 0;

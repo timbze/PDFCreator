@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Actions.Queries;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -8,6 +6,8 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Diagnostics;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -24,7 +24,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         /// <summary>
         ///     Creates a new default viewer action.
         /// </summary>
-        public DefaultViewerAction(IFileAssoc fileAssoc,  IRecommendArchitect recommendArchitect, IPdfArchitectCheck architectCheck)
+        public DefaultViewerAction(IFileAssoc fileAssoc, IRecommendArchitect recommendArchitect, IPdfArchitectCheck architectCheck)
         {
             _fileAssoc = fileAssoc;
             _recommendArchitect = recommendArchitect;
@@ -48,63 +48,67 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             if (!isPdfFile)
                 return OpenJobOutput(job);
 
-            if (job.Profile.OpenWithPdfArchitect)
+            if (job.Profile.OpenWithPdfArchitect && IsArchitectInstalled())
             {
-                string architectPath = null;
-
-                try
-                {
-                    architectPath = _architectCheck.GetInstallationPath();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Warn(ex, "There was an exception while checking the PDF Architect path");
-                }
-
-                if (architectPath != null)
-                {
-                    Logger.Debug("Open with PDF Architect");
-                    foreach (var file in job.OutputFiles)
-                    {
-                        try
-                        {
-                            var p = new Process();
-                            p.StartInfo.FileName = architectPath;
-                            p.StartInfo.Arguments = "\"" + file + "\"";
-                            p.Start();
-                            Logger.Trace("Openend: " + file);
-                        }
-                        catch
-                        {
-                            Logger.Error("PDF Architect could not open file: " + file);
-                            return new ActionResult(ErrorCode.Viewer_ArchitectCouldNotOpenOutput);
-                        }
-                    }
-                    return new ActionResult();
-                }
-                Logger.Warn("Open with PDF Architect selected, but not installed");
+                return OpenWithArchitect(job);
             }
 
             if (!_fileAssoc.HasOpen(".pdf"))
             {
                 Logger.Error("No program associated with pdf.");
 
-                var displayed =_recommendArchitect.Show();
-                if(displayed)
-                    return new ActionResult(); //return true, to avoid another message window.
+                _recommendArchitect.Show();
+                return new ActionResult(); //return true, to avoid another message window.
             }
 
             return OpenJobOutput(job);
         }
 
+        private string GetArchitectPath()
+        {
+            try
+            {
+                return _architectCheck.GetInstallationPath();
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn(ex, "There was an exception while checking the PDF Architect path");
+                return null;
+            }
+        }
+
+        private bool IsArchitectInstalled()
+        {
+            return _architectCheck.IsInstalled();
+        }
+
+        private ActionResult OpenWithArchitect(Job job)
+        {
+            string architectPath = GetArchitectPath();
+
+            Logger.Debug("Open with PDF Architect");
+            foreach (var file in job.OutputFiles)
+            {
+                try
+                {
+                    var p = new Process();
+                    p.StartInfo.FileName = architectPath;
+                    p.StartInfo.Arguments = "\"" + file + "\"";
+                    p.Start();
+                    Logger.Trace("Openend: " + file);
+                }
+                catch
+                {
+                    Logger.Error("PDF Architect could not open file: " + file);
+                    return new ActionResult(ErrorCode.Viewer_ArchitectCouldNotOpenOutput);
+                }
+            }
+            return new ActionResult();
+        }
+
         public bool IsEnabled(ConversionProfile profile)
         {
             return profile.OpenViewer;
-        }
-
-        public bool Init(Job job)
-        {
-            return true;
         }
 
         private ActionResult OpenJobOutput(Job job)
@@ -118,7 +122,6 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             catch
             {
                 Logger.Error("File could not be opened.");
-                return new ActionResult(ErrorCode.Viewer_CouldNotOpenOutputFile);
             }
             return new ActionResult();
         }

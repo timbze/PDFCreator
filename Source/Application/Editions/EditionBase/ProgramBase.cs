@@ -1,16 +1,22 @@
-﻿using System;
-using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Threading;
-using NLog;
+﻿using NLog;
 using pdfforge.Communication;
 using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Logging;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup;
-using pdfforge.PDFCreator.UI.Views;
+using pdfforge.PDFCreator.Editions.EditionBase.Prism.SimpleInjector;
+using pdfforge.PDFCreator.UI.Presentation;
+using pdfforge.PDFCreator.UI.Presentation.Help;
+using pdfforge.PDFCreator.Utilities;
+using Prism.Regions;
 using SimpleInjector;
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows.Threading;
+using Application = System.Windows.Forms.Application;
 
 namespace pdfforge.PDFCreator.Editions.EditionBase
 {
@@ -18,6 +24,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static ErrorReportHelper _errorReportHelper;
+        private static Container _container;
 
         public static void Main(string[] args, Func<Bootstrapper> getBootstrapperFunc)
         {
@@ -31,6 +38,8 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             finally
             {
                 globalMutex.Release();
+                _container?.Dispose();
+
                 Logger.Debug("Ending PDFCreator");
                 Environment.Exit(exitCode);
             }
@@ -48,24 +57,43 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             var bootstrapper = getBootstrapperFunc();
-            var container = new Container();
+            _container = new Container();
 
-            var windowResolver = new SimpleInjectorWindowResolver(container);
-            var windowRegistry = new WindowRegistry(windowResolver);
+            var profileSettingsTabs = bootstrapper.DefineProfileSettingsTabs();
+            var applicationSettingsTabs = bootstrapper.DefineApplicationSettingsTabs();
 
-            bootstrapper.ConfigureContainer(container, windowRegistry);
-            bootstrapper.RegisterInteractions(windowRegistry);
+            var prismBootstrapper = new PrismBootstrapper(profileSettingsTabs, applicationSettingsTabs);
 
-            container.Verify(VerificationOption.VerifyOnly);
+            prismBootstrapper.ConfigurePrismDependecies(_container);
+            prismBootstrapper.RegisterNavigationViews(_container);
 
-            var resolver = new SimpleInjectorAppStartResolver(container);
+            bootstrapper.ConfigureContainer(_container);
+            bootstrapper.RegisterInteractions();
+
+            ViewRegistry.WindowFactory = new DelegateWindowFactory(content =>
+            {
+                var window = _container.GetInstance<InteractionHostWindow>();
+                window.Content = content;
+
+                return window;
+            });
+
+            if (Debugger.IsAttached)
+                _container.Verify(VerificationOption.VerifyOnly);
+
+            bootstrapper.RegisterEditiondependentRegions(_container.GetInstance<IRegionManager>());
+            prismBootstrapper.InitPrismStuff(_container);
+
+            var resolver = new SimpleInjectorAppStartResolver(_container);
 
             var appStartFactory = new AppStartFactory(resolver);
             var appStart = appStartFactory.CreateApplicationStart(args);
 
-            var app = new App(appStart);
-            app.DispatcherUnhandledException += Application_DispatcherUnhandledException;
+            var helpCommandHandler = _container.GetInstance<HelpCommandHandler>();
+            var settingsManager = _container.GetInstance<ISettingsManager>();
 
+            var app = new App(appStart, helpCommandHandler, settingsManager);
+            app.DispatcherUnhandledException += Application_DispatcherUnhandledException;
             return app.Run();
         }
 
@@ -74,7 +102,8 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             LoggingHelper.InitFileLogger("PDFCreator", LoggingLevel.Error);
             var inMemoryLogger = new InMemoryLogger(100);
             inMemoryLogger.Register();
-            _errorReportHelper = new ErrorReportHelper(inMemoryLogger);
+            var assembly = typeof(ProgramBase).Assembly;
+            _errorReportHelper = new ErrorReportHelper(inMemoryLogger, new VersionHelper(assembly), new AssemblyHelper(assembly));
         }
 
         private static GlobalMutex AcquireMutex()
@@ -87,7 +116,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            var ex = (Exception) e.ExceptionObject;
+            var ex = (Exception)e.ExceptionObject;
             Logger.Fatal(ex, "Uncaught exception, IsTerminating: {0}", e.IsTerminating);
             _errorReportHelper.ShowErrorReportInNewProcess(ex);
         }

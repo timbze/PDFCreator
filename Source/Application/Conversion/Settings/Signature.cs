@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,126 +16,89 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Digitally sign the PDF document
 	/// </summary>
-	public class Signature {
+	[ImplementPropertyChanged]
+	public partial class Signature : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// If true, the PDF file may be signed by additional persons
 		/// </summary>
-		public bool AllowMultiSigning { get; set; }
+		public bool AllowMultiSigning { get; set; } = false;
 		
 		/// <summary>
 		/// Path to the certificate
 		/// </summary>
-		public string CertificateFile { get; set; }
+		public string CertificateFile { get; set; } = "";
 		
 		/// <summary>
 		/// If true, the signature will be displayed in the PDF file
 		/// </summary>
-		public bool DisplaySignatureInDocument { get; set; }
+		public bool DisplaySignatureInDocument { get; set; } = false;
 		
 		/// <summary>
 		/// If true, the signature will be displayed in the PDF document
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Signature location: Top left corner (X part)
 		/// </summary>
-		public int LeftX { get; set; }
+		public int LeftX { get; set; } = 100;
 		
 		/// <summary>
 		/// Signature location: Top left corner (Y part)
 		/// </summary>
-		public int LeftY { get; set; }
+		public int LeftY { get; set; } = 100;
 		
 		/// <summary>
 		/// Signature location: Bottom right corner (X part)
 		/// </summary>
-		public int RightX { get; set; }
+		public int RightX { get; set; } = 200;
 		
 		/// <summary>
 		/// Signature location: Bottom right corner (Y part)
 		/// </summary>
-		public int RightY { get; set; }
+		public int RightY { get; set; } = 200;
 		
 		/// <summary>
 		/// Contact name of the signature
 		/// </summary>
-		public string SignContact { get; set; }
+		public string SignContact { get; set; } = "";
 		
 		/// <summary>
 		/// Signature location
 		/// </summary>
-		public string SignLocation { get; set; }
+		public string SignLocation { get; set; } = "";
 		
 		/// <summary>
 		/// Reason for the signature
 		/// </summary>
-		public string SignReason { get; set; }
+		public string SignReason { get; set; } = "";
 		
 		/// <summary>
 		/// If the signature page is set to custom, this property defines the page where the signature will be displayed
 		/// </summary>
-		public int SignatureCustomPage { get; set; }
+		public int SignatureCustomPage { get; set; } = 1;
 		
 		/// <summary>
-		/// Defines the page on which the signature will be displayed. Valid values are: FirstPage, LastPage, CustomPage
+		/// Defines the page on which the signature will be displayed.
 		/// </summary>
-		public SignaturePage SignaturePage { get; set; }
+		public SignaturePage SignaturePage { get; set; } = SignaturePage.FirstPage;
 		
 		/// <summary>
 		/// Password for the certificate file
 		/// </summary>
-		private string _signaturePassword;
+		private string _signaturePassword = "";
 		public string SignaturePassword { get { try { return Data.Decrypt(_signaturePassword); } catch { return ""; } } set { _signaturePassword = Data.Encrypt(value); } }
 		
 		/// <summary>
-		/// Set to true, if the time server needs authentication
+		/// ID of the linked account for the timeserver
 		/// </summary>
-		public bool TimeServerIsSecured { get; set; }
+		public string TimeServerAccountId { get; set; } = "";
 		
-		/// <summary>
-		/// Login name for the time server
-		/// </summary>
-		public string TimeServerLoginName { get; set; }
-		
-		/// <summary>
-		/// Password for the time server
-		/// </summary>
-		private string _timeServerPassword;
-		public string TimeServerPassword { get { try { return Data.Decrypt(_timeServerPassword); } catch { return ""; } } set { _timeServerPassword = Data.Encrypt(value); } }
-		
-		/// <summary>
-		/// URL of a time server that provides a signed timestamp
-		/// </summary>
-		public string TimeServerUrl { get; set; }
-		
-		
-		private void Init() {
-			AllowMultiSigning = false;
-			CertificateFile = "";
-			DisplaySignatureInDocument = false;
-			Enabled = false;
-			LeftX = 100;
-			LeftY = 100;
-			RightX = 200;
-			RightY = 200;
-			SignContact = "";
-			SignLocation = "";
-			SignReason = "";
-			SignatureCustomPage = 1;
-			SignaturePage = SignaturePage.FirstPage;
-			SignaturePassword = "";
-			TimeServerIsSecured = false;
-			TimeServerLoginName = "";
-			TimeServerPassword = "";
-			TimeServerUrl = "http://timestamp.globalsign.com/scripts/timstamp.dll";
-		}
-		
-		public Signature()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{
@@ -149,10 +116,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { SignatureCustomPage = int.Parse(data.GetValue(@"" + path + @"SignatureCustomPage"), System.Globalization.CultureInfo.InvariantCulture); } catch { SignatureCustomPage = 1;}
 			try { SignaturePage = (SignaturePage) Enum.Parse(typeof(SignaturePage), data.GetValue(@"" + path + @"SignaturePage")); } catch { SignaturePage = SignaturePage.FirstPage;}
 			_signaturePassword = data.GetValue(@"" + path + @"SignaturePassword");
-			try { TimeServerIsSecured = bool.Parse(data.GetValue(@"" + path + @"TimeServerIsSecured")); } catch { TimeServerIsSecured = false;}
-			try { TimeServerLoginName = Data.UnescapeString(data.GetValue(@"" + path + @"TimeServerLoginName")); } catch { TimeServerLoginName = "";}
-			_timeServerPassword = data.GetValue(@"" + path + @"TimeServerPassword");
-			try { TimeServerUrl = Data.UnescapeString(data.GetValue(@"" + path + @"TimeServerUrl")); } catch { TimeServerUrl = "http://timestamp.globalsign.com/scripts/timstamp.dll";}
+			try { TimeServerAccountId = Data.UnescapeString(data.GetValue(@"" + path + @"TimeServerAccountId")); } catch { TimeServerAccountId = "";}
 		}
 		
 		public void StoreValues(Data data, string path)
@@ -171,10 +135,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"SignatureCustomPage", SignatureCustomPage.ToString(System.Globalization.CultureInfo.InvariantCulture));
 			data.SetValue(@"" + path + @"SignaturePage", SignaturePage.ToString());
 			data.SetValue(@"" + path + @"SignaturePassword", _signaturePassword);
-			data.SetValue(@"" + path + @"TimeServerIsSecured", TimeServerIsSecured.ToString());
-			data.SetValue(@"" + path + @"TimeServerLoginName", Data.EscapeString(TimeServerLoginName));
-			data.SetValue(@"" + path + @"TimeServerPassword", _timeServerPassword);
-			data.SetValue(@"" + path + @"TimeServerUrl", Data.EscapeString(TimeServerUrl));
+			data.SetValue(@"" + path + @"TimeServerAccountId", Data.EscapeString(TimeServerAccountId));
 		}
 		
 		public Signature Copy()
@@ -195,10 +156,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.SignatureCustomPage = SignatureCustomPage;
 			copy.SignaturePage = SignaturePage;
 			copy.SignaturePassword = SignaturePassword;
-			copy.TimeServerIsSecured = TimeServerIsSecured;
-			copy.TimeServerLoginName = TimeServerLoginName;
-			copy.TimeServerPassword = TimeServerPassword;
-			copy.TimeServerUrl = TimeServerUrl;
+			copy.TimeServerAccountId = TimeServerAccountId;
 			
 			return copy;
 		}
@@ -222,10 +180,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!SignatureCustomPage.Equals(v.SignatureCustomPage)) return false;
 			if (!SignaturePage.Equals(v.SignaturePage)) return false;
 			if (!SignaturePassword.Equals(v.SignaturePassword)) return false;
-			if (!TimeServerIsSecured.Equals(v.TimeServerIsSecured)) return false;
-			if (!TimeServerLoginName.Equals(v.TimeServerLoginName)) return false;
-			if (!TimeServerPassword.Equals(v.TimeServerPassword)) return false;
-			if (!TimeServerUrl.Equals(v.TimeServerUrl)) return false;
+			if (!TimeServerAccountId.Equals(v.TimeServerAccountId)) return false;
 			
 			return true;
 		}
@@ -248,10 +203,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("SignatureCustomPage=" + SignatureCustomPage.ToString());
 			sb.AppendLine("SignaturePage=" + SignaturePage.ToString());
 			sb.AppendLine("SignaturePassword=" + SignaturePassword.ToString());
-			sb.AppendLine("TimeServerIsSecured=" + TimeServerIsSecured.ToString());
-			sb.AppendLine("TimeServerLoginName=" + TimeServerLoginName.ToString());
-			sb.AppendLine("TimeServerPassword=" + TimeServerPassword.ToString());
-			sb.AppendLine("TimeServerUrl=" + TimeServerUrl.ToString());
+			sb.AppendLine("TimeServerAccountId=" + TimeServerAccountId.ToString());
 			
 			return sb.ToString();
 		}

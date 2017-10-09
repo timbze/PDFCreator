@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.Tokens;
+using System.Collections.Generic;
 using System.Linq;
 using SystemInterface;
 using SystemInterface.IO;
 using SystemWrapper.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Utilities;
-using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs
 {
     public interface ITokenReplacerFactory
     {
         TokenReplacer BuildTokenReplacerWithOutputfiles(Job job);
+
         TokenReplacer BuildTokenReplacerWithoutOutputfiles(Job job);
     }
 
@@ -69,8 +70,6 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             return _tokenReplacer;
         }
 
-
-
         private void AddDateToken()
         {
             _tokenReplacer.AddDateToken("DateTime", _dateTimeProvider.Now());
@@ -104,15 +103,13 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             var keywords = _tokenReplacer.ReplaceTokens(metadata.Keywords);
             _tokenReplacer.AddStringToken("Keywords", keywords);
 
-
-            // Author and title token have to be created last, 
+            // Author and title token have to be created last,
             // as they can contain other tokens that might need replacing
             var author = _tokenReplacer.ReplaceTokens(metadata.Author);
             _tokenReplacer.AddStringToken("Author", author);
 
             var title = _tokenReplacer.ReplaceTokens(metadata.Title);
             _tokenReplacer.AddStringToken("Title", title);
-
         }
 
         private void AddTokensForDocumentTitle(SourceFileInfo sfi, Metadata metadata)
@@ -139,7 +136,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             var userToken = new UserToken();
             foreach (var sfi in sourceFileInfos)
             {
-                userToken.Merge(sfi.UserToken);      
+                userToken.Merge(sfi.UserToken);
             }
             _tokenReplacer.AddToken(userToken);
         }

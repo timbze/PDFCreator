@@ -1,9 +1,8 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
+using System;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {
@@ -23,34 +22,18 @@ namespace pdfforge.PDFCreator.Core.Workflow
     ///     If required (i.e. during interactive conversion), the respective requests are invoked
     ///     on the IWorkflowInformationQuery implementation.
     /// </summary>
-    public class ConversionWorkflow : IConversionWorkflow
+    public abstract class ConversionWorkflow : IConversionWorkflow
     {
-        private readonly IJobDataUpdater _jobDataUpdater;
-        private readonly IJobRunner _jobRunner;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IProfileChecker _profileChecker;
-        private readonly ITargetFileNameComposer _targetFileNameComposer;
 
         /// <summary>
         ///     The step the workflow currently is in
         /// </summary>
-        private WorkflowResult _workflowResult;
+        protected WorkflowResult WorkflowResult;
 
-        public ConversionWorkflow(IProfileChecker profileChecker, ITargetFileNameComposer targetFileNameComposer, IJobRunner jobRunner, IJobDataUpdater jobDataUpdater, IErrorNotifier errorNotifier)
-        {
-            _profileChecker = profileChecker;
-            _targetFileNameComposer = targetFileNameComposer;
-            _jobRunner = jobRunner;
-            _jobDataUpdater = jobDataUpdater;
-            ErrorNotifier = errorNotifier;
-        }
+        protected abstract IJobDataUpdater JobDataUpdater { get; }
 
-        public IErrorNotifier ErrorNotifier { get; }
-
-        /// <summary>
-        ///     The job that is created during the workflow
-        /// </summary>
-        public Job Job { get; private set; }
+        public ErrorCode? LastError { get; private set; }
 
         public event EventHandler JobFinished;
 
@@ -59,30 +42,28 @@ namespace pdfforge.PDFCreator.Core.Workflow
         /// </summary>
         public WorkflowResult RunWorkflow(Job job)
         {
-            Job = job;
             try
             {
-                try
-                {
-                    DoWorkflowWork();
-                }
-                catch (AbortWorkflowException ex)
-                {
-                    // we need to clean up the job when it was cancelled
-                    _logger.Warn(ex.Message + " No output will be created.");
-                    _workflowResult = WorkflowResult.AbortedByUser;
-                }
+                PrepareAndRun(job);
+            }
+            catch (AbortWorkflowException ex)
+            {
+                // we need to clean up the job when it was cancelled
+                _logger.Warn(ex.Message + " No output will be created.");
+                WorkflowResult = WorkflowResult.AbortedByUser;
             }
             catch (WorkflowException ex)
             {
                 _logger.Error(ex.Message);
-                _workflowResult = WorkflowResult.Error;
+                WorkflowResult = WorkflowResult.Error;
             }
             catch (ProcessingException ex)
             {
-                 _logger.Error("Error " + ex.ErrorCode + ": " + ex.Message);
-                ErrorNotifier.Notify(new ActionResult(ex.ErrorCode));
-                                  _workflowResult = WorkflowResult.Error;
+                _logger.Error("Error " + ex.ErrorCode + ": " + ex.Message);
+                LastError = ex.ErrorCode;
+
+                HandleError(ex.ErrorCode);
+                WorkflowResult = WorkflowResult.Error;
             }
             catch (ManagePrintJobsException)
             {
@@ -91,56 +72,53 @@ namespace pdfforge.PDFCreator.Core.Workflow
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                _workflowResult = WorkflowResult.Error;
+                WorkflowResult = WorkflowResult.Error;
+                throw;
             }
 
-            return _workflowResult;
+            return WorkflowResult;
         }
 
-        private void DoWorkflowWork()
+        protected abstract void DoWorkflowWork(Job job);
+
+        private void PrepareAndRun(Job job)
         {
-            _workflowResult = WorkflowResult.Init;
+            WorkflowResult = WorkflowResult.Init;
 
             _logger.Debug("Starting conversion...");
 
-            var originalMetadata = Job.JobInfo.Metadata.Copy();
-            Job.InitMetadataWithTemplates();
+            var originalMetadata = job.JobInfo.Metadata.Copy();
+            job.InitMetadataWithTemplates();
 
-            _jobDataUpdater.UpdateTokensAndMetadata(Job);
+            JobDataUpdater.UpdateTokensAndMetadata(job);
 
-            _logger.Debug("Querying the place to save the file");
+            _logger.Debug("Starting PrintJobWindow");
 
-            
             try
             {
-                _targetFileNameComposer.ComposeTargetFileName(Job);
+                DoWorkflowWork(job);
+
+                WorkflowResult = WorkflowResult.Finished;
             }
             catch (ManagePrintJobsException)
             {
                 // revert metadata changes and rethrow exception
-                Job.JobInfo.Metadata = originalMetadata;
+                job.JobInfo.Metadata = originalMetadata;
                 throw;
             }
-
-            var preCheck = _profileChecker.ProfileCheck(Job.Profile, Job.Accounts);
-            if (!preCheck)
-                throw new ProcessingException("Invalid Profile", preCheck[0]);
-
-            _logger.Debug("Output filename template is: {0}", Job.OutputFilenameTemplate);
-            _logger.Debug("Output format is: {0}", Job.Profile.OutputFormat);
-
-            _logger.Info("Converting " + Job.OutputFilenameTemplate);
-
-            // Can throw ProcessingException
-            _jobRunner.RunJob(Job);
-
-            _workflowResult = WorkflowResult.Finished;
-            OnJobFinished(EventArgs.Empty);
+            finally
+            {
+                OnJobFinished(EventArgs.Empty);
+            }
         }
 
-        private void OnJobFinished(EventArgs e)
+        protected void OnJobFinished(EventArgs e)
         {
             JobFinished?.Invoke(this, e);
+        }
+
+        protected virtual void HandleError(ErrorCode errorCode)
+        {
         }
     }
 }

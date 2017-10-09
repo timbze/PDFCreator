@@ -1,4 +1,11 @@
-﻿using System;
+﻿using NLog;
+using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -6,13 +13,6 @@ using System.Resources;
 using System.Text;
 using SystemInterface.IO;
 using SystemWrapper.IO;
-using NLog;
-using pdfforge.PDFCreator.Conversion.Jobs;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Utilities;
-using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -172,15 +172,15 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 
         private string RgbToCmykColorString(Color color)
         {
-            var red = color.R/255.0;
-            var green = color.G/255.0;
-            var blue = color.B/255.0;
+            var red = color.R / 255.0;
+            var green = color.G / 255.0;
+            var blue = color.B / 255.0;
 
             var k = Math.Min(1 - red, 1 - green);
             k = Math.Min(k, 1 - blue);
-            var c = (1 - red - k)/(1 - k);
-            var m = (1 - green - k)/(1 - k);
-            var y = (1 - blue - k)/(1 - k);
+            var c = (1 - red - k) / (1 - k);
+            var m = (1 - green - k) / (1 - k);
+            var y = (1 - blue - k) / (1 - k);
 
             return c.ToString("0.00", _numberFormat) + " " +
                    m.ToString("0.00", _numberFormat) + " " +
@@ -191,7 +191,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
         private void CreateStampFile(string filename, ConversionProfile profile, TokenReplacer tokenReplacer)
         {
             // Create a resource manager to retrieve resources.
-            var rm = new ResourceManager(typeof (Resources));
+            var rm = new ResourceManager(typeof(Resources));
 
             var stampString = rm.GetString("PostScriptStamp");
 
@@ -226,9 +226,9 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
             }
             else
             {
-                var colorString = (profile.Stamping.Color.R/255.0).ToString("0.00", _numberFormat) + " " +
-                                  (profile.Stamping.Color.G/255.0).ToString("0.00", _numberFormat) + " " +
-                                  (profile.Stamping.Color.B/255.0).ToString("0.00", _numberFormat);
+                var colorString = (profile.Stamping.Color.R / 255.0).ToString("0.00", _numberFormat) + " " +
+                                  (profile.Stamping.Color.G / 255.0).ToString("0.00", _numberFormat) + " " +
+                                  (profile.Stamping.Color.B / 255.0).ToString("0.00", _numberFormat);
                 stampString = stampString.Replace("[FONTCOLOR]", colorString);
             }
 
@@ -251,21 +251,27 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                     case '\\':
                         sb.Append("\\\\");
                         break;
+
                     case '{':
                         sb.Append("\\{");
                         break;
+
                     case '}':
                         sb.Append("\\}");
                         break;
+
                     case '[':
                         sb.Append("\\[");
                         break;
+
                     case ']':
                         sb.Append("\\]");
                         break;
+
                     case '(':
                         sb.Append("\\(");
                         break;
+
                     case ')':
                         sb.Append("\\)");
                         break;
@@ -309,18 +315,23 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 case PageView.OneColumn:
                     metadataContent.Append("/OneColumn");
                     break;
+
                 case PageView.TwoColumnsOddLeft:
                     metadataContent.Append("/TwoColumnLeft");
                     break;
+
                 case PageView.TwoColumnsOddRight:
                     metadataContent.Append("/TwoColumnRight");
                     break;
+
                 case PageView.TwoPagesOddLeft:
                     metadataContent.Append("/TwoPageLeft");
                     break;
+
                 case PageView.TwoPagesOddRight:
                     metadataContent.Append("/TwoPageRight");
                     break;
+
                 case PageView.OnePage:
                     metadataContent.Append("/SinglePage");
                     break;
@@ -332,18 +343,23 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 case DocumentView.AttachmentsPanel:
                     metadataContent.Append("/UseAttachments");
                     break;
+
                 case DocumentView.ContentGroupPanel:
                     metadataContent.Append("/UseOC");
                     break;
+
                 case DocumentView.FullScreen:
                     metadataContent.Append("/FullScreen");
                     break;
+
                 case DocumentView.Outline:
                     metadataContent.Append("/UseOutlines");
                     break;
+
                 case DocumentView.ThumbnailImages:
                     metadataContent.Append("/UseThumbs");
                     break;
+
                 default:
                     metadataContent.Append("/UseNone");
                     break;
@@ -358,7 +374,5 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 
             metadataContent.Append("\n/DOCVIEW pdfmark");
         }
-
-        
     }
 }

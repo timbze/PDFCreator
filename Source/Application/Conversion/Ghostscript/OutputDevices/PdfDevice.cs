@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -37,7 +37,6 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
             if (!(Job.Profile.OutputFormat.Equals(OutputFormat.PdfA2B) || Job.Profile.OutputFormat.Equals(OutputFormat.PdfA1B))
                 && Job.Profile.PdfSettings.FastWebView)
             {
-
                 parameters.Add("-dFastWebView=true");
             }
             */
@@ -78,15 +77,17 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 
             //Add ICC profile
             var iccFile = PathSafe.Combine(shortenedTempPath, "profile.icc");
-            //Set ICC Profile according to the color model 
+            //Set ICC Profile according to the color model
             switch (Job.Profile.PdfSettings.ColorModel)
             {
                 case ColorModel.Cmyk:
                     FileWrap.WriteAllBytes(iccFile, Resources.WebCoatedFOGRA28);
                     break;
+
                 case ColorModel.Gray:
                     FileWrap.WriteAllBytes(iccFile, Resources.ISOcoated_v2_grey1c_bas);
                     break;
+
                 default:
                 case ColorModel.Rgb:
                     FileWrap.WriteAllBytes(iccFile, Resources.eciRGB_v2);
@@ -229,6 +230,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                                              Job.Profile.PdfSettings.CompressColorAndGray.JpegCompressionFactor.ToString(CultureInfo.InvariantCulture) +
                                              " /Blend 1 /HSample [2 1 1 2] /VSample [2 1 1 2]>> >> setdistillerparams");
                     break;
+
                 case CompressionColorAndGray.Automatic:
                 default:
                     parameters.Add("-dAutoFilterColorImages=true");
@@ -240,7 +242,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                     break;
             } //close switch
 
-            #endregion
+            #endregion compress parameters
 
             #region resample parameters
 
@@ -260,7 +262,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 parameters.Add("-dGrayImageResolution=" + Job.Profile.PdfSettings.CompressColorAndGray.Dpi);
             }
 
-            #endregion
+            #endregion resample parameters
         }
 
         private void MonoImagesCompression(IList<string> parameters)
@@ -277,10 +279,12 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                     parameters.Add("-dEncodeMonoImages=true");
                     parameters.Add("-dMonoImageFilter=/CCITTFaxEncode");
                     break;
+
                 case CompressionMonochrome.RunLengthEncoding:
                     parameters.Add("-dEncodeMonoImages=true");
                     parameters.Add("-dMonoImageFilter=/RunLengthEncode");
                     break;
+
                 case CompressionMonochrome.Zip:
                 default:
                     parameters.Add("-dEncodeMonoImages=true");
@@ -314,15 +318,17 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                     parameters.Add("-sColorConversionStrategy=CMYK"); //Executes to execute the actual conversion to CMYK
                     parameters.Add("-dProcessColorModel=/DeviceCMYK");
                     break;
+
                 case ColorModel.Gray:
                     parameters.Add("-sColorConversionStrategy=Gray"); //Executes the actual conversion to Gray
                     parameters.Add("-dProcessColorModel=/DeviceGray");
                     break;
+
                 case ColorModel.Rgb:
-                    if ((Job.Profile.OutputFormat == OutputFormat.PdfA1B) || (Job.Profile.OutputFormat == OutputFormat.PdfA2B))
+                    /* if ((Job.Profile.OutputFormat == OutputFormat.PdfA1B) || (Job.Profile.OutputFormat == OutputFormat.PdfA2B))
                         parameters.Add("-sColorConversionStrategy=/UseDeviceIndependentColor");
-                    else
-                        parameters.Add("-sColorConversionStrategy=RGB");
+                    else */
+                    parameters.Add("-sColorConversionStrategy=RGB");
                     parameters.Add("-dProcessColorModel=/DeviceRGB");
                     parameters.Add("-dConvertCMYKImagesToRGB=true");
                     break;
@@ -337,6 +343,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                     parameters.Add("-dAutoRotatePages=/None");
                     distillerDictonaries.Add("<</Orientation 3>> setpagedevice");
                     break;
+
                 case PageOrientation.Automatic:
                     parameters.Add("-dAutoRotatePages=/PageByPage");
                     parameters.Add("-dParseDSCComments=false"); //necessary for automatic rotation

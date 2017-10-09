@@ -25,10 +25,10 @@ namespace pdfforge.PDFCreator.Utilities
 
         private IEnumerable<string> Split(string str, int chunkSize)
         {
-            var chunks = (int) Math.Ceiling(str.Length/(double) chunkSize);
+            var chunks = (int)Math.Ceiling(str.Length / (double)chunkSize);
 
             return Enumerable.Range(0, chunks)
-                .Select(i => GetSafeSubstring(str, i*chunkSize, chunkSize));
+                .Select(i => GetSafeSubstring(str, i * chunkSize, chunkSize));
         }
 
         private string GetSafeSubstring(string str, int position, int length)

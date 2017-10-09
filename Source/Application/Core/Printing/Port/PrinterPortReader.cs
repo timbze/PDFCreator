@@ -49,7 +49,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Port
 
                 printerPort.TempFolderName = key.GetValue("TempFolderName", DefaultTempFolderName).ToString();
 
-                var serverValue = (int?) key.GetValue("Server");
+                var serverValue = (int?)key.GetValue("Server");
 
                 if (serverValue == 1)
                     printerPort.IsServerPort = true;
@@ -57,7 +57,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Port
                 if (string.IsNullOrWhiteSpace(printerPort.TempFolderName))
                     printerPort.TempFolderName = DefaultTempFolderName;
 
-                var jobCounter = (int) key.GetValue("JobCounter", 0);
+                var jobCounter = (int)key.GetValue("JobCounter", 0);
                 printerPort.JobCounter = jobCounter;
             }
             catch (NullReferenceException)

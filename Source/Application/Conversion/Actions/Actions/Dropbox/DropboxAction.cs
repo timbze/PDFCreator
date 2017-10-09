@@ -1,52 +1,46 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using pdfforge.PDFCreator.Conversion.Actions.Queries;
-using pdfforge.PDFCreator.Conversion.ActionsInterface;
+﻿using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities.Tokens;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
 {
     public class DropboxAction : IAction, ICheckable
     {
         private readonly IDropboxService _dropboxService;
-        private readonly IDropboxSharedLinksProvider _dropboxSharedLinksProvider;
 
-        public DropboxAction(IDropboxService dropboxService, IDropboxSharedLinksProvider dropboxSharedLinksProvider)
+        public DropboxAction(IDropboxService dropboxService)
         {
             _dropboxService = dropboxService;
-            _dropboxSharedLinksProvider = dropboxSharedLinksProvider;
         }
 
         public ActionResult ProcessJob(Job job)
         {
-
             var sharedLink = job.Profile.DropboxSettings.CreateShareLink;
-            var sharedFolder = job.TokenReplacer.ReplaceTokens(job.Profile.DropboxSettings.SharedFolder);
+            var shareFolder = job.TokenReplacer.ReplaceTokens(job.Profile.DropboxSettings.SharedFolder);
+            shareFolder = shareFolder.Replace("\\", "/");
 
-            var accountId = job.Profile.DropboxSettings.AccountId;
-            var currentDropBoxAccount = job.Accounts.DropboxAccounts.First(s => s.AccountId.Equals(accountId));
+            var currentDropBoxAccount = job.Accounts.GetDropboxAccount(job.Profile);
             if (sharedLink)
             {
                 try
                 {
-                    var sharedLinks = _dropboxService.UploadFileWithSharing(
+                    var shareLink = _dropboxService.UploadFileWithSharing(
                         currentDropBoxAccount.AccessToken,
-                        sharedFolder, job.OutputFiles,
+                        shareFolder, job.OutputFiles,
                         job.Profile.DropboxSettings.EnsureUniqueFilenames, job.OutputFilenameTemplate);
-                    if (sharedLinks  == null)
+                    if (shareLink == null)
                     {
                         return new ActionResult(ErrorCode.Dropbox_Upload_And_Share_Error);
                     }
-                    sharedLinks.FilePath = sharedLinks.FilePath.Split('/').Last();
-                    job.TokenReplacer.AddToken(new StringToken("DROPBOXFULLLINKS", $"{sharedLinks.FilePath} ( {sharedLinks.SharedUrl} )"));
-                    job.TokenReplacer.AddToken(new StringToken("DROPBOXHTMLLINKS", $"<a href = '{sharedLinks.SharedUrl}'>{sharedLinks.FilePath}</a>"));
-                    if (job.Profile.AutoSave.Enabled == false)
-                    {
-                        ShowWindowWithSharedLinks(sharedLinks);
-                    }
+
+                    job.ShareLinks.DropboxShareUrl = shareLink.ShareUrl;
+
+                    shareLink.Filename = shareLink.Filename.Split('/').Last();
+                    job.TokenReplacer.AddToken(new StringToken("DROPBOXFULLLINKS", $"{shareLink.Filename} ( {shareLink.ShareUrl} )"));
+                    job.TokenReplacer.AddToken(new StringToken("DROPBOXHTMLLINKS", $"<a href = '{shareLink.ShareUrl}'>{shareLink.Filename}</a>"));
                 }
                 catch
                 {
@@ -55,21 +49,14 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
             }
             else
             {
-                var result = _dropboxService.UploadFiles(currentDropBoxAccount.AccessToken, sharedFolder, job.OutputFiles, job.Profile.DropboxSettings.EnsureUniqueFilenames, job.OutputFilenameTemplate);
+                var result = _dropboxService.UploadFiles(currentDropBoxAccount.AccessToken, shareFolder, job.OutputFiles, job.Profile.DropboxSettings.EnsureUniqueFilenames, job.OutputFilenameTemplate);
                 if (result == false)
                 {
                     return new ActionResult(ErrorCode.Dropbox_Upload_Error);
                 }
             }
-           
 
             return new ActionResult();
-        }
-
-        private void ShowWindowWithSharedLinks(DropboxFileMetaData sharedLink)
-        {
-            _dropboxSharedLinksProvider.ShowSharedLinks(sharedLink);
-
         }
 
         public bool IsEnabled(ConversionProfile profile)
@@ -77,23 +64,17 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
             return profile.DropboxSettings.Enabled;
         }
 
-        public bool Init(Job job)
-        {
-            return true;
-        }
-
         public ActionResult Check(ConversionProfile profile, Accounts accounts)
         {
             if (!profile.DropboxSettings.Enabled)
                 return new ActionResult();
 
-            var account = accounts.DropboxAccounts.FirstOrDefault(
-                s => s.AccountId.Equals(profile.DropboxSettings.AccountId));
+            var account = accounts.GetDropboxAccount(profile);
 
             if (account == null)
                 return new ActionResult(ErrorCode.Dropbox_AccountNotSpecified);
 
-            var listOfInvalidCharacthers = new[] { '\\', '/', ':', '?', '*', '|', '"', '*', '.' };
+            var listOfInvalidCharacthers = new[] { ':', '?', '*', '|', '"', '*', '.' };
             if (profile.DropboxSettings.SharedFolder.IndexOfAny(listOfInvalidCharacthers) != -1)
                 return new ActionResult(ErrorCode.Dropbox_InvalidFolderName);
 

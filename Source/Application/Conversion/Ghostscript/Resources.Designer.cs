@@ -111,7 +111,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript {
         ///[/_objdef {icc_PDFA} /type /stream /OBJ pdfmark
         ///[{icc_PDFA}
         ///&lt;&lt;
-        ///  / [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PdfaDefinition {
             get {

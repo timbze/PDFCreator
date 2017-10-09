@@ -1,13 +1,13 @@
-﻿using System;
+﻿using NUnit.Framework;
+using pdfforge.PDFCreator.UI.Presentation.Help;
+using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using NUnit.Framework;
-using pdfforge.PDFCreator.UI.ViewModels.Helper;
-using pdfforge.PDFCreator.Utilities;
 
-namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
+namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
 {
     [TestFixture]
     internal class HelpTopicTest
@@ -36,7 +36,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
         {
             var helpPath = folder;
 
-            foreach (HelpTopic topic in Enum.GetValues(typeof (HelpTopic)))
+            foreach (HelpTopic topic in Enum.GetValues(typeof(HelpTopic)))
             {
                 var sourceFile = StringValueAttribute.GetValue(topic);
                 sourceFile = Path.Combine(helpPath, sourceFile + ".html");
@@ -81,12 +81,13 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
                 Path.GetFullPath(Path.Combine(appDir, @"..\..\..\..")),
                 Path.GetFullPath(Path.Combine(appDir, @"..\..\..\..\..")),
                 Path.GetFullPath(Path.Combine(appDir, @"..\..\..\..\..\..")),
+                Path.GetFullPath(Path.Combine(appDir, @"..\..\..\..\..\..\..")),
                 ""
             };
 
             foreach (var dir in candidates)
             {
-                var dirCandidate = Path.Combine(dir, @"build\chm");
+                var dirCandidate = Path.GetFullPath(Path.Combine(dir, @"build\chm"));
                 if (Directory.Exists(dirCandidate) && Directory.GetFiles(dirCandidate, "*.chm").Length > 0)
                     return dirCandidate;
             }
@@ -127,7 +128,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
         [Test]
         public void TestHelpTopicsAssigned()
         {
-            foreach (HelpTopic topic in Enum.GetValues(typeof (HelpTopic)))
+            foreach (HelpTopic topic in Enum.GetValues(typeof(HelpTopic)))
             {
                 Assert.IsNotNullOrEmpty(StringValueAttribute.GetValue(topic), $"Topic {topic} does not have a html reference attached");
             }

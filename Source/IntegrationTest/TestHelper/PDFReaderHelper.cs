@@ -1,7 +1,7 @@
-﻿using System.Text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using System.Text;
 
 namespace PDFCreator.TestUtilities
 {
@@ -11,7 +11,7 @@ namespace PDFCreator.TestUtilities
         {
             return BuildPdfReader(job.OutputFiles[0], job.Profile, job.Passwords);
         }
-       
+
         public static PdfReader BuildPdfReader(string testFile, ConversionProfile profile, JobPasswords passwords)
         {
             PdfReader pdfReader;

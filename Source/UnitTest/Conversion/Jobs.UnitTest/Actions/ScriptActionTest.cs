@@ -1,11 +1,11 @@
-﻿using System;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities.Process;
+using System;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 {

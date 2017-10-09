@@ -1,6 +1,6 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Utilities.Process;
+using System;
 using System.Diagnostics;
-using pdfforge.PDFCreator.Utilities.Process;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Printing.PrintFile
 {

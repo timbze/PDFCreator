@@ -1,8 +1,6 @@
-﻿using System.IO;
-using System.Linq;
-using SystemWrapper.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -10,7 +8,9 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.DirectConversion;
 using pdfforge.PDFCreator.Core.SettingsManagement;
-using PDFCreator.TestUtilities;
+using System.IO;
+using System.Linq;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.DirectConversion
 {

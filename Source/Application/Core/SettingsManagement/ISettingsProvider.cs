@@ -1,24 +1,24 @@
-using System;
 using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
+using System;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface ISettingsProvider : IApplicationLanguageProvider
     {
         PdfCreatorSettings Settings { get; }
-        IGpoSettings GpoSettings { get; }
-
 
         ConversionProfile GetDefaultProfile();
 
-
         bool CheckValidSettings(PdfCreatorSettings settings);
+
+        void UpdateSettings(PdfCreatorSettings settings);
+
+        event EventHandler SettingsChanged;
     }
 
     public interface IApplicationLanguageProvider
     {
-        event EventHandler LanguageChanged;
+        event EventHandler<LanguageChangedEventArgs> LanguageChanged;
 
         string GetApplicationLanguage();
     }

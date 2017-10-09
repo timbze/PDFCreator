@@ -1,6 +1,6 @@
-﻿using System;
-using pdfforge.PDFCreator.Core.SettingsManagement;
+﻿using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using System;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
@@ -25,7 +25,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             {
                 return ExitCode.Unknown;
             }
-                
+
             return ExitCode.Ok;
         }
     }

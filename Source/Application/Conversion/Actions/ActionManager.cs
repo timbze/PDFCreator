@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Conversion.Actions
 {
@@ -22,9 +22,6 @@ namespace pdfforge.PDFCreator.Conversion.Actions
             foreach (var action in _availableActions)
             {
                 if (!action.IsEnabled(job.Profile))
-                    continue;
-
-                if (!action.Init(job))
                     continue;
 
                 enabledActions.Add(action);

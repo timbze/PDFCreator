@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.UpdateHint.UpdateHintView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.UpdateHint"
+             xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance designTime:DesignTimeUpdateHintViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                        TextWrapping="Wrap"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="DemiBold"
+                        FontSize="17"
+                        Text="{Binding Translation.NewUpdateIsAvailable}" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <ContentControl VerticalAlignment="Center" Margin="20,20,0,20" Width="100"
+                                Height="64"
+                                Content="{DynamicResource PDFCreatorLogo}" />
+                <StackPanel Margin="10,20,20,20"  Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock TextWrapping="Wrap"
+                               MinWidth="200" MaxWidth="450" Text="{Binding AvailabeVersionText}" />
+                    <TextBlock Margin="0 10 0 0">
+                        <Hyperlink NavigateUri="{Binding WhatsNewUrl}" Command="{Binding WhatsNewCommand}">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Translation.WhatsNew}" />
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="2" FlowDirection="RightToLeft" Orientation="Horizontal"
+                        Background="Transparent">
+                <Button
+                    Command="{Binding AskLaterCommand}"
+                    Margin="10,10,5,10"
+                    Padding="10"
+                    MinWidth="60">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.AskLater}" />
+                </Button>
+                <Button
+                    Command="{Binding SkipVersionCommand}"
+                    Margin="5,10,5,10"
+                    Padding="10"
+                    MinWidth="60">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.SkipVersion}" />
+                </Button>
+                <Button
+                    Command="{Binding InstallUpdateCommand}"
+                    Margin="5,10,20,10"
+                    IsDefault="True"
+                    Padding="10"
+                    MinWidth="60">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Translation.Install}" />
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

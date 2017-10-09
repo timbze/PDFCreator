@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.ConverterInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -9,7 +6,10 @@ using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Core.Workflow.Output;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
+using pdfforge.PDFCreator.Utilities.IO;
+using System.Collections.Generic;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {
@@ -18,28 +18,25 @@ namespace pdfforge.PDFCreator.Core.Workflow
         /// <summary>
         ///     Runs the job and all actions
         /// </summary>
-        void RunJob(Job abstractJob);
+        void RunJob(Job abstractJob, IOutputFileMover outputFileMover);
     }
 
     public class JobRunner : IJobRunner
     {
         private readonly IActionManager _actionManager;
-        private readonly IConversionProgress _conversionProgress;
         private readonly IConverterFactory _converterFactory;
         private readonly IDirectory _directory;
+        private readonly IDirectoryHelper _directoryHelper;
         private readonly IJobCleanUp _jobClean;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IOutputFileMover _outputFileMover;
         private readonly IPdfProcessor _processor;
         private readonly ITempFolderProvider _tempFolderProvider;
         private readonly ITokenReplacerFactory _tokenReplacerFactory;
 
-        public JobRunner(IOutputFileMover outputFileMover, ITokenReplacerFactory tokenReplacerFactory,
+        public JobRunner(ITokenReplacerFactory tokenReplacerFactory,
             IPdfProcessor processor, IConverterFactory converterFactory, IActionManager actionManager,
-            IJobCleanUp jobClean, ITempFolderProvider tempFolderProvider, IDirectory directory,
-            IConversionProgress conversionProgress)
+            IJobCleanUp jobClean, ITempFolderProvider tempFolderProvider, IDirectory directory, IDirectoryHelper directoryHelper)
         {
-            _outputFileMover = outputFileMover;
             _tokenReplacerFactory = tokenReplacerFactory;
             _processor = processor;
             _converterFactory = converterFactory;
@@ -47,15 +44,19 @@ namespace pdfforge.PDFCreator.Core.Workflow
             _jobClean = jobClean;
             _tempFolderProvider = tempFolderProvider;
             _directory = directory;
-            _conversionProgress = conversionProgress;
+            _directoryHelper = directoryHelper;
         }
 
         /// <summary>
         ///     Runs the job and all actions
         /// </summary>
-        public void RunJob(Job job)
+        public void RunJob(Job job, IOutputFileMover outputFileMover) //todo: Store OutputFileMover somewhere workflow dependant
         {
             _logger.Trace("Starting job");
+
+            _logger.Debug("Output filename template is: {0}", job.OutputFilenameTemplate);
+            _logger.Debug("Output format is: {0}", job.Profile.OutputFormat);
+            _logger.Info("Converting " + job.OutputFilenameTemplate);
 
             SetTempFolders(job);
 
@@ -64,10 +65,9 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 _processor.Init(job);
                 var actions = SetUpActions(job);
 
-                _conversionProgress.Show(job);
                 Convert(job);
                 Process(job);
-                _outputFileMover.MoveOutputFiles(job);
+                outputFileMover.MoveOutputFiles(job);
 
                 if (job.OutputFiles.Count == 0)
                 {
@@ -93,7 +93,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             {
                 _logger.Trace("Calling job completed event");
                 job.CallJobCompleted();
-            };
+            }
         }
 
         private void LogOutputFiles(Job job)
@@ -114,6 +114,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
         {
             _logger.Debug("Cleaning up after the job");
             _jobClean.DoCleanUp(job.JobTempFolder, job.JobInfo.SourceFiles, job.JobInfo.InfFile);
+            _directoryHelper.DeleteCreatedDirectories();
         }
 
         private void SetTempFolders(Job job)
@@ -134,16 +135,11 @@ namespace pdfforge.PDFCreator.Core.Workflow
             _logger.Trace("Starting Actions");
             foreach (var action in actions)
             {
-                _logger.Trace("Calling Action {0}", action.GetType().Name);
-
                 var result = action.ProcessJob(job);
-
-                if (!result.IsSuccess)
-                {
+                if (result)
+                    _logger.Trace("Action {0} completed", action.GetType().Name);
+                else
                     throw new ProcessingException("An action failed.", result[0]);
-                }
-
-                _logger.Trace("Action {0} completed", action.GetType().Name);
             }
         }
 

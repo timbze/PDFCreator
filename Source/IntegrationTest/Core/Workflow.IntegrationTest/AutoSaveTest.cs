@@ -1,14 +1,13 @@
-﻿using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using PDFCreator.TestUtilities;
+using System.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class AutoSaveTest
     {
         [SetUp]
@@ -19,7 +18,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _th = container.GetInstance<TestHelper>();
             _th.InitTempFolder("AutoSaveTest");
             _th.Profile.ShowProgress = false;
-            
+
             _factory = container.GetInstance<ConversionWorkflowTestFactory>();
         }
 
@@ -52,7 +51,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -91,7 +90,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -128,7 +127,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = true;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -182,7 +181,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = true;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -224,7 +223,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -259,7 +258,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = true;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Jpeg;
 
@@ -294,7 +293,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
 
@@ -321,7 +320,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = true;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
 
@@ -353,7 +352,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
 
@@ -377,7 +376,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings = new PdfCreatorSettings(null);
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = true;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
 

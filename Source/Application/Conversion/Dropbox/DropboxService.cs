@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Dropbox.Api;
+﻿using Dropbox.Api;
 using Dropbox.Api.Files;
 using NLog;
 using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Conversion.Dropbox
 {
     public class DropboxService : IDropboxService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public string AccessToken = string.Empty;
-
 
         public Uri GetAuthorizeUri(string appKey, string redirectUri)
         {
@@ -27,10 +25,11 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             // make handling if bereaer token is not reachable
             var result = DropboxOAuth2Helper.ParseTokenFragment(uri);
 
-            return AccessToken = result.AccessToken;
+            return result.AccessToken;
         }
 
         #region Upload without sharing
+
         public bool UploadFiles(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames, string baseFileName)
         {
             try
@@ -43,7 +42,7 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
 
                     // path to upload is just /FileName
                     var currentFilePath = fullFolder + currentFileName;
-                    // if folder to upload is not empty add it to beginning of pathToUpload. 
+                    // if folder to upload is not empty add it to beginning of pathToUpload.
                     //If it doesnt exists dropbox will create it
 
                     using (var mem = GetFileStream(pathOfCurrentItem))
@@ -63,9 +62,10 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             }
         }
 
-        #endregion
+        #endregion Upload without sharing
 
         #region Upload with sharing
+
         public DropboxFileMetaData UploadFileWithSharing(string accessToken, string folder, IEnumerable<string> listOfFilePaths, bool ensureUniqueFilenames, string subFolderForMultipleFiles)
         {
             try
@@ -83,7 +83,7 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
                         result = MakeSharedLinksOfFile(dbxClient, fileMetaData);
                     }
                 }
-                if (string.IsNullOrEmpty(result.FilePath) || string.IsNullOrEmpty(result.SharedUrl))
+                if (string.IsNullOrEmpty(result.Filename) || string.IsNullOrEmpty(result.ShareUrl))
                 {
                     result = MakeSharedLinksOfFolder(dbxClient, folderToUpload);
                 }
@@ -111,12 +111,11 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             var f = dbxClient.Sharing.ListSharedLinksAsync(folder).Result.Links;
 
             if (f.Count > 0)
-                return new DropboxFileMetaData { FilePath = folder, SharedUrl = f.First().Url };
+                return new DropboxFileMetaData { Filename = folder, ShareUrl = f.First().Url };
 
             var x = dbxClient.Sharing.CreateSharedLinkWithSettingsAsync(folder).Result;
 
-            return new DropboxFileMetaData { FilePath = x.PathLower, SharedUrl = x.Url };
-
+            return new DropboxFileMetaData { Filename = x.PathLower, ShareUrl = x.Url };
         }
 
         private DropboxFileMetaData MakeSharedLinksOfFile(DropboxClient dbxClient, FileMetadata uploadFileMethaData)
@@ -124,14 +123,16 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             var sharedLinkExists = dbxClient.Sharing.ListSharedLinksAsync(uploadFileMethaData.PathDisplay).Result;
             if (sharedLinkExists.Links.Any())
             {
-                return new DropboxFileMetaData { FilePath = uploadFileMethaData.PathDisplay, SharedUrl = sharedLinkExists.Links.First().Url };
+                return new DropboxFileMetaData { Filename = uploadFileMethaData.PathDisplay, ShareUrl = sharedLinkExists.Links.First().Url };
             }
             var sharedLink = dbxClient.Sharing.CreateSharedLinkWithSettingsAsync(uploadFileMethaData.PathDisplay).Result;
-            return new DropboxFileMetaData { FilePath = uploadFileMethaData.PathDisplay, SharedUrl = sharedLink.Url };
+            return new DropboxFileMetaData { Filename = uploadFileMethaData.PathDisplay, ShareUrl = sharedLink.Url };
         }
 
         private static FileMetadata UploadAndGetSharedLink(bool ensureUniqueFilenames, DropboxClient dbxClient, string fullPuthToUpload,
-        #endregion
+
+        #endregion Upload with sharing
+
         FileStream mem)
         {
             FileMetadata uploadFileMethaData;
@@ -145,8 +146,8 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
         #region Private members
 
         /// <summary>
-        /// Creating folder for dropbox upload. 
-        /// If there is more than one file to upload 
+        /// Creating folder for dropbox upload.
+        /// If there is more than one file to upload
         /// Than upload to folder/commonstrings in output files
         /// </summary>
         /// <param name="mainFolder"></param>
@@ -169,13 +170,13 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             return folder;
         }
 
-        public DropboxUserInfo GetDropUserInfo()
+        public DropboxUserInfo GetDropUserInfo(string accessToken)
         {
-            var currentUser = MakeInstanceOfClient(AccessToken).Users.GetCurrentAccountAsync().Result;
+            var currentUser = MakeInstanceOfClient(accessToken).Users.GetCurrentAccountAsync().Result;
             if (currentUser != null)
                 return new DropboxUserInfo
                 {
-                    AccessToken = AccessToken,
+                    AccessToken = accessToken,
                     AccountId = currentUser.AccountId,
                     AccountInfo = currentUser.Email + " - " + currentUser.Name.DisplayName
                 };
@@ -184,7 +185,6 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
 
         public void RevokeToken(string accountAccessToken)
         {
-
             using (var dbxClient = MakeInstanceOfClient(accountAccessToken))
             {
                 dbxClient.Auth.TokenRevokeAsync().Wait();
@@ -221,6 +221,7 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
                     case "error_description":
                         errorDescription = Uri.UnescapeDataString(elements[1]);
                         break;
+
                     case "error":
                         error = Uri.UnescapeDataString(elements[1]);
                         break;
@@ -234,6 +235,6 @@ namespace pdfforge.PDFCreator.Conversion.Dropbox
             return false;
         }
 
-        #endregion
+        #endregion Private members
     }
 }

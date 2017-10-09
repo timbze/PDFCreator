@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Utilities.Threading;
+using System;
+using System.Threading;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {
@@ -65,7 +65,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 return;
             }
 
-            _processingThread = new SynchronizedThread(ProcessJobs) {Name = "ProcessingThread"};
+            _processingThread = new SynchronizedThread(ProcessJobs) { Name = "ProcessingThread" };
             _processingThread.SetApartmentState(ApartmentState.STA);
 
             _threadManager.StartSynchronizedThread(_processingThread);
@@ -127,6 +127,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             catch (Exception ex)
             {
                 _logger.Error("There was an error while processing the print jobs: " + ex);
+                throw;
             }
             finally
             {
@@ -159,12 +160,12 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 if (workflowResult == WorkflowResult.AbortedByUser)
                 {
                     _logger.Info("The job '{0}' was aborted by the user.",
-                        workflow.Job.JobInfo.Metadata.Title);
+                        job.JobInfo.Metadata.Title);
                 }
                 else
                 {
                     _logger.Error("The job '{0}' terminated at step {1} and did not end successfully.",
-                        workflow.Job.JobInfo.Metadata.Title, workflowResult);
+                        job.JobInfo.Metadata.Title, workflowResult);
                 }
             }
         }

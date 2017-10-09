@@ -1,5 +1,5 @@
-﻿using System.IO;
-using NGettext;
+﻿using NGettext;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Services.Translation
 {

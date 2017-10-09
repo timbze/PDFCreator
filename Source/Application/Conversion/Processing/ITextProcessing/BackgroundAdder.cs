@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 {
@@ -34,7 +34,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             }
             catch (Exception ex)
             {
-                throw new ProcessingException(ex.GetType() + " while addding background:" + Environment.NewLine + ex.Message, ErrorCode.Background_GenericError);
+                throw new ProcessingException(ex.GetType() + " while addding background:" + Environment.NewLine + ex.Message, ErrorCode.Background_GenericError, ex);
             }
         }
 
@@ -61,7 +61,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 throw new ProcessingException(
                     ex.GetType() + " while detecting number of pages of the cover file: " + profile.AttachmentPage.File +
-                    "\r\n" + ex, ErrorCode.Cover_CouldNotOpenFile);
+                    "\r\n" + ex, ErrorCode.Cover_CouldNotOpenFile, ex);
             }
 
             int lastPageWithBackground;
@@ -73,7 +73,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 throw new ProcessingException(
                     "Exception while detecting number of pages of the attachment file: " + profile.AttachmentPage.File +
-                    "\r\n" + ex, ErrorCode.Attachment_CouldNotOpenFile);
+                    "\r\n" + ex, ErrorCode.Attachment_CouldNotOpenFile, ex);
             }
 
             for (var i = 1; i <= nFile; i++)
@@ -94,9 +94,9 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 if ((stamper.Reader.GetPageRotation(i) == 90) || (stamper.Reader.GetPageRotation(i) == 270))
                 {
                     //Turn with document page...
-                    //* 
+                    //*
                     backgroundPageRotation += 90;
-                    backgroundPageRotation = backgroundPageRotation%360;
+                    backgroundPageRotation = backgroundPageRotation % 360;
                     //*/
                     documentPageSize = new Rectangle(documentPageSize.Height, documentPageSize.Width);
                 }
@@ -116,55 +116,55 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             switch (rotation)
             {
                 case 90:
-                    scaleWidth = documentPageSize.Width/backgroundPageSize.Height;
-                    scaleHeight = documentPageSize.Height/backgroundPageSize.Width;
+                    scaleWidth = documentPageSize.Width / backgroundPageSize.Height;
+                    scaleHeight = documentPageSize.Height / backgroundPageSize.Width;
                     scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
-                    backgroundHeight = scale*backgroundPageSize.Height;
-                    backgroundWidth = scale*backgroundPageSize.Width;
+                    backgroundHeight = scale * backgroundPageSize.Height;
+                    backgroundWidth = scale * backgroundPageSize.Width;
 
                     documentPage.AddTemplate(backgroundPage, 0, -scale, scale, 0,
-                        (documentPageSize.Width - backgroundHeight)/2,
-                        backgroundWidth + (documentPageSize.Height - backgroundWidth)/2);
+                        (documentPageSize.Width - backgroundHeight) / 2,
+                        backgroundWidth + (documentPageSize.Height - backgroundWidth) / 2);
                     break;
 
                 case 180:
-                    scaleWidth = documentPageSize.Width/backgroundPageSize.Width;
-                    scaleHeight = documentPageSize.Height/backgroundPageSize.Height;
+                    scaleWidth = documentPageSize.Width / backgroundPageSize.Width;
+                    scaleHeight = documentPageSize.Height / backgroundPageSize.Height;
                     scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
-                    backgroundHeight = scale*backgroundPageSize.Height;
-                    backgroundWidth = scale*backgroundPageSize.Width;
+                    backgroundHeight = scale * backgroundPageSize.Height;
+                    backgroundWidth = scale * backgroundPageSize.Width;
 
                     documentPage.AddTemplate(backgroundPage, -scale, 0, 0, -scale,
-                        backgroundWidth + (documentPageSize.Width - backgroundWidth)/2,
-                        backgroundHeight + (documentPageSize.Height - backgroundHeight)/2);
+                        backgroundWidth + (documentPageSize.Width - backgroundWidth) / 2,
+                        backgroundHeight + (documentPageSize.Height - backgroundHeight) / 2);
                     break;
 
                 case 270:
-                    scaleWidth = documentPageSize.Width/backgroundPageSize.Height;
-                    scaleHeight = documentPageSize.Height/backgroundPageSize.Width;
+                    scaleWidth = documentPageSize.Width / backgroundPageSize.Height;
+                    scaleHeight = documentPageSize.Height / backgroundPageSize.Width;
                     scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
-                    backgroundHeight = scale*backgroundPageSize.Height;
-                    backgroundWidth = scale*backgroundPageSize.Width;
+                    backgroundHeight = scale * backgroundPageSize.Height;
+                    backgroundWidth = scale * backgroundPageSize.Width;
 
                     documentPage.AddTemplate(backgroundPage, 0, scale, -scale, 0,
-                        backgroundHeight + (documentPageSize.Width - backgroundHeight)/2,
-                        (documentPageSize.Height - backgroundWidth)/2);
+                        backgroundHeight + (documentPageSize.Width - backgroundHeight) / 2,
+                        (documentPageSize.Height - backgroundWidth) / 2);
                     break;
 
                 case 0:
                 default:
-                    scaleWidth = documentPageSize.Width/backgroundPageSize.Width;
-                    scaleHeight = documentPageSize.Height/backgroundPageSize.Height;
+                    scaleWidth = documentPageSize.Width / backgroundPageSize.Width;
+                    scaleHeight = documentPageSize.Height / backgroundPageSize.Height;
                     scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
-                    backgroundHeight = scale*backgroundPageSize.Height;
-                    backgroundWidth = scale*backgroundPageSize.Width;
+                    backgroundHeight = scale * backgroundPageSize.Height;
+                    backgroundWidth = scale * backgroundPageSize.Width;
 
-                    documentPage.AddTemplate(backgroundPage, scale, 0, 0, scale, (documentPageSize.Width - backgroundWidth)/2,
-                        (documentPageSize.Height - backgroundHeight)/2);
+                    documentPage.AddTemplate(backgroundPage, scale, 0, 0, scale, (documentPageSize.Width - backgroundWidth) / 2,
+                        (documentPageSize.Height - backgroundHeight) / 2);
                     break;
             }
         }
@@ -236,12 +236,14 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             switch (repeat)
             {
                 case BackgroundRepetition.RepeatAllPages:
-                    return (currentDocumentPage - startOffset - 1)%numberOfBackgroundpages + 1;
+                    return (currentDocumentPage - startOffset - 1) % numberOfBackgroundpages + 1;
+
                 case BackgroundRepetition.RepeatLastPage:
                     if (currentDocumentPage - startOffset < numberOfBackgroundpages)
                         return currentDocumentPage - startOffset;
                     //else if (currentDocumentPage - startOffset >= numberOfBackgroundpages)
                     return numberOfBackgroundpages;
+
                 case BackgroundRepetition.NoRepetition:
                     if (currentDocumentPage - startOffset <= numberOfBackgroundpages)
                         return currentDocumentPage - startOffset;

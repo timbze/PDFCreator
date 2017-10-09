@@ -1,0 +1,70 @@
+﻿<UserControl
+    x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementEditUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:titleReplacementSettings="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings"
+    xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+    xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
+    mc:Ignorable="d"
+    d:DesignHeight="170" d:DesignWidth="500"
+    d:DataContext="{d:DesignInstance titleReplacementSettings:DesignTimeTitleReplacementEditUserControlViewModel, d:IsDesignTimeCreatable=True}"
+    help:HelpProvider.HelpTopic="AppTitle">
+    <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible"
+                                             FalseValue="Hidden" />
+        <converter:BoolNegationConverter x:Key="InvertBoolConverter"/>
+        
+    </UserControl.Resources>
+    <DockPanel Margin="10 5 10 10" LastChildFill="True" MinWidth="500" MinHeight="170">
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="5" Command="{Binding OkCommand}" IsEnabled="{Binding IsInvalid, Converter={StaticResource InvertBoolConverter}}" Content="{Binding Translation.OkButtonContent}" />
+            <Button Margin="5" Command="{Binding CancelCommand}" Content="{Binding Translation.CancelButtonContent}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"  DockPanel.Dock="Bottom" Visibility="{Binding IsInvalid, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock Margin="10"  Foreground="Red">
+                <TextBlock.Inlines>
+                    <Run Text="{Binding Translation.InvalidRegex, Mode=OneWay }"/>
+                    <Hyperlink Command="{Binding ShowUserGuideCommand}">
+                        <TextBlock Text="{Binding Translation.UserGuide}"/>
+                    </Hyperlink>
+                </TextBlock.Inlines>
+                </TextBlock>
+            
+        </StackPanel>
+        
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Right">
+                <TextBlock Text="{Binding Translation.SearchModelText}" />
+                
+                <RadioButton GroupName="SearchMode" 
+                             IsChecked="{Binding IsRemoveAll}" 
+                             Content="{Binding Translation.RadioButtonRemoveAll}" />
+
+                <RadioButton GroupName="SearchMode" 
+                             IsChecked="{Binding IsRemoveAtBeginning}"
+                             Content="{Binding Translation.RadioButtonRemoveAtBeginning}" />
+
+                <RadioButton GroupName="SearchMode" 
+                             IsChecked="{Binding IsRemoveAtEnd}" 
+                             Content="{Binding Translation.RadioButtonRemoveAtEnd}" />
+
+                <RadioButton GroupName="SearchMode" 
+                             IsChecked="{Binding IsReplaceByRegex}"
+                             Content="{Binding Translation.RadioButtonReplaceWithRegEx}" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="{Binding Translation.SearchForText}" />
+                <TextBox Text="{Binding SearchForInput, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 20 5" />
+                <StackPanel Visibility="{Binding IsReplaceByRegex, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBlock Text="{Binding Translation.ReplaceWithText}" />
+                    <TextBox Text="{Binding ReplaceWithInput, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 20 5" />
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

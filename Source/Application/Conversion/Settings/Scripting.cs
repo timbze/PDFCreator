@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,40 +15,33 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// The scripting action allows to run a script after the conversion
 	/// </summary>
-	public class Scripting {
+	[ImplementPropertyChanged]
+	public partial class Scripting : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// If true, the given script or application will be executed
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Parameters that will be passed to the script in addition to the output files
 		/// </summary>
-		public string ParameterString { get; set; }
+		public string ParameterString { get; set; } = "";
 		
 		/// <summary>
 		/// Path to the script or application
 		/// </summary>
-		public string ScriptFile { get; set; }
+		public string ScriptFile { get; set; } = "";
 		
 		/// <summary>
 		/// Wait until the script excution has ended
 		/// </summary>
-		public bool WaitForScript { get; set; }
+		public bool WaitForScript { get; set; } = true;
 		
-		
-		private void Init() {
-			Enabled = false;
-			ParameterString = "";
-			ScriptFile = "";
-			WaitForScript = true;
-		}
-		
-		public Scripting()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

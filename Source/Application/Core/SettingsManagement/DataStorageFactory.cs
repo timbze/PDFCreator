@@ -1,12 +1,13 @@
-﻿using System.Text;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using pdfforge.DataStorage.Storage;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface IDataStorageFactory
     {
         IStorage BuildIniStorage();
+
         IStorage BuildRegistryStorage(RegistryHive registryHive, string baseKey, bool clearOnWrite = false);
     }
 

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Linq;
-using SystemInterface.IO;
-using SystemWrapper.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Linq;
+using SystemInterface.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
 {
@@ -16,25 +17,22 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
 
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         protected readonly IFile File;
-        private IProcessingPasswordsProvider PasswordsProvider { get; set; }
 
-        protected PdfProcessorBase(IFile file, IProcessingPasswordsProvider passwordsProvider)
+        protected PdfProcessorBase(IFile file)
         {
             File = file;
-            PasswordsProvider = passwordsProvider;
         }
 
         /// <summary>
-        /// Inits the Profile 
+        /// Inits the Profile
         /// </summary>
         /// <param name="job"></param>
         public void Init(Job job)
         {
             Logger.Trace("Init Processor");
-            
+
             //Must be applied before determining passwords
             ApplyRestrictionsToProfile(job);
-            DeterminePasswords(job);
         }
 
         private void ApplyRestrictionsToProfile(Job job)
@@ -73,27 +71,9 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                     }
                     return;
             }
-        }
 
-        private void DeterminePasswords(Job job)
-        {
-            if ((job.Profile.OutputFormat == OutputFormat.Pdf)
-               || (job.Profile.OutputFormat == OutputFormat.PdfA1B)
-               || (job.Profile.OutputFormat == OutputFormat.PdfA2B)
-               || (job.Profile.OutputFormat == OutputFormat.PdfX))
-            {
-                if (job.Profile.PdfSettings.Security.Enabled)
-                {
-                    Logger.Debug("Querying encryption passwords");
-                    PasswordsProvider.SetEncryptionPasswords(job);
-                }
-
-                if (job.Profile.PdfSettings.Signature.Enabled)
-                {
-                    Logger.Debug("Querying signature password");
-                    PasswordsProvider.SetSignaturePassword(job);
-                }
-            }
+            if (!job.Profile.PdfSettings.Security.AllowPrinting)
+                job.Profile.PdfSettings.Security.RestrictPrintingToLowQuality = false;
         }
 
         /// <summary>
@@ -115,7 +95,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                     return profile.PdfSettings.Security.Enabled
                            || profile.BackgroundPage.Enabled
                            || profile.PdfSettings.Signature.Enabled;
-         
+
                 case OutputFormat.PdfX:
                     return profile.BackgroundPage.Enabled
                            || profile.PdfSettings.Signature.Enabled;
@@ -137,13 +117,25 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                 throw new ProcessingException("_file in PdfProcessor does not exist: " + pdfFile, ErrorCode.Processing_OutputFileMissing);
             }
 
+            const int retryCount = 5;
+            var retryInterval = TimeSpan.FromMilliseconds(300);
+
             try
             {
-                DoProcessPdf(job);
+                // Retry signing when a ProcessingException with the ErrorCode Signature_NoTimeServerConnection was thrown
+                Retry.Do(
+                        () => DoProcessPdf(job),
+                        retryInterval: retryInterval,
+                        retryCount: retryCount,
+                        retryCondition: ex => (ex as ProcessingException)?.ErrorCode == ErrorCode.Signature_NoTimeServerConnection);
             }
-            catch (ProcessingException ex)
+            catch (AggregateException ex)
             {
-                throw ex;
+                throw ex.InnerExceptions.First();
+            }
+            catch (ProcessingException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -164,10 +156,23 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
         ///     Determine PDF-Version according to settings in conversion profile.
         /// </summary>
         /// <param name="profile">ConversionProfile</param>
-        /// <returns>PDF Version as string, i.e. 1.4</returns>
+        /// <returns>PDF Version as string as interim value for inherited Processors</returns>
         public string DeterminePdfVersion(ConversionProfile profile)
         {
-            var pdfVersion = "1.4";
+            //Important:
+            //The string value is just an interim value!!!
+            //If another PDFVersion is added, the inherited Processors have to evaluate it
+
+            var pdfVersion = "1.3";
+
+            if (profile.OutputFormat != OutputFormat.PdfX)
+                pdfVersion = "1.4";
+
+            if (profile.PdfSettings.Signature.Enabled)
+                pdfVersion = "1.4"; //todo: Could remain 1.3. Is it necessary to fix this?
+
+            if (profile.BackgroundPage.Enabled)
+                pdfVersion = "1.4"; //todo: Could remain 1.3. Is it necessary to fix this?
 
             if (profile.OutputFormat == OutputFormat.Pdf)
                 if (profile.PdfSettings.Security.Enabled)
@@ -188,30 +193,6 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                 pdfVersion = "1.7";
 
             return pdfVersion;
-        }
-
-        /// <summary>
-        ///     Moves original file to preprocess file, which is the original file with an appended "_PrePdfProcessor.pdf".
-        /// </summary>
-        /// <param name="pdfFile">Full path to PDF file</param>
-        /// <param name="appendix">filename is oldname_APPENDIX.pdf</param>
-        /// <returns>Path to preprocess file</returns>
-        public string MoveFileToPreProcessFile(string pdfFile, string appendix)
-        {
-            string preProcessFile;
-            try
-            {
-                preProcessFile = _pathSafe.ChangeExtension(pdfFile, "_" + appendix + ".pdf").Replace("._", "_");
-                File.Move(pdfFile, preProcessFile);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.GetType() + " while creating pdf preprocess file:" + Environment.NewLine + ex.Message);
-                throw new ProcessingException(
-                    ex.GetType() + " while creating pdf preprocess file:" + Environment.NewLine + ex.Message, ErrorCode.Processing_GenericError);
-            }
-
-            return preProcessFile;
         }
 
         protected abstract void DoProcessPdf(Job job);

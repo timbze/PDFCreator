@@ -1,0 +1,23 @@
+using Translatable;
+
+namespace pdfforge.PDFCreator.UI.Presentation.Windows
+{
+    public class ManagePrintJobsWindowTranslation : ITranslatable
+    {
+        public string ContinueButtonContent { get; private set; } = "Continue";
+        public string DeleteTooltip { get; private set; } = "Delete print job";
+        public string MergeAllButtonContent { get; private set; } = "Merge All";
+        public string MergeButtonContent { get; private set; } = "Merge Selected";
+        public string Title { get; private set; } = "Merge Print Jobs";
+        public string WindowHeader { get; private set; } = "Reorder and Merge Print Jobs";
+        public string DocumentInfoHeader { get; private set; } = "Document Info";
+        public string MergedFilesHeader { get; private set; } = "Merged Files";
+        public string PrintJobPages { get; private set; } = "Pages:";
+        public string PrintJobFiles { get; private set; } = "Files:";
+        public string PrintJobTitle { get; private set; } = "Title:";
+        public string PrintJobAuthor { get; private set; } = "Author:";
+        public string PrintJobPrinter { get; private set; } = "Printer:";
+        public string PrintJobCounter { get; private set; } = "ID:";
+        public string DragHint { get; private set; } = "Hint: You can drag the print jobs to reorder them";
+    }
+}

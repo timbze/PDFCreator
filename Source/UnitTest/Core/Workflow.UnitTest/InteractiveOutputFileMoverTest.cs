@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -12,7 +9,13 @@ using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
+using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 {
@@ -25,7 +28,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         private string[] _multipleTempOutputFilesWithTwoDigits;
         private IRetypeFileNameQuery _retypeQuery;
 
-        const string RetypedFilename = "C:\\retype_";
+        private const string RetypedFilename = "C:\\retype_";
 
         [SetUp]
         public void Setup()
@@ -54,17 +57,17 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                 .When(x => x.Copy(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>()))
                 .Do(x => { throw new IOException(); });
 
-            _retypeQuery.RetypeFileName(Arg.Any<Job>()).Returns(new QueryResult<string>(false, null));
+            _retypeQuery.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(new QueryResult<string>(false, null));
 
             var outputFileMover = BuildInteractiveFileMover(fileStub);
             _job.Profile.AutoSave.Enabled = false;
 
             _job.TempOutputFiles = _multipleTempOutputFiles;
 
-            _retypeQuery.RetypeFileName(Arg.Any<Job>()).Returns(new QueryResult<string>(false, null));
+            _retypeQuery.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(new QueryResult<string>(false, null));
 
             Assert.Throws<AbortWorkflowException>(() => outputFileMover.MoveOutputFiles(_job));
-            
+
             Assert.AreEqual(1, _retypeQuery.ReceivedCalls().Count(), "RetypeOutputFilename was not called exactly once");
             Assert.IsEmpty(_job.OutputFiles, "Outputfiles are not empty.");
         }
@@ -81,7 +84,6 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                     if (copyCount++ == 0)
                         throw new IOException();
                 });
-
 
             var outputFileMover = BuildInteractiveFileMover(fileStub);
             _job.Profile.AutoSave.Enabled = false;
@@ -103,7 +105,6 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                 {
                     throw new IOException();
                 });
-
 
             var outputFileMover = BuildInteractiveFileMover(fileStub);
             _job.Profile.AutoSave.Enabled = false;
@@ -170,7 +171,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             _job.Profile.AutoSave.Enabled = false;
             _job.Profile.OutputFormat = OutputFormat.Pdf;
 
-            _retypeQuery.RetypeFileName(Arg.Any<Job>()).Returns(new QueryResult<string>(false, null));
+            _retypeQuery.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(new QueryResult<string>(false, null));
 
             _job.TempOutputFiles = _singleTempOutputfile;
 
@@ -221,6 +222,24 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         }
 
         [Test]
+        public void OnRetry_CallsDispatcherToQuery()
+        {
+            var fileStub = new FailingFileCopy(3);
+            var dispatcher = Substitute.For<IDispatcher>();
+            dispatcher.InvokeAsync<QueryResult<string>>(null).ReturnsForAnyArgs(x => Task.Run(x.Arg<Func<QueryResult<string>>>()));
+
+            var outputFileMover = BuildInteractiveFileMover(fileStub, dispatcher);
+            _job.Profile.AutoSave.Enabled = false;
+            _job.Profile.OutputFormat = OutputFormat.Pdf;
+
+            _job.TempOutputFiles = _singleTempOutputfile;
+
+            outputFileMover.MoveOutputFiles(_job);
+
+            dispatcher.ReceivedWithAnyArgs().InvokeAsync<QueryResult<string>>(null);
+        }
+
+        [Test]
         public void DeleteFileFails_DoesNotThrowException()
         {
             var fileStub = Substitute.For<IFile>();
@@ -228,28 +247,31 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                 .When(x => x.Delete(Arg.Any<string>()))
                 .Do(x => { throw new IOException(); });
 
-            _retypeQuery.RetypeFileName(Arg.Any<Job>()).Returns(new QueryResult<string>(false, null));
+            _retypeQuery.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(new QueryResult<string>(false, null));
 
             var outputFileMover = BuildInteractiveFileMover(fileStub);
             _job.Profile.AutoSave.Enabled = false;
 
             _job.TempOutputFiles = _multipleTempOutputFiles;
 
-            _retypeQuery.RetypeFileName(Arg.Any<Job>()).Returns(new QueryResult<string>(false, null));
+            _retypeQuery.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(new QueryResult<string>(false, null));
 
             Assert.DoesNotThrow(() => outputFileMover.MoveOutputFiles(_job));
         }
 
-        private InteractiveOutputFileMover BuildInteractiveFileMover(IFile file)
+        private InteractiveOutputFileMover BuildInteractiveFileMover(IFile file, IDispatcher dispatcher = null)
         {
+            if (dispatcher == null)
+                dispatcher = new InvokeImmediatelyDispatcher();
+
             var pathUtil = Substitute.For<IPathUtil>();
 
             int retypeCount = 0;
             _retypeQuery
-                .RetypeFileName(Arg.Any<Job>())
+                .RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>())
                 .Returns(x => new QueryResult<string>(true, $"{RetypedFilename}{++retypeCount}." + _job.Profile.OutputFormat.ToString().ToLower()));
 
-            return new InteractiveOutputFileMover(Substitute.For<IDirectory>(), file, pathUtil, _retypeQuery);
+            return new InteractiveOutputFileMover(Substitute.For<IDirectory>(), file, pathUtil, _retypeQuery, dispatcher);
         }
     }
 }

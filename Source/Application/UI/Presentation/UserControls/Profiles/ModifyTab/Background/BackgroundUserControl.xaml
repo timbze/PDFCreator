@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background"
+    xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance local:DesignTimeBackgroundUserControlViewModel, IsDesignTimeCreatable=True}"
+    Style="{DynamicResource TabUserControl}"
+    help:HelpProvider.HelpTopic="Background">
+    <Grid IsEnabled="{Binding CurrentProfile.BackgroundPage.Enabled}">
+        <HeaderedContentControl Template="{DynamicResource BorderlessHeaderPanelTemplate}" Header="{Binding Translation.DisplayName}">
+            <StackPanel>
+                <Label Content="{Binding Translation.BackgroundFileLabelContent}"></Label>
+                <DockPanel LastChildFill="True">
+                    <Button DockPanel.Dock="Right" Margin="5 0 0 0" Width="25" Command="{Binding SelectBackgroundCommand}" Style="{DynamicResource SmallLightGreyButton}">...</Button>
+                    <TextBox Text="{Binding CurrentProfile.BackgroundPage.File}" />
+                </DockPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center">
+                    <Label Content="{Binding Translation.BackgroundRepetitionLabelContent}" />
+
+                    <ComboBox Margin="5 0 0 0"
+                              SelectedValue="{Binding CurrentProfile.BackgroundPage.Repetition}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Translation"
+                              ItemsSource="{Binding Translation.BackgroundRepetitionValues}" />
+                </StackPanel>
+                <CheckBox IsChecked="{Binding CurrentProfile.BackgroundPage.OnCover}" Margin="0,10,0,0">
+                    <TextBlock Text="{Binding Translation.ShowBackgroundOnCoverText}" TextWrapping="Wrap"></TextBlock>
+                </CheckBox>
+                <CheckBox IsChecked="{Binding CurrentProfile.BackgroundPage.OnAttachment}" Margin="0,5,0,0">
+                    <TextBlock Text="{Binding Translation.ShowBackgroundOnAttachmentText}" TextWrapping="Wrap"></TextBlock>
+                </CheckBox>
+            </StackPanel>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>

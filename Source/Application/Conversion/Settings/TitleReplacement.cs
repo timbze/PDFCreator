@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Text;
 using System;
@@ -16,25 +20,19 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// i.e. Word prints are named "Document.docx - Microsoft Word", where the replacement can remove the ".docx - Microsoft Word" part.
 	/// 
 	/// </summary>
-	public class TitleReplacement {
-		
-		public string Replace { get; set; }
-		
-		public ReplacementType ReplacementType { get; set; }
-		
-		public string Search { get; set; }
+	[ImplementPropertyChanged]
+	public partial class TitleReplacement : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
 		
-		private void Init() {
-			Replace = "";
-			ReplacementType = ReplacementType.Replace;
-			Search = "";
-		}
+		public string Replace { get; set; } = "";
 		
-		public TitleReplacement()
-		{
-			Init();
-		}
+		public ReplacementType ReplacementType { get; set; } = ReplacementType.Replace;
+		
+		public string Search { get; set; } = "";
+		
 		
 		public void ReadValues(Data data, string path) {
 			try { Replace = Data.UnescapeString(data.GetValue(@"" + path + @"Replace")); } catch { Replace = "";}
@@ -91,6 +89,11 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		
 // Custom Code starts here
 // START_CUSTOM_SECTION:GENERAL
+
+	    public TitleReplacement()
+	    {
+	        
+	    }
 
         /// <summary>
         ///     Create a TitleReplacement with search and replace fields set

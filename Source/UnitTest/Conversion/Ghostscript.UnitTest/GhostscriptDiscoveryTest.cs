@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using SystemInterface.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Utilities;
 using Rhino.Mocks;
+using System.Collections.Generic;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript
 {
@@ -18,12 +18,11 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript
 
         private IFile _fileMock;
 
-
         private GhostscriptDiscovery CreateGhostscriptDiscoveryWithMocks(string appPath = @"C:\Program Files\MyApp", bool x64 = true)
         {
             var assemblyHelper = MockRepository.GenerateStub<IAssemblyHelper>();
 
-            assemblyHelper.Stub(x => x.GetPdfforgeAssemblyDirectory()).Return(appPath);
+            assemblyHelper.Stub(x => x.GetAssemblyDirectory()).Return(appPath);
 
             var osHelper = MockRepository.GenerateStub<IOsHelper>();
             osHelper.Stub(x => x.Is64BitOperatingSystem).Return(x64);
@@ -80,7 +79,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript
         public void GetGhostscript_IfPossibleGhostscriptPathsWereReplaced_FindsIntance()
         {
             var otherGhostscriptPath = new List<string>() { "SomeOtherFolder" };
-            
+
             const string appPath = @"C:\MyApp";
             const string gsPath = appPath + @"\SomeOtherFolder";
             const string gsExe = gsPath + @"\Bin\gswin32c.exe";

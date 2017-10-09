@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NLog;
+using pdfforge.PDFCreator.Utilities.Threading;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using NLog;
-using pdfforge.PDFCreator.Utilities.Threading;
 
 namespace pdfforge.PDFCreator.Core.ComImplementation
 {

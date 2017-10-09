@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {

@@ -1,19 +1,20 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants.Update;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.Utilities.Threading;
+using System;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
     public interface IMaybePipedApplicationStarter
     {
         ICheckAllStartupConditions StartupConditions { get; }
+
         bool SendMessageOrStartApplication(Func<string> composePipeMessage, Func<bool> startApplication, bool startManagePrintJobs);
     }
 
@@ -170,7 +171,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 
         private void StartUpdateCheck()
         {
-            _updateAssistant.UpdateProcedure(true, true);
+            _updateAssistant.UpdateProcedure(true);
         }
     }
 }

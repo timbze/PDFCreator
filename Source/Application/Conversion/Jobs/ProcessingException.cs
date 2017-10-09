@@ -4,8 +4,8 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 {
     public class ProcessingException : Exception
     {
-        public ProcessingException(string message, ErrorCode errorCode)
-            : base(message)
+        public ProcessingException(string message, ErrorCode errorCode, Exception innerException = null)
+            : base(message, innerException)
         {
             ErrorCode = errorCode;
         }

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Core.Printing.Printing
 {
@@ -38,7 +38,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
         /// <returns>true, if all files are printable</returns>
         public bool AddFile(string file)
         {
-            return AddFiles(new[] {file});
+            return AddFiles(new[] { file });
         }
 
         /// <summary>
@@ -141,7 +141,9 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
         }
 
         protected abstract void DirectoriesNotSupportedHint();
+
         protected abstract bool UnprintableFilesQuery(IList<PrintCommand> unprintable);
+
         protected abstract bool QuerySwitchDefaultPrinter();
     }
 }

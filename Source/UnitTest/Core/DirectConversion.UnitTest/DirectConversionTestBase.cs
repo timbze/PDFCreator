@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using SystemInterface.IO;
-using SystemWrapper.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -10,11 +6,14 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
+using System;
+using System.IO;
+using SystemInterface.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
 {
-
-    abstract class DirectConversionTestBase
+    internal abstract class DirectConversionTestBase
     {
         protected IFixture Fixture;
         protected IFile FileMock;
@@ -23,6 +22,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
         private IJobInfoManager _jobInfoManagerMock;
 
         protected abstract DirectConversionBase BuildDirectConversion();
+
         protected abstract void ConfigureValidFileOpenRead(IFile file, string filename);
 
         [SetUp]

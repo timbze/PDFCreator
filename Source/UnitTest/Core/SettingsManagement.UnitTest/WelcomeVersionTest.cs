@@ -1,10 +1,9 @@
-﻿using System;
-using SystemInterface.Microsoft.Win32;
-using NSubstitute;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
 using Rhino.Mocks;
+using System;
+using SystemInterface.Microsoft.Win32;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 {
@@ -14,12 +13,10 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         [SetUp]
         public void Setup()
         {
-            var assemblyHelper = Substitute.For<IAssemblyHelper>();
-            assemblyHelper.GetPdfforgeAssemblyVersion().Returns(new Version(1, 2, 3, 4));
-            _versionHelper = new VersionHelper(assemblyHelper);
+            _versionHelper = new VersionHelper(new Version(1, 2, 3, 4));
         }
 
-        private VersionHelper _versionHelper;
+        private IVersionHelper _versionHelper;
 
         [Test]
         public void FirstRunTest_NoWelcomeVersionSet_IsFirstRun()

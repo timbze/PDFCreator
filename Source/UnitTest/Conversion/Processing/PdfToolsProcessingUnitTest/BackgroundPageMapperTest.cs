@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PDFProcessing.PdfTools.UnitTest
 {
@@ -35,7 +35,7 @@ namespace PDFProcessing.PdfTools.UnitTest
             Assert.Throws<ArgumentException>(() => pageMapper.GetBackgroundPageNumber(invalidPageNumber, numPages, out bgPage));
         }
 
-        [TestCase(3, new[] { 1, 2, 3})]
+        [TestCase(3, new[] { 1, 2, 3 })]
         [TestCase(4, new[] { 1, 2, 3, 4, -1 })]
         public void BackgroundPageMapper_WithoutRepetition_DoesNotAddBackgroundAfterFirstIteration(int numBackgroundPages, int[] expectedPages)
         {

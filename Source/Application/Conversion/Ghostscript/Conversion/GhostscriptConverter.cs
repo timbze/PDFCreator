@@ -1,11 +1,11 @@
-﻿using System;
-using System.Text;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.ConverterInterface;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.Conversion
 {
@@ -24,7 +24,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.Conversion
 
         private int NumberOfPages { get; set; }
 
-        public void DoConversion(Job job) 
+        public void DoConversion(Job job)
         {
             var ghostScript = GetGhostscript();
             NumberOfPages = job.NumberOfPages;
@@ -84,15 +84,19 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.Conversion
                 case OutputFormat.Pdf:
                     device = new PdfDevice(job);
                     break;
+
                 case OutputFormat.Png:
                     device = new PngDevice(job);
                     break;
+
                 case OutputFormat.Jpeg:
                     device = new JpegDevice(job);
                     break;
+
                 case OutputFormat.Tif:
                     device = new TiffDevice(job);
                     break;
+
                 case OutputFormat.Txt:
                     device = new TextDevice(job);
                     break;
@@ -177,7 +181,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.Conversion
                     if (int.TryParse(page, out pageNumber))
                     {
                         if (pageNumber <= NumberOfPages)
-                            ReportProgress(pageNumber*100/NumberOfPages);
+                            ReportProgress(pageNumber * 100 / NumberOfPages);
                     }
                 }
             }

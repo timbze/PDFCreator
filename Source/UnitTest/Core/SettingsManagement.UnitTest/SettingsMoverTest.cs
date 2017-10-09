@@ -1,9 +1,9 @@
-﻿using System.Security;
-using SystemInterface.Microsoft.Win32;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities.Registry;
 using Rhino.Mocks;
+using System.Security;
+using SystemInterface.Microsoft.Win32;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 {

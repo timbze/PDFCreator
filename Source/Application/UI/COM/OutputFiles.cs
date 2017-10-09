@@ -9,6 +9,7 @@ namespace pdfforge.PDFCreator.UI.COM
     public interface IOutputFiles
     {
         int Count { get; }
+
         string GetFilename(int index);
     }
 

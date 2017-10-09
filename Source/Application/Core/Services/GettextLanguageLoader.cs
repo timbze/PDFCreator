@@ -4,16 +4,20 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-
 namespace pdfforge.PDFCreator.Core.Services
 {
     public interface ILanguageLoader
     {
         string GetTranslationFile(string language);
+
         string GetTranslationFileIfExists(string language);
+
         IEnumerable<Language> GetAvailableLanguages();
+
         Language FindBestLanguage(CultureInfo cultureInfo);
+
         Language FindBestLanguage(CultureInfo cultureInfo, IEnumerable<Language> languages);
+
         string TranslationFolder { get; }
     }
 
@@ -22,6 +26,7 @@ namespace pdfforge.PDFCreator.Core.Services
         private readonly Language _englishLanguage = new Language
         {
             CommonName = "English",
+            NativeName = "English",
             Iso2 = "en",
             CultureInfo = new CultureInfo("en")
         };
@@ -35,7 +40,7 @@ namespace pdfforge.PDFCreator.Core.Services
             _predefinedLanguages = new Dictionary<string, Language>
             {
                 { "en", _englishLanguage},
-                {"val", new Language() {Iso2 = "val", CommonName = "Valencian"} }
+                {"val", new Language() {Iso2 = "val", CommonName = "Valencian", NativeName = "valencià"} }
             };
         }
 
@@ -76,6 +81,7 @@ namespace pdfforge.PDFCreator.Core.Services
 
             language.CultureInfo = cultureInfo;
             language.CommonName = cultureInfo.EnglishName;
+            language.NativeName = cultureInfo.NativeName;
             language.Iso2 = cultureInfo.Name;
 
             return language;
@@ -89,7 +95,6 @@ namespace pdfforge.PDFCreator.Core.Services
             }
             catch (CultureNotFoundException)
             {
-                
             }
 
             return _predefinedLanguages.ContainsKey(name)

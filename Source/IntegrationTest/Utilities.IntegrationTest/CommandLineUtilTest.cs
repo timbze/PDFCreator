@@ -18,7 +18,7 @@ namespace PDFCreator.Utilities.IntegrationTest
         public void CommandLineToArgs_GivenSimpleCommandLine_ReturnsGoodArray()
         {
             const string commandLine = "/Test /Quote=\"This is a Test\"";
-            var expected = new[] {"/Test", "/Quote=This is a Test"};
+            var expected = new[] { "/Test", "/Quote=This is a Test" };
             Assert.AreEqual(expected, _commandLineUtil.CommandLineToArgs(commandLine));
         }
     }

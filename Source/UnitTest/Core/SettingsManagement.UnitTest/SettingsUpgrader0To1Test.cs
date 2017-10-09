@@ -6,7 +6,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 {
     [TestFixture]
     internal class SettingsUpgrader0To1Test
-    {    
+    {
         [Test]
         public void DataWithVersion0_UpgradeToVersion1_SetsVersionTo1()
         {

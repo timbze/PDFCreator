@@ -1,14 +1,15 @@
-﻿using System;
-using pdfforge.PDFCreator.Core.StartupInterface;
+﻿using pdfforge.PDFCreator.Core.StartupInterface;
 using Pdftools.Pdf2Pdf;
 using Pdftools.PdfSecure;
 using PdfTools.Pdf;
+using System;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 {
     public interface IPdfToolsLicensing
     {
         ExitCode ExitCode { get; set; }
+
         bool Apply();
     }
 

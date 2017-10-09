@@ -1,16 +1,27 @@
-﻿using System;
-using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
+using System;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
+    public class LanguageChangedEventArgs : EventArgs
+    {
+        public LanguageChangedEventArgs(PdfCreatorSettings settings)
+        {
+            Settings = settings;
+        }
+
+        public PdfCreatorSettings Settings { get; }
+    }
+
     public abstract class SettingsProvider : ISettingsProvider
     {
+        protected string CurrentLanguage { get; private set; } = "en";
         public PdfCreatorSettings Settings { get; private set; }
 
-        public abstract IGpoSettings GpoSettings { get; }
+        public event EventHandler<LanguageChangedEventArgs> LanguageChanged;
 
-        public event EventHandler LanguageChanged;
+        public event EventHandler SettingsChanged;
 
         public abstract string GetApplicationLanguage();
 
@@ -24,29 +35,32 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             return Settings.GetProfileByGuid(ProfileGuids.DEFAULT_PROFILE_GUID);
         }
 
-        private void RaiseLanguageChanged()
+        private void RaiseLanguageChanged(PdfCreatorSettings settings)
         {
-            LanguageChanged?.Invoke(this, EventArgs.Empty);
+            LanguageChanged?.Invoke(this, new LanguageChangedEventArgs(settings));
         }
 
         public void UpdateSettings(PdfCreatorSettings settings)
         {
-            var oldLanguage = Settings?.ApplicationSettings.Language;
+            if (!settings.ApplicationSettings.Language.Equals(CurrentLanguage) || Settings == null)
+            {
+                CurrentLanguage = settings.ApplicationSettings.Language;
+                RaiseLanguageChanged(settings);
+            }
 
-            Settings = settings;
+            Settings = settings.CopyAndPreserveApplicationSettings();
 
-            if (!settings.ApplicationSettings.Language.Equals(oldLanguage))
-                RaiseLanguageChanged();
+            SettingsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
     public class DefaultSettingsProvider : SettingsProvider
     {
-        public override IGpoSettings GpoSettings => new GpoSettingsDefaults();
+        public IGpoSettings GpoSettings => new GpoSettingsDefaults();
 
         public override string GetApplicationLanguage()
         {
-            return Settings == null ? "en" : Settings.ApplicationSettings.Language;
+            return CurrentLanguage;
         }
     }
 }

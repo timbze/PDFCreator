@@ -55,6 +55,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         [Translation("Error while signing. The certificate is invalid or has expired.")]
         Signature_Invalid = 12206,
 
+        [Translation("The specified time server account for signing is not configured.")]
+        Signature_NoTimeServerAccount = 12207,
+
         [Translation("Error while signing the document.")]
         Signature_GenericError = 12999,
 
@@ -87,28 +90,34 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("No SMTP e-mail server is specified.")]
         Smtp_NoServerSpecified = 15102,
-        
+
         [Translation("Invalid SMTP port.")]
         Smtp_InvalidPort = 15103,
-        
+
         [Translation("No SMTP e-mail user name is specified.")]
         Smtp_NoUserSpecified = 15104,
-        
+
+        [Translation("The specified SMTP account is not configured.")]
+        Smtp_NoAccount = 15105,
+
         [Translation("No password provided for E-mail over SMTP.")]
         Smtp_NoPasswordSpecified = 15111,
-        
+
         [Translation("E-mail over SMTP could not be delivered to one or more recipients.")]
         Smtp_EmailNotDelivered = 15106,
-        
+
         [Translation("Could not authorize to SMTP server.")]
         Smtp_AuthenticationDenied = 15107,
-        
+
         [Translation("User cancelled retyping SMTP e-mail password.")]
         Smtp_UserCancelled = 15108,
-               
+
+        [Translation("Invalid SMTP e-mail recipients.")]
+        Smtp_InvalidRecipients = 15109,
+
         [Translation("Error while sending e-mail over SMTP.")]
         Smtp_GenericError = 15999,
-        
+
         [Translation("No background file is specified.")]
         Background_NoFileSpecified = 17100,
 
@@ -156,6 +165,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("User cancelled retyping FTP password.")]
         Ftp_UserCancelled = 18110,
+
+        [Translation("The specified FTP account is not configured.")]
+        Ftp_NoAccount = 18111,
 
         [Translation("Error while uploading file to FTP server.")]
         Ftp_GenericError = 18999,
@@ -243,5 +255,32 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("Error while uploading and sharing the document to Dropbox.")]
         Dropbox_Upload_And_Share_Error = 31202,
+
+        [Translation("Missing URL for HTTP upload.")]
+        HTTP_NoUrl = 32101,
+
+        [Translation("Missing user name for HTTP authentication.")]
+        HTTP_NoUserNameForAuth = 32102,
+
+        [Translation("Automatic saving without password for HTTP authentication.")]
+        HTTP_NoPasswordForAuthWithAutoSave = 32103,
+
+        [Translation("The specified HTTP account is not configured.")]
+        HTTP_NoAccount = 32104,
+
+        [Translation("User cancelled retyping HTTP autentication password.")]
+        HTTP_UserCancelled = 32105,
+
+        [Translation("HTTP URL must start with 'http://' or 'https://'.")]
+        HTTP_MustStartWithHttp = 32106,
+
+        [Translation("Error while uploading to HTTP server. 401 interaction is not authorized.")]
+        HTTP_UnAuthorized_Request_Error = 32107,
+
+        [Translation("Error while uploading to HTTP server.")]
+        HTTP_Generic_Error = 32999,
+
+        [Translation("Error while trying to log-in.")]
+        PasswordAction_Login_Error = 33001,
     }
 }

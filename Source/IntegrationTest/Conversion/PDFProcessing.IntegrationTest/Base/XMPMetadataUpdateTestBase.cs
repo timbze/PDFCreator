@@ -12,14 +12,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         private IPdfProcessor _pdfProcessor;
 
         protected abstract IPdfProcessor BuildPdfProcessor();
+        protected abstract void FinalizePdfProcessor();
 
-        public void SetUp(TestFile tf)
+        private void InitializeTest(TestFile tf)
         {
+            _pdfProcessor = BuildPdfProcessor();
+
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _th = container.GetInstance<TestHelper>();
-            _th.InitTempFolder("PDFProcessing_IText_XMPMetadata");
-
+            _th.InitTempFolder($"PDFProcessing_{_pdfProcessor.GetType().Name}_XMPMetadata");
             _th.GenerateGsJob_WithSetOutput(tf);
 
             //Settings of the set outputfile
@@ -27,20 +29,19 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             _th.Job.JobInfo.Metadata.Subject = "Test Subject";
             _th.Job.JobInfo.Metadata.Keywords = "Test Keywords";
             _th.Job.JobInfo.Metadata.Author = "Test Author";
-
-            _pdfProcessor = BuildPdfProcessor();
         }
 
         [TearDown]
         public void CleanUp()
         {
             _th.CleanUp();
+            FinalizePdfProcessor();
         }
 
         [Test]
         public void CheckForXMPMetadataUpdateStrings_PDFA1b()
         {
-            SetUp(TestFile.TestpagePDFA1b);
+            InitializeTest(TestFile.TestpagePDFA1b);
 
             _pdfProcessor.ProcessPdf(_th.Job);
 
@@ -50,7 +51,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         [Test]
         public void CheckForXMPMetadataUpdateStrings_PDFA2b()
         {
-            SetUp(TestFile.TestpagePDFA2b);
+            InitializeTest(TestFile.TestpagePDFA2b);
 
             _pdfProcessor.ProcessPdf(_th.Job);
 

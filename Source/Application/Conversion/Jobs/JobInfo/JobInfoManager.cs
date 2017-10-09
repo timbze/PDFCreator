@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using pdfforge.DataStorage;
+using pdfforge.DataStorage.Storage;
+using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using pdfforge.DataStorage;
-using pdfforge.DataStorage.Storage;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 {
@@ -135,7 +135,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
             ini.SetData(infData);
             ini.ReadData(infFile);
 
-            var sourceFiles = new List<SourceFileInfo>();
+            var sourceFiles = new ObservableCollection<SourceFileInfo>();
             var sourceFileReader = new SourceFileInfoDataReader();
             foreach (var section in infData.GetSections())
             {
@@ -154,6 +154,8 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
                 jobInfo.JobType = sourceFiles[0].Type;
             }
             jobInfo.Metadata = metadata;
+
+            jobInfo.PrintDateTime = File.GetCreationTime(infFile);
 
             return jobInfo;
         }

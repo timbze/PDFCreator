@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {
@@ -14,22 +13,22 @@ namespace pdfforge.PDFCreator.Core.Workflow
         Job BuildJobFromJobInfo(JobInfo jobInfo, PdfCreatorSettings settings);
     }
 
-    public class JobBuilder : IJobBuilder
+    public abstract class JobBuilder : IJobBuilder
     {
-        private readonly IJobFinishedHandler _jobFinishedHandler;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IMailSignatureHelper _mailSignatureHelper;
 
-        public JobBuilder(IMailSignatureHelper mailSignatureHelper, IJobFinishedHandler jobFinishedHandler)
+        public JobBuilder(IMailSignatureHelper mailSignatureHelper)
         {
             _mailSignatureHelper = mailSignatureHelper;
-            _jobFinishedHandler = jobFinishedHandler;
         }
+
+        public abstract Job SkipPrintDialog(Job job);
 
         public Job BuildJobFromJobInfo(JobInfo jobInfo, PdfCreatorSettings settings)
         {
             _logger.Trace("Building Job from JobInfo");
-            
+
             var preselectedProfile = PreselectedProfile(jobInfo, settings).Copy();
 
             _logger.Debug("Profile: {0} (GUID {1})", preselectedProfile.Name, preselectedProfile.Guid);
@@ -38,8 +37,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
 
             var job = new Job(jobInfo, preselectedProfile, jobTranslations, settings.ApplicationSettings.Accounts);
 
-            if (!job.Profile.AutoSave.Enabled) // TODO this should be set somewhere else
-                job.OnJobCompleted += _jobFinishedHandler.OnJobFinished;
+            SkipPrintDialog(job);
 
             return job;
         }
@@ -79,6 +77,31 @@ namespace pdfforge.PDFCreator.Core.Workflow
         private ConversionProfile GetDefaultProfile(IList<ConversionProfile> conversionProfiles)
         {
             return conversionProfiles.FirstOrDefault(p => p.IsDefault);
+        }
+    }
+
+    public class JobBuilderFree : JobBuilder
+    {
+        public JobBuilderFree(IMailSignatureHelper mailSignatureHelper) : base(mailSignatureHelper)
+        {
+        }
+
+        public override Job SkipPrintDialog(Job job)
+        {
+            job.Profile.SkipPrintDialog = false;
+            return job;
+        }
+    }
+
+    public class JobBuilderPlus : JobBuilder
+    {
+        public JobBuilderPlus(IMailSignatureHelper mailSignatureHelper) : base(mailSignatureHelper)
+        {
+        }
+
+        public override Job SkipPrintDialog(Job job)
+        {
+            return job;
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using NLog;
 using pdfforge.PDFCreator.Core.ComImplementation;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
+using System.Runtime.InteropServices;
 
 namespace pdfforge.PDFCreator.UI.COM
 {
@@ -10,15 +12,24 @@ namespace pdfforge.PDFCreator.UI.COM
     public interface IQueue
     {
         void Initialize();
+
         bool WaitForJob(int timeOut);
+
         bool WaitForJobs(int jobCount, int timeOut);
+
         int Count { get; }
         PrintJob NextJob { get; }
+
         PrintJob GetJobByIndex(int jobIndex);
+
         void MergeJobs(PrintJob job1, PrintJob job2);
+
         void MergeAllJobs();
+
         void Clear();
+
         void DeleteJob(int index);
+
         void ReleaseCom();
     }
 
@@ -31,15 +42,24 @@ namespace pdfforge.PDFCreator.UI.COM
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly IPrintJobAdapterFactory _printJobAdapterFactory;
         private readonly QueueAdapter _queueAdapter;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public Queue()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            try
+            {
+                var builder = new ComDependencyBuilder();
+                var dependencies = builder.ComDependencies;
 
-            _queueAdapter = dependencies.QueueAdapter;
-            _printJobAdapterFactory = _queueAdapter.PrintJobAdapterFactory;
-            _jobInfoQueue = _queueAdapter.JobInfoQueue;
+                _queueAdapter = dependencies.QueueAdapter;
+                _printJobAdapterFactory = _queueAdapter.PrintJobAdapterFactory;
+                _jobInfoQueue = _queueAdapter.JobInfoQueue;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -47,7 +67,15 @@ namespace pdfforge.PDFCreator.UI.COM
         /// </summary>
         public void Initialize()
         {
-            _queueAdapter.Initialize();
+            try
+            {
+                _queueAdapter.Initialize();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                throw;
+            }
         }
 
         /// <summary>

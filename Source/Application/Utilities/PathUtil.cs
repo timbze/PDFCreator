@@ -12,11 +12,17 @@ namespace pdfforge.PDFCreator.Utilities
     {
         // ReSharper disable once InconsistentNaming
         int MAX_PATH { get; }
+
         string GetLongDirectoryName(string givenPath);
+
         string EllipsisForPath(string filePath, int length);
+
         string EllipsisForTooLongPath(string filePath);
+
         bool DirectoryIsEmpty(string path);
+
         bool CheckWritability(string directory);
+
         bool IsValidRootedPath(string path);
     }
 
@@ -63,13 +69,13 @@ namespace pdfforge.PDFCreator.Utilities
         public string EllipsisForPath(string filePath, int length)
         {
             if (filePath == null)
-                throw new ArgumentNullException("filePath");
+                throw new ArgumentNullException(nameof(filePath));
 
             if (filePath.EndsWith("\\"))
-                throw new ArgumentException("filePath");
+                throw new ArgumentException("The path has to be a file", nameof(filePath));
 
             if ((length < 10) || (length > MAX_PATH))
-                throw new ArgumentException("length");
+                throw new ArgumentException($"The desired length must be between 10 and {MAX_PATH}", nameof(length));
 
             if (filePath.Length > length)
             {
@@ -84,7 +90,7 @@ namespace pdfforge.PDFCreator.Utilities
                 if (remainingLength < 4)
                     throw new ArgumentException(filePath);
 
-                var partLength = remainingLength/2;
+                var partLength = remainingLength / 2;
 
                 file = file.Substring(0, partLength) + ellipsis + file.Substring(file.Length - partLength, partLength);
                 filePath = _pathSafe.Combine(path, file + ext);

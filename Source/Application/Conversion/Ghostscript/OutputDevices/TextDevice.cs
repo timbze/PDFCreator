@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -31,7 +31,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 
         private void AddPs2AsciiParameters(IList<string> parameters)
         {
-            //Solution with ps2ascii file, has problems with Office Open XML formats 
+            //Solution with ps2ascii file, has problems with Office Open XML formats
 
             parameters.Add("-dNODISPLAY");
             parameters.Add("-dDELAYBIND");
@@ -45,7 +45,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
         {
             // Solution with gs Textdevice
             //
-            // There are 4 values for dTextFormat 
+            // There are 4 values for dTextFormat
             // 0 and 1 output XML-escaped Unicode along with information regarding the format of the text...
             // 2/3 outputs Unicode(UCS2)/UTF-8 text which approximates the layout of the original document.
             //

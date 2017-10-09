@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance d:Type = designTime:DesignTimeArchitectViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/Logos.xaml" />
+                <ResourceDictionary Source="../../Styles/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid MaxWidth="800">
+            <Grid.Resources>
+                <converter:BoolToVisibilityConverter x:Key="VisibleWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
+                <converter:BoolToVisibilityConverter x:Key="VisibleWhenFalse" TrueValue="Collapsed" FalseValue="Visible" />
+                <converter:CaseConverter x:Key="UpperCaseConverter"  Case="Upper" />
+            </Grid.Resources>
+            <Grid MaxHeight="600" VerticalAlignment="Center">
+                <StackPanel Margin="5">
+                    <DockPanel Margin="0 0 0 10">
+                        <ContentControl Focusable="False"
+                                        Content="{StaticResource PDFArchitectLogo}"
+                                        MaxHeight="50"
+                                        MaxWidth="250"
+                                        Margin="10" />
+                        <TextBlock FontWeight="DemiBold"
+                               Foreground="#C5091D"
+                               FontSize="24"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="10 0"
+                               Text="{Binding Translation.FullFeatured, Converter={StaticResource UpperCaseConverter}}" />
+                    </DockPanel>
+                    <Border SnapsToDevicePixels="True"
+                            BorderBrush="#DEDEDE"
+                            BorderThickness="1"
+                            Background="#F6F6F6">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap"
+                                       FontSize="16"
+                                       Margin="10"
+                                       FontWeight="DemiBold"
+                                       HorizontalAlignment="Center"
+                                       Text="{Binding Translation.EnjoyFreeFeatures, Converter={StaticResource UpperCaseConverter}}" />
+
+                            <UniformGrid Columns="3" Margin="20" HorizontalAlignment="Center">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="FontWeight" Value="Light" />
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="Margin" Value="10 0 20 0" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+
+                                    <Style TargetType="DockPanel">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="0 5" />
+                                    </Style>
+
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Foreground" Value="#7C7E7D" />
+                                        <Setter Property="Focusable" Value="False" />
+                                        <Setter Property="MaxHeight" Value="32" />
+                                    </Style>
+                                </UniformGrid.Resources>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.BookO}" />
+                                    <TextBlock Text="{Binding Translation.ViewAndPrint}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.FilesTextPlusO}" />
+                                    <TextBlock Text="{Binding Translation.CreatePdfFiles}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.FilesO}" />
+                                    <TextBlock Text="{Binding Translation.SplitAndMerge}" />
+                                </DockPanel>
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border SnapsToDevicePixels="True"
+                            BorderBrush="#EEEEEE"
+                            Background="#FAFAFA"
+                            BorderThickness="1 0 1 1">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap"
+                                       FontSize="16"
+                                       Margin="10"
+                                       FontWeight="DemiBold"
+                                       HorizontalAlignment="Center"
+                                       Text="{Binding Translation.ProFeatures, Converter={StaticResource UpperCaseConverter}}" />
+
+                            <UniformGrid Columns="2" Margin="20" HorizontalAlignment="Center">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="FontWeight" Value="Light" />
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="Margin" Value="5" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+
+                                    <Style TargetType="DockPanel">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Width" Value="250" />
+                                        <Setter Property="Margin" Value="0 5" />
+                                    </Style>
+
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Foreground" Value="#7C7E7D" />
+                                        <Setter Property="Focusable" Value="False" />
+                                        <Setter Property="MaxHeight" Value="32" />
+                                    </Style>
+                                </UniformGrid.Resources>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.PencilSquareO}" />
+                                    <TextBlock Text="{Binding Translation.EditPdfFiles}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.SignIn}" />
+                                    <TextBlock Text="{Binding Translation.InsertPageElements}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.Refresh}" />
+                                    <TextBlock Text="{Binding Translation.ConvertPdfFiles}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.ListAlt}" />
+                                    <TextBlock Text="{Binding Translation.CreateForms}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.Paperclip}" />
+                                    <TextBlock Text="{Binding Translation.ReviewAndAnnotate}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.Font}" />
+                                    <TextBlock Text="{Binding Translation.Ocr}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.Lock}" />
+                                    <TextBlock Text="{Binding Translation.SecureAndProtect}" />
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <ContentControl Content="{StaticResource FontAwesome.PaperPlaneO}" />
+                                    <TextBlock Text="{Binding Translation.SendESign}" />
+                                </DockPanel>
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Margin="10 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center"
+                            Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenFalse}}">
+                        <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150"
+                            Command="{Binding LaunchWebsiteCommand}"
+                            Content="{Binding Translation.GetPdfArchitectButtonContent}"
+                            Style="{DynamicResource LargeGreyButton}" />
+                        <Button HorizontalAlignment="Center" Padding="10" Margin="5" MinWidth="150"
+                            Command="{Binding DownloadPdfArchitectCommand}"
+                            Content="{Binding Translation.DownloadPdfArchitectButtonContent}"
+                            Style="{DynamicResource LargeGreenButton}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10 20 0 0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Visibility="{Binding IsPdfArchitectInstalled, Converter={StaticResource VisibleWhenTrue}}">
+
+                        <TextBlock VerticalAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Margin="0 0 20 00" FontSize="18"
+                                   FontWeight="DemiBold"
+                                   Text="{Binding Translation.PdfArchitectInstalledText}" />
+
+                        <Button HorizontalAlignment="Center" Padding="10"
+                            Command="{Binding LaunchPdfArchitectCommand}"
+                            Content="{Binding Translation.LaunchPdfArchitectButtonContent}"
+                            Style="{DynamicResource LargeGreenButton}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

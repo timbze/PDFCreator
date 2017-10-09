@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using NLog;
+﻿using NLog;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -21,8 +21,10 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 
         public void CheckAll()
         {
+            _logger.Trace("Checking installation...");
             foreach (var startupCondition in _startupConditions)
             {
+                _logger.Trace("Checking " + startupCondition.GetType().Name);
                 var result = startupCondition.Check();
 
                 if (result.IsSuccessful)

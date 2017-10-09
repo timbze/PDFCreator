@@ -1,8 +1,8 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using System;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript
 {
@@ -10,7 +10,6 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
     {
         private readonly IGhostscriptDiscovery _ghostscriptDiscovery;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
 
         public GhostScriptPrinter(IGhostscriptDiscovery ghostscriptDiscovery)
         {

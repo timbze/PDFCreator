@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.IO;
+using System.Text;
 
 namespace PDFCreator.TestUtilities
 {
@@ -30,15 +30,15 @@ namespace PDFCreator.TestUtilities
             //User password
             //File can only be opened with user password is user pw is required.
             //Note: If encryption is disabled, the files can be opened with PdfReader using any password.
-            //      If encryption is enabled, it is not possible, although no password is required.    
+            //      If encryption is enabled, it is not possible, although no password is required.
             //File can be edited with user password if no owner password is requested (respectively security is disabled).
             PasswordTest(testFile, askUserPw || !profile.PdfSettings.Security.Enabled, !profile.PdfSettings.Security.Enabled, passwords.PdfUserPassword);
 
-            //Without password 
+            //Without password
             //File can be opened without password if no user password is requested (or security is disabled (of course...)).
             //File can only be opened with a bad password if user pw is required.
             //Note: If encryption is disabled, the files can be opened with PdfReader using any password.
-            //      If encryption is enabled, it is not possible, although no password is required. 
+            //      If encryption is enabled, it is not possible, although no password is required.
             //File can be edited without (or bad) password if no owner password is requested (respectively security is disabled).
             PasswordTest(testFile, !askUserPw, !profile.PdfSettings.Security.Enabled);
             PasswordTest(testFile, !profile.PdfSettings.Security.Enabled, !profile.PdfSettings.Security.Enabled, "BadPassword" + DateTime.Now.Millisecond);
@@ -190,7 +190,7 @@ namespace PDFCreator.TestUtilities
                 Assert.AreEqual(PdfWriter.ALLOW_DEGRADED_PRINTING, permissionCode & PdfWriter.ALLOW_PRINTING,
                     "No Restriction to degraded printing (" + profile.PdfSettings.Security.EncryptionLevel + ")");
 
-            //Extended permission set automatically for 40BitEncryption 
+            //Extended permission set automatically for 40BitEncryption
             if (profile.PdfSettings.Security.AllowToEditAssembly || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc40Bit))
                 Assert.AreEqual(PdfWriter.ALLOW_ASSEMBLY, permissionCode & PdfWriter.ALLOW_ASSEMBLY,
                     "Requested Allow-Assembly is not set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
@@ -198,7 +198,7 @@ namespace PDFCreator.TestUtilities
                 Assert.AreEqual(0, permissionCode & PdfWriter.ALLOW_ASSEMBLY,
                     "Unrequested Allow-Assembly is set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
 
-            //Extended permission set automatically for 40BitEncryption 
+            //Extended permission set automatically for 40BitEncryption
             if (profile.PdfSettings.Security.AllowToFillForms || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc40Bit))
                 Assert.AreEqual(PdfWriter.ALLOW_FILL_IN, permissionCode & PdfWriter.ALLOW_FILL_IN,
                     "Requested Allow-Fill-In is not set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
@@ -206,7 +206,7 @@ namespace PDFCreator.TestUtilities
                 Assert.AreEqual(0, permissionCode & PdfWriter.ALLOW_FILL_IN,
                     "Unrequested Allow-Fill-In is set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
 
-            //Extended permission set automatically for 40BitEncryption    
+            //Extended permission set automatically for 40BitEncryption
             if (profile.PdfSettings.Security.AllowScreenReader || (profile.PdfSettings.Security.EncryptionLevel == EncryptionLevel.Rc40Bit))
                 Assert.AreEqual(PdfWriter.ALLOW_SCREENREADERS, permissionCode & PdfWriter.ALLOW_SCREENREADERS,
                     "Requested Allow-ScreenReaders is not set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
@@ -214,7 +214,7 @@ namespace PDFCreator.TestUtilities
                 Assert.AreEqual(0, permissionCode & PdfWriter.ALLOW_SCREENREADERS,
                     "Unrequested Allow-ScreenReaders is set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
 
-            #endregion
+            #endregion check permissions
         }
 
         private static void CheckEncryptionLevel(ConversionProfile profile, bool IsIText, PdfReader pdfReader)
@@ -224,12 +224,15 @@ namespace PDFCreator.TestUtilities
                 case EncryptionLevel.Rc40Bit:
                     Assert.AreEqual(0, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 40Bit");
                     break;
+
                 case EncryptionLevel.Rc128Bit:
                     Assert.AreEqual(1, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 128Bit");
                     break;
+
                 case EncryptionLevel.Aes128Bit:
                     Assert.AreEqual(2, pdfReader.GetCryptoMode(), "Wrong Encrypt-Mode for 128BitAES");
                     break;
+
                 case EncryptionLevel.Aes256Bit:
                     if (IsIText)
                     {

@@ -1,0 +1,26 @@
+﻿using Translatable;
+
+namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt
+{
+    public class EncryptUserControlTranslation : ITranslatable
+    {
+        public string UserPasswordCheckBox { get; private set; } = "Require a password to open the PDF document";
+        public string SecurityPasswordsButton { get; private set; } = "Set Passwords";
+
+        public string EncryptionLevelHeader { get; private set; } = "Encryption Level";
+        public string Rc128BitEncryptionText { get; private set; } = "Low (128 Bit)";
+        public string Rc128BitEncryptionHint { get; private set; } = "This is not considered secure anymore. Use this for compatibility only.";
+        public string Aes128BitEncryptionText { get; private set; } = "Medium (128 Bit AES)";
+        public string Aes256BitEncryptionText { get; private set; } = "High (256 Bit AES)";
+        public string AllowTheUser { get; private set; } = "Allow the user";
+        public string CopyContentPermissionCheckBox { get; private set; } = "to copy content from the document";
+        public string PrintDocumentPermissionCheckbox { get; private set; } = "to print the document";
+        public string LowQualityPrintPermissionCheckBox { get; private set; } = "restrict to low quality";
+        public string ScreenReaderPermissionCheckBox { get; private set; } = "to use a screen reader";
+        public string EditDocumentPermissionCheckBox { get; private set; } = "to edit the document";
+        public string EditCommentsPermissionCheckBox { get; private set; } = "to edit comments";
+        public string FillFormsPermissionCheckBox { get; private set; } = "to fill forms";
+        public string EditAssemblyPermissionCheckBox { get; private set; } = "to edit the assembly";
+        public string PasswordTitle { get; private set; } = "Password";
+    }
+}

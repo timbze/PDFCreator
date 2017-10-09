@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpAccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             mc:Ignorable="d"
+             Width="400"
+             d:DataContext="{d:DesignInstance designTime:DesignTimeSmtpAccountViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <converter:BoolNegationConverter x:Key="NegationConverter" />
+    </UserControl.Resources>
+    <DockPanel Margin ="10 5 10 10" HorizontalAlignment="Stretch">
+        <StackPanel DockPanel.Dock="Top">
+            <Label Content="{Binding Translation.EmailAddressLabel}" />
+            <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="{Binding Translation.UserNameLabel}" />
+            <TextBox Text="{Binding Username,  UpdateSourceTrigger=PropertyChanged}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="{Binding Translation.ServerLabel}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Server, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Translation.PortLabel}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5 0" MinWidth="30"
+                         Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" IsChecked="{Binding Ssl, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBlock Text="{Binding Translation.Ssl}" />
+                </CheckBox>
+            </Grid>
+            <StackPanel IsEnabled="{Binding AskForPasswordLater, Converter={StaticResource NegationConverter}}">
+                <Label Content="{Binding Translation.PasswordLabel, UpdateSourceTrigger=PropertyChanged}" />
+                <PasswordBox Name="ServerPasswordBox" PasswordChar="•"
+                             PasswordChanged="ServerPasswordBox_OnPasswordChanged" />
+            </StackPanel>
+            <CheckBox Margin="0 5 0 20" IsChecked="{Binding AskForPasswordLater}">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.DontSavePassword}" />
+            </CheckBox>
+        </StackPanel>
+        <UniformGrid DockPanel.Dock="Bottom" Height="35" Rows="1" VerticalAlignment="Bottom">
+            <Button Content="{Binding Translation.Save}" Command="{Binding SaveCommand}" Margin="0 0 5 0" Style="{DynamicResource LightGreyButton}" />
+            <Button Content="{Binding Translation.Cancel}" Command="{Binding CancelCommand}" Margin ="5 0 0 0" Style="{DynamicResource LightGreyButton}" />
+        </UniformGrid>
+    </DockPanel>
+</UserControl>

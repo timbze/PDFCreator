@@ -1,6 +1,6 @@
 ﻿using Optional;
-using pdfforge.LicenseValidator.Interface.Data;
 using pdfforge.LicenseValidator.Interface;
+using pdfforge.LicenseValidator.Interface.Data;
 
 namespace pdfforge.PDFCreator.Core.Services.Licensing
 {
@@ -40,7 +40,6 @@ namespace pdfforge.PDFCreator.Core.Services.Licensing
 
         public void SaveActivation(Activation activation)
         {
-            
         }
     }
 }

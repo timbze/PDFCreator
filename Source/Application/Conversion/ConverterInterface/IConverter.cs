@@ -1,11 +1,12 @@
-﻿using System;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using System;
 
 namespace pdfforge.PDFCreator.Conversion.ConverterInterface
 {
     public interface IConverter
     {
         void DoConversion(Job job);
+
         event EventHandler<ConversionProgressChangedEventArgs> OnReportProgress;
     }
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -83,12 +83,14 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                         parameters.Add("<< /Duplex true /Tumble false >> setpagedevice ");
                     }
                     break;
+
                 case DuplexPrint.ShortEdge: //Calendar
                     if (_printer.CanDuplex)
                     {
                         parameters.Add("<< /Duplex true /Tumble true >> setpagedevice ");
                     }
                     break;
+
                 case DuplexPrint.Disable:
                 default:
                     //Nothing

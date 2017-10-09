@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Core.ComImplementation.Error;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.COM;
 using pdfforge.PDFCreator.Utilities.Threading;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.ComImplementation
 {
@@ -137,16 +136,14 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
                 }
 
                 Logger.Trace("COM: Creating workflow");
-                var errorNotifier = new ErrorNotifierCom();
-
-                var workflow = _workflowFactory.BuildWorkflow(targetFilename, errorNotifier);
+                var workflow = _workflowFactory.BuildWorkflow(targetFilename);
 
                 Logger.Trace("COM: Running workflow");
                 var workflowResult = workflow.RunWorkflow(job);
 
                 if (workflowResult == WorkflowResult.Error)
                 {
-                    var errorCode = errorNotifier.Error[0];
+                    var errorCode = workflow.LastError.Value;
                     throw new COMException(_errorCodeInterpreter.GetErrorText(errorCode, true));
                 }
 

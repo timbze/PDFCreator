@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {

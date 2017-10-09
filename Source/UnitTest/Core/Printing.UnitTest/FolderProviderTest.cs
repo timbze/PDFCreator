@@ -1,10 +1,10 @@
-﻿using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Printing;
 using pdfforge.PDFCreator.Core.Printing.Port;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Printing
 {

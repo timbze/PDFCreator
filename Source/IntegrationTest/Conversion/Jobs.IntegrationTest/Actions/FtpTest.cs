@@ -1,28 +1,46 @@
-﻿using System;
+﻿using FtpLib;
+using NUnit.Framework;
+using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using SimpleInjector;
+using System;
 using System.IO;
 using System.Net;
-using FtpLib;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Actions.Actions;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
-using SimpleInjector;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class FtpTest
     {
         private TestHelper _th;
+        private FtpAccount _ftpTestAccount;
+        private Accounts _accounts;
 
         [SetUp]
         public void SetUp()
         {
+            _ftpTestAccount = new FtpAccount();
+            _ftpTestAccount.AccountId = "FtpTestAccountID";
+            _ftpTestAccount.Server = ParameterHelper.GetPassword("ftp_server");
+            _ftpTestAccount.UserName = ParameterHelper.GetPassword("ftp_user");
+            _ftpTestAccount.Password = ParameterHelper.GetPassword("ftp_password");
+
             var bootstrapper = new IntegrationTestBootstrapper();
+
             _container = bootstrapper.ConfigureContainer();
+            _container.Options.AllowOverridingRegistrations = true;
+            _container.Options.AllowOverridingRegistrations = false;
+
             _th = _container.GetInstance<TestHelper>();
             _th.InitTempFolder("FtpTest");
+
+            _th.Profile.Ftp.Enabled = true;
+            _th.Profile.Ftp.AccountId = _ftpTestAccount.AccountId;
+
+            _accounts = new Accounts();
+            _accounts.FtpAccounts.Add(_ftpTestAccount);
         }
 
         [TearDown]
@@ -31,10 +49,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _th.CleanUp();
         }
 
-
-        private readonly string _ftpServer = ParameterHelper.GetPassword("ftp_server");
-        private readonly string _userName = ParameterHelper.GetPassword("ftp_user");
-        private readonly string _password = ParameterHelper.GetPassword("ftp_password");
         private Container _container;
 
         private void VerifyFileUpload(string ftpDirectory)
@@ -42,17 +56,17 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             foreach (var file in _th.Job.OutputFiles)
             {
                 // Get the object used to communicate with the server.
-                var downloadUrl = "ftp://" + _th.Profile.Ftp.Server + "/" + ftpDirectory + "/" + Path.GetFileName(file);
-                var request = (FtpWebRequest) WebRequest.Create(new Uri(downloadUrl));
+                var downloadUrl = "ftp://" + _ftpTestAccount.Server + "/" + ftpDirectory + "/" + Path.GetFileName(file);
+                var request = (FtpWebRequest)WebRequest.Create(new Uri(downloadUrl));
                 request.Method = WebRequestMethods.Ftp.DownloadFile;
 
-                request.Credentials = new NetworkCredential(_th.Job.Profile.Ftp.UserName, _th.Job.Passwords.FtpPassword);
+                request.Credentials = new NetworkCredential(_ftpTestAccount.UserName, _ftpTestAccount.Password);
 
                 var fi = new FileInfo(file);
 
                 try
                 {
-                    var response = (FtpWebResponse) request.GetResponse();
+                    var response = (FtpWebResponse)request.GetResponse();
                     var responseStream = response.GetResponseStream();
 
                     Assert.IsNotNull(responseStream);
@@ -72,7 +86,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
         private void ClearFtp()
         {
-            var ftp = new FtpConnection(_ftpServer, _userName, _password);
+            var ftp = new FtpConnection(_ftpTestAccount.Server, _ftpTestAccount.UserName, _ftpTestAccount.Password);
             ftp.Open();
             ftp.Login();
 
@@ -108,14 +122,12 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             ClearFtp();
 
-            _th.Profile.Ftp.Enabled = true;
-            _th.Profile.Ftp.Server = _ftpServer;
             _th.Profile.Ftp.Directory = "testdirectory/<PrintJobAuthor>";
-            _th.Profile.Ftp.UserName = _userName;
             _th.Profile.Ftp.EnsureUniqueFilenames = true;
 
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Jpeg);
-            _th.Job.Passwords.FtpPassword = _password;
+            _th.Job.Passwords.FtpPassword = _ftpTestAccount.Password;
+            _th.Job.Accounts = _accounts;
 
             var ftp = _container.GetInstance<FtpAction>();
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile("FtpTest", "test.pdf"));
@@ -129,14 +141,12 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             ClearFtp();
 
-            _th.Profile.Ftp.Enabled = true;
-            _th.Profile.Ftp.Server = _ftpServer;
             _th.Profile.Ftp.Directory = "testdirectory/<InvalidChars>";
-            _th.Profile.Ftp.UserName = _userName;
             _th.Profile.Ftp.EnsureUniqueFilenames = true;
 
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Jpeg);
-            _th.Job.Passwords.FtpPassword = _password;
+            _th.Job.Passwords.FtpPassword = _ftpTestAccount.Password;
+            _th.Job.Accounts = _accounts;
 
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile("FtpTest", "test.pdf"));
             _th.Job.TokenReplacer.AddStringToken("InvalidChars", "Invalid|><:*?\"Chars");
@@ -152,15 +162,12 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             ClearFtp();
 
-            _th.Profile.Ftp.Enabled = true;
-            _th.Profile.Ftp.Server = _ftpServer;
             _th.Profile.Ftp.Directory = "testdirectory/abc";
-            _th.Profile.Ftp.UserName = _userName;
             _th.Profile.Ftp.EnsureUniqueFilenames = true;
 
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Jpeg);
-
-            _th.Job.Passwords.FtpPassword = _password;
+            _th.Job.Passwords.FtpPassword = _ftpTestAccount.Password;
+            _th.Job.Accounts = _accounts;
 
             var ftp = _container.GetInstance<FtpAction>();
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile("FtpTest", "test.pdf"));
@@ -175,15 +182,12 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             ClearFtp();
 
-            _th.Profile.Ftp.Enabled = true;
-            _th.Profile.Ftp.Server = _ftpServer;
             _th.Profile.Ftp.Directory = "";
-            _th.Profile.Ftp.UserName = _userName;
             _th.Profile.Ftp.EnsureUniqueFilenames = true;
 
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Jpeg);
-
-            _th.Job.Passwords.FtpPassword = _password;
+            _th.Job.Passwords.FtpPassword = _ftpTestAccount.Password;
+            _th.Job.Accounts = _accounts;
 
             var ftp = _container.GetInstance<FtpAction>();
             _th.Job.OutputFiles.Add(TempFileHelper.CreateTempFile("FtpTest", "test.pdf"));

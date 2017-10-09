@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,28 +15,23 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Appends one or more pages at the end of the converted document
 	/// </summary>
-	public class AttachmentPage {
+	[ImplementPropertyChanged]
+	public partial class AttachmentPage : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Enables the AttachmentPage action
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Filename of the PDF that will be appended
 		/// </summary>
-		public string File { get; set; }
+		public string File { get; set; } = "";
 		
-		
-		private void Init() {
-			Enabled = false;
-			File = "";
-		}
-		
-		public AttachmentPage()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

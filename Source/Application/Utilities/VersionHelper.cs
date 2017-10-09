@@ -1,29 +1,32 @@
 ﻿using System;
+using System.Reflection;
 
 namespace pdfforge.PDFCreator.Utilities
 {
     public interface IVersionHelper
     {
         Version ApplicationVersion { get; }
+
         string FormatWithTwoDigits();
+
         string FormatWithThreeDigits();
+
         string FormatWithBuildNumber();
     }
 
     public class VersionHelper : IVersionHelper
     {
-        private readonly IAssemblyHelper _assemblyHelper;
-        private Version _applicationVersion;
-
-        public VersionHelper(IAssemblyHelper assemblyHelper)
+        public VersionHelper(Version applicationVersion)
         {
-            _assemblyHelper = assemblyHelper;
+            ApplicationVersion = applicationVersion;
         }
 
-        public Version ApplicationVersion
+        public VersionHelper(Assembly assembly)
         {
-            get { return _applicationVersion ?? (_applicationVersion = _assemblyHelper.GetPdfforgeAssemblyVersion()); }
+            ApplicationVersion = assembly.GetName().Version;
         }
+
+        public Version ApplicationVersion { get; }
 
         /// <summary>
         ///     Get current application version as string

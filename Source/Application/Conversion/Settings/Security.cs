@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,111 +16,95 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// PDF Security options
 	/// </summary>
-	public class Security {
+	[ImplementPropertyChanged]
+	public partial class Security : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Allow to user to print the document
 		/// </summary>
-		public bool AllowPrinting { get; set; }
+		public bool AllowPrinting { get; set; } = true;
 		
 		/// <summary>
 		/// Allow to user to use a screen reader
 		/// </summary>
-		public bool AllowScreenReader { get; set; }
+		public bool AllowScreenReader { get; set; } = true;
 		
 		/// <summary>
 		/// Allow to user to copy content from the PDF
 		/// </summary>
-		public bool AllowToCopyContent { get; set; }
+		public bool AllowToCopyContent { get; set; } = false;
 		
 		/// <summary>
 		/// Allow to user to make changes to the assembly
 		/// </summary>
-		public bool AllowToEditAssembly { get; set; }
+		public bool AllowToEditAssembly { get; set; } = false;
 		
 		/// <summary>
 		/// Allow to user to edit comments
 		/// </summary>
-		public bool AllowToEditComments { get; set; }
+		public bool AllowToEditComments { get; set; } = false;
 		
 		/// <summary>
 		/// Allow to user to edit the document
 		/// </summary>
-		public bool AllowToEditTheDocument { get; set; }
+		public bool AllowToEditTheDocument { get; set; } = false;
 		
 		/// <summary>
 		/// Allow to user to fill in forms
 		/// </summary>
-		public bool AllowToFillForms { get; set; }
+		public bool AllowToFillForms { get; set; } = true;
 		
 		/// <summary>
 		/// If true, the PDF file will be password protected
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
-		/// Defines the encryption level. Valid values are: Rc40Bit, Rc128Bit, Aes128Bit
+		/// Defines the encryption level.
 		/// </summary>
-		public EncryptionLevel EncryptionLevel { get; set; }
+		public EncryptionLevel EncryptionLevel { get; set; } = EncryptionLevel.Aes256Bit;
 		
 		/// <summary>
 		/// Password that can be used to modify the document
 		/// </summary>
-		private string _ownerPassword;
+		private string _ownerPassword = "";
 		public string OwnerPassword { get { try { return Data.Decrypt(_ownerPassword); } catch { return ""; } } set { _ownerPassword = Data.Encrypt(value); } }
 		
 		/// <summary>
 		/// If true, a password is required to open the document.
 		/// </summary>
-		public bool RequireUserPassword { get; set; }
+		public bool RequireUserPassword { get; set; } = false;
 		
 		/// <summary>
 		/// If true, only printing in low resolution will be supported
 		/// </summary>
-		public bool RestrictPrintingToLowQuality { get; set; }
+		public bool RestrictPrintingToLowQuality { get; set; } = false;
 		
 		/// <summary>
 		/// Password that must be used to open the document (if set)
 		/// </summary>
-		private string _userPassword;
+		private string _userPassword = "";
 		public string UserPassword { get { try { return Data.Decrypt(_userPassword); } catch { return ""; } } set { _userPassword = Data.Encrypt(value); } }
 		
-		
-		private void Init() {
-			AllowPrinting = true;
-			AllowScreenReader = true;
-			AllowToCopyContent = true;
-			AllowToEditAssembly = true;
-			AllowToEditComments = true;
-			AllowToEditTheDocument = true;
-			AllowToFillForms = true;
-			Enabled = false;
-			EncryptionLevel = EncryptionLevel.Rc128Bit;
-			OwnerPassword = "";
-			RequireUserPassword = false;
-			RestrictPrintingToLowQuality = true;
-			UserPassword = "";
-		}
-		
-		public Security()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{
 			try { AllowPrinting = bool.Parse(data.GetValue(@"" + path + @"AllowPrinting")); } catch { AllowPrinting = true;}
 			try { AllowScreenReader = bool.Parse(data.GetValue(@"" + path + @"AllowScreenReader")); } catch { AllowScreenReader = true;}
-			try { AllowToCopyContent = bool.Parse(data.GetValue(@"" + path + @"AllowToCopyContent")); } catch { AllowToCopyContent = true;}
-			try { AllowToEditAssembly = bool.Parse(data.GetValue(@"" + path + @"AllowToEditAssembly")); } catch { AllowToEditAssembly = true;}
-			try { AllowToEditComments = bool.Parse(data.GetValue(@"" + path + @"AllowToEditComments")); } catch { AllowToEditComments = true;}
-			try { AllowToEditTheDocument = bool.Parse(data.GetValue(@"" + path + @"AllowToEditTheDocument")); } catch { AllowToEditTheDocument = true;}
+			try { AllowToCopyContent = bool.Parse(data.GetValue(@"" + path + @"AllowToCopyContent")); } catch { AllowToCopyContent = false;}
+			try { AllowToEditAssembly = bool.Parse(data.GetValue(@"" + path + @"AllowToEditAssembly")); } catch { AllowToEditAssembly = false;}
+			try { AllowToEditComments = bool.Parse(data.GetValue(@"" + path + @"AllowToEditComments")); } catch { AllowToEditComments = false;}
+			try { AllowToEditTheDocument = bool.Parse(data.GetValue(@"" + path + @"AllowToEditTheDocument")); } catch { AllowToEditTheDocument = false;}
 			try { AllowToFillForms = bool.Parse(data.GetValue(@"" + path + @"AllowToFillForms")); } catch { AllowToFillForms = true;}
 			try { Enabled = bool.Parse(data.GetValue(@"" + path + @"Enabled")); } catch { Enabled = false;}
-			try { EncryptionLevel = (EncryptionLevel) Enum.Parse(typeof(EncryptionLevel), data.GetValue(@"" + path + @"EncryptionLevel")); } catch { EncryptionLevel = EncryptionLevel.Rc128Bit;}
+			try { EncryptionLevel = (EncryptionLevel) Enum.Parse(typeof(EncryptionLevel), data.GetValue(@"" + path + @"EncryptionLevel")); } catch { EncryptionLevel = EncryptionLevel.Aes256Bit;}
 			_ownerPassword = data.GetValue(@"" + path + @"OwnerPassword");
 			try { RequireUserPassword = bool.Parse(data.GetValue(@"" + path + @"RequireUserPassword")); } catch { RequireUserPassword = false;}
-			try { RestrictPrintingToLowQuality = bool.Parse(data.GetValue(@"" + path + @"RestrictPrintingToLowQuality")); } catch { RestrictPrintingToLowQuality = true;}
+			try { RestrictPrintingToLowQuality = bool.Parse(data.GetValue(@"" + path + @"RestrictPrintingToLowQuality")); } catch { RestrictPrintingToLowQuality = false;}
 			_userPassword = data.GetValue(@"" + path + @"UserPassword");
 		}
 		

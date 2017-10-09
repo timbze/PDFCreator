@@ -1,6 +1,6 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using System;
 using System.Collections.Generic;
-using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {

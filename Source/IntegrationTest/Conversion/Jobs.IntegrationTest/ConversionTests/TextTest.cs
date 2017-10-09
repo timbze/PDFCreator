@@ -1,15 +1,14 @@
-﻿using System.IO;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.IO;
 using System.Text;
 using System.Xml;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
     [TestFixture]
-    [Category("LongRunning")]
-    class TextTest
+    internal class TextTest
     {
         private TestHelper _th;
 
@@ -52,7 +51,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             Assert.AreEqual(1, _th.Job.OutputFiles.Count, "Job created more or less than one pdf text.");
             Assert.IsTrue(File.Exists(_th.Job.OutputFiles[0]), "Outputfile does not exist");
-            
+
             var doc = new XmlDocument();
             doc.Load(_th.Job.OutputFiles[0]);
 

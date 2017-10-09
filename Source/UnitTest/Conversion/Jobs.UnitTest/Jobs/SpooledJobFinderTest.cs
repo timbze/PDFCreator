@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using System;
+using System.IO;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -34,12 +34,12 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void ForEachInfFile_AddsJobInfo()
         {
-            var files = new[] {"one.inf", "two.inf", "three.inf", "other.inf"};
+            var files = new[] { "one.inf", "two.inf", "three.inf", "other.inf" };
             _dir.Exists(_spoolFolder).Returns(true);
 
             _dir.GetFiles(_spoolFolder, "*.inf", SearchOption.AllDirectories).Returns(files);
 
-            _jobManager.ReadFromInfFile(Arg.Any<string>()).Returns(x => new JobInfo {InfFile = x.Arg<string>()});
+            _jobManager.ReadFromInfFile(Arg.Any<string>()).Returns(x => new JobInfo { InfFile = x.Arg<string>() });
 
             var jobs = _spooledJobFinder.GetJobs();
             Assert.AreEqual(files.Length, jobs.Count());
@@ -48,6 +48,23 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             {
                 Assert.IsTrue(jobs.Any(x => x.InfFile.Equals(file)));
             }
+        }
+
+        [Test]
+        public void ForEachInfFile_AddsJobInfoOrderedByDate()
+        {
+            var files = new[] { "two.inf", "one.inf" };
+            _dir.Exists(_spoolFolder).Returns(true);
+
+            _dir.GetFiles(_spoolFolder, "*.inf", SearchOption.AllDirectories).Returns(files);
+
+            _jobManager.ReadFromInfFile(Arg.Any<string>()).Returns(x => new JobInfo { InfFile = x.Arg<string>(), PrintDateTime = x.Arg<string>() == "one.inf" ? DateTime.Now.AddHours(-1) : DateTime.Now });
+
+            var jobs = _spooledJobFinder.GetJobs().ToList();
+            Assert.AreEqual(files.Length, jobs.Count);
+
+            Assert.AreEqual("one.inf", jobs.First().InfFile);
+            Assert.AreEqual("two.inf", jobs.Skip(1).First().InfFile);
         }
 
         [Test]
@@ -60,7 +77,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void IfReadingInfThrowsException_DoesNotThrow()
         {
-            var files = new[] {"one.inf", "two.inf", "three.inf", "other.png"};
+            var files = new[] { "one.inf", "two.inf", "three.inf", "other.png" };
             _dir.Exists(_spoolFolder).Returns(true);
 
             _dir.GetFiles(_spoolFolder, "*.inf", SearchOption.AllDirectories).Returns(files);

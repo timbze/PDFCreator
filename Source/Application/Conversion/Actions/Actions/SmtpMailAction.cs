@@ -1,105 +1,87 @@
-﻿using System;
-using System.Net;
-using System.Net.Mail;
-using NLog;
-using pdfforge.PDFCreator.Conversion.Actions.Queries;
-using pdfforge.PDFCreator.Conversion.ActionsInterface;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using System;
+using System.Net;
+using System.Net.Mail;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
-    public class SmtpMailAction : IAction, ICheckable, ISmtpMailAction
+    public class SmtpMailAction : RetypePasswordActionBase, ISmtpMailAction
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly ISmtpPasswordProvider _passwordProvider;
 
-        public SmtpMailAction(ISmtpPasswordProvider passwordProvider)
-        {
-            _passwordProvider = passwordProvider;
-        }
+        protected override string PasswordText => "SMTP";
 
-        /// <summary>
-        ///     Sends the created files using SMTP
-        /// </summary>
-        /// <param name="job"></param>
-        /// <returns>An ActionResult to determine the success and a list of errors</returns>
-        public ActionResult ProcessJob(Job job)
-        {
-            Logger.Debug("Launched smtp mail action");
-            try
-            {
-                var result = SendMailOverSmtp(job);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Exception in smtp mail action:\r\n" + ex.Message);
-                return new ActionResult(ErrorCode.Smtp_GenericError);
-            }
-        }
-
-        public bool Init(Job job)
-        {
-            return _passwordProvider.SetPassword(job);
-        }
-
-        public bool IsEnabled(ConversionProfile profile)
-        {
-            return profile.EmailSmtpSettings.Enabled;
-        }
-
-        public ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public override ActionResult Check(ConversionProfile profile, Accounts accounts)
         {
             var actionResult = new ActionResult();
 
-            if (profile.EmailSmtpSettings.Enabled)
+            if (!profile.EmailSmtpSettings.Enabled)
+                return actionResult;
+
+            var smtpAccount = accounts.GetSmtpAccount(profile);
+
+            return Check(profile, smtpAccount);
+        }
+
+        private ActionResult Check(ConversionProfile profile, SmtpAccount smtpAccount)
+        {
+            var actionResult = new ActionResult();
+
+            if (smtpAccount == null)
             {
-                if (string.IsNullOrEmpty(profile.EmailSmtpSettings.Address))
-                {
-                    Logger.Error("No SMTP email address is specified.");
-                    actionResult.Add(ErrorCode.Smtp_NoEmailAddress);
-                }
-                if (string.IsNullOrEmpty(profile.EmailSmtpSettings.Recipients))
-                {
-                    Logger.Error("No SMTP email recipients are specified.");
-                    actionResult.Add(ErrorCode.Smtp_NoRecipients);
-                }
-                if (string.IsNullOrEmpty(profile.EmailSmtpSettings.Server))
-                {
-                    Logger.Error("No SMTP host is specified.");
-                    actionResult.Add(ErrorCode.Smtp_NoServerSpecified);
-                }
+                Logger.Error($"The specified SMTP account with ID \"{profile.EmailSmtpSettings.AccountId}\" is not configured.");
+                actionResult.Add(ErrorCode.Smtp_NoAccount);
+                return actionResult;
+            }
 
-                if (profile.EmailSmtpSettings.Port < 0)
-                {
-                    Logger.Error("Invalid SMTP port.");
-                    actionResult.Add(ErrorCode.Smtp_InvalidPort);
-                }
+            if (string.IsNullOrWhiteSpace(smtpAccount.Address))
+            {
+                Logger.Error("No SMTP email address is specified.");
+                actionResult.Add(ErrorCode.Smtp_NoEmailAddress);
+            }
+            if (string.IsNullOrWhiteSpace(profile.EmailSmtpSettings.Recipients))
+            {
+                Logger.Error("No SMTP email recipients are specified.");
+                actionResult.Add(ErrorCode.Smtp_NoRecipients);
+            }
+            if (string.IsNullOrWhiteSpace(smtpAccount.Server))
+            {
+                Logger.Error("No SMTP host is specified.");
+                actionResult.Add(ErrorCode.Smtp_NoServerSpecified);
+            }
 
-                if (string.IsNullOrEmpty(profile.EmailSmtpSettings.UserName))
-                {
-                    Logger.Error("No SMTP UserName is specified.");
-                    actionResult.Add(ErrorCode.Smtp_NoUserSpecified);
-                }
+            if (smtpAccount.Port < 0)
+            {
+                Logger.Error("Invalid SMTP port.");
+                actionResult.Add(ErrorCode.Smtp_InvalidPort);
+            }
 
-                if (profile.AutoSave.Enabled)
+            if (string.IsNullOrWhiteSpace(smtpAccount.UserName))
+            {
+                Logger.Error("No SMTP UserName is specified.");
+                actionResult.Add(ErrorCode.Smtp_NoUserSpecified);
+            }
+
+            if (profile.AutoSave.Enabled)
+            {
+                if (string.IsNullOrWhiteSpace(smtpAccount.Password))
                 {
-                    if (string.IsNullOrEmpty(profile.EmailSmtpSettings.Password))
-                    {
-                        Logger.Error("No SMTP password for automatic saving.");
-                        actionResult.Add(ErrorCode.Smtp_NoPasswordSpecified);
-                    }
+                    Logger.Error("No SMTP password for automatic saving.");
+                    actionResult.Add(ErrorCode.Smtp_NoPasswordSpecified);
                 }
             }
 
             return actionResult;
         }
 
-        private ActionResult SendMailOverSmtp(Job job)
+        protected override ActionResult DoActionProcessing(Job job)
         {
-            var actionResult = Check(job.Profile, job.Accounts);
+            var smtpAccount = job.Accounts.GetSmtpAccount(job.Profile);
+
+            var actionResult = Check(job.Profile, smtpAccount);
             if (!actionResult)
             {
                 Logger.Error("Canceled SMTP mail action.");
@@ -115,7 +97,17 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             var recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients);
             recipients = recipients.Replace(';', ',');
 
-            var mail = new MailMessage(job.Profile.EmailSmtpSettings.Address, recipients);
+            MailMessage mail;
+            try
+            {
+                mail = new MailMessage(smtpAccount.Address, recipients);
+            }
+            catch (FormatException)
+            {
+                Logger.Error($"\'{recipients}\' is no valid SMTP e-mail recipient.");
+                return new ActionResult(ErrorCode.Smtp_InvalidRecipients);
+            }
+
             mail.Subject = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Subject);
             mail.IsBodyHtml = job.Profile.EmailSmtpSettings.Html;
             mail.Body = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Content);
@@ -146,13 +138,13 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 }
             }
 
-            var smtp = new SmtpClient(job.Profile.EmailSmtpSettings.Server, job.Profile.EmailSmtpSettings.Port);
-            smtp.EnableSsl = job.Profile.EmailSmtpSettings.Ssl;
+            var smtp = new SmtpClient(smtpAccount.Server, smtpAccount.Port);
+            smtp.EnableSsl = smtpAccount.Ssl;
 
             Logger.Debug("Created new SmtpClient:"
                          + "\r\nHost: " + smtp.Host
                          + "\r\nPort: " + smtp.Port
-                );
+            );
 
             return SendEmail(job, smtp, mail);
         }
@@ -167,7 +159,9 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
         private ActionResult SendEmail(Job job, SmtpClient smtp, MailMessage mail)
         {
-            var credentials = new NetworkCredential(job.Profile.EmailSmtpSettings.UserName, job.Passwords.SmtpPassword);
+            var smtpAccount = job.Accounts.GetSmtpAccount(job.Profile);
+
+            var credentials = new NetworkCredential(smtpAccount.UserName, job.Passwords.SmtpPassword);
             smtp.Credentials = credentials;
 
             try
@@ -182,13 +176,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             catch (SmtpException ex)
             {
                 Logger.Warn("Could not authorize to host.\r\n" + ex.Message);
-
-                var retypeResult = _passwordProvider.RetypePassword(job);
-                if (retypeResult)
-                {
-                    return SendEmail(job, smtp, mail);
-                }
-                return retypeResult;
+                return new ActionResult(ErrorCode.PasswordAction_Login_Error);
             }
             catch (Exception ex)
             {
@@ -200,8 +188,18 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             {
                 mail.Dispose();
             }
-            
+
             return new ActionResult();
+        }
+
+        protected override void SetPassword(Job job, string password)
+        {
+            job.Passwords.SmtpPassword = password;
+        }
+
+        public override bool IsEnabled(ConversionProfile profile)
+        {
+            return profile.EmailSmtpSettings.Enabled;
         }
     }
 }

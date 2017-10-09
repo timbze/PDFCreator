@@ -17,13 +17,14 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         public override ExitCode Run()
         {
             var success = _maybePipedApplicationStarter.SendMessageOrStartApplication(ComposePipeMessage, StartApplication, StartManagePrintJobs);
-            if(!success)
+            if (!success)
                 return ExitCode.ErrorWhileManagingPrintJobs;
 
             return ExitCode.Ok;
         }
 
         protected abstract string ComposePipeMessage();
+
         protected abstract bool StartApplication();
     }
 }

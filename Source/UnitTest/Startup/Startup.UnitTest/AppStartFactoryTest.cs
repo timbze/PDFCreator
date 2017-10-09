@@ -49,7 +49,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_MultipleRootedFiles_ReturnsDragAndDropStart()
         {
-            string[] args = {@"\RootedFile1.xxx", @"\RootedFile2.xxx", @"\RootedFile3.xxx"};
+            string[] args = { @"\RootedFile1.xxx", @"\RootedFile2.xxx", @"\RootedFile3.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -60,7 +60,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_RootedAndNotRootedFiles_ReturnsMainWindowStart()
         {
-            string[] args = {@"\RootedFile1.xxx", @"NotRootedFile.xxx", @"\RootedFile2.xxx"};
+            string[] args = { @"\RootedFile1.xxx", @"NotRootedFile.xxx", @"\RootedFile2.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -71,7 +71,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_RootedDirectory_ReturnsMainWindowStart()
         {
-            string[] args = {@"\RootedDirectory"};
+            string[] args = { @"\RootedDirectory" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -82,7 +82,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_RootedFileAndRootedDirectory_ReturnsMainWindowStart()
         {
-            string[] args = {@"\RootedDirectory", @"\RootedFile1.xxx"};
+            string[] args = { @"\RootedDirectory", @"\RootedFile1.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -93,7 +93,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithCompleteFilePath_ReturnsDragAndDropStart()
         {
-            string[] args = {@"C:\RootedFile.xxx"};
+            string[] args = { @"C:\RootedFile.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -104,7 +104,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithEmptyCommandLine_ReturnsMainWindowStartUp()
         {
-            string[] args = {};
+            string[] args = { };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -115,7 +115,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithFilesAndNonsenseParameter_ReturnsMainWindowStart()
         {
-            string[] args = {@"\RootedFile1.xxx", "/NonSenseParameter", @"\RootedFile.xxx", @"\RootedFile2.xxx"};
+            string[] args = { @"\RootedFile1.xxx", "/NonSenseParameter", @"\RootedFile.xxx", @"\RootedFile2.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -126,7 +126,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithInitializeSettings_ReturnsInitializeJobStart()
         {
-            string[] args = {"-InitializeSettings"};
+            string[] args = { "-InitializeSettings" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -138,20 +138,20 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void Called_WithJobInfo_ReturnsNewPrintJobStart()
         {
             var jobFile = @"C:\test.inf";
-            string[] args = {$"/InfoDataFile={jobFile}"};
+            string[] args = { $"/InfoDataFile={jobFile}" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPrintJobStart>(appStart);
-            Assert.AreEqual(jobFile, ((NewPrintJobStart) appStart).NewJobInfoFile, "Wrong JobInfoFile.");
+            Assert.AreEqual(jobFile, ((NewPrintJobStart)appStart).NewJobInfoFile, "Wrong JobInfoFile.");
         }
 
         [Test]
         public void Called_WithJobInfoAndInitializeSettings_ReturnsNewPrintJobStart()
         {
             var jobFile = @"C:\test.inf";
-            string[] args = {$"/InfoDataFile={jobFile}", "/InitializeSettings"};
+            string[] args = { $"/InfoDataFile={jobFile}", "/InitializeSettings" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -163,19 +163,19 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void Called_WithJobInfoAndManagePrintJobs_ReturnsNewPrintJobStartWithManagePrintJobs()
         {
             var jobFile = @"C:\test.inf";
-            string[] args = {$"-InfoDataFile={jobFile}", "-ManagePrintJobs"};
+            string[] args = { $"-InfoDataFile={jobFile}", "-ManagePrintJobs" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPrintJobStart>(appStart);
-            Assert.IsTrue(((NewPrintJobStart) appStart).StartManagePrintJobs);
+            Assert.IsTrue(((NewPrintJobStart)appStart).StartManagePrintJobs);
         }
 
         [Test]
         public void Called_WithManagePrintJobs_ReturnsManagePrintJobsStartUp()
         {
-            string[] args = {"/ManagePrintJobs"};
+            string[] args = { "/ManagePrintJobs" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -188,7 +188,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithNonSense_ReturnsMainWindowStartUp()
         {
-            string[] args = {"NonSense123"};
+            string[] args = { "NonSense123" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -199,7 +199,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithNonSenseParameter_ReturnsMainWindowStartUp()
         {
-            string[] args = {"/NonSenseParameter123"};
+            string[] args = { "/NonSenseParameter123" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -210,7 +210,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithNonSenseParameterHyphen_ReturnsMainWindowStartUp()
         {
-            string[] args = {"-NonSenseParameter123"};
+            string[] args = { "-NonSenseParameter123" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -221,7 +221,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithNotRootedFilePath_ReturnsMainWindowStart()
         {
-            string[] args = {"NotRootedFile.xxx"};
+            string[] args = { "NotRootedFile.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -233,20 +233,20 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void Called_WithPdfFile_ReturnsNewPsJobStart()
         {
             var jobFile = @"C:\test.pdf";
-            string[] args = {$"/PdfFile={jobFile}"};
+            string[] args = { $"/PdfFile={jobFile}" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPdfJobStart>(appStart);
-            Assert.AreEqual(jobFile, ((NewDirectConversionJobStart) appStart).NewDirectConversionFile, "Wrong File in NewDirectConversionJobStart.");
+            Assert.AreEqual(jobFile, ((NewDirectConversionJobStart)appStart).NewDirectConversionFile, "Wrong File in NewDirectConversionJobStart.");
         }
 
         [Test]
         public void Called_WithPdfFileAndInitializeSettings_ReturnsNewPrintJobStart()
         {
             var jobFile = @"C:\test.pdf";
-            string[] args = {$"/PdfFile={jobFile}", "/InitializeSettings"};
+            string[] args = { $"/PdfFile={jobFile}", "/InitializeSettings" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -258,19 +258,19 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void Called_WithPdfFileAndManagePrintJobs_ReturnsNewPrintJobStartWithManagePrintJobs()
         {
             var jobFile = @"C:\test.pdf";
-            string[] args = {$"/PdfFile={jobFile}", "/ManagePrintJobs"};
+            string[] args = { $"/PdfFile={jobFile}", "/ManagePrintJobs" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPdfJobStart>(appStart);
-            Assert.IsTrue(((NewDirectConversionJobStart) appStart).StartManagePrintJobs);
+            Assert.IsTrue(((NewDirectConversionJobStart)appStart).StartManagePrintJobs);
         }
 
         [Test]
         public void Called_WithPrintFileAndInitializeSettings_ReturnsPrintFileJobStart()
         {
-            string[] args = {"-PrintFile=C:\\Test.txt", "-InitializeSettings"};
+            string[] args = { "-PrintFile=C:\\Test.txt", "-InitializeSettings" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -281,45 +281,45 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         [Test]
         public void Called_WithPrintFileAndPrinterParameter_ReturnsPrintFileStartUpWithCorrectPrinter()
         {
-            string[] args = {"/PrintFile=C:\\Test.txt", "/PrinterName=TestPrinter"};
+            string[] args = { "/PrintFile=C:\\Test.txt", "/PrinterName=TestPrinter" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<PrintFileStart>(appStart);
-            Assert.AreEqual("TestPrinter", ((PrintFileStart) appStart).PrinterName);
+            Assert.AreEqual("TestPrinter", ((PrintFileStart)appStart).PrinterName);
         }
 
         [Test]
         public void Called_WithPrintFileParameter_ReturnsPrintFileStartUp()
         {
-            string[] args = {"/PrintFile=C:\\Test.txt"};
+            string[] args = { "/PrintFile=C:\\Test.txt" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<PrintFileStart>(appStart);
-            Assert.AreEqual("C:\\Test.txt", ((PrintFileStart) appStart).PrintFile);
+            Assert.AreEqual("C:\\Test.txt", ((PrintFileStart)appStart).PrintFile);
         }
 
         [Test]
         public void Called_WithPsFile_ReturnsNewPsJobStart()
         {
             var jobFile = @"C:\test.ps";
-            string[] args = {$"/PsFile={jobFile}"};
+            string[] args = { $"/PsFile={jobFile}" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPsJobStart>(appStart);
-            Assert.AreEqual(jobFile, ((NewDirectConversionJobStart) appStart).NewDirectConversionFile, "Wrong File in NewDirectConversionJobStart.");
+            Assert.AreEqual(jobFile, ((NewDirectConversionJobStart)appStart).NewDirectConversionFile, "Wrong File in NewDirectConversionJobStart.");
         }
 
         [Test]
         public void Called_WithPsFileAndInitializeSettings_ReturnsNewPsJobStart()
         {
             var jobFile = @"C:\test.ps";
-            string[] args = {$"/PsFile={jobFile}", "/InitializeSettings"};
+            string[] args = { $"/PsFile={jobFile}", "/InitializeSettings" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
@@ -331,19 +331,19 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void Called_WithPsFileAndManagePrintJobs_NewPsJobStartWithManagePrintJobs()
         {
             var jobFile = @"C:\test.ps";
-            string[] args = {$"/PsFile={jobFile}", "/ManagePrintJobs"};
+            string[] args = { $"/PsFile={jobFile}", "/ManagePrintJobs" };
 
             var appStartFactory = BuildAppStartFactory();
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             Assert.IsAssignableFrom<NewPsJobStart>(appStart);
-            Assert.IsTrue(((NewDirectConversionJobStart) appStart).StartManagePrintJobs);
+            Assert.IsTrue(((NewDirectConversionJobStart)appStart).StartManagePrintJobs);
         }
 
         [Test]
         public void Called_WithRootedFilePath_ReturnsDragAndDropStart()
         {
-            string[] args = {@"\RootedFile.xxx"};
+            string[] args = { @"\RootedFile.xxx" };
 
             var appStartFactory = BuildAppStartFactory();
             appStartFactory.CreateApplicationStart(args);
@@ -395,7 +395,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             string[] args = { @"/StoreLicenseForAllUsers", @"/LicenseServerCode=" + code, @"/LicenseKey=" + licenseKey };
 
             var appStartFactory = BuildAppStartFactory();
-            var appStart = (StoreLicenseForAllUsersStart) appStartFactory.CreateApplicationStart(args);
+            var appStart = (StoreLicenseForAllUsersStart)appStartFactory.CreateApplicationStart(args);
 
             Assert.AreEqual(code, appStart.LicenseServerCode);
             Assert.AreEqual(licenseKey, appStart.LicenseKey);

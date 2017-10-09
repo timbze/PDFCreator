@@ -1,6 +1,9 @@
 using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System;
@@ -14,29 +17,25 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Container class for PDFCreator settings and profiles
 	/// </summary>
-	public class PdfCreatorSettings {
+	[ImplementPropertyChanged]
+	public partial class PdfCreatorSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		private Data data = Data.CreateDataStorage();
 		private IStorage storage = null;
 		
-		public ApplicationProperties ApplicationProperties { get; set; }
+		public ApplicationProperties ApplicationProperties { get; set; } = new ApplicationProperties();
 		
 		/// <summary>
 		/// PDFCreator application settings
 		/// </summary>
-		public ApplicationSettings ApplicationSettings { get; set; }
+		public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
 		
-		public IList<ConversionProfile> ConversionProfiles { get; set; }
-		
-		private void Init() {
-			ApplicationProperties = new ApplicationProperties();
-			ApplicationSettings = new ApplicationSettings();
-			ConversionProfiles = new List<ConversionProfile>();
-		}
-		
+		public ObservableCollection<ConversionProfile> ConversionProfiles { get; set; } = new ObservableCollection<ConversionProfile>();
 		public PdfCreatorSettings(IStorage storage)
 		{
-			Init();
-			
 			this.storage = storage;
 			data = Data.CreateDataStorage();
 		}
@@ -116,7 +115,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.ApplicationProperties = ApplicationProperties.Copy();
 			copy.ApplicationSettings = ApplicationSettings.Copy();
 			
-			copy.ConversionProfiles = new List<ConversionProfile>();
+			copy.ConversionProfiles = new ObservableCollection<ConversionProfile>();
 			for (int i = 0; i < ConversionProfiles.Count; i++)
 			{
 				copy.ConversionProfiles.Add(ConversionProfiles[i].Copy());
@@ -242,7 +241,9 @@ namespace pdfforge.PDFCreator.Conversion.Settings
         public void SortConversionProfiles()
         {
             //((List<ConversionProfile>)ConversionProfiles).Sort(CompareTemporaryFirstDefaultSecond);
-            ((List<ConversionProfile>) ConversionProfiles).Sort(new ProfileSorter().Compare);
+            var profiles = ConversionProfiles.ToList();
+            profiles.Sort(new ProfileSorter().Compare);
+            ConversionProfiles = new ObservableCollection<ConversionProfile>(profiles);
         }
 
         /// <summary>

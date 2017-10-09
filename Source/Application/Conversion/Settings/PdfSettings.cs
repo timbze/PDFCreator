@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,70 +16,58 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Settings for the PDF output format
 	/// </summary>
-	public class PdfSettings {
+	[ImplementPropertyChanged]
+	public partial class PdfSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Compression settings for color and greyscale images
 		/// </summary>
-		public CompressColorAndGray CompressColorAndGray { get; set; }
+		public CompressColorAndGray CompressColorAndGray { get; set; } = new CompressColorAndGray();
 		
 		/// <summary>
 		/// Compression settings for monochrome images
 		/// </summary>
-		public CompressMonochrome CompressMonochrome { get; set; }
+		public CompressMonochrome CompressMonochrome { get; set; } = new CompressMonochrome();
 		
 		/// <summary>
 		/// PDF Security options
 		/// </summary>
-		public Security Security { get; set; }
+		public Security Security { get; set; } = new Security();
 		
 		/// <summary>
 		/// Digitally sign the PDF document
 		/// </summary>
-		public Signature Signature { get; set; }
+		public Signature Signature { get; set; } = new Signature();
 		
 		/// <summary>
-		/// Color model of the PDF (does not apply to images). Valid values are: Rgb, Cmyk, Gray
+		/// Color model of the PDF (does not apply to images).
 		/// </summary>
-		public ColorModel ColorModel { get; set; }
+		public ColorModel ColorModel { get; set; } = ColorModel.Rgb;
 		
 		/// <summary>
-		/// Defines which controls will be opened in the reader. Valid values are: NoOutLineNoThumbnailImages,Outline, ThumbnailImages, FullScreen, ContentGroupPanel ,AttachmentsPanel
+		/// Defines which controls will be opened in the reader.
 		/// </summary>
-		public DocumentView DocumentView { get; set; }
+		public DocumentView DocumentView { get; set; } = DocumentView.NoOutLineNoThumbnailImages;
 		
 		/// <summary>
-		/// Define how pages are automatically rotated. Valid values are: Automatic, Portrait, Landscape
+		/// Define how pages are automatically rotated.
 		/// </summary>
-		public PageOrientation PageOrientation { get; set; }
+		public PageOrientation PageOrientation { get; set; } = PageOrientation.Automatic;
 		
 		/// <summary>
-		/// Defines how the document will be opened in the reader. Valid values are: OnePage, OneColumn, TwoColumnsOddLeft, TwoColumnsOddRight, TwoPagesOddLeft, TwoPagesOddRight
+		/// Defines how the document will be opened in the reader.
 		/// </summary>
-		public PageView PageView { get; set; }
+		public PageView PageView { get; set; } = PageView.OnePage;
 		
 		/// <summary>
 		/// Defines the page number the viewer will start on when opening the document
 		/// </summary>
-		public int ViewerStartsOnPage { get; set; }
+		public int ViewerStartsOnPage { get; set; } = 1;
 		
-		
-		private void Init() {
-			CompressColorAndGray = new CompressColorAndGray();
-			CompressMonochrome = new CompressMonochrome();
-			Security = new Security();
-			Signature = new Signature();
-			ColorModel = ColorModel.Rgb;
-			DocumentView = DocumentView.NoOutLineNoThumbnailImages;
-			PageOrientation = PageOrientation.Automatic;
-			PageView = PageView.OnePage;
-			ViewerStartsOnPage = 1;
-		}
-		
-		public PdfSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

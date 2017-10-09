@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using System.Collections.Generic;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
             var settingsLoader = Substitute.For<ISettingsLoader>();
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new TranslationFactory());
 
             var result = printerInstalledCondition.Check();
 
@@ -38,8 +38,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var settingsLoader = Substitute.For<ISettingsLoader>();
             settingsLoader.LoadPdfCreatorSettings().Returns(new PdfCreatorSettings(null));
 
-
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new TranslationFactory());
 
             var result = printerInstalledCondition.Check();
 
@@ -57,8 +56,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var settingsLoader = Substitute.For<ISettingsLoader>();
             settingsLoader.LoadPdfCreatorSettings().Returns(new PdfCreatorSettings(null));
 
-
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new TranslationFactory());
 
             var result = printerInstalledCondition.Check();
 
@@ -85,11 +83,11 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 return true;
             });
 
-            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new ApplicationTranslation());
+            var printerInstalledCondition = new PrinterInstalledCondition(repairPrinterAssitant, settingsLoader, new TranslationFactory());
 
             printerInstalledCondition.Check();
 
-            CollectionAssert.AreEquivalent(new[] {"Printer1", "Printer2" }, printersToRepair);
+            CollectionAssert.AreEquivalent(new[] { "Printer1", "Printer2" }, printersToRepair);
         }
     }
 }

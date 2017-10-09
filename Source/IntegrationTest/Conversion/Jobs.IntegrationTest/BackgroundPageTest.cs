@@ -1,13 +1,12 @@
 ﻿using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class BackgroundPageTest
     {
         [SetUp]

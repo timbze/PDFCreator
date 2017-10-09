@@ -1,14 +1,14 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using NUnit.Framework;
+using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
-using iTextSharp.text.pdf;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace PDFCreator.TestUtilities
 {
@@ -32,7 +32,7 @@ namespace PDFCreator.TestUtilities
             var matches = regex.Matches(content);
 
             string xmlString;
-            Assert.DoesNotThrow(() => { xmlString = matches[matches.Count - 1].ToString();},
+            Assert.DoesNotThrow(() => { xmlString = matches[matches.Count - 1].ToString(); },
                 "Missing XMP Metadata starting and ending  with \'<?xpacket\'.");
             xmlString = matches[matches.Count - 1].ToString();
 
@@ -52,6 +52,7 @@ namespace PDFCreator.TestUtilities
             nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
 
             var node = doc.SelectSingleNode("//pdfaid:part", nsmgr);
+
             Assert.NotNull(node, "PDF/A id part is not set.");
             var part = format == OutputFormat.PdfA1B ? "1" : "2";
             Assert.AreEqual(part, node.InnerText.Trim(), "PDF/A id part is not set properly.");
@@ -82,16 +83,16 @@ namespace PDFCreator.TestUtilities
             node = doc.SelectSingleNode("//dc:creator/rdf:Seq/rdf:li", nsmgr);
             Assert.NotNull(node, "Creator is not set.");
             Assert.AreEqual(metadata.Author, node.InnerText.Trim(), "Creator (Author) is not set properly.");
-            
+
             node = doc.SelectSingleNode("//pdf:Producer", nsmgr);
             Assert.NotNull(node, "PDF producer is not set.");
             Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), "PDFCreator [0-9].[0-9].[0-9].[0-9].*"), "PDF producer is not PDFCreator X.X.X.X.");
-            
+
             node = doc.SelectSingleNode("//pdf:Keywords", nsmgr);
             Assert.NotNull(node, "PDF Keywords are not set.");
             Assert.AreEqual(metadata.Keywords, node.InnerText.Trim(), "Keywords are not set properly.");
 
-            /* 
+            /*
             node = doc.SelectSingleNode("//xmpMM:DocumentID", nsmgr);
             Assert.NotNull(node, "Document ID is not set.");
             Assert.IsTrue(Regex.IsMatch(node.InnerText.Trim(), @"uuid:[0-9A-Za-z\-]{32,}"), "Document ID in wrong format.");
@@ -125,7 +126,7 @@ namespace PDFCreator.TestUtilities
 
             var reader = XmlReader.Create(xmlStream, settings);
 
-            // Parse the file. 
+            // Parse the file.
             while (reader.Read())
             {
             }

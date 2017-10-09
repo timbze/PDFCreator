@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Core.Workflow
 {

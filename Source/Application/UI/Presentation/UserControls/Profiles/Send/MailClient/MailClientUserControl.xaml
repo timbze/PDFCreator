@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
+             xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             xmlns:controls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance designTime:DesignTimeMailClientControlViewModel, IsDesignTimeCreatable=True}"
+             IsEnabled="{Binding CurrentProfile.EmailClientSettings.Enabled}"
+             Style="{DynamicResource TabUserControl}"
+             help:HelpProvider.HelpTopic="OpenEmailClient">
+
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <HeaderedContentControl Template="{DynamicResource BorderlessHeaderPanelTemplate}" Header="{Binding Translation.Email}">
+        <StackPanel>
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsText}"></TextBlock>
+            </Label>
+            <controls:TokenControl DataContext="{Binding RecipientsTokenViewModel}" />
+
+            <Label Margin="0 -5">
+                <TextBlock Text="{Binding Translation.MultipleRecipientsHintText}" TextWrapping="Wrap" />
+            </Label>
+
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <Button Style="{DynamicResource LightGreyButton}"
+                        Padding="12"
+                        Command="{Binding EditEmailTextCommand}"
+                        Content="{Binding Translation.EditEmailButtonText}" />
+
+                <Button Style="{DynamicResource LightGreyButton}"
+                        Padding="12"
+                        Margin="20 0"
+                        Command="{Binding EmailClientTestCommand}"
+                        Content="{Binding Translation.CheckMailClientButtonText}" />
+            </StackPanel>
+        </StackPanel>
+    </HeaderedContentControl>
+</UserControl>

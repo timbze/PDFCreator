@@ -18,7 +18,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
         private const char TokenCloseChar = '>';
         private const string TokenSplitString = ":";
 
-        #endregion
+        #endregion Constants
 
         #region Methods
 
@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
         ///     values.
         ///     Optional use of C#-format, declared behind a colon behind the Token-name.
         /// </summary>
-        /// <param name="InputString">InputString which may contain Tokens, that will be replaced</param>
+        /// <param name="inputString">InputString which may contain Tokens, that will be replaced</param>
         /// <returns>
         ///     Returns the InputString with formated values of valid Tokens.
         /// </returns>
@@ -45,25 +45,28 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
         /// ]]>
         /// </code>
         /// </example>
-        public string ReplaceTokens(string InputString)
+        public string ReplaceTokens(string inputString)
         {
-            int beginOfToken, endOfToken, lastIndexOfToken; //Memorize Indexes 
-            var begin = false; //Flag for the beginning of a Token 
+            if (inputString == null)
+                return string.Empty;
 
-            beginOfToken = InputString.IndexOf(TokenOpenChar);
-            lastIndexOfToken = InputString.LastIndexOf(TokenCloseChar);
+            int beginOfToken, endOfToken, lastIndexOfToken; //Memorize Indexes
+            var begin = false; //Flag for the beginning of a Token
+
+            beginOfToken = inputString.IndexOf(TokenOpenChar);
+            lastIndexOfToken = inputString.LastIndexOf(TokenCloseChar);
 
             if (beginOfToken == -1 || lastIndexOfToken == -1 //No pair of <> included
                 || beginOfToken > lastIndexOfToken) //No valid token pair possible
             {
-                return InputString;
+                return inputString;
             }
 
             var outputString = new StringBuilder();
 
             if (beginOfToken > 0) //Add part ahead of the first TokenOpenChar
             {
-                outputString.Append(InputString.Substring(0, beginOfToken));
+                outputString.Append(inputString.Substring(0, beginOfToken));
             }
 
             begin = true; //Flag for an opened Token
@@ -71,37 +74,37 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
 
             for (var i = beginOfToken + 1; i <= lastIndexOfToken; i++)
             {
-                if ((InputString[i] == TokenOpenChar) && !begin) //Regular opening of Token
+                if ((inputString[i] == TokenOpenChar) && !begin) //Regular opening of Token
                 {
                     //check for text in between
                     if (i > endOfToken + 1)
                     {
-                        outputString.Append(InputString.Substring(endOfToken + 1, i - endOfToken - 1));
+                        outputString.Append(inputString.Substring(endOfToken + 1, i - endOfToken - 1));
                         //Append text between Tokens
                     }
 
                     beginOfToken = i;
                     begin = true;
                 }
-                else if (InputString[i] == TokenOpenChar) //(&& Begin) //second TokenOpenChar without previous closing 
+                else if (inputString[i] == TokenOpenChar) //(&& Begin) //second TokenOpenChar without previous closing
                 {
-                    outputString.Append(InputString.Substring(beginOfToken, i - beginOfToken));
+                    outputString.Append(inputString.Substring(beginOfToken, i - beginOfToken));
                     //add substring from the last BeginOfToken to the new TokenOpenChar
                     beginOfToken = i;
                 }
-                else if ((InputString[i] == TokenCloseChar) && begin) //regular closing of an opened Token
+                else if ((inputString[i] == TokenCloseChar) && begin) //regular closing of an opened Token
                 {
                     begin = false;
                     endOfToken = i;
 
-                    var ExtractedTokenString = InputString.Substring(beginOfToken, i - beginOfToken + 1);
+                    var ExtractedTokenString = inputString.Substring(beginOfToken, i - beginOfToken + 1);
                     //Extract Token from Input String
 
                     if (ExtractedTokenString.Contains(TokenSplitString)
                         &&
                         _tokenDict.ContainsKey(
                             ExtractedTokenString.Substring(1, ExtractedTokenString.IndexOf(':') - 1).ToUpper()))
-                        //Token contains a format and TokenName (without <>) is Key in the TokenDict
+                    //Token contains a format and TokenName (without <>) is Key in the TokenDict
                     {
                         var token =
                             _tokenDict[ExtractedTokenString.Substring(1, ExtractedTokenString.IndexOf(':') - 1).ToUpper()
@@ -124,31 +127,31 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
                     }
                     else if (
                         _tokenDict.ContainsKey(
-                            InputString.Substring(beginOfToken + 1, i - beginOfToken - 1).ToUpper()))
-                        //Tokenname (without <>) is Key in the TokenDict
+                            inputString.Substring(beginOfToken + 1, i - beginOfToken - 1).ToUpper()))
+                    //Tokenname (without <>) is Key in the TokenDict
                     {
                         outputString.Append(
-                            _tokenDict[InputString.Substring(beginOfToken + 1, i - beginOfToken - 1).ToUpper()]
+                            _tokenDict[inputString.Substring(beginOfToken + 1, i - beginOfToken - 1).ToUpper()]
                                 .GetValue());
                     }
                     else //Tokenname (without <>) is not Key in the TokenDict
                     {
-                        outputString.Append(InputString.Substring(beginOfToken, i - beginOfToken + 1));
+                        outputString.Append(inputString.Substring(beginOfToken, i - beginOfToken + 1));
                         //add the non-valid Tokenname (with <>)
                     }
                 }
-                else if (InputString[i] == TokenCloseChar) //&& !Begin //closing of Token without opening
+                else if (inputString[i] == TokenCloseChar) //&& !Begin //closing of Token without opening
                 {
-                    outputString.Append(InputString.Substring(endOfToken + 1, i - endOfToken));
-                    //add part from the last regular closing to the actual irregular closing 
+                    outputString.Append(inputString.Substring(endOfToken + 1, i - endOfToken));
+                    //add part from the last regular closing to the actual irregular closing
                     endOfToken = i;
                 }
             }
 
-            if (lastIndexOfToken < InputString.Length) //Add part behind the last TokenCloseChar
+            if (lastIndexOfToken < inputString.Length) //Add part behind the last TokenCloseChar
             {
-                outputString.Append(InputString.Substring(lastIndexOfToken + 1,
-                    InputString.Length - lastIndexOfToken - 1));
+                outputString.Append(inputString.Substring(lastIndexOfToken + 1,
+                    inputString.Length - lastIndexOfToken - 1));
             }
 
             return outputString.ToString();
@@ -242,8 +245,6 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
             AddToken(new ListToken(name, value));
         }
 
-        #endregion
-
-
+        #endregion Methods
     }
 }

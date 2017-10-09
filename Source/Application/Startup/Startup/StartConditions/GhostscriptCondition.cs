@@ -1,6 +1,7 @@
 ﻿using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Core.Startup.Translations;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -9,10 +10,12 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly IGhostscriptDiscovery _ghostscriptDiscovery;
         private readonly StartupTranslation _translation;
 
-        public GhostscriptCondition(IGhostscriptDiscovery ghostscriptDiscovery, StartupTranslation translation)
+        public bool CanRequestUserInteraction => false;
+
+        public GhostscriptCondition(IGhostscriptDiscovery ghostscriptDiscovery, ITranslationFactory translationFactory)
         {
             _ghostscriptDiscovery = ghostscriptDiscovery;
-            _translation = translation;
+            _translation = translationFactory.CreateTranslation<StartupTranslation>();
         }
 
         public StartupConditionResult Check()

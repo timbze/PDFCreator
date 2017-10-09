@@ -1,5 +1,7 @@
+DataStorage
 NUnit
 NSubstitute
 NLog
 SimpleInjector
 Obsidian
+Translatable

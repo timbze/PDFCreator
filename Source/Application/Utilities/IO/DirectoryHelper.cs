@@ -1,35 +1,23 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using SystemInterface.IO;
-using SystemWrapper.IO;
-using NLog;
 
 namespace pdfforge.PDFCreator.Utilities.IO
 {
-    public class DirectoryHelper
+    public class DirectoryHelper : IDirectoryHelper
     {
-        private readonly IDirectoryInfo _directoryInfo;
-
         private readonly IDirectory _directoryWrap;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private List<string> _createdDirectories;
 
-        public DirectoryHelper(IDirectoryInfo directoryInfoWrap, IDirectory directoryWrap)
+        public DirectoryHelper(IDirectory directoryWrap)
         {
-            _directoryInfo = directoryInfoWrap;
             _directoryWrap = directoryWrap;
             _createdDirectories = new List<string>();
-        }
-
-        public DirectoryHelper(string directory) : this(new DirectoryInfoWrap(directory), new DirectoryWrap())
-        {
-        }
-
-        public string Directory
-        {
-            get { return _directoryInfo.FullName; }
         }
 
         public virtual List<string> CreatedDirectories
@@ -40,14 +28,15 @@ namespace pdfforge.PDFCreator.Utilities.IO
         /// <summary>
         ///     Returns a list that contains all parent directories of the directory
         /// </summary>
-        public List<string> GetDirectoryTree()
+        public List<string> GetDirectoryTree(string directory)
         {
+            directory = directory.TrimEnd('\\');
             var directoryTree = new List<string>();
-            var currentDirectory = _directoryInfo;
-            while (currentDirectory != null) //while directory has parent
+
+            while (directory?.Length > 3) //while directory has parent that is not the root drive
             {
-                directoryTree.Add(currentDirectory.FullName);
-                currentDirectory = _directoryWrap.GetParent(currentDirectory.FullName);
+                directoryTree.Add(directory);
+                directory = Path.GetDirectoryName(directory);
             }
             return directoryTree;
         }
@@ -56,30 +45,37 @@ namespace pdfforge.PDFCreator.Utilities.IO
         ///     Creates the directory and stores in "CreatedDirectories" which parent directories hab to be created
         /// </summary>
         /// <returns>false if creating directory throws exception</returns>
-        public bool CreateDirectory()
+        public bool CreateDirectory(string directory)
         {
-            var directoryTree = GetDirectoryTree();
-            directoryTree = directoryTree.OrderBy(x => x).ToList(); //start with smallest 
-
-            foreach (var directory in directoryTree)
+            try
             {
-                if (!_directoryWrap.Exists(directory))
-                {
-                    try
-                    {
-                        _directoryWrap.CreateDirectory(directory);
-                        _logger.Debug("Created directory " + directory);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.Warn("Exception while creating \"" + directory + "\"\r\n" + ex.Message);
-                        return false;
-                    }
-                    _createdDirectories.Add(directory);
-                }
-            }
+                var directoryTree = GetDirectoryTree(directory);
+                directoryTree = directoryTree.OrderBy(x => x).ToList(); //start with smallest
 
-            return true;
+                foreach (var path in directoryTree)
+                {
+                    if (!_directoryWrap.Exists(path))
+                    {
+                        try
+                        {
+                            _directoryWrap.CreateDirectory(path);
+                            _logger.Debug("Created directory " + path);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.Warn("Exception while creating \"" + path + "\"\r\n" + ex.Message);
+                            return false;
+                        }
+                        _createdDirectories.Add(path);
+                    }
+                }
+
+                return true;
+            }
+            catch (PathTooLongException)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -96,7 +92,7 @@ namespace pdfforge.PDFCreator.Utilities.IO
                     continue;
 
                 if (_directoryWrap.EnumerateFileSystemEntries(createdDirectory).Any())
-                    break;
+                    continue;
 
                 try
                 {

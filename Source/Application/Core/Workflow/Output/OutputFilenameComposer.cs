@@ -33,18 +33,23 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
                 case OutputFormat.PdfX:
                     outputFilename += ".pdf";
                     break;
+
                 case OutputFormat.Jpeg:
                     outputFilename += ".jpg";
                     break;
+
                 case OutputFormat.Png:
                     outputFilename += ".png";
                     break;
+
                 case OutputFormat.Tif:
                     outputFilename += ".tif";
                     break;
+
                 case OutputFormat.Txt:
                     outputFilename += ".txt";
                     break;
+
                 default:
                     _logger.Warn("Can't find a supported Output format! File format is defaulted to .pdf");
                     outputFilename += ".pdf";

@@ -1,19 +1,29 @@
-﻿using SystemWrapper.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing;
 using pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base;
+using pdfforge.PDFCreator.Utilities;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.PdfTools
 {
-    class PdfToolsBasicTest : PdfProcessingBasicTestBase
+    internal class PdfToolsBasicTest : PdfProcessingBasicTestBase
     {
-        protected override IPdfProcessor BuildPdfProcessor(IProcessingPasswordsProvider passwordsProvider)
+        private ICertificateManager _certificateManager;
+
+        protected override IPdfProcessor BuildPdfProcessor()
         {
+            _certificateManager = new CertificateManager();
+
             var pdfToolsLicensing = new PdfToolsTestLicensing();
             Assert.IsTrue(pdfToolsLicensing.Apply(), "Could not apply pdf-tools licensing.");
 
-            return new PdfToolsPdfProcessor(new FileWrap(), passwordsProvider);
+            return new PdfToolsPdfProcessor(new FileWrap(), _certificateManager, new VersionHelper(GetType().Assembly));
+        }
+
+        protected override void FinalizePdfProcessor()
+        {
+            _certificateManager?.Dispose();
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
 {
     [TestFixture]
-    class PsDirectConversionTest : DirectConversionTestBase
+    internal class PsDirectConversionTest : DirectConversionTestBase
     {
         protected override DirectConversionBase BuildDirectConversion()
         {

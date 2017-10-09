@@ -1,14 +1,13 @@
-﻿using System;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.Drawing;
 using System.IO;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class PngTest
     {
         [SetUp]
@@ -63,24 +62,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
                 {
                     case PngColor.BlackWhite:
                         Assert.AreEqual(0, bytes[25], "wrong color-scheme according to byte[24-25]");
-                        Assert.AreEqual(2, bytes[24]*2, "wrong color-scheme according to byte[24-25]");
+                        Assert.AreEqual(2, bytes[24] * 2, "wrong color-scheme according to byte[24-25]");
                         break;
+
                     case PngColor.Gray8Bit:
                         Assert.AreEqual(0, bytes[25], "wrong color-scheme according to byte[24-25]");
                         Assert.AreEqual(8, bytes[24], "wrong color-scheme according to byte[24-25]");
                         break;
+
                     case PngColor.Color32BitTransp:
                         Assert.AreEqual(6, bytes[25], "wrong color-scheme according to byte[24-25]");
-                        Assert.AreEqual(32, bytes[24]*4, "wrong color-scheme according to byte[24-25]");
+                        Assert.AreEqual(32, bytes[24] * 4, "wrong color-scheme according to byte[24-25]");
                         break;
+
                     case PngColor.Color24Bit:
                         Assert.AreEqual(2, bytes[25], "wrong color-scheme according to byte[24-25]");
-                        Assert.AreEqual(24, bytes[24]*3, "wrong color-scheme according to byte[24-25]");
+                        Assert.AreEqual(24, bytes[24] * 3, "wrong color-scheme according to byte[24-25]");
                         break;
+
                     case PngColor.Color8Bit:
                         Assert.AreEqual(3, bytes[25], "wrong color-scheme according to byte[24-25]");
                         Assert.AreEqual(8, bytes[24], "wrong color-scheme according to byte[24-25]");
                         break;
+
                     case PngColor.Color4Bit:
                         Assert.AreEqual(3, bytes[25], "wrong color-scheme according to byte[24-25]");
                         Assert.AreEqual(4, bytes[24], "wrong color-scheme according to byte[24-25]");

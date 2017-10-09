@@ -1,11 +1,11 @@
-﻿using System;
-using System.Security;
-using SystemInterface.Microsoft.Win32;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using System;
+using System.Security;
+using SystemInterface.Microsoft.Win32;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup.AppStarts
 {
@@ -42,7 +42,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup.AppStarts
         public void Run_ActivationIsNone_ReturnsStartupResultMissingActivation()
         {
             _storeLicenseForAllUsersStart.LicenseServerCode = null;
-            
+
             var result = _storeLicenseForAllUsersStart.Run();
 
             Assert.AreEqual(ExitCode.MissingActivation, result);

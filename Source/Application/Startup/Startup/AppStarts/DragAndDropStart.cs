@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using pdfforge.PDFCreator.Core.Controller;
+﻿using pdfforge.PDFCreator.Core.Controller;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {

@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,34 +16,28 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Settings for the JPEG output format
 	/// </summary>
-	public class JpegSettings {
+	[ImplementPropertyChanged]
+	public partial class JpegSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Number of colors. Valid values are: Color24Bit, Gray8Bit
+		/// Number of colors.
 		/// </summary>
-		public JpegColor Color { get; set; }
+		public JpegColor Color { get; set; } = JpegColor.Color24Bit;
 		
 		/// <summary>
 		/// Resolution of the JPEG files
 		/// </summary>
-		public int Dpi { get; set; }
+		public int Dpi { get; set; } = 150;
 		
 		/// <summary>
 		/// Quality factor of the resulting JPEG (100 is best, 0 is worst)
 		/// </summary>
-		public int Quality { get; set; }
+		public int Quality { get; set; } = 75;
 		
-		
-		private void Init() {
-			Color = JpegColor.Color24Bit;
-			Dpi = 150;
-			Quality = 75;
-		}
-		
-		public JpegSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

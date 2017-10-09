@@ -1,17 +1,24 @@
-﻿using System.Runtime.InteropServices;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Editions.PDFCreator;
 using pdfforge.PDFCreator.UI.COM;
-using PDFCreator.TestUtilities;
 using SimpleInjector;
+using System.Runtime.InteropServices;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 {
     [TestFixture]
     internal class PdfCreatorTest
     {
+        [TestFixtureSetUp]
+        public void CleanDependencies()
+        {
+            ComDependencyBuilder.ResetDependencies();
+            ComTestHelper.ModifyAndBuildComDependencies();
+        }
+
         [SetUp]
         public void SetUp()
         {
@@ -24,7 +31,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 
             var bootstrapper = new PDFCreatorBootstrapper();
             var container = new Container();
-            bootstrapper.ConfigureContainer(container, null);
+            bootstrapper.ConfigureContainer(container);
             _th = container.GetInstance<TestHelper>();
         }
 
@@ -84,11 +91,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         [Test]
         public void WithPdfFileAsArgument_AddItToQueue()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            var dependencies = ComTestHelper.ModifyAndBuildComDependencies();
 
             _th.InitTempFolder("PDFTest");
-            var path = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePDF); //The pdf file content is irrelevant for this test.
+            var path = _th.GenerateTestFile(TestFile.PDFCreatorTestpage_GS9_19_PDF); //The pdf file content is irrelevant for this test.
             var queueInstance = dependencies.QueueAdapter.JobInfoQueue;
             var jobNumber = queueInstance.Count;
 
@@ -102,8 +108,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         [Test]
         public void WithPsFileAsArgument_AddItToQueue()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            var dependencies = ComTestHelper.ModifyAndBuildComDependencies();
 
             _th.InitTempFolder("PsTest");
             var path = _th.GenerateTestFile(TestFile.PDFCreatorTestpagePs);

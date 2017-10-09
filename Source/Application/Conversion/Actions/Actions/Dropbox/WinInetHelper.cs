@@ -8,10 +8,9 @@ public interface IWinInetHelper
 
 public class WinInetHelper : IWinInetHelper
 {
-
     public bool EndBrowserSession()
     {
-        // 42 = INTERNET_OPTION_END_BROWSER_SESSION 
+        // 42 = INTERNET_OPTION_END_BROWSER_SESSION
         return SetOption(42, null);
     }
 

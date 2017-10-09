@@ -1,17 +1,17 @@
-﻿using System;
+﻿using NUnit.Framework;
+using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using SystemInterface;
 using SystemWrapper;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
 {
     [TestFixture]
     public class TokenCoreTest
     {
-        readonly IDateTime _expectedDate = new DateTimeWrap(2012, 7, 24, 4, 36, 6);
+        private readonly IDateTime _expectedDate = new DateTimeWrap(2012, 7, 24, 4, 36, 6);
 
         [SetUp]
         public void InitTest()
@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
             _testTokenReplacer.AddToken(new StringToken("Title", "Lord of the Rings"));
             _testTokenReplacer.AddToken(new NumberToken("Counter", 23));
             _testTokenReplacer.AddToken(new DateToken("DateTime", _expectedDate.DateTimeInstance));
-            _testTokenReplacer.AddToken(new ListToken("List", new[] {"filename1", "filename2"}));
+            _testTokenReplacer.AddToken(new ListToken("List", new[] { "filename1", "filename2" }));
             _testTokenReplacer.AddToken(new EnvironmentToken("Environment"));
             var userToken = new UserToken();
             userToken.AddKeyValuePair("TokenByUser", "User token value");
@@ -52,6 +52,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
             Assert.AreEqual("", t.GetValue());
         }
 
+        [TestCase("", null)]
         [TestCase("No angel-brakets in this String...", "No angel-brakets in this String...")]
         [TestCase("Only Open < no Close", "Only Open < no Close")]
         [TestCase("Only Close > no Open", "Only Close > no Open")]
@@ -76,7 +77,6 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
         [TestCase("filename1 - filename2", "<List: - >")]
         [TestCase("filename1\nfilename2", "<List:\\n>")]
         [TestCase("Lord of the RingsChristophe", "<Title><Author>")]
-
         public void Test(string expected, string tokenizedString)
         {
             Assert.AreEqual(expected, _testTokenReplacer.ReplaceTokens(tokenizedString));
@@ -124,7 +124,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
         public void UserToken_Merge_NullParameterDoesNotThrowException()
         {
             var userToken1 = new UserToken();
-            Assert.DoesNotThrow(() => {userToken1.Merge(null);});
+            Assert.DoesNotThrow(() => { userToken1.Merge(null); });
         }
 
         [Test]
@@ -199,7 +199,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
         public void TokenReplacerWithSingleEnvironmentToken_GetToken_ReturnsTokenWithNameEnvironment()
         {
             var tr = new TokenReplacer();
-            tr.AddListToken("testName", new List<string>(new string[] {}));
+            tr.AddListToken("testName", new List<string>(new string[] { }));
             Assert.IsTrue(tr.GetToken("testName") is ListToken);
         }
 
@@ -207,7 +207,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.Tokens
         public void TokenReplacerWithSingleListToken_GetToken_ReturnsListToken()
         {
             var tr = new TokenReplacer();
-            tr.AddListToken("testName", new List<string>(new string[] {}));
+            tr.AddListToken("testName", new List<string>(new string[] { }));
             Assert.IsTrue(tr.GetToken("testName") is ListToken);
         }
 

@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using SystemInterface.Diagnostics;
-using SystemInterface.IO;
 using NLog;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -13,6 +6,13 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using SystemInterface.Diagnostics;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -96,11 +96,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             return profile.Scripting.Enabled;
         }
 
-        public bool Init(Job job)
-        {
-            return true;
-        }
-
+        /// <summary>
+        ///     Check for complete profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="accounts">accounts are not used here, but are required for common ICheckable</param>
+        /// <returns>ActionResult</returns>
         public ActionResult Check(ConversionProfile profile, Accounts accounts)
         {
             var actionResult = new ActionResult();

@@ -60,8 +60,10 @@ namespace pdfforge.PDFCreator.Core.Services.Licensing
         public struct OSVERSIONINFOEX
         {
             public int dwOSVersionInfoSize;
+
             //public uint dwOSVersionInfoSize;
             public uint dwMajorVersion;
+
             public uint dwMinorVersion;
             public uint dwBuildNumber;
             public uint dwPlatformId;

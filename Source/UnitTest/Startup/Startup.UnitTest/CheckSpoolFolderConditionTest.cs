@@ -3,8 +3,8 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.Startup.StartConditions;
 using pdfforge.PDFCreator.Core.StartupInterface;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void WhenSpoolFolderIsAccessible_Success()
         {
             _spoolFolderAccess.CanAccess().Returns(true);
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, null, new ApplicationTranslation(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, null, new TranslationFactory(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 
@@ -38,7 +38,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         public void RepairDoesNotRegainAccess_FailsWithSpoolFolderInaccessible()
         {
             _spoolFolderAccess.CanAccess().Returns(false);
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new ApplicationTranslation(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new TranslationFactory(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 
@@ -57,7 +57,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 .When(x => x.TryRepairSpoolPath())
                 .Do(x => isAccessible = true);
 
-            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new ApplicationTranslation(), _spoolerProvider);
+            var spoolFolderCondition = new CheckSpoolFolderCondition(_spoolFolderAccess, _repairSpoolFolderAssistant, new TranslationFactory(), _spoolerProvider);
 
             var result = spoolFolderCondition.Check();
 

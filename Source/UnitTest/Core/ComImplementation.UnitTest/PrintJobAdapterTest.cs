@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading;
-using SystemInterface.IO;
-using SystemWrapper.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -15,33 +8,36 @@ using pdfforge.PDFCreator.Core.ComImplementation;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
+using System.Threading;
+using SystemInterface.IO;
+using SystemWrapper.IO;
 using Translatable;
 using ThreadPool = pdfforge.PDFCreator.Core.ComImplementation.ThreadPool;
 
 namespace ComImplementation.UnitTest
 {
     [TestFixture]
-    class PrintJobAdapterTest
+    internal class PrintJobAdapterTest
     {
-        private IList<ConversionProfile> _profiles;
+        private ObservableCollection<ConversionProfile> _profiles;
         private Job _job;
         private IDirectory _directory;
         private IConversionWorkflow _conversionWorkflow;
         private WorkflowResult _workflowResult;
-        private IErrorNotifier _errorNotifier;
         private IJobInfoQueue _jobInfoQueue;
 
         [SetUp]
         public void Setup()
         {
-            _errorNotifier = null;
             _workflowResult = WorkflowResult.Finished;
 
             _jobInfoQueue = Substitute.For<IJobInfoQueue>();
 
-            _profiles = new List<ConversionProfile>();
+            _profiles = new ObservableCollection<ConversionProfile>();
             _profiles.Add(new ConversionProfile
             {
                 Guid = "SomeGuid"
@@ -59,7 +55,6 @@ namespace ComImplementation.UnitTest
             _conversionWorkflow.RunWorkflow(Arg.Any<Job>())
                 .Returns(x =>
                 {
-
                     var job = x.Arg<Job>();
                     job.Completed = true;
                     return _workflowResult;
@@ -75,16 +70,12 @@ namespace ComImplementation.UnitTest
 
             var comWorkflowFactory = Substitute.For<IComWorkflowFactory>();
 
-            comWorkflowFactory.BuildWorkflow(Arg.Any<string>(), Arg.Any<IErrorNotifier>())
-                .Returns(x =>
-                {
-                    _errorNotifier = x.Arg<IErrorNotifier>();
-                    return _conversionWorkflow;
-                });
+            comWorkflowFactory.BuildWorkflow(Arg.Any<string>())
+                .Returns(x => _conversionWorkflow);
 
             var jobInfo = new JobInfo
             {
-                Metadata = new Metadata(Substitute.For<IAssemblyHelper>())
+                Metadata = new Metadata(Substitute.For<IVersionHelper>())
                 {
                     Title = "Test"
                 }
@@ -246,8 +237,6 @@ namespace ComImplementation.UnitTest
             _workflowResult = WorkflowResult.Error;
             var printJobAdapter = BuildPrintJobAdapter();
             _directory.Exists("X:\\").Returns(true);
-
-            _conversionWorkflow.When(x => x.RunWorkflow(_job)).Do(x => { _errorNotifier.Notify(new ActionResult(ErrorCode.Conversion_UnknownError)); });
 
             Assert.Throws<COMException>(() => printJobAdapter.ConvertTo("X:\\test.pdf"));
 

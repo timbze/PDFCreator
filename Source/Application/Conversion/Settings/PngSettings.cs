@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,28 +16,23 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Settings for the PNG output format
 	/// </summary>
-	public class PngSettings {
+	[ImplementPropertyChanged]
+	public partial class PngSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Number of colors. Valid values are: Color32BitTransp, Color24Bit, Color8Bit, Color4Bit, Gray8Bit, BlackWhite
+		/// Number of colors.
 		/// </summary>
-		public PngColor Color { get; set; }
+		public PngColor Color { get; set; } = PngColor.Color24Bit;
 		
 		/// <summary>
 		/// Resolution of the PNG files
 		/// </summary>
-		public int Dpi { get; set; }
+		public int Dpi { get; set; } = 150;
 		
-		
-		private void Init() {
-			Color = PngColor.Color24Bit;
-			Dpi = 150;
-		}
-		
-		public PngSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

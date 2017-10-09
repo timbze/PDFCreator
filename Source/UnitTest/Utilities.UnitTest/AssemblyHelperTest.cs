@@ -1,7 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
 using System.IO;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Utilities.UnitTest
 {
@@ -12,36 +10,11 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest
         public void GetCurrentAssemblyDirectory_ReturnsDirectoryOfTestAssembly()
         {
             var expectedPath = Path.GetDirectoryName(GetType().Assembly.CodeBase.Substring(8));
-            var assemblyHelper = new AssemblyHelper();
+            var assemblyHelper = new AssemblyHelper(GetType().Assembly);
 
-            var assemblyDirectory = assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var assemblyDirectory = assemblyHelper.GetAssemblyDirectory();
 
             Assert.AreEqual(expectedPath, assemblyDirectory);
-        }
-
-        [Test]
-        public void GetCurrentAssemblyVersion_ReturnsVersionOfTestAssembly()
-        {
-            var assemblyHelper = new AssemblyHelper();
-
-            var assemblyVersion = assemblyHelper.GetPdfforgeAssemblyVersion();
-
-            Assert.AreEqual(GetType().Assembly.GetName().Version, assemblyVersion);
-        }
-    }
-}
-
-// ReSharper disable once CheckNamespace
-namespace SomeNamespaceThatDoesntStartWithPdfforge
-{
-    [TestFixture]
-    public class AssemblyHelperTestWithOtherNamespace
-    {
-        [Test]
-        public void GetAssemblyVersion_OutsideOfPdfforgeNamespace_ThrowsInvalidOperationException()
-        {
-            var assemblyHelper = new AssemblyHelper();
-            Assert.Throws<InvalidOperationException>(() => assemblyHelper.GetPdfforgeAssemblyVersion());
         }
     }
 }

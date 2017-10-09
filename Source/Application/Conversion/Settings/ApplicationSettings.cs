@@ -1,6 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -13,41 +17,29 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// PDFCreator application settings
 	/// </summary>
-	public class ApplicationSettings {
-		
-		public Accounts Accounts { get; set; }
-		
-		public IList<PrinterMapping> PrinterMappings { get; set; }
-		public IList<TitleReplacement> TitleReplacement { get; set; }
-		public bool AskSwitchDefaultPrinter { get; set; }
-		
-		public string Language { get; set; }
-		
-		public string LastUsedProfileGuid { get; set; }
-		
-		public LoggingLevel LoggingLevel { get; set; }
-		
-		public string PrimaryPrinter { get; set; }
-		
-		public UpdateInterval UpdateInterval { get; set; }
+	[ImplementPropertyChanged]
+	public partial class ApplicationSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
 		
-		private void Init() {
-			Accounts = new Accounts();
-			PrinterMappings = new List<PrinterMapping>();
-			TitleReplacement = new List<TitleReplacement>();
-			AskSwitchDefaultPrinter = true;
-			Language = "";
-			LastUsedProfileGuid = "DefaultGuid";
-			LoggingLevel = LoggingLevel.Error;
-			PrimaryPrinter = "PDFCreator";
-			UpdateInterval = UpdateInterval.Weekly;
-		}
+		public Accounts Accounts { get; set; } = new Accounts();
 		
-		public ApplicationSettings()
-		{
-			Init();
-		}
+		public ObservableCollection<PrinterMapping> PrinterMappings { get; set; } = new ObservableCollection<PrinterMapping>();
+		public ObservableCollection<TitleReplacement> TitleReplacement { get; set; } = new ObservableCollection<TitleReplacement>();
+		public bool AskSwitchDefaultPrinter { get; set; } = true;
+		
+		public string Language { get; set; } = "";
+		
+		public string LastUsedProfileGuid { get; set; } = "DefaultGuid";
+		
+		public LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
+		
+		public string PrimaryPrinter { get; set; } = "PDFCreator";
+		
+		public UpdateInterval UpdateInterval { get; set; } = UpdateInterval.Weekly;
+		
 		
 		public void ReadValues(Data data, string path)
 		{
@@ -117,14 +109,14 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			
 			copy.Accounts = Accounts.Copy();
 			
-			copy.PrinterMappings = new List<PrinterMapping>();
+			copy.PrinterMappings = new ObservableCollection<PrinterMapping>();
 			for (int i = 0; i < PrinterMappings.Count; i++)
 			{
 				copy.PrinterMappings.Add(PrinterMappings[i].Copy());
 			}
 			
 			
-			copy.TitleReplacement = new List<TitleReplacement>();
+			copy.TitleReplacement = new ObservableCollection<TitleReplacement>();
 			for (int i = 0; i < TitleReplacement.Count; i++)
 			{
 				copy.TitleReplacement.Add(TitleReplacement[i].Copy());

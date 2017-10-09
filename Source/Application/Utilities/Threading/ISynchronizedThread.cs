@@ -10,6 +10,8 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// </summary>
         string Name { get; set; }
 
+        Thread Thread { get; }
+
         /// <summary>
         ///     Gets the current state of the thread
         /// </summary>

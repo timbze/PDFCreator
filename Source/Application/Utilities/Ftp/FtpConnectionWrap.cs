@@ -5,12 +5,19 @@ namespace pdfforge.PDFCreator.Utilities.Ftp
     public interface IFtpConnection
     {
         void Open();
+
         void Close();
+
         void Login();
+
         bool FileExists(string filePath);
+
         bool DirectoryExists(string path);
+
         void CreateDirectory(string path);
+
         void SetCurrentDirectory(string directory);
+
         void PutFile(string file, string path);
     }
 

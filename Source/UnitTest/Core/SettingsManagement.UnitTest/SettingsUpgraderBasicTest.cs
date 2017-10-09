@@ -103,6 +103,6 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
             var upgrader = new SettingsUpgrader(data);
 
             Assert.IsTrue(upgrader.RequiresUpgrade(1));
-        }        
+        }
     }
 }

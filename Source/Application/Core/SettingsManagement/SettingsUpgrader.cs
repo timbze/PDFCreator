@@ -1,8 +1,10 @@
-﻿using System;
+﻿using pdfforge.DataStorage;
+using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using pdfforge.DataStorage;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.Text.RegularExpressions;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
@@ -27,6 +29,7 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             _upgradeMethods.Add(UpgradeV3ToV4);
             _upgradeMethods.Add(UpgradeV4ToV5);
             _upgradeMethods.Add(UpgradeV5ToV6);
+            _upgradeMethods.Add(UpgradeV6ToV7);
         }
 
         public int SettingsVersion
@@ -166,6 +169,189 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             MoveSettingInAllProfiles(@"EmailSmtp\UserName", @"EmailSmtpSettings\UserName");
         }
 
+        private void UpgradeV6ToV7()
+        {
+            Data.SetValue(VersionSettingPath, "7");
+
+            ApplyV7TargetFolder();
+            ApplyV7TitleReplacements();
+
+            V7ExtractTimeServerAccounts();
+            V7ExtractFtpAccounts();
+            V7ExtractSmtpAccounts();
+        }
+
+        private void ApplyV7TargetFolder()
+        {
+            ForAllProfiles((s, i) =>
+            {
+                if (GetBool(Data.GetValue(s + @"AutoSave\Enabled")) == true)
+                    Data.SetValue(s + "TargetDirectory", Data.GetValue(s + @"AutoSave\TargetDirectory"));
+                else
+                    Data.SetValue(s + "TargetDirectory", Data.GetValue(s + @"SaveDialog\Folder"));
+            });
+        }
+
+        private void ApplyV7TitleReplacements()
+        {
+            int replacementCount;
+            if (int.TryParse(Data.GetValue(@"ApplicationSettings\TitleReplacement\numClasses"), out replacementCount))
+            {
+                for (var i = 0; i < replacementCount; i++)
+                {
+                    string section = $"ApplicationSettings\\TitleReplacement\\{i}\\";
+
+                    var replacement = new TitleReplacement();
+                    replacement.ReadValues(Data, section);
+
+                    if (replacement.ReplacementType == ReplacementType.RegEx)
+                        continue;
+
+                    if (String.IsNullOrEmpty(replacement.Replace))
+                        continue;
+
+                    replacement.ReplacementType = ReplacementType.RegEx;
+                    replacement.Search = Regex.Escape(replacement.Search);
+                    replacement.Replace = Regex.Escape(replacement.Replace);
+
+                    replacement.StoreValues(Data, section);
+                }
+            }
+        }
+
+        private void V7ExtractTimeServerAccounts()
+        {
+            var accounts = new Dictionary<TimeServerAccount, List<int>>();
+            accounts[new TimeServerAccount { Url = "https://freetsa.org/tsr" }] = new List<int>();
+            accounts[new TimeServerAccount { Url = "http://timestamp.digicert.com" }] = new List<int>();
+            accounts[new TimeServerAccount { Url = "http://timestamp.globalsign.com/scripts/timstamp.dll" }] = new List<int>();
+
+            ForAllProfiles((s, i) =>
+            {
+                var path = s + @"PdfSettings\Signature\";
+                if (GetBool(Data.GetValue(path + "Enabled")) != true)
+                    return;
+
+                var account = new TimeServerAccount();
+                account.IsSecured = GetBool(Data.GetValue(path + "TimeServerIsSecured")) == true;
+                account.UserName = Data.GetValue(path + "TimeServerLoginName");
+                account.Password = Data.Decrypt(Data.GetValue(path + "TimeServerPassword"));
+                account.Url = Data.GetValue(path + "TimeServerUrl");
+
+                var existingAccount = accounts.Keys.FirstOrDefault(a => a.Equals(account));
+                if (existingAccount != null)
+                {
+                    accounts[existingAccount].Add(i);
+                }
+                else
+                {
+                    accounts[account] = new List<int>();
+                    accounts[account].Add(i);
+                }
+            });
+
+            for (var i = 0; i < accounts.Count; i++)
+            {
+                var account = accounts.Keys.ToArray()[i];
+                account.AccountId = Guid.NewGuid().ToString();
+
+                account.StoreValues(Data, $"ApplicationSettings\\Accounts\\TimeServerAccounts\\{i}\\");
+
+                foreach (var profileId in accounts[account])
+                {
+                    Data.SetValue($"ConversionProfiles\\{profileId}\\PdfSettings\\Signature\\TimeServerAccountId", account.AccountId);
+                }
+            }
+            Data.SetValue(@"ApplicationSettings\Accounts\TimeServerAccounts\numClasses", accounts.Keys.Count.ToString());
+        }
+
+        private void V7ExtractFtpAccounts()
+        {
+            var accounts = new Dictionary<FtpAccount, List<int>>();
+
+            ForAllProfiles((s, i) =>
+            {
+                var path = s + @"Ftp\";
+                if (GetBool(Data.GetValue(path + "Enabled")) != true)
+                    return;
+
+                var account = new FtpAccount();
+                account.UserName = Data.GetValue(path + "UserName");
+                account.Password = Data.Decrypt(Data.GetValue(path + "Password"));
+                account.Server = Data.GetValue(path + "Server");
+
+                var existingAccount = accounts.Keys.FirstOrDefault(a => a.Equals(account));
+                if (existingAccount != null)
+                {
+                    accounts[existingAccount].Add(i);
+                }
+                else
+                {
+                    accounts[account] = new List<int>();
+                    accounts[account].Add(i);
+                }
+            });
+
+            for (var i = 0; i < accounts.Count; i++)
+            {
+                var account = accounts.Keys.ToArray()[i];
+                account.AccountId = Guid.NewGuid().ToString();
+
+                account.StoreValues(Data, $"ApplicationSettings\\Accounts\\FtpAccounts\\{i}\\");
+
+                foreach (var profileId in accounts[account])
+                {
+                    Data.SetValue($"ConversionProfiles\\{profileId}\\Ftp\\AccountId", account.AccountId);
+                }
+            }
+            Data.SetValue(@"ApplicationSettings\Accounts\FtpAccounts\numClasses", accounts.Keys.Count.ToString());
+        }
+
+        private void V7ExtractSmtpAccounts()
+        {
+            var accounts = new Dictionary<SmtpAccount, List<int>>();
+
+            ForAllProfiles((s, i) =>
+            {
+                var path = s + @"EmailSmtpSettings\";
+                if (GetBool(Data.GetValue(path + "Enabled")) != true)
+                    return;
+
+                var account = new SmtpAccount();
+                account.Address = Data.GetValue(path + "Address");
+                account.Password = Data.Decrypt(Data.GetValue(path + "Password"));
+                account.Port = GetInt(Data.GetValue(path + "Port")) ?? 25;
+                account.Server = Data.GetValue(path + "Server");
+                account.Ssl = GetBool(Data.GetValue(path + "Ssl")) == true;
+                account.UserName = Data.GetValue(path + "UserName");
+
+                var existingAccount = accounts.Keys.FirstOrDefault(a => a.Equals(account));
+                if (existingAccount != null)
+                {
+                    accounts[existingAccount].Add(i);
+                }
+                else
+                {
+                    accounts[account] = new List<int>();
+                    accounts[account].Add(i);
+                }
+            });
+
+            for (var i = 0; i < accounts.Count; i++)
+            {
+                var account = accounts.Keys.ToArray()[i];
+                account.AccountId = Guid.NewGuid().ToString();
+
+                account.StoreValues(Data, $@"ApplicationSettings\Accounts\SmtpAccounts\{i}\");
+
+                foreach (var profileId in accounts[account])
+                {
+                    Data.SetValue($@"ConversionProfiles\{profileId}\EmailSmtpSettings\AccountId", account.AccountId);
+                }
+            }
+            Data.SetValue(@"ApplicationSettings\Accounts\SmtpAccounts\numClasses", accounts.Keys.Count.ToString());
+        }
+
         private string MapTiffColorBlackWhite_V4(string s)
         {
             if (s.Equals("BlackWhite", StringComparison.OrdinalIgnoreCase))
@@ -186,13 +372,30 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             {
                 case "Low40Bit":
                     return "Rc40Bit";
+
                 case "Medium128Bit":
                     return "Rc128Bit";
+
                 case "High128BitAes":
                     return "Aes128Bit";
             }
 
             return "Rc128Bit";
+        }
+
+        private void ForAllProfiles(Action<string, int> func)
+        {
+            var numProfiles = GetInt(Data.GetValue(@"ConversionProfiles\numClasses"));
+
+            if (numProfiles != null)
+            {
+                for (var i = 0; i < numProfiles; i++)
+                {
+                    var path = $@"ConversionProfiles\{i}\";
+
+                    func(path, i);
+                }
+            }
         }
 
         private void MoveSettingInAllProfiles(string oldPath, string newPath)
@@ -244,6 +447,15 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
             if (!int.TryParse(s, out i))
                 return null;
             return i;
+        }
+
+        private bool? GetBool(string s)
+        {
+            bool b;
+
+            if (!bool.TryParse(s, out b))
+                return null;
+            return b;
         }
     }
 }

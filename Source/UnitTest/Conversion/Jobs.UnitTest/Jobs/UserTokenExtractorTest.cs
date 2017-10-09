@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
+﻿using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PsParser;
 using PsParser;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -22,7 +22,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             _psParser.UserTokens.Returns(new List<UserToken>());
             var psParserFactory = Substitute.For<IPsParserFactory>();
             psParserFactory.BuildPsParser(PsFile).Returns(_psParser);
-            
+
             _userTokenExtractor = new UserTokenExtractor(psParserFactory);
         }
 
@@ -31,7 +31,8 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         {
             _userTokenExtractor.ExtractUserTokenFromPsFile(PsFile);
 
-            Received.InOrder(() => {
+            Received.InOrder(() =>
+            {
                 _psParser.Analyse();
                 _psParser.RemoveParameterLinesFromPSFile();
                 _psParser.CloseStream();

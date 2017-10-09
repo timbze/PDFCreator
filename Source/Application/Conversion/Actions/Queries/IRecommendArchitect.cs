@@ -2,6 +2,6 @@
 {
     public interface IRecommendArchitect
     {
-        bool Show();
+        void Show();
     }
 }

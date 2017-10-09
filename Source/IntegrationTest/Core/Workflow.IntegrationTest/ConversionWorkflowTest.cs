@@ -1,16 +1,15 @@
 ﻿using iTextSharp.text.pdf;
 using NSubstitute;
 using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 {
     [TestFixture]
-    [Category("LongRunning")]
     public class ConversionWorkflowTest
     {
         [SetUp]
@@ -23,10 +22,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _workflowFactory = container.GetInstance<IWorkflowFactory>();
             _jobBuilder = container.GetInstance<IJobBuilder>();
 
-            /*
-            var translationHelper = new TranslationHelper(new TranslationProxy(), new SettingsProvider(), new AssemblyHelper());
-            translationHelper.InitTranslator("None");*/
-
             _interactiveProfile = new ConversionProfile();
             _interactiveProfile.Name = InteractivePrinterName;
             _interactiveProfile.Guid = InteractiveProfileGuid;
@@ -38,7 +33,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _autosaveProfile.Guid = AutosaveProfileGuid;
             _autosaveProfile.AutoSave.Enabled = true;
             _autosaveProfileMapping = new PrinterMapping(AutosavePrinterName, AutosaveProfileGuid);
-            
+
             _th = container.GetInstance<TestHelper>();
             _th.InitTempFolder("ConversionWorklowTest");
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
@@ -78,7 +73,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.Enabled = true;
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
             _settings.ConversionProfiles[0].AuthorTemplate = "<PrintJobAuthor> + some text";
@@ -88,7 +83,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 
             autoSaveWorkflow.RunWorkflow(job);
 
-            var pdf = new PdfReader(autoSaveWorkflow.Job.OutputFiles[0]);
+            var pdf = new PdfReader(job.OutputFiles[0]);
             Assert.AreEqual("Author from Job + some text", pdf.Info["Author"], "Wrong author in PDF Metadata");
         }
 
@@ -173,7 +168,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings.ConversionProfiles.Add(_th.Job.Profile);
             _settings.ConversionProfiles[0].AutoSave.Enabled = true;
             _settings.ConversionProfiles[0].AutoSave.EnsureUniqueFilenames = false;
-            _settings.ConversionProfiles[0].AutoSave.TargetDirectory = _th.TmpTestFolder;
+            _settings.ConversionProfiles[0].TargetDirectory = _th.TmpTestFolder;
             _settings.ConversionProfiles[0].FileNameTemplate = "AutoSaveTestOutput";
             _settings.ConversionProfiles[0].OutputFormat = OutputFormat.Pdf;
             _settings.ConversionProfiles[0].TitleTemplate = "<PrintJobName> by <PrintJobAuthor>";
@@ -186,7 +181,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 
             autoSaveWorkflow.RunWorkflow(job);
 
-            var pdf = new PdfReader(autoSaveWorkflow.Job.OutputFiles[0]);
+            var pdf = new PdfReader(job.OutputFiles[0]);
             Assert.AreEqual("Title from Job by Author from Job", pdf.Info["Title"], "Wrong title in PDF Metadata");
         }
     }

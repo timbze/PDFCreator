@@ -2,7 +2,7 @@
 {
     public class DropboxFileMetaData
     {
-        public string SharedUrl { get; set; }
-        public string FilePath { get; set; }
+        public string ShareUrl { get; set; }
+        public string Filename { get; set; }
     }
 }

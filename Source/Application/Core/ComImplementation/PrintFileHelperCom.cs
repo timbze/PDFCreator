@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using pdfforge.PDFCreator.Core.Printing.Printer;
+﻿using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Core.ComImplementation
 {
@@ -56,7 +56,7 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
         protected override bool QuerySwitchDefaultPrinter()
         {
             //Depending on what the COM user chose to do, we set the
-            //default printer or not 
+            //default printer or not
             return AllowDefaultPrinterSwitch;
         }
     }

@@ -1,8 +1,8 @@
-﻿using System.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
@@ -12,7 +12,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         private readonly IPrintFileHelper _printFileHelper;
         private readonly ISettingsManager _settingsManager;
 
-        public PrintFileStart(ICheckAllStartupConditions startupConditions, IPrintFileHelper printFileHelper, ISettingsManager settingsManager) 
+        public PrintFileStart(ICheckAllStartupConditions startupConditions, IPrintFileHelper printFileHelper, ISettingsManager settingsManager)
             : base(startupConditions)
         {
             _printFileHelper = printFileHelper;
@@ -30,7 +30,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             {
                 _logger.Error("PrintFile Parameter has no argument");
                 return ExitCode.PrintFileParameterHasNoArgument;
-;
+                ;
             }
 
             if (!File.Exists(PrintFile))

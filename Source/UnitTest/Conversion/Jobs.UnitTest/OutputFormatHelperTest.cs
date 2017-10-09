@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
 {
@@ -12,106 +12,149 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         public void PrepareSamples()
         {
             _outputFormatHelper = new OutputFormatHelper();
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.Pdf));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.PdfA2B));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.PdfX));
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.Png));
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.Tif));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.Tif));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.TiFf", OutputFormat.Tif));
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.Jpeg));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.Jpeg));
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.jPEG", OutputFormat.Jpeg));
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.Txt));
-
-            _goodSamples.Add(new KeyValuePair<string, OutputFormat>(@"c:\MyFolder.Tiff\test.pdf", OutputFormat.Pdf));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.Pdf));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.PdfA2B));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.PdfX));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.Png));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.Jpeg));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.txt", OutputFormat.Tif));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.Pdf));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.Pdf));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.Pdf));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.Pdf));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.Pdf));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.PdfA2B));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.PdfA2B));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.PdfA2B));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.PdfA2B));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.PdfA2B));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.PdfX));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.PdfX));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.PdfX));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.PdfX));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.PdfX));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.Png));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.Png));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.Png));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.Png));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.Png));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.Jpeg));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tif", OutputFormat.Jpeg));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.tiff", OutputFormat.Jpeg));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.Jpeg));
-
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.pdf", OutputFormat.Tif));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.png", OutputFormat.Tif));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpg", OutputFormat.Tif));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.Tif));
-            _badSamples.Add(new KeyValuePair<string, OutputFormat>("test.jpeg", OutputFormat.Txt));
         }
 
-        private readonly List<KeyValuePair<string, OutputFormat>> _goodSamples = new List<KeyValuePair<string, OutputFormat>>();
-        private readonly List<KeyValuePair<string, OutputFormat>> _badSamples = new List<KeyValuePair<string, OutputFormat>>();
         private OutputFormatHelper _outputFormatHelper;
 
-        [Test]
-        public void AddValidExtension_GivenBadFiles_ReturnsGoodFiles()
+        [TestCase("test.txt", OutputFormat.Pdf)]
+        [TestCase("test.txt", OutputFormat.PdfA2B)]
+        [TestCase("test.txt", OutputFormat.PdfX)]
+        [TestCase("test.txt", OutputFormat.Png)]
+        [TestCase("test.txt", OutputFormat.Jpeg)]
+        [TestCase("test.txt", OutputFormat.Tif)]
+        [TestCase("test.png", OutputFormat.Pdf)]
+        [TestCase("test.tif", OutputFormat.Pdf)]
+        [TestCase("test.tiff", OutputFormat.Pdf)]
+        [TestCase("test.jpg", OutputFormat.Pdf)]
+        [TestCase("test.jpeg", OutputFormat.Pdf)]
+        [TestCase("test.png", OutputFormat.PdfA2B)]
+        [TestCase("test.tif", OutputFormat.PdfA2B)]
+        [TestCase("test.tiff", OutputFormat.PdfA2B)]
+        [TestCase("test.jpg", OutputFormat.PdfA2B)]
+        [TestCase("test.jpeg", OutputFormat.PdfA2B)]
+        [TestCase("test.png", OutputFormat.PdfX)]
+        [TestCase("test.tif", OutputFormat.PdfX)]
+        [TestCase("test.tiff", OutputFormat.PdfX)]
+        [TestCase("test.jpg", OutputFormat.PdfX)]
+        [TestCase("test.jpeg", OutputFormat.PdfX)]
+        [TestCase("test.pdf", OutputFormat.Png)]
+        [TestCase("test.tif", OutputFormat.Png)]
+        [TestCase("test.tiff", OutputFormat.Png)]
+        [TestCase("test.jpg", OutputFormat.Png)]
+        [TestCase("test.jpeg", OutputFormat.Png)]
+        [TestCase("test.pdf", OutputFormat.Jpeg)]
+        [TestCase("test.tif", OutputFormat.Jpeg)]
+        [TestCase("test.tiff", OutputFormat.Jpeg)]
+        [TestCase("test.png", OutputFormat.Jpeg)]
+        [TestCase("test.pdf", OutputFormat.Tif)]
+        [TestCase("test.png", OutputFormat.Tif)]
+        [TestCase("test.jpg", OutputFormat.Tif)]
+        [TestCase("test.jpeg", OutputFormat.Tif)]
+        [TestCase("test.jpeg", OutputFormat.Txt)]
+        public void AddValidExtension_GivenBadFiles_ReturnsGoodFiles(string filename, OutputFormat outputFormat)
         {
-            foreach (var sample in _badSamples)
-            {
-                Assert.IsTrue(_outputFormatHelper.HasValidExtension(_outputFormatHelper.EnsureValidExtension(sample.Key, sample.Value), sample.Value));
-            }
+            var fixedFile = _outputFormatHelper.EnsureValidExtension(filename, outputFormat);
+            Assert.IsTrue(_outputFormatHelper.HasValidExtension(fixedFile, outputFormat));
         }
 
-        [Test]
-        public void AddValidExtension_GivenGoodFiles_ReturnsSameFiles()
+        [TestCase("test.pdf", OutputFormat.Pdf)]
+        [TestCase("test.pdf", OutputFormat.PdfA2B)]
+        [TestCase("test.pdf", OutputFormat.PdfX)]
+        [TestCase("test.png", OutputFormat.Png)]
+        [TestCase("test.tif", OutputFormat.Tif)]
+        [TestCase("test.tiff", OutputFormat.Tif)]
+        [TestCase("test.TiFf", OutputFormat.Tif)]
+        [TestCase("test.jpg", OutputFormat.Jpeg)]
+        [TestCase("test.jpeg", OutputFormat.Jpeg)]
+        [TestCase("test.jPEG", OutputFormat.Jpeg)]
+        [TestCase("test.txt", OutputFormat.Txt)]
+        [TestCase(@"c:\MyFolder.Tiff\test.pdf", OutputFormat.Pdf)]
+        public void AddValidExtension_GivenGoodFiles_ReturnsSameFiles(string filename, OutputFormat outputFormat)
         {
-            foreach (var sample in _goodSamples)
-            {
-                Assert.AreEqual(_outputFormatHelper.EnsureValidExtension(sample.Key, sample.Value), sample.Key);
-            }
+            Assert.AreEqual(filename, _outputFormatHelper.EnsureValidExtension(filename, outputFormat));
         }
 
-        [Test]
-        public void HasValidExtension_GivenLotsOfFalseSamples_ReturnsFalse()
+        [TestCase("test.txt", OutputFormat.Pdf)]
+        [TestCase("test.txt", OutputFormat.PdfA2B)]
+        [TestCase("test.txt", OutputFormat.PdfX)]
+        [TestCase("test.txt", OutputFormat.Png)]
+        [TestCase("test.txt", OutputFormat.Jpeg)]
+        [TestCase("test.txt", OutputFormat.Tif)]
+        [TestCase("test.png", OutputFormat.Pdf)]
+        [TestCase("test.tif", OutputFormat.Pdf)]
+        [TestCase("test.tiff", OutputFormat.Pdf)]
+        [TestCase("test.jpg", OutputFormat.Pdf)]
+        [TestCase("test.jpeg", OutputFormat.Pdf)]
+        [TestCase("test.png", OutputFormat.PdfA2B)]
+        [TestCase("test.tif", OutputFormat.PdfA2B)]
+        [TestCase("test.tiff", OutputFormat.PdfA2B)]
+        [TestCase("test.jpg", OutputFormat.PdfA2B)]
+        [TestCase("test.jpeg", OutputFormat.PdfA2B)]
+        [TestCase("test.png", OutputFormat.PdfX)]
+        [TestCase("test.tif", OutputFormat.PdfX)]
+        [TestCase("test.tiff", OutputFormat.PdfX)]
+        [TestCase("test.jpg", OutputFormat.PdfX)]
+        [TestCase("test.jpeg", OutputFormat.PdfX)]
+        [TestCase("test.pdf", OutputFormat.Png)]
+        [TestCase("test.tif", OutputFormat.Png)]
+        [TestCase("test.tiff", OutputFormat.Png)]
+        [TestCase("test.jpg", OutputFormat.Png)]
+        [TestCase("test.jpeg", OutputFormat.Png)]
+        [TestCase("test.pdf", OutputFormat.Jpeg)]
+        [TestCase("test.tif", OutputFormat.Jpeg)]
+        [TestCase("test.tiff", OutputFormat.Jpeg)]
+        [TestCase("test.png", OutputFormat.Jpeg)]
+        [TestCase("test.pdf", OutputFormat.Tif)]
+        [TestCase("test.png", OutputFormat.Tif)]
+        [TestCase("test.jpg", OutputFormat.Tif)]
+        [TestCase("test.jpeg", OutputFormat.Tif)]
+        [TestCase("test.jpeg", OutputFormat.Txt)]
+        public void HasValidExtension_GivenLotsOfFalseSamples_ReturnsFalse(string filename, OutputFormat outputFormat)
         {
-            foreach (var sample in _badSamples)
-            {
-                Assert.IsFalse(_outputFormatHelper.HasValidExtension(sample.Key, sample.Value), $"Sample '{sample.Key}' was deemed valid for {sample.Value}, but should be invalid.");
-            }
+            Assert.IsFalse(_outputFormatHelper.HasValidExtension(filename, outputFormat), $"Sample '{filename}' was deemed valid for {outputFormat}, but should be invalid.");
         }
 
-        [Test]
-        public void HasValidExtension_GivenLotsOfTrueSamples_ReturnsTrue()
+        [TestCase("test.pdf", OutputFormat.Pdf)]
+        [TestCase("test.pdf", OutputFormat.PdfA2B)]
+        [TestCase("test.pdf", OutputFormat.PdfX)]
+        [TestCase("test.png", OutputFormat.Png)]
+        [TestCase("test.tif", OutputFormat.Tif)]
+        [TestCase("test.tiff", OutputFormat.Tif)]
+        [TestCase("test.TiFf", OutputFormat.Tif)]
+        [TestCase("test.jpg", OutputFormat.Jpeg)]
+        [TestCase("test.jpeg", OutputFormat.Jpeg)]
+        [TestCase("test.jPEG", OutputFormat.Jpeg)]
+        [TestCase("test.txt", OutputFormat.Txt)]
+        [TestCase(@"c:\MyFolder.Tiff\test.pdf", OutputFormat.Pdf)]
+        public void HasValidExtension_GivenLotsOfTrueSamples_ReturnsTrue(string filename, OutputFormat outputFormat)
         {
-            foreach (var sample in _goodSamples)
-            {
-                Assert.IsTrue(_outputFormatHelper.HasValidExtension(sample.Key, sample.Value), $"Sample '{sample.Key}' was deemed invalid for {sample.Value}, but should be valid.");
-            }
+            Assert.IsTrue(_outputFormatHelper.HasValidExtension(filename, outputFormat), $"Sample '{filename}' was deemed invalid for {outputFormat}, but should be valid.");
         }
+
+        [Test, TestCaseSource(nameof(_outputformatValues))]
+        public void IsPdfFormat_ForAllFormats_DoesNotThrowException(OutputFormat outputFormat)
+        {
+            Assert.DoesNotThrow(() => _outputFormatHelper.IsPdfFormat(outputFormat));
+        }
+
+        [TestCase(OutputFormat.Pdf)]
+        [TestCase(OutputFormat.PdfA1B)]
+        [TestCase(OutputFormat.PdfA2B)]
+        [TestCase(OutputFormat.PdfX)]
+        public void ForPdfFormats_ReturnsTrue(OutputFormat outputFormat)
+        {
+            Assert.IsTrue(_outputFormatHelper.IsPdfFormat(outputFormat));
+        }
+
+        [TestCase(OutputFormat.Jpeg)]
+        [TestCase(OutputFormat.Png)]
+        [TestCase(OutputFormat.Tif)]
+        [TestCase(OutputFormat.Txt)]
+        public void ForOtherFormats_ReturnsFalse(OutputFormat outputFormat)
+        {
+            Assert.IsFalse(_outputFormatHelper.IsPdfFormat(outputFormat));
+        }
+
+        private static OutputFormat[] _outputformatValues = (OutputFormat[])Enum.GetValues(typeof(OutputFormat));
     }
 }

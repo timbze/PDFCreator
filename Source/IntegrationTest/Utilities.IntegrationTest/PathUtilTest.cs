@@ -1,8 +1,8 @@
-﻿using System;
-using SystemWrapper.IO;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Utilities;
+﻿using NUnit.Framework;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Utilities;
+using System;
+using SystemWrapper.IO;
 
 namespace PDFCreator.Utilities.IntegrationTest
 {

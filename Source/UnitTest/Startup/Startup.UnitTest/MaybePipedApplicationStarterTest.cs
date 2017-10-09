@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Communication;
@@ -10,8 +7,11 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants.Update;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.Utilities.Threading;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
@@ -74,7 +74,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _pipeServerManager.IsServerRunning().Returns(true);
             var starter = BuildMaybePipedApplicationStarter(5);
 
-            starter.SendMessageOrStartApplication(()=>expectedMessage, () => false, false);
+            starter.SendMessageOrStartApplication(() => expectedMessage, () => false, false);
 
             _pipeServerManager.Received(starter.Retries).TrySendPipeMessage(expectedMessage);
         }
@@ -103,7 +103,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _pipeServerManager.TrySendPipeMessage(expectedMessage)
                 .Returns(false, false, false, true);
 
-            starter.SendMessageOrStartApplication(()=>expectedMessage, () => false, false);
+            starter.SendMessageOrStartApplication(() => expectedMessage, () => false, false);
 
             _pipeServerManager.Received(4).TrySendPipeMessage(expectedMessage);
         }
@@ -117,7 +117,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _pipeServerManager.TrySendPipeMessage(expectedMessage).Returns(true);
             var starter = BuildMaybePipedApplicationStarter(1);
 
-            starter.SendMessageOrStartApplication(()=>expectedMessage, () => false, false);
+            starter.SendMessageOrStartApplication(() => expectedMessage, () => false, false);
 
             _pipeServerManager.Received(1).TrySendPipeMessage(expectedMessage);
         }
@@ -157,7 +157,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
             _threadManager.DidNotReceiveWithAnyArgs().StartSynchronizedThread(Arg.Any<ISynchronizedThread>());
             _threadManager.DidNotReceiveWithAnyArgs().StartSynchronizedThread(Arg.Any<ThreadStart>(), Arg.Any<string>());
-            _updateAssistant.DidNotReceive().UpdateProcedure(Arg.Any<bool>(), Arg.Any<bool>());
+            _updateAssistant.DidNotReceive().UpdateProcedure(Arg.Any<bool>());
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
             starter.SendMessageOrStartApplication(() => "", () => true, false);
 
-            _updateAssistant.Received(1).UpdateProcedure(true, true);
+            _updateAssistant.Received(1).UpdateProcedure(true);
         }
 
         [Test]
@@ -230,9 +230,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 return true;
             };
 
-
             Assert.Throws<Exception>(() => starter.SendMessageOrStartApplication(() => "", startFunc, true));
-
 
             Received.InOrder(() =>
             {

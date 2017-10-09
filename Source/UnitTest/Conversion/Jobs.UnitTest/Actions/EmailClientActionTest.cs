@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
@@ -10,6 +7,9 @@ using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities.Tokens;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 {
@@ -30,7 +30,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), new Accounts());
             _job.TokenReplacer = _tokenReplacer;
-            _job.OutputFiles = new[] {@"C:\Temp\file1.pdf"}.ToList();
+            _job.OutputFiles = new[] { @"C:\Temp\file1.pdf" }.ToList();
             _job.Profile = _profile;
             _job.JobTranslations = new JobTranslations();
             _job.JobTranslations.EmailSignature = SignatureText;
@@ -127,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] {"a@local", "b@local"}.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local" }.ToList(), mail.To);
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] {"a@local", "b@local", "c@local"}.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }.ToList(), mail.To);
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] {"a@local", "b@local", "c@local"}.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }.ToList(), mail.To);
         }
 
         [Test]
@@ -257,7 +257,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         public void CheckEmailClientInstalled_ClientCanBeCreated_ReturnsTrue()
         {
             var action = new EMailClientAction(_emailClientFactory);
-            
+
             Assert.IsTrue(action.CheckEmailClientInstalled());
         }
 

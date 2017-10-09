@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -32,7 +32,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("Beta - Two", title);
+            Assert.AreEqual(" - ", title);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("My Sample Word - Microsoft xx", title);
+            Assert.AreEqual("My Sample Word - Microsoft ", title);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("xx Sample My Title - Microsoft Word", title);
+            Assert.AreEqual(" Sample My Title - Microsoft Word", title);
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("My Sample Title abc", title);
+            Assert.AreEqual("My Sample Title ", title);
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("My Sample TitleEmpty", title);
+            Assert.AreEqual("My Sample Title", title);
         }
 
         [TestCase(ReplacementType.Start)]

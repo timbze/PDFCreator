@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NLog;
 using Org.BouncyCastle.Crypto;
@@ -12,6 +7,11 @@ using Org.BouncyCastle.Security;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
@@ -19,7 +19,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
     public class ITextSigner
     {
         //ActionId = 12;
-        private readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         ///     Add a signature (set in profile) to a document, that is opened in the stamper.
@@ -29,11 +29,44 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <param name="profile">Profile with signature settings</param>
         /// <param name="jobPasswords">Passwords with PdfSignaturePassword</param>
         /// <exception cref="ProcessingException">In case of any error.</exception>
-        public void SignPdfFile(PdfStamper stamper, ConversionProfile profile, JobPasswords jobPasswords)
+        public void SignPdfFile(PdfStamper stamper, ConversionProfile profile, JobPasswords jobPasswords, Accounts accounts)
         {
+            var signing = profile.PdfSettings.Signature;
+
+            if (!profile.PdfSettings.Signature.Enabled) //Leave without signing
+                return;
+
+            _logger.Debug("Start signing file.");
+
+            signing.CertificateFile = Path.GetFullPath(signing.CertificateFile);
+
+            if (string.IsNullOrEmpty(jobPasswords.PdfSignaturePassword))
+            {
+                _logger.Error("Launched signing without certification password.");
+                throw new ProcessingException("Launched signing without certification password.", ErrorCode.Signature_LaunchedSigningWithoutPassword);
+            }
+            if (IsValidCertificatePassword(signing.CertificateFile, jobPasswords.PdfSignaturePassword) == false)
+            {
+                _logger.Error("Canceled signing. The password for certificate '" + signing.CertificateFile + "' is wrong.");
+                throw new ProcessingException("Canceled signing. The password for certificate '" + signing.CertificateFile + "' is wrong.", ErrorCode.Signature_WrongCertificatePassword);
+            }
+            if (CertificateHasPrivateKey(signing.CertificateFile, jobPasswords.PdfSignaturePassword) == false)
+            {
+                _logger.Error("Canceled signing. The certificate '" + signing.CertificateFile + "' has no private key.");
+                throw new ProcessingException(
+                    "Canceled signing. The certificate '" + signing.CertificateFile + "' has no private key.", ErrorCode.Signature_NoPrivateKey);
+            }
+
+            var timeServerAccount = accounts.GetTimeServerAccount(profile);
+            if (timeServerAccount == null)
+            {
+                _logger.Error("Launched signing without available timeserver account.");
+                throw new ProcessingException("Launched signing without available timeserver account.", ErrorCode.Signature_NoTimeServerAccount);
+            }
+
             try
             {
-                DoSignPdfFile(stamper, profile, jobPasswords);
+                DoSignPdfFile(stamper, signing, jobPasswords, timeServerAccount);
             }
             catch (ProcessingException)
             {
@@ -41,39 +74,13 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             }
             catch (Exception ex)
             {
-                throw new ProcessingException(ex.GetType() + " while signing:" + Environment.NewLine + ex.Message, ErrorCode.Signature_GenericError);
+                throw new ProcessingException(ex.GetType() + " while signing:" + Environment.NewLine + ex.Message, ErrorCode.Signature_GenericError, ex);
             }
         }
 
-        private void DoSignPdfFile(PdfStamper stamper, ConversionProfile profile, JobPasswords jobPasswords)
+        private void DoSignPdfFile(PdfStamper stamper, Signature signing, JobPasswords jobPasswords, TimeServerAccount timeServerAccount)
         {
-            var signing = profile.PdfSettings.Signature;
-
-            if (!signing.Enabled) //Leave without signing 
-                return;
-
-            Logger.Debug("Start signing file.");
-
-            signing.CertificateFile = Path.GetFullPath(signing.CertificateFile);
-
-            if (string.IsNullOrEmpty(jobPasswords.PdfSignaturePassword))
-            {
-                Logger.Error("Launched signing without certification password.");
-                throw new ProcessingException("Launched signing without certification password.", ErrorCode.Signature_LaunchedSigningWithoutPassword);
-            }
-            if (IsValidCertificatePassword(signing.CertificateFile, jobPasswords.PdfSignaturePassword) == false)
-            {
-                Logger.Error("Canceled signing. The password for certificate '" + signing.CertificateFile + "' is wrong.");
-                throw new ProcessingException("Canceled signing. The password for certificate '" + signing.CertificateFile + "' is wrong.", ErrorCode.Signature_WrongCertificatePassword);
-            }
-            if (CertificateHasPrivateKey(signing.CertificateFile, jobPasswords.PdfSignaturePassword) == false)
-            {
-                Logger.Error("Canceled signing. The certificate '" + signing.CertificateFile + "' has no private key.");
-                throw new ProcessingException(
-                    "Canceled signing. The certificate '" + signing.CertificateFile + "' has no private key.", ErrorCode.Signature_NoPrivateKey);
-            }
-
-            var fsCert = new FileStream(signing.CertificateFile, FileMode.Open);
+            var fsCert = new FileStream(signing.CertificateFile, FileMode.Open, FileAccess.Read);
             var ks = new Pkcs12Store(fsCert, jobPasswords.PdfSignaturePassword.ToCharArray());
             string alias = null;
             foreach (string al in ks.Aliases)
@@ -92,12 +99,12 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 chain[k] = x[k].Certificate;
 
             ITSAClient tsc = null;
-            if (!string.IsNullOrEmpty(signing.TimeServerUrl.Trim()))
+            if (!string.IsNullOrWhiteSpace(timeServerAccount.Url))
             {
-                if (!signing.TimeServerIsSecured)
-                    tsc = new TSAClientBouncyCastle(signing.TimeServerUrl);
+                if (!timeServerAccount.IsSecured)
+                    tsc = new TSAClientBouncyCastle(timeServerAccount.Url);
                 else
-                    tsc = new TSAClientBouncyCastle(signing.TimeServerUrl, signing.TimeServerLoginName, signing.TimeServerPassword);
+                    tsc = new TSAClientBouncyCastle(timeServerAccount.Url, timeServerAccount.UserName, timeServerAccount.Password);
             }
 
             var psa = stamper.SignatureAppearance;
@@ -106,7 +113,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             else
                 psa.SetCrypto(null, chain, null, PdfSignatureAppearance.SELF_SIGNED);
 
-            if (!profile.PdfSettings.Signature.AllowMultiSigning)
+            if (!signing.AllowMultiSigning)
                 //Lock PDF, except for form filling (irrelevant for PDFCreator)
                 psa.CertificationLevel = PdfSignatureAppearance.CERTIFIED_FORM_FILLING_AND_ANNOTATIONS;
 
@@ -132,7 +139,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             const int contentEstimated = 15000;
             // Preallocate excluded byte-range for the signature content (hex encoded)
             var exc = new Dictionary<PdfName, int>();
-            exc[PdfName.CONTENTS] = contentEstimated*2 + 2;
+            exc[PdfName.CONTENTS] = contentEstimated * 2 + 2;
             psa.PreClose(exc);
             const string hashAlgorithm = "SHA1"; //Always use HashAlgorithm "SHA1"
             var sgn = new PdfPKCS7(pk, chain, null, hashAlgorithm, false);
@@ -306,6 +313,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                     if (signing.SignatureCustomPage < 1)
                         return 1;
                     return signing.SignatureCustomPage;
+
                 case SignaturePage.LastPage:
                     return stamper.Reader.NumberOfPages;
                 //case SignaturePosition.FirstPage:

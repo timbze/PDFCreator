@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Core.Controller
 {
@@ -16,18 +16,21 @@ namespace pdfforge.PDFCreator.Core.Controller
 
     public class TestPageHelper : ITestPageHelper
     {
-        private readonly IAssemblyHelper _assemblyHelper;
+        private readonly IVersionHelper _versionHelper;
         private readonly IJobInfoManager _jobInfoManager;
+        private readonly ApplicationNameProvider _applicationNameProvider;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly IOsHelper _osHelper;
         private readonly string _spoolFolder;
 
-        public TestPageHelper(IAssemblyHelper assemblyHelper, IOsHelper osHelper, ISpoolerProvider spoolerProvider, IJobInfoQueue jobInfoQueue, IJobInfoManager jobInfoManager)
+        public TestPageHelper(IVersionHelper versionHelper, IOsHelper osHelper, ISpoolerProvider spoolerProvider,
+            IJobInfoQueue jobInfoQueue, IJobInfoManager jobInfoManager, ApplicationNameProvider applicationNameProvider)
         {
-            _assemblyHelper = assemblyHelper;
+            _versionHelper = versionHelper;
             _osHelper = osHelper;
             _jobInfoQueue = jobInfoQueue;
             _jobInfoManager = jobInfoManager;
+            _applicationNameProvider = applicationNameProvider;
             _spoolFolder = spoolerProvider.SpoolFolder;
         }
 
@@ -75,11 +78,12 @@ namespace pdfforge.PDFCreator.Core.Controller
         private string GetPsFileContent()
         {
             var sb = new StringBuilder(Testpage.TestPage);
-            sb.Replace("[INFOTITLE]", "PDFCreator " + _assemblyHelper.GetPdfforgeAssemblyVersion());
+            sb.Replace("[INFOEDITION]", _applicationNameProvider.EditionName.ToUpper());
+            sb.Replace("[INFOTITLE]", "PDFCreator " + _versionHelper.ApplicationVersion);
             sb.Replace("[INFODATE]", DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString());
             sb.Replace("[INFOAUTHORS]", "pdfforge");
             sb.Replace("[INFOHOMEPAGE]", Urls.PdfforgeWebsiteUrl);
-            sb.Replace("[INFOPDFCREATOR]", "PDFCreator " + _assemblyHelper.GetPdfforgeAssemblyVersion());
+            sb.Replace("[INFOPDFCREATOR]", "PDFCreator " + _versionHelper.ApplicationVersion);
 
             sb.Replace("[INFOCOMPUTER]", Environment.MachineName);
             sb.Replace("[INFOWINDOWS]", _osHelper.GetWindowsVersion());

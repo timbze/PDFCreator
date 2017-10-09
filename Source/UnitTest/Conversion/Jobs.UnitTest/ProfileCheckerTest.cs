@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using SystemInterface.IO;
 using static pdfforge.PDFCreator.Conversion.Jobs.ErrorCode;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
@@ -15,16 +15,28 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
     [TestFixture]
     internal class ProfileCheckerTest
     {
+        private TimeServerAccount _timeServerAccount;
+        private ConversionProfile _profile;
+        private IFile _file;
+        private ProfileChecker _profileChecker;
+        private List<ICheckable> _actionCheckList;
+        private Accounts _accounts;
+
         [SetUp]
         public void SetUp()
         {
             _profile = new ConversionProfile();
-            _accounts = new Accounts();
             _file = Substitute.For<IFile>();
             _actionCheckList = new List<ICheckable>();
             _actionCheckList.Add(Substitute.For<ICheckable>());
             _actionCheckList.Add(Substitute.For<ICheckable>());
             _actionCheckList.Add(Substitute.For<ICheckable>());
+
+            _accounts = new Accounts();
+            _timeServerAccount = new TimeServerAccount();
+            _timeServerAccount.AccountId = "TimeServerTestId";
+            _profile.PdfSettings.Signature.TimeServerAccountId = _timeServerAccount.AccountId;
+            _accounts.TimeServerAccounts.Add(_timeServerAccount);
 
             for (var i = 0; i < _actionCheckList.Count; i++)
             {
@@ -34,16 +46,10 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profileChecker = new ProfileChecker(_file, _actionCheckList);
         }
 
-        private ConversionProfile _profile;
-        private IFile _file;
-        private ProfileChecker _profileChecker;
-        private List<ICheckable> _actionCheckList;
-        private Accounts _accounts;
-
         private void SetValidAutoSaveSettings()
         {
             _profile.AutoSave.Enabled = true;
-            _profile.AutoSave.TargetDirectory = "random autosave directory";
+            _profile.TargetDirectory = "random autosave directory";
             _profile.FileNameTemplate = "random autosave filename";
         }
 
@@ -282,7 +288,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         public void DefaultProfile_Autosave_NoDirectory()
         {
             _profile.AutoSave.Enabled = true;
-            _profile.AutoSave.TargetDirectory = "";
+            _profile.TargetDirectory = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(AutoSave_NoTargetDirectory, result, "ProfileCheck did not detect missing directory for autosave.");
             result.Remove(AutoSave_NoTargetDirectory);
@@ -314,7 +320,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         {
             _profile.AutoSave.Enabled = true;
             _profile.FileNameTemplate = "";
-            _profile.AutoSave.TargetDirectory = "";
+            _profile.TargetDirectory = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(AutoSave_NoFilenameTemplate, result, "ProfileCheck did not detect missing filename template for autosave.");
             result.Remove(AutoSave_NoFilenameTemplate);
@@ -334,7 +340,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         public void EmptyFolderForSaveDialog()
         {
             _profile.SaveDialog.SetDirectory = true;
-            _profile.SaveDialog.Folder = "";
+            _profile.TargetDirectory = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(SaveDialog_NoPreselectedFolder, result, "ProfileCheck did not detect empty folder for save dialog.");
             result.Remove(SaveDialog_NoPreselectedFolder);
@@ -345,7 +351,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         public void EmptyFolderForSaveDialog_EnabledAutosave_IsValid()
         {
             _profile.SaveDialog.SetDirectory = true;
-            _profile.SaveDialog.Folder = "";
+            _profile.TargetDirectory = "";
             _profile.AutoSave.Enabled = true;
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsFalse(result.Contains(SaveDialog_NoPreselectedFolder), "ProfileCheck should ignore empty folder for save dialog if Autosave is enabled.");
@@ -462,9 +468,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             SetValidAutoSaveSettings();
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_AutoSaveWithoutCertificatePassword, result, "ProfileCheck did not detect missing certification password for autosave.");
             result.Remove(ProfileCheck_AutoSaveWithoutCertificatePassword);
@@ -480,9 +486,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             SetValidAutoSaveSettings();
             _profile.PdfSettings.Signature.SignaturePassword = "1234";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
@@ -494,9 +500,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = "does_not_exist_3912839021830.psx";
             SetValidAutoSaveSettings();
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = true;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_CertificateFileDoesNotExist, result, "ProfileCheck did not detect, that the certification file does not exist.");
             result.Remove(ProfileCheck_CertificateFileDoesNotExist);
@@ -518,9 +524,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             SetValidAutoSaveSettings();
             _profile.PdfSettings.Signature.SignaturePassword = "1234";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = true;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "SecuredTimeServerLoginName";
-            _profile.PdfSettings.Signature.TimeServerPassword = "SecuredTimeServerPassword";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "SecuredTimeServerLoginName";
+            _timeServerAccount.Password = "SecuredTimeServerPassword";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
@@ -532,9 +538,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = "";
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_NoCertificationFileSpecified, result, "ProfileCheck did not detect missing certification file.");
             result.Remove(ProfileCheck_NoCertificationFileSpecified);
@@ -550,9 +556,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
@@ -564,9 +570,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = "does_not_exist_3912839021830.psx";
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_CertificateFileDoesNotExist, result, "ProfileCheck did not detect, that the certification file does not exist.");
             result.Remove(ProfileCheck_CertificateFileDoesNotExist);
@@ -580,9 +586,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = @"\\notexistingnetworkpath_3920ß392932013912\does_not_exist_3912839021830.psx";
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = false;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = false;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
@@ -596,9 +602,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = true;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "";
-            _profile.PdfSettings.Signature.TimeServerPassword = "SecuredTimeServerPassword";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "";
+            _timeServerAccount.Password = "SecuredTimeServerPassword";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_SecureTimeServerWithoutUsername, result, "ProfileCheck did not detect missing login name for secured time server.");
             result.Remove(ProfileCheck_SecureTimeServerWithoutUsername);
@@ -614,9 +620,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = true;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "SecuredTimeServerLoginName";
-            _profile.PdfSettings.Signature.TimeServerPassword = "";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "SecuredTimeServerLoginName";
+            _timeServerAccount.Password = "";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.Contains(ProfileCheck_SecureTimeServerWithoutPassword, result, "ProfileCheck did not detect missing password for secured time server.");
             result.Remove(ProfileCheck_SecureTimeServerWithoutPassword);
@@ -632,9 +638,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
             _profile.PdfSettings.Signature.CertificateFile = testFile;
             _profile.AutoSave.Enabled = false;
             _profile.PdfSettings.Signature.SignaturePassword = "";
-            _profile.PdfSettings.Signature.TimeServerIsSecured = true;
-            _profile.PdfSettings.Signature.TimeServerLoginName = "SecuredTimeServerLoginName";
-            _profile.PdfSettings.Signature.TimeServerPassword = "SecuredTimeServerPassword";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "SecuredTimeServerLoginName";
+            _timeServerAccount.Password = "SecuredTimeServerPassword";
             var result = _profileChecker.ProfileCheck(_profile, _accounts);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }

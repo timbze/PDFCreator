@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -7,6 +6,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
 {
@@ -70,7 +70,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
             _directConversionProvider.GetPdfConversion().Returns(pdfDirectConversion);
 
             var jobInfoManager = _fixture.Freeze<IJobInfoManager>();
-            jobInfoManager.ReadFromInfFile(Arg.Any<string>()).Returns(x => new JobInfo {InfFile = x.Arg<string>()});
+            jobInfoManager.ReadFromInfFile(Arg.Any<string>()).Returns(x => new JobInfo { InfFile = x.Arg<string>() });
 
             var directConversionHelper = _fixture.Create<DirectConversionHelper>();
 

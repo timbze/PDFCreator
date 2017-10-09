@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -11,7 +10,9 @@ namespace pdfforge.PDFCreator.Utilities
     public interface IFileAssoc
     {
         bool HasPrint(string assoc);
+
         bool HasPrintTo(string assoc);
+
         bool HasOpen(string assoc);
     }
 
@@ -82,7 +83,12 @@ namespace pdfforge.PDFCreator.Utilities
                     "The file extension must start with a dot (.) and must not contain any dots after the first character");
             }
 
-            var verbs = GetVerbsByExtension(assoc);
+            var verbs = new string[3];
+
+            if (verb.Equals("open"))
+                verbs = GetCoreVerbs(assoc);
+            else
+                verbs = GetVerbsByExtension(assoc);
 
             return verbs.Any(s => s.Equals(verb, StringComparison.OrdinalIgnoreCase));
         }
@@ -110,12 +116,12 @@ namespace pdfforge.PDFCreator.Utilities
         /// <returns>An array of shell verbs that are registered for the extension</returns>
         private string[] GetCoreVerbs(string extension)
         {
-            var si = new ProcessStartInfo(@"X:\file." + extension);
+            var si = new ProcessStartInfo(@"X:\file" + extension);
             return si.Verbs;
         }
 
         /// <summary>
-        /// Shell verbs are only properly registered, if 
+        /// Shell verbs are only properly registered, if
         /// </summary>
         /// <param name="extension"></param>
         /// <param name="verb"></param>
@@ -124,7 +130,7 @@ namespace pdfforge.PDFCreator.Utilities
         {
             try
             {
-                string command = AssocQueryString(AssocStr.Command, @"X:\file." + extension, verb);
+                string command = AssocQueryString(AssocStr.Command, @"X:\file" + extension, verb);
                 return true;
             }
             catch (Win32Exception)
@@ -213,7 +219,7 @@ namespace pdfforge.PDFCreator.Utilities
             ASSOCSTR_MAX
         }
 
-        enum HRESULT : long
+        private enum HRESULT : long
         {
             S_FALSE = 0x0001,
             S_OK = 0x0000,
@@ -221,6 +227,7 @@ namespace pdfforge.PDFCreator.Utilities
             E_OUTOFMEMORY = 0x8007000E,
             E_NO_APPLICATION_ASSOCIATED = 0x80070483
         }
-        #endregion
+
+        #endregion Shell Lightweight API
     }
 }

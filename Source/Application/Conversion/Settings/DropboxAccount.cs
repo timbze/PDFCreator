@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -7,26 +12,20 @@ using System.Text;
 
 namespace pdfforge.PDFCreator.Conversion.Settings
 {
-	public class DropboxAccount {
+	[ImplementPropertyChanged]
+	public partial class DropboxAccount : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		private string _accessToken;
+		
+		private string _accessToken = "";
 		public string AccessToken { get { try { return Data.Decrypt(_accessToken); } catch { return ""; } } set { _accessToken = Data.Encrypt(value); } }
 		
-		public string AccountId { get; set; }
+		public string AccountId { get; set; } = "";
 		
-		public string AccountInfo { get; set; }
+		public string AccountInfo { get; set; } = "";
 		
-		
-		private void Init() {
-			AccessToken = "";
-			AccountId = "";
-			AccountInfo = "";
-		}
-		
-		public DropboxAccount()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path) {
 			_accessToken = data.GetValue(@"" + path + @"AccessToken");

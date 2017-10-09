@@ -2,7 +2,7 @@
 {
     public class DropboxAppData
     {
-        public readonly  string AppKey;
+        public readonly string AppKey;
 
         public readonly string RedirectUri;
 

@@ -2,6 +2,8 @@
 {
     public interface IStartupCondition
     {
+        bool CanRequestUserInteraction { get; }
+
         StartupConditionResult Check();
     }
 }

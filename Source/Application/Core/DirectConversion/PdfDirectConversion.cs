@@ -1,9 +1,9 @@
-﻿using System;
-using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Core.SettingsManagement;
+using System;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion
 {

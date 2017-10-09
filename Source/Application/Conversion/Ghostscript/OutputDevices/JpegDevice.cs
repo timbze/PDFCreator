@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -26,6 +26,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 case JpegColor.Gray8Bit:
                     parameters.Add("-sDEVICE=jpeggray");
                     break;
+
                 default:
                     parameters.Add("-sDEVICE=jpeg");
                     break;

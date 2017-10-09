@@ -1,15 +1,14 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using NUnit.Framework;
+using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.IO;
 using System.Text;
-using iTextSharp.text.pdf;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class PdfTest
     {
         [SetUp]

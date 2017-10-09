@@ -5,7 +5,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 {
     [TestFixture]
-    internal class SettingsUpgrader5To6Test
+    internal partial class SettingsUpgrader5To6Test
     {
         [Test]
         public void DataWithVersion5_UpgradeRequiredToVersion6_ReturnsTrue()
@@ -19,7 +19,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         }
 
         [Test]
-        public void DataWithVersion5_UpgradeToVersion5_SetsVersionTo6()
+        public void DataWithVersion5_UpgradeToVersion6_SetsVersionTo6()
         {
             var data = Data.CreateDataStorage();
             data.SetValue(SettingsUpgrader.VersionSettingPath, "5");

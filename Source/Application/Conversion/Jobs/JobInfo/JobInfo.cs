@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using System;
+using System.Collections.ObjectModel;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 {
@@ -10,7 +11,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
     {
         public string InfFile { get; set; }
 
-        public IList<SourceFileInfo> SourceFiles { get; set; } = new List<SourceFileInfo>();
+        public bool ShowMergedFiles => SourceFiles.Count > 1;
+
+        public ObservableCollection<SourceFileInfo> SourceFiles { get; set; } = new ObservableCollection<SourceFileInfo>();
 
         /// <summary>
         ///     Sum of TotalPages of all SourceFiles
@@ -19,6 +22,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 
         public Metadata Metadata { get; set; }
         public JobType JobType { get; set; }
+        public DateTime PrintDateTime { get; set; }
 
         private int CalculateTotalPages()
         {
@@ -30,6 +34,15 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
                 pages += sfi.TotalPages;
 
             return pages;
+        }
+
+        public override string ToString()
+        {
+            if (SourceFiles.Count == 0)
+                return base.ToString();
+
+            var sourceFile = SourceFiles[0];
+            return $"{sourceFile.DocumentTitle} - {sourceFile.Filename}";
         }
     }
 }

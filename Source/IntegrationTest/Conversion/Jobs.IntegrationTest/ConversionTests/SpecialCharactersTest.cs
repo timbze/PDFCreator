@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
@@ -61,7 +61,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
             _th.InitTempFolder("SpecialCharactersTest");
         }
 
-        private void SetUpTestWithRegularRegularTempFolder()
+        private void SetUpTestWithRegularTempFolder()
         {
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
@@ -89,7 +89,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         [Test]
         public void SpecialCharacters_in_AttachmentFile()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
 
@@ -112,7 +112,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         [Test]
         public void SpecialCharacters_in_CoverFile()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
 
@@ -135,7 +135,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         [Test]
         public void SpecialCharacters_in_EnvironmentTempFolder_Pdf()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             var newTemp = Path.Combine(Path.GetTempPath(), TestHelper.SpecialCharactersString);
             SetTempFolder(newTemp);
@@ -144,13 +144,13 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
             _th.RunGsJob();
             CheckOutputFiles();
         }
-        
+
         //other formats
 
         [Test]
         public void SpecialCharacters_in_OutputFilename()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             _th.GenerateGsJob(PSfiles.ElevenTextPages, OutputFormat.Pdf);
 
@@ -164,7 +164,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         [Test]
         public void SpecialCharacters_in_SourceFile()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
             var sourceFileWithSpecialCharacters =
@@ -227,7 +227,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         [Test]
         public void SpecialCharacters_Stamping()
         {
-            SetUpTestWithRegularRegularTempFolder();
+            SetUpTestWithRegularTempFolder();
 
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
 
@@ -259,4 +259,3 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
         }
     }
 }
- 

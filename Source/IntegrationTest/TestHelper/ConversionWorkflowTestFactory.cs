@@ -1,4 +1,5 @@
 ﻿using pdfforge.PDFCreator.Core.Workflow;
+using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 
 namespace PDFCreator.TestUtilities
@@ -6,23 +7,23 @@ namespace PDFCreator.TestUtilities
     public class ConversionWorkflowTestFactory
     {
         private readonly IJobDataUpdater _jobDataUpdater;
-        private readonly IErrorNotifier _errorNotifier;
+        private readonly AutosaveOutputFileMover _outputFileMover;
         private readonly IJobRunner _jobRunner;
         private readonly IProfileChecker _profileChecker;
         private readonly ITargetFileNameComposer _targetFileNameComposer;
 
-        public ConversionWorkflowTestFactory(IProfileChecker profileChecker, ITargetFileNameComposer targetFileNameComposer, IJobRunner jobRunner, IJobDataUpdater jobDataUpdater, IErrorNotifier errorNotifier)
+        public ConversionWorkflowTestFactory(IProfileChecker profileChecker, ITargetFileNameComposer targetFileNameComposer, IJobRunner jobRunner, IJobDataUpdater jobDataUpdater, AutosaveOutputFileMover outputFileMover)
         {
             _profileChecker = profileChecker;
             _targetFileNameComposer = targetFileNameComposer;
             _jobRunner = jobRunner;
             _jobDataUpdater = jobDataUpdater;
-            _errorNotifier = errorNotifier;
+            _outputFileMover = outputFileMover;
         }
 
         public ConversionWorkflow BuildWorkflow()
         {
-            return new ConversionWorkflow(_profileChecker, _targetFileNameComposer, _jobRunner, _jobDataUpdater, _errorNotifier);
+            return new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _targetFileNameComposer, _outputFileMover);
         }
     }
 }

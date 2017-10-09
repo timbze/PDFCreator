@@ -20,7 +20,10 @@ namespace pdfforge.PDFCreator.Utilities
         string WindowsFontsFolder { get; }
 
         bool UserIsAdministrator();
+
         string GetWindowsVersion();
+
+        void AddDllDirectorySearchPath(string path);
     }
 
     public class OsHelper : IOsHelper
@@ -49,7 +52,7 @@ namespace pdfforge.PDFCreator.Utilities
             {
                 var myKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
                 if (myKey != null)
-                    windowsVersion = (string) myKey.GetValue("ProductName") + " (" + windowsVersion + ")";
+                    windowsVersion = (string)myKey.GetValue("ProductName") + " (" + windowsVersion + ")";
             }
             catch
             {
@@ -113,6 +116,15 @@ namespace pdfforge.PDFCreator.Utilities
                 }
             }
             return false;
+        }
+
+        [DllImport("kernel32.dll", CharSet =
+            System.Runtime.InteropServices.CharSet.Unicode)]
+        private static extern bool SetDllDirectory(string path);
+
+        public void AddDllDirectorySearchPath(string path)
+        {
+            SetDllDirectory(path);
         }
     }
 }

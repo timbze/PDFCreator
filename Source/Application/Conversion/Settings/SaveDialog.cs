@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,38 +15,26 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Settings to control the behaviour of the save dialog
 	/// </summary>
-	public class SaveDialog {
+	[ImplementPropertyChanged]
+	public partial class SaveDialog : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		/// <summary>
-		/// Folder in which the save dialog will be opened (if SetDirectory is true)
-		/// </summary>
-		public string Folder { get; set; }
 		
 		/// <summary>
 		/// If true, the save dialog will open in the given folder instead of the last used folder.
 		/// </summary>
-		public bool SetDirectory { get; set; }
+		public bool SetDirectory { get; set; } = false;
 		
-		
-		private void Init() {
-			Folder = "";
-			SetDirectory = false;
-		}
-		
-		public SaveDialog()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{
-			try { Folder = Data.UnescapeString(data.GetValue(@"" + path + @"Folder")); } catch { Folder = "";}
 			try { SetDirectory = bool.Parse(data.GetValue(@"" + path + @"SetDirectory")); } catch { SetDirectory = false;}
 		}
 		
 		public void StoreValues(Data data, string path)
 		{
-			data.SetValue(@"" + path + @"Folder", Data.EscapeString(Folder));
 			data.SetValue(@"" + path + @"SetDirectory", SetDirectory.ToString());
 		}
 		
@@ -49,7 +42,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		{
 			SaveDialog copy = new SaveDialog();
 			
-			copy.Folder = Folder;
 			copy.SetDirectory = SetDirectory;
 			
 			return copy;
@@ -60,7 +52,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!(o is SaveDialog)) return false;
 			SaveDialog v = o as SaveDialog;
 			
-			if (!Folder.Equals(v.Folder)) return false;
 			if (!SetDirectory.Equals(v.SetDirectory)) return false;
 			
 			return true;
@@ -70,7 +61,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		{
 			StringBuilder sb = new StringBuilder();
 			
-			sb.AppendLine("Folder=" + Folder.ToString());
 			sb.AppendLine("SetDirectory=" + SetDirectory.ToString());
 			
 			return sb.ToString();

@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,28 +16,23 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Settings for the TIFF output format
 	/// </summary>
-	public class TiffSettings {
+	[ImplementPropertyChanged]
+	public partial class TiffSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Number of colors. Valid values are: Color24Bit, Color12Bit, BlackWhite
+		/// Number of colors.
 		/// </summary>
-		public TiffColor Color { get; set; }
+		public TiffColor Color { get; set; } = TiffColor.Color24Bit;
 		
 		/// <summary>
 		/// Resolution of the TIFF files
 		/// </summary>
-		public int Dpi { get; set; }
+		public int Dpi { get; set; } = 150;
 		
-		
-		private void Init() {
-			Color = TiffColor.Color24Bit;
-			Dpi = 150;
-		}
-		
-		public TiffSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

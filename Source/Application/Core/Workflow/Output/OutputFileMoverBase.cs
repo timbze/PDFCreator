@@ -1,14 +1,15 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Query;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.IO;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.Workflow.Output
 {
@@ -32,7 +33,7 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         protected abstract IPathUtil PathUtil { get; }
         private string _outfilebody;
 
-        protected abstract QueryResult<string> HandleFirstFileFailed(Job job);
+        protected abstract QueryResult<string> HandleFirstFileFailed(string filename, OutputFormat outputFormat);
 
         protected abstract HandleCopyErrorResult QueryHandleCopyError(int fileNumber);
 
@@ -79,6 +80,7 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
                             case HandleCopyErrorResult.Requery:
                                 currentOutputFile = RequeryFilename(job, tempOutputFile, numberSuffix, extension);
                                 break;
+
                             default:
                                 currentOutputFile = EnsureUniqueFilename(uniqueFilename);
 
@@ -101,7 +103,7 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         {
             while (true)
             {
-                var result = HandleFirstFileFailed(job);
+                var result = HandleFirstFileFailed(job.OutputFilenameTemplate, job.Profile.OutputFormat);
 
                 if (result.Success == false)
                 {
@@ -180,7 +182,7 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
                 int numValue;
                 if (int.TryParse(num, out numValue))
                 {
-                    var numDigits = (int) Math.Floor(Math.Log10(job.TempOutputFiles.Count) + 1);
+                    var numDigits = (int)Math.Floor(Math.Log10(job.TempOutputFiles.Count) + 1);
                     num = numValue.ToString("D" + numDigits);
                 }
             }

@@ -1,9 +1,9 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Utilities;
-using PDFCreator.TestUtilities;
+using System;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Core.Printing.PrintFile
 {

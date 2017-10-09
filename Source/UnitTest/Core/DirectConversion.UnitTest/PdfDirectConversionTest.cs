@@ -1,13 +1,13 @@
-﻿using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
 {
     [TestFixture]
-    class PdfDirectConversionTest : DirectConversionTestBase
+    internal class PdfDirectConversionTest : DirectConversionTestBase
     {
         protected override DirectConversionBase BuildDirectConversion()
         {
@@ -18,6 +18,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
         {
             ConfigureFileOpenRead(file, filename, "%PDF");
         }
+
         protected virtual void ConfigureInvalidFileOpenRead(IFile file, string filename)
         {
             ConfigureFileOpenRead(file, filename, "");

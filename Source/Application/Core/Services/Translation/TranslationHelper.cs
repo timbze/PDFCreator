@@ -1,14 +1,15 @@
-﻿using System;
+﻿using NGettext;
+using pdfforge.DataStorage;
+using pdfforge.DataStorage.Storage;
+using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
+using pdfforge.PDFCreator.Core.SettingsManagement;
+using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using NGettext;
-using pdfforge.DataStorage;
-using pdfforge.DataStorage.Storage;
-using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Core.SettingsManagement;
-using pdfforge.PDFCreator.Utilities;
 using Translatable;
 using Translatable.NGettext;
 
@@ -30,7 +31,9 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             TranslationFactory = translationFactory;
         }
 
-        protected ILanguageLoader LanguageLoader
+        public Language CurrentLanguage { get; private set; }
+
+        private ILanguageLoader LanguageLoader
         {
             get
             {
@@ -47,7 +50,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
 
         public IEnumerable<Language> GetAvailableLanguages()
         {
-            return LanguageLoader.GetAvailableLanguages();
+            return LanguageLoader.GetAvailableLanguages().OrderBy(t => t.NativeName);
         }
 
         public bool HasTranslation(string language)
@@ -60,7 +63,6 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             return LanguageLoader.FindBestLanguage(culture);
         }
 
-
         /// <summary>
         ///     Initialize the Translator for later use in the application
         /// </summary>
@@ -69,8 +71,8 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         {
             LanguageLoader = BuildLanguageLoader();
 
-            var language = FindBestLanguage(languageName);
-            TranslationFactory.TranslationSource = BuildTranslationSource(language);
+            CurrentLanguage = FindBestLanguage(languageName);
+            TranslationFactory.TranslationSource = BuildTranslationSource(CurrentLanguage);
         }
 
         public ITranslationSource BuildTranslationSource(Language language)
@@ -133,7 +135,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
 
         private ILanguageLoader BuildLanguageLoader()
         {
-            var appDir = _assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var appDir = _assemblyHelper.GetAssemblyDirectory();
 
             var translationPathCandidates = PossibleLanguagePaths.Select(path => Path.Combine(appDir, path)).ToArray();
 
@@ -141,23 +143,67 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         }
     }
 
-    public class TranslationHelper : BaseTranslationHelper
+    public interface ITranslationHelper : ILanguageProvider
     {
-        private readonly ISettingsProvider _settingsProvider;
+        /// <summary>
+        ///     Temporarily sets a translation while storing the old translator for later use. Use RevertTemporaryTranslation to
+        ///     revert to the initial translator.
+        /// </summary>
+        /// <param name="language">The language definition to use</param>
+        /// <returns>true, if the translation was successfully loaded</returns>
+        bool SetTemporaryTranslation(Language language);
 
-        public TranslationHelper(ISettingsProvider settingsProvider, IAssemblyHelper assemblyHelper, TranslationFactory translationFactory) : base(assemblyHelper, translationFactory)
+        /// <summary>
+        ///     Reverts a temporarily set translation to it's original. If no temporary translation has been set, nothing will be
+        ///     reverted.
+        /// </summary>
+        void RevertTemporaryTranslation();
+
+        /// <summary>
+        ///     Translates a profile list by searching for predefined translations based on their GUID and apply the translated
+        ///     name to them
+        /// </summary>
+        /// <param name="profiles">The profile list</param>
+        void TranslateProfileList(IList<ConversionProfile> profiles);
+
+        List<string> PossibleLanguagePaths { get; set; }
+
+        /// <summary>
+        ///     Initialize the Translator for later use in the application
+        /// </summary>
+        /// <param name="languageName">Language to use for initialization</param>
+        void InitTranslator(string languageName);
+
+        ITranslationSource BuildTranslationSource(Language language);
+
+        /// <summary>
+        ///     Initialize an empty translator (i.e. for tests)
+        /// </summary>
+        void InitEmptyTranslator();
+    }
+
+    public class TranslationHelper : BaseTranslationHelper, ITranslationHelper
+    {
+        private readonly IGpoSettings _gpoSettings;
+
+        public TranslationHelper(ISettingsProvider settingsProvider, IAssemblyHelper assemblyHelper, TranslationFactory translationFactory, IGpoSettings gpoSettings) : base(assemblyHelper, translationFactory)
         {
-            _settingsProvider = settingsProvider;
-
-            _settingsProvider.LanguageChanged += SettingsProviderOnLanguageChanged;
+            _gpoSettings = gpoSettings;
+            settingsProvider.LanguageChanged += SettingsProviderOnLanguageChanged;
         }
 
-
-        private void SettingsProviderOnLanguageChanged(object sender, EventArgs eventArgs)
+        private void SettingsProviderOnLanguageChanged(object sender, LanguageChangedEventArgs eventArgs)
         {
-            var applicationLanguage = _settingsProvider.GetApplicationLanguage();
-            InitTranslator(applicationLanguage);
-            TranslateProfileList(_settingsProvider.Settings.ConversionProfiles);
+            var settings = eventArgs.Settings;
+            if (!string.IsNullOrEmpty(_gpoSettings?.Language))
+            {
+                InitTranslator(_gpoSettings.Language);
+            }
+            else
+            {
+                InitTranslator(settings.ApplicationSettings.Language);
+            }
+            TranslateProfileList(settings.ConversionProfiles);
         }
 
         /// <summary>
@@ -189,6 +235,8 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
         {
             if (_tmpTranslationSource != null)
                 TranslationFactory.TranslationSource = _tmpTranslationSource;
+
+            _tmpTranslationSource = null;
         }
 
         /// <summary>
@@ -207,7 +255,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
                 }
                 catch (ArgumentException)
                 {
-                    //do nothing, profile must not be renamed 
+                    //do nothing, profile must not be renamed
                 }
         }
     }

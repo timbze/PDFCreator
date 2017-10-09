@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,22 +15,18 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Parse ps files for user definied tokens
 	/// </summary>
-	public class UserTokens {
+	[ImplementPropertyChanged]
+	public partial class UserTokens : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Activate parsing ps files for user tokens (Only available in PDFCreator Business)
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
-		
-		private void Init() {
-			Enabled = false;
-		}
-		
-		public UserTokens()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

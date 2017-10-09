@@ -1,5 +1,5 @@
-﻿using System;
-using pdfforge.Obsidian.Interaction;
+﻿using pdfforge.Obsidian.Interaction;
+using System;
 
 namespace pdfforge.PDFCreator.UI.Interactions
 {

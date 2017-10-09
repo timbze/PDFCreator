@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,34 +15,29 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Dropbox settings for currently logged user
 	/// </summary>
-	public class DropboxSettings {
+	[ImplementPropertyChanged]
+	public partial class DropboxSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		public string AccountId { get; set; }
 		
-		public bool CreateShareLink { get; set; }
+		/// <summary>
+		/// ID of the linked account
+		/// </summary>
+		public string AccountId { get; set; } = "";
 		
-		public bool Enabled { get; set; }
+		public bool CreateShareLink { get; set; } = false;
+		
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// If true, files with the same name will not be overwritten on the server. A counter will be appended instead (i.e. document_2.pdf)
 		/// </summary>
-		public bool EnsureUniqueFilenames { get; set; }
+		public bool EnsureUniqueFilenames { get; set; } = false;
 		
-		public string SharedFolder { get; set; }
+		public string SharedFolder { get; set; } = "PDFCreator";
 		
-		
-		private void Init() {
-			AccountId = "";
-			CreateShareLink = false;
-			Enabled = false;
-			EnsureUniqueFilenames = false;
-			SharedFolder = "PDFCreator";
-		}
-		
-		public DropboxSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

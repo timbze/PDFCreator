@@ -1,39 +1,42 @@
 ﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal abstract class EncryptionTestBase
     {
         private TestHelper _th;
         private IPdfProcessor _pdfProcessor;
 
         protected abstract IPdfProcessor BuildPdfProcessor();
+
+        protected abstract void FinalizePdfProcessor();
+
         protected abstract bool IsIText { get; }
 
         [SetUp]
         public void SetUp()
         {
+            _pdfProcessor = BuildPdfProcessor();
+
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _th = container.GetInstance<TestHelper>();
-            _th.InitTempFolder("PDFProcessing_IText_Encryption");
+            _th.InitTempFolder($"PDFProcessing_{_pdfProcessor.GetType().Name}_Encryption");
 
-            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpagePDF);
+            _th.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF);
             _th.Job.Passwords.PdfOwnerPassword = "Owner";
             _th.Job.Passwords.PdfUserPassword = "User";
-
-            _pdfProcessor = BuildPdfProcessor();
         }
 
         [TearDown]
         public void CleanUp()
         {
             _th.CleanUp();
+            FinalizePdfProcessor();
         }
 
         private void TestEncryption()

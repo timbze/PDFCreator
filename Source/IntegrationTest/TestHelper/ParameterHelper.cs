@@ -29,12 +29,19 @@ namespace PDFCreator.TestUtilities
             if (_passwordDictionary == null)
                 _passwordDictionary = LoadPasswords();
 
-            var password = _passwordDictionary[name];
+            try
+            {
+                var password = _passwordDictionary[name];
 
-            if (string.IsNullOrWhiteSpace(password))
+                if (string.IsNullOrWhiteSpace(password))
+                    throw new InvalidOperationException("The password " + name + "was not set!");
+
+                return password;
+            }
+            catch (KeyNotFoundException)
+            {
                 throw new InvalidOperationException("The password " + name + "was not set!");
-
-            return password;
+            }
         }
 
         private static Dictionary<string, string> LoadPasswords()
@@ -55,7 +62,7 @@ namespace PDFCreator.TestUtilities
 
                 if (line.Contains("="))
                 {
-                    var pair = line.Split(new[] {'='}, 2);
+                    var pair = line.Split(new[] { '=' }, 2);
                     passwords.Add(pair[0].Trim(), pair[1].Trim());
                 }
             }

@@ -15,7 +15,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
         public T ResolveAppStart<T>() where T : IAppStart
         {
-            return (T) _container.GetInstance(typeof(T));
+            return (T)_container.GetInstance(typeof(T));
         }
     }
 }

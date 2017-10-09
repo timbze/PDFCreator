@@ -8,7 +8,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest
         [Test]
         public void EmptyArgument_Regression()
         {
-            string[] args = {"", "/abc"};
+            string[] args = { "", "/abc" };
             var clp = new CommandLineParser(args);
 
             Assert.IsTrue(clp.HasArgument("abc"));
@@ -17,7 +17,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest
         [Test]
         public void TestBasicArgs()
         {
-            string[] args = {"/abc", "/myTEST=123", "-xyz"};
+            string[] args = { "/abc", "/myTEST=123", "-xyz" };
             var clp = new CommandLineParser(args);
 
             Assert.IsTrue(clp.HasArgument("ABC"));

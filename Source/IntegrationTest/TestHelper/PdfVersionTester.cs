@@ -1,9 +1,9 @@
-﻿using System.Text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
+using System.Text;
 
 namespace PDFCreator.TestUtilities
 {
@@ -43,8 +43,10 @@ namespace PDFCreator.TestUtilities
                 Assert.AreEqual(PdfWriter.VERSION_1_6, pdfReader.PdfVersion, "Not PDF-Version 1.6");
             else if (expectedVersion == "1.5")
                 Assert.AreEqual(PdfWriter.VERSION_1_5, pdfReader.PdfVersion, "Not PDF-Version 1.5");
-            else
+            else if (expectedVersion == "1.4")
                 Assert.AreEqual(PdfWriter.VERSION_1_4, pdfReader.PdfVersion, "Not PDF-Version 1.4");
+            else
+                Assert.AreEqual(PdfWriter.VERSION_1_3, pdfReader.PdfVersion, "Not PDF-Version 1.3");
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using pdfforge.PDFCreator.Core.StartupInterface;
+﻿using pdfforge.PDFCreator.Core.StartupInterface;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.ViewModels;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using System.Collections.Generic;
+using System.Linq;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -13,11 +13,13 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly ISettingsLoader _settingsLoader;
         private readonly ApplicationTranslation _translation;
 
-        public PrinterInstalledCondition(IRepairPrinterAssistant repairPrinterAssistant, ISettingsLoader settingsLoader, ApplicationTranslation translation)
+        public bool CanRequestUserInteraction => false;
+
+        public PrinterInstalledCondition(IRepairPrinterAssistant repairPrinterAssistant, ISettingsLoader settingsLoader, ITranslationFactory translationFactory)
         {
             _repairPrinterAssistant = repairPrinterAssistant;
             _settingsLoader = settingsLoader;
-            _translation = translation;
+            _translation = translationFactory.CreateTranslation<ApplicationTranslation>();
         }
 
         public StartupConditionResult Check()

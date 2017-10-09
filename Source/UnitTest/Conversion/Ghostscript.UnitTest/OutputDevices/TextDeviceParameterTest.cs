@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
 {

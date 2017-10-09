@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,46 +16,38 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Compression settings for color and greyscale images
 	/// </summary>
-	public class CompressColorAndGray {
+	[ImplementPropertyChanged]
+	public partial class CompressColorAndGray : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Settings for the compression method. Valid values are: Automatic, JpegMaximum, JpegHigh, JpegMedium, JpegLow, JpegMinimum, JpegManual, Zip
+		/// Settings for the compression method.
 		/// </summary>
-		public CompressionColorAndGray Compression { get; set; }
+		public CompressionColorAndGray Compression { get; set; } = CompressionColorAndGray.Automatic;
 		
 		/// <summary>
 		/// Images will be resampled to this maximum resolution of the images, if resampling is enabled
 		/// </summary>
-		public int Dpi { get; set; }
+		public int Dpi { get; set; } = 300;
 		
 		/// <summary>
 		/// If true, color and grayscale images will be processed according to the algorithm. If false, they will remain uncompressed
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = true;
 		
 		/// <summary>
 		/// Define a custom compression factor (requires JpegManual as method)
 		/// </summary>
-		public double JpegCompressionFactor { get; set; }
+		public double JpegCompressionFactor { get; set; } = 0.66;
 		
 		/// <summary>
 		/// If true, the images will be resampled to a maximum resolution
 		/// </summary>
-		public bool Resampling { get; set; }
+		public bool Resampling { get; set; } = false;
 		
-		
-		private void Init() {
-			Compression = CompressionColorAndGray.Automatic;
-			Dpi = 300;
-			Enabled = true;
-			JpegCompressionFactor = 0.66;
-			Resampling = false;
-		}
-		
-		public CompressColorAndGray()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

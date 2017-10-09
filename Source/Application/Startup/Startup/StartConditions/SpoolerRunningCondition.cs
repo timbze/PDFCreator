@@ -1,9 +1,10 @@
-﻿﻿using System;
+﻿using NLog;
+using pdfforge.PDFCreator.Core.Startup.Translations;
+using pdfforge.PDFCreator.Core.StartupInterface;
+using System;
 using System.ComponentModel;
 using System.ServiceProcess;
-using NLog;
- using pdfforge.PDFCreator.Core.Startup.Translations;
- using pdfforge.PDFCreator.Core.StartupInterface;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -12,9 +13,11 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly StartupTranslation _translation;
 
-        public SpoolerRunningCondition(StartupTranslation translation)
+        public bool CanRequestUserInteraction => false;
+
+        public SpoolerRunningCondition(ITranslationFactory translationFactory)
         {
-            _translation = translation;
+            _translation = translationFactory.CreateTranslation<StartupTranslation>();
         }
 
         public StartupConditionResult Check()

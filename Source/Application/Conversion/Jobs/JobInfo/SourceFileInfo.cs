@@ -1,5 +1,5 @@
-﻿using pdfforge.PDFCreator.Utilities.Tokens;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 {
@@ -73,6 +73,6 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// <summary>
         ///     User tokens extracted from ps file if activated
         /// </summary>
-        public UserToken UserToken { get; set; } 
+        public UserToken UserToken { get; set; }
     }
 }

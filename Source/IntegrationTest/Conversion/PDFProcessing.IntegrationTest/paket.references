@@ -1,5 +1,7 @@
 iTextSharp
 NUnit
+PdfTools.PdfAValidator
+PdfTools.LibPdf
 SystemInterface
 SystemWrapper
 SimpleInjector

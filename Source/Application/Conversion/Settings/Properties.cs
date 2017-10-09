@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,34 +15,28 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Properties of the profile
 	/// </summary>
-	public class Properties {
+	[ImplementPropertyChanged]
+	public partial class Properties : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Can users delete this profile?
 		/// </summary>
-		public bool Deletable { get; set; }
+		public bool Deletable { get; set; } = true;
 		
 		/// <summary>
 		/// Can users edit this profile?
 		/// </summary>
-		public bool Editable { get; set; }
+		public bool Editable { get; set; } = true;
 		
 		/// <summary>
 		/// Can users rename this profile?
 		/// </summary>
-		public bool Renamable { get; set; }
+		public bool Renamable { get; set; } = true;
 		
-		
-		private void Init() {
-			Deletable = true;
-			Editable = true;
-			Renamable = true;
-		}
-		
-		public Properties()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

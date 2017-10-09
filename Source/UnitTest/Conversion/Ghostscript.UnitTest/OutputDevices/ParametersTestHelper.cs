@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using SystemInterface.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -11,6 +7,10 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
 using Rhino.Mocks;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
 {
@@ -42,18 +42,22 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
                 case OutputFormat.Jpeg:
                     device = new JpegDevice(jobStub, fileStub, osHelperStub, commandLineUtilStub);
                     break;
+
                 case OutputFormat.Pdf:
                 case OutputFormat.PdfA1B:
                 case OutputFormat.PdfA2B:
                 case OutputFormat.PdfX:
                     device = new PdfDevice(jobStub, fileStub, osHelperStub, commandLineUtilStub);
                     break;
+
                 case OutputFormat.Png:
                     device = new PngDevice(jobStub, fileStub, osHelperStub, commandLineUtilStub);
                     break;
+
                 case OutputFormat.Tif:
                     device = new TiffDevice(jobStub, fileStub, osHelperStub, commandLineUtilStub);
                     break;
+
                 case OutputFormat.Txt:
                     device = new TextDevice(jobStub, fileStub, osHelperStub, commandLineUtilStub);
                     break;
@@ -70,9 +74,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
             jobInfo.SourceFiles.Add(sourceFileInfo);
             jobInfo.Metadata = new Metadata();
             var jobStub = new Job(jobInfo, new ConversionProfile(), new JobTranslations(), new Accounts());
-            jobStub.JobTempFileName="JobTempFileNameDummie";
-            jobStub.JobTempFolder=JobTempFolderDummie;
-            jobStub.JobTempOutputFolder="JobTempOutputFolderDummie";
+            jobStub.JobTempFileName = "JobTempFileNameDummie";
+            jobStub.JobTempFolder = JobTempFolderDummie;
+            jobStub.JobTempOutputFolder = "JobTempOutputFolderDummie";
             //jobStub.Stub(x => x.JobTempFileName).Return("JobTempFileNameDummie");
             jobStub.OutputFilenameTemplate = "OutputFilenameTemplateDummie";
             jobStub.Profile = new ConversionProfile();

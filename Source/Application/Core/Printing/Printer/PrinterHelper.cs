@@ -182,16 +182,16 @@ namespace pdfforge.PDFCreator.Core.Printing.Printer
             if (lastWin32Error != ERROR_INSUFFICIENT_BUFFER)
                 throw new Win32Exception(lastWin32Error);
 
-            var pAddr = Marshal.AllocHGlobal((int) cbNeeded);
+            var pAddr = Marshal.AllocHGlobal((int)cbNeeded);
             if (EnumPrinters(flags, null, enumLevel, pAddr, cbNeeded, ref cbNeeded, ref cReturned))
             {
                 var printerInfo = new PRINTER_INFO_5[cReturned];
                 var offset = pAddr;
-                var type = typeof (PRINTER_INFO_5);
+                var type = typeof(PRINTER_INFO_5);
                 var increment = Marshal.SizeOf(type);
                 for (var i = 0; i < cReturned; i++)
                 {
-                    printerInfo[i] = (PRINTER_INFO_5) Marshal.PtrToStructure(offset, type);
+                    printerInfo[i] = (PRINTER_INFO_5)Marshal.PtrToStructure(offset, type);
                     offset += increment;
                 }
                 Marshal.FreeHGlobal(pAddr);
@@ -227,9 +227,10 @@ namespace pdfforge.PDFCreator.Core.Printing.Printer
         [Flags]
         private enum PrinterEnumFlags
         {
-// ReSharper disable UnusedMember.Local
-// ReSharper disable InconsistentNaming
+            // ReSharper disable UnusedMember.Local
+            // ReSharper disable InconsistentNaming
             PRINTER_ENUM_DEFAULT = 0x00000001,
+
             PRINTER_ENUM_LOCAL = 0x00000002,
             PRINTER_ENUM_CONNECTIONS = 0x00000004,
             PRINTER_ENUM_FAVORITE = 0x00000004,
@@ -249,10 +250,10 @@ namespace pdfforge.PDFCreator.Core.Printing.Printer
             PRINTER_ENUM_ICON7 = 0x00400000,
             PRINTER_ENUM_ICON8 = 0x00800000,
             PRINTER_ENUM_HIDE = 0x01000000
-// ReSharper restore UnusedMember.Local
-// ReSharper restore InconsistentNaming
+            // ReSharper restore UnusedMember.Local
+            // ReSharper restore InconsistentNaming
         }
 
-        #endregion
+        #endregion Windows Spooler
     }
 }

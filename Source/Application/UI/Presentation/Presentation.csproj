@@ -1,0 +1,1389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CF5FF5FD-39AD-472D-ABC3-44D4E7909E68}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>pdfforge.PDFCreator.UI.Presentation</RootNamespace>
+    <AssemblyName>PDFCreator.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LicenseValidator.Interface, Version=1.6.382.584, Culture=neutral, PublicKeyToken=fc6825f92a0342e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\LicenseValidator.Interface\lib\LicenseValidator.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Optional, Version=3.2.0.0, Culture=neutral, PublicKeyToken=eb588ea2081fa9a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net451\Optional.dll</HintPath>
+    </Reference>
+    <Reference Include="pdfforge.Mail, Version=1.0.6.0, Culture=neutral, PublicKeyToken=fc6825f92a0342e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\pdfforge.Mail\lib\pdfforge.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="SystemWrapper, Version=9.6.171.928, Culture=neutral, PublicKeyToken=9861416082383a00, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assistants\ApplicationTranslation.cs" />
+    <Compile Include="Assistants\IniSettingsAssistant.cs" />
+    <Compile Include="Assistants\IUpdateAssistant.cs" />
+    <Compile Include="Assistants\PrinterActionsAssistant.cs" />
+    <Compile Include="Assistants\PrinterActionsAssistantTranslation.cs" />
+    <Compile Include="Assistants\PrintFileAssistant.cs" />
+    <Compile Include="Assistants\PrintFilesTranslation.cs" />
+    <Compile Include="Assistants\RepairPrinterAssistant.cs" />
+    <Compile Include="Assistants\RepairSpoolFolderAssistant.cs" />
+    <Compile Include="Assistants\SmtpTestEmailAssistant.cs" />
+    <Compile Include="Assistants\UacAssistant.cs" />
+    <Compile Include="Assistants\Update\ApplicationVersion.cs" />
+    <Compile Include="Assistants\Update\DisabledUpdateAssistant.cs" />
+    <Compile Include="Assistants\Update\UpdateAssistant.cs" />
+    <Compile Include="Assistants\Update\UpdateEventArgs.cs" />
+    <Compile Include="Assistants\Update\UpdateInformationProvider.cs" />
+    <Compile Include="Assistants\Update\UpdateLauncher.cs" />
+    <Compile Include="Commands\AccountCommands\TimeServerAccountEditCommand.cs" />
+    <Compile Include="Commands\AccountCommands\TimeServerAccountRemoveCommand.cs" />
+    <Compile Include="Commands\AccountCommands\TimeServerAccountAddCommand.cs" />
+    <Compile Include="Commands\AccountCommands\HttpAccountRemoveCommand.cs" />
+    <Compile Include="Commands\AccountCommands\HttpAccountEditCommand.cs" />
+    <Compile Include="Commands\AccountCommands\HttpAccountAddCommand.cs" />
+    <Compile Include="Commands\AccountCommands\DropboxAccountAddCommand.cs" />
+    <Compile Include="Commands\AccountCommands\DropboxAccountRemoveCommand.cs" />
+    <Compile Include="Commands\AccountCommands\SmtpAccountRemoveCommand.cs" />
+    <Compile Include="Commands\AccountCommands\SmtpAccountEditCommand.cs" />
+    <Compile Include="Commands\AccountCommands\SmtpAccountAddCommand.cs" />
+    <Compile Include="Commands\AccountCommands\FtpAccountEditCommand.cs" />
+    <Compile Include="Commands\CancelApplicationSettingsChangesCommand.cs" />
+    <Compile Include="Commands\AccountCommands\FtpAccountRemoveCommand.cs" />
+    <Compile Include="Commands\CheckProfileCommand.cs" />
+    <Compile Include="Commands\NavigatePrismRegionCommand.cs" />
+    <Compile Include="Commands\SaveAndContinueEvaluationCommand.cs" />
+    <Compile Include="Commands\ContiueAndSaveEvaluationTranslation.cs" />
+    <Compile Include="Commands\CopyToClipboardCommand.cs" />
+    <Compile Include="Commands\NavigateMainTabCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\HideLockLayerCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\OpenProfileCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\ProfileAddCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\ProfileCommandBase.cs" />
+    <Compile Include="Commands\ProfileCommands\ProfileRemoveCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\ProfileRenameCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\ShowLockLayerCommand.cs" />
+    <Compile Include="Commands\ProfileCommands\WaitProfileModificationCommand.cs" />
+    <Compile Include="Commands\SaveApplicationSettingsChangesCommand.cs" />
+    <Compile Include="Commands\AccountCommands\FtpAccountAddCommand.cs" />
+    <Compile Include="Commands\TitleReplacements\TitleReplacementAddCommand.cs" />
+    <Compile Include="Commands\TitleReplacements\TitleReplacementEditCommand.cs" />
+    <Compile Include="Commands\TitleReplacements\TitleReplacementRemoveCommand.cs" />
+    <Compile Include="Commands\UrlOpenCommand.cs" />
+    <Compile Include="Commands\UserGuide\ShowUserGuideCommand.cs" />
+    <Compile Include="Controls\BindableTextBox.cs" />
+    <Compile Include="Controls\DataGridComboBoxColumnWithBindingHack.cs" />
+    <Compile Include="Controls\DesignTimeTokenViewModel.cs" />
+    <Compile Include="Controls\TokenControlMultiline.xaml.cs">
+      <DependentUpon>TokenControlMultiline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PasswordButtonController.cs" />
+    <Compile Include="Controls\Tab\ISubTabViewModel.cs" />
+    <Compile Include="Controls\Tab\SubItem.cs" />
+    <Compile Include="Controls\Tab\SubTabItem.cs" />
+    <Compile Include="Controls\TokenButtonFunctionProvider.cs" />
+    <Compile Include="Controls\TokenControl.xaml.cs">
+      <DependentUpon>TokenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TokenViewModel.cs" />
+    <Compile Include="Converter\AreEqualConverter.cs" />
+    <Compile Include="Converter\BoolNegationConverter.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\CaseConverter.cs" />
+    <Compile Include="Converter\ColorConverter.cs" />
+    <Compile Include="Converter\MessageIconToIconConverter.cs" />
+    <Compile Include="Converter\StringMatchToShowColourConverter.cs" />
+    <Compile Include="Converter\EqualsNullConverter.cs" />
+    <Compile Include="Converter\OneWayEnumToBooleanConverter.cs" />
+    <Compile Include="Converter\EnumToBooleanConverter.cs" />
+    <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Converter\OutputFormatToTextConverter.cs" />
+    <Compile Include="Converter\StringIsNullOrWhiteSpaceToBoolConverter.cs" />
+    <Compile Include="Converter\TokenReplacerConverter.cs" />
+    <Compile Include="Converter\TokenTextToVisibilityConverter.cs" />
+    <Compile Include="Converter\TranslateableConverter.cs" />
+    <Compile Include="Converter\TranslatorConverter.cs" />
+    <Compile Include="Customization\ButtonDisplayOptions.cs" />
+    <Compile Include="DesignTime\DesignTimeAboutViewModel.cs" />
+    <Compile Include="Converter\DebugConverter.cs" />
+    <Compile Include="DesignTime\DesignTimeArchitectViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeConvertTabViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeDebugSettingsViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeDropboxShareLinkStepViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeEditEmailTextViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeEncryptUserControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeMailClientControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeUpdateHintViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeLicenseSettingsViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeMessageUserControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeRecommendPdfArchitectWindowViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSignUserControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeTimeServerAccountViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeHttpActionViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeHttpAccountViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeInputBoxWindowViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeDropboxAccountViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeDropboxUserControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSmtpAccountViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeFtpAccountViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeFtpActionViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeHttpJobStepPasswordViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeManagePrintJobsVM.cs" />
+    <Compile Include="DesignTime\DesignTimePrinterViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSignaturePasswordsViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSmtpJobStepPasswordViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeFtpJobStepPasswordViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeHomeViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeMetadataTabViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimePdfJobStepPasswordsViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimePlusFeatureControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimePlusHintViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimePrintJobShellViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSettingsViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimePrintJobViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSettingsProvider.cs" />
+    <Compile Include="DesignTime\DesignTimeSmtpActionViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeStoreLicenseForAllUsersWindowViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeUpdateDownloadWindowViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeWelcomeViewModel.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeApplicationNameProvider.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeCurrentSettingsProvider.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeDragAndDropHandler.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeFileConversionHandler.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeJobInfoQueue.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimePlusHintHelper.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimePrinterHelper.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimePrinterProvider.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeTranslationUpdater.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeUserGuideHelper.cs" />
+    <Compile Include="DesignTime\Helper\DesignTimeVersionHelper.cs" />
+    <Compile Include="Events\CloseMainWindowEvent.cs" />
+    <Compile Include="Events\ForceMainShellNavigation.cs" />
+    <Compile Include="Events\HideLockLayerEvent.cs" />
+    <Compile Include="Events\MainWindowClosedEvent.cs" />
+    <Compile Include="Events\MainWindowOpenedEvent.cs" />
+    <Compile Include="Events\NavigateMainTabEvent.cs" />
+    <Compile Include="Events\PrismNavigatedEvent.cs" />
+    <Compile Include="Events\PrintJobShellTranslation.cs" />
+    <Compile Include="Events\ReturnToHomeEvent.cs" />
+    <Compile Include="Events\ShowLockLayerEvent.cs" />
+    <Compile Include="Helper\ClientTestEmail.cs" />
+    <Compile Include="Helper\ClipboardService.cs" />
+    <Compile Include="Helper\DragAndDropEventHandler.cs" />
+    <Compile Include="Helper\EditionHintOptionProvider.cs" />
+    <Compile Include="Helper\FlashWindow.cs" />
+    <Compile Include="Helper\FontHelper.cs" />
+    <Compile Include="Helper\Gpo\GPOLockLayer.xaml.cs">
+      <DependentUpon>GPOLockLayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Gpo\GPOLockLayerTranslation.cs" />
+    <Compile Include="Helper\Gpo\GPOLockLayerViewModel.cs" />
+    <Compile Include="Helper\Gpo\GpoTranslation.cs" />
+    <Compile Include="Helper\HightlightColorRegistration.cs" />
+    <Compile Include="Helper\MailSignature\MailSignatureHelperFreeVersion.cs" />
+    <Compile Include="Helper\MailSignature\MailSignatureHelperLicensed.cs" />
+    <Compile Include="Helper\MailSignature\MailSignatureHelperTranslation.cs" />
+    <Compile Include="Assistants\RecommendArchitect.cs" />
+    <Compile Include="Helper\PlusHintHelperDisabled.cs" />
+    <Compile Include="Helper\PrismNavigationValueObject.cs" />
+    <Compile Include="Helper\SoundPlayer.cs" />
+    <Compile Include="Helper\UserGuideHelper.cs" />
+    <Compile Include="Help\HelpCommandHandler.cs" />
+    <Compile Include="Help\HelpProvider.cs" />
+    <Compile Include="Help\HelpTopic.cs" />
+    <Compile Include="Helper\IPlusHintHelper.cs" />
+    <Compile Include="Helper\IUserGuideHelper.cs" />
+    <Compile Include="Helper\OpenFileHelper.cs" />
+    <Compile Include="Helper\PlusHintHelper.cs" />
+    <Compile Include="Helper\SettingsLoader.cs" />
+    <Compile Include="Helper\SynchronizedCollection.cs" />
+    <Compile Include="Helper\TokenHelper.cs" />
+    <Compile Include="Helper\TokenPlaceHoldersTranslation.cs" />
+    <Compile Include="Helper\Translation\TranslationUpdater.cs" />
+    <Compile Include="InteractionHostWindow.xaml.cs">
+      <DependentUpon>InteractionHostWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RegionManager\ManagedRegionManager.cs" />
+    <Compile Include="Routing\StartupNavigationAction.cs" />
+    <Compile Include="Settings\SettingsManager.cs" />
+    <Compile Include="Styles\Behavior\TextBoxForceCaretToEndBehavior.cs" />
+    <Compile Include="Styles\TextBoxBehavior.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\HTTP\HttpTranslation.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\Dropbox\DropboxAccountWindow.xaml.cs">
+      <DependentUpon>DropboxAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountViews\Dropbox\DropboxAccountViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\Dropbox\DropboxTranslation.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\SMTP\SmtpAccountView.xaml.cs">
+      <DependentUpon>SmtpAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountViews\SMTP\SmtpAccountViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\HTTP\HttpAccountView.xaml.cs">
+      <DependentUpon>HttpAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountViews\HTTP\HttpAccountViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\SMTP\SmtpTranslation.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\TimeServer\TimeServerAccountView.xaml.cs">
+      <DependentUpon>TimeServerAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountViews\TimeServer\TimeServerAccountViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\TimeServer\TimeServerTranslation.cs" />
+    <Compile Include="UserControls\ApplicationLogoControl.xaml.cs">
+      <DependentUpon>ApplicationLogoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Dialogs\InputBoxUserControl.xaml.cs">
+      <DependentUpon>InputBoxUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Dialogs\InputBoxWindowTranslation.cs" />
+    <Compile Include="UserControls\Dialogs\InputBoxWindowViewModel.cs" />
+    <Compile Include="UserControls\Misc\MessageUserControl.xaml.cs">
+      <DependentUpon>MessageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Misc\MessageUserControlViewModel.cs" />
+    <Compile Include="UserControls\Misc\MessageWindowTranslation.cs" />
+    <Compile Include="UserControls\Misc\PlusHintControl.xaml.cs">
+      <DependentUpon>PlusHintControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Misc\PlusHintViewModel.cs" />
+    <Compile Include="UserControls\Misc\TokenHintPanel.xaml.cs">
+      <DependentUpon>TokenHintPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Misc\TokenHintPanelTranslation.cs" />
+    <Compile Include="UserControls\Misc\TokenHintPanelViewModel.cs" />
+    <Compile Include="UserControls\Printer\PrinterTabTranslation.cs" />
+    <Compile Include="UserControls\Printer\PrinterViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeProgressViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\DropboxShareLinkStep\DropboxShareLinkStepView.xaml.cs">
+      <DependentUpon>DropboxShareLinkStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\DropboxShareLinkStep\DropboxShareLinkStepViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\PrintJobPasswordButtonViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\ProgressViewTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\SignaturePasswordOverlayViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\SignaturePasswordStepViewModel.cs" />
+    <Compile Include="Commands\SkipPrintDialogCommand.cs" />
+    <Compile Include="UserControls\PrintJob\UpdateHint\UpdateHintView.xaml.cs">
+      <DependentUpon>UpdateHintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\UpdateHint\UpdateHintViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\AdvancedMasterTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\ProfileAdvancedTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\Script\ScriptUserControl.xaml.cs">
+      <DependentUpon>ScriptUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Advanced\Script\ScriptTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\Script\ScriptUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\UserToken\UserTokenTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\UserToken\UserTokenUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Advanced\UserToken\UserTokenUserControl.xaml.cs">
+      <DependentUpon>UserTokenUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\DefectiveProfilesView.xaml.cs">
+      <DependentUpon>DefectiveProfilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\DefectiveProfilesViewTranslation.cs" />
+    <Compile Include="UserControls\Profiles\DefectiveProfilesViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeDefectiveProfilesViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\HTTP\HttpActionUserControl.xaml.cs">
+      <DependentUpon>HttpActionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\HTTP\HttpActionViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\MailSmtp\EditEmailTextUserControl.xaml.cs">
+      <DependentUpon>EditEmailTextUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\MailSmtp\EditEmailTextViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertJpgView.xaml.cs">
+      <DependentUpon>ConvertJpgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertJpgTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPdfTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPdfView.xaml.cs">
+      <DependentUpon>ConvertPdfView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPdfViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPngTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPngView.xaml.cs">
+      <DependentUpon>ConvertPngView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertJpgViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPngViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTextTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTextView.xaml.cs">
+      <DependentUpon>ConvertTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTextViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTiffTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTiffView.xaml.cs">
+      <DependentUpon>ConvertTiffView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTiffViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeConvertPdfViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeConvertTextViewModel.cs" />
+    <Compile Include="UserControls\Welcome\WelcomeView.xaml.cs">
+      <DependentUpon>WelcomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Welcome\WelcomeWindowTranslation.cs" />
+    <Compile Include="UserControls\Welcome\WelcomeViewModel.cs" />
+    <Compile Include="ViewModelBases\AccountViewModelBase.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\FTP\FtpAccountView.xaml.cs">
+      <DependentUpon>FtpAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountViews\FTP\FtpAccountViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\Dropbox\DropboxUserControl.xaml.cs">
+      <DependentUpon>DropboxUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\Dropbox\DropboxUserControlViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountViews\FTP\FtpActionTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Send\FTP\FTPActionUserControl.xaml.cs">
+      <DependentUpon>FTPActionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\FTP\FtpActionViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\MailClient\MailClientTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Send\MailClient\MailClientUserControl.xaml.cs">
+      <DependentUpon>MailClientUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\MailClient\MailClientControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\MailSmtp\SmtpActionUserControl.xaml.cs">
+      <DependentUpon>SmtpActionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\MailSmtp\SmtpActionViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\Print\PrintTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Send\Print\PrintUserControl.xaml.cs">
+      <DependentUpon>PrintUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Send\Print\PrintUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Send\ProfileSendSubTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Send\SendMasterTabViewModel.cs" />
+    <Compile Include="UserControls\Settings\License\LicenseUpdateControl.xaml.cs">
+      <DependentUpon>LicenseUpdateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintJobShellViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\SignaturePasswordTranslation.cs" />
+    <Compile Include="UserControls\Overlay\Encryption\EncryptionPasswordsUserControl.xaml.cs">
+      <DependentUpon>EncryptionPasswordsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Overlay\Encryption\EncryptionPasswordsUserControlTranslation.cs" />
+    <Compile Include="UserControls\Overlay\Encryption\EncryptionPasswordUserControlViewModel.cs" />
+    <Compile Include="UserControls\Overlay\Password\PasswordOverlayInteraction.cs" />
+    <Compile Include="UserControls\Overlay\Password\PasswordOverlayViewModel.cs" />
+    <Compile Include="UserControls\Overlay\Password\PasswordOverlay.xaml.cs">
+      <DependentUpon>PasswordOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Overlay\Password\PasswordOverlayTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\HttpPasswordTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\HttpPasswordView.xaml.cs">
+      <DependentUpon>HttpPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\HttpJobStepPasswordViewModel.cs" />
+    <Compile Include="UserControls\Accounts\AccountsTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\SignaturePasswordView.xaml.cs">
+      <DependentUpon>SignaturePasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\SignaturePasswordViewModel.cs" />
+    <Compile Include="UserControls\PlusFeatureControl.xaml.cs">
+      <DependentUpon>PlusFeatureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PlusFeatureControlTranslation.cs" />
+    <Compile Include="UserControls\PlusFeatureControlViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\FtpPasswordStep\FtpPasswordView.xaml.cs">
+      <DependentUpon>FtpPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\FtpPasswordStep\FtpJobStepPasswordViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeAccountsViewModel.cs" />
+    <Compile Include="UserControls\About\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Accounts\AccountsViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\IPasswordButtonViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\PdfPasswordTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\PdfPasswordView.xaml.cs">
+      <DependentUpon>PdfPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\PdfJobStepPasswordViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\PlusHint\PlusHintView.xaml.cs">
+      <DependentUpon>PlusHintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\PlusHint\PlusHintViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\PlusHint\PlusHintViewTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\PrintJobPasswordButtonUserControl.xaml.cs">
+      <DependentUpon>PrintJobPasswordButtonUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\PrintJobViewTranslation.cs" />
+    <Compile Include="UserControls\PrintJob\ProgressView.xaml.cs">
+      <DependentUpon>ProgressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\ProgressViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Attachment\AttachmentSettingsAndActionTranslation.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Background\BackgroundSettingsAndActionTranslation.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Cover\CoverSettingsAndActionTranslation.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Stamp\DocumentTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\ProfileUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Attachment\AttachmentUserControl.xaml.cs">
+      <DependentUpon>AttachmentUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\ModifyTab\Attachment\AttachmentUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Background\BackgroundUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Background\BackgroundUserControl.xaml.cs">
+      <DependentUpon>BackgroundUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\ModifyTab\Cover\CoverUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Cover\CoverUserControl.xaml.cs">
+      <DependentUpon>CoverUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\ModifyTab\Stamp\StampUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\Stamp\StampUserControl.xaml.cs">
+      <DependentUpon>StampUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\SecureTab\Encrypt\EncryptUserControl.xaml.cs">
+      <DependentUpon>EncryptUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\SecureTab\Encrypt\EncryptUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\SecureTab\Encrypt\EncryptUserControlTranslation.cs" />
+    <Compile Include="UserControls\Profiles\SecureTab\SecureMasterTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\SecureTab\ProfileSecureTranslation.cs" />
+    <Compile Include="UserControls\Profiles\SecureTab\Sign\SignUserControl.xaml.cs">
+      <DependentUpon>SignUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\SecureTab\Sign\SignUserControlTranslation.cs" />
+    <Compile Include="UserControls\Profiles\SecureTab\Sign\SignUserControlViewModel.cs" />
+    <Compile Include="UserControls\Profiles\TabHelper\ProfileSubTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\MetadataTab.xaml.cs">
+      <DependentUpon>MetadataTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\SmtpPasswordView.xaml.cs">
+      <DependentUpon>SmtpPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\License\OfflineActivationViewModelTranslation.cs" />
+    <Compile Include="UserControls\Settings\License\StoreLicenseForAllUsersControl.xaml.cs">
+      <DependentUpon>StoreLicenseForAllUsersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\License\StoreLicenseForAllUsersWindowTranslation.cs" />
+    <Compile Include="UserControls\Settings\License\StoreLicenseForAllUsersWindowViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\ModifyMasterTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ModifyTab\ProfileModifyTranslation.cs" />
+    <Compile Include="UserControls\Profiles\TabHelper\MasterIconTabHeader.cs" />
+    <Compile Include="UserControls\PrintJob\SmtpJobStepPasswordViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeSaveTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\MetadataTabTranslation.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\MetadataViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\DebugMasterTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\SaveTab.xaml.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\SaveTabTranslation.cs" />
+    <Compile Include="UserControls\Settings\License\OfflineActivationUserControl.xaml.cs">
+      <DependentUpon>OfflineActivationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\License\OfflineActivationUserControlViewModel.cs" />
+    <Compile Include="UserControls\Settings\Shared\SettingControlsView.xaml.cs">
+      <DependentUpon>SettingControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\Shared\SettingControlsTranslation.cs" />
+    <Compile Include="UserControls\Settings\Shared\SettingControlsViewModel.cs" />
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementDataTemplateSelector.cs" />
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementEditInteraction.cs" />
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementEditUserControl.xaml.cs">
+      <DependentUpon>TitleReplacementEditUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementEditUserControlViewModel.cs" />
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementsTranslation.cs" />
+    <Compile Include="ViewModelBases\ITranslatableViewModel.cs" />
+    <Compile Include="Customization\ViewCustomization.cs" />
+    <Compile Include="ViewModelBases\PasswordOverlayViewModelBase.cs" />
+    <Compile Include="ViewModelBases\OverlayViewModelBase.cs" />
+    <Compile Include="ViewModelBases\JobStepPasswordViewModelBase.cs" />
+    <Compile Include="ViewModelBases\TranslatableViewModelBase.cs" />
+    <Compile Include="Windows\ManagePrintJobExceptionHandler.cs" />
+    <Compile Include="Windows\ManagePrintJobsViewModel.cs" />
+    <Compile Include="Windows\ManagePrintJobsWindow.xaml.cs">
+      <DependentUpon>ManagePrintJobsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ManagePrintJobsWindowTranslation.cs" />
+    <Compile Include="ViewModelBases\TranslatableCommandBase.cs" />
+    <Compile Include="Windows\RecommendPdfArchitectWindow.xaml.cs">
+      <DependentUpon>RecommendPdfArchitectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RecommendPdfArchitectWindowTranslation.cs" />
+    <Compile Include="Windows\RecommendPdfArchitectWindowViewModel.cs" />
+    <Compile Include="Windows\Startup\DisabledWelcomeWindowCommand.cs" />
+    <Compile Include="Windows\Startup\LicenseOptionProvider.cs" />
+    <Compile Include="Windows\Startup\ShowWelcomeWindowCommand.cs" />
+    <Compile Include="Windows\Startup\WelcomeCommand.cs" />
+    <Compile Include="Windows\UpdateDownloadWindow.xaml.cs">
+      <DependentUpon>UpdateDownloadWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UpdateDownloadWindowTranslation.cs" />
+    <Compile Include="Windows\UpdateDownloadWindowViewModel.cs" />
+    <Compile Include="Windows\UpdateManagerTranslation.cs" />
+    <Compile Include="WorkflowQuery\AutosaveTargetFileNameComposer.cs" />
+    <Compile Include="WorkflowQuery\ErrorNotifier.cs" />
+    <Compile Include="WorkflowQuery\InteractiveFileNameQuery.cs" />
+    <Compile Include="WorkflowQuery\InteractiveWorkflowTranslation.cs" />
+    <Compile Include="Workflow\InteractiveWorkflow.cs" />
+    <Compile Include="Workflow\InteractiveWorkflowManager.cs" />
+    <Compile Include="MainShellTranslation.cs" />
+    <Compile Include="PrintJobShell.xaml.cs">
+      <DependentUpon>PrintJobShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\About\AboutViewModel.cs" />
+    <Compile Include="UserControls\About\AboutViewTranslation.cs" />
+    <Compile Include="UserControls\Accounts\AccountsView.xaml.cs">
+      <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Architect\ArchitectView.xaml.cs">
+      <DependentUpon>ArchitectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Architect\ArchitectViewModel.cs" />
+    <Compile Include="UserControls\Architect\ArchitectViewTranslation.cs" />
+    <Compile Include="UserControls\Home\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Home\HomeViewModel.cs" />
+    <Compile Include="UserControls\Home\HomeViewTranslation.cs" />
+    <Compile Include="UserControls\MainRegionViewNames.cs" />
+    <Compile Include="UserControls\Printer\PrinterView.xaml.cs">
+      <DependentUpon>PrinterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PrintJob\PrintJobViewModel.cs" />
+    <Compile Include="UserControls\PrintJob\PrintJobView.xaml.cs">
+      <DependentUpon>PrintJobView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\DesignTimeProfilesViewModel.cs" />
+    <Compile Include="UserControls\Profiles\ProfileMangementTranslation.cs" />
+    <Compile Include="UserControls\Profiles\CurrentSettingsProvider.cs" />
+    <Compile Include="UserControls\Profiles\ProfilesView.xaml.cs">
+      <DependentUpon>ProfilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\ProfilesViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\OutputFormatTab.xaml.cs">
+      <DependentUpon>OutputFormatTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\TabHelper\IconTabHeader.cs" />
+    <Compile Include="UserControls\Profiles\TabHelper\IconList.cs" />
+    <Compile Include="UserControls\Profiles\TabHelper\ITabViewModel.cs" />
+    <Compile Include="UserControls\Profiles\Tabs\SaveTabViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeGeneralSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\ADebugSettingsItemControlModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\DebugSettingView.xaml.cs">
+      <DependentUpon>DebugSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DebugSettings\DebugSettingsTranslation.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\DebugSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\ExportSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\ExportSettingView.xaml.cs">
+      <DependentUpon>ExportSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DebugSettings\LoggingSettingView.xaml.cs">
+      <DependentUpon>LoggingSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DebugSettings\LoggingSettingViewModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\RestoreSettingsView.xaml.cs">
+      <DependentUpon>RestoreSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DebugSettings\RestoreSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\DebugSettings\TestPageSettingsView.xaml.cs">
+      <DependentUpon>TestPageSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DebugSettings\TestPageSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\General\AGeneralSettingsItemControlModel.cs" />
+    <Compile Include="UserControls\Settings\General\DefaultPrinterSettingsView.xaml.cs">
+      <DependentUpon>DefaultPrinterSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\General\DefaultPrinterSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\General\ExplorerIntegrationSettingsView.xaml.cs">
+      <DependentUpon>ExplorerIntegrationSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\General\ExplorerIntegrationSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\General\GeneralSettingsView.xaml.cs">
+      <DependentUpon>GeneralSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\General\GeneralSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\General\GeneralSettingsTranslation.cs" />
+    <Compile Include="UserControls\Settings\General\LanguageSelectionSettingsView.xaml.cs">
+      <DependentUpon>LanguageSelectionSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\General\LanguageSelectionSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\General\UpdateIntervalSettingsView.xaml.cs">
+      <DependentUpon>UpdateIntervalSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\General\UpdateIntervalSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\License\LicenseSettingsView.xaml.cs">
+      <DependentUpon>LicenseSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\License\LicenseSettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\License\LicenseSettingsTranslation.cs" />
+    <Compile Include="UserControls\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\SettingsViewModel.cs" />
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementsView.xaml.cs">
+      <DependentUpon>TitleReplacementsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementsViewModel.cs" />
+    <Compile Include="Workflow\IWorkflowStep.cs" />
+    <Compile Include="Workflow\IWorkflowViewModel.cs" />
+    <Compile Include="Workflow\Steps\DropboxSharedLinkStep.cs" />
+    <Compile Include="Workflow\Steps\FtpPasswordStep.cs" />
+    <Compile Include="Workflow\Steps\HttpPasswordStep.cs" />
+    <Compile Include="Workflow\Steps\SignaturePasswordStep.cs" />
+    <Compile Include="Workflow\Steps\SmtpPasswordStep.cs" />
+    <Compile Include="Workflow\Steps\PdfPasswordsStep.cs" />
+    <Compile Include="Workflow\InteractiveWorkflowManagerFactory.cs" />
+    <Compile Include="Workflow\Steps\PlusHintStep.cs" />
+    <Compile Include="Workflow\Steps\UpdateHintStep.cs" />
+    <Compile Include="Workflow\WorkflowNavigationHelper.cs" />
+    <Compile Include="Workflow\WorkflowStep.cs" />
+    <Compile Include="Workflow\WorkflowStepBase.cs" />
+    <Compile Include="Workflow\WpfTopMostHelper.cs" />
+    <Compile Include="Wrapper\AskSwitchPrinter.cs" />
+    <Compile Include="Wrapper\DispatcherWrapper.cs" />
+    <Compile Include="Wrapper\PrinterMappingWrapper.cs" />
+    <Page Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TokenControlMultiline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TokenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Helper\Gpo\GPOLockLayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InteractionHostWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\BrandLogos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ChildWindowOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\CustomListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\GPOLayerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\RadioButtonList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountViews\HTTP\HttpAccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountViews\Dropbox\DropboxAccountWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountViews\SMTP\SmtpAccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountViews\TimeServer\TimeServerAccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ApplicationLogoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Dialogs\InputBoxUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Misc\MessageUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Misc\PlusHintControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Misc\TokenHintPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\PrintJob\DropboxShareLinkStep\DropboxShareLinkStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\UpdateHint\UpdateHintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Advanced\Script\ScriptUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Advanced\UserToken\UserTokenUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountViews\FTP\FtpAccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\DefectiveProfilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\Dropbox\DropboxUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\FTP\FTPActionUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\HTTP\HttpActionUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\MailClient\MailClientUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\MailSmtp\EditEmailTextUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\MailSmtp\SmtpActionUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Send\Print\PrintUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertJpgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPdfView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertPngView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\ConvertTiffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\License\LicenseUpdateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintJobShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="DesignTime\DesignTimeMainShellViewModel.cs" />
+    <Compile Include="MainShellViewModel.cs" />
+    <Compile Include="RegionNames.cs" />
+    <Page Include="MainShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="IShellManager.cs" />
+    <Compile Include="MainShell.xaml.cs">
+      <DependentUpon>MainShell.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Styles\IconButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\NoChromeButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Badged.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\FileTypeIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\GpoStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\LightGreyButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\RedesignedHeaderPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\HeaderPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DragDropBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\FlatPDFCreatorButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Logos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MainResourceDict.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MainWindowNavStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\pdfforgeTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PDFCreatorIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Textblock\RoundDarkBackgroundTextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\About\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Accounts\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Architect\ArchitectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Home\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Overlay\Encryption\EncryptionPasswordsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Overlay\Password\PasswordOverlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\PlusFeatureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Printer\PrinterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\FtpPasswordStep\FtpPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\HttpPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\PdfPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\PlusHint\PlusHintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\PrintJobPasswordButtonUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\PrintJobView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\ProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\SignaturePasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\ModifyTab\Attachment\AttachmentUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\ModifyTab\Background\BackgroundUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\ModifyTab\Cover\CoverUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\ModifyTab\Stamp\StampUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\SecureTab\Encrypt\EncryptUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\SecureTab\Sign\SignUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\MetadataTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PrintJob\SmtpPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\ProfilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\ConvertTabs\OutputFormatTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Profiles\Tabs\SaveTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Settings\DebugSettings\DebugSettingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Settings\DebugSettings\ExportSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\DebugSettings\LoggingSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\DebugSettings\RestoreSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\DebugSettings\TestPageSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\General\DefaultPrinterSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\General\ExplorerIntegrationSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\General\GeneralSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\General\LanguageSelectionSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\General\UpdateIntervalSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\License\LicenseSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\License\OfflineActivationUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Settings\License\StoreLicenseForAllUsersControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\Shared\SettingControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementEditUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Welcome\WelcomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ManagePrintJobsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\RecommendPdfArchitectWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\UpdateDownloadWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainShellLauncher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="paket.references" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="pdfforge.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Resource Include="Fonts\yorktennormregular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Conversion\ActionsInterface\ActionsInterface.csproj">
+      <Project>{8DE100B3-17E1-46E3-830B-5E0B072483CA}</Project>
+      <Name>ActionsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Actions\Actions.csproj">
+      <Project>{1DBB980A-80ED-4263-BC5D-B90377466E14}</Project>
+      <Name>Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Jobs\Jobs.csproj">
+      <Project>{18354054-45F6-4F51-8730-D05643A400A3}</Project>
+      <Name>Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Settings\Settings.csproj">
+      <Project>{94936199-c9c7-4a5f-a58e-6123158e84f3}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
+      <Project>{BE1A6F7D-6439-4361-8E96-DF90B4BFE000}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Printing\Printing.csproj">
+      <Project>{FD68EB7E-2AE8-4C8E-BA9C-71F9AD98E33E}</Project>
+      <Name>Printing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Services\Services.csproj">
+      <Project>{C6058628-42B2-4CF6-A4BE-622AD45F6E42}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\SettingsManagement\SettingsManagement.csproj">
+      <Project>{9b31d8cd-4e32-4925-b696-7d1cf02f0142}</Project>
+      <Name>SettingsManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Workflow\Workflow.csproj">
+      <Project>{E4F2F7AA-5A58-44A4-905D-09536CB81EA1}</Project>
+      <Name>Workflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Startup\StartupInterface\StartupInterface.csproj">
+      <Project>{1A092466-45AC-4FA5-BC67-25071F20CD59}</Project>
+      <Name>StartupInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{EA29538B-89A5-4FB3-AE0F-5E2370E852F8}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interactions\Interactions.csproj">
+      <Project>{9fa4da88-81e9-4ff9-8521-70102762415b}</Project>
+      <Name>Interactions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\Overlay\Sign\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Practices.ServiceLocation">
+          <HintPath>..\..\..\..\packages\CommonServiceLocator\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="DataStorage">
+          <HintPath>..\..\..\..\packages\DataStorage\lib\DataStorage.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="GongSolutions.WPF.DragDrop">
+          <HintPath>..\..\..\..\packages\gong-wpf-dragdrop.strongnamed\lib\net45\GongSolutions.WPF.DragDrop.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="MahApps.Metro">
+          <HintPath>..\..\..\..\packages\MahApps.Metro\lib\net45\MahApps.Metro.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Windows.Interactivity">
+          <HintPath>..\..\..\..\packages\MahApps.Metro\lib\net45\System.Windows.Interactivity.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="MahApps.Metro.SimpleChildWindow">
+          <HintPath>..\..\..\..\packages\MahApps.Metro.SimpleChildWindow\lib\net45\MahApps.Metro.SimpleChildWindow.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="NLog">
+          <HintPath>..\..\..\..\packages\NLog\lib\net45\NLog.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Obsidian">
+          <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Prism">
+          <HintPath>..\..\..\..\packages\Prism.Core\lib\net45\Prism.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Prism.Wpf">
+          <HintPath>..\..\..\..\packages\Prism.Wpf\lib\net45\Prism.Wpf.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Windows.Interactivity">
+          <HintPath>..\..\..\..\packages\Prism.Wpf\lib\net45\System.Windows.Interactivity.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="SystemInterface">
+          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Translatable">
+          <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="TrueTypeFontInfo">
+          <HintPath>..\..\..\..\packages\TrueTypeFontInfo\lib\net40-Client\TrueTypeFontInfo.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

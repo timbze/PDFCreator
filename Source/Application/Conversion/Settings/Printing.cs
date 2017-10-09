@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,40 +16,33 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Print the document to a physical printer
 	/// </summary>
-	public class Printing {
+	[ImplementPropertyChanged]
+	public partial class Printing : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Defines the duplex printing mode. Valid values are: Disable, LongEdge, ShortEdge
+		/// Defines the duplex printing mode.
 		/// </summary>
-		public DuplexPrint Duplex { get; set; }
+		public DuplexPrint Duplex { get; set; } = DuplexPrint.Disable;
 		
 		/// <summary>
 		/// If enabled, the document will be printed to a physical printer
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Name of the printer that will be used, if SelectedPrinter is set.
 		/// </summary>
-		public string PrinterName { get; set; }
+		public string PrinterName { get; set; } = "PDFCreator";
 		
 		/// <summary>
-		/// Method to select the printer. Valid values are: DefaultPrinter, ShowDialog, SelectedPrinter
+		/// Method to select the printer.
 		/// </summary>
-		public SelectPrinter SelectPrinter { get; set; }
+		public SelectPrinter SelectPrinter { get; set; } = SelectPrinter.ShowDialog;
 		
-		
-		private void Init() {
-			Duplex = DuplexPrint.Disable;
-			Enabled = false;
-			PrinterName = "PDFCreator";
-			SelectPrinter = SelectPrinter.ShowDialog;
-		}
-		
-		public Printing()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

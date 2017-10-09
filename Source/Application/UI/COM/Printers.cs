@@ -1,6 +1,6 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Core.Printing.Printer;
+using System;
 using System.Runtime.InteropServices;
-using pdfforge.PDFCreator.Core.Printing.Printer;
 
 namespace pdfforge.PDFCreator.UI.COM
 {
@@ -10,6 +10,7 @@ namespace pdfforge.PDFCreator.UI.COM
     public interface IPrinters
     {
         int Count { get; }
+
         string GetPrinterByIndex(int index);
     }
 

@@ -33,7 +33,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 
             upgrader.MoveSection("MySection\\", "MyNewSection\\");
 
-            Assert.AreEqual(new[] {"MyNewSection\\"}, data.GetSections());
+            Assert.AreEqual(new[] { "MyNewSection\\" }, data.GetSections());
         }
     }
 }

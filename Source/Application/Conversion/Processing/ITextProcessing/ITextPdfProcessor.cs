@@ -1,16 +1,18 @@
-﻿using System.Linq;
-using SystemInterface.IO;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
+using System;
+using System.IO;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 {
     public class ITextPdfProcessor : PdfProcessorBase
     {
-        public ITextPdfProcessor(IFile file, IProcessingPasswordsProvider passwordsProvider) : base(file, passwordsProvider)
-        {  }
+        public ITextPdfProcessor(IFile file) : base(file)
+        { }
 
         /// <summary>
         ///     Determines number of pages in PDF file
@@ -34,44 +36,54 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 return PdfWriter.VERSION_1_6;
             if (intendedPdfVersion == "1.5")
                 return PdfWriter.VERSION_1_5;
+            if (intendedPdfVersion == "1.4")
+                return PdfWriter.VERSION_1_4;
 
-            return PdfWriter.VERSION_1_4;
+            return PdfWriter.VERSION_1_3;
         }
 
         protected override void DoProcessPdf(Job job)
         {
-            string preProcessFile = null;
+            var pdfFile = job.TempOutputFiles.First();
+            var processedFile = Path.ChangeExtension(pdfFile, "_processed.pdf");
+            var version = DeterminePdfVersionForPdfStamper(job.Profile);
+
+            var stamperBundle = StamperCreator.CreateStamperAccordingToEncryptionAndSignature(pdfFile, processedFile, job.Profile, version);
+            var stamper = stamperBundle.Item1;
+            var outputStream = stamperBundle.Item2;
+
             try
             {
-                var pdfFile = job.TempOutputFiles.First();
-                preProcessFile = MoveFileToPreProcessFile(pdfFile, "PreProcess");
-                var version = DeterminePdfVersionForPdfStamper(job.Profile);
-                using (var stamper = StamperCreator.CreateStamperAccordingToEncryptionAndSignature(preProcessFile, pdfFile, job.Profile, version))
-                {
-                    var encrypter = new Encrypter();
-                    encrypter.SetEncryption(stamper, job.Profile, job.Passwords);
-                    //Encryption before adding Background and Signing!
+                //Encryption before adding Background and Signing!
+                var encrypter = new Encrypter();
+                encrypter.SetEncryption(stamper, job.Profile, job.Passwords);
 
-                    var metadataUpdater = new XmpMetadataUpdater();
-                    metadataUpdater.UpdateXmpMetadata(stamper, job.Profile);
+                var metadataUpdater = new XmpMetadataUpdater();
+                metadataUpdater.UpdateXmpMetadata(stamper, job.Profile);
 
-                    var backgroundAdder = new BackgroundAdder();
-                    backgroundAdder.AddBackground(stamper, job.Profile);
+                var backgroundAdder = new BackgroundAdder();
+                backgroundAdder.AddBackground(stamper, job.Profile);
 
-                    var signer = new ITextSigner();
-                    signer.SignPdfFile(stamper, job.Profile, job.Passwords);
-                    //Signing after adding background and update metadata
-
-                    stamper.Close();
-                }
+                //Signing after adding background and update metadata
+                var signer = new ITextSigner();
+                signer.SignPdfFile(stamper, job.Profile, job.Passwords, job.Accounts);
             }
             finally
             {
-                //delete copy of original file
-                if (!string.IsNullOrEmpty(preProcessFile))
-                    if (File.Exists(preProcessFile))
-                        File.Delete(preProcessFile);
+                try
+                {
+                    stamper?.Close();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn($"Could not close iText pdf stamper.\r\n{ex}");
+                }
+                outputStream?.Close();
             }
+
+            //Set the final output pdf
+            job.TempOutputFiles.Clear();
+            job.TempOutputFiles.Add(processedFile);
         }
     }
 }

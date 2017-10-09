@@ -44,10 +44,13 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                 case EncryptionLevel.Rc40Bit:
                 case EncryptionLevel.Rc128Bit:
                     return "RC4";
+
                 case EncryptionLevel.Aes128Bit:
                     return "AESV2";
+
                 case EncryptionLevel.Aes256Bit:
                     return "AESV3";
+
                 default:
                     return "None";
             }
@@ -62,11 +65,14 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
             {
                 case EncryptionLevel.Rc40Bit:
                     return 40;
+
                 case EncryptionLevel.Rc128Bit:
                 case EncryptionLevel.Aes128Bit:
                     return 128;
+
                 case EncryptionLevel.Aes256Bit:
                     return 256;
+
                 default:
                     return 0;
             }
@@ -79,7 +85,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 
             var securitySettings = profile.PdfSettings.Security;
 
-            PDFPermission permissionValue = (PDFPermission) (-3904);
+            PDFPermission permissionValue = (PDFPermission)(-3904);
 
             if (securitySettings.AllowPrinting)
                 permissionValue = permissionValue | PDFPermission.ePermDigitalPrint ^ PDFPermission.ePermPrint;

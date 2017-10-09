@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             xmlns:viewModels="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Properties"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="1000"
+             d:DataContext="{d:DesignInstance designTime:DesignTimeAboutViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Styles/BrandLogos.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Collapsed"
+                                                 FalseValue="Visible" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="2*" MaxHeight="120" />
+            <RowDefinition Height="Auto" MinHeight="120" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Column="1" Grid.Row="1">
+
+            <userControls:ApplicationLogoControl DockPanel.Dock="Top"
+                                                 Margin="40 25"
+                                                 Foreground="Black" />
+        </Viewbox>
+        <DockPanel Grid.Column="1" Grid.Row="2">
+            <TextBlock DockPanel.Dock="Top"
+                       TextWrapping="Wrap"
+                       FontSize="15"
+                       Text="{Binding Translation.LicenseInfo}" />
+            <TextBlock DockPanel.Dock="Top"
+                       Margin="0 20 0 0"
+                       TextWrapping="Wrap"
+                       FontSize="15"
+                       Text="{Binding Translation.PleaseReadLicenseSection}" />
+            <Viewbox DockPanel.Dock="Top"
+                     HorizontalAlignment="Center"
+                     Margin="0 10"
+                     Width="200"
+                     Height="40">
+
+                <Image x:Name="CustomLogo" />
+            </Viewbox>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Top">
+            <DockPanel DockPanel.Dock="Top">
+                <Button DockPanel.Dock="Left"
+                        Style="{DynamicResource NoChromeButton}"
+                        IsTabStop="False"
+                        Content="{DynamicResource pdfforge}"
+                        Height="44"
+                        VerticalAlignment="Top"
+                        Command="{Binding PdfforgeWebsiteCommand}" />
+                <DockPanel HorizontalAlignment="Right"
+                           DockPanel.Dock="Right"
+                           Margin="0 15 0 0">
+                    <TextBlock FontSize="15"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="0 0 5 0"
+                               TextWrapping="Wrap">
+                        <Run Text="{Binding ApplicationNameProvider.ApplicationNameWithEdition, Mode=OneWay}" />
+                        <Run Text="{Binding VersionText, Mode=OneWay}" />
+                    </TextBlock>
+                </DockPanel>
+            </DockPanel>
+            <Separator HorizontalAlignment="Stretch" Margin="0 30 0 30" Background="{DynamicResource PdfforgeDarkGreyColorBrush}" Height="1" DockPanel.Dock="Top" />
+            <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" LastChildFill="False">
+                <Button DockPanel.Dock="Right"
+                        Style="{DynamicResource NoChromeButton}"
+                        Command="{Binding GooglePlusCommand}"
+                        Visibility="{Binding Path=HideSocialMediaButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Margin="10 0 0 0" Content="{StaticResource GooglePlusLogo}" MaxHeight="32" />
+                <Button DockPanel.Dock="Right"
+                        Style="{DynamicResource NoChromeButton}"
+                        Command="{Binding FacebookCommand}"
+                        Visibility="{Binding Path=HideSocialMediaButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Margin="0 0 10 0" Content="{StaticResource FacebookLogo}" MaxHeight="32" />
+                <Button DockPanel.Dock="Left"
+                        Content="{Binding Translation.License}"
+                        Style="{DynamicResource BoldTextButton}"
+                        Command="{Binding ShowLicenseCommand}" />
+                <Button DockPanel.Dock="Left"
+                        Content="{Binding Translation.UserManual}"
+                        Style="{DynamicResource BoldTextButton}" Margin="50 0 0 0"
+                        Command="{Binding ShowManualCommand}" />
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

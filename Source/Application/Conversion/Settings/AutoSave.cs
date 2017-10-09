@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,41 +15,31 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// AutoSave allows to create PDF files without user interaction
 	/// </summary>
-	public class AutoSave {
+	[ImplementPropertyChanged]
+	public partial class AutoSave : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		public bool Enabled { get; set; }
+		
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Existing files will not be overwritten. Existing filenames automatically get an appendix.
 		/// </summary>
-		public bool EnsureUniqueFilenames { get; set; }
+		public bool EnsureUniqueFilenames { get; set; } = true;
 		
-		public string TargetDirectory { get; set; }
-		
-		
-		private void Init() {
-			Enabled = false;
-			EnsureUniqueFilenames = true;
-			TargetDirectory = "";
-		}
-		
-		public AutoSave()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{
 			try { Enabled = bool.Parse(data.GetValue(@"" + path + @"Enabled")); } catch { Enabled = false;}
 			try { EnsureUniqueFilenames = bool.Parse(data.GetValue(@"" + path + @"EnsureUniqueFilenames")); } catch { EnsureUniqueFilenames = true;}
-			try { TargetDirectory = Data.UnescapeString(data.GetValue(@"" + path + @"TargetDirectory")); } catch { TargetDirectory = "";}
 		}
 		
 		public void StoreValues(Data data, string path)
 		{
 			data.SetValue(@"" + path + @"Enabled", Enabled.ToString());
 			data.SetValue(@"" + path + @"EnsureUniqueFilenames", EnsureUniqueFilenames.ToString());
-			data.SetValue(@"" + path + @"TargetDirectory", Data.EscapeString(TargetDirectory));
 		}
 		
 		public AutoSave Copy()
@@ -53,7 +48,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			
 			copy.Enabled = Enabled;
 			copy.EnsureUniqueFilenames = EnsureUniqueFilenames;
-			copy.TargetDirectory = TargetDirectory;
 			
 			return copy;
 		}
@@ -65,7 +59,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			
 			if (!Enabled.Equals(v.Enabled)) return false;
 			if (!EnsureUniqueFilenames.Equals(v.EnsureUniqueFilenames)) return false;
-			if (!TargetDirectory.Equals(v.TargetDirectory)) return false;
 			
 			return true;
 		}
@@ -76,7 +69,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			
 			sb.AppendLine("Enabled=" + Enabled.ToString());
 			sb.AppendLine("EnsureUniqueFilenames=" + EnsureUniqueFilenames.ToString());
-			sb.AppendLine("TargetDirectory=" + TargetDirectory.ToString());
 			
 			return sb.ToString();
 		}

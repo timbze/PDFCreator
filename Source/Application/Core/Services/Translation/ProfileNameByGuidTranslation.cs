@@ -33,7 +33,6 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             if (profileGuid == "TiffGuid")
                 return TiffGuid;
 
-
             return "";
         }
     }

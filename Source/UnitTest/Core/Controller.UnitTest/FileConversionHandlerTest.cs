@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.DirectConversion;
 using pdfforge.PDFCreator.Core.Printing.Printing;
+using System.Collections.Generic;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Controller
 {
@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Controller
 
             _fileConversionHandler = new FileConversionHandler(_directConversionHelper, _printFileHelper, _fileWrap);
 
-            _droppedFiles = new List<string> {"file1", "file2", "file3"};
+            _droppedFiles = new List<string> { "file1", "file2", "file3" };
         }
 
         private IFileConversionHandler _fileConversionHandler;

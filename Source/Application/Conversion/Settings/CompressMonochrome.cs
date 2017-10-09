@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,40 +16,33 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Compression settings for monochrome images
 	/// </summary>
-	public class CompressMonochrome {
+	[ImplementPropertyChanged]
+	public partial class CompressMonochrome : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
-		/// Settings for the compression method. Valid values are: CcittFaxEncoding, Zip, RunLengthEncoding
+		/// Settings for the compression method.
 		/// </summary>
-		public CompressionMonochrome Compression { get; set; }
+		public CompressionMonochrome Compression { get; set; } = CompressionMonochrome.CcittFaxEncoding;
 		
 		/// <summary>
 		/// Images will be resampled to this maximum resolution of the images, if resampling is enabled
 		/// </summary>
-		public int Dpi { get; set; }
+		public int Dpi { get; set; } = 1200;
 		
 		/// <summary>
 		/// If true, monochrome images will be processed according to the algorithm. If false, they will remain uncompressed
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = true;
 		
 		/// <summary>
 		/// If true, the images will be resampled to a maximum resolution
 		/// </summary>
-		public bool Resampling { get; set; }
+		public bool Resampling { get; set; } = false;
 		
-		
-		private void Init() {
-			Compression = CompressionMonochrome.CcittFaxEncoding;
-			Dpi = 1200;
-			Enabled = true;
-			Resampling = false;
-		}
-		
-		public CompressMonochrome()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

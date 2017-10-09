@@ -1,6 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using pdfforge.PDFCreator.Core.ComImplementation;
+﻿using pdfforge.PDFCreator.Core.ComImplementation;
 using pdfforge.PDFCreator.Core.Printing.Printer;
+using System.Runtime.InteropServices;
 
 namespace pdfforge.PDFCreator.UI.COM
 {
@@ -11,8 +11,11 @@ namespace pdfforge.PDFCreator.UI.COM
     {
         Printers GetPDFCreatorPrinters { get; }
         bool IsInstanceRunning { get; }
+
         void PrintFile(string path);
+
         void AddFileToQueue(string path);
+
         void PrintFileSwitchingPrinters(string path, bool allowDefaultPrinterSwitch);
     }
 

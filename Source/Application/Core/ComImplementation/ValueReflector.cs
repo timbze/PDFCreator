@@ -55,7 +55,7 @@ namespace pdfforge.PDFCreator.UI.COM
                     if (itemRemainder != null)
                     {
                         var m = pi.GetGetMethod();
-                        var newParent = m.Invoke(parent, new object[] {});
+                        var newParent = m.Invoke(parent, new object[] { });
                         return FindProperty(newParent, itemRemainder);
                     }
                     return new PropertyWrapper(parent, parent.GetType().GetProperty(propertyName, RequiredFlags));

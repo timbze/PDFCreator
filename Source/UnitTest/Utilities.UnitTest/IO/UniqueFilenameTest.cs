@@ -1,9 +1,9 @@
-﻿using System;
-using SystemInterface.IO;
-using SystemWrapper.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using SystemInterface.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
 {
@@ -29,7 +29,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
             const string dir245Chars = @"C:\ThisIsAVeryLongFileNameBecauseItHasMoreThan150CharactersAndToReachThatIHaveToWriteALotMoreTextThanICanThinkAboutRightNowIfYouReadThisUpToHereIOwnYouALittleSnackAndIStillNeedAFewMoreCharactersLetsSimplyCountOneTwoThreeFourFiveSixSevenEightNine";
             const string fileName13Chars = "File12345.pdf";
             var pathWrapSafe = new PathWrapSafe();
-            //Combine adds a "\" so the result is the max path lengh of 260 
+            //Combine adds a "\" so the result is the max path lengh of 260
             var fileMaxLengthPath = pathWrapSafe.Combine(dir245Chars, fileName13Chars);
 
             var fileMaxLengthPathWithAppendix =

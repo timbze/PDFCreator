@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using BitMiracle.LibTiff.Classic;
+﻿using BitMiracle.LibTiff.Classic;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class TiffTest
     {
         [SetUp]
@@ -77,7 +76,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
                 for (var i = 0; i < pages; ++i)
                 {
-                    image.SetDirectory((short) i);
+                    image.SetDirectory((short)i);
 
                     Assert.AreEqual(image.GetField(TiffTag.XRESOLUTION)[0].ToInt(),
                         image.GetField(TiffTag.YRESOLUTION)[0].ToInt(),
@@ -94,22 +93,27 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
                             expectedBitsPerPixel = 1;
                             expectedCompression = Compression.CCITT_T6;
                             break;
+
                         case TiffColor.BlackWhiteG3Fax:
                             expectedBitsPerPixel = 1;
                             expectedCompression = Compression.CCITT_T4;
                             break;
+
                         case TiffColor.BlackWhiteLzw:
                             expectedBitsPerPixel = 1;
                             expectedCompression = Compression.LZW;
                             break;
+
                         case TiffColor.Gray8Bit:
                             expectedBitsPerPixel = 8;
                             expectedCompression = Compression.LZW;
                             break;
+
                         case TiffColor.Color12Bit:
                             expectedBitsPerPixel = 4;
                             expectedCompression = Compression.LZW;
                             break;
+
                         case TiffColor.Color24Bit:
                             expectedBitsPerPixel = 8;
                             expectedCompression = Compression.LZW;

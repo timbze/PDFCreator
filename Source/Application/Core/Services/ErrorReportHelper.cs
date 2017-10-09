@@ -1,12 +1,12 @@
+using pdfforge.LicenseValidator.Interface;
+using pdfforge.LicenseValidator.Interface.Data;
+using pdfforge.PDFCreator.Core.Services.Logging;
+using pdfforge.PDFCreator.ErrorReport;
+using pdfforge.PDFCreator.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using pdfforge.LicenseValidator.Interface.Data;
-using pdfforge.LicenseValidator.Interface;
-using pdfforge.PDFCreator.Core.Services.Logging;
-using pdfforge.PDFCreator.ErrorReport;
-using pdfforge.PDFCreator.Utilities;
 using Tartaros;
 
 namespace pdfforge.PDFCreator.Core.Services
@@ -14,10 +14,14 @@ namespace pdfforge.PDFCreator.Core.Services
     public class ErrorReportHelper
     {
         private readonly InMemoryLogger _inMemoryLogger;
+        private readonly IVersionHelper _versionHelper;
+        private readonly IAssemblyHelper _assemblyHelper;
 
-        public ErrorReportHelper(InMemoryLogger inMemoryLogger)
+        public ErrorReportHelper(InMemoryLogger inMemoryLogger, IVersionHelper versionHelper, IAssemblyHelper assemblyHelper)
         {
             _inMemoryLogger = inMemoryLogger;
+            _versionHelper = versionHelper;
+            _assemblyHelper = assemblyHelper;
         }
 
         public static ILicenseChecker LicenseChecker { private get; set; }
@@ -40,8 +44,7 @@ namespace pdfforge.PDFCreator.Core.Services
 
         private ErrorAssistant CreateErrorAssistant()
         {
-            var assemblyHelper = new AssemblyHelper();
-            return new ErrorAssistant("pdfcreator", assemblyHelper.GetPdfforgeAssemblyVersion());
+            return new ErrorAssistant("pdfcreator", _versionHelper.ApplicationVersion);
         }
 
         private Report CreateReport(ErrorAssistant errorAssistant, Exception ex)
@@ -66,8 +69,7 @@ namespace pdfforge.PDFCreator.Core.Services
             var errorAssistant = CreateErrorAssistant();
             var report = CreateReport(errorAssistant, ex);
 
-            var assemblyHelper = new AssemblyHelper();
-            var errorReporterPath = assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var errorReporterPath = _assemblyHelper.GetAssemblyDirectory();
             errorReporterPath = Path.Combine(errorReporterPath, "ErrorReport.exe");
 
             if (!File.Exists(errorReporterPath))

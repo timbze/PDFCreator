@@ -12,6 +12,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         }
 
         public abstract ExitCode Run();
+
         public bool SkipStartupConditionCheck { get; set; }
 
         public void CheckApplicationConditions()

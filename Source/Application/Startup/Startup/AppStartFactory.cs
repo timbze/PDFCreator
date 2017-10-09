@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using SystemInterface.IO;
-using SystemWrapper.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Utilities;
+using System.Linq;
+using SystemInterface.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Core.Startup
 {
@@ -110,7 +110,7 @@ namespace pdfforge.PDFCreator.Core.Startup
             if (!commandLineParser.HasArgument("InitializeSettings"))
                 return false;
 
-            var excludingArguments = new[] {"ManagePrintJobs", "InfoDataFile", "PsFile", "PdfFile"};
+            var excludingArguments = new[] { "ManagePrintJobs", "InfoDataFile", "PsFile", "PdfFile" };
 
             return excludingArguments.All(argument => !commandLineParser.HasArgument(argument));
         }

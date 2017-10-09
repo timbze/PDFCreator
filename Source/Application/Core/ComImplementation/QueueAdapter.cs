@@ -1,12 +1,12 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace pdfforge.PDFCreator.Core.ComImplementation
 {
@@ -17,13 +17,14 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
 
         private readonly AutoResetEvent _newJobResetEvent = new AutoResetEvent(false);
         private readonly IPipeServerManager _pipeServerManager;
+        private readonly ComStartupConditionChecker _startupConditionChecker;
         private readonly ISettingsProvider _settingsProvider;
 
         private readonly ThreadPool _threadPool;
 
         private bool _isComActive;
 
-        public QueueAdapter(ThreadPool threadPool, IJobInfoQueue jobInfoQueue, ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager, IPipeServerManager pipeServerManager, IPrintJobAdapterFactory printJobAdapterFactory)
+        public QueueAdapter(ThreadPool threadPool, IJobInfoQueue jobInfoQueue, ISettingsProvider settingsProvider, IJobInfoManager jobInfoManager, IPipeServerManager pipeServerManager, IPrintJobAdapterFactory printJobAdapterFactory, ComStartupConditionChecker startupConditionChecker)
         {
             _threadPool = threadPool;
             JobInfoQueue = jobInfoQueue;
@@ -31,6 +32,7 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
             _settingsProvider = settingsProvider;
             _jobInfoManager = jobInfoManager;
             _pipeServerManager = pipeServerManager;
+            _startupConditionChecker = startupConditionChecker;
         }
 
         public IJobInfoQueue JobInfoQueue { get; }
@@ -50,6 +52,10 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
             Logger.Trace("COM: Starting initialization process");
 
             _isComActive = true;
+
+            var startupCheck = _startupConditionChecker.CheckStartupConditions();
+            if (!startupCheck.Item1)
+                throw new InvalidOperationException("Can't initialize the COM interface! " + startupCheck.Item2);
 
             if (IsServerInstanceRunning)
                 throw new InvalidOperationException("Access forbidden. An instance of PDFCreator is currently running.");

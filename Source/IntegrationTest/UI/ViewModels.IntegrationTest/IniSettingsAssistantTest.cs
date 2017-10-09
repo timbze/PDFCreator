@@ -1,6 +1,6 @@
-﻿using System.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.DataStorage.Storage;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
@@ -8,11 +8,11 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations;
-using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
+using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
+using System.IO;
 
-namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
+namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
 {
     [TestFixture]
     public class IniSettingsAssistantTest
@@ -41,7 +41,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
 
         private PdfCreatorSettings CreateSettings()
         {
-            var profileBuilder = new DefaultProfileBuilder();
+            var profileBuilder = new DefaultSettingsBuilder();
             var settings = profileBuilder.CreateDefaultSettings("MySpecialPrinter", new IniStorage(), "Elbisch");
             return settings;
         }
@@ -66,7 +66,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
             settingsMananger.When(x => x.ApplyAndSaveSettings(Arg.Any<PdfCreatorSettings>())).Do(x => loadedSettings = x.Arg<PdfCreatorSettings>());
 
             var iniSettingsLoader = new IniSettingsLoader(settingsMananger, new DataStorageFactory());
-            var iniSettingsAssistant = new IniSettingsAssistant(invoker, new ApplicationSettingsWindowTranslation(), settingsMananger, new DataStorageFactory(), iniSettingsLoader);
+            var iniSettingsAssistant = new IniSettingsAssistant(invoker, new DesignTimeTranslationUpdater(), settingsMananger, new DataStorageFactory(), iniSettingsLoader);
 
             iniSettingsAssistant.SaveIniSettings(settings.ApplicationSettings);
             iniSettingsAssistant.LoadIniSettings();

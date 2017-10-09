@@ -9,7 +9,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
     /// </summary>
     public sealed class SynchronizedThread : ISynchronizedThread
     {
-        private readonly Thread _thread;
+        public Thread Thread { get; }
         private readonly ThreadStart _threadFunction;
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// <param name="threadFunction">Thread delegate</param>
         public SynchronizedThread(ThreadStart threadFunction)
         {
-            _thread = new Thread(RunThread);
+            Thread = new Thread(RunThread);
             _threadFunction = threadFunction;
         }
 
@@ -37,7 +37,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// </summary>
         public ThreadState ThreadState
         {
-            get { return _thread.ThreadState; }
+            get { return Thread.ThreadState; }
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// </summary>
         public bool IsAlive
         {
-            get { return _thread.IsAlive; }
+            get { return Thread.IsAlive; }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// <param name="state">The new state</param>
         public void SetApartmentState(ApartmentState state)
         {
-            _thread.SetApartmentState(state);
+            Thread.SetApartmentState(state);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// </summary>
         public void Join()
         {
-            _thread.Join();
+            Thread.Join();
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// <param name="millisecondsTimeout">Number of milliseconds to wait</param>
         public bool Join(int millisecondsTimeout)
         {
-            return _thread.Join(millisecondsTimeout);
+            return Thread.Join(millisecondsTimeout);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// <param name="timeout">TimeSpan to wait</param>
         public bool Join(TimeSpan timeout)
         {
-            return _thread.Join(timeout);
+            return Thread.Join(timeout);
         }
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         public void Start()
         {
             if (!string.IsNullOrEmpty(Name))
-                _thread.Name = Name;
+                Thread.Name = Name;
 
-            _thread.Start();
+            Thread.Start();
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         /// </summary>
         public void Abort()
         {
-            _thread.Abort();
+            Thread.Abort();
         }
 
         private void RunThread()

@@ -1,8 +1,8 @@
-﻿using SystemInterface.Microsoft.Win32;
-using SystemWrapper.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Printing.Port;
 using Rhino.Mocks;
+using SystemInterface.Microsoft.Win32;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Printing
 {
@@ -37,7 +37,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Printing
             if (server == null)
                 key.Stub(x => x.GetValue("Server")).Return(null);
             else
-                key.Stub(x => x.GetValue("Server")).Return((bool) server ? 1 : 0);
+                key.Stub(x => x.GetValue("Server")).Return((bool)server ? 1 : 0);
 
             _hklmKey.Stub(x => x.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Print\Monitors\pdfcmon\Ports\pdfcmon"))
                 .Return(key);

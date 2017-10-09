@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,52 +15,43 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Opens the default E-mail client with the converted document as attachment
 	/// </summary>
-	public class EmailClientSettings {
+	[ImplementPropertyChanged]
+	public partial class EmailClientSettings : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Add the PDFCreator signature to the mail
 		/// </summary>
-		public bool AddSignature { get; set; }
+		public bool AddSignature { get; set; } = true;
 		
 		/// <summary>
 		/// Body text of the E-mail
 		/// </summary>
-		public string Content { get; set; }
+		public string Content { get; set; } = "";
 		
 		/// <summary>
 		/// Enables the EmailClient action
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Use html for E-mail body
 		/// </summary>
-		public bool Html { get; set; }
+		public bool Html { get; set; } = false;
 		
 		/// <summary>
 		/// The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org
 		/// </summary>
-		public string Recipients { get; set; }
+		public string Recipients { get; set; } = "";
 		
 		/// <summary>
 		/// Subject line of the E-mail
 		/// </summary>
-		public string Subject { get; set; }
+		public string Subject { get; set; } = "";
 		
-		
-		private void Init() {
-			AddSignature = true;
-			Content = "";
-			Enabled = false;
-			Html = false;
-			Recipients = "";
-			Subject = "";
-		}
-		
-		public EmailClientSettings()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

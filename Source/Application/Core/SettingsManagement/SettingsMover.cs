@@ -1,12 +1,13 @@
-﻿using System.Security;
+﻿using pdfforge.PDFCreator.Utilities.Registry;
+using System.Security;
 using SystemInterface.Microsoft.Win32;
-using pdfforge.PDFCreator.Utilities.Registry;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface ISettingsMover
     {
         bool MoveRequired();
+
         bool MoveSettings();
     }
 

@@ -18,7 +18,5 @@ namespace pdfforge.PDFCreator.Conversion.ActionsInterface
         ActionResult ProcessJob(Job job);
 
         bool IsEnabled(ConversionProfile profile);
-
-        bool Init(Job job);
     }
 }

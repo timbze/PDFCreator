@@ -1,15 +1,13 @@
-﻿using System.Runtime.InteropServices;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.ComImplementation;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
+using System.Runtime.InteropServices;
 
 namespace pdfforge.PDFCreator.UI.COM
 {
-    [ComVisible(true)]
-    public delegate void JobFinishedDelegate();
-
     [ComVisible(true)]
     [Guid("489689FE-E8AF-41FF-8D5A-8212DF2F013C")]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
@@ -25,12 +23,19 @@ namespace pdfforge.PDFCreator.UI.COM
     {
         bool IsFinished { get; }
         bool IsSuccessful { get; }
+
         void SetProfileByGuid(string profileGuid);
+
         OutputFiles GetOutputFiles { get; }
+
         void ConvertTo(string fullFileName);
+
         void ConvertToAsync(string fullFileName);
+
         void SetProfileSetting(string name, string value);
+
         PrintJobInfo PrintJobInfo { get; }
+
         string GetProfileSetting(string propertyName);
     }
 
@@ -50,7 +55,7 @@ namespace pdfforge.PDFCreator.UI.COM
             _printJobAdapter = printJobAdapterFactory.BuildPrintJobAdapter(job);
         }
 
-        public JobInfo JobInfo => _printJobAdapter.Job.JobInfo;
+        internal JobInfo JobInfo => _printJobAdapter.Job.JobInfo;
 
         /// <summary>
         ///     Informs about process state
@@ -119,6 +124,10 @@ namespace pdfforge.PDFCreator.UI.COM
             return _printJobAdapter.GetProfileSetting(propertyName);
         }
 
-        public event JobFinishedDelegate JobFinished; //Extern event: For COM clients only
+#pragma warning disable CS0067
+
+        public event EventHandler JobFinished; //Extern event: For COM clients only
+
+#pragma warning restore CS0067
     }
 }

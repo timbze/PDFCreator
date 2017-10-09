@@ -1,7 +1,7 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using NLog;
 
 namespace pdfforge.PDFCreator.Utilities.Threading
 {
@@ -20,6 +20,8 @@ namespace pdfforge.PDFCreator.Utilities.Threading
         private bool _isShuttingDown;
 
         public Action UpdateAfterShutdownAction { get; set; }
+
+        public event EventHandler<ThreadFinishedEventArgs> CleanUpAfterThreadClosed;
 
         /// <summary>
         ///     Adds and starts a synchronized thread to the thread list. The application will wait for all of these to end before
@@ -167,6 +169,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
                 lock (LockObject)
                 {
                     _threads.Remove(e.SynchronizedThread);
+                    CleanUpAfterThreadClosed.Invoke(this, e);
                 }
             }
             catch (ArgumentOutOfRangeException)

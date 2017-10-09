@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -12,46 +16,38 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Adds a page background to the resulting document
 	/// </summary>
-	public class BackgroundPage {
+	[ImplementPropertyChanged]
+	public partial class BackgroundPage : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Enables the BackgroundPage action
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
 		/// Filename of the PDF that will be used as background
 		/// </summary>
-		public string File { get; set; }
+		public string File { get; set; } = "";
 		
 		/// <summary>
 		/// If true, the background will be placed on the attachment as well
 		/// </summary>
-		public bool OnAttachment { get; set; }
+		public bool OnAttachment { get; set; } = false;
 		
 		/// <summary>
 		/// If true, the background will be placed on the cover as well
 		/// </summary>
-		public bool OnCover { get; set; }
+		public bool OnCover { get; set; } = false;
 		
 		/// <summary>
-		/// Defines the way the background document is repeated. Valid values are: NoRepetition, RepeatAllPages, RepeatLastPage
+		/// Defines the way the background document is repeated.
 		/// </summary>
-		public BackgroundRepetition Repetition { get; set; }
+		public BackgroundRepetition Repetition { get; set; } = BackgroundRepetition.RepeatLastPage;
 		
-		
-		private void Init() {
-			Enabled = false;
-			File = "";
-			OnAttachment = false;
-			OnCover = false;
-			Repetition = BackgroundRepetition.RepeatLastPage;
-		}
-		
-		public BackgroundPage()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

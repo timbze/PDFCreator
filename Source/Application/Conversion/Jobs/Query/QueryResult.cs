@@ -4,7 +4,6 @@
     {
         public QueryResult()
         {
-            
         }
 
         public QueryResult(bool success, T data)

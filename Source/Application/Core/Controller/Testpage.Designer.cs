@@ -61,27 +61,24 @@ namespace pdfforge.PDFCreator.Core.Controller {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to %!PS-Adobe-1.0
-        ///%%Creator: PDFCreator
-        ///%%For: PDFCreator
-        ///%%Title: Testpage - PDFCreator
+        ///   Looks up a localized string similar to %!PS-Adobe-3.0
+        ///%%Creator: cairo 1.15.6 (http://cairographics.org)
+        ///%%CreationDate: Fri Sep 01 14:17:36 2017
         ///%%Pages: 1
-        ///%%PageOrder: Ascend
+        ///%%DocumentData: Clean7Bit
+        ///%%LanguageLevel: 3
         ///%%DocumentMedia: A4 595 842 0 () ()
-        ///%%Orientation: Portrait
-        ///%%BoundingBox: 0 0 595 842
-        ///%%DocumentFonts: Arial, Helvetica, Helvetica-Bold, Times-Roman
+        ///%%BoundingBox: 0 0 596 842
         ///%%EndComments
-        ///
-        ////Reencsmalldict 12 dict def
-        ////ReEncodeSmall
-        ///{ Reencsmalldict begin
-        ///    /NewCodesAndNames exch def
-        ///    /NewFontName exch def
-        ///    /BaseFontName exch def
-        ///    /BaseFontDict
-        ///    BaseFontName findfont def
-        ///    /NewFont [rest of string was truncated]&quot;;.
+        ///%%BeginProlog
+        ////languagelevel where
+        ///{ pop languagelevel } { 1 } ifelse
+        ///3 lt { /Helvetica findfont 12 scalefont setfont 50 500 moveto
+        ///  (This print job requires a PostScript Language Level 3 printer.) show
+        ///  showpage quit } if
+        ////q { gsave } bind def
+        ////Q { grestore } bind def
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TestPage {
             get {

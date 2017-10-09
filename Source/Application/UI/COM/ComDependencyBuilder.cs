@@ -1,16 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using pdfforge.Obsidian.Interaction;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
+﻿using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.ComImplementation;
+using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Editions.EditionBase;
 using pdfforge.PDFCreator.Utilities;
 using SimpleInjector;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace pdfforge.PDFCreator.UI.COM
 {
@@ -28,10 +28,17 @@ namespace pdfforge.PDFCreator.UI.COM
             }
         }
 
+        public Action<Container> ModifyRegistrations { get; set; } = container => { };
+
+        public static void ResetDependencies()
+        {
+            _comDependencies = null;
+        }
+
         private Bootstrapper CreateBootstrapper()
         {
-            var assemblyHelper = new AssemblyHelper();
-            var applicationDir = assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var assemblyHelper = new AssemblyHelper(GetType().Assembly);
+            var applicationDir = assemblyHelper.GetAssemblyDirectory();
             var assemblyPath = Path.Combine(applicationDir, "PDFCreator.exe");
 
             var assembly = Assembly.LoadFrom(assemblyPath);
@@ -43,11 +50,13 @@ namespace pdfforge.PDFCreator.UI.COM
         {
             var bootstrapper = CreateBootstrapper();
             var container = new Container();
-            bootstrapper.ConfigureContainer(container, new WindowRegistry(null));
+            bootstrapper.ConfigureContainer(container);
             container.Register<PrintFileHelperComFactory>();
             container.Register<IComWorkflowFactory>(() => new ComWorkflowFactory(container));
             container.RegisterSingleton(() => new ThreadPool());
             container.Register<IPrintJobAdapterFactory, PrintJobAdapterFactory>();
+
+            DoModifyRegistrations(container);
 
             var dependencies = container.GetInstance<ComDependencies>();
 
@@ -56,10 +65,21 @@ namespace pdfforge.PDFCreator.UI.COM
             var settingsManager = container.GetInstance<ISettingsManager>();
             settingsManager.LoadAllSettings();
 
-            var translator = container.GetInstance<TranslationHelper>();
+            var translator = container.GetInstance<ITranslationHelper>();
             translator.InitTranslator("english");
 
             return dependencies;
+        }
+
+        private void DoModifyRegistrations(Container container)
+        {
+            container.Options.AllowOverridingRegistrations = true;
+
+            container.Register<IMainWindowThreadLauncher, DummyMainWindowThreadLauncher>();
+
+            ModifyRegistrations(container);
+
+            container.Options.AllowOverridingRegistrations = false;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace PDFProcessing.PdfTools.UnitTest
         [Test]
         public void Test()
         {
-            
         }
     }
 }

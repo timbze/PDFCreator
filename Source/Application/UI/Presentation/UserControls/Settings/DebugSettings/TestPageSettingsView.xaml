@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.TestPageSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:debugSettings="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="520"
+             d:DataContext="{d:DesignInstance debugSettings:TestPageSettingsViewModel}">
+    <Grid>
+        <HeaderedContentControl Header="{Binding Translation.TestPagesControlHeader}">
+            <UniformGrid Columns="2" Margin="0 5 0 0" Width="510" HorizontalAlignment="Left">
+                <Button Margin="0 0 5 0" Style="{DynamicResource LightGreyButton}"
+                        Command="{Binding PrintPdfCreatorTestpageCommand}">
+                    <TextBlock Text="{Binding Translation.PdfCreatorTestpageButtonContent}" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Button>
+                <Button Margin="5 0 0 0" Style="{DynamicResource LightGreyButton}"
+                        Command="{Binding PrintWindowsTestpageCommand}">
+                    <TextBlock Text="{Binding Translation.WindowsTestpageButtonContent}" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Button>
+            </UniformGrid>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>

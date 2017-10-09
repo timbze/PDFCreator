@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
@@ -10,11 +9,11 @@ using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.Utilities.Process;
+using System.Linq;
+using Translatable;
 
 namespace pdfforge.PDFCreator.UnitTest.Startup
 {
-
-
     [TestFixture]
     public class TerminalServerConditionTest
     {
@@ -32,7 +31,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
 
         private TerminalServerNotAllowedCondition BuildTerminalServerCondition()
         {
-            return new TerminalServerNotAllowedCondition(_terminalServerDetection, new ProgramTranslation(), _interactionInvoker, _process, new ApplicationNameProvider("PDFCreator"));
+            return new TerminalServerNotAllowedCondition(_terminalServerDetection, new TranslationFactory(), _interactionInvoker, _process, new ApplicationNameProvider("Free"));
         }
 
         [Test]

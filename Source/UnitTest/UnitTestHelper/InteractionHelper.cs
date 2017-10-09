@@ -4,9 +4,9 @@ namespace pdfforge.PDFCreator.UnitTest.UnitTestHelper
 {
     public class InteractionHelper<T> where T : class, IInteraction
     {
-        private InteractionAwareViewModelBase<T> _viewModel;
+        private IInteractionAware _viewModel;
 
-        public InteractionHelper(InteractionAwareViewModelBase<T> viewModel, T interaction)
+        public InteractionHelper(IInteractionAware viewModel, T interaction)
         {
             _viewModel = viewModel;
             viewModel.FinishInteraction = () => InteractionIsFinished = true;

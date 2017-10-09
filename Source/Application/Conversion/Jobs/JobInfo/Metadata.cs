@@ -7,11 +7,11 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
     /// </summary>
     public class Metadata
     {
-        private readonly IAssemblyHelper _assemblyHelper;
+        private readonly IVersionHelper _versionHelper;
 
-        public Metadata(IAssemblyHelper assemblyHelper = null)
+        public Metadata(IVersionHelper versionHelper = null)
         {
-            _assemblyHelper = assemblyHelper ?? new AssemblyHelper();
+            _versionHelper = versionHelper ?? new VersionHelper(GetType().Assembly);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         /// </summary>
         public string Producer
         {
-            get { return "PDFCreator " + _assemblyHelper.GetPdfforgeAssemblyVersion(); }
+            get { return "PDFCreator " + _versionHelper.ApplicationVersion; }
         }
 
         /// <summary>

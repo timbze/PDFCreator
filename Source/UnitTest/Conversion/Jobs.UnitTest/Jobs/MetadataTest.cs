@@ -1,8 +1,8 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Utilities;
 using Rhino.Mocks;
+using System;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -12,7 +12,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithAuthor_OnCopy_ContainsSameAuthor()
         {
-            var metadata = new Metadata {Author = "MyAuthor"};
+            var metadata = new Metadata { Author = "MyAuthor" };
 
             var clone = metadata.Copy();
 
@@ -22,7 +22,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithAuthor_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {Author = "MyAuthor"};
+            var metadata = new Metadata { Author = "MyAuthor" };
 
             var clone = metadata.Copy();
             clone.Author = "Author2";
@@ -33,7 +33,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithKeywords_OnCopy_ContainsSameKeywords()
         {
-            var metadata = new Metadata {Keywords = "MyKeywords"};
+            var metadata = new Metadata { Keywords = "MyKeywords" };
 
             var clone = metadata.Copy();
 
@@ -43,7 +43,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithKeywords_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {Keywords = "MyKeywords"};
+            var metadata = new Metadata { Keywords = "MyKeywords" };
 
             var clone = metadata.Copy();
             clone.Keywords = "Keywords2";
@@ -54,7 +54,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithPrintJobAuthor_OnCopy_ContainsSamePrintJobAuthor()
         {
-            var metadata = new Metadata {PrintJobAuthor = "SomeAuthor"};
+            var metadata = new Metadata { PrintJobAuthor = "SomeAuthor" };
 
             var clone = metadata.Copy();
 
@@ -64,7 +64,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithPrintJobAuthor_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {PrintJobAuthor = "SomeAuthor"};
+            var metadata = new Metadata { PrintJobAuthor = "SomeAuthor" };
 
             var clone = metadata.Copy();
             clone.PrintJobAuthor = "SomeOtherAuthor";
@@ -75,7 +75,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithPrintJobName_OnCopy_ContainsSamePrintJobName()
         {
-            var metadata = new Metadata {PrintJobName = "NameOfThePrintJob"};
+            var metadata = new Metadata { PrintJobName = "NameOfThePrintJob" };
 
             var clone = metadata.Copy();
 
@@ -85,7 +85,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithPrintJobName_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {PrintJobName = "NameOfThePrintJob"};
+            var metadata = new Metadata { PrintJobName = "NameOfThePrintJob" };
 
             var clone = metadata.Copy();
             clone.PrintJobName = "NewNameOfThePrintJob";
@@ -96,7 +96,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithSubject_OnCopy_ContainsSameSubject()
         {
-            var metadata = new Metadata {Subject = "MySubject"};
+            var metadata = new Metadata { Subject = "MySubject" };
 
             var clone = metadata.Copy();
 
@@ -106,7 +106,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithSubject_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {Subject = "MySubject"};
+            var metadata = new Metadata { Subject = "MySubject" };
 
             var clone = metadata.Copy();
             clone.Subject = "Subject2";
@@ -117,7 +117,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithTitle_OnCopy_ContainsSameTitle()
         {
-            var metadata = new Metadata {Title = "MyTitle"};
+            var metadata = new Metadata { Title = "MyTitle" };
 
             var clone = metadata.Copy();
 
@@ -127,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void MetadataWithTitle_OnCopyAndEdit_OriginalNotModified()
         {
-            var metadata = new Metadata {Title = "MyTitle"};
+            var metadata = new Metadata { Title = "MyTitle" };
 
             var clone = metadata.Copy();
             clone.Title = "Title2";
@@ -138,10 +138,10 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         [Test]
         public void ProducerProperty_ReturnsCorrectProducerString()
         {
-            var assemblyHelper = MockRepository.GenerateStub<IAssemblyHelper>();
-            assemblyHelper.Stub(v => v.GetPdfforgeAssemblyVersion()).Return(new Version("1.1.0"));
+            var versionHelper = MockRepository.GenerateStub<IVersionHelper>();
+            versionHelper.Stub(v => v.ApplicationVersion).Return(new Version("1.1.0"));
 
-            var metadata = new Metadata(assemblyHelper);
+            var metadata = new Metadata(versionHelper);
 
             Assert.AreEqual("PDFCreator 1.1.0", metadata.Producer);
         }

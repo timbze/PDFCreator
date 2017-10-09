@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using Microsoft.Win32;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.SetupHelper
 {
@@ -25,9 +25,11 @@ namespace pdfforge.SetupHelper
                         case "Add":
                             MaybeInvokeWow6432(AddExplorerIntegration);
                             break;
+
                         case "Remove":
                             MaybeInvokeWow6432(RemoveExplorerIntegration);
                             break;
+
                         default:
                             showUsage = true;
                             break;
@@ -50,9 +52,11 @@ namespace pdfforge.SetupHelper
                         case "Register":
                             MaybeInvokeWow6432(RegisterComInterface);
                             break;
+
                         case "Unregister":
                             MaybeInvokeWow6432(UnregisterComInterface);
                             break;
+
                         default:
                             showUsage = true;
                             break;
@@ -151,7 +155,7 @@ namespace pdfforge.SetupHelper
 
         private static string GetApplicationDirectory()
         {
-            return new AssemblyHelper().GetPdfforgeAssemblyDirectory();
+            return new AssemblyHelper(typeof(Program).Assembly).GetAssemblyDirectory();
         }
     }
 }

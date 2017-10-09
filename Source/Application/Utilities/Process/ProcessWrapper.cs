@@ -32,7 +32,7 @@ namespace pdfforge.PDFCreator.Utilities.Process
 
         public virtual void WaitForExit(TimeSpan timeSpan)
         {
-            _process.WaitForExit((int) timeSpan.TotalMilliseconds);
+            _process.WaitForExit((int)timeSpan.TotalMilliseconds);
         }
 
         public virtual void Kill()

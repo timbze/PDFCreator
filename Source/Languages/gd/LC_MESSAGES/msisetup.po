@@ -15,15 +15,10 @@ msgid "Program files"
 msgstr "Faidhlichean a’ phrògraim"
 
 msgid "You need to be an administrator to install PDFCreator."
-msgstr ""
-"Feumaidh tu a bhith ’nad rianaire mus urrainn dhut PDFCreator a stàladh."
+msgstr "Feumaidh tu a bhith ’nad rianaire mus urrainn dhut PDFCreator a stàladh."
 
-msgid ""
-"This application requires .NET Framework 4.0. Please install the .NET "
-"Framework then run this installer again."
-msgstr ""
-"Feumaidh an aplacaid .NET Framework 4.0. Stàlaich .NET Framework is cuir gu "
-"dol an stàlaichear seo a-rithist."
+msgid "This application requires .NET Framework 4.0. Please install the .NET Framework then run this installer again."
+msgstr "Feumaidh an aplacaid .NET Framework 4.0. Stàlaich .NET Framework is cuir gu dol an stàlaichear seo a-rithist."
 
 msgid "PDFCreator requires Windows XP SP3 or above!"
 msgstr "Feumaidh PDFCreator Windows XP SP3 no tionndadh nas ùire!"

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.Diagnostics;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.DirectConversion
 {
@@ -84,7 +84,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
 
         private string CreateJobFolderInSpool(string file)
         {
-            var psFilename = Path.GetFileName(file); 
+            var psFilename = Path.GetFileName(file);
             var jobFolder = Path.Combine(_spoolerProvider.SpoolFolder, psFilename);
             jobFolder = new UniqueDirectory(jobFolder).MakeUniqueDirectory();
             Directory.CreateDirectory(jobFolder);
@@ -132,6 +132,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
         }
 
         protected abstract int GetNumberOfPages(string file);
+
         protected abstract bool IsValid(string file);
     }
 }

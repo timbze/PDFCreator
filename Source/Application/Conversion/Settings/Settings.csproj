@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>pdfforge.PDFCreator.Conversion.Settings</RootNamespace>
     <AssemblyName>PDFCreator.Settings</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -42,19 +45,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts.cs" />
+    <Compile Include="Accounts.Custom.cs" />
     <Compile Include="ApplicationProperties.cs" />
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="AttachmentPage.cs" />
+    <Compile Include="AttachmentPageCustom.cs" />
     <Compile Include="AutoSave.cs" />
+    <Compile Include="AutoSaveCustom.cs" />
     <Compile Include="BackgroundPage.cs" />
+    <Compile Include="BackgroundPageCustom.cs" />
     <Compile Include="CompressColorAndGray.cs" />
+    <Compile Include="CompressColorAndGrayCustom.cs" />
     <Compile Include="CompressMonochrome.cs" />
+    <Compile Include="CompressMonochromeCustom.cs" />
     <Compile Include="ConversionProfile.cs" />
     <Compile Include="CoverPage.cs" />
+    <Compile Include="CoverPageCustom.cs" />
     <Compile Include="DropboxAccount.cs" />
     <Compile Include="DropboxSettings.cs" />
+    <Compile Include="DropboxSettingsCustom.cs" />
     <Compile Include="EmailClientSettings.cs" />
+    <Compile Include="EmailClientSettingsCustom.cs" />
     <Compile Include="EmailSmtpSettings.cs" />
+    <Compile Include="EmailSmtpSettingsCustom.cs" />
     <Compile Include="Enums\PageOrientation.cs" />
     <Compile Include="Enums\BackgroundRepetition.cs" />
     <Compile Include="Enums\ColorModel.cs" />
@@ -74,9 +87,19 @@
     <Compile Include="Enums\TiffColor.cs" />
     <Compile Include="Enums\UpdateInterval.cs" />
     <Compile Include="Ftp.cs" />
+    <Compile Include="FtpCustom.cs" />
+    <Compile Include="FtpAccount.cs" />
+    <Compile Include="PdfCreatorSettings.Custom.cs" />
+    <Compile Include="TimeServerAccount.Custom.cs" />
+    <Compile Include="HttpAccount.Custom.cs" />
+    <Compile Include="FtpAccount.Custom.cs" />
     <Compile Include="Ghostscript.cs" />
     <Compile Include="GroupPolicies\GpoSettingsDefaults.cs" />
     <Compile Include="GroupPolicies\IGpoSettings.cs" />
+    <Compile Include="HttpAccount.cs" />
+    <Compile Include="HttpSettings.cs" />
+    <Compile Include="HttpSettingsCustom.cs" />
+    <Compile Include="IProfileSetting.cs" />
     <Compile Include="JobPasswords.cs" />
     <Compile Include="JpegSettings.cs" />
     <Compile Include="PdfCreatorSettings.cs" />
@@ -84,21 +107,31 @@
     <Compile Include="PngSettings.cs" />
     <Compile Include="PrinterMapping.cs" />
     <Compile Include="Printing.cs" />
+    <Compile Include="PrintingCustom.cs" />
     <Compile Include="ProfileGuids.cs" />
     <Compile Include="ProfileSorter.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveDialog.cs" />
     <Compile Include="Scripting.cs" />
+    <Compile Include="ScriptingCustom.cs" />
     <Compile Include="Security.cs" />
+    <Compile Include="SecurityCustom.cs" />
     <Compile Include="Signature.cs" />
+    <Compile Include="SignatureCustom.cs" />
+    <Compile Include="SmtpAccount.cs" />
+    <Compile Include="SmtpAccount.Custom.cs" />
     <Compile Include="Stamping.cs" />
+    <Compile Include="StampingCustom.cs" />
     <Compile Include="TextSettings.cs" />
     <Compile Include="TiffSettings.cs" />
+    <Compile Include="TimeServerAccount.cs" />
     <Compile Include="TitleReplacement.cs" />
     <Compile Include="UserTokens.cs" />
+    <Compile Include="UserTokensCustom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
     <Content Include="settings.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -110,6 +143,13 @@
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <PropertyGroup>
+        <__paket__Fody_targets>portable-net+sl+win+wpa+wp\Fody</__paket__Fody_targets>
+      </PropertyGroup>
+    </When>
+  </Choose>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -118,7 +158,7 @@
   </Target>
   -->
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="DataStorage">
           <HintPath>..\..\..\..\packages\DataStorage\lib\DataStorage.dll</HintPath>
@@ -129,7 +169,18 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="PropertyChanged">
+          <HintPath>..\..\..\..\packages\PropertyChanged.Fody\Lib\netstandard10\PropertyChanged.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="Translatable">
           <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
@@ -139,4 +190,5 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Import Project="..\..\..\..\packages\Fody\build\$(__paket__Fody_targets).targets" Condition="Exists('..\..\..\..\packages\Fody\build\$(__paket__Fody_targets).targets')" Label="Paket" />
 </Project>

@@ -1,4 +1,8 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -8,30 +12,25 @@ using System;
 
 namespace pdfforge.PDFCreator.Conversion.Settings
 {
-	public class ApplicationProperties {
+	[ImplementPropertyChanged]
+	public partial class ApplicationProperties : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		public DateTime NextUpdate { get; set; }
+		
+		public DateTime NextUpdate { get; set; } = DateTime.Now;
 		
 		/// <summary>
 		/// Version of the settings classes. This is used for internal purposes, i.e. to match properties when they were renamed
 		/// </summary>
-		public int SettingsVersion { get; set; }
+		public int SettingsVersion { get; set; } = 7;
 		
-		
-		private void Init() {
-			NextUpdate = DateTime.Now;
-			SettingsVersion = 6;
-		}
-		
-		public ApplicationProperties()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{
 			try { NextUpdate = DateTime.Parse(data.GetValue(@"" + path + @"NextUpdate"), System.Globalization.CultureInfo.InvariantCulture); } catch { NextUpdate = DateTime.Now;}
-			try { SettingsVersion = int.Parse(data.GetValue(@"" + path + @"SettingsVersion"), System.Globalization.CultureInfo.InvariantCulture); } catch { SettingsVersion = 6;}
+			try { SettingsVersion = int.Parse(data.GetValue(@"" + path + @"SettingsVersion"), System.Globalization.CultureInfo.InvariantCulture); } catch { SettingsVersion = 7;}
 		}
 		
 		public void StoreValues(Data data, string path)

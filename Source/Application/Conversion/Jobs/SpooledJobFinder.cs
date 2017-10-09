@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs
 {
@@ -55,7 +56,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
                 }
             }
 
-            return jobs;
+            return jobs.OrderBy(job => job.PrintDateTime);
         }
     }
 }

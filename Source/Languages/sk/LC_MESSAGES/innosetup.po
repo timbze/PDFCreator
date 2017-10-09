@@ -1,712 +1,542 @@
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Inštalátor dokončil inštaláciu programu [name] na váš počítač."
+
+msgid "Edit & Insert"
+msgstr "Upraviť a vložiť"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Slovak (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-15 12:58+0000\n"
+"POT-Creation-Date: 2017-09-21 10:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Slovak "
-"<http://translate.pdfforge.org/projects/pdfcreator/innosetup/sk/>\n"
+"Language-Team: Slovak <http://translate.pdfforge.org/projects/pdfcreator/innosetup/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.11\n"
-
-msgid ""
-"The application is already installed.%n%nFor a new installation uninstall "
-"the application first.%n%nThe setup will be canceled."
-msgstr ""
-"Program je už nainštalovaný.%n%nPre novú inštaláciu musíte najprv "
-"odinštalovať program.%n%nInštalácia bude zrušená."
-
-msgid ""
-"PDFCreator is already installed. It is necessary to uninstall the existing "
-"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
-"update PDFCreator now? Your PDFCreator settings and printers will be "
-"preserved."
-msgstr ""
-"PDFCreator je už nainštalovaný. Je nevyhnutné odinštalovať už existujúcu "
-"verziu (%1) pred nainštalovaním novej verzie programu PDFCreator %2.%n%"
-"nChcete aktualizovať program PDFCreator teraz? Vaše nastavenia programu a "
-"tlačiarní budú zachované."
-
-msgid ""
-"The application is already installed.%n%nAn update is not possible. Please "
-"uninstall the application first.%n%nThe setup will be canceled."
-msgstr ""
-"Program je už nainštalovaný.%n%nAktualizácia nie je možná. Musíte ho najprv "
-"odinštalovať.%n%nInštalácia bude ukončená."
-
-msgid "The setup will be canceled."
-msgstr "Inštalácia bude zrušená."
-
-msgid "Do you want to cancel the setup?"
-msgstr "Chcete zrušiť inštaláciu?"
-
-msgid ""
-"The following applications have to be closed to proceed with the "
-"uninstallation:"
-msgstr "Pre spustením odinštalácie by mali byť zatvorené tieto programy:"
-
-msgid "Compact installation"
-msgstr "Kompaktná inštalácia"
-
-msgid ""
-"The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "Stiahnutý súbor je poškodený a bude vymazaný. Inštalácia sa ukončí!"
-
-msgid "Custom installation"
-msgstr "Vlastná inštalácia"
-
-msgid "Donate to PDFCreator"
-msgstr "Podporiť PDFCreator"
-
-msgid ""
-"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
-"wait."
-msgstr ""
-"Inštaluje sa Microsoft .Net Framework %1. Môže to trvať niekoľko minút. "
-"Čakajte prosím."
-
-msgid ""
-"An error has occurred during the installation of Microsoft.Net Framework %1. "
-"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr ""
-"Vyskytla sa chyba počas inštalácie služby Microsoft.Net.Framework %1. (Kód "
-"chyby: %2)%n%nChcete zobraziť súbor záznamu z inštalácie?"
-
-msgid ""
-"PDFCreator requires Microsoft .Net %1. Please download and install Microsoft "
-".Net %1 and then rerun the PDFCreator setup."
-msgstr ""
-"PDFCreator požaduje platformu Microsoft .Net %1. Stiahnite, nainštalujte "
-"Microsoft .Net %1 a pokračujte v inštalácii programu PDFCreator."
-
-msgid ""
-"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
-"system restart. Please reboot your system now and then start the setup "
-"again.%n%nSetup will now exit."
-msgstr ""
-"Inštalátor PDFCreatora nainštaloval .Net Fremewor 4.0. Je potrebné "
-"reštartovať počítač. Reštartujte váš systém a spustite inštalátor znovu.%n%"
-"nInštalácia bude teraz ukončená."
-
-msgid ""
-"The downloaded file could not be verified with its checksum. Do you want to "
-"start the setup anyway?"
-msgstr ""
-"Stiahnutý súbor nemôže byť overený kontrolným súčtom. Chcete aj tak spustiť "
-"inštaláciu?"
-
-msgid "PDFCreator download"
-msgstr "PDFCreator - sťahovanie"
-
-msgid "Download the latest version..."
-msgstr "Stiahnuť poslednú verziu..."
-
-msgid ""
-"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
-"download and install this version?"
-msgstr ""
-"Je dostupná nová verzia programu (%1).\\%n%nChcete túto verziu stiahnuť a "
-"nainštalovať?"
-
-msgid "Expert settings"
-msgstr "Pokročilé nastavenia"
-
-msgid "Set installation directory and additional options"
-msgstr "Nastavte priečinok inštalácie a dodatočné nastavenia"
-
-msgid ""
-"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
-"Please choose a new printer name."
-msgstr ""
-"Nie je povolené používať symboly \"!\", \"\\\" alebo \",\" v názve "
-"tlačiarne. Zadajte nový názov tlačiarne."
-
-msgid "Please choose a printer name."
-msgstr "Vyberte názov tlačiarne."
-
-msgid ""
-"The chosen printer name is too long. The name can be 221 characters long at "
-"the most. Please choose a new printer name."
-msgstr ""
-"Vybraný názov tlačiarne je príliš dlhý. Môže obsahovať najviac 221 znakov. "
-"Vyberte nový názov tlačiarne."
-
-msgid ""
-"There already exists a printer with this name. Please choose another name."
-msgstr "Tlačiareň s týmto názvom už existuje. Vyberte iný názov."
-
-msgid ""
-"An error in the system environment variable 'Path' has occurred%n%n->Missing "
-"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
-"fixed first before the installation can be continued.%n%nPlease select OK if "
-"you want this error to be fixed. You have to restart your system "
-"afterwards.%n%nOtherwise Cancel the installation."
-msgstr ""
-"Vyskytla sa chyba v systémovej premennej \"Path\"%n%n->Chybný alebo neplatný "
-"záznam: %Systemroot%\\system32\\wbem%n%nTáto chyba bude opravená pred "
-"inštaláciou a vy môžete pokračovať ďalej.%n%nStlačte OK ak chcete chybu "
-"opraviť. Váš systém bude potom reštartovaný.%n%nV opačnom prípade zrušte "
-"inštaláciu."
-
-msgid "For &all users"
-msgstr "Pre &všetkých používateľov"
-
-msgid "For the &current user only"
-msgstr "Iba pre &aktuálneho používateľa"
-
-msgid "Full installation"
-msgstr "Plná inštalácia"
-
-#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationSettingsWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,
-#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.Translations.ApplicationSettingsWindowTranslation,,,
-#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ApplicationSettingsWindowTranslation,,,
-#: pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.ProfileSettingsWindowTranslation,,
-msgid "Help"
-msgstr "Pomocník"
-
-msgid "Install printer"
-msgstr "Inštalovať tlačiareň"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Inštalovať tlačový monitor,tlačový port, ovládače tlačiarne a tlačiareň"
-
-msgid "Install printer driver"
-msgstr "Inštalovať ovládač tlačiarne"
-
-msgid "Install printer monitor"
-msgstr "Inštalovať tlačový monitor"
-
-msgid "Install printer port"
-msgstr "Inštalovať port tlačiarne"
-
-msgid "Offline activation instructions"
-msgstr "Inštrukcie k offline aktivácii"
-
-msgid "Languages"
-msgstr "Jazyky"
-
-msgid "Please wait. Checking license key..."
-msgstr "Čakajte. Kontroluje sa licenčný kľúč..."
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "Aktivácia je zastaralá! Obnovte si vašu aktiváciu."
-
-msgid "Empty answer from license server!"
-msgstr "Žiadna odpoveď z licenčného servera!"
-
-msgid "Invalid answer from license server!"
-msgstr "Neplatná odpoveď z licenčného servera!"
-
-msgid ""
-"This version is not covered by your license key! Please renew your license "
-"on %1."
-msgstr ""
-"Táto verzia neobsahuje váš licenčný kľúč! Obnovte si vašu licenciu na %1."
-
-msgid "No answer from license server!"
-msgstr "Žiadna odpoveď z licenčného servera!"
-
-msgid "An unknown error is occurred!"
-msgstr "Vyskytla sa neznáma chyba!"
-
-msgid "Wrong answer from license server!"
-msgstr "Nesprávna odpoveď z licenčného servera!"
-
-msgid ""
-"The computer time seems to be incorrectly set! Please check your system time."
-msgstr ""
-"Zdá sa, že systémový čas nie je správne nastavený! Nastavte správny čas."
-
-msgid "License server answer not valid for this computer!"
-msgstr "Licenčný server neposlal správnu odpoveď pre tento počítač!"
-
-msgid "The license is not valid for the given product!"
-msgstr "Licencia nie je platná pre daný produkt!"
-
-msgid "License key validation"
-msgstr "Overenie licenčného kľúča"
-
-msgid "Enter the valid license key"
-msgstr "Zadajte platný licenčný kľúč"
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "Zadajte platný licenčný kľúč a pokračujte v inštalácii."
-
-msgid "An error occurred validating the license key!"
-msgstr "Vyskytla sa chyba počas overovania licenčného kľúča!"
-
-msgid "Invalid license answer hash!"
-msgstr "Neplatná hash odpoveď licencie!"
-
-msgid "Invalid license key!"
-msgstr "Neplatný licenčný kľúč!"
-
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.OfflineActivationViewModelTranslation
-msgid "License key"
-msgstr "Licenčný kľúč"
-
-msgid "Please enter the license key."
-msgstr "Zadajte licenčný kľúč."
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "Formát licenčného kľúča je XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Licensee"
-msgstr "Licencia"
-
-msgid "Message"
-msgstr "Správa"
-
-msgid ""
-"You need a new valid license key to continue. Do you want to proceed with "
-"the installation?"
-msgstr ""
-"Pre pokračovanie potrebujete nový platný licenčný kľúč. Chcete pokračovať v "
-"inštalácii?"
-
-msgid ""
-"No license key was given. A license key in combination with the parameters '/"
-"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter "
-"'/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr ""
-"Nebol zadaný žiadny licenčný kľúč. Licenčný kľúč je kombináciou parametrov '/"
-"VerySilent' alebo '/Silent'. Použite parameter '/%1'.%n%nVzor: %2 /Silent "
-"/%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-
-msgid "Offline activation string:"
-msgstr "Offline aktivačný reťazec:"
-
-msgid "Offline license check"
-msgstr "Offline kontrola licencie"
-
-msgid "License server answer:"
-msgstr "Odpoveď licenčného servera:"
-
-msgid "The machine or the user is blocked!"
-msgstr "Zariadenie alebo používateľ sú blokovaní!"
-
-msgid "The authorization is failed!"
-msgstr "Autorizácia zlyhala!"
-
-msgid "An invalid license key is provided!"
-msgstr "K dispozícii je neplatný licenčný kľúč!"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "Je prekročené maximum (%1) licencií!"
-
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.SignaturePasswordWindowTranslation,,
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.EncryptionPasswordsWindowTranslation,,
-msgid "OK"
-msgstr "OK"
-
-msgid "The product %1 does not exist!"
-msgstr "Produkt %1 neexistuje!"
-
-msgid ""
-"The version %1 is not supported! Please use the latest version from here %2."
-msgstr "Verzia %1 už nie je podporovaná! Použite poslednú verziu tu %2."
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr "Kontaktujte podporu na support@pdfforge.org!"
-
-msgid "License agreement"
-msgstr "Licenčná zmluva"
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr "Kliknutím na tlačidlo Ďalej súhlasíte s licenčnými podmienkami."
-
-msgid "PDFCreator log file"
-msgstr "Súbor záznamu programu PDFCreator"
-
-msgid ""
-"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
-"installation of an older version, uninstall the application first.%n%nThe "
-"setup will be canceled."
-msgstr ""
-"Nainštalovaná verzia programu (%1) je novšia ako verzia, ktorú sa pokúšate "
-"nainštalovať (%2).%n%nAk chcete nainštalovať túto staršiu verziu, musíte "
-"najprv odinštalovať program.%n%nInštalácia bude ukončená."
-
-msgid ""
-"You are not a member of the administrator group.%n%n%nFor creating a PDF "
-"document out of any application, the PDFCreator is using a PostScript "
-"printerdriver.%nYou have to be a member of the administrator group, to "
-"install any printerdriver.%n%nIf you continue the installation, you will "
-"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr ""
-"Nie ste členom administrátorskej skupiny.%n%n%nPre vytvorenie PDF dokumentu "
-"z akéhokoľvek programu, PDFCreator používa PostScript ovládač tlačiarne.%"
-"nAby ste mohli nainštalovať akýkoľvek ovládač tlačiarne, musíte byť členom "
-"administrátorskej skupiny.%n%nAk budete pokračovať v inštalácii, budete môcť "
-"iba previesť existujúce PostScript súbory.%n%nChcete pokračovať v "
-"inštalácii?%n"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Pre toto nemusíte byť členom žiadnej skupiny administrátorov.%n%n"
-
-msgid ""
-"An older version '%1' was found.%n%nIt is not possible to update this "
-"version to version '%2'.%n%nPlease uninstall the application first."
-msgstr ""
-"Bola nájdená staršia verzia programu (%1).%n%nNie je možné aktualizovať "
-"program na verziu %2.%n%nNajprv odinštalujte staršiu verziu programu."
-
-msgid ""
-"An older version '%1' was found.%nIt is possible to update this version to "
-"version '%2'.%n%n"
-msgstr ""
-"Bola nájdená staršia verzia programu (%1).%NJe možné aktualizovať program na "
-"verziu %2.%n%n"
-
-msgid "Other tasks:"
-msgstr "Ďalšie úlohy:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "Program nie je nainštalovaný. Nemôžete použiť túto cestu."
-
-msgid ""
-"This patch is for an older application version. You cannot use this patch."
-msgstr ""
-"Toto je patch pre staršie verzie programu. Tento patch nie je možné použiť."
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr ""
-"Inštalovaný program je príliš zastaralý. Nie je možné použiť tento patch."
-
-msgid "Edit pages"
-msgstr "Upraviť stránky"
-
-msgid "Edit texts and fonts"
-msgstr "Upraviť texty a písma"
-
-msgid "Split and merge"
-msgstr "Rozdeliť a spojiť"
-
-msgid "PDF to Word"
-msgstr "PDF do Wordu"
-
-msgid "Create"
-msgstr "Vytvoriť"
-
-msgid "Convert"
-msgstr "Prevod"
-
-msgid "Edit & Insert"
-msgstr "Upraviť a vložiť"
+"X-Generator: Weblate 2.16\n"
 
 msgid "Review"
 msgstr "Hodnotenie"
 
+msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgstr "PDFCreator je už nainštalovaný. Je nevyhnutné odinštalovať už existujúcu verziu (%1) pred nainštalovaním novej verzie programu PDFCreator %2.%n%nChcete aktualizovať program PDFCreator teraz? Vaše nastavenia programu a tlačiarní budú zachované."
+
 msgid "Secure & Sign"
 msgstr "Zabezpečenie a podpis"
+
+msgid "The setup will be canceled."
+msgstr "Inštalácia bude zrušená."
 
 msgid "Forms"
 msgstr "Formuláre"
 
+msgid "The following applications have to be closed to proceed with the uninstallation:"
+msgstr "Pred spustením odinštalácie by mali byť zatvorené tieto programy:"
+
 msgid "Try out the new PDF Architect"
 msgstr "Vyskúšajte nový PDF Architect"
+
+msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr "Stiahnutý súbor je poškodený a bude vymazaný. Inštalácia sa teraz ukončí!"
 
 msgid "A shortcut has been added to your desktop."
 msgstr "Odkaz bol pridaný na plochu."
 
+msgid "Donate to PDFCreator"
+msgstr "Podporiť PDFCreator"
+
 msgid "Install PDF Architect with great free features"
 msgstr "Inštalovať PDF Architect s funkciami zdarmo"
+
+msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr "Vyskytla sa chyba počas inštalácie služby Microsoft.Net.Framework %1. (Kód chyby: %2)%n%nChcete zobraziť súbor záznamu z inštalácie?"
 
 msgid "Rotate, move and delete pages"
 msgstr "Otáčanie, pohyb a vymazávanie stránok"
 
+msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
+msgstr "Inštalátor PDFCreatora nainštaloval .Net Fremewor 4.0. Je potrebné reštartovať počítač. Reštartujte váš systém a spustite inštalátor znovu.%n%nInštalácia bude teraz ukončená."
+
 msgid "Merge multiple PDFs"
 msgstr "Zlúčenie viacerých PDF súborov"
+
+msgid "PDFCreator download"
+msgstr "PDFCreator - sťahovanie"
 
 msgid "Free features:"
 msgstr "Funkcie zdarma:"
 
+msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
+msgstr "Je dostupná nová verzia programu (%1).\\%n%nChcete túto verziu stiahnuť a nainštalovať?"
+
 msgid "Enhance PDFCreator with edit features!"
 msgstr "Vylepšite PDFCreator s funkciami pre upravovanie!"
+
+msgid "Set installation directory and additional options"
+msgstr "Nastavte priečinok inštalácie a dodatočné nastavenia"
 
 msgid "New in PDF Architect {0}:"
 msgstr "Novinky v PDF Architect {0}:"
 
+msgid "Please choose a printer name."
+msgstr "Vyberte názov tlačiarne."
+
 msgid "Automatic E-Sign workflows"
 msgstr "Automatické E-Sign pracovné postupy"
+
+msgid "There already exists a printer with this name. Please choose another name."
+msgstr "Tlačiareň s týmto názvom už existuje. Vyberte iný názov."
 
 msgid "Verify and remove signatures"
 msgstr "Overovanie alebo odstránenie podpisov"
 
+msgid "For &all users"
+msgstr "Pre &všetkých používateľov"
+
 msgid "Already installed"
 msgstr "Už nainštalované"
+
+msgid "Full installation"
+msgstr "Plná inštalácia"
 
 msgid "Automatic updates"
 msgstr "Automatické aktualizácie"
 
+msgid "Install printer"
+msgstr "Inštalovať tlačiareň"
+
 msgid "Default application for PDF files"
 msgstr "Predvolený program pre PDF súbory"
+
+msgid "Install printer driver"
+msgstr "Inštalovať ovládač tlačiarne"
 
 msgid "The new PDF Architect will be installed. This might take a while."
 msgstr "Bude nainštalovaný nový PDF Architect. Môže to chvíľu trvať."
 
+msgid "Install printer port"
+msgstr "Inštalovať port tlačiarne"
+
 msgid "Firefox integration"
 msgstr "Integrácia do Firefoxu"
+
+msgid "Languages"
+msgstr "Jazyky"
 
 msgid "Internet Explorer integration"
 msgstr "Integrácia do Internet Explorera"
 
+msgid "The activation is too old! Please renew your activation."
+msgstr "Aktivácia je zastaralá! Obnovte si vašu aktiváciu."
+
 msgid "MS Outlook previewer integration"
 msgstr "Integrácia do MS Outlook"
+
+msgid "Invalid answer from license server!"
+msgstr "Neplatná odpoveď z licenčného servera!"
 
 msgid "Windows Explorer integration"
 msgstr "Integrácia do Windows Explorera"
 
+msgid "No answer from license server!"
+msgstr "Žiadna odpoveď z licenčného servera!"
+
 msgid "No thanks"
 msgstr "Nie, vďaka"
 
-msgid ""
-"Please uninstall 'PDFCreator Server' before you continue with the "
-"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
-"on the same machine."
-msgstr ""
-"Odinštalujte \"PDFCreator Sever\" pred pokračovaním v inštalácii. Nie je "
-"možné používať PDFCreator a PDFCreator Server na tom istom zariadení."
+msgid "Wrong answer from license server!"
+msgstr "Nesprávna odpoveď z licenčného servera!"
+
+msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
+msgstr "Odinštalujte „PDFCreator Sever\" pred pokračovaním v inštalácii. Nie je možné používať PDFCreator a PDFCreator Server na tom istom zariadení."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Licenčný server neposlal správnu odpoveď pre tento počítač!"
 
 msgid "PDFCreator setup"
 msgstr "Inštalácia programu PDFCreator"
 
+msgid "License key validation"
+msgstr "Overenie licenčného kľúča"
+
 msgid "Setup is being prepared..."
 msgstr "Príprava inštalácie..."
 
-#: pdfforge.PDFCreator.UI.ViewModels.UserControlViewModels.ApplicationSettings.Translations.PrinterTabTranslation
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Zadajte platný licenčný kľúč a pokračujte v inštalácii."
+
 msgid "Printer"
 msgstr "Tlačiareň"
 
-msgid ""
-"During the printer installation errors have occurred. A detailed description "
-"can be found in the file 'SetupLog.txt' in application path."
-msgstr ""
-"Vyskytla sa chyba počas inštalácie tlačiarne. Detailný popis chyby nájdete v "
-"priečinku programu v súbore \"SetupLog.txt\"."
+msgid "Invalid license answer hash!"
+msgstr "Neplatná hash odpoveď licencie!"
+
+msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
+msgstr "Vyskytla sa chyba počas inštalácie tlačiarne. Detailný popis chyby nájdete v priečinku programu v súbore „SetupLog.txt\"."
+
+msgid "License key"
+msgstr "Licenčný kľúč"
 
 msgid "Printer name"
 msgstr "Názov tlačiarne"
 
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Formát licenčného kľúča je XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
 msgid "Choosing a printer name."
 msgstr "Výber názvu tlačiarne."
+
+msgid "Message"
+msgstr "Správa"
 
 msgid "Please choose a name for the printer."
 msgstr "Vyberte názov tlačiarne."
 
-msgid ""
-"PDFCreator installs a printer on your computer. With this printer each "
-"application that is able to print, can create PDF documents, bitmaps or "
-"PostScript files.%n%nName of printer:"
-msgstr ""
-"Program PDFCreator nainštaluje tlačiareň do vášho počítača. S touto "
-"tlačiarňou môžete z každého programu, ktorý tlačí, vytvoriť PDF dokumenty, "
-"obrázky alebo PostScript súbory.%n%nNázov tlačiarne:"
+msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr "Nebol zadaný žiadny licenčný kľúč. Licenčný kľúč je kombináciou parametrov „/VerySilent\" alebo „/Silent\". Použite parameter „/%1\".%n%nVzor: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
+msgstr "Program PDFCreator nainštaluje tlačiareň do vášho počítača. S touto tlačiarňou môžete z každého programu, ktorý tlačí, vytvoriť PDF dokumenty, obrázky alebo PostScript súbory.%n%nNázov tlačiarne:"
+
+msgid "Offline license check"
+msgstr "Offline kontrola licencie"
 
 msgid "This process might take several minutes."
 msgstr "Môže trvať niekoľko minút."
 
-msgid ""
-"PDFCreator easily creates PDFs from any Windows program. Use it like a "
-"printer in Word, Excel, or any other Windows application."
-msgstr ""
-"PDFCreator vie jednoducho vytvoriť PDF súbory z ktoréhokoľvek programu "
-"systému Windows. Môže byť použitý ako tlačiareň pre Word, Excel a iné "
-"Windows programy."
+msgid "The machine or the user is blocked!"
+msgstr "Zariadenie alebo používateľ sú blokovaní!"
+
+msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
+msgstr "PDFCreator vie jednoducho vytvoriť PDF súbory z ktoréhokoľvek programu systému Windows. Môže byť použitý ako tlačiareň pre Word, Excel a iné Windows programy."
+
+msgid "An invalid license key is provided!"
+msgstr "K dispozícii je neplatný licenčný kľúč!"
 
 msgid "application files"
 msgstr "súbory programu"
 
-msgid ""
-"The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "Program %1 stále beží.%n%nNajprv ho musíte zatvoriť.%n%n"
+msgid "OK"
+msgstr "OK"
+
+msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Program „%1\" stále beží.%n%nNajprv ho musíte zatvoriť.%n%n"
+
+msgid "The version %1 is not supported! Please use the latest version from here %2."
+msgstr "Verzia %1 už nie je podporovaná! Použite poslednú verziu tu %2."
 
 msgid "Please restart your system first to continue setup."
 msgstr "Pred pokračovaním v inštalácii musíte najprv reštartovať váš systém."
 
+msgid "License agreement"
+msgstr "Licenčná zmluva"
+
 msgid "PDFCreator settings"
 msgstr "Nastavenia programu PDFCreator"
+
+msgid "PDFCreator log file"
+msgstr "Súbor záznamu programu PDFCreator"
 
 msgid "Show help after setup"
 msgstr "Po inštalácii zobraziť pomocníka"
 
-msgid ""
-"Please use \"PDFCreator Terminal Server\" for use on computers with "
-"installed Terminal Services.%n%nWould you like to have more information "
-"about \"PDFCreator Terminal Server\"?"
-msgstr ""
-"Použite \"PDFCreator Terminal Server\" ak používate počítač s terminálovými "
-"službami.%n%nChcete viac informácií o \"PDFCreator Terminal Server\"?"
+msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr "Nie ste členom administrátorskej skupiny.%n%n%nPre vytvorenie PDF dokumentu z akéhokoľvek programu, PDFCreator používa PostScript ovládač tlačiarne.%nAby ste mohli nainštalovať akýkoľvek ovládač tlačiarne, musíte byť členom administrátorskej skupiny.%n%nAk budete pokračovať v inštalácii, budete môcť iba previesť existujúce PostScript súbory.%n%nChcete pokračovať v inštalácii?%n"
 
-msgid ""
-"This is a developer preview of PDFCreator.%n%nThis is not an early version "
-"of the next release. It will most likely contain bugs or not work at all.%n%"
-"nIf you should dare to install it anyway, we would like to hear your "
-"feedback."
-msgstr ""
-"Toto je vývojová verzia programu PDFCreator.%n%nToto nie je skorá verzia "
-"ďalšieho vydania. Môže obsahovať chyby a všetko nemusí fungovať správne.%n%"
-"nAk ju napriek tomu aj tak nainštalujete, budeme radi ak nám pošlete nejakú "
-"odozvu."
+msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
+msgstr "Použite „PDFCreator Terminal Server\" ak používate počítač s terminálovými službami.%n%nChcete viac informácií o „PDFCreator Terminal Server\"?"
 
-msgid ""
-"This version doesn't support the server mode. Do you want install this "
-"version anyway?"
+msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
+msgstr "Bola nájdená staršia verzia programu (%1).%n%nNie je možné aktualizovať program na verziu %2.%n%nNajprv odinštalujte staršiu verziu programu."
+
+msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
+msgstr "Toto je vývojová verzia programu PDFCreator.%n%nToto nie je skorá verzia ďalšieho vydania. Môže obsahovať chyby a všetko nemusí fungovať správne.%n%nAk ju napriek tomu aj tak nainštalujete, budeme radi ak nám pošlete nejakú odozvu."
+
+msgid "Other tasks:"
+msgstr "Ďalšie úlohy:"
+
+msgid "This version doesn't support the server mode. Do you want install this version anyway?"
 msgstr "Táto verzia nepodporuje server mód. Chcete ju aj tak nainštalovať?"
+
+msgid "This patch is for an older application version. You cannot use this patch."
+msgstr "Toto je patch pre staršie verzie programu. Tento patch nie je možné použiť."
 
 msgid "Delete all application settings?"
 msgstr "Chcete vymazať všetky nastavenia programu?"
 
+msgid "Edit pages"
+msgstr "Upraviť stránky"
+
 msgid "Uninstall the printer with all its components."
 msgstr "Odinštalujte tlačiareň a všetky jej súčasti."
 
-msgid ""
-"To update, use <OK>, or cancel the setup and uninstall the older version "
-"first."
-msgstr ""
-"Pre aktualizáciu stlačte <OK>, alebo zrušte inštaláciu a najprv odinštalujte "
-"staršiu verziu."
+msgid "Split and merge"
+msgstr "Rozdeliť a spojiť"
+
+msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
+msgstr "Pre aktualizáciu stlačte <OK>, alebo zrušte inštaláciu a najprv odinštalujte staršiu verziu."
+
+msgid "Create"
+msgstr "Vytvoriť"
 
 msgid "Create an &entry in the Windows Explorer context menu"
 msgstr "Vytvoriť &položku v kontextovom menu Windows Explorera"
 
+msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
+msgstr "Program je už nainštalovaný.%n%nPre novú inštaláciu musíte najprv odinštalovať program.%n%nInštalácia bude zrušená."
+
 msgid "Create PDF and Bitmap files with %1"
 msgstr "Vytvoriť PDF a Bitmapové súbory s %1"
+
+msgid "Do you want to cancel the setup?"
+msgstr "Chcete zrušiť inštaláciu?"
 
 msgid "Bad request (400)"
 msgstr "Zlá požiadavka (400)"
 
+msgid "Custom installation"
+msgstr "Vlastná inštalácia"
+
 msgid "Access denied (401)"
 msgstr "Prístup zamietnutý (401)"
+
+msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr "PDFCreator požaduje platformu Microsoft .Net %1. Stiahnite, nainštalujte si Microsoft .Net %1 a potom pokračujte v inštalácii programu PDFCreator."
 
 msgid "File not found (404)"
 msgstr "Súbor nenájdený (404)"
 
+msgid "Download the latest version..."
+msgstr "Stiahnuť poslednú verziu..."
+
 msgid "Proxy authentication required (407)"
 msgstr "Požiadavka na overenie proxy (407)"
+
+msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
+msgstr "Nie je povolené používať symboly „ ! \", „ \\ \" alebo „ , \" v názve tlačiarne. Zadajte nový názov tlačiarne."
 
 msgid "Server internal error (500)"
 msgstr "Interná chyby servera (500)"
 
+msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
+msgstr "Vyskytla sa chyba v systémovej premennej „Path\"%n%n->Chybný alebo neplatný záznam: %Systemroot%\\system32\\wbem%n%nTáto chyba bude opravená pred inštaláciou a vy môžete pokračovať ďalej.%n%nStlačte OK ak chcete chybu opraviť. Váš systém bude potom reštartovaný.%n%nV opačnom prípade zrušte inštaláciu."
+
 msgid "Bad gateway (502)"
 msgstr "Zlá brána (502)"
+
+msgid "Help"
+msgstr "Pomocník"
 
 msgid "Service temporarily unavailable (503)"
 msgstr "Služba je dočasne nedostupná (503)"
 
+msgid "Install printer monitor"
+msgstr "Inštalovať tlačový monitor"
+
 msgid "Cancelling download..."
 msgstr "Rušenie sťahovania..."
+
+msgid "Please wait. Checking license key..."
+msgstr "Čakajte. Kontroluje sa licenčný kľúč..."
 
 msgid "Cannot connect"
 msgstr "Chyba pripojenia"
 
+msgid "This version is not covered by your license key! Please renew your license on %1."
+msgstr "Táto verzia neobsahuje váš licenčný kľúč! Obnovte si vašu licenciu na %1."
+
 msgid "Connecting..."
 msgstr "Pripájanie..."
+
+msgid "The computer time seems to be incorrectly set! Please check your system time."
+msgstr "Zdá sa, že systémový čas nie je správne nastavený! Nastavte správny čas."
 
 msgid "Current file"
 msgstr "Aktuálny súbor"
 
+msgid "Enter the valid license key"
+msgstr "Zadajte platný licenčný kľúč"
+
 msgid "Details"
 msgstr "Detaily"
+
+msgid "Invalid license key!"
+msgstr "Neplatný licenčný kľúč!"
 
 msgid "Download cancelled"
 msgstr "Sťahovanie zrušené"
 
+msgid "Licensee"
+msgstr "Licencia"
+
 msgid "Download complete"
 msgstr "Sťahovanie dokončené"
+
+msgid "Offline activation string:"
+msgstr "Offline aktivačný reťazec:"
 
 msgid "Download failed"
 msgstr "Sťahovanie neúspešné"
 
+msgid "The authorization is failed!"
+msgstr "Autorizácia zlyhala!"
+
 msgid "Downloading..."
 msgstr "Sťahovanie..."
+
+msgid "The product %1 does not exist!"
+msgstr "Produkt %1 neexistuje!"
+
+msgid "Please click here to revoke your previous activations."
+msgstr "Ak chcete zrušiť predchádzajúce aktivácie kliknite tu."
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "Kliknutím na tlačidlo Ďalej súhlasíte s licenčnými podmienkami."
 
 msgid "Elapsed time:"
 msgstr "Uplynutý čas:"
 
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Pre toto nemusíte byť členom žiadnej skupiny administrátorov.%n%n"
+
 msgid "File:"
 msgstr "Súbor:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "Program nie je nainštalovaný. Nemôžete použiť túto cestu."
 
 msgid "The following files were not downloaded:"
 msgstr "Nasledujúce súbory neboli stiahnuté:"
 
+msgid "Edit texts and fonts"
+msgstr "Upraviť texty a písma"
+
 msgid "Downloading additional files"
 msgstr "Sťahovanie doplnkových súborov"
+
+msgid "Convert"
+msgstr "Prevod"
 
 msgid "Please wait, while setup downloading additional files..."
 msgstr "Čakajte, pokým inštalátor nestiahne dodatočné súbory..."
 
+msgid "Compact installation"
+msgstr "Kompaktná inštalácia"
+
 msgid "GB"
 msgstr "GB"
+
+msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
+msgstr "Stiahnutý súbor nemôže byť overený kontrolným súčtom. Chcete aj tak spustiť inštaláciu?"
 
 msgid "Getting file information..."
 msgstr "Získavanie informácií..."
 
+msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
+msgstr "Vybraný názov tlačiarne je príliš dlhý. Môže obsahovať najviac 221 znakov. Vyberte nový názov tlačiarne."
+
 msgid "Hide"
 msgstr "Skryť"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Inštalovať tlačový monitor,tlačový port, ovládače tlačiarne a tlačiareň"
 
 msgid "HTTP error %d"
 msgstr "HTTP chyba %d"
 
+msgid "Empty answer from license server!"
+msgstr "Žiadna odpoveď z licenčného servera!"
+
 msgid "Ignore"
 msgstr "Ignorovať"
+
+msgid "The license is not valid for the given product!"
+msgstr "Licencia nie je platná pre daný produkt!"
 
 msgid "Initializing..."
 msgstr "Spúšťanie..."
 
+msgid "Please enter the license key."
+msgstr "Zadajte licenčný kľúč."
+
 msgid "KB"
 msgstr "KB"
+
+msgid "License server answer:"
+msgstr "Odpoveď licenčného servera:"
 
 msgid "KB/s"
 msgstr "KB/s"
 
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Kontaktujte podporu na support@pdfforge.org!"
+
 msgid "MB"
 msgstr "MB"
+
+msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
+msgstr "Bola nájdená staršia verzia programu (%1).%NJe možné aktualizovať program na verziu %2.%n%n"
 
 msgid "MB/s"
 msgstr "MB/s"
 
+msgid "PDF to Word"
+msgstr "PDF do Wordu"
+
 msgid "Remaining time:"
 msgstr "Zostávajúci čas:"
 
-#: pdfforge.PDFCreator.UI.ViewModels.DialogViewModels.Translations.MessageWindowTranslation
+msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
+msgstr "Inštaluje sa Microsoft .Net Framework %1. Môže to trvať niekoľko minút. Čakajte prosím."
+
 msgid "Retry"
 msgstr "Znovu"
 
-msgid ""
-"Check your connection and click 'Retry' to try downloading the files again, "
-"or click 'Cancel' to terminate setup."
-msgstr ""
-"Skontrolujte vaše internetové pripojenie a stlačte \"Pokračovať\" pre "
-"opätovné stiahnutie súborov alebo stlačte \"Zrušiť\" pre ukončenie "
-"inštalácie."
+msgid "For the &current user only"
+msgstr "Iba pre &aktuálneho používateľa"
 
-msgid ""
-"Check your connection and click 'Retry' to try downloading the files again, "
-"or click 'Next' to continue installing anyway."
-msgstr ""
-"Skontrolujte vaše pripojenie a stlačte \"Znovu\" pre opätovné stiahnutie "
-"súborov alebo stlačte \"Ďalej\" ak chcete aj tak pokračovať v inštalácii."
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
+msgstr "Skontrolujte vaše internetové pripojenie a stlačte \"Pokračovať\" pre opätovné stiahnutie súborov alebo stlačte \"Zrušiť\" pre ukončenie inštalácie."
+
+msgid "An unknown error is occurred!"
+msgstr "Vyskytla sa neznáma chyba!"
+
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
+msgstr "Skontrolujte vaše pripojenie a stlačte „Znovu\" pre opätovné stiahnutie súborov alebo stlačte „Ďalej\" ak chcete aj tak pokračovať v inštalácii."
+
+msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
+msgstr "Pre pokračovanie potrebujete nový platný licenčný kľúč. Chcete pokračovať v inštalácii?"
 
 msgid "Speed:"
 msgstr "Rýchlosť:"
 
+msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
+msgstr "Nainštalovaná verzia programu (%1) je novšia ako verzia, ktorú sa pokúšate nainštalovať (%2).%n%nAk chcete nainštalovať túto staršiu verziu, musíte najprv odinštalovať program.%n%nInštalácia bude teraz ukončená."
+
 msgid "Starting download..."
 msgstr "Spúšťanie sťahovania..."
 
+msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
+msgstr "Program je už nainštalovaný.%n%nAktualizácia nie je možná. Musíte ho najprv odinštalovať.%n%nInštalácia bude teraz ukončená."
+
 msgid "Status:"
 msgstr "Stav:"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Je prekročené maximum (%1) licencií!"
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "Inštalovaný program je príliš zastaralý. Nie je možné použiť tento patch."
+
+msgid "Expert settings"
+msgstr "Pokročilé nastavenia"
+
+msgid "An error occurred validating the license key!"
+msgstr "Vyskytla sa chyba počas overovania licenčného kľúča!"
 
 msgid "Total progress"
 msgstr "Celkový stav"
@@ -717,5 +547,5 @@ msgstr "Neznáme"
 msgid "%.2f of %.2f"
 msgstr "%.2f z %.2f"
 
-msgid "Setup has finished installing [name] on your computer."
-msgstr "Inštalátor dokončil inštaláciu programu [name] na váš počítač."
+msgid "Offline activation instructions"
+msgstr "Inštrukcie k offline aktivácii"

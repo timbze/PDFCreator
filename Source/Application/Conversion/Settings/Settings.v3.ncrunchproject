@@ -1,0 +1,11 @@
+﻿<ProjectConfiguration>
+  <Settings>
+    <AdditionalFilesToIncludeForProject>
+      <Value>..\..\..\..\packages\PropertyChanged.Fody\**.*</Value>
+    </AdditionalFilesToIncludeForProject>
+    <IgnoredTests>
+      <AllTestsSelector />
+    </IgnoredTests>
+    <PreviouslyBuiltSuccessfully>True</PreviouslyBuiltSuccessfully>
+  </Settings>
+</ProjectConfiguration>

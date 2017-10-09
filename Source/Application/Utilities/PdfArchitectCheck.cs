@@ -59,12 +59,10 @@ namespace pdfforge.PDFCreator.Utilities
         {
             foreach (var pdfArchitectCandidate in _pdfArchitectCandidates)
             {
-
                 var installationPath = TryFindInstallationPath(pdfArchitectCandidate.Item1, pdfArchitectCandidate.Item2);
 
                 if (installationPath != null)
                     return installationPath;
-
             }
 
             return null;
@@ -117,7 +115,7 @@ namespace pdfforge.PDFCreator.Utilities
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             // ignored
                         }

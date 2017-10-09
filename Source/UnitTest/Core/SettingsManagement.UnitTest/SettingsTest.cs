@@ -17,8 +17,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void GetProfileByGuid_WithExistingProfile_ReturnsProfile()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            var p1 = new ConversionProfile {Guid = "g1", Name = "p1"};
-            var p2 = new ConversionProfile {Guid = "g2", Name = "p2"};
+            var p1 = new ConversionProfile { Guid = "g1", Name = "p1" };
+            var p2 = new ConversionProfile { Guid = "g2", Name = "p2" };
 
             settings.ConversionProfiles.Add(p1);
             settings.ConversionProfiles.Add(p2);
@@ -30,8 +30,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void GetProfileByGuid_WithNonexistantProfile_ReturnsProfile()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            var p1 = new ConversionProfile {Guid = "g1", Name = "p1"};
-            var p2 = new ConversionProfile {Guid = "g2", Name = "p2"};
+            var p1 = new ConversionProfile { Guid = "g1", Name = "p1" };
+            var p2 = new ConversionProfile { Guid = "g2", Name = "p2" };
 
             settings.ConversionProfiles.Add(p1);
             settings.ConversionProfiles.Add(p2);
@@ -43,8 +43,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void GetProfileByName_WithExistingProfile_ReturnsProfile()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            var p1 = new ConversionProfile {Guid = "g1", Name = "p1"};
-            var p2 = new ConversionProfile {Guid = "g2", Name = "p2"};
+            var p1 = new ConversionProfile { Guid = "g1", Name = "p1" };
+            var p2 = new ConversionProfile { Guid = "g2", Name = "p2" };
 
             settings.ConversionProfiles.Add(p1);
             settings.ConversionProfiles.Add(p2);
@@ -56,8 +56,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void GetProfileByName_WithNonexistantProfile_ReturnsProfile()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            var p1 = new ConversionProfile {Guid = "g1", Name = "p1"};
-            var p2 = new ConversionProfile {Guid = "g2", Name = "p2"};
+            var p1 = new ConversionProfile { Guid = "g1", Name = "p1" };
+            var p2 = new ConversionProfile { Guid = "g2", Name = "p2" };
 
             settings.ConversionProfiles.Add(p1);
             settings.ConversionProfiles.Add(p2);
@@ -69,8 +69,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void Settings_Copy_EqualsOriginal()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            settings.ConversionProfiles.Add(new ConversionProfile {Guid = "p1"});
-            settings.ConversionProfiles.Add(new ConversionProfile {Guid = "p2"});
+            settings.ConversionProfiles.Add(new ConversionProfile { Guid = "p1" });
+            settings.ConversionProfiles.Add(new ConversionProfile { Guid = "p2" });
 
             var clone = settings.Copy();
 
@@ -83,8 +83,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
         public void Settings_Save_ExpectsNothing()
         {
             var settings = new PdfCreatorSettings(Substitute.For<IStorage>());
-            settings.ConversionProfiles.Add(new ConversionProfile {Guid = "p1"});
-            settings.ConversionProfiles.Add(new ConversionProfile {Guid = "p2"});
+            settings.ConversionProfiles.Add(new ConversionProfile { Guid = "p1" });
+            settings.ConversionProfiles.Add(new ConversionProfile { Guid = "p2" });
 
             settings.SaveData("");
         }

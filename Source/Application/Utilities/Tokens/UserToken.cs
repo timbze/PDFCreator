@@ -6,7 +6,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
     public class UserToken : IToken
     {
         private readonly string _name;
-        public readonly Dictionary<string, string> KeyValueDict; 
+        public readonly Dictionary<string, string> KeyValueDict;
 
         public UserToken()
         {
@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
 
         public string GetValueWithFormat(string formatString)
         {
-            var split = formatString.Split(new[]{':'}, 2);
+            var split = formatString.Split(new[] { ':' }, 2);
             var key = split[0];
 
             if (KeyValueDict.ContainsKey(key))
@@ -41,7 +41,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
         public void AddKeyValuePair(string key, string value)
         {
             if (!string.IsNullOrEmpty(key))
-                if(!KeyValueDict.ContainsKey(key)) //Use value from first appearance
+                if (!KeyValueDict.ContainsKey(key)) //Use value from first appearance
                     KeyValueDict[key] = value;
         }
 
@@ -49,8 +49,8 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
         {
             if (otherUserToken == null)
                 return;
-            
-            foreach(var keyValuePair in otherUserToken.KeyValueDict)
+
+            foreach (var keyValuePair in otherUserToken.KeyValueDict)
                 AddKeyValuePair(keyValuePair.Key, keyValuePair.Value);
         }
     }

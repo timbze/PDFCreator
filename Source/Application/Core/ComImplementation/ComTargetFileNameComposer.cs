@@ -12,9 +12,9 @@ namespace pdfforge.PDFCreator.UI.COM
             _targetFilename = targetFilename;
         }
 
-        public void ComposeTargetFileName(Job job)
+        public string ComposeTargetFileName(Job job)
         {
-            job.OutputFilenameTemplate = _targetFilename;
+            return _targetFilename;
         }
     }
 }

@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -7,22 +12,17 @@ using System.Text;
 
 namespace pdfforge.PDFCreator.Conversion.Settings
 {
-	public class PrinterMapping {
+	[ImplementPropertyChanged]
+	public partial class PrinterMapping : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
 		
-		public string PrinterName { get; set; }
 		
-		public string ProfileGuid { get; set; }
+		public string PrinterName { get; set; } = "";
 		
+		public string ProfileGuid { get; set; } = "";
 		
-		private void Init() {
-			PrinterName = "";
-			ProfileGuid = "";
-		}
-		
-		public PrinterMapping()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path) {
 			try { PrinterName = Data.UnescapeString(data.GetValue(@"" + path + @"PrinterName")); } catch { PrinterName = "";}
@@ -74,6 +74,11 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		
 // Custom Code starts here
 // START_CUSTOM_SECTION:GENERAL
+
+	    public PrinterMapping()
+	    {
+	        
+	    }
 
         public PrinterMapping(string printerName, string profileGuid)
         {

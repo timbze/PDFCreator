@@ -1,11 +1,11 @@
+using NLog;
+using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using NLog;
-using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript
 {
@@ -22,6 +22,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
         }
 
         public GhostscriptVersion GhostscriptVersion { get; }
+
         public event EventHandler<OutputEventArgs> Output;
 
         private bool Run(IList<string> parameters, string tempOutputFolder)
@@ -72,7 +73,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
 
             while (!p.StandardOutput.EndOfStream)
             {
-                var c = (char) p.StandardOutput.Read();
+                var c = (char)p.StandardOutput.Read();
                 sbout.Append(c);
 
                 if ((c == ']') || (c == '\n'))
@@ -106,7 +107,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
         /// <param name="tempOutputFolder">Full path to the folder, where temporary files can be stored</param>
         public bool Run(OutputDevice output, string tempOutputFolder)
         {
-            var parameters = (List<string>) output.GetGhostScriptParameters(GhostscriptVersion);
+            var parameters = (List<string>)output.GetGhostScriptParameters(GhostscriptVersion);
             var success = Run(parameters.ToArray(), tempOutputFolder);
 
             var outputFolder = Path.GetDirectoryName(output.Job.OutputFilenameTemplate);

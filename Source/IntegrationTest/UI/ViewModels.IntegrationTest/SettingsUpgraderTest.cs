@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.DataStorage.Storage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.SettingsManagement;
-using PDFCreator.TestUtilities;
+using System.IO;
+using System.Text;
 
-namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
+namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
 {
     [TestFixture]
     internal class SettingsUpgraderTest
@@ -35,7 +35,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
             const int newSettingsVersion = 4;
 
             var ini = new IniStorage(Encoding.UTF8);
-            var builder = new DefaultProfileBuilder();
+            var builder = new DefaultSettingsBuilder();
             var oldSettings = builder.CreateDefaultSettings("PDFCreator", ini, "English");
 
             oldSettings.ConversionProfiles[0].TiffSettings.Color = TiffColor.BlackWhiteG4Fax;
@@ -50,7 +50,7 @@ namespace pdfforge.IntegrationTest.ViewModels.IntegrationTest
             File.WriteAllText(iniFile, settingsFromIni);
 
             var upgrader = new SettingsUpgradeHelper(newSettingsVersion);
-            var settings = new DefaultProfileBuilder().CreateEmptySettings(null);
+            var settings = new DefaultSettingsBuilder().CreateEmptySettings(null);
             settings.LoadData(ini, iniFile, upgrader.UpgradeSettings);
 
             Assert.AreEqual(newSettingsVersion, settings.ApplicationProperties.SettingsVersion, "Did not update SettingsVersion.");

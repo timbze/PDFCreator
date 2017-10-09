@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using SystemWrapper.IO;
-using SystemWrapper.Microsoft.Win32;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
@@ -13,6 +10,9 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using SystemWrapper.IO;
+using SystemWrapper.Microsoft.Win32;
 using Translatable;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
@@ -20,23 +20,33 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class PrintJobInfoTest
     {
+        [TestFixtureSetUp]
+        public void CleanDependencies()
+        {
+            ComDependencyBuilder.ResetDependencies();
+            ComTestHelper.ModifyAndBuildComDependencies();
+        }
+
         [SetUp]
         public void SetUp()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            var dependencies = ComTestHelper.ModifyAndBuildComDependencies();
 
             LoggingHelper.InitConsoleLogger("PDFCreatorTest", LoggingLevel.Off);
 
             _queue = new Queue();
             _queue.Initialize();
 
-            var translationHelper = new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(), new TranslationFactory());
+            var assembly = GetType().Assembly;
+            var assemblyHelper = new AssemblyHelper(assembly);
+
+            var translationHelper = new TranslationHelper(new DefaultSettingsProvider(), assemblyHelper, new TranslationFactory(), null);
             translationHelper.InitTranslator("None");
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());
 
-            _testPageHelper = new TestPageHelper(new AssemblyHelper(), new OsHelper(), folderProvider, dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())));
+            _testPageHelper = new TestPageHelper(new VersionHelper(assembly), new OsHelper(), folderProvider,
+                dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())), new ApplicationNameProvider("FREE"));
 
             CreateTestPages(1);
 

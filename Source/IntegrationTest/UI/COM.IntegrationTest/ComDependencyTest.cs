@@ -4,7 +4,7 @@ using pdfforge.PDFCreator.UI.COM;
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 {
     [TestFixture]
-    class ComDependencyTest
+    internal class ComDependencyTest
     {
         [Test]
         public void ComDependencies_CanBeCreatedWithoutException()

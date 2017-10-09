@@ -7,5 +7,6 @@
         public string PdfSignaturePassword { get; set; }
         public string SmtpPassword { get; set; }
         public string FtpPassword { get; set; }
+        public string HttpPassword { get; set; }
     }
 }

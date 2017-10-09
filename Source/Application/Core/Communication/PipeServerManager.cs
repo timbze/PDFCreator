@@ -1,15 +1,19 @@
-﻿using System.Diagnostics;
-using NLog;
+﻿using NLog;
 using pdfforge.Communication;
+using System.Diagnostics;
 
 namespace pdfforge.PDFCreator.Core.Communication
 {
     public interface IPipeServerManager
     {
         bool StartServer();
+
         bool IsServerRunning();
+
         void PrepareShutdown();
+
         void Shutdown();
+
         bool TrySendPipeMessage(string message);
     }
 

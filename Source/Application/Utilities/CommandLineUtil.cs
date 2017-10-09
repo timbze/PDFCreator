@@ -27,7 +27,7 @@ namespace pdfforge.PDFCreator.Utilities
                 var args = new string[argc];
                 for (var i = 0; i < args.Length; i++)
                 {
-                    var p = Marshal.ReadIntPtr(argv, i*IntPtr.Size);
+                    var p = Marshal.ReadIntPtr(argv, i * IntPtr.Size);
                     args[i] = Marshal.PtrToStringUni(p);
                 }
 

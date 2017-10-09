@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Core.Services.Logging
 {
@@ -48,7 +48,7 @@ namespace pdfforge.PDFCreator.Core.Services.Logging
 
             _loggingRule = new LoggingRule("*", LogLevel.Trace, _logTarget);
             config.LoggingRules.Add(_loggingRule);
-            
+
             LogManager.Configuration = config;
         }
     }

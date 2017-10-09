@@ -8,7 +8,9 @@ namespace pdfforge.PDFCreator.Utilities
     public interface IHashUtil
     {
         string GetSha1Hash(string text);
+
         string CalculateFileMd5(string filepath);
+
         bool VerifyFileMd5(string filepath, string expectedMd5);
     }
 

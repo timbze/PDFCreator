@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing</RootNamespace>
     <AssemblyName>PDFProcessor.IntegrationTest</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile />
@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -49,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BackgroundPageTestBase.cs" />
+    <Compile Include="Base\PdfAValidationTestBase.cs" />
     <Compile Include="Base\PdfProcessingBasicTestBase.cs" />
     <Compile Include="Base\PdfProcessingCombinedTestBase.cs" />
     <Compile Include="Base\EncryptionTestBase.cs" />
@@ -56,8 +59,9 @@
     <Compile Include="IText\ITextBasicTest.cs" />
     <Compile Include="IText\ITextCombinedTest.cs" />
     <Compile Include="IText\ITextEncryptionTest.cs" />
+    <Compile Include="IText\ITextPdfAValidationTest.cs" />
     <Compile Include="IText\ITextSigningTest.cs" />
-    <Compile Include="IText\ITextXMPMetadataUpdateTest.cs" />
+    <Compile Include="PdfTools\PdfToolsPdfAValidationTest.cs" />
     <Compile Include="PdfTools\PdfToolsBackgroundPageTest.cs" />
     <Compile Include="PdfTools\PdfToolsBasicTest.cs" />
     <Compile Include="PdfTools\PdfToolsCombinedTest.cs" />
@@ -65,10 +69,8 @@
     <Compile Include="PdfTools\PDFToolsLicensingTest.cs" />
     <Compile Include="PdfTools\PdfToolsSigningTest.cs" />
     <Compile Include="PdfTools\PdfToolsTestLicensing.cs" />
-    <Compile Include="PdfTools\PdfToolsXMPMetadataUpdateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\SigningTestBase.cs" />
-    <Compile Include="Base\XMPMetadataUpdateTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,10 +101,20 @@
       <Project>{df164150-d813-496f-b1b9-def0b0f79f72}</Project>
       <Name>PDFCreator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Utilities\Utilities.csproj">
+      <Project>{EA29538B-89A5-4FB3-AE0F-5E2370E852F8}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\TestHelper\TestUtilities.csproj">
       <Project>{083d9318-f02a-44a1-8ad9-a82413b85655}</Project>
       <Name>TestUtilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\packages\PdfTools.PdfAValidator\content\x64\PdfValidatorAPI.dll">
+      <Link>PdfValidatorAPI.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -113,7 +125,7 @@
   </Target>
   -->
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="itextsharp">
           <HintPath>..\..\..\..\packages\iTextSharp\lib\itextsharp.dll</HintPath>
@@ -124,7 +136,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="nunit.framework">
           <HintPath>..\..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
@@ -135,10 +147,10 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="SimpleInjector">
-          <HintPath>..\..\..\..\packages\SimpleInjector\lib\net40-client\SimpleInjector.dll</HintPath>
+        <Reference Include="libpdfNET">
+          <HintPath>..\..\..\..\packages\PdfTools.LibPdf\lib\libpdfNET.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -146,7 +158,29 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="PdfValidatorNET">
+          <HintPath>..\..\..\..\packages\PdfTools.PdfAValidator\lib\PdfValidatorNET.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="SimpleInjector">
+          <HintPath>..\..\..\..\packages\SimpleInjector\lib\net45\SimpleInjector.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SystemInterface">
           <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
@@ -157,7 +191,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SystemWrapper">
           <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>

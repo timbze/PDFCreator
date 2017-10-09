@@ -1,13 +1,12 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
+﻿using NUnit.Framework;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class JpegTest
     {
         [SetUp]
@@ -43,6 +42,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
                     case JpegColor.Color24Bit:
                         Assert.AreEqual(PixelFormat.Format24bppRgb, img.PixelFormat, "Wrong PixelFormat/ColorScheme");
                         break;
+
                     case JpegColor.Gray8Bit:
                         Assert.AreEqual(PixelFormat.Format8bppIndexed, img.PixelFormat, "Wrong PixelFormat/ColorScheme");
                         break;

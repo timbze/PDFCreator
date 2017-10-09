@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using SystemInterface.IO;
-using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
 {
@@ -26,18 +26,23 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 case PngColor.BlackWhite:
                     parameters.Add("-sDEVICE=pngmonod");
                     break;
+
                 case PngColor.Color24Bit:
                     parameters.Add("-sDEVICE=png16m");
                     break;
+
                 case PngColor.Color32BitTransp:
                     parameters.Add("-sDEVICE=pngalpha");
                     break;
+
                 case PngColor.Color4Bit:
                     parameters.Add("-sDEVICE=png16");
                     break;
+
                 case PngColor.Color8Bit:
                     parameters.Add("-sDEVICE=png256");
                     break;
+
                 case PngColor.Gray8Bit:
                     parameters.Add("-sDEVICE=pnggray");
                     break;

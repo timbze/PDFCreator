@@ -1,9 +1,9 @@
-﻿using System.Text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.Text;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 {
@@ -44,11 +44,13 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 case EncryptionLevel.Rc40Bit:
                     stamper.SetEncryption(userPassword, ownerPassword, encryption, PdfWriter.STRENGTH40BITS);
                     break;
+
                 case EncryptionLevel.Rc128Bit:
                     stamper.SetEncryption(userPassword, ownerPassword, encryption, PdfWriter.STRENGTH128BITS);
                     break;
+
                 case EncryptionLevel.Aes128Bit:
-                case EncryptionLevel.Aes256Bit: 
+                case EncryptionLevel.Aes256Bit:
                     stamper.SetEncryption(userPassword, ownerPassword, encryption, PdfWriter.ENCRYPTION_AES_128);
                     break;
             }

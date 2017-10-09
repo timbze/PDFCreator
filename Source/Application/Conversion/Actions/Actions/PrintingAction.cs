@@ -44,10 +44,5 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         {
             return profile.Printing.Enabled;
         }
-
-        public bool Init(Job job)
-        {
-            return true;
-        }
     }
 }

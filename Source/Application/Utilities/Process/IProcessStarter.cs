@@ -6,8 +6,11 @@ namespace pdfforge.PDFCreator.Utilities.Process
     public interface IProcessStarter
     {
         IProcess Start(string fileName);
+
         IProcess Start(string fileName, string arguments);
+
         bool Start(IProcessStartInfo startInfo);
+
         IProcess CreateProcess(string fileName);
     }
 

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.IO;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Conversion.Jobs
 {
@@ -13,28 +14,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             if (extension == null)
                 return false;
 
-            switch (outputFormat)
-            {
-                case OutputFormat.Pdf:
-                case OutputFormat.PdfA1B:
-                case OutputFormat.PdfA2B:
-                case OutputFormat.PdfX:
-                    return extension.Equals(".pdf", StringComparison.OrdinalIgnoreCase);
+            var validExtensions = GetValidExtensions(outputFormat);
 
-                case OutputFormat.Jpeg:
-                    return extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) || extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase);
-
-                case OutputFormat.Png:
-                    return extension.Equals(".png", StringComparison.OrdinalIgnoreCase);
-
-                case OutputFormat.Tif:
-                    return extension.Equals(".tif", StringComparison.OrdinalIgnoreCase) || extension.Equals(".tiff", StringComparison.OrdinalIgnoreCase);
-
-                case OutputFormat.Txt:
-                    return extension.Equals(".txt", StringComparison.OrdinalIgnoreCase);
-            }
-
-            return false;
+            return validExtensions.Contains(extension.ToLower());
         }
 
         public string EnsureValidExtension(string file, OutputFormat outputFormat)
@@ -42,28 +24,51 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             if (HasValidExtension(file, outputFormat))
                 return file;
 
+            var validExtensions = GetValidExtensions(outputFormat);
+
+            return Path.ChangeExtension(file, validExtensions.First());
+        }
+
+        public bool IsPdfFormat(OutputFormat outputFormat)
+        {
             switch (outputFormat)
             {
                 case OutputFormat.Pdf:
                 case OutputFormat.PdfA1B:
                 case OutputFormat.PdfA2B:
                 case OutputFormat.PdfX:
-                    return Path.ChangeExtension(file, ".pdf");
+                    return true;
 
                 case OutputFormat.Jpeg:
-                    return Path.ChangeExtension(file, ".jpg");
+                case OutputFormat.Png:
+                case OutputFormat.Tif:
+                case OutputFormat.Txt:
+                    return false;
+            }
+            throw new NotImplementedException($"OutputFormat '{outputFormat}' is not known to {nameof(OutputFormatHelper)}!");
+        }
+
+        private string[] GetValidExtensions(OutputFormat outputFormat)
+        {
+            if (IsPdfFormat(outputFormat))
+                return new[] { ".pdf" };
+
+            switch (outputFormat)
+            {
+                case OutputFormat.Jpeg:
+                    return new[] { ".jpg", ".jpeg" };
 
                 case OutputFormat.Png:
-                    return Path.ChangeExtension(file, ".png");
+                    return new[] { ".png" };
 
                 case OutputFormat.Tif:
-                    return Path.ChangeExtension(file, ".tif");
+                    return new[] { ".tif", ".tiff" };
 
                 case OutputFormat.Txt:
-                    return Path.ChangeExtension(file, ".txt");
+                    return new[] { ".txt" };
             }
 
-            return file;
+            throw new NotImplementedException($"OutputFormat '{outputFormat}' is not known to {nameof(OutputFormatHelper)}!");
         }
     }
 }

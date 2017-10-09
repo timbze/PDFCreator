@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using SystemInterface.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.Workflow;
+using System.Collections.Generic;
+using System.IO;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 {
@@ -50,7 +50,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         public void DeleteSourceFiles_DeletesSourceFiles()
         {
             var sourceFileName = @"D:\test\Spool\fileName.sourcefile";
-            var sourceFiles = new List<SourceFileInfo> {new SourceFileInfo {Filename = sourceFileName}};
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = sourceFileName } };
 
             _file.Exists(sourceFileName).Returns(true);
 
@@ -63,7 +63,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         public void DeleteSourceFiles_IfDeleteThrowsExcepton_CatchesException()
         {
             var fileName = @"D:\test\Spool\fileName.sourcefile";
-            var sourceFiles = new List<SourceFileInfo> {new SourceFileInfo {Filename = fileName}};
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
 
             _file.When(x => x.Delete(fileName)).Do(x => { throw new IOException(); });
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PDFCreator.TestUtilities</RootNamespace>
     <AssemblyName>PDFCreator.TestHelper</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile />
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -38,11 +40,19 @@
     <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="libpdfNET, Version=4.8.0.0, Culture=neutral, PublicKeyToken=de6610a347b79ec0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\PdfTools.LibPdf\lib\libpdfNET.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\..\packages\NSubstitute\lib\net40\NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="PdfValidatorNET">
+      <HintPath>..\..\..\packages\PdfTools.PdfAValidator\lib\PdfValidatorNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -52,10 +62,17 @@
     <Compile Include="BackgroundPageTester.cs" />
     <Compile Include="ConversionWorkflowTestFactory.cs" />
     <Compile Include="EncryptionTester.cs" />
+    <Compile Include="HttpServer\HttpItegrationServer.cs" />
+    <Compile Include="HttpServer\Listener.cs" />
+    <Compile Include="HttpServer\Request.cs" />
+    <Compile Include="HttpServer\Response.cs" />
+    <Compile Include="HttpServer\RouteRepository.cs" />
+    <Compile Include="HttpServer\Server.cs" />
     <Compile Include="IntegrationTestBootstrapper.cs" />
     <Compile Include="PaketGhostscriptDiscovery.cs" />
     <Compile Include="ParameterHelper.cs" />
     <Compile Include="PdfReaderHelper.cs" />
+    <Compile Include="PDFValidation.cs" />
     <Compile Include="PdfVersionTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -92,6 +109,10 @@
     <ProjectReference Include="..\..\Application\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
       <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
       <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\Conversion\Processing\PdfToolsProcessing\PdfToolsProcessing.csproj">
+      <Project>{a80fba8d-683c-4622-8c0b-5ab66c2a8968}</Project>
+      <Name>PdfToolsProcessing</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Application\Conversion\Settings\Settings.csproj">
       <Project>{94936199-c9c7-4a5f-a58e-6123158e84f3}</Project>
@@ -132,8 +153,10 @@
     <None Include="app.config" />
     <None Include="paket.references" />
     <None Include="pdfforge.snk" />
-    <None Include="TestFiles\PDFCreatorTestpagePDFA1b.pdf" />
-    <None Include="TestFiles\PDFCreatorTestpagePDFA2b.pdf" />
+    <None Include="TestFiles\PDFCreatorTestpage-GS9_19-PDF.pdf" />
+    <None Include="TestFiles\PDFCreatorTestpage-GS9_19-PDF_A-1b.pdf" />
+    <None Include="TestFiles\PDFCreatorTestpage-GS9_19-PDF_A-2b.pdf" />
+    <None Include="TestFiles\PDFCreatorTestpage-GS9_19-PDF_X.pdf" />
     <None Include="TestFiles\Signature\CertificationFileP12.p12" />
     <None Include="TestFiles\FourRotatingPDFCreatorTestpagesPDF.pdf" />
     <None Include="TestFiles\PageRotation0PDF.pdf" />
@@ -149,7 +172,6 @@
     <None Include="TestFiles\ElevenTextPagesPS.ps" />
     <None Include="TestFiles\EmptyPagePS.ps" />
     <None Include="TestFiles\LandscapePagePS.ps" />
-    <None Include="TestFiles\PDFCreatorTestpagePDF.pdf" />
     <None Include="TestFiles\PDFCreatorTestpagePS.ps" />
     <None Include="TestFiles\PortraitPagePS.ps" />
     <None Include="TestFiles\ScriptCopyFilesToDirectoryCMD.cmd" />
@@ -157,6 +179,18 @@
     <None Include="TestFiles\SixEmptyPages.Pdf" />
     <None Include="TestFiles\SixEmptyPagesAttachment3PagesPDF.pdf" />
     <None Include="TestFiles\ThreePDFCreatorTestpagesPDF.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\packages\PdfTools.PdfAValidator\content\x64\PdfValidatorAPI.dll">
+      <Link>PdfValidatorAPI.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="TestFiles\PDFCreatorTestpageJPG.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestFiles\PDFCreatorTestpagePNG.png" />
+    <Content Include="TestFiles\PDFCreatorTestpageTIF.tif" />
+    <Content Include="TestFiles\PDFCreatorTestpageTXT.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -167,7 +201,18 @@
   </Target>
   -->
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Practices.ServiceLocation">
+          <HintPath>..\..\..\packages\CommonServiceLocator\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="itextsharp">
           <HintPath>..\..\..\packages\iTextSharp\lib\itextsharp.dll</HintPath>
@@ -178,10 +223,15 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\..\..\packages\NLog\lib\net40\NLog.dll</HintPath>
+        <Reference Include="MahApps.Metro">
+          <HintPath>..\..\..\packages\MahApps.Metro\lib\net45\MahApps.Metro.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Windows.Interactivity">
+          <HintPath>..\..\..\packages\MahApps.Metro\lib\net45\System.Windows.Interactivity.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -189,7 +239,29 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="MahApps.Metro.SimpleChildWindow">
+          <HintPath>..\..\..\packages\MahApps.Metro.SimpleChildWindow\lib\net45\MahApps.Metro.SimpleChildWindow.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="NLog">
+          <HintPath>..\..\..\packages\NLog\lib\net45\NLog.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="nunit.framework">
           <HintPath>..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
@@ -200,7 +272,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
@@ -211,7 +283,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="Rhino.Mocks">
           <HintPath>..\..\..\packages\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
@@ -222,10 +294,10 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SimpleInjector">
-          <HintPath>..\..\..\packages\SimpleInjector\lib\net40-client\SimpleInjector.dll</HintPath>
+          <HintPath>..\..\..\packages\SimpleInjector\lib\net45\SimpleInjector.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -233,23 +305,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
-      <ItemGroup>
-        <Reference Include="Microsoft.Expression.Interactions">
-          <HintPath>..\..\..\packages\System.Windows.Interactivity.WPF\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="System.Windows.Interactivity">
-          <HintPath>..\..\..\packages\System.Windows.Interactivity.WPF\lib\net40\System.Windows.Interactivity.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SystemInterface">
           <HintPath>..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
@@ -260,7 +316,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="SystemWrapper">
           <HintPath>..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>

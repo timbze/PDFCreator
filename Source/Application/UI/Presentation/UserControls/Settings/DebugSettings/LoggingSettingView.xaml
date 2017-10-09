@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.LoggingSettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:debugSettings="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="520"
+             d:DataContext="{d:DesignInstance debugSettings:LoggingSettingViewModel}">
+
+    <Grid>
+        <HeaderedContentControl Template="{DynamicResource BorderlessHeaderPanelTemplate}"
+                                Header="{Binding Translation.LoggingControlHeader}">
+
+            <StackPanel Margin="0 5 0 0" HorizontalAlignment="Left">
+                <StackPanel.Triggers>
+                    <EventTrigger SourceName="ClearLogFileButton" RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard TargetName="LogFileClearedPanel">
+                                <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:5">
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                                    <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+                                    <LinearDoubleKeyFrame Value="1" KeyTime="0:0:4.5" />
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </StackPanel.Triggers>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Translation.LoggingLevelLabelText}" Margin="0 5 0 5" />
+                <ComboBox Margin="0 5 0 10" Width="510" HorizontalAlignment="Left"
+                          SelectedValue="{Binding ApplicationSettings.LoggingLevel}"
+                          ItemsSource="{Binding LoggingValues}" />
+                <UniformGrid Columns="2" Margin="0 5 0 5" Width="510">
+                    <Button Command="{Binding ShowLogFileCommand}" Margin="0 0 5 0" Style="{DynamicResource LightGreyButton}">
+                        <TextBlock Text="{Binding Translation.ShowLogFileButtonContent}" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                    <Button Name="ClearLogFileButton" 
+                            Command="{Binding ClearLogFileCommand}" Margin="5 0 0 0"  Style="{DynamicResource LightGreyButton}">
+                        <TextBlock Text="{Binding Translation.ClearLogFileButtonContent}" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                </UniformGrid>
+                <StackPanel Name="LogFileClearedPanel" Orientation="Horizontal" HorizontalAlignment="Right"
+                            VerticalAlignment="Center" Margin="0 5 0 0" Opacity="0">
+                    <ContentControl Content="{DynamicResource InfoIcon}" Width="15" Height="15"
+                                    VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Translation.LogFileClearedText}" VerticalAlignment="Center"
+                               Margin="5 0 0 0" />
+                </StackPanel>
+            </StackPanel>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>

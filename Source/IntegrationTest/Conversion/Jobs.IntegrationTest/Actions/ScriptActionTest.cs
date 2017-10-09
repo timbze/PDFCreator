@@ -1,20 +1,23 @@
-﻿using System.IO;
-using SystemWrapper.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities.Process;
 using pdfforge.PDFCreator.Utilities.Tokens;
-using PDFCreator.TestUtilities;
+using System.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class ScriptActionTest
     {
+        private TestHelper _th;
+
+        private string _scriptFile;
+
         [SetUp]
         public void SetUp()
         {
@@ -27,9 +30,9 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
             /*
             Script:
-            rem Script copies multiple files into the directory given as first parameter 
+            rem Script copies multiple files into the directory given as first parameter
             if %1 == """" goto end
-            if %2 == """" goto end 
+            if %2 == """" goto end
             set targetDir=%1
             md %targetDir%
             :copy
@@ -46,9 +49,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             _th.CleanUp();
         }
-
-        private TestHelper _th;
-        private string _scriptFile;
 
         private ScriptAction BuildScriptAction()
         {
@@ -91,7 +91,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             tokenReplacer.AddStringToken("foo", "bar");
 
             var scriptAction = BuildScriptAction();
-            var result = scriptAction.ComposeScriptParameters("--myparam", new[] {@"C:\file1.pdf"}, tokenReplacer);
+            var result = scriptAction.ComposeScriptParameters("--myparam", new[] { @"C:\file1.pdf" }, tokenReplacer);
 
             Assert.AreEqual("--myparam \"C:\\file1.pdf\"", result);
         }
@@ -115,7 +115,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             tokenReplacer.AddStringToken("foo", "bar");
 
             var scriptAction = BuildScriptAction();
-            var result = scriptAction.ComposeScriptParameters("--myparam <foo>", new[] {@"C:\file1.pdf"}, tokenReplacer);
+            var result = scriptAction.ComposeScriptParameters("--myparam <foo>", new[] { @"C:\file1.pdf" }, tokenReplacer);
 
             Assert.AreEqual("--myparam bar \"C:\\file1.pdf\"", result);
         }

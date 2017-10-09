@@ -1,5 +1,9 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System;
 
@@ -9,205 +13,185 @@ using System;
 
 namespace pdfforge.PDFCreator.Conversion.Settings
 {
-	public class ConversionProfile {
+	[ImplementPropertyChanged]
+	public partial class ConversionProfile : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// Appends one or more pages at the end of the converted document
 		/// </summary>
-		public AttachmentPage AttachmentPage { get; set; }
+		public AttachmentPage AttachmentPage { get; set; } = new AttachmentPage();
 		
 		/// <summary>
 		/// AutoSave allows to create PDF files without user interaction
 		/// </summary>
-		public AutoSave AutoSave { get; set; }
+		public AutoSave AutoSave { get; set; } = new AutoSave();
 		
 		/// <summary>
 		/// Adds a page background to the resulting document
 		/// </summary>
-		public BackgroundPage BackgroundPage { get; set; }
+		public BackgroundPage BackgroundPage { get; set; } = new BackgroundPage();
 		
 		/// <summary>
 		/// Inserts one or more pages at the beginning of the converted document
 		/// </summary>
-		public CoverPage CoverPage { get; set; }
+		public CoverPage CoverPage { get; set; } = new CoverPage();
 		
 		/// <summary>
 		/// Dropbox settings for currently logged user
 		/// </summary>
-		public DropboxSettings DropboxSettings { get; set; }
+		public DropboxSettings DropboxSettings { get; set; } = new DropboxSettings();
 		
 		/// <summary>
 		/// Opens the default E-mail client with the converted document as attachment
 		/// </summary>
-		public EmailClientSettings EmailClientSettings { get; set; }
+		public EmailClientSettings EmailClientSettings { get; set; } = new EmailClientSettings();
 		
 		/// <summary>
 		/// Sends a mail without user interaction through SMTP
 		/// </summary>
-		public EmailSmtpSettings EmailSmtpSettings { get; set; }
+		public EmailSmtpSettings EmailSmtpSettings { get; set; } = new EmailSmtpSettings();
 		
 		/// <summary>
 		/// Upload the converted documents with FTP
 		/// </summary>
-		public Ftp Ftp { get; set; }
+		public Ftp Ftp { get; set; } = new Ftp();
 		
 		/// <summary>
 		/// Ghostscript settings
 		/// </summary>
-		public Ghostscript Ghostscript { get; set; }
+		public Ghostscript Ghostscript { get; set; } = new Ghostscript();
+		
+		/// <summary>
+		/// Action to upload files to a HTTP server
+		/// </summary>
+		public HttpSettings HttpSettings { get; set; } = new HttpSettings();
 		
 		/// <summary>
 		/// Settings for the JPEG output format
 		/// </summary>
-		public JpegSettings JpegSettings { get; set; }
+		public JpegSettings JpegSettings { get; set; } = new JpegSettings();
 		
 		/// <summary>
 		/// Settings for the PDF output format
 		/// </summary>
-		public PdfSettings PdfSettings { get; set; }
+		public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 		
 		/// <summary>
 		/// Settings for the PNG output format
 		/// </summary>
-		public PngSettings PngSettings { get; set; }
+		public PngSettings PngSettings { get; set; } = new PngSettings();
 		
 		/// <summary>
 		/// Print the document to a physical printer
 		/// </summary>
-		public Printing Printing { get; set; }
+		public Printing Printing { get; set; } = new Printing();
 		
 		/// <summary>
 		/// Properties of the profile
 		/// </summary>
-		public Properties Properties { get; set; }
+		public Properties Properties { get; set; } = new Properties();
 		
 		/// <summary>
 		/// Settings to control the behaviour of the save dialog
 		/// </summary>
-		public SaveDialog SaveDialog { get; set; }
+		public SaveDialog SaveDialog { get; set; } = new SaveDialog();
 		
 		/// <summary>
 		/// The scripting action allows to run a script after the conversion
 		/// </summary>
-		public Scripting Scripting { get; set; }
+		public Scripting Scripting { get; set; } = new Scripting();
 		
 		/// <summary>
 		/// Place a stamp text on all pages of the document
 		/// </summary>
-		public Stamping Stamping { get; set; }
+		public Stamping Stamping { get; set; } = new Stamping();
 		
-		public TextSettings TextSettings { get; set; }
+		public TextSettings TextSettings { get; set; } = new TextSettings();
 		
 		/// <summary>
 		/// Settings for the TIFF output format
 		/// </summary>
-		public TiffSettings TiffSettings { get; set; }
+		public TiffSettings TiffSettings { get; set; } = new TiffSettings();
 		
 		/// <summary>
 		/// Parse ps files for user definied tokens
 		/// </summary>
-		public UserTokens UserTokens { get; set; }
+		public UserTokens UserTokens { get; set; } = new UserTokens();
 		
 		/// <summary>
 		/// Template for the Author field. This may contain tokens.
 		/// </summary>
-		public string AuthorTemplate { get; set; }
+		public string AuthorTemplate { get; set; } = "<PrintJobAuthor>";
 		
 		/// <summary>
 		/// Template of which the filename will be created. This may contain Tokens.
 		/// </summary>
-		public string FileNameTemplate { get; set; }
+		public string FileNameTemplate { get; set; } = "<Title>";
 		
 		/// <summary>
 		/// GUID of the profile
 		/// </summary>
-		public string Guid { get; set; }
+		public string Guid { get; set; } = "";
 		
 		/// <summary>
 		/// Template for the Keyword field. This may contain tokens.
 		/// </summary>
-		public string KeywordTemplate { get; set; }
+		public string KeywordTemplate { get; set; } = "";
 		
 		/// <summary>
 		/// Name of the profile
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; set; } = "NewProfile";
 		
 		/// <summary>
 		/// Open the default viewer after converting the document
 		/// </summary>
-		public bool OpenViewer { get; set; }
+		public bool OpenViewer { get; set; } = true;
 		
 		/// <summary>
 		/// If the output is a PDF, use PDF Architect instead of the default PDF viewer
 		/// </summary>
-		public bool OpenWithPdfArchitect { get; set; }
+		public bool OpenWithPdfArchitect { get; set; } = true;
 		
 		/// <summary>
-		/// Default format for this print job. Valid values are: Pdf, PdfA1B, PdfA2B, PdfX, Jpeg, Png, Tif
+		/// Default format for this print job.
 		/// </summary>
-		public OutputFormat OutputFormat { get; set; }
+		public OutputFormat OutputFormat { get; set; } = OutputFormat.Pdf;
 		
 		/// <summary>
 		/// If true, a progress window will be shown during conversion
 		/// </summary>
-		public bool ShowProgress { get; set; }
+		public bool ShowProgress { get; set; } = true;
+		
+		/// <summary>
+		/// Show quick actions page after converting the document
+		/// </summary>
+		public bool ShowQuickActions { get; set; } = true;
 		
 		/// <summary>
 		/// Allows to skip the print dialog (where metadata are set) and directly proceed to the save dialog
 		/// </summary>
-		public bool SkipPrintDialog { get; set; }
+		public bool SkipPrintDialog { get; set; } = false;
 		
 		/// <summary>
 		/// Template for the Subject field. This may contain tokens.
 		/// </summary>
-		public string SubjectTemplate { get; set; }
+		public string SubjectTemplate { get; set; } = "";
+		
+		/// <summary>
+		/// Directory in which the files will be saved (in interactive mode, this is the default location that is presented to the user)
+		/// </summary>
+		public string TargetDirectory { get; set; } = "";
 		
 		/// <summary>
 		/// Template for the Title field. This may contain tokens.
 		/// </summary>
-		public string TitleTemplate { get; set; }
+		public string TitleTemplate { get; set; } = "<PrintJobName>";
 		
-		
-		private void Init() {
-			AttachmentPage = new AttachmentPage();
-			AutoSave = new AutoSave();
-			BackgroundPage = new BackgroundPage();
-			CoverPage = new CoverPage();
-			DropboxSettings = new DropboxSettings();
-			EmailClientSettings = new EmailClientSettings();
-			EmailSmtpSettings = new EmailSmtpSettings();
-			Ftp = new Ftp();
-			Ghostscript = new Ghostscript();
-			JpegSettings = new JpegSettings();
-			PdfSettings = new PdfSettings();
-			PngSettings = new PngSettings();
-			Printing = new Printing();
-			Properties = new Properties();
-			SaveDialog = new SaveDialog();
-			Scripting = new Scripting();
-			Stamping = new Stamping();
-			TextSettings = new TextSettings();
-			TiffSettings = new TiffSettings();
-			UserTokens = new UserTokens();
-			AuthorTemplate = "<PrintJobAuthor>";
-			FileNameTemplate = "<Title>";
-			Guid = "";
-			KeywordTemplate = "";
-			Name = "NewProfile";
-			OpenViewer = true;
-			OpenWithPdfArchitect = true;
-			OutputFormat = OutputFormat.Pdf;
-			ShowProgress = true;
-			SkipPrintDialog = false;
-			SubjectTemplate = "";
-			TitleTemplate = "<PrintJobName>";
-		}
-		
-		public ConversionProfile()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path) {
 			AttachmentPage.ReadValues(data, path + @"AttachmentPage\");
@@ -219,6 +203,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			EmailSmtpSettings.ReadValues(data, path + @"EmailSmtpSettings\");
 			Ftp.ReadValues(data, path + @"Ftp\");
 			Ghostscript.ReadValues(data, path + @"Ghostscript\");
+			HttpSettings.ReadValues(data, path + @"HttpSettings\");
 			JpegSettings.ReadValues(data, path + @"JpegSettings\");
 			PdfSettings.ReadValues(data, path + @"PdfSettings\");
 			PngSettings.ReadValues(data, path + @"PngSettings\");
@@ -239,8 +224,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { OpenWithPdfArchitect = bool.Parse(data.GetValue(@"" + path + @"OpenWithPdfArchitect")); } catch { OpenWithPdfArchitect = true;}
 			try { OutputFormat = (OutputFormat) Enum.Parse(typeof(OutputFormat), data.GetValue(@"" + path + @"OutputFormat")); } catch { OutputFormat = OutputFormat.Pdf;}
 			try { ShowProgress = bool.Parse(data.GetValue(@"" + path + @"ShowProgress")); } catch { ShowProgress = true;}
+			try { ShowQuickActions = bool.Parse(data.GetValue(@"" + path + @"ShowQuickActions")); } catch { ShowQuickActions = true;}
 			try { SkipPrintDialog = bool.Parse(data.GetValue(@"" + path + @"SkipPrintDialog")); } catch { SkipPrintDialog = false;}
 			try { SubjectTemplate = Data.UnescapeString(data.GetValue(@"" + path + @"SubjectTemplate")); } catch { SubjectTemplate = "";}
+			try { TargetDirectory = Data.UnescapeString(data.GetValue(@"" + path + @"TargetDirectory")); } catch { TargetDirectory = "";}
 			try { TitleTemplate = Data.UnescapeString(data.GetValue(@"" + path + @"TitleTemplate")); } catch { TitleTemplate = "<PrintJobName>";}
 		}
 		
@@ -255,6 +242,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			EmailSmtpSettings.StoreValues(data, path + @"EmailSmtpSettings\");
 			Ftp.StoreValues(data, path + @"Ftp\");
 			Ghostscript.StoreValues(data, path + @"Ghostscript\");
+			HttpSettings.StoreValues(data, path + @"HttpSettings\");
 			JpegSettings.StoreValues(data, path + @"JpegSettings\");
 			PdfSettings.StoreValues(data, path + @"PdfSettings\");
 			PngSettings.StoreValues(data, path + @"PngSettings\");
@@ -275,8 +263,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"OpenWithPdfArchitect", OpenWithPdfArchitect.ToString());
 			data.SetValue(@"" + path + @"OutputFormat", OutputFormat.ToString());
 			data.SetValue(@"" + path + @"ShowProgress", ShowProgress.ToString());
+			data.SetValue(@"" + path + @"ShowQuickActions", ShowQuickActions.ToString());
 			data.SetValue(@"" + path + @"SkipPrintDialog", SkipPrintDialog.ToString());
 			data.SetValue(@"" + path + @"SubjectTemplate", Data.EscapeString(SubjectTemplate));
+			data.SetValue(@"" + path + @"TargetDirectory", Data.EscapeString(TargetDirectory));
 			data.SetValue(@"" + path + @"TitleTemplate", Data.EscapeString(TitleTemplate));
 		}
 		
@@ -293,6 +283,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.EmailSmtpSettings = EmailSmtpSettings.Copy();
 			copy.Ftp = Ftp.Copy();
 			copy.Ghostscript = Ghostscript.Copy();
+			copy.HttpSettings = HttpSettings.Copy();
 			copy.JpegSettings = JpegSettings.Copy();
 			copy.PdfSettings = PdfSettings.Copy();
 			copy.PngSettings = PngSettings.Copy();
@@ -313,8 +304,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.OpenWithPdfArchitect = OpenWithPdfArchitect;
 			copy.OutputFormat = OutputFormat;
 			copy.ShowProgress = ShowProgress;
+			copy.ShowQuickActions = ShowQuickActions;
 			copy.SkipPrintDialog = SkipPrintDialog;
 			copy.SubjectTemplate = SubjectTemplate;
+			copy.TargetDirectory = TargetDirectory;
 			copy.TitleTemplate = TitleTemplate;
 			
 			return copy;
@@ -334,6 +327,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!EmailSmtpSettings.Equals(v.EmailSmtpSettings)) return false;
 			if (!Ftp.Equals(v.Ftp)) return false;
 			if (!Ghostscript.Equals(v.Ghostscript)) return false;
+			if (!HttpSettings.Equals(v.HttpSettings)) return false;
 			if (!JpegSettings.Equals(v.JpegSettings)) return false;
 			if (!PdfSettings.Equals(v.PdfSettings)) return false;
 			if (!PngSettings.Equals(v.PngSettings)) return false;
@@ -354,8 +348,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!OpenWithPdfArchitect.Equals(v.OpenWithPdfArchitect)) return false;
 			if (!OutputFormat.Equals(v.OutputFormat)) return false;
 			if (!ShowProgress.Equals(v.ShowProgress)) return false;
+			if (!ShowQuickActions.Equals(v.ShowQuickActions)) return false;
 			if (!SkipPrintDialog.Equals(v.SkipPrintDialog)) return false;
 			if (!SubjectTemplate.Equals(v.SubjectTemplate)) return false;
+			if (!TargetDirectory.Equals(v.TargetDirectory)) return false;
 			if (!TitleTemplate.Equals(v.TitleTemplate)) return false;
 			
 			return true;
@@ -383,6 +379,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine(Ftp.ToString());
 			sb.AppendLine("[Ghostscript]");
 			sb.AppendLine(Ghostscript.ToString());
+			sb.AppendLine("[HttpSettings]");
+			sb.AppendLine(HttpSettings.ToString());
 			sb.AppendLine("[JpegSettings]");
 			sb.AppendLine(JpegSettings.ToString());
 			sb.AppendLine("[PdfSettings]");
@@ -414,8 +412,10 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("OpenWithPdfArchitect=" + OpenWithPdfArchitect.ToString());
 			sb.AppendLine("OutputFormat=" + OutputFormat.ToString());
 			sb.AppendLine("ShowProgress=" + ShowProgress.ToString());
+			sb.AppendLine("ShowQuickActions=" + ShowQuickActions.ToString());
 			sb.AppendLine("SkipPrintDialog=" + SkipPrintDialog.ToString());
 			sb.AppendLine("SubjectTemplate=" + SubjectTemplate.ToString());
+			sb.AppendLine("TargetDirectory=" + TargetDirectory.ToString());
 			sb.AppendLine("TitleTemplate=" + TitleTemplate.ToString());
 			
 			return sb.ToString();

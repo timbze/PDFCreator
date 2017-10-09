@@ -1,15 +1,17 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Utilities;
+using System;
 using System.IO;
 using System.Linq;
 using SystemInterface.IO;
-using pdfforge.PDFCreator.Utilities;
 
 namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface IPDFCreatorNameProvider
     {
         string GetExeName();
+
         string GetExePath();
+
         string GetPortApplicationPath();
     }
 
@@ -26,7 +28,7 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
 
         public string GetExePath()
         {
-            return _assemblyHelper.GetPdfforgeAssemblyDirectory() + "\\" + GetExeName();
+            return _assemblyHelper.GetAssemblyDirectory() + "\\" + GetExeName();
         }
 
         public string GetPortApplicationPath()
@@ -36,7 +38,7 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
 
         public string GetExeName()
         {
-            var assemblyDirectory = _assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var assemblyDirectory = _assemblyHelper.GetAssemblyDirectory();
 
             // Get files that start with PDFCreator, end with exe and have only one dot (to exclude .vshost.exe and PDFCreator.LicenseService.exe)
             var candidates = _directory.EnumerateFiles(assemblyDirectory, "PDFCreator*.exe")

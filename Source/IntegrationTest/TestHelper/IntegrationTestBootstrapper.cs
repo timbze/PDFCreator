@@ -1,5 +1,4 @@
-﻿using pdfforge.Obsidian.Interaction;
-using pdfforge.PDFCreator.Conversion.Ghostscript;
+﻿using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Editions.EditionBase;
 using pdfforge.PDFCreator.Editions.PDFCreator;
 using SimpleInjector;
@@ -13,11 +12,16 @@ namespace PDFCreator.TestUtilities
         public Container ConfigureContainer()
         {
             var container = new Container();
-            _bootstrapper.ConfigureContainer(container, new WindowRegistry(null));
+            _bootstrapper.ConfigureContainer(container);
 
+            AddIntegrationTestRegistrations(container);
             OverrideRegistrations(container);
 
             return container;
+        }
+
+        protected virtual void AddIntegrationTestRegistrations(Container container)
+        {
         }
 
         private void OverrideRegistrations(Container container)

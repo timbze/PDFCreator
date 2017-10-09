@@ -1,5 +1,10 @@
+using pdfforge.DataStorage.Storage;
 using pdfforge.DataStorage;
+using PropertyChanged;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System;
 
 // ! This file is generated automatically.
 // ! Do not edit it outside the sections for custom code.
@@ -10,22 +15,18 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 	/// <summary>
 	/// Ghostscript settings
 	/// </summary>
-	public class Ghostscript {
+	[ImplementPropertyChanged]
+	public partial class Ghostscript : INotifyPropertyChanged {
+		#pragma warning disable 67
+		public event PropertyChangedEventHandler PropertyChanged;
+		#pragma warning restore 67
+		
 		
 		/// <summary>
 		/// These parameters will be provided to Ghostscript in addition to the PDFCreator parameters
 		/// </summary>
-		public string AdditionalGsParameters { get; set; }
+		public string AdditionalGsParameters { get; set; } = "";
 		
-		
-		private void Init() {
-			AdditionalGsParameters = "";
-		}
-		
-		public Ghostscript()
-		{
-			Init();
-		}
 		
 		public void ReadValues(Data data, string path)
 		{

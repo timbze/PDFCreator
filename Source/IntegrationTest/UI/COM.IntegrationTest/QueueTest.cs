@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using SystemWrapper.IO;
-using SystemWrapper.Microsoft.Win32;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
@@ -14,6 +10,10 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
 using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using SystemWrapper.IO;
+using SystemWrapper.Microsoft.Win32;
 using Translatable;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
@@ -21,23 +21,30 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class QueueTest
     {
+        [TestFixtureSetUp]
+        public void CleanDependencies()
+        {
+            ComDependencyBuilder.ResetDependencies();
+            ComTestHelper.ModifyAndBuildComDependencies();
+        }
+
         [SetUp]
         public void SetUp()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            var dependencies = ComTestHelper.ModifyAndBuildComDependencies();
 
             LoggingHelper.InitConsoleLogger("PDFCreatorTest", LoggingLevel.Off);
 
             _queue = new Queue();
             _queue.Initialize();
 
-            var translationHelper = new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(), new TranslationFactory());
+            var translationHelper = new TranslationHelper(new DefaultSettingsProvider(), new AssemblyHelper(GetType().Assembly), new TranslationFactory(), null);
             translationHelper.InitTranslator("None");
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());
 
-            _testPageHelper = new TestPageHelper(new AssemblyHelper(), new OsHelper(), folderProvider, dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())));
+            _testPageHelper = new TestPageHelper(new VersionHelper(GetType().Assembly), new OsHelper(), folderProvider,
+                dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())), new ApplicationNameProvider("FREE"));
         }
 
         [TearDown]
@@ -74,7 +81,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         [Test]
         public void Clear_IfQueueHasElements_CountEquals0()
         {
-            //Create meanless print jobs 
+            //Create meanless print jobs
             CreateTestPages(5);
             _queue.Clear();
 

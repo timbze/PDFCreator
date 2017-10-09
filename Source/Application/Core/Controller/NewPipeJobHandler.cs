@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
+using System.IO;
 
 namespace pdfforge.PDFCreator.Core.Controller
 {
@@ -39,7 +39,7 @@ namespace pdfforge.PDFCreator.Core.Controller
             }
             else if (message.StartsWith("ShowMain|", StringComparison.OrdinalIgnoreCase))
             {
-                _mainWindowThreadLauncher.LaunchMainWindow();
+                _mainWindowThreadLauncher.LaunchMainWindow(null);
             }
             else if (message.StartsWith("ReloadSettings|", StringComparison.OrdinalIgnoreCase))
             {

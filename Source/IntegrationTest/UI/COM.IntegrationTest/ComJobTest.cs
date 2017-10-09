@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using SystemWrapper.IO;
-using SystemWrapper.Microsoft.Win32;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -16,8 +11,14 @@ using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
+using pdfforge.PDFCreator.UI.Presentation.Settings;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using SystemWrapper.IO;
+using SystemWrapper.Microsoft.Win32;
 using Translatable;
 
 namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
@@ -25,11 +26,17 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class ComJobTest
     {
+        [TestFixtureSetUp]
+        public void CleanDependencies()
+        {
+            ComDependencyBuilder.ResetDependencies();
+            ComTestHelper.ModifyAndBuildComDependencies();
+        }
+
         [SetUp]
         public void SetUp()
         {
-            var builder = new ComDependencyBuilder();
-            var dependencies = builder.ComDependencies;
+            var dependencies = ComTestHelper.ModifyAndBuildComDependencies();
 
             LoggingHelper.InitConsoleLogger("PDFCreatorTest", LoggingLevel.Off);
 
@@ -37,12 +44,12 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 
             var settingsProvider = new DefaultSettingsProvider();
 
-            var translationHelper = new TranslationHelper(settingsProvider, new AssemblyHelper(), new TranslationFactory());
+            var translationHelper = new TranslationHelper(settingsProvider, new AssemblyHelper(GetType().Assembly), new TranslationFactory(), null);
             translationHelper.InitTranslator("None");
 
             var settingsLoader = new SettingsLoader(translationHelper, Substitute.For<ISettingsMover>(), installationPathProvider, Substitute.For<IPrinterHelper>());
 
-            var settingsManager = new SettingsManager(settingsProvider, settingsLoader);
+            var settingsManager = new SettingsManager(settingsProvider, settingsLoader, installationPathProvider);
             settingsManager.LoadAllSettings();
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());
@@ -50,7 +57,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
             _queue = new Queue();
             _queue.Initialize();
 
-            _testPageHelper = new TestPageHelper(new AssemblyHelper(), new OsHelper(), folderProvider, dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())));
+            _testPageHelper = new TestPageHelper(new VersionHelper(GetType().Assembly), new OsHelper(), folderProvider,
+                dependencies.QueueAdapter.JobInfoQueue, new JobInfoManager(new LocalTitleReplacerProvider(new List<TitleReplacement>())), new ApplicationNameProvider("FREE"));
         }
 
         [TearDown]
@@ -152,7 +160,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         }
 
         [Test]
-        [ExpectedException(typeof (FormatException))]
+        [ExpectedException(typeof(FormatException))]
         public void SetProfileSettings_IfEmptyValue_ThrowsCOMException()
         {
             CreateTestPages(1);
@@ -162,7 +170,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         }
 
         [Test]
-        [ExpectedException(typeof (FormatException))]
+        [ExpectedException(typeof(FormatException))]
         public void SetProfileSettings_IfInappropriateValue_ThrowsCOMException()
         {
             CreateTestPages(1);

@@ -48,8 +48,8 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest
         [Test]
         public void TestIsValidFilename()
         {
-            string[] validPaths = {@"C:\Test.txt", @"X:\Test\Folder\With\Many\Sub\Folders\test.txt", @"C:\Test,abc.txt"};
-            string[] invalidPaths = {@"C:\Test<.txt", @"C:\Test>.txt", @"C:\Test?.txt", @"C:\Test*.txt", @"C:\Test|.txt", @"C:\Test"".txt"};
+            string[] validPaths = { @"C:\Test.txt", @"X:\Test\Folder\With\Many\Sub\Folders\test.txt", @"C:\Test,abc.txt" };
+            string[] invalidPaths = { @"C:\Test<.txt", @"C:\Test>.txt", @"C:\Test?.txt", @"C:\Test*.txt", @"C:\Test|.txt", @"C:\Test"".txt" };
 
             foreach (var p in validPaths)
                 Assert.IsTrue(_validName.IsValidFilename(p), "Expected '" + p + "' to be a valid path");

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Globalization;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
+using System.Globalization;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal class CompressionAndResolutionTest
     {
         [SetUp]
@@ -31,7 +30,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 
         private int CalculateImageByteSize(float width, float height, PdfObject obj, PdfDictionary tg)
         {
-            var imgRi = ImageRenderInfo.CreateForXObject(new Matrix(width, height), (PRIndirectReference) obj, tg);
+            var imgRi = ImageRenderInfo.CreateForXObject(new Matrix(width, height), (PRIndirectReference)obj, tg);
             var length = imgRi.GetImage().GetImageAsBytes().Length;
             return length;
         }
@@ -57,8 +56,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new int[4];
@@ -70,7 +69,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();
@@ -121,8 +120,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new int[4];
@@ -134,7 +133,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();
@@ -184,8 +183,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new string[4];
@@ -197,7 +196,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();
@@ -248,8 +247,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new int[4];
@@ -261,7 +260,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();
@@ -314,8 +313,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new string[4];
@@ -327,7 +326,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();
@@ -380,8 +379,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             var pdf = new PdfReader(_th.Job.OutputFiles[0]);
 
             var pg = pdf.GetPageN(1);
-            var res = (PdfDictionary) PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-            var xobj = (PdfDictionary) PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            var res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+            var xobj = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
 
             var testResultsFilter = new string[4];
             var testResultsWidth = new string[4];
@@ -393,7 +392,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
                 var obj = xobj.Get(name);
                 if (obj.IsIndirect())
                 {
-                    var tg = (PdfDictionary) PdfReader.GetPdfObject(obj);
+                    var tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
 
                     if (tg.Get(PdfName.FILTER) != null)
                         testResultsFilter[i] = tg.Get(PdfName.FILTER).ToString();

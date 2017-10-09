@@ -1,6 +1,6 @@
-﻿using System;
-using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 {
@@ -50,7 +50,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                 }
             }
 
-            backgroundPage = ((page-1) % _numBackgroundPages) + 1;
+            backgroundPage = ((page - 1) % _numBackgroundPages) + 1;
 
             return true;
         }

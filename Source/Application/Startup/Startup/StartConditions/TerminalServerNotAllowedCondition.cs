@@ -7,6 +7,7 @@ using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.Utilities.Process;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -19,11 +20,13 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly ITerminalServerDetection _terminalServerDetection;
         private readonly ProgramTranslation _translation;
 
-        public TerminalServerNotAllowedCondition(ITerminalServerDetection terminalServerDetection, ProgramTranslation translation,
+        public bool CanRequestUserInteraction => true;
+
+        public TerminalServerNotAllowedCondition(ITerminalServerDetection terminalServerDetection, ITranslationFactory translationFactory,
             IInteractionInvoker interactionInvoker, IProcessStarter processStarter, ApplicationNameProvider applicationNameProvider)
         {
             _terminalServerDetection = terminalServerDetection;
-            _translation = translation;
+            _translation = translationFactory.CreateTranslation<ProgramTranslation>();
             _interactionInvoker = interactionInvoker;
             _processStarter = processStarter;
             _applicationNameProvider = applicationNameProvider;
@@ -42,7 +45,7 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
             if (result == MessageResponse.MoreInfo)
                 _processStarter.Start(Urls.PdfCreatorTerminalServerUrl);
 
-            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.NotValidOnTerminalServer, errorMessage, showMessage:false);
+            return StartupConditionResult.BuildErrorWithMessage((int)ExitCode.NotValidOnTerminalServer, errorMessage, showMessage: false);
         }
 
         private MessageResponse ShowMessage(string message, string title, MessageOptions options, MessageIcon icon)

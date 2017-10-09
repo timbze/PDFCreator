@@ -1,8 +1,8 @@
 ﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.StartupInterface;
-using pdfforge.PDFCreator.UI.ViewModels.Assistants;
-using pdfforge.PDFCreator.UI.ViewModels.Translations;
+using pdfforge.PDFCreator.UI.Presentation.Assistants;
+using Translatable;
 
 namespace pdfforge.PDFCreator.Core.Startup.StartConditions
 {
@@ -14,11 +14,13 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
         private readonly ISpoolerProvider _spoolerProvider;
         private readonly ISpoolFolderAccess _spoolFolderAccess;
 
-        public CheckSpoolFolderCondition(ISpoolFolderAccess spoolFolderAccess, IRepairSpoolFolderAssistant repairSpoolFolderAssistant, ApplicationTranslation translation, ISpoolerProvider spoolerProvider)
+        public bool CanRequestUserInteraction => false;
+
+        public CheckSpoolFolderCondition(ISpoolFolderAccess spoolFolderAccess, IRepairSpoolFolderAssistant repairSpoolFolderAssistant, ITranslationFactory translationFactory, ISpoolerProvider spoolerProvider)
         {
             _spoolFolderAccess = spoolFolderAccess;
             _repairSpoolFolderAssistant = repairSpoolFolderAssistant;
-            _translation = translation;
+            _translation = translationFactory.CreateTranslation<ApplicationTranslation>();
             _spoolerProvider = spoolerProvider;
         }
 

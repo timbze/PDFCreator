@@ -1,7 +1,7 @@
-﻿using SystemInterface.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.Core.Printing.Port;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.Core.Printing
 {

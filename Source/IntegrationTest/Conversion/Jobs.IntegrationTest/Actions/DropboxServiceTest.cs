@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Dropbox.Api;
+using NUnit.Framework;
+using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Dropbox;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using Dropbox.Api;
-using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Dropbox;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using PDFCreator.TestUtilities;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 {
@@ -15,7 +15,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
     public class DropboxServiceTest
     {
         private TestHelper _th;
-
 
         private readonly string APP_KEY = ParameterHelper.GetPassword("dropbox_api_key");
         private readonly string REDIRECT_URI = ParameterHelper.GetPassword("dropbox_redirectUri");
@@ -34,7 +33,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _dropboxService = new DropboxService();
-            _dropboxService.AccessToken = DROPBOX_ACCESSTOKEN;
 
             _th = container.GetInstance<TestHelper>();
             _th.InitTempFolder(DROPBOX_FOLDER);
@@ -77,6 +75,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             var result = _dropboxService.ParseAccessToken(new Uri(url));
             Assert.AreEqual(DROPBOX_ACCESSTOKEN, result);
         }
+
         [Test]
         public void Check_AuthorisationUriCreated_RetursnNonEmptyString()
         {
@@ -88,21 +87,22 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         [Test]
         public void GetAccessToken()
         {
-            Assert.AreEqual(DROPBOX_ACCESSTOKEN, _dropboxService.GetDropUserInfo().AccessToken);
+            Assert.AreEqual(DROPBOX_ACCESSTOKEN, _dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccessToken);
         }
 
         [Test]
         public void GetDropboxUserAccountId()
         {
-            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo().AccountId);
+            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccountId);
         }
 
         [Test]
         public void SetUserInfoAndCheckAccountInfo_ReturnsNonEmptyString()
         {
-            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo().AccountId);
+            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccountId);
         }
-        #endregion
+
+        #endregion General tests
 
         #region Upload and sharing files
 
@@ -118,8 +118,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames = false;
 
             var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
-            _addedFiles.Add(result.FilePath);
-            Assert.AreEqual("/" + tempFileName, result.FilePath);
+            _addedFiles.Add(result.Filename);
+            Assert.AreEqual("/" + tempFileName, result.Filename);
             Assert.IsNotNull(result);
         }
 
@@ -136,11 +136,9 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
             _addedFolders.Add(DROPBOX_FOLDER);
 
-            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + tempFileName, result.FilePath);
+            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + tempFileName, result.Filename);
             Assert.IsNotNull(result);
-
         }
-
 
         [Test]
         public void Upload2FilesToDropboxRootFolderAndShareLink_WhenNoAdditionalFolderProvided_FolderIsShared()
@@ -156,7 +154,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             var result = _dropboxService.UploadFileWithSharing(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
             _addedFolders.Add(BASE_FOLDER_NAME);
 
-            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.FilePath);
+            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.Filename);
             Assert.IsNotNull(result);
         }
 
@@ -173,7 +171,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
             _addedFolders.Add(BASE_FOLDER_NAME);
             Assert.IsNotNull(result);
-            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.FilePath);
+            StringAssert.AreEqualIgnoringCase("/" + BASE_FOLDER_NAME, result.Filename);
         }
 
         [Test]
@@ -189,9 +187,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
             _addedFolders.Add(DROPBOX_FOLDER);
             Assert.IsNotNull(result);
-            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + BASE_FOLDER_NAME, result.FilePath);
+            StringAssert.AreEqualIgnoringCase("/" + DROPBOX_FOLDER + "/" + BASE_FOLDER_NAME, result.Filename);
         }
-
 
         [Test]
         public void UploadListOfFilesToDropboxFolderAndShareLink_UniqueFileNames_CountEquals2()
@@ -210,10 +207,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             Assert.IsNotNull(result);
         }
 
-
-        #endregion
+        #endregion Upload and sharing files
 
         #region Only uploading files
+
         [Test]
         public void UploadOneFilesToDropbox_WhenNoAdditionalFolderProvided_ReturnsTrue()
         {
@@ -225,7 +222,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _addedFiles.AddRange(_th.Job.OutputFiles.Select(path => "/" + Path.GetFileName(path)));
             Assert.IsTrue(result);
         }
-
 
         [Test]
         public void Upload2FilesToDropboxFolder_WhenDropboxFolderDefined_ReturnsTrue()
@@ -277,7 +273,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
                 }
             }
             _addedFolders.Add(DROPBOX_FOLDER);
-
         }
 
         [Test]
@@ -315,14 +310,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
             var result = _dropboxService.UploadFiles(DROPBOX_ACCESSTOKEN, DROPBOX_FOLDER, _th.Job.OutputFiles, _th.Job.Profile.DropboxSettings.EnsureUniqueFilenames, BASE_FOLDER_NAME);
 
-
             _addedFolders.Add(DROPBOX_FOLDER);
             Assert.IsTrue(result);
-
         }
 
-        #endregion
-
-
+        #endregion Only uploading files
     }
 }

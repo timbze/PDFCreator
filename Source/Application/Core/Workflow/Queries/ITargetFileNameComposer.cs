@@ -4,6 +4,6 @@ namespace pdfforge.PDFCreator.Core.Workflow.Queries
 {
     public interface ITargetFileNameComposer
     {
-        void ComposeTargetFileName(Job job);
+        string ComposeTargetFileName(Job job);
     }
 }

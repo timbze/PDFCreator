@@ -1,6 +1,6 @@
 ﻿using pdfforge.PDFCreator.Core.ComImplementation;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.Core.Workflow.Queries;
+using pdfforge.PDFCreator.Core.Workflow.Output;
 using SimpleInjector;
 
 namespace pdfforge.PDFCreator.UI.COM
@@ -14,14 +14,15 @@ namespace pdfforge.PDFCreator.UI.COM
             _container = container;
         }
 
-        public IConversionWorkflow BuildWorkflow(string targetFileName, IErrorNotifier errorNotifier)
+        public IConversionWorkflow BuildWorkflow(string targetFileName)
         {
             var profileChecker = _container.GetInstance<IProfileChecker>();
             var targetFileNameComposer = new ComTargetFileNameComposer(targetFileName);
             var jobRunner = _container.GetInstance<IJobRunner>();
             var jobDataUpdater = _container.GetInstance<IJobDataUpdater>();
+            var outputFileMover = _container.GetInstance<AutosaveOutputFileMover>();
 
-            return new ConversionWorkflow(profileChecker, targetFileNameComposer, jobRunner, jobDataUpdater, errorNotifier);
+            return new AutoSaveWorkflow(jobDataUpdater, jobRunner, profileChecker, targetFileNameComposer, outputFileMover);
         }
     }
 }

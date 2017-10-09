@@ -1,6 +1,7 @@
-﻿using System;
+﻿using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
-using pdfforge.PDFCreator.UI.ViewModels.Wrapper;
+using System;
+using System.Threading.Tasks;
 
 namespace pdfforge.PDFCreator.UnitTest.UnitTestHelper
 {
@@ -14,6 +15,16 @@ namespace pdfforge.PDFCreator.UnitTest.UnitTestHelper
         public void BeginInvoke(Action<JobInfo> addMethod, JobInfo jobInfo)
         {
             addMethod(jobInfo);
+        }
+
+        public Task<TResult> InvokeAsync<TResult>(Func<TResult> action)
+        {
+            return Task.Run(action);
+        }
+
+        public Task InvokeAsync(Action action)
+        {
+            return Task.Run(action);
         }
     }
 }

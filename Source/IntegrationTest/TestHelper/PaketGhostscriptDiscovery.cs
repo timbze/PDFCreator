@@ -1,21 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using pdfforge.PDFCreator.Conversion.Ghostscript;
+using pdfforge.PDFCreator.Utilities;
+using System.Collections.Generic;
 using System.IO;
 using SystemInterface.IO;
 using SystemWrapper.IO;
-using pdfforge.PDFCreator.Conversion.Ghostscript;
-using pdfforge.PDFCreator.Utilities;
 
 namespace PDFCreator.TestUtilities
 {
     public class PaketGhostscriptDiscovery : IGhostscriptDiscovery
     {
+        private readonly IAssemblyHelper _assemblyHelper;
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
+
+        public PaketGhostscriptDiscovery(IAssemblyHelper assemblyHelper)
+        {
+            _assemblyHelper = assemblyHelper;
+        }
 
         private IEnumerable<string> GetPathCandidates()
         {
-            var assemblyHelper = new AssemblyHelper();
-
-            var path = assemblyHelper.GetPdfforgeAssemblyDirectory();
+            var path = _assemblyHelper.GetAssemblyDirectory();
 
             while (path.Length > 3)
             {

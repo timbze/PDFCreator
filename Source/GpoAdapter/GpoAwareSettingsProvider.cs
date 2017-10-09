@@ -5,22 +5,21 @@ namespace pdfforge.PDFCreator.Core.GpoAdapter
 {
     public class GpoAwareSettingsProvider : SettingsProvider
     {
-        public GpoAwareSettingsProvider()
-        {
-            var gpoReader = new GpoReader.GpoReader(true);
-            GpoSettings = new GpoReaderSettings(gpoReader.ReadGpoSettings());
-        }
+        private readonly IGpoSettings _gpoSettings;
 
-        public override IGpoSettings GpoSettings { get; }
+        public GpoAwareSettingsProvider(IGpoSettings gpoSettings)
+        {
+            _gpoSettings = gpoSettings;
+        }
 
         public override string GetApplicationLanguage()
         {
-            if (!string.IsNullOrWhiteSpace(GpoSettings.Language))
+            if (!string.IsNullOrWhiteSpace(_gpoSettings.Language))
             {
-                return GpoSettings.Language;
+                return _gpoSettings.Language;
             }
 
-            return Settings == null ? "en" : Settings.ApplicationSettings.Language;
+            return CurrentLanguage;
         }
     }
 }

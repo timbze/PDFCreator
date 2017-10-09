@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
-using NLog;
+﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using PdfTools;
 using PdfTools.Pdf;
+using System;
+using System.IO;
 using ErrorCode = pdfforge.PDFCreator.Conversion.Jobs.ErrorCode;
+using Path = System.IO.Path;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 {
@@ -20,16 +21,14 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
             _pdfProcessor = pdfProcessor;
         }
 
-        internal void AddBackground(string pdfFile, ConversionProfile conversionProfile)
+        internal string AddBackground(string pdfFile, ConversionProfile conversionProfile)
         {
             if (!conversionProfile.BackgroundPage.Enabled)
-                return;
-
-            var tmpFile = _pdfProcessor.MoveFileToPreProcessFile(pdfFile, "PreBackground");
+                return pdfFile;
 
             try
             {
-                DoAddBackground(pdfFile, tmpFile, conversionProfile);
+                return DoAddBackground(pdfFile, conversionProfile);
             }
             catch (ProcessingException)
             {
@@ -37,20 +36,15 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
             }
             catch (Exception ex)
             {
-                throw new ProcessingException(ex.GetType() + " while addding background:" + Environment.NewLine + ex.Message, ErrorCode.Background_GenericError);
-            }
-            finally
-            {
-                //delete copy of original file
-                if (!string.IsNullOrEmpty(tmpFile))
-                    if (File.Exists(tmpFile))
-                        File.Delete(tmpFile);
+                throw new ProcessingException(ex.GetType() + " while addding background:" + Environment.NewLine + ex.Message, ErrorCode.Background_GenericError, ex);
             }
         }
 
-        private void DoAddBackground(string pdfFile, string tmpFile,  ConversionProfile profile)
+        private string DoAddBackground(string pdfFile, ConversionProfile profile)
         {
             _logger.Debug("Start adding background.");
+
+            var outputFile = Path.ChangeExtension(pdfFile, "_withBackground.pdf");
 
             var copyOptions = CopyOption.CopyLinks | CopyOption.CopyAnnotations | CopyOption.CopyFormFields | CopyOption.CopyOutlines | CopyOption.CopyLogicalStructure | CopyOption.CopyNamedDestinations | CopyOption.FlattenAnnotations | CopyOption.FlattenFormFields | CopyOption.FlattenSignatureAppearances | CopyOption.OptimizeResources;
 
@@ -58,9 +52,9 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 
             using (Stream backgroundStream = new FileStream(profile.BackgroundPage.File, FileMode.Open, FileAccess.Read))
             using (var backgroundDoc = Document.Open(backgroundStream, null))
-            using (Stream docStream = new FileStream(tmpFile, FileMode.Open, FileAccess.Read))
+            using (Stream docStream = new FileStream(pdfFile, FileMode.Open, FileAccess.Read))
             using (var doc = Document.Open(docStream, ""))
-            using (Stream outStream = new FileStream(pdfFile, FileMode.Create, FileAccess.ReadWrite))
+            using (Stream outStream = new FileStream(outputFile, FileMode.Create, FileAccess.ReadWrite))
             using (var outDoc = Document.Create(outStream, conformance, new EncryptionParams()))
             {
                 CopyMetadata(outDoc, doc.Metadata);
@@ -70,7 +64,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
 
                 var backgroundPageMapper = new BackgroundPageMapper(backgroundDoc.Pages.Count, profile.BackgroundPage, coverPages, attachmentPages);
 
-                for (int i=0; i< doc.Pages.Count; i++)
+                for (int i = 0; i < doc.Pages.Count; i++)
                 {
                     var page = doc.Pages[i];
                     var pageCopy = outDoc.CopyPage(page, copyOptions);
@@ -86,11 +80,11 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                             var scaleHeight = pageCopy.Size.Height / backgroundPage.Size.Height;
                             var scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
-                            var backgroundHeight = backgroundPage.Size.Height*scale;
-                            var backgroundWidth = backgroundPage.Size.Width*scale;
+                            var backgroundHeight = backgroundPage.Size.Height * scale;
+                            var backgroundWidth = backgroundPage.Size.Width * scale;
 
-                            var offsetHeight = (pageCopy.Size.Height - backgroundHeight)/2;
-                            var offsetWidth = (pageCopy.Size.Width - backgroundWidth)/2;
+                            var offsetHeight = (pageCopy.Size.Height - backgroundHeight) / 2;
+                            var offsetWidth = (pageCopy.Size.Width - backgroundWidth) / 2;
 
                             var backgroundRect = new Rectangle()
                             {
@@ -99,7 +93,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                                 Right = backgroundWidth + offsetWidth,
                                 Left = offsetWidth,
                             };
-                            
+
                             gen.PaintForm(background, backgroundRect);
                         }
                     }
@@ -107,6 +101,8 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                     outDoc.Pages.Add(pageCopy);
                 }
             }
+
+            return outputFile;
         }
 
         private Conformance DeterminePdfVersionConformance(ConversionProfile profile)
@@ -118,8 +114,10 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfToolsProcessing
                 return Conformance.Pdf16;
             if (pdfVersion == "1.5")
                 return Conformance.Pdf15;
+            if (pdfVersion == "1.4")
+                return Conformance.Pdf14;
 
-            return Conformance.Pdf14;
+            return Conformance.Pdf13;
         }
 
         private void CopyMetadata(Document document, Metadata metadata)

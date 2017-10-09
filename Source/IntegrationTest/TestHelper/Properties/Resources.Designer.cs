@@ -211,11 +211,21 @@ namespace PDFCreator.TestUtilities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PDFCreatorTestpageJPG {
+            get {
+                object obj = ResourceManager.GetObject("PDFCreatorTestpageJPG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] PDFCreatorTestpagePDF {
+        public static byte[] PDFCreatorTestpage_GS9_19_PDF {
             get {
-                object obj = ResourceManager.GetObject("PDFCreatorTestpagePDF", resourceCulture);
+                object obj = ResourceManager.GetObject("PDFCreatorTestpage_GS9_19_PDF", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -223,9 +233,9 @@ namespace PDFCreator.TestUtilities.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] PDFCreatorTestpagePDFA1b {
+        public static byte[] PDFCreatorTestpage_GS9_19_PDF_A_1b {
             get {
-                object obj = ResourceManager.GetObject("PDFCreatorTestpagePDFA1b", resourceCulture);
+                object obj = ResourceManager.GetObject("PDFCreatorTestpage_GS9_19_PDF_A_1b", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -233,10 +243,30 @@ namespace PDFCreator.TestUtilities.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] PDFCreatorTestpagePDFA2b {
+        public static byte[] PDFCreatorTestpage_GS9_19_PDF_A_2b {
             get {
-                object obj = ResourceManager.GetObject("PDFCreatorTestpagePDFA2b", resourceCulture);
+                object obj = ResourceManager.GetObject("PDFCreatorTestpage_GS9_19_PDF_A_2b", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] PDFCreatorTestpage_GS9_19_PDF_X {
+            get {
+                object obj = ResourceManager.GetObject("PDFCreatorTestpage_GS9_19_PDF_X", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PDFCreatorTestpagePNG {
+            get {
+                object obj = ResourceManager.GetObject("PDFCreatorTestpagePNG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -247,6 +277,30 @@ namespace PDFCreator.TestUtilities.Properties {
             get {
                 object obj = ResourceManager.GetObject("PDFCreatorTestpagePS", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PDFCreatorTestpageTIF {
+            get {
+                object obj = ResourceManager.GetObject("PDFCreatorTestpageTIF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to                            PDF                                                         PDFCreator
+        ///                                                                                       Opensource
+        ///                                        Now
+        ///                                   PDFCreator 3.0.0.0
+        ///                                   Date:                                                                 25/04/2017 13:27:30
+        ///                                   Authors:                                              [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PDFCreatorTestpageTXT {
+            get {
+                return ResourceManager.GetString("PDFCreatorTestpageTXT", resourceCulture);
             }
         }
         

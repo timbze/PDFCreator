@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
+using System;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
@@ -41,7 +41,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             {
                 return ExitCode.ErrorWhileSavingDefaultSettings;
             }
-           
+
             return ExitCode.Ok;
         }
     }

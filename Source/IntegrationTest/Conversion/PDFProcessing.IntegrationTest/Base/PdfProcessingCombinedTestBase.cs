@@ -1,33 +1,44 @@
 ﻿using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using PDFCreator.TestUtilities;
+using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
+using pdfforge.PDFCreator.Conversion.Settings;
 
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 {
     [TestFixture]
-    [Category("LongRunning")]
     internal abstract class PdfProcessingCombinedTestBase
     {
         private TestHelper _th;
         private IPdfProcessor _pdfProcessor;
 
         protected abstract IPdfProcessor BuildPdfProcessor();
+
+        protected abstract void FinalizePdfProcessor();
+
         protected abstract bool IsIText { get; }
 
         [SetUp]
         public void SetUp()
         {
+            _pdfProcessor = BuildPdfProcessor();
+
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
             _th = container.GetInstance<TestHelper>();
-            _th.InitTempFolder("PDFProcessing_IText_Combined");
-
-            _pdfProcessor = BuildPdfProcessor();
+            _th.InitTempFolder($"PDFProcessing_{_pdfProcessor.GetType().Name}_Combined");
         }
 
         private void GenerateGsJob_WithSettedOutput(TestFile tf)
         {
             _th.GenerateGsJob_WithSetOutput(tf);
+
+            var accounts = new Accounts();
+            var timeServerAccount = new TimeServerAccount();
+            timeServerAccount.AccountId = "ExistingTimerServerAccountId";
+            accounts.TimeServerAccounts.Add(timeServerAccount);
+            _th.Job.Accounts = accounts;
+            _th.Job.Profile.PdfSettings.Signature.TimeServerAccountId = timeServerAccount.AccountId;
+
             _th.Job.Profile.BackgroundPage.File = _th.GenerateTestFile(TestFile.Background3PagesPDF);
             _th.Job.Profile.PdfSettings.Signature.CertificateFile = _th.GenerateTestFile(TestFile.CertificationFileP12);
 
@@ -46,119 +57,66 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         public void CleanUp()
         {
             _th.CleanUp();
+            FinalizePdfProcessor();
         }
 
         [Test]
-        public void EncryptionAndBackground()
+        public void EncryptionSigningAndBackground()
         {
-            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpagePDF); //Disables pdf metadata update
+            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF); //Disables pdf metadata update
             _th.Job.Profile.PdfSettings.Security.Enabled = true;
-            _th.Job.Profile.PdfSettings.Signature.Enabled = false;
+            _th.Job.Profile.PdfSettings.Signature.Enabled = true;
             _th.Job.Profile.BackgroundPage.Enabled = true;
 
             _pdfProcessor.ProcessPdf(_th.Job);
 
+            PdfVersionTester.CheckPDFVersion(_th.Job, _pdfProcessor);
             EncryptionTester.DoSecurityTest(_th.Job, IsIText);
+            SigningTester.TestSignature(_th.Job);
             BackgroundPageTester.BackgroundOnPage(_th.Job);
         }
 
         [Test]
         public void EncryptionAndSigning()
         {
-            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpagePDF); //Disables pdf metadata update
+            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF); //Disables pdf metadata update
             _th.Job.Profile.PdfSettings.Security.Enabled = true;
             _th.Job.Profile.PdfSettings.Signature.Enabled = true;
             _th.Job.Profile.BackgroundPage.Enabled = false;
 
             _pdfProcessor.ProcessPdf(_th.Job);
 
+            PdfVersionTester.CheckPDFVersion(_th.Job, _pdfProcessor);
             EncryptionTester.DoSecurityTest(_th.Job, IsIText);
             SigningTester.TestSignature(_th.Job);
         }
 
         [Test]
-        public void EncryptionSigningAndBackground()
+        public void EncryptionAndBackground()
         {
-            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpagePDF); //Disables pdf metadata update
+            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF); //Disables pdf metadata update
             _th.Job.Profile.PdfSettings.Security.Enabled = true;
-            _th.Job.Profile.PdfSettings.Signature.Enabled = true;
-            _th.Job.Profile.BackgroundPage.Enabled = true;
-
-            _pdfProcessor.ProcessPdf(_th.Job);
-
-            EncryptionTester.DoSecurityTest(_th.Job, IsIText);
-            SigningTester.TestSignature(_th.Job);
-            BackgroundPageTester.BackgroundOnPage(_th.Job);
-        }
-
-        [Test]
-        public void MetadataAndBackground()
-        {
-            GenerateGsJob_WithSettedOutput(TestFile.TestpagePDFA2b); //Enables pdf metadata update
-            _th.Job.Profile.PdfSettings.Security.Enabled = false;
             _th.Job.Profile.PdfSettings.Signature.Enabled = false;
             _th.Job.Profile.BackgroundPage.Enabled = true;
 
             _pdfProcessor.ProcessPdf(_th.Job);
 
-            XmpMetadataTester.CheckForXMPMetadataUpdateStrings(_th.Job);
-            BackgroundPageTester.BackgroundOnPage(_th.Job);
-        }
-
-        [Test]
-        public void MetadataAndSigning()
-        {
-            GenerateGsJob_WithSettedOutput(TestFile.TestpagePDFA2b); //Enables pdf metadata update
-            _th.Job.Profile.PdfSettings.Security.Enabled = false;
-            _th.Job.Profile.PdfSettings.Signature.Enabled = true;
-            _th.Job.Profile.BackgroundPage.Enabled = false;
-
-            _pdfProcessor.ProcessPdf(_th.Job);
-
-            XmpMetadataTester.CheckForXMPMetadataUpdateStrings(_th.Job);
-            SigningTester.TestSignature(_th.Job);
-        }
-
-        [Test]
-        public void MetadataSigningAndBackground()
-        {
-            GenerateGsJob_WithSettedOutput(TestFile.TestpagePDFA2b); //Enables pdf metadata update
-            _th.Job.Profile.PdfSettings.Security.Enabled = false;
-            _th.Job.Profile.PdfSettings.Signature.Enabled = true;
-            _th.Job.Profile.BackgroundPage.Enabled = true;
-
-            _pdfProcessor.ProcessPdf(_th.Job);
-
-            XmpMetadataTester.CheckForXMPMetadataUpdateStrings(_th.Job);
-            SigningTester.TestSignature(_th.Job);
+            PdfVersionTester.CheckPDFVersion(_th.Job, _pdfProcessor);
+            EncryptionTester.DoSecurityTest(_th.Job, IsIText);
             BackgroundPageTester.BackgroundOnPage(_th.Job);
         }
 
         [Test]
         public void SigningAndBackground()
         {
-            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpagePDF); //Disables pdf metadata update
+            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF); //Disables pdf metadata update
             _th.Job.Profile.PdfSettings.Security.Enabled = false;
             _th.Job.Profile.PdfSettings.Signature.Enabled = true;
             _th.Job.Profile.BackgroundPage.Enabled = true;
 
             _pdfProcessor.ProcessPdf(_th.Job);
 
-            SigningTester.TestSignature(_th.Job);
-            BackgroundPageTester.BackgroundOnPage(_th.Job);
-        }
-
-        [Test]
-        public void All_EncryptionSigningAndBackground()
-        {
-            GenerateGsJob_WithSettedOutput(TestFile.PDFCreatorTestpagePDF); //Disables pdf metadata update
-            _th.Job.Profile.PdfSettings.Security.Enabled = true;
-            _th.Job.Profile.PdfSettings.Signature.Enabled = true;
-            _th.Job.Profile.BackgroundPage.Enabled = true;
-
-            _pdfProcessor.ProcessPdf(_th.Job);
-
-            EncryptionTester.DoSecurityTest(_th.Job, IsIText);
+            PdfVersionTester.CheckPDFVersion(_th.Job, _pdfProcessor);
             SigningTester.TestSignature(_th.Job);
             BackgroundPageTester.BackgroundOnPage(_th.Job);
         }

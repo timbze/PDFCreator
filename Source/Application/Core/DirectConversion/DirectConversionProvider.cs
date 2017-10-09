@@ -3,6 +3,7 @@
     public interface IDirectConversionProvider
     {
         IDirectConversion GetPdfConversion();
+
         IDirectConversion GetPsConversion();
     }
 

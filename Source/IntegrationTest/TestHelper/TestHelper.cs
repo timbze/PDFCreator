@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using SystemWrapper;
-using SystemWrapper.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PDFCreator.TestUtilities.Properties;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.ITextProcessing;
-using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
+using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Utilities;
-using PDFCreator.TestUtilities.Properties;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using SystemWrapper;
+using SystemWrapper.IO;
 
 namespace PDFCreator.TestUtilities
 {
@@ -26,6 +27,7 @@ namespace PDFCreator.TestUtilities
 
         //default passwords
         private const string UserPassword = "User";
+
         private const string OwnerPassword = "Owner";
         private const string SignaturePassword = "Test1";
         private readonly IGhostscriptDiscovery _ghostscriptDiscovery;
@@ -39,7 +41,8 @@ namespace PDFCreator.TestUtilities
         public TestHelper(IJobRunner jobRunner)
         {
             _jobRunner = jobRunner;
-            _ghostscriptDiscovery = new PaketGhostscriptDiscovery();
+            _ghostscriptDiscovery = new PaketGhostscriptDiscovery(new AssemblyHelper(GetType().Assembly));
+            _accounts = new Accounts();
         }
 
         public string TmpTestFolder { get; set; }
@@ -68,6 +71,13 @@ namespace PDFCreator.TestUtilities
         /// </summary>
         public JobInfo JobInfo { get; set; }
 
+        private Accounts _accounts;
+
+        public void SetAccounts(Accounts accounts)
+        {
+            _accounts = accounts;
+        }
+
         public void InitTempFolder(string testName)
         {
             TmpTestFolder = TempFileHelper.CreateTempFolder("PdfCreatorTest\\" + testName);
@@ -78,18 +88,17 @@ namespace PDFCreator.TestUtilities
             Profile.ShowProgress = false;
         }
 
+        private void DoCleanUp()
+        {
+            if (Directory.Exists(TmpTestFolder))
+                Directory.Delete(TmpTestFolder, true);
+
+            TempFileHelper.CleanUp();
+        }
+
         public void CleanUp()
         {
-            try
-            {
-                if (Directory.Exists(TmpTestFolder))
-                    Directory.Delete(TmpTestFolder, true);
-
-                TempFileHelper.CleanUp();
-            }
-            catch (IOException)
-            {
-            }
+            Retry.Do(DoCleanUp, retryInterval: TimeSpan.FromSeconds(2), retryCount: 10);
         }
 
         private List<string> GeneratePSFileList(PSfiles psFiles, string tmpTestFolder)
@@ -104,21 +113,25 @@ namespace PDFCreator.TestUtilities
                     File.WriteAllBytes(testFilePath, Resources.ElevenTextPagesPS);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.EmptyPage:
                     testFilePath = Path.Combine(tmpTestFolder, psFiles + ".ps");
                     File.WriteAllBytes(testFilePath, Resources.EmptyPagePS);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.LandscapePage:
                     testFilePath = Path.Combine(tmpTestFolder, psFiles + ".ps");
                     File.WriteAllBytes(testFilePath, Resources.LandscapePagePS);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.PDFCreatorTestpage:
                     testFilePath = Path.Combine(tmpTestFolder, psFiles + ".ps");
                     File.WriteAllBytes(testFilePath, Resources.PDFCreatorTestpagePS);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.ThreePDFCreatorTestpages:
                     testFilePath = Path.Combine(tmpTestFolder, "PDFCreatorTestpage.ps");
                     File.WriteAllBytes(testFilePath, Resources.PDFCreatorTestpagePS);
@@ -126,6 +139,7 @@ namespace PDFCreator.TestUtilities
                     list.Add(testFilePath);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.PortraitLandscapeLandscapeLandscapePortrait:
                     var portrait = Path.Combine(tmpTestFolder, "Portrait.ps");
                     File.WriteAllBytes(portrait, Resources.PortraitPagePS);
@@ -137,11 +151,13 @@ namespace PDFCreator.TestUtilities
                     list.Add(landscape);
                     list.Add(portrait);
                     break;
+
                 case PSfiles.PortraitPage:
                     testFilePath = Path.Combine(tmpTestFolder, psFiles + ".ps");
                     File.WriteAllBytes(testFilePath, Resources.PortraitPagePS);
                     list.Add(testFilePath);
                     break;
+
                 case PSfiles.SixEmptyPages:
                     testFilePath = Path.Combine(TmpTestFolder, "EmptyPage.ps");
                     File.WriteAllBytes(testFilePath, Resources.EmptyPagePS);
@@ -154,6 +170,11 @@ namespace PDFCreator.TestUtilities
                     break;
             }
             return list;
+        }
+
+        public void AddOutputFileToJob(TestFile file, string fileName = "")
+        {
+            Job.OutputFiles.Add(GenerateTestFile(file, fileName));
         }
 
         public void ResetProfileToDefault()
@@ -179,7 +200,7 @@ namespace PDFCreator.TestUtilities
             var jobTranslations = new JobTranslations();
             jobTranslations.EmailSignature = "\r\n\r\nCreated with PDFCreator";
 
-            Job = new Job(JobInfo, _profile, jobTranslations, AppSettings.Accounts);
+            Job = new Job(JobInfo, _profile, jobTranslations, _accounts);
 
             var extension = outputformat.ToString();
             if (outputformat == OutputFormat.PdfA1B || outputformat == OutputFormat.PdfA2B || outputformat == OutputFormat.PdfX)
@@ -199,12 +220,23 @@ namespace PDFCreator.TestUtilities
         ///     Note: The INF- and the PS file will be created with the content of the PDFCreatorTestpage
         /// </summary>
         /// <param name="testFileAsOutput">Testfile setted as output</param>
+        ///
         public void GenerateGsJob_WithSetOutput(TestFile testFileAsOutput)
         {
-            var testFile = GenerateTestFile(testFileAsOutput);
+            GenerateGsJob_WithSetOutput(testFileAsOutput, testFileAsOutput.ToString());
+        }
+
+        public void GenerateGsJob_WithSetOutput(TestFile testFileAsOutput, string fileName)
+        {
+            var testFile = GenerateTestFile(testFileAsOutput, fileName);
 
             switch (testFileAsOutput)
             {
+                case TestFile.PDFCreatorTestpageJPG:
+                    _profile.OutputFormat = OutputFormat.Jpeg;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+
                 case TestFile.Cover2PagesSixEmptyPagesPDF:
                 case TestFile.Cover2PagesSixEmptyPagesAttachment3PagesPDF:
                 case TestFile.SixEmptyPagesPDF:
@@ -212,21 +244,44 @@ namespace PDFCreator.TestUtilities
                     _profile.OutputFormat = OutputFormat.Pdf;
                     GenerateGsJob(PSfiles.SixEmptyPages, _profile.OutputFormat);
                     break;
-                case TestFile.TestpagePDFA1b:
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_A_1b:
                     _profile.OutputFormat = OutputFormat.PdfA1B;
                     GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
                     break;
-                case TestFile.TestpagePDFA2b:
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_A_2b:
                     _profile.OutputFormat = OutputFormat.PdfA2B;
                     GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
                     break;
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_X:
+                    _profile.OutputFormat = OutputFormat.PdfX;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+
+                case TestFile.PDFCreatorTestpageTIF:
+                    _profile.OutputFormat = OutputFormat.Tif;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+
+                case TestFile.PDFCreatorTestpageTXT:
+                    _profile.OutputFormat = OutputFormat.Txt;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+
+                case TestFile.PDFCreatorTestpagePNG:
+                    _profile.OutputFormat = OutputFormat.Png;
+                    GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
+                    break;
+                // ReSharper disable once RedundantCaseLabel
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF:
                 default:
                     GenerateGsJob(PSfiles.PDFCreatorTestpage, _profile.OutputFormat);
                     break;
             }
 
-            Job.OutputFiles.Clear();
-            Job.OutputFiles.Add(testFile);
+            Job.OutputFiles = Job.TempOutputFiles;
             Job.TempOutputFiles.Clear();
             Job.TempOutputFiles.Add(testFile);
             Job.OutputFilenameTemplate = testFile;
@@ -272,6 +327,7 @@ namespace PDFCreator.TestUtilities
                     sb.AppendLine("TotalPages=11");
                     sb.AppendLine("Copies=1");
                     break;
+
                 case PSfiles.EmptyPage:
                 case PSfiles.LandscapePage:
                 case PSfiles.PortraitPage:
@@ -279,14 +335,17 @@ namespace PDFCreator.TestUtilities
                     sb.AppendLine("Copies=1");
                     sb.AppendLine("TotalPages=1");
                     break;
+
                 case PSfiles.PortraitLandscapeLandscapeLandscapePortrait:
                     sb.AppendLine("Copies=1");
                     sb.AppendLine("TotalPages=1");
                     break;
+
                 case PSfiles.SixEmptyPages:
                     sb.AppendLine("Copies=6");
                     sb.AppendLine("TotalPages=1");
                     break;
+
                 case PSfiles.ThreePDFCreatorTestpages:
                     sb.AppendLine("Copies=3");
                     sb.AppendLine("TotalPages=1");
@@ -304,13 +363,24 @@ namespace PDFCreator.TestUtilities
             SetUpGhostscript();
             InitMissingData();
 
-            _jobRunner.RunJob(Job);
+            //todo:
+            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), new FileWrap(), new PathUtil(new PathWrap(), new DirectoryWrap()));
+
+            _jobRunner.RunJob(Job, outputFileMover);
         }
 
         private void InitMissingData()
         {
-            var jobDataUpdater = new JobDataUpdater(new TokenReplacerFactory(new DateTimeProvider(), new EnvironmentWrap(), new PathWrap(), new PathUtil(new PathWrap(), new DirectoryWrap())), new PageNumberCalculator(new ITextPdfProcessor(new FileWrap(), new DefaultProcessingPasswordsProvider())), new UserTokenExtractorDummy());
-            jobDataUpdater.UpdateTokensAndMetadata(Job as Job);
+            var jobDataUpdater = new JobDataUpdater(new TokenReplacerFactory(new DateTimeProvider(), new EnvironmentWrap(), new PathWrap(), new PathUtil(new PathWrap(), new DirectoryWrap())), new PageNumberCalculator(new ITextPdfProcessor(new FileWrap())), new UserTokenExtractorDummy());
+
+            jobDataUpdater.UpdateTokensAndMetadata(Job);
+
+            //PDF-Tools does not set empty values when setting the XMP-Metadata for PDF/A.
+            //Our way of testing requires all values to be set, so we need to set content.
+            Job.JobInfo.Metadata.Title = "Test Title";
+            Job.JobInfo.Metadata.Author = "Test Author";
+            Job.JobInfo.Metadata.Keywords = "Test Keywords";
+            Job.JobInfo.Metadata.Subject = "Test Subject";
         }
 
         private void SetUpGhostscript()
@@ -331,81 +401,138 @@ namespace PDFCreator.TestUtilities
 
         /// <summary>
         ///     Creates testfiles according to the TestFile enum and returns its path.
+        ///     Uses testFile name for the file name
         /// </summary>
         /// <param name="testFile">Choose a testfile from the enum</param>
         /// <returns>Path to the created testfile</returns>
         public string GenerateTestFile(TestFile testFile)
         {
-            var testfilePath = Path.Combine(TmpTestFolder, testFile + ".pdf");
+            return GenerateTestFile(testFile, testFile.ToString());
+        }
+
+        public string GenerateTestFile(TestFile testFile, string fileName)
+        {
+            var testFileName = fileName;
+            if (string.IsNullOrWhiteSpace(testFileName))
+            {
+                testFileName = testFile.ToString();
+            }
+
+            var testfilePath = Path.Combine(TmpTestFolder, testFileName + ".pdf");
 
             switch (testFile)
             {
                 case TestFile.Attachment3PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Attachment3PagesPDF);
                     break;
+
                 case TestFile.Background3PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Background3PagesPDF);
                     break;
+
                 case TestFile.CertificationFileP12:
                     testfilePath = testfilePath.Replace(".pdf", ".p12");
                     File.WriteAllBytes(testfilePath, Resources.CertificationFileP12);
                     break;
+
                 case TestFile.CertificationFile_ExpiredP12:
                     testfilePath = testfilePath.Replace(".pdf", ".p12");
                     File.WriteAllBytes(testfilePath, Resources.CertificationFile_ExpiredP12);
                     break;
+
                 case TestFile.Cover2PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Cover2PagesPDF);
                     break;
+
                 case TestFile.Cover2PagesSixEmptyPagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Cover2PagesSixEmptyPagesPDF);
                     break;
+
                 case TestFile.Cover2PagesSixEmptyPagesAttachment3PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.Cover2PagesSixEmptyPagesAttachment3PagesPDF);
                     break;
+
                 case TestFile.FourRotatingPDFCreatorTestpagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.FourRotatingPDFCreatorTestpagesPDF);
                     break;
+
                 case TestFile.PageRotation0PDF:
                     File.WriteAllBytes(testfilePath, Resources.PageRotation0PDF);
                     break;
+
                 case TestFile.PageRotation180PDF:
                     File.WriteAllBytes(testfilePath, Resources.PageRotation180PDF);
                     break;
+
                 case TestFile.PageRotation270PDF:
                     File.WriteAllBytes(testfilePath, Resources.PageRotation270PDF);
                     break;
+
                 case TestFile.PageRotation90PDF:
                     File.WriteAllBytes(testfilePath, Resources.PageRotation90PDF);
                     break;
-                case TestFile.PDFCreatorTestpagePDF:
-                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDF);
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpage_GS9_19_PDF);
                     break;
-                case TestFile.TestpagePDFA1b:
-                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDFA1b);
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_A_1b:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpage_GS9_19_PDF_A_1b);
                     break;
-                case TestFile.TestpagePDFA2b:
-                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePDFA2b);
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_A_2b:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpage_GS9_19_PDF_A_2b);
                     break;
+
+                case TestFile.PDFCreatorTestpage_GS9_19_PDF_X:
+                    File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpage_GS9_19_PDF_X);
+                    break;
+
                 case TestFile.PortraitLandscapeLandscapeLandscapePortraitPDF:
                     File.WriteAllBytes(testfilePath, Resources.PortraitLandscapeLandscapeLandscapePortraitPDF);
                     break;
+
                 case TestFile.SixEmptyPagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.SixEmptyPagesPDF);
                     break;
+
                 case TestFile.SixEmptyPagesAttachment3PagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.SixEmptyPagesAttachment3PagesPDF);
                     break;
+
                 case TestFile.ScriptCopyFilesToDirectoryCMD:
                     testfilePath = testfilePath.Replace(".pdf", ".cmd");
                     File.WriteAllText(testfilePath, Resources.ScriptCopyFilesToDirectoryCMD);
                     break;
+
                 case TestFile.ThreePDFCreatorTestpagesPDF:
                     File.WriteAllBytes(testfilePath, Resources.ThreePDFCreatorTestpagesPDF);
                     break;
+
                 case TestFile.PDFCreatorTestpagePs:
                     testfilePath = testfilePath.Replace(".pdf", ".ps");
                     File.WriteAllBytes(testfilePath, Resources.PDFCreatorTestpagePS);
+                    break;
+
+                case TestFile.PDFCreatorTestpageJPG:
+                    testfilePath = testfilePath.Replace(".pdf", ".jpg");
+                    Resources.PDFCreatorTestpageJPG.Save(testfilePath.Replace(".pdf", ".jpg"));
+                    break;
+
+                case TestFile.PDFCreatorTestpageTIF:
+                    testfilePath = testfilePath.Replace(".pdf", ".tif");
+                    Resources.PDFCreatorTestpageTIF.Save(testfilePath);
+                    break;
+
+                case TestFile.PDFCreatorTestpageTXT:
+                    testfilePath = testfilePath.Replace(".pdf", ".txt");
+                    File.WriteAllText(testfilePath, Resources.PDFCreatorTestpageTXT);
+                    break;
+
+                case TestFile.PDFCreatorTestpagePNG:
+                    testfilePath = testfilePath.Replace(".pdf", ".png");
+                    Resources.PDFCreatorTestpagePNG.Save(testfilePath);
+
                     break;
             }
 
@@ -427,15 +554,20 @@ namespace PDFCreator.TestUtilities
         PageRotation180PDF,
         PageRotation270PDF,
         PageRotation90PDF,
-        PDFCreatorTestpagePDF,
-        TestpagePDFA1b,
-        TestpagePDFA2b,
+        PDFCreatorTestpage_GS9_19_PDF,
+        PDFCreatorTestpage_GS9_19_PDF_A_1b,
+        PDFCreatorTestpage_GS9_19_PDF_A_2b,
+        PDFCreatorTestpage_GS9_19_PDF_X,
         PortraitLandscapeLandscapeLandscapePortraitPDF,
         SixEmptyPagesPDF,
         SixEmptyPagesAttachment3PagesPDF,
         ScriptCopyFilesToDirectoryCMD,
         ThreePDFCreatorTestpagesPDF,
-        PDFCreatorTestpagePs
+        PDFCreatorTestpagePs,
+        PDFCreatorTestpageJPG,
+        PDFCreatorTestpageTIF,
+        PDFCreatorTestpageTXT,
+        PDFCreatorTestpagePNG
     }
 
     public enum PSfiles
