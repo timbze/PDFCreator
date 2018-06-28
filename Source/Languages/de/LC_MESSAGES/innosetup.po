@@ -1,9 +1,3 @@
-msgid "https://license.pdfforge.org"
-msgstr "https://license.pdfforge.org"
-
-msgid "OK"
-msgstr "OK"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: German (PDFCreator)\n"
@@ -15,7 +9,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.0.8\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+
+msgid "https://license.pdfforge.org"
+msgstr "https://license.pdfforge.org"
+
+msgid "OK"
+msgstr "OK"
 
 msgid "Offline activation instructions"
 msgstr "Anleitung zur Offline-Aktivierung"
@@ -469,10 +471,8 @@ msgstr "Der Dienst muss 'license.pdfforge.org' erreichen können sowie Schreibre
 msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
 msgstr "Es wurde kein Lizenzschlüssel angegeben. Ein Lizenzschlüssel in Kombination mit den Parametern '/VerySilent' oder '/Silent' ist zwingend notwendig! Bitte verwenden sie für die Eingabe den Parameter '/%1'.%n%nBeispiel: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
 
-#, fuzzy
-#| msgid "The setup detected that this computer is part of a Windows domain. There is no support for {#Edition} in Windows domains anymore!%n%nPlease use PDFCreator Business. You can find more information here:%nhttp://go.pdfforge.org/pdfcreator-business/upgrade%n%nBy clicking on 'Yes' you confirm you aren't installing {#Edition} in an enterprise environment!"
 msgid "The setup detected that this computer is part of a Windows domain. There is no support for {#Edition} in Windows domains anymore!%n%nPlease use PDFCreator Business. You can find more information here:%nhttps://go.pdfforge.org/pdfcreator-business/upgrade%n%nBy clicking on 'Yes' you confirm you aren't installing {#Edition} in an enterprise environment!"
-msgstr "Das Setup hat festgestellt, dass dieser Computer Teil einer Windows Domäne ist. Es gibt leider keine Unterstützung mehr für {#Edition} unter Windows Domänen.%n%nBitte installieren sie PDFCreator Business. Weitere Informationen dazu finden Sie hier:%nhttp://go.pdfforge.org/pdfcreator-business/upgrade%n%nDurch das Klicken auf 'Ja' bestätigen Sie, dass Sie {#Edition} nicht in einem Unternehmen einsetzen."
+msgstr "Das Setup hat festgestellt, dass dieser Computer Teil einer Windows Domäne ist. Es gibt leider keine Unterstützung mehr für {#Edition} unter Windows Domänen.%n%nBitte installieren sie PDFCreator Business. Weitere Informationen dazu finden Sie hier:%nhttps://go.pdfforge.org/pdfcreator-business/upgrade%n%nDurch das Klicken auf 'Ja' bestätigen Sie, dass Sie {#Edition} nicht in einem Unternehmen einsetzen."
 
 msgid "Access denied (401)"
 msgstr "Nicht autorisiert (401)"
@@ -528,13 +528,13 @@ msgid "Ignore"
 msgstr "Ignorieren"
 
 msgid "To continue the installation on this machine, you will first need to purchase additional licenses.%nTo add more licenses to your existing key, please send your current key and the amount of licenses you'd like to add to licensing@pdfforge.org."
-msgstr ""
+msgstr "Um die Installation auf diesem Computer fortzusetzen, müssen Sie zunächst zusätzliche Lizenzen erwerben.%nUm weitere Lizenzen Ihrem vorhandenen Lizenzschlüssel hinzuzufügen, senden Sie bitte eine E-Mail an licensing@pdfforge.org mit Ihrem aktuellen Lizenzschlüssel und die Anzahl der benötigten Lizenzen."
 
 msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
 msgstr "Installiere Microsoft .Net %1. Dies kann einige Minuten dauern. Bitte haben Sie etwas Geduld."
 
 msgid "To continue with the installation, you need to revoke your previous activations in our license portal license.pdfforge.org.%n%nThis step is required because the new version will generate a different machine ID, which is more resistant towards Windows updates and system changes.%n%nIf you need help, please contact our Support team at support@pdfforge.org."
-msgstr ""
+msgstr "Um mit der Installation fortzufahren, müssen Sie Ihre vorherigen Aktivierungen in unserer Lizenzportal license.pdfforge.org widerrufen.%n%nDieser Schritt ist erforderlich, da die neue Version des PDFCreator eine andere Computer-ID generiert, die gegenüber Windows-Updates und Systemänderungen robuster ist.%n%nFalls Sie Hilfe benötigen, wenden Sie sich bitte an unser Support-Team unter support@pdfforge.org."
 
 msgid "Languages"
 msgstr "Sprachen"

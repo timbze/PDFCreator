@@ -2825,8 +2825,7 @@ msgstr ""
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Additional Parameters:"
 msgstr ""
-"Zusätzliche P\n"
-"arameter:"
+"Zusätzliche Parameter:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Executable Path:"

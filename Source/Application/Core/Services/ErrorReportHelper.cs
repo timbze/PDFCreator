@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Tartaros;
 
 namespace pdfforge.PDFCreator.Core.Services
@@ -63,8 +64,19 @@ namespace pdfforge.PDFCreator.Core.Services
             return report;
         }
 
+        private bool IsIgnoredException(Exception ex)
+        {
+            if (ex is TaskCanceledException && ex.StackTrace.Contains("MS.Internal.WeakEventTable.OnShutDown()"))
+                return true;
+
+            return false;
+        }
+
         public void ShowErrorReport(Exception ex)
         {
+            if (IsIgnoredException(ex))
+                return;
+
             var errorAssistant = CreateErrorAssistant();
             var report = CreateReport(errorAssistant, ex);
 
@@ -73,6 +85,9 @@ namespace pdfforge.PDFCreator.Core.Services
 
         public void ShowErrorReportInNewProcess(Exception ex)
         {
+            if (IsIgnoredException(ex))
+                return;
+
             var errorAssistant = CreateErrorAssistant();
             var report = CreateReport(errorAssistant, ex);
 

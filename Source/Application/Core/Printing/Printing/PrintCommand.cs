@@ -93,7 +93,7 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
         /// <returns>true, if printing was successful</returns>
         public bool Print()
         {
-            return Print(TimeSpan.FromSeconds(60));
+            return Print(TimeSpan.FromSeconds(180));
         }
 
         /// <summary>
