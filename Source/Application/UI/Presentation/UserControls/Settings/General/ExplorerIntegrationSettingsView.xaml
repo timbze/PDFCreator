@@ -63,7 +63,7 @@
                         </Style.Triggers>
                     </Style>
                 </Label.Style>
-                <TextBlock Name="AddToContextMenu" TextWrapping="Wrap"
+                <TextBlock TextWrapping="Wrap"
                            Text="{Binding Translation.AddToContextMenuText}" />
             </Label>
 

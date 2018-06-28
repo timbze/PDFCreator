@@ -12,20 +12,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
     public abstract class ADebugSettingsItemControlModel : TranslatableViewModelBase<DebugSettingsTranslation>
     {
         protected readonly ISettingsManager SettingsManager;
-        protected readonly ICurrentSettingsProvider SettingsProvider;
+        public ICurrentSettingsProvider SettingsProvider { get; private set; }
         
         protected ADebugSettingsItemControlModel(ISettingsManager settingsManager, ITranslationUpdater translationUpdater, ICurrentSettingsProvider settingsProvider, IGpoSettings gpoSettings):base(translationUpdater)
         {
             GpoSettings = gpoSettings;
             SettingsManager = settingsManager;
             SettingsProvider = settingsProvider;
-            ApplicationSettings = settingsProvider.Settings.ApplicationSettings;
         }
 
         public IGpoSettings GpoSettings { get; private set; }
 
-        public ApplicationSettings ApplicationSettings { get; private set; }
- 
         public event EventHandler<SettingsEventArgs> SettingsLoaded;
 
         protected void ApplySettingsProcedure(PdfCreatorSettings settings)
@@ -34,6 +31,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
             SettingsManager.LoadPdfCreatorSettings(); //Load settings to ensure default profile
             SettingsManager.SaveCurrentSettings(); //Save settings again to synch registry with current settings
             SettingsLoaded?.Invoke(this, new SettingsEventArgs(SettingsProvider.Settings));
+            SettingsProvider.Reset();
         }
 
         public class SettingsEventArgs : EventArgs

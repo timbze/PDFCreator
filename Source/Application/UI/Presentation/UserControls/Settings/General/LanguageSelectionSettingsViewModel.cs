@@ -23,6 +23,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
             PreviewTranslationCommand = new DelegateCommand(ExecutePreviewTranslation);
             _translationHelper = translationHelper;
             Languages = languageProvider.GetAvailableLanguages().ToList();
+            SettingsProvider.SettingsChanged += (sender, args) => RaisePropertyChanged(nameof(CurrentLanguage));
         }
 
         public IList<Language> Languages
@@ -42,7 +43,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         {
             get
             {
-                if (ApplicationSettings == null)
+                if (SettingsProvider.Settings?.ApplicationSettings == null)
                     return true;
 
                 return GpoSettings?.Language == null;
@@ -54,17 +55,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         {
             get
             {
-                if (ApplicationSettings == null)
+                if (SettingsProvider.Settings?.ApplicationSettings == null)
                     return null;
 
                 if (GpoSettings?.Language == null)
-                    return ApplicationSettings.Language;
+                    return SettingsProvider.Settings.ApplicationSettings.Language;
 
                 return GpoSettings.Language;
             }
             set
             {
-                ApplicationSettings.Language = value;
+                SettingsProvider.Settings.ApplicationSettings.Language = value;
                
             }
         }

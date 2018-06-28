@@ -243,6 +243,7 @@
     <Compile Include="Helper\Gpo\GPOLockLayerViewModel.cs" />
     <Compile Include="Helper\Gpo\GpoTranslation.cs" />
     <Compile Include="Helper\HightlightColorRegistration.cs" />
+    <Compile Include="Helper\LastSaveDirectoryHelper.cs" />
     <Compile Include="Helper\MailSignature\MailSignatureHelperFreeVersion.cs" />
     <Compile Include="Helper\MailSignature\MailSignatureHelperLicensed.cs" />
     <Compile Include="Helper\MailSignature\MailSignatureHelperTranslation.cs" />
@@ -578,7 +579,7 @@
     <Compile Include="Windows\UpdateDownloadWindowTranslation.cs" />
     <Compile Include="Windows\UpdateDownloadWindowViewModel.cs" />
     <Compile Include="Windows\UpdateManagerTranslation.cs" />
-    <Compile Include="WorkflowQuery\AutosaveTargetFileNameComposer.cs" />
+    <Compile Include="WorkflowQuery\TargetFileNameComposer.cs" />
     <Compile Include="WorkflowQuery\ErrorNotifier.cs" />
     <Compile Include="WorkflowQuery\InteractiveFileNameQuery.cs" />
     <Compile Include="WorkflowQuery\InteractiveWorkflowTranslation.cs" />

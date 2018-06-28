@@ -76,6 +76,11 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
 
             _runIndex++;
 
+            if (e.ResponseStatus == ResponseStatus.Skip)
+            {
+                Next(sender, new MacroCommandIsDoneEventArgs(ResponseStatus.Success));
+            }
+
             if (CommandsList.Count > _runIndex)
             {
                 var command = CommandsList.ElementAt(_runIndex);
@@ -134,6 +139,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
     {
         Success,
         Cancel,
+        Skip,
         Error
     }
 }

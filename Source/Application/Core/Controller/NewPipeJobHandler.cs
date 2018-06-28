@@ -3,8 +3,10 @@ using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
+using pdfforge.PDFCreator.Utilities.Threading;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace pdfforge.PDFCreator.Core.Controller
 {
@@ -12,18 +14,20 @@ namespace pdfforge.PDFCreator.Core.Controller
     {
         private readonly IFileConversionHandler _fileConversionHandler;
         private readonly IJobInfoManager _jobInfoManager;
+        private readonly IThreadManager _threadManager;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IMainWindowThreadLauncher _mainWindowThreadLauncher;
         private readonly ISettingsManager _settingsManager;
 
-        public NewPipeJobHandler(IJobInfoQueue jobInfoQueue, ISettingsManager settingsManager, IFileConversionHandler fileConversionHandler, IMainWindowThreadLauncher mainWindowThreadLauncher, IJobInfoManager jobInfoManager)
+        public NewPipeJobHandler(IJobInfoQueue jobInfoQueue, ISettingsManager settingsManager, IFileConversionHandler fileConversionHandler, IMainWindowThreadLauncher mainWindowThreadLauncher, IJobInfoManager jobInfoManager, IThreadManager threadManager)
         {
             _jobInfoQueue = jobInfoQueue;
             _settingsManager = settingsManager;
             _fileConversionHandler = fileConversionHandler;
             _mainWindowThreadLauncher = mainWindowThreadLauncher;
             _jobInfoManager = jobInfoManager;
+            _threadManager = threadManager;
         }
 
         public void HandlePipeMessage(string message)
@@ -51,7 +55,10 @@ namespace pdfforge.PDFCreator.Core.Controller
         private void HandleDroppedFileMessage(string message)
         {
             var droppedFiles = message.Split('|');
-            _fileConversionHandler.HandleFileList(droppedFiles);
+
+            var threadStart = new ThreadStart(() => _fileConversionHandler.HandleFileList(droppedFiles));
+
+            _threadManager.StartSynchronizedUiThread(threadStart, "PipeDragAndDrop");
         }
 
         private void HandleNewJobMessage(string message)

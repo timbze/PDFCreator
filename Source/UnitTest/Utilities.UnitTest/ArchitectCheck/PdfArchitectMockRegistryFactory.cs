@@ -1,4 +1,4 @@
-using Rhino.Mocks;
+using NSubstitute;
 using System.Collections.Generic;
 using System.IO;
 using SystemInterface.IO;
@@ -10,33 +10,41 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.ArchitectCheck
     {
         private readonly IList<PdfArchitectVersion> _pdfArchitectVersions = new List<PdfArchitectVersion>();
 
-        public IRegistry BuildRegistry()
+        public IRegistry BuildRegistry(bool throwException = false)
         {
-            var hklm = MockRepository.GenerateStub<IRegistryKey>();
+            var hklm = Substitute.For<IRegistryKey>();
 
-            var softwareKey = MockRepository.GenerateStub<IRegistryKey>();
-            var softwareWow64Key = MockRepository.GenerateStub<IRegistryKey>();
+            var softwareKey = Substitute.For<IRegistryKey>();
+            var softwareWow64Key = Substitute.For<IRegistryKey>();
 
             AddArchitectVersionKeys(softwareKey, softwareWow64Key);
 
-            hklm.Stub(x => x.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")).Return(softwareKey);
-            hklm.Stub(x => x.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall")).Return(softwareWow64Key);
+            if (throwException)
+            {
+                hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall").Returns(x => throw new IOException());
+                hklm.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall").Returns(x => throw new IOException());
+            }
+            else
+            {
+                hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall").Returns(softwareKey);
+                hklm.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall").Returns(softwareWow64Key);
+            }
 
-            var registry = MockRepository.GenerateStub<IRegistry>();
-            registry.Stub(x => x.LocalMachine).Return(hklm);
+            var registry = Substitute.For<IRegistry>();
+            registry.LocalMachine.Returns(hklm);
 
             return registry;
         }
 
         public IFile BuildFile()
         {
-            var file = MockRepository.GenerateStub<IFile>();
+            var file = Substitute.For<IFile>();
 
             foreach (var pdfArchitectVersion in _pdfArchitectVersions)
             {
                 var version = pdfArchitectVersion;
-                file.Stub(x => x.Exists(Path.Combine(version.InstallLocation, version.ExeName)))
-                    .Return(true);
+                file.Exists(Path.Combine(version.InstallLocation, version.ExeName))
+                    .Returns(true);
             }
 
             return file;
@@ -49,32 +57,42 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.ArchitectCheck
 
             foreach (var pdfArchitectVersion in _pdfArchitectVersions)
             {
-                var versionKey = MockRepository.GenerateStub<IRegistryKey>();
-                versionKey.Stub(x => x.GetValue("DisplayName")).Return(pdfArchitectVersion.DisplayName);
-                versionKey.Stub(x => x.GetValue("InstallLocation")).Return(pdfArchitectVersion.InstallLocation);
-                versionKey.Stub(x => x.GetValue("Publisher")).Return("pdfforge");
+                var versionKey = Substitute.For<IRegistryKey>();
+                versionKey.GetValue("DisplayName").Returns(pdfArchitectVersion.DisplayName);
+                versionKey.GetValue("InstallLocation").Returns(pdfArchitectVersion.InstallLocation);
+                versionKey.GetValue("Publisher").Returns("pdfforge");
 
                 var version = pdfArchitectVersion;
 
+                IRegistryKey mockKey;
+                IList<string> subkeyList;
+
                 if (pdfArchitectVersion.IsWow64)
                 {
-                    softwareWow64Key.Stub(x => x.OpenSubKey(version.SubkeyName)).Return(versionKey);
-                    subkeysWow64.Add(pdfArchitectVersion.SubkeyName);
+                    mockKey = softwareWow64Key;
+                    subkeyList = subkeysWow64;
                 }
                 else
                 {
-                    softwareKey.Stub(x => x.OpenSubKey(version.SubkeyName)).Return(versionKey);
-                    subkeys.Add(pdfArchitectVersion.SubkeyName);
+                    mockKey = softwareKey;
+                    subkeyList = subkeys;
                 }
+
+                subkeyList.Add(pdfArchitectVersion.SubkeyName);
+
+                if (pdfArchitectVersion.ThrowsException)
+                    mockKey.OpenSubKey(version.SubkeyName).Returns(x => throw new IOException());
+                else
+                    mockKey.OpenSubKey(version.SubkeyName).Returns(versionKey);
             }
 
-            softwareKey.Stub(x => x.GetSubKeyNames()).Return(subkeys.ToArray());
-            softwareWow64Key.Stub(x => x.GetSubKeyNames()).Return(subkeysWow64.ToArray());
+            softwareKey.GetSubKeyNames().Returns(subkeys.ToArray());
+            softwareWow64Key.GetSubKeyNames().Returns(subkeysWow64.ToArray());
         }
 
-        public void AddArchitectVersion(string subkeyName, string displayName, string installLocation, string exeName, bool isWow64)
+        public void AddArchitectVersion(string subkeyName, string displayName, string installLocation, string exeName, bool isWow64, bool throwsException = false)
         {
-            _pdfArchitectVersions.Add(new PdfArchitectVersion(subkeyName, displayName, installLocation, exeName, isWow64));
+            _pdfArchitectVersions.Add(new PdfArchitectVersion(subkeyName, displayName, installLocation, exeName, isWow64, throwsException));
         }
     }
 }

@@ -45,7 +45,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
 
         private void SaveIniSettingsExecute(object o)
         {
-            _iniSettingsAssistant.SaveIniSettings(ApplicationSettings);
+            _iniSettingsAssistant.SaveIniSettings(SettingsProvider.Settings.ApplicationSettings);
         }
     }
 }

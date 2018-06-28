@@ -65,7 +65,7 @@ namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
             settingsMananger.GetSettingsProvider().Returns(settingsHelper);
             settingsMananger.When(x => x.ApplyAndSaveSettings(Arg.Any<PdfCreatorSettings>())).Do(x => loadedSettings = x.Arg<PdfCreatorSettings>());
 
-            var iniSettingsLoader = new IniSettingsLoader(settingsMananger, new DataStorageFactory());
+            var iniSettingsLoader = new IniSettingsLoader(new DataStorageFactory());
             var iniSettingsAssistant = new IniSettingsAssistant(invoker, new DesignTimeTranslationUpdater(), settingsMananger, new DataStorageFactory(), iniSettingsLoader);
 
             iniSettingsAssistant.SaveIniSettings(settings.ApplicationSettings);

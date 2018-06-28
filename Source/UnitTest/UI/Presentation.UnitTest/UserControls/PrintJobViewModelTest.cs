@@ -14,6 +14,7 @@ using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
@@ -79,12 +80,13 @@ namespace Presentation.UnitTest.UserControls
         {
             var settingsProvider = Substitute.For<ISettingsProvider>();
             settingsProvider.Settings.Returns(_settings);
-            var tempFolderProvider = Substitute.For<IPathUtil>();
-            tempFolderProvider.MAX_PATH.Returns(259);
+            var pathUtil = Substitute.For<IPathUtil>();
+            pathUtil.MAX_PATH.Returns(259);
+            pathUtil.GetLongDirectoryName(Arg.Any<string>()).Returns(x => Path.GetDirectoryName(x.Arg<string>()));
 
             return new PrintJobViewModel(settingsProvider, new TranslationUpdater(new TranslationFactory(), new ThreadManager()),
                 _jobInfoQueue, _saveFileQuery, _interactionRequest, _profileChecker, _errorCodeInterpreter, new DesignTimeCommandLocator(),
-                null, null, null, tempFolderProvider, _file, null);
+                null, null, null, pathUtil, _file, null, Substitute.For<ILastSaveDirectoryHelper>());
         }
 
         private Job BuildJob(ConversionProfile profile)

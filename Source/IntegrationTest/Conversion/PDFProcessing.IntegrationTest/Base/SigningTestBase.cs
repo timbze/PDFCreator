@@ -6,6 +6,8 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -15,12 +17,13 @@ using System.Threading.Tasks;
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 {
     [TestFixture]
+    [Category("Brittle")]
     public abstract class SigningTestBase
     {
         protected TestHelper TestHelper;
-        protected IPdfProcessor PDFProcessor;
-        protected TimeServerAccount TimeServerAccount;
-        protected Accounts Accounts;
+        protected IPdfProcessor PdfProcessor;
+        private TimeServerAccount _timeServerAccount;
+        private Accounts _accounts;
 
         protected abstract IPdfProcessor BuildPdfProcessor();
 
@@ -29,16 +32,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         [SetUp]
         public void SetUp()
         {
-            PDFProcessor = BuildPdfProcessor();
+            PdfProcessor = BuildPdfProcessor();
 
             var bootstrapper = new IntegrationTestBootstrapper();
             var container = bootstrapper.ConfigureContainer();
-            Accounts = new Accounts();
-            TimeServerAccount = new TimeServerAccount();
-            Accounts.TimeServerAccounts.Add(TimeServerAccount);
+            _accounts = new Accounts();
+            _timeServerAccount = new TimeServerAccount();
+            _accounts.TimeServerAccounts.Add(_timeServerAccount);
 
             TestHelper = container.GetInstance<TestHelper>();
-            TestHelper.InitTempFolder($"PDFProcessing_{PDFProcessor.GetType().Name}_Signing");
+            TestHelper.InitTempFolder($"PDFProcessing_{PdfProcessor.GetType().Name}_Signing");
 
             TestHelper.GenerateGsJob_WithSetOutput(TestFile.ThreePDFCreatorTestpagesPDF);
             TestHelper.Job.Profile.PdfSettings.Signature.AllowMultiSigning = true;
@@ -48,7 +51,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 
         private void ApplySignatureSettings()
         {
-            TestHelper.Job.Accounts = Accounts;
+            TestHelper.Job.Accounts = _accounts;
             TestHelper.Job.Profile.PdfSettings.Signature.Enabled = true;
 
             TestHelper.Job.Profile.PdfSettings.Signature.CertificateFile = TestHelper.GenerateTestFile(TestFile.CertificationFileP12);
@@ -65,11 +68,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignLocation = "Testland";
             TestHelper.Job.Profile.PdfSettings.Signature.SignReason = "The Reason is Testing";
 
-            TimeServerAccount.AccountId = "TestAccountId";
-            TimeServerAccount.Url = "https://freetsa.org/tsr";
-            TimeServerAccount.IsSecured = false;
+            _timeServerAccount.AccountId = "TestAccountId";
+            _timeServerAccount.Url = "https://freetsa.org/tsr";
+            _timeServerAccount.IsSecured = false;
 
-            TestHelper.Job.Profile.PdfSettings.Signature.TimeServerAccountId = TimeServerAccount.AccountId;
+            TestHelper.Job.Profile.PdfSettings.Signature.TimeServerAccountId = _timeServerAccount.AccountId;
         }
 
         [TearDown]
@@ -81,51 +84,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 
         #region TimeServer
 
+        private void TestTimeServer(string timeserverUrl)
+        {
+            // This test can be brittle, so we retry it first to make this more resilient to network issues
+            Retry.Do(() => DoTestTimeServer(timeserverUrl), TimeSpan.FromSeconds(5), retryCount: 5);
+        }
+
+        private void DoTestTimeServer(string timeserverUrl)
+        {
+            TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
+            _timeServerAccount.Url = timeserverUrl;
+
+            PdfProcessor.ProcessPdf(TestHelper.Job);
+
+            SigningTester.TestSignature(TestHelper.Job);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
+        }
+
         [Test]
         public void TimeServer_GlobalSign()
         {
-            TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            TimeServerAccount.Url = "http://timestamp.globalsign.com/scripts/timestamp.dll";
-
-            TimeServerAccount.IsSecured = true;
-            TimeServerAccount.UserName = "UserName";
-            TimeServerAccount.Password = "TimeServerPassword";
-
-            PDFProcessor.ProcessPdf(TestHelper.Job);
-
-            SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            TestTimeServer("http://timestamp.globalsign.com/scripts/timestamp.dll");
         }
 
         [Test]
         public void TimeServer_DigiCert()
         {
-            TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            TimeServerAccount.Url = "http://timestamp.digicert.com";
-
-            TimeServerAccount.IsSecured = true;
-            TimeServerAccount.UserName = "UserName";
-            TimeServerAccount.Password = "TimeServerPassword";
-
-            PDFProcessor.ProcessPdf(TestHelper.Job);
-
-            SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            TestTimeServer("http://timestamp.digicert.com");
         }
 
         [Test]
         public void TimeServer_FreeTSA()
         {
-            TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
-
-            TimeServerAccount.IsSecured = true;
-            TimeServerAccount.UserName = "UserName";
-            TimeServerAccount.Password = "TimeServerPassword";
-
-            PDFProcessor.ProcessPdf(TestHelper.Job);
-
-            SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            TestTimeServer("https://freetsa.org/tsr");
         }
 
         #endregion TimeServer
@@ -136,16 +127,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         public void SigningPdf_SecuredTimeServerEnabled_TimeserverDoesNotRequireLogin()
         {
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            TimeServerAccount.Url = "http://timestamp.globalsign.com/scripts/timestamp.dll";
+            _timeServerAccount.Url = "http://timestamp.globalsign.com/scripts/timestamp.dll";
 
-            TimeServerAccount.IsSecured = true;
-            TimeServerAccount.UserName = "UserName";
-            TimeServerAccount.Password = "TimeServerPassword";
+            _timeServerAccount.IsSecured = true;
+            _timeServerAccount.UserName = "UserName";
+            _timeServerAccount.Password = "TimeServerPassword";
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
@@ -156,10 +147,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignaturePage = SignaturePage.CustomPage;
             TestHelper.Job.Profile.PdfSettings.Signature.SignatureCustomPage = 5;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
@@ -172,10 +163,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignLocation = "Tästlènd";
             TestHelper.Job.Profile.PdfSettings.Signature.SignReason = "The Réßön is Tästing";
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
@@ -186,10 +177,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignaturePage = SignaturePage.FirstPage;
             TestHelper.Job.Profile.PdfSettings.Signature.SignatureCustomPage = 2;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
@@ -198,10 +189,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
             TestHelper.Job.Profile.PdfSettings.Signature.DisplaySignatureInDocument = false;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
@@ -212,19 +203,19 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignaturePage = SignaturePage.LastPage;
             TestHelper.Job.Profile.PdfSettings.Signature.SignatureCustomPage = 2;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         [Test]
         public void SigningPdf_UnavailableTimeServer_ThrowsProcessingException()
         {
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            TimeServerAccount.Url = "http://timestamp.HOPEFULLY.NEVER.EXISTS/timestamp.dll";
+            _timeServerAccount.Url = "http://timestamp.HOPEFULLY.NEVER.EXISTS/timestamp.dll";
 
-            var ex = Assert.Throws<ProcessingException>(() => PDFProcessor.ProcessPdf(TestHelper.Job));
+            var ex = Assert.Throws<ProcessingException>(() => PdfProcessor.ProcessPdf(TestHelper.Job));
             Assert.AreEqual(ErrorCode.Signature_NoTimeServerConnection, ex.ErrorCode, "Wrong error code for unavailable time server");
         }
 
@@ -234,7 +225,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
             TestHelper.Job.Passwords.PdfSignaturePassword = "Invalid certificate Password";
 
-            var ex = Assert.Throws<ProcessingException>(() => PDFProcessor.ProcessPdf(TestHelper.Job));
+            var ex = Assert.Throws<ProcessingException>(() => PdfProcessor.ProcessPdf(TestHelper.Job));
             Assert.AreEqual(ErrorCode.Signature_WrongCertificatePassword, ex.ErrorCode, "Wrong error code for wrong certificate password");
         }
 
@@ -252,11 +243,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
             TestHelper.Job.Profile.PdfSettings.Signature.DisplaySignatureInDocument = true;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
             SigningTester.TestSignature(TestHelper.Job);
-            var multiSignedFile = SigningTester.TestMultipleSigning(TestHelper.Job, PDFProcessor);
+            var multiSignedFile = SigningTester.TestMultipleSigning(TestHelper.Job, PdfProcessor);
 
             Process.Start(multiSignedFile);
             Debugger.Break();
@@ -276,11 +267,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
             TestHelper.Job.Profile.PdfSettings.Signature.DisplaySignatureInDocument = true;
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
             SigningTester.TestSignature(TestHelper.Job);
-            var multiSignedFile = SigningTester.TestMultipleSigning(TestHelper.Job, PDFProcessor);
+            var multiSignedFile = SigningTester.TestMultipleSigning(TestHelper.Job, PdfProcessor);
 
             Process.Start(multiSignedFile);
             Debugger.Break();
@@ -296,10 +287,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF_X);
             ApplySignatureSettings();
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         #endregion PDF/X
@@ -312,10 +303,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF_A_1b);
             ApplySignatureSettings();
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         #endregion PDF/A1-b
@@ -328,10 +319,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.GenerateGsJob_WithSetOutput(TestFile.PDFCreatorTestpage_GS9_19_PDF_A_2b);
             ApplySignatureSettings();
 
-            PDFProcessor.ProcessPdf(TestHelper.Job);
+            PdfProcessor.ProcessPdf(TestHelper.Job);
 
             SigningTester.TestSignature(TestHelper.Job);
-            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PDFProcessor);
+            PdfVersionTester.CheckPDFVersion(TestHelper.Job, PdfProcessor);
         }
 
         #endregion PDF/A2-b
@@ -341,6 +332,14 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         [Test]
         public void Test_Parallel_Signing()
         {
+            // This test can be brittle, so we retry it first to make this more resilient to issues
+            Retry.Do(DoParallelSigning, TimeSpan.FromSeconds(5), retryCount: 5);
+        }
+
+        private void DoParallelSigning()
+        {
+            _timeServerAccount.Url = "http://timestamp.digicert.com";
+
             var tmpfolder = Path.Combine(TestHelper.TmpTestFolder, "output");
             int numTests = 10;
 
@@ -357,7 +356,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
                 var pdfFile = Path.Combine(tmpfolder, $"{i:D5}.pdf");
                 File.Copy(TestHelper.Job.TempOutputFiles[0], pdfFile);
 
-                var job = new Job(new JobInfo(), TestHelper.Job.Profile, new JobTranslations(), Accounts);
+                var job = new Job(new JobInfo(), TestHelper.Job.Profile, new JobTranslations(), _accounts);
                 job.Passwords = TestHelper.Job.Passwords;
                 job.TempOutputFiles.Add(pdfFile);
 
@@ -372,6 +371,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             });
 
             jobs.ForEach(SigningTester.TestSignature);
+
+            FinalizePdfProcessor();
         }
 
         #endregion Parallel

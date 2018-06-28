@@ -44,8 +44,23 @@ namespace pdfforge.PDFCreator.UI.Presentation.Commands
 
         private void ResolveInteractionResult(ValidateContinueWithSavingInteraction interactionResult)
         {
-            var responseStatus = interactionResult.Response == MessageResponse.Yes ? ResponseStatus.Success : ResponseStatus.Cancel;
-            IsDone?.Invoke(this, new MacroCommandIsDoneEventArgs(responseStatus));
+            var macroResult = ResponseStatus.Success;
+            switch (interactionResult.Response)
+            {
+                case MessageResponse.Yes:
+                    macroResult = ResponseStatus.Success;
+                    break;
+
+                case MessageResponse.No:
+                    _settingsProvider.Reset();
+                    macroResult = ResponseStatus.Skip;
+                    break;
+
+                case MessageResponse.Cancel:
+                    macroResult = ResponseStatus.Cancel;
+                    break;
+            }
+            IsDone?.Invoke(this, new MacroCommandIsDoneEventArgs(macroResult));
         }
 
         public event EventHandler<MacroCommandIsDoneEventArgs> IsDone;

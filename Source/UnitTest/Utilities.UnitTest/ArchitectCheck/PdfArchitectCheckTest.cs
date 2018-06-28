@@ -230,5 +230,18 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.ArchitectCheck
 
             Assert.IsFalse(isInstalled);
         }
+
+        [Test]
+        public void InstallationPath_WithIOException_DoesNotthrowException()
+        {
+            var factory = new PdfArchitectMockRegistryFactory();
+            factory.AddArchitectVersion("000", "PDF Architect 3", @"C:\Program Files\PDF Architect 3", "architect.exe", isWow64: false, throwsException: true);
+            var registryMock = factory.BuildRegistry(throwException: true);
+            var fileMock = factory.BuildFile();
+
+            var architectCheck = new PdfArchitectCheck(registryMock, fileMock);
+
+            Assert.DoesNotThrow(() => architectCheck.GetInstallationPath());
+        }
     }
 }

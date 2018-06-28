@@ -137,7 +137,7 @@ namespace Presentation.UnitTest.UserControls.GeneralSettings
             var viewModel = BuildViewModel();
 
             viewModel.CurrentLanguage = language;
-            Assert.AreEqual(viewModel.ApplicationSettings.Language, language);
+            Assert.AreEqual(_currentSettingsProvider.Settings.ApplicationSettings.Language, language);
         }
 
         [Test]

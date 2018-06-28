@@ -40,7 +40,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.PdfTools
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;
             TestHelper.Job.Profile.PdfSettings.Signature.CertificateFile = TestHelper.GenerateTestFile(TestFile.CertificationFile_ExpiredP12);
 
-            var ex = Assert.Throws<ProcessingException>(() => PDFProcessor.ProcessPdf(TestHelper.Job));
+            var ex = Assert.Throws<ProcessingException>(() => PdfProcessor.ProcessPdf(TestHelper.Job));
             Assert.AreEqual(ErrorCode.Signature_Invalid, ex.ErrorCode, "Wrong error code for expired certificate/signature");
         }
     }

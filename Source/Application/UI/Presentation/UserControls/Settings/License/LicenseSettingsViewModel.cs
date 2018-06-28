@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NLog;
 using Optional;
 using pdfforge.LicenseValidator.Interface;
 using pdfforge.LicenseValidator.Interface.Data;
@@ -19,7 +21,6 @@ using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.TabHelper;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
-using Prism.Mvvm;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License
 {
@@ -68,6 +69,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License
 
     public class LicenseSettingsViewModel : TranslatableViewModelBase<LicenseSettingsTranslation>, ITabViewModel
     {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
+
         public delegate void CloseLicenseWindow(object sender, ActivationResponseEventArgs e);
 
         private readonly IDispatcher _dispatcher;
@@ -224,7 +227,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License
                 {
                     var activation = _offlineActivator.ValidateOfflineActivationString(interaction.LicenseServerAnswer);
 
-                    activation.MatchSome(a => _offlineActivator.SaveActivation(a));
+                    try
+                    {
+                        activation.MatchSome(a => _offlineActivator.SaveActivation(a));
+                    }
+                    catch (SecurityException)
+                    {
+                        _logger.Info("Can't save activation. Please share the license for all users.");
+                    }
                     //Just to show in UI
                     //LicenseChecker in UpdateActivation can't save activation
                     UpdateActivation(activation);

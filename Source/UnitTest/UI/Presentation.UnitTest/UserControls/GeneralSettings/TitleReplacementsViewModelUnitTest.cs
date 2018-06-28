@@ -63,7 +63,6 @@ namespace Presentation.UnitTest.UserControls.GeneralSettings
         [Test]
         public void BuildViewModel_PropertiesAreSet()
         {
-            _settingsProvider = null;
             var viewModel = BuildViewModel();
             Assert.AreEqual(viewModel.SampleText, "Microsoft Word - Sample Text.doc");
             Assert.AreEqual(viewModel.ReplacedSampleText, "Microsoft Word - Sample Text.doc");

@@ -11,12 +11,13 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
     {
         public AGeneralSettingsItemControlModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider settingsProvider, IGpoSettings gpoSettings):base(translationUpdater)
         {
-            ApplicationSettings = settingsProvider.Settings?.ApplicationSettings;
+            SettingsProvider = settingsProvider;
             GpoSettings = gpoSettings;
         }
 
-        public ApplicationSettings ApplicationSettings { get; private set; }
+        //public ApplicationSettings ApplicationSettings { get; private set; }
 
+        public ICurrentSettingsProvider SettingsProvider { get; }
         protected IGpoSettings GpoSettings { get; }
 
     }

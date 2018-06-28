@@ -6,6 +6,7 @@
         xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
         xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
         MaxWidth="600"
+        Background="{x:Static SystemColors.ControlBrush}"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designTime:DesignTimeMessageUserControlViewModel, IsDesignTimeCreatable=True}">
     <UserControl.CommandBindings>
@@ -32,22 +33,29 @@
             <TextBlock Name="MessageText" Margin="10,20,20,20" VerticalAlignment="Center" TextWrapping="Wrap"
                        MinWidth="100" MaxWidth="425" Text="{Binding Interaction.Text}" />
         </StackPanel>
-        <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal"
-                    Background="{x:Static SystemColors.ControlBrush}">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                Name="LeftButton"
+                Command="{Binding ButtonLeftCommand}"
+                Content="{Binding LeftButtonContent}"
+                Margin="10"
+                IsDefault="True"
+                Padding="10"
+                MinWidth="60" />
+            <Button
+                Name="MiddleButton"
+                Command="{Binding ButtonMiddleCommand}"
+                Content="{Binding MiddleButtonContent}"
+                Visibility="{Binding ShowMiddleButton, Converter={StaticResource BoolToVisibilityConverter}}"
+                Margin="10"
+                Padding="10"
+                MinWidth="60" />
             <Button
                 Name="RightButton"
                 Command="{Binding ButtonRightCommand}"
                 Content="{Binding RightButtonContent}"
                 Visibility="{Binding ButtonRightCommand.IsExecutable, Converter={StaticResource BoolToVisibilityConverter}}"
-                Margin="10,10,5,10"
-                Padding="10"
-                MinWidth="60" />
-            <Button
-                Name="LeftButton"
-                Command="{Binding ButtonLeftCommand}"
-                Content="{Binding LeftButtonContent}"
-                Margin="5,10,20,10"
-                IsDefault="True"
+                Margin="10"
                 Padding="10"
                 MinWidth="60" />
         </StackPanel>

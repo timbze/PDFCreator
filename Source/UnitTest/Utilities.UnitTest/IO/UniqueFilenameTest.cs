@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using pdfforge.PDFCreator.Utilities.IO;
 using System;
+using System.IO;
 using SystemInterface.IO;
 using SystemWrapper.IO;
 
@@ -17,6 +18,18 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
             _file = Substitute.For<IFile>();
             _pathUtil = Substitute.For<IPathUtil>();
             _pathUtil.MAX_PATH.Returns(259);
+            _pathUtil.GetLongDirectoryName(Arg.Any<string>()).ReturnsForAnyArgs(x =>
+            {
+                var str = x[0] as string;
+                try
+                {
+                    return str.Substring(0, str.LastIndexOf('\\')) + "\\";
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            });
         }
 
         private IDirectory _directory;
@@ -30,18 +43,14 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
             const string fileName13Chars = "File12345.pdf";
             var pathWrapSafe = new PathWrapSafe();
             //Combine adds a "\" so the result is the max path lengh of 260
-            var fileMaxLengthPath = pathWrapSafe.Combine(dir245Chars, fileName13Chars);
-
-            var fileMaxLengthPathWithAppendix =
-                @"C:\ThisIsAVeryLongFileNameBecauseItHasMoreThan150CharactersAndToReachThatIHaveToWriteALotMoreTextThanICanThinkAboutRightNowIfYouReadThisUpToHereIOwnYouALittleSnackAndIStillNeedAFewMoreCharactersLetsSimplyCountOneTwoThreeFourFiveSixSevenEightNine\File12345_2.pdf";
+            var tooLongPath = pathWrapSafe.Combine(dir245Chars, fileName13Chars);
 
             _file.Exists("").ReturnsForAnyArgs(x => true, x => false);
             _directory.Exists("").ReturnsForAnyArgs(false);
 
-            var uniqueFilename = new UniqueFilename(fileMaxLengthPath, _directory, _file, _pathUtil);
-            uniqueFilename.CreateUniqueFileName();
+            var uniqueFilename = new UniqueFilename(tooLongPath, _directory, _file, _pathUtil);
 
-            _pathUtil.Received().EllipsisForTooLongPath(fileMaxLengthPathWithAppendix);
+            Assert.Throws<PathTooLongException>(() => uniqueFilename.CreateUniqueFileName());
         }
 
         [Test]

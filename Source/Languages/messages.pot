@@ -1652,6 +1652,10 @@ msgid_plural "The account is used in the following profiles:"
 msgstr[0] ""
 msgstr[1] ""
 
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "Set Timeout"
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "HTTP"
 msgstr ""
@@ -1918,20 +1922,20 @@ msgstr ""
 msgid "Title from Settings"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
-msgid "Please save or cancel settings to continue"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "Set by Administrator"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "Disabled by Administrator"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "These settings have been set by your administrator and can't be changed."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
+msgid "Please save or cancel settings to continue"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation

@@ -8,7 +8,7 @@ using pdfforge.PDFCreator.UI.Presentation.UserControls.Misc;
 using System.Collections.Generic;
 using System.Media;
 
-namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
+namespace Presentation.UnitTest.UserControls.Dialogs
 {
     [TestFixture]
     internal class MessageUserControlViewModelTest
@@ -28,6 +28,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
         [TestCase(MessageOptions.OKCancel, MessageResponse.OK)]
         [TestCase(MessageOptions.RetryCancel, MessageResponse.Retry)]
         [TestCase(MessageOptions.YesNo, MessageResponse.Yes)]
+        [TestCase(MessageOptions.YesNoCancel, MessageResponse.Yes)]
         public void ExecuteButtonLeft_ForDifferentMessageOptions_SetsResponseAndCallsFinish(MessageOptions option, MessageResponse response)
         {
             var finishWasCalled = false;
@@ -41,10 +42,25 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             Assert.IsTrue(finishWasCalled);
         }
 
+        [TestCase(MessageOptions.YesNoCancel, MessageResponse.No)]
+        public void ExecuteButtonMiddle_ForDifferentMessageOptions_SetsResponseAndCallsFinish(MessageOptions option, MessageResponse response)
+        {
+            var finishWasCalled = false;
+            _viewModel.FinishInteraction = () => finishWasCalled = true;
+
+            var interaction = new MessageInteraction("message", "title", option, MessageIcon.Info);
+            _viewModel.SetInteraction(interaction);
+            _viewModel.ButtonMiddleCommand.Execute(null);
+
+            Assert.AreEqual(response, _viewModel.Interaction.Response);
+            Assert.IsTrue(finishWasCalled);
+        }
+
         [TestCase(MessageOptions.MoreInfoCancel, MessageResponse.Cancel)]
         [TestCase(MessageOptions.OKCancel, MessageResponse.Cancel)]
         [TestCase(MessageOptions.RetryCancel, MessageResponse.Cancel)]
         [TestCase(MessageOptions.YesNo, MessageResponse.No)]
+        [TestCase(MessageOptions.YesNoCancel, MessageResponse.Cancel)]
         public void ExecuteButtonRight_ForDifferentMessageOptions_SetsResponseAndCallsFinish(MessageOptions option, MessageResponse response)
         {
             var finishWasCalled = false;
@@ -58,11 +74,26 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
             Assert.IsTrue(finishWasCalled);
         }
 
+        [TestCase(MessageOptions.YesNoCancel, true)]
+        [TestCase(MessageOptions.MoreInfoCancel, false)]
+        [TestCase(MessageOptions.OK, false)]
+        [TestCase(MessageOptions.OKCancel, false)]
+        [TestCase(MessageOptions.RetryCancel, false)]
+        [TestCase(MessageOptions.YesNo, false)]
+        public void Check_ShowMiddleButton(MessageOptions option, bool isVisible)
+        {
+            var interaction = new MessageInteraction("message", "title", option, MessageIcon.Info);
+            _viewModel.SetInteraction(interaction);
+
+            Assert.AreEqual(isVisible, _viewModel.ShowMiddleButton);
+        }
+
         [TestCase(MessageOptions.MoreInfoCancel, "More information", null, "Cancel")]
         [TestCase(MessageOptions.OK, "OK", null, null)]
         [TestCase(MessageOptions.OKCancel, "OK", null, "Cancel")]
         [TestCase(MessageOptions.RetryCancel, "Retry", null, "Cancel")]
         [TestCase(MessageOptions.YesNo, "Yes", null, "No")]
+        [TestCase(MessageOptions.YesNoCancel, "Yes", "No", "Cancel")]
         public void ButtonContentsAreSetAccordingToInteraction(MessageOptions option, string left, string middle, string right)
         {
             var interaction = new MessageInteraction("message", "title", option, MessageIcon.Info);
@@ -165,6 +196,7 @@ namespace pdfforge.PDFCreator.UnitTest.UI.ViewModels.DialogViewModels
 
             Assert.IsTrue(propertyChangedList.Contains(nameof(_viewModel.Icon)));
             Assert.IsTrue(propertyChangedList.Contains(nameof(_viewModel.IconSize)));
+            Assert.IsTrue(propertyChangedList.Contains(nameof(_viewModel.ShowMiddleButton)));
         }
     }
 }

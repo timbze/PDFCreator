@@ -43,14 +43,23 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         {
             _logger.Debug("Launched Script-Action");
 
-            var scriptFile = _path.GetFullPath(ComposeScriptPath(job.Profile.Scripting.ScriptFile, job.TokenReplacer));
-
             var actionResult = Check(job.Profile, job.Accounts);
             if (!actionResult)
                 return actionResult;
 
+            _logger.Debug("Script-File in Profile: " + job.Profile.Scripting.ScriptFile);
+            var scriptFile = ComposeScriptPath(job.Profile.Scripting.ScriptFile, job.TokenReplacer);
+            scriptFile = _path.GetFullPath(scriptFile);
+            _logger.Debug("Composed Script-File: " + scriptFile);
+
+            if (!_file.Exists(scriptFile))
+            {
+                _logger.Error($"The composed Script-File: \'{scriptFile}\' does not exist");
+                actionResult.Add(ErrorCode.Script_FileDoesNotExist);
+                return actionResult;
+            }
+
             IProcess process = _processStarter.CreateProcess(scriptFile);
-            _logger.Debug("Script-File: " + scriptFile);
 
             var parameters = ComposeScriptParameters(job.Profile.Scripting.ParameterString, job.OutputFiles, job.TokenReplacer);
 
@@ -109,31 +118,31 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             if (!profile.Scripting.Enabled)
                 return actionResult;
 
-            var tokenReplacer = new TokenReplacer();
-            tokenReplacer.AddToken(new EnvironmentToken());
-
-            var validName = new ValidName();
-
-            var scriptFile = ComposeScriptPath(profile.Scripting.ScriptFile, tokenReplacer);
-
-            if (string.IsNullOrEmpty(scriptFile))
+            if (string.IsNullOrWhiteSpace(profile.Scripting.ScriptFile))
             {
                 _logger.Error("Missing script file.");
                 actionResult.Add(ErrorCode.Script_NoScriptFileSpecified);
                 return actionResult;
             }
 
-            if (!validName.IsValidFilename(scriptFile))
+            //Skip check for Tokens
+            if (TokenIdentifier.ContainsTokens(profile.Scripting.ScriptFile))
+                return actionResult;
+
+            if (!ValidName.IsValidPath(profile.Scripting.ScriptFile))
             {
-                _logger.Error("The script file \"" + scriptFile + "\" contains illegal characters.");
+                _logger.Error("The script file \"" + profile.Scripting.ScriptFile + "\" contains illegal characters.");
                 actionResult.Add(ErrorCode.Script_IllegalCharacters);
                 return actionResult;
             }
 
             //Skip check for network path
-            if (!scriptFile.StartsWith(@"\\") && !_file.Exists(scriptFile))
+            if (profile.Scripting.ScriptFile.StartsWith(@"\\"))
+                return actionResult;
+
+            if (!_file.Exists(profile.Scripting.ScriptFile))
             {
-                _logger.Error("The script file \"" + scriptFile + "\" does not exist.");
+                _logger.Error("The script file \"" + profile.Scripting.ScriptFile + "\" does not exist.");
                 actionResult.Add(ErrorCode.Script_FileDoesNotExist);
                 return actionResult;
             }
@@ -143,9 +152,8 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
         public string ComposeScriptPath(string path, TokenReplacer tokenReplacer)
         {
-            var validName = new ValidName();
             var composedPath = tokenReplacer.ReplaceTokens(path);
-            composedPath = validName.MakeValidFolderName(composedPath);
+            composedPath = ValidName.MakeValidFolderName(composedPath);
 
             return composedPath;
         }

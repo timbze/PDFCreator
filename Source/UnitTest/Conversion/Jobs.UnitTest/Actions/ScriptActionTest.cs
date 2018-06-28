@@ -12,64 +12,107 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
     [TestFixture]
     internal class ScriptActionTest
     {
+        private ConversionProfile _profile;
+        private IFile _file;
+        private IPath _path;
+        private IProcessStarter _processStarter;
+        private ScriptAction _scriptAction;
+        private Accounts _unusedAccounts;
+
         [SetUp]
         public void Setup()
         {
             _profile = new ConversionProfile();
 
             _file = Substitute.For<IFile>();
+            _file.Exists(Arg.Any<string>()).Returns(true);
             _processStarter = Substitute.For<IProcessStarter>();
             _path = Substitute.For<IPath>();
-
             _scriptAction = new ScriptAction(_path, _processStarter, _file);
         }
 
-        private ConversionProfile _profile;
-        private IFile _file;
-        private IPath _path;
-        private IProcessStarter _processStarter;
-        private ScriptAction _scriptAction;
+        [Test]
+        public void Check_ValidScriptSettings()
+        {
+            _profile.Scripting.Enabled = true;
+            _profile.Scripting.ScriptFile = "ScriptfileDummy.exe";
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
+        }
 
         [Test]
-        public void ScriptSettings_NoScriptFile()
+        public void Check_ScriptActionDisabled_ResultIsTrue()
+        {
+            _profile.Scripting.Enabled = false;
+            _profile.Scripting.ScriptFile = string.Empty;
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
+        }
+
+        [Test]
+        public void Check_NoScriptFile()
         {
             _profile.Scripting.Enabled = true;
             _profile.Scripting.ScriptFile = "";
 
-            var result = _scriptAction.Check(_profile, new Accounts());
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
             Assert.Contains(ErrorCode.Script_NoScriptFileSpecified, result, "did not detect missing script file.");
             result.Remove(ErrorCode.Script_NoScriptFileSpecified);
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
 
         [Test]
-        public void ScriptSettings_NotExistingScriptFile()
+        public void Check_ScripFileContainsToken_ResultIsTrue()
+        {
+            _profile.Scripting.Enabled = true;
+            _profile.Scripting.ScriptFile = "Folder\\<Token>\\Script.exe";
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
+        }
+
+        [Test]
+        public void Check_InvalidFileName()
+        {
+            _profile.Scripting.Enabled = true;
+            _profile.Scripting.ScriptFile = "Illegal Char < ";
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
+            Assert.Contains(ErrorCode.Script_IllegalCharacters, result, "did not detect illegel char in script file.");
+            result.Remove(ErrorCode.Script_IllegalCharacters);
+            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
+        }
+
+        [Test]
+        public void Check_NotExistingSkriptFileInNetworkPath_ResultIsTrue()
+        {
+            _profile.Scripting.Enabled = true;
+            _profile.Scripting.ScriptFile = "\\\\NetworkPath\\Doesnotexist.exe";
+            _file.Exists(_profile.Scripting.ScriptFile).Returns(false);
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
+        }
+
+        [Test]
+        public void Check_NotExistingScriptFile()
         {
             _profile.Scripting.Enabled = true;
             _profile.Scripting.ScriptFile = "Doesnotexist.exe";
-            var result = _scriptAction.Check(_profile, new Accounts());
+            _file.Exists(_profile.Scripting.ScriptFile).Returns(false);
+
+            var result = _scriptAction.Check(_profile, _unusedAccounts);
+
             Assert.Contains(ErrorCode.Script_FileDoesNotExist, result, "did not detect, that the script file does not exist.");
             result.Remove(ErrorCode.Script_FileDoesNotExist);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void ScriptSettings_NotExistingSkriptFileInNetworkPath()
-        {
-            _profile.Scripting.Enabled = true;
-            _profile.Scripting.ScriptFile = @"\\notexistingnetworkpath_3920ß392932013912\does_not_exist_3912839021830.exe";
-            var result = _scriptAction.Check(_profile, new Accounts());
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void ScriptSettings_valid()
-        {
-            _profile.Scripting.Enabled = true;
-            const string testFile = "ScriptfileDummy.exe";
-            _file.Exists(testFile).Returns(true);
-            _profile.Scripting.ScriptFile = testFile;
-            var result = _scriptAction.Check(_profile, new Accounts());
             Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
         }
     }

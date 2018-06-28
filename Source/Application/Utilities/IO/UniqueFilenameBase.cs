@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SystemInterface.IO;
 using SystemWrapper.IO;
 
@@ -21,13 +22,16 @@ namespace pdfforge.PDFCreator.Utilities.IO
         public UniqueFilenameBase(string originalFilename, IPathUtil pathUtil)
         {
             if (originalFilename == null)
-                throw new ArgumentNullException(nameof(originalFilename));
+                throw new ArgumentNullException();
+
+            if (string.IsNullOrWhiteSpace(originalFilename))
+                throw new ArgumentException(nameof(originalFilename));
 
             _pathUtil = pathUtil;
 
             OriginalFilename = originalFilename;
             LastUniqueFilename = originalFilename;
-            _directory = _pathSafe.GetDirectoryName(OriginalFilename) ?? "";
+            _directory = _pathUtil.GetLongDirectoryName(OriginalFilename) ?? "";
             _fileBody = _pathSafe.GetFileNameWithoutExtension(OriginalFilename);
             _extension = _pathSafe.GetExtension(OriginalFilename);
         }
@@ -48,10 +52,9 @@ namespace pdfforge.PDFCreator.Utilities.IO
                 _appendix++;
                 if (LastUniqueFilename.Length > _pathUtil.MAX_PATH)
                 {
-                    LastUniqueFilename = _pathUtil.EllipsisForTooLongPath(LastUniqueFilename);
+                    throw new PathTooLongException("Can not create useful unique filename for too long path: " + LastUniqueFilename);
                 }
             }
-
             return LastUniqueFilename;
         }
 

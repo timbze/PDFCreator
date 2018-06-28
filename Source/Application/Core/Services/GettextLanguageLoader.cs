@@ -68,7 +68,7 @@ namespace pdfforge.PDFCreator.Core.Services
         public string GetTranslationFileIfExists(string language)
         {
             var languages = GetAvailableLanguages();
-            return languages.FirstOrDefault(x => x.Iso2 == language)?.CultureInfo.Name;
+            return languages.FirstOrDefault(x => x.Iso2 == language)?.Iso2;
         }
 
         private Language FindLanguageByCulture(string name)

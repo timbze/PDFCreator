@@ -62,11 +62,13 @@
     <Compile Include="IO\UniqueFilenameTest.cs" />
     <Compile Include="LicenseKeySyntaxCheckerTest.cs" />
     <Compile Include="ArchitectCheck\PdfArchitectCheckTest.cs" />
+    <Compile Include="PathUtilTest.cs" />
     <Compile Include="Process\ProcessWrapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetryTest.cs" />
     <Compile Include="Tokens\SingleEnvironmentTokenTest.cs" />
     <Compile Include="Tokens\TokenCoreTest.cs" />
+    <Compile Include="Tokens\TokenIdentifierTest.cs" />
     <Compile Include="ValidNameTest.cs" />
     <Compile Include="VersionHelperTest.cs" />
   </ItemGroup>

@@ -157,7 +157,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             container.Register<IOutputFileMover, AutosaveOutputFileMover>();
 
-            container.Register<ITargetFileNameComposer, AutosaveTargetFileNameComposer>();
+            container.Register<ITargetFileNameComposer, TargetFileNameComposer>();
             container.Register<IErrorNotifier, ErrorNotifierInteractive>();
 
             container.RegisterSingleton<IRecommendArchitect, RecommendArchitect>();
@@ -175,7 +175,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             container.Register<IJobDataUpdater, JobDataUpdater>();
             container.Register<IPageNumberCalculator, PageNumberCalculator>();
-            container.Register<IOutputFilenameComposer, OutputFilenameComposer>();
 
             container.Register<IJobRunner, JobRunner>();
             container.Register<IConverterFactory, ConverterFactory>();
@@ -272,6 +271,8 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.RegisterSingleton<ITitleReplacerProvider, SettingsTitleReplacerProvider>();
 
             container.RegisterSingleton<IMainWindowThreadLauncher, MainShellLauncher>();
+
+            container.Register<ILastSaveDirectoryHelper, LastSaveDirectoryHelper>();
 
             container.RegisterSingleton<IGpoSettings>(GetGpoSettings);
 

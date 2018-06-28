@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 {
     [TestFixture]
+    [Category("Brittle")]
     public class DropboxServiceTest
     {
         private TestHelper _th;

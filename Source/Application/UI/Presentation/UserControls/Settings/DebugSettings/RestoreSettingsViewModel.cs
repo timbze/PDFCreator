@@ -23,7 +23,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
 
         public ICommand RestoreDefaultSettingsCommand { get; }
 
-
         private void RestoreDefaultSettingsExecute(object obj)
         {
             var title = Translation.RestoreDefaultSettingsTitle;
@@ -36,7 +35,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
                     var profileBuilder = new DefaultSettingsBuilder();
                     var defaultSettings = profileBuilder.CreateDefaultSettings(SettingsProvider.Settings);
                     ApplySettingsProcedure(defaultSettings);
-                    SettingsProvider.Reset();
                 }
             } );
         }

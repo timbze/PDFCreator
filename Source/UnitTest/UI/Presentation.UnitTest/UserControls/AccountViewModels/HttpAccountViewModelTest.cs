@@ -28,6 +28,7 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
                 Url = "www.pdfforge.org",
                 UserName = "UserName",
                 Password = "Password",
+                Timeout = 60,
                 IsBasicAuthentication = true
             };
 
@@ -35,6 +36,22 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
 
             _viewModel = new HttpAccountViewModel(translationUpdater);
             _viewModel.SetPasswordAction = s => { };
+        }
+
+        [Test]
+        public void SaveCanExecute_SetTimeout()
+        {
+            _viewModel.SetInteraction(_httpAccountInteraction);
+            _viewModel.Url = "http://testsite.com";
+            _viewModel.Timeout = 120;
+            Assert.AreEqual(_httpAccount.Timeout, _viewModel.Timeout);
+        }
+
+        [Test]
+        public void SaveCanExecute_AccountIsNull_TimeoutIsDefaultValue()
+        {
+            _httpAccount = null;
+            Assert.AreEqual(60, _viewModel.Timeout);
         }
 
         [Test]

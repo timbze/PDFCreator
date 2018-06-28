@@ -41,7 +41,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 {
                     _directory.Delete(jobTempFolder, true);
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
                     _logger.Warn("Error while deleting temporary folder: " + ex.Message);
                 }
@@ -62,7 +62,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
                     var folder = Path.GetDirectoryName(file.Filename);
                     DeleteFolderIfEmptyAndNotSpool(folder);
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
                     _logger.Warn("Error while deleting source file: " + ex.Message);
                 }
@@ -103,7 +103,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 var folder = Path.GetDirectoryName(infFile);
                 DeleteFolderIfEmptyAndNotSpool(folder);
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 _logger.Warn("Error while deleting job file: " + ex.Message);
             }

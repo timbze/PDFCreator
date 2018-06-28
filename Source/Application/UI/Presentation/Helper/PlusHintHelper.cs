@@ -48,28 +48,43 @@ namespace pdfforge.PDFCreator.UI.Presentation.Helper
 
         private DateTime GetLastDate()
         {
-            var lastDate = _registry.GetValue(_registryKeyForHintSettings, RegistryKeyForDate, "").ToString();
+            try
+            {
+                var lastDate = _registry.GetValue(_registryKeyForHintSettings, RegistryKeyForDate, "").ToString();
 
-            if (string.IsNullOrWhiteSpace(lastDate))
+                if (string.IsNullOrWhiteSpace(lastDate))
+                {
+                    WriteCurrentDate();
+                    return DateTime.Now;
+                }
+
+                DateTime date;
+                var success = DateTime.TryParse(lastDate, out date);
+
+                return success ? date : DateTime.Now;
+            }
+            catch (NullReferenceException)
             {
                 WriteCurrentDate();
                 return DateTime.Now;
             }
-
-            DateTime date;
-            var success = DateTime.TryParse(lastDate, out date);
-
-            return success ? date : DateTime.Now;
         }
 
         private int GetLastJobCounter()
         {
-            var lastJobCounter = (int)_registry.GetValue(_registryKeyForHintSettings, RegistryKeyForCounter, 0);
+            try
+            {
+                var lastJobCounter = (int)_registry.GetValue(_registryKeyForHintSettings, RegistryKeyForCounter, 0);
 
-            if (lastJobCounter != 0) return lastJobCounter;
+                if (lastJobCounter != 0) return lastJobCounter;
 
-            WriteCounter(lastJobCounter);
-            return lastJobCounter;
+                WriteCounter(lastJobCounter);
+                return lastJobCounter;
+            }
+            catch (NullReferenceException)
+            {
+                return 0;
+            }
         }
 
         private int ReadCurrentJobCounter()

@@ -174,8 +174,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
-            var validName = new ValidName();
-            return validName.IsValidFtpPath(path);
+            return ValidName.IsValidFtpPath(path);
         }
 
         private string MakeValidPath(string path)
@@ -183,8 +182,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
-            var validName = new ValidName();
-            return validName.MakeValidFtpPath(path);
+            return ValidName.MakeValidFtpPath(path);
         }
 
         protected override void SetPassword(Job job, string password)

@@ -23,7 +23,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
         public void LoadPdfCreatorSettings()
         {
             // Synchronize across processes with a Mutex to avaoid partial reads/writes
-            RunSyncronized(DoLoadPdfCreatorSettings);
+            RunSynchronized(DoLoadPdfCreatorSettings);
         }
 
         private void DoLoadPdfCreatorSettings()
@@ -41,8 +41,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
 
         public void SaveCurrentSettings()
         {
-            // Synchronize across processes with a Mutex to avaoid partial reads/writes
-            RunSyncronized(SaveSettings);
+            // Synchronize across processes with a Mutex to avoid partial reads/writes
+            RunSynchronized(SaveSettings);
         }
 
         private void SaveSettings()
@@ -62,7 +62,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
             LoadPdfCreatorSettings();
         }
 
-        private void RunSyncronized(Action action)
+        private void RunSynchronized(Action action)
         {
             var mutexName = "PDFCreator-Settings" + _installationPathProvider.ApplicationGuid;
             var mutex = new Mutex(false, mutexName);

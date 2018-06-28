@@ -13,9 +13,11 @@ namespace pdfforge.PDFCreator.Utilities
         // ReSharper disable once InconsistentNaming
         int MAX_PATH { get; }
 
+        string ELLIPSIS { get; }
+
         string GetLongDirectoryName(string givenPath);
 
-        string EllipsisForPath(string filePath, int length);
+        string EllipsisForPath(string filePath, int maxLength);
 
         string EllipsisForTooLongPath(string filePath);
 
@@ -40,6 +42,8 @@ namespace pdfforge.PDFCreator.Utilities
 
         public int MAX_PATH => 259;
 
+        public string ELLIPSIS => "__";
+
         public string GetLongDirectoryName(string givenPath)
         {
             if (givenPath == null)
@@ -47,26 +51,25 @@ namespace pdfforge.PDFCreator.Utilities
 
             var pos = givenPath.LastIndexOf('\\');
 
-            if (pos > 0)
-            {
-                var folder = givenPath.Substring(0, pos);
+            // if pos == 0, the path starts with a backslash and has no further backslashes
+            if (pos <= 0)
+                return null;
 
-                if ((folder.Length == 2) && (folder[1] == ':'))
-                    folder += "\\";
+            var folder = givenPath.Substring(0, pos);
 
-                return folder;
-            }
+            if (folder.Length == 2 && folder[1] == ':')
+                folder += "\\";
 
-            return null;
+            return folder;
         }
 
         /// <summary>
-        ///     Adds ellipsis "(...)" to a path with a length longer than 255.
+        ///     Adds ellipsis to a path with a length longer than 255.
         /// </summary>
         /// <param name="filePath">full path to file</param>
-        /// <param name="length">maximum length of the string. This must be between 10 and MAX_PATH (260)</param>
+        /// <param name="maxLength">maximum length of the string. This must be between 10 and MAX_PATH (260)</param>
         /// <returns>file path with ellipsis to ensure length under the max length </returns>
-        public string EllipsisForPath(string filePath, int length)
+        public string EllipsisForPath(string filePath, int maxLength)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
@@ -74,32 +77,34 @@ namespace pdfforge.PDFCreator.Utilities
             if (filePath.EndsWith("\\"))
                 throw new ArgumentException("The path has to be a file", nameof(filePath));
 
-            if ((length < 10) || (length > MAX_PATH))
-                throw new ArgumentException($"The desired length must be between 10 and {MAX_PATH}", nameof(length));
+            if (maxLength < 10 || maxLength > MAX_PATH)
+                throw new ArgumentException($"The desired length must be between 10 and {MAX_PATH}", nameof(maxLength));
 
-            if (filePath.Length > length)
+            if (filePath.Length > maxLength)
             {
-                const string ellipsis = "(...)";
+                int minUsefulFileLength = 4;
 
-                var path = GetLongDirectoryName(filePath) ?? "";
+                var directory = GetLongDirectoryName(filePath) ?? "";
                 var file = _pathSafe.GetFileNameWithoutExtension(filePath);
-                var ext = _pathSafe.GetExtension(filePath);
+                var extension = _pathSafe.GetExtension(filePath);
 
-                var remainingLength = length - path.Length - ellipsis.Length - ext.Length - 1; // substract -1 to account for the slash between path and filename
+                var remainingLengthForFile = maxLength - directory.Length - extension.Length - ELLIPSIS.Length - 1; // substract -1 to account for the slash between path and filename
+                if (remainingLengthForFile < minUsefulFileLength)
+                {
+                    throw new ArgumentException("The path is too long", nameof(filePath)); //!
+                }
 
-                if (remainingLength < 4)
-                    throw new ArgumentException(filePath);
+                var partLength = remainingLengthForFile / 2;
 
-                var partLength = remainingLength / 2;
-
-                file = file.Substring(0, partLength) + ellipsis + file.Substring(file.Length - partLength, partLength);
-                filePath = _pathSafe.Combine(path, file + ext);
+                file = file.Substring(0, partLength) + ELLIPSIS + file.Substring(file.Length - partLength, partLength);
+                filePath = _pathSafe.Combine(directory, file + extension);
             }
+
             return filePath;
         }
 
         /// <summary>
-        ///     Adds ellipsis "(...)" to a path with a length longer than 255.
+        ///     Adds ellipsis to a path with a length longer than 255.
         /// </summary>
         /// <param name="filePath">full path to file</param>
         /// <returns>file path with ellipsis to ensure length under 255 </returns>

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Core.Workflow;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using SystemInterface.IO;
@@ -60,12 +61,23 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         }
 
         [Test]
-        public void DeleteSourceFiles_IfDeleteThrowsExcepton_CatchesException()
+        public void DeleteSourceFiles_IfDeleteThrowsIOExcepton_CatchesException()
         {
             var fileName = @"D:\test\Spool\fileName.sourcefile";
             var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
 
-            _file.When(x => x.Delete(fileName)).Do(x => { throw new IOException(); });
+            _file.When(x => x.Delete(fileName)).Do(x => throw new IOException());
+
+            Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
+        }
+
+        [Test]
+        public void DeleteSourceFiles_IfDeleteThrowsUnauthorizedAccessExcepton_CatchesException()
+        {
+            var fileName = @"D:\test\Spool\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _file.When(x => x.Delete(fileName)).Do(x => throw new UnauthorizedAccessException());
 
             Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
         }
@@ -98,6 +110,68 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             _directory.DidNotReceive().Delete(_jobTempFolder, true);
         }
 
-        //TODO Delete folder if empty and not spool
+        [Test]
+        public void DeleteSourceFiles_IfDeleteFolderThrowsIOExcepton_CatchesException()
+        {
+            var fileName = @"D:\test\Spool\test\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _directory.Exists(_jobTempFolder).Returns(true);
+            _directory.When(x => x.Delete(_jobTempFolder, true)).Do(x => throw new IOException());
+
+            Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
+        }
+
+        [Test]
+        public void DeleteSourceFiles_IfDeleteFolderThrowsUnauthorizedAccessExcepton_CatchesException()
+        {
+            var fileName = @"D:\test\Spool\test\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _directory.Exists(_jobTempFolder).Returns(true);
+            _directory.When(x => x.Delete(_jobTempFolder, true)).Do(x => throw new UnauthorizedAccessException());
+
+            Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
+        }
+
+        [Test]
+        public void DeleteSourceFiles_WithSubfolderThatIsNotTheSpoolFolderAndDeleteFolderThrowsIOExcepton_CatchesException()
+        {
+            var fileName = @"D:\test\Spool\test\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _file.Exists(fileName).Returns(true);
+            _directory.Exists(_jobTempFolder).Returns(true);
+            _directory.When(x => x.Delete(@"D:\test\Spool\test")).Do(x => throw new IOException());
+
+            Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
+        }
+
+        [Test]
+        public void DeleteSourceFiles_WithSubfolderAndDeleteFolderThrowsUnauthorizedAccessExcepton_CatchesException()
+        {
+            var fileName = @"D:\test\Spool\test\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _file.Exists(fileName).Returns(true);
+            _directory.Exists(_jobTempFolder).Returns(true);
+            _directory.When(x => x.Delete(@"D:\test\Spool\test")).Do(x => throw new UnauthorizedAccessException());
+
+            Assert.DoesNotThrow(() => _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile));
+        }
+
+        [Test]
+        public void DeleteSourceFiles_WithSubfolder_DeletesSubfolder()
+        {
+            var fileName = @"D:\test\Spool\test\fileName.sourcefile";
+            var sourceFiles = new List<SourceFileInfo> { new SourceFileInfo { Filename = fileName } };
+
+            _file.Exists(fileName).Returns(true);
+            _directory.Exists(_jobTempFolder).Returns(true);
+
+            _jobCleanUp.DoCleanUp(_jobTempFolder, sourceFiles, _infFile);
+
+            _directory.Received(1).Delete(@"D:\test\Spool\test");
+        }
     }
 }

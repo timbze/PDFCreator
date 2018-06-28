@@ -8,8 +8,19 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
 {
     public class DefaultPrinterSettingsViewModel : AGeneralSettingsItemControlModel
     {
+        private readonly AskSwitchPrinter _switchPrinterAsk;
+        private readonly AskSwitchPrinter _switchPrinterYes;
+
         public DefaultPrinterSettingsViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider settingsProvider, IGpoSettings gpoSettings) : base(translationUpdater, settingsProvider, gpoSettings)
         {
+            _switchPrinterAsk = new AskSwitchPrinter(Translation.Ask, true);
+            _switchPrinterYes = new AskSwitchPrinter(Translation.Yes, false);
+            translationUpdater.RegisterAndSetTranslation(tf =>
+            {
+                _switchPrinterAsk.Name = Translation.Ask;
+                _switchPrinterYes.Name = Translation.Yes;
+                
+            });
         }
 
         public IEnumerable<AskSwitchPrinter> AskSwitchPrinterValues
@@ -18,8 +29,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
             {
                 return new List<AskSwitchPrinter>
                 {
-                    new AskSwitchPrinter(Translation.Ask, true),
-                    new AskSwitchPrinter(Translation.Yes, false)
+                    _switchPrinterAsk,
+                    _switchPrinterYes
                 };
             }
         }

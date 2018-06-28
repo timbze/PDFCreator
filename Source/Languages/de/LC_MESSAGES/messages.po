@@ -1,14 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: German (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-10-09 13:39+0200\n"
+"Last-Translator: pdfforge\n"
+"Language-Team: German <http://translate.pdfforge.org/projects/pdfcreator/messages/de/>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.0.2\n"
+
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "The profile is mapped to the following printer:"
 msgid_plural "The profile is mapped to the following printers:"
 msgstr[0] "Das Profil ist dem folgenden Drucker zugeordnet:"
 msgstr[1] "Das Profil ist den folgenden Druckern zugeordnet:"
 
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-msgid "Signing will be disabled for this profile."
-msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "Signieren wird für dieses Profil deaktiviert."
-msgstr[1] "Signieren wird für diese Profile deaktiviert."
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+msgid "The Dropbox upload will be disabled for this profile."
+msgid_plural "The Dropbox upload will be disabled for this profiles."
+msgstr[0] "Der Dropbox-Upload wird für dieses Profil deaktiviert."
+msgstr[1] "Der Dropbox-Upload wird für diese Profile deaktiviert."
 
 # pdfforge.PDFCreatorShell.ContextMenuTranslation
 # pdfforge.PDFCreatorShell.ContextMenuTranslation
@@ -18,12 +33,6 @@ msgid "and {0} more file/directory"
 msgid_plural "and {0} more files/directories"
 msgstr[0] "und {0} weitere Datei/weiteres Verzeichnis"
 msgstr[1] "und {0} weitere Dateien/Verzeichnisse"
-
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "The FTP action will be disabled for this profile."
-msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "Die FTP-Aktion wird für dieses Profil deaktiviert."
-msgstr[1] "Die FTP-Aktion wird für diese Profile deaktiviert."
 
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The SMTP action will be disabled for this profile."
@@ -64,25 +73,16 @@ msgid_plural "You have already converted {0} files!"
 msgstr[0] "Sie haben bereits {0} Datei konvertiert!"
 msgstr[1] "Sie haben bereits {0} Dateien konvertiert!"
 
-msgid ""
-msgstr ""
-"Project-Id-Version: German (PDFCreator)\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-09-20 16:59+0200\n"
-"Last-Translator: pdfforge\n"
-"Language-Team: German <http://translate.pdfforge.org/projects/pdfcreator/messages/de/>\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.0.1\n"
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+msgid "Signing will be disabled for this profile."
+msgid_plural "Signing will be disabled for this profiles."
+msgstr[0] "Signieren wird für dieses Profil deaktiviert."
+msgstr[1] "Signieren wird für diese Profile deaktiviert."
 
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-msgid "The Dropbox upload will be disabled for this profile."
-msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "Der Dropbox-Upload wird für dieses Profil deaktiviert."
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "The FTP action will be disabled for this profile."
+msgid_plural "The FTP action will be disabled for this profiles."
+msgstr[0] "Die FTP-Aktion wird für dieses Profil deaktiviert."
 msgstr[1] "Die FTP-Aktion wird für diese Profile deaktiviert."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
@@ -941,21 +941,21 @@ msgstr "Möchten Sie fortfahren und Ihre Einstellungen speichern?"
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
-msgid "Disabled by Administrator"
-msgstr "Vom Administrator deaktiviert"
-
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
-msgid "Set by Administrator"
-msgstr "Vom Administrator gesetzt"
-
-#: pdfforge.PDFCreator.UI.Presentation.Converter.GpoTranslation
-msgid "These settings have been set by your administrator and can't be changed."
-msgstr "Diese Einstellungen wurde vom Administrator gesetzt und können nicht geändert werden."
-
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
 msgstr "Um fortzufahren, bitte die Einstellungen speichern oder abbrechen"
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
+msgid "Disabled by Administrator"
+msgstr "Vom Administrator deaktiviert"
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
+msgid "Set by Administrator"
+msgstr "Vom Administrator gesetzt"
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
+msgid "These settings have been set by your administrator and can't be changed."
+msgstr "Diese Einstellungen wurde vom Administrator gesetzt und können nicht geändert werden."
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by PDFCreator"
@@ -1292,6 +1292,15 @@ msgstr "Wählen Sie ein Konto oder legen Sie ein neues an ->"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Server:"
 msgstr "Server:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+msgid "Set Timeout"
+msgstr "Timeout setzen"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "The following link has been created for your document:"

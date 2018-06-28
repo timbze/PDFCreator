@@ -110,10 +110,7 @@ namespace pdfforge.PDFCreator.Utilities.Threading
             }
             finally
             {
-                if (OnThreadFinished != null)
-                {
-                    OnThreadFinished(this, new ThreadFinishedEventArgs(this));
-                }
+                OnThreadFinished?.Invoke(this, new ThreadFinishedEventArgs(this));
             }
         }
     }

@@ -7,7 +7,6 @@ using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.Utilities.Threading;
 using pdfforge.PDFCreator.Utilities.Tokens;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using Translatable;
@@ -28,8 +27,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
             if (tokenHelper != null)
             {
                 TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
-
-                var tokens = new List<string>(TokenReplacer.GetTokenNames(true));
+                var tokens = tokenHelper.GetTokenListWithFormatting();
                 ParameterTokenViewModel = new TokenViewModel(x => CurrentProfile.Scripting.ParameterString = x, () => CurrentProfile?.Scripting.ParameterString, tokens, ReplaceTokens);
                 ScriptFileTokenViewModel = new TokenViewModel(x => CurrentProfile.Scripting.ScriptFile = x, () => CurrentProfile?.Scripting.ScriptFile, tokens, ReplaceTokens, SelectScriptFileAction);
                 ParameterTokenViewModel.OnTextChanged += TokenTextChanged;

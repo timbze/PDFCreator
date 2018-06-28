@@ -12,6 +12,7 @@ using System.Net;
 namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 {
     [TestFixture]
+    [Category("Brittle")]
     internal class FtpTest
     {
         private TestHelper _th;

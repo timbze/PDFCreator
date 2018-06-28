@@ -16,6 +16,7 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Commands.ProfileCommands;
 using pdfforge.PDFCreator.UI.Presentation.Events;
+using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
@@ -46,6 +47,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         private readonly ErrorCodeInterpreter _errorCodeInterpreter;
         private readonly ISelectedProfileProvider _selectedProfileProvider;
         private readonly IFile _file;
+        private readonly ILastSaveDirectoryHelper _lastSaveDirectoryHelper;
         private readonly ITempFolderProvider _tempFolderProvider;
         private readonly IPathUtil _pathUtil;
         private PathWrapSafe _pathSafe = new PathWrapSafe();
@@ -68,7 +70,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
             ITempFolderProvider tempFolderProvider,
             IPathUtil pathUtil,
             IFile file,
-            IGpoSettings gpoSettings)
+            IGpoSettings gpoSettings,
+            ILastSaveDirectoryHelper lastSaveDirectoryHelper)
             : base(translationUpdater)
         {
             GpoSettings = gpoSettings;
@@ -79,10 +82,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
             _errorCodeInterpreter = errorCodeInterpreter;
             _selectedProfileProvider = selectedProfileProvider;
             _file = file;
+            _lastSaveDirectoryHelper = lastSaveDirectoryHelper;
             _tempFolderProvider = tempFolderProvider;
             _pathUtil = pathUtil;
 
-            SaveCommand = new DelegateCommand(SaveExecute);
+            SaveCommand = new DelegateCommand(SaveExecute, CanExecute);
             SendByEmailCommand = new DelegateCommand(EmailExecute);
             MergeCommand = new DelegateCommand(MergeExecute);
             CancelCommand = new DelegateCommand(CancelExecute);
@@ -106,6 +110,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
                         OutputFormat = ((ConversionProfile)profileListView.CurrentItem).OutputFormat;
                 };
             }
+        }
+
+        private bool CanExecute(object obj)
+        {
+            return !string.IsNullOrWhiteSpace(OutputFolder) && ValidName.IsValidPath(OutputFolder);
         }
 
         public ConversionProfile SelectedProfile
@@ -157,7 +166,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public string NumberOfPrintJobsHint { get; private set; }
 
         public DelegateCommand<OutputFormat> SetOutputFormatCommand { get; }
-        public ICommand SaveCommand { get; }
+        public DelegateCommand SaveCommand { get; }
         public ICommand SendByEmailCommand { get; }
         public ICommand BrowseFileCommand { get; }
         public ICommand MergeCommand { get; }
@@ -206,7 +215,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public string OutputFolder
         {
             get { return _outputFolder; }
-            set { SetProperty(ref _outputFolder, value); ComposeOutputFilename(); }
+            set
+            {
+                SetProperty(ref _outputFolder, value);
+                ComposeOutputFilename();
+                SaveCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public string OutputFilename
@@ -217,7 +231,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
         private void ComposeOutputFilename()
         {
-            _job.OutputFilenameTemplate = _pathSafe.Combine(OutputFolder, OutputFilename);
+            if (ValidName.IsValidPath(OutputFolder))
+                _job.OutputFilenameTemplate = _pathSafe.Combine(OutputFolder, OutputFilename);
         }
 
         private void BrowseFileExecute(object parameter)
@@ -239,8 +254,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
             _job = job;
 
-            var filenameTemplate = job.OutputFilenameTemplate;
-            SetOutputFilenameAndFolder(filenameTemplate);
+            SetOutputFilenameAndFolder(_job.OutputFilenameTemplate);
+            if (_lastSaveDirectoryHelper.Apply(_job))
+                OutputFolder = _lastSaveDirectoryHelper.ReadFromRegistry(OutputFolder);
             OutputFormat = job.Profile.OutputFormat;
             RaisePropertyChanged(nameof(SelectedProfile));
             RaisePropertyChanged(nameof(Job));
@@ -249,7 +265,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         private void SetOutputFilenameAndFolder(string filenameTemplate)
         {
             OutputFilename = Path.GetFileName(filenameTemplate);
-            OutputFolder = Path.GetDirectoryName(filenameTemplate);
+            OutputFolder = _pathUtil.GetLongDirectoryName(filenameTemplate);
         }
 
         private void UpdateNumberOfPrintJobsHint(int numberOfPrintJobs)
@@ -277,10 +293,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
         private void SaveExecute(object obj)
         {
+            ChangeOutputFormat(); //Ensure extension before the checks
+
             if (IsProfileValidAndNotifyUserIfNot())
             {
                 if (FileDoesNotExistsElseNotifyUser() && FilePathShortEnoughElseNotifyUser())
                 {
+                    if (_lastSaveDirectoryHelper.Apply(_job))
+                        _lastSaveDirectoryHelper.SaveInRegistry(OutputFolder);
                     CallFinishInteraction();
                 }
             }

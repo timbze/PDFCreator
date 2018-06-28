@@ -70,7 +70,7 @@ namespace PDFCreator.Utilities.IntegrationTest
             var shortFile = _pathUtil.EllipsisForTooLongPath(file);
 
             Assert.AreNotEqual(file, shortFile);
-            Assert.IsTrue(shortFile.Contains("(...)"));
+            StringAssert.Contains(_pathUtil.ELLIPSIS, shortFile);
             Assert.IsTrue(shortFile.Length <= _pathUtil.MAX_PATH);
         }
 
@@ -81,7 +81,7 @@ namespace PDFCreator.Utilities.IntegrationTest
 
             var shortFile = _pathUtil.EllipsisForTooLongPath(file);
 
-            Assert.IsTrue(shortFile.Contains("(...)"), "File does not contain ellipsis");
+            StringAssert.Contains(_pathUtil.ELLIPSIS, shortFile);
             Assert.IsTrue(shortFile.Length <= _pathUtil.MAX_PATH, "Shortened file still is too long");
         }
 
@@ -121,7 +121,7 @@ namespace PDFCreator.Utilities.IntegrationTest
             var shortFile = _pathUtil.EllipsisForPath(file, 200);
 
             Assert.AreNotEqual(file, shortFile);
-            Assert.IsTrue(shortFile.Contains("(...)"));
+            StringAssert.Contains(_pathUtil.ELLIPSIS, shortFile);
             Assert.IsTrue(shortFile.Length <= 200);
         }
 

@@ -56,14 +56,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs
 
         private string PreviewForFileName(string s)
         {
-            var validName = new ValidName();
-            return validName.MakeValidFileName(_tokenReplacer.ReplaceTokens(s));
+            return ValidName.MakeValidFileName(_tokenReplacer.ReplaceTokens(s));
         }
 
         private string PreviewForFolder(string s)
         {
-            var validName = new ValidName();
-            return validName.MakeValidFolderName(_tokenReplacer.ReplaceTokens(s));
+            return ValidName.MakeValidFolderName(_tokenReplacer.ReplaceTokens(s));
         }
     }
 }

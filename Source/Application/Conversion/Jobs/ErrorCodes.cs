@@ -241,6 +241,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         [Translation("Error while copying the output file.")]
         Conversion_ErrorWhileCopyingOutputFile = 28200,
 
+        [Translation("File path too long")]
+        Conversion_PathTooLong = 28201,
+
         [Translation("Internal Ghostscript error.")]
         Conversion_GhostscriptError = 29100,
 

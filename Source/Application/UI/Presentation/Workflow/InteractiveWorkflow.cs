@@ -6,6 +6,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
+using pdfforge.PDFCreator.Utilities;
 using System;
 using SystemInterface.IO;
 
@@ -21,9 +22,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
         private readonly ISettingsProvider _settingsProvider;
         private readonly IFileNameQuery _saveFileQuery;
         private readonly ICommandLocator _commandLocator;
+        private readonly IPathUtil _pathUtil;
         private readonly ITargetFileNameComposer _targetFileNameComposer;
 
-        public InteractiveWorkflow(IShellManager shellManager, ITargetFileNameComposer targetFileNameComposer, IJobDataUpdater jobDataUpdater, IPathSafe pathSafe, IErrorNotifier errorNotifier, ISettingsProvider settingsProvider, IFileNameQuery saveFileQuery, ICommandLocator commandLocator)
+        public InteractiveWorkflow(IShellManager shellManager, ITargetFileNameComposer targetFileNameComposer, IJobDataUpdater jobDataUpdater, IPathSafe pathSafe, IErrorNotifier errorNotifier, ISettingsProvider settingsProvider, IFileNameQuery saveFileQuery, ICommandLocator commandLocator, IPathUtil pathUtil)
         {
             _shellManager = shellManager;
             _pathSafe = pathSafe;
@@ -31,6 +33,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             _settingsProvider = settingsProvider;
             _saveFileQuery = saveFileQuery;
             _commandLocator = commandLocator;
+            _pathUtil = pathUtil;
             _targetFileNameComposer = targetFileNameComposer;
 
             JobDataUpdater = jobDataUpdater;
@@ -55,7 +58,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
         {
             var filePath = _targetFileNameComposer.ComposeTargetFileName(job);
 
-            var folderName = _pathSafe.GetDirectoryName(filePath);
+            var folderName = _pathUtil.GetLongDirectoryName(filePath);
+            //_pathSafe.GetDirectoryName(filePath);
 
             if (string.IsNullOrEmpty(folderName))
                 folderName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

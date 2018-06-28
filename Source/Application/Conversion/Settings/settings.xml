@@ -59,6 +59,9 @@
             <value name="Password" type="password" defaultvalue="">
               <comment>Password that is used to authenticate at the server</comment>
             </value>
+            <value name="Timeout" type="value" datatype="Int" enumname="" defaultvalue="60" islist="False">
+              <comment>Timeout in seconds for upload</comment>
+            </value>
             <value name="Url" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
               <comment>HTTP upload Url</comment>
             </value>

@@ -62,7 +62,6 @@
     <Compile Include="Output\AutosaveOutputFileMover.cs" />
     <Compile Include="Output\InteractiveOutputFileMover.cs" />
     <Compile Include="Output\OutputFileMoverBase.cs" />
-    <Compile Include="Output\OutputFilenameComposer.cs" />
     <Compile Include="PageNumberCalculator.cs" />
     <Compile Include="ProfileChecker.cs" />
     <Compile Include="Queries\IFileNameQuery.cs" />

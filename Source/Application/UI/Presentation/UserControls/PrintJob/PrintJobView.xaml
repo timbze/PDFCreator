@@ -8,6 +8,8 @@
              xmlns:enums="clr-namespace:pdfforge.PDFCreator.Conversion.Settings.Enums;assembly=PDFCreator.Settings"
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
              xmlns:printJob="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob"
+             xmlns:behavior="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Styles.Behavior"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance designTime:DesignTimePrintJobViewModel, IsDesignTimeCreatable=True}">
@@ -71,7 +73,7 @@
                             Command="{Binding BrowseFileCommand}">
                     ...
                 </Button>
-                <TextBox HorizontalAlignment="Stretch" Name="TargetFolderTextBox" Text="{Binding OutputFolder}" />
+                <TextBox HorizontalAlignment="Stretch" Name="TargetFolderTextBox" Text="{Binding OutputFolder, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </DockPanel>
 
             <DockPanel>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using Tartaros;
 
 namespace pdfforge.PDFCreator.Core.Services
@@ -29,6 +30,12 @@ namespace pdfforge.PDFCreator.Core.Services
         private Dictionary<string, string> BuildAdditionalEntries()
         {
             var additionalEntries = new Dictionary<string, string>();
+
+            if (!string.IsNullOrWhiteSpace(Thread.CurrentThread.Name))
+                additionalEntries["Thread"] = Thread.CurrentThread.Name;
+
+            if (LicenseChecker == null)
+                return additionalEntries;
 
             var activation = LicenseChecker.GetSavedActivation();
             activation

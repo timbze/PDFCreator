@@ -15,7 +15,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
     public partial class DesignTimePrintJobViewModel : PrintJobViewModel
     {
         public DesignTimePrintJobViewModel()
-            : base(new DesignTimeSettingsProvider(), new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeJobInfoQueue(), null, new InteractionRequest(), null, null, new DesignTimeCommandLocator(), null, null, null, null, null, null)
+            : base(new DesignTimeSettingsProvider(), new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeJobInfoQueue(), null, new InteractionRequest(), null, null, new DesignTimeCommandLocator(), null, null, null, null, null, null, null)
         {
             var jobInfo = new JobInfo()
             {

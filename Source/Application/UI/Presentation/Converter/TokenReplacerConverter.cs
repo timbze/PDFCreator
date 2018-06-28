@@ -35,8 +35,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Converter
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var convertedValue = base.Convert(values, targetType, parameter, culture) as string;
-            var validName = new ValidName();
-            return validName.MakeValidFileName(convertedValue);
+            return ValidName.MakeValidFileName(convertedValue);
         }
     }
 
@@ -45,8 +44,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Converter
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var convertedValue = base.Convert(values, targetType, parameter, culture) as string;
-            var validName = new ValidName();
-            return validName.MakeValidFolderName(convertedValue);
+            return ValidName.MakeValidFolderName(convertedValue);
         }
     }
 
@@ -55,8 +53,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Converter
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var convertedValue = base.Convert(values, targetType, parameter, culture) as string;
-            var validName = new ValidName();
-            return validName.MakeValidFtpPath(convertedValue);
+            return ValidName.MakeValidFtpPath(convertedValue);
         }
     }
 
@@ -81,8 +78,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Converter
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var convertedValue = base.Convert(values, targetType, parameter, culture) as string;
-            var validName = new ValidName();
-            return validName.MakeValidFtpPath(convertedValue);
+            return ValidName.MakeValidFtpPath(convertedValue);
         }
     }
 }

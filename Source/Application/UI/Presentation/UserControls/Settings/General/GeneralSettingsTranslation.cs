@@ -21,6 +21,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         public string SelectLanguageLabelText { get; private set; } = "Select the application language:";
         public string UpdateCheckControlHeader { get; private set; } = "Update";
         public string UpdateCheckIsRunning { get; private set; } = "Update check is already running.";
+        public string ErrorMessage { get; private set; } = "PDFCreator was not able to look for an update.\nPlease check your internet connection and retry later.";
         public string UpdateCheckTitle { get; private set; } = "Update check";
         public string NoUpdateMessage { get; private set; } = "You already have the most recent version.";
         public string UpdateIntervalLabelText { get; private set; } = "Check for updates:";

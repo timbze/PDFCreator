@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace pdfforge.PDFCreator.Utilities
 {
-    public class ValidName
+    public static class ValidName
     {
         private static readonly string InvalidFileCharRegex = $@"[{Regex.Escape(new string(Path.GetInvalidFileNameChars()))}]+";
 
@@ -12,12 +12,12 @@ namespace pdfforge.PDFCreator.Utilities
 
         private static readonly string InvalidFtpCharRegex = $@"/\\|[{Regex.Escape(new string(Path.GetInvalidPathChars()) + ":*?")}]+";
 
-        public string MakeValidFileName(string name)
+        public static string MakeValidFileName(string name)
         {
             return Regex.Replace(name, InvalidFileCharRegex, "_");
         }
 
-        public string MakeValidFolderName(string name)
+        public static string MakeValidFolderName(string name)
         {
             var tmp = Regex.Replace(name, InvalidPathCharRegex, "_");
             var sanitized = new StringBuilder();
@@ -35,17 +35,17 @@ namespace pdfforge.PDFCreator.Utilities
             return sanitized.ToString();
         }
 
-        public string MakeValidFtpPath(string path)
+        public static string MakeValidFtpPath(string path)
         {
             return Regex.Replace(path, InvalidFtpCharRegex, "_");
         }
 
-        public bool IsValidFtpPath(string path)
+        public static bool IsValidFtpPath(string path)
         {
             return !Regex.IsMatch(path, InvalidFtpCharRegex);
         }
 
-        public bool IsValidFilename(string name)
+        public static bool IsValidPath(string name)
         {
             var containsABadCharacter = new Regex(InvalidPathCharRegex);
             if (containsABadCharacter.IsMatch(name))

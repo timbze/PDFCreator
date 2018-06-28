@@ -33,6 +33,22 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews
             }
         }
 
+        public int Timeout
+        {
+            get
+            {
+                if (_httpAccount != null)
+                    return _httpAccount.Timeout;
+
+                return 60;
+            }
+            set
+            {
+                _httpAccount.Timeout = value;
+                SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public string Password
         {
             get { return _httpAccount?.Password; }
@@ -100,6 +116,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews
             RaisePropertyChanged(nameof(AskForPasswordLater));
             HasBasicAuthentication = _httpAccount.IsBasicAuthentication;
             RaisePropertyChanged(nameof(HasBasicAuthentication));
+            RaisePropertyChanged(nameof(Timeout));
             SetPasswordAction(_httpAccount.Password);
             SaveCommand.RaiseCanExecuteChanged();
         }

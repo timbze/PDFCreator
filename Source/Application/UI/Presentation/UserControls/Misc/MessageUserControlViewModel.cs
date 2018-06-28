@@ -18,10 +18,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
             _soundPlayer = soundPlayer;
             ButtonRightCommand = new DelegateCommand(ExecuteButtonRight, CanExecuteButtonRight);
             ButtonLeftCommand = new DelegateCommand(ExecuteButtonLeft);
+            ButtonMiddleCommand = new DelegateCommand(ExecuteButtonMiddle);
         }
 
         public DelegateCommand ButtonLeftCommand { get; private set; }
         public DelegateCommand ButtonRightCommand { get; }
+        public DelegateCommand ButtonMiddleCommand { get; }
 
         public MessageIcon Icon { get; set; }
         public int IconSize { get; set; } = 32;
@@ -38,14 +40,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
                 case MessageOptions.RetryCancel:
                 case MessageOptions.MoreInfoCancel:
                     Interaction.Response = MessageResponse.Cancel;
-                    FinishInteraction();
                     break;
 
                 case MessageOptions.YesNo:
                     Interaction.Response = MessageResponse.No;
-                    FinishInteraction();
+                    break;
+
+                case MessageOptions.YesNoCancel:
+                    Interaction.Response = MessageResponse.Cancel;
                     break;
             }
+            FinishInteraction();
         }
 
         private void ExecuteButtonLeft(object obj)
@@ -71,9 +76,26 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
                 case MessageOptions.YesNo:
                     Interaction.Response = MessageResponse.Yes;
                     break;
+
+                case MessageOptions.YesNoCancel:
+                    Interaction.Response = MessageResponse.Yes;
+                    break;
             }
             FinishInteraction();
         }
+
+        private void ExecuteButtonMiddle(object obj)
+        {
+            switch (Interaction.Buttons)
+            {
+                case MessageOptions.YesNoCancel:
+                    Interaction.Response = MessageResponse.No;
+                    break;
+            }
+            FinishInteraction();
+        }
+
+        public bool ShowMiddleButton => Interaction?.Buttons == MessageOptions.YesNoCancel;
 
         private bool CanExecuteButtonRight(object obj)
         {
@@ -82,12 +104,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
 
         protected override void HandleInteractionObjectChanged()
         {
-            Interaction.Buttons = Interaction.Buttons;
             SetButtonContent(Interaction.Buttons);
 
             ButtonRightCommand.RaiseCanExecuteChanged();
 
             SetIcon(Interaction.Icon);
+            RaisePropertyChanged(nameof(ShowMiddleButton));
         }
 
         public override string Title => Interaction.Title;
@@ -156,6 +178,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
                 case MessageOptions.YesNo:
                     LeftButtonContent = Translation.Yes;
                     RightButtonContent = Translation.No;
+                    break;
+
+                case MessageOptions.YesNoCancel:
+                    LeftButtonContent = Translation.Yes;
+                    RightButtonContent = Translation.Cancel;
+                    MiddleButtonContent = Translation.No;
                     break;
             }
 

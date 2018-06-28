@@ -34,6 +34,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
             ShowUpdate = updateAssistant.ShowUpdate;
             _showUpdateEvent = eventAggregator.GetEvent<SetShowUpdateEvent>();
             _showUpdateEvent.Subscribe(SetShowDialog);
+            settingsProvider.SettingsChanged += (sender, args) =>
+            {
+                RaisePropertyChanged(nameof(CurrentUpdateInterval));
+                RaisePropertyChanged(nameof(DisplayUpdateWarning));
+            };
         }
 
         private void SetShowDialog(bool value)
@@ -48,13 +53,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         public ICommand AskLaterCommand => new DelegateCommand(o => UpdateLater());
         public ICommand UpdateCheckCommand => new DelegateCommand(o =>
         {
-            if (_updateAssistant.IsOnlineUpdateAvailable())
+            try
             {
-                _showUpdateEvent.Publish(true);
+                if (_updateAssistant.IsOnlineUpdateAvailable())
+                {
+                    _showUpdateEvent.Publish(true);
+                }
+                else
+                {
+                    var interaction = new MessageInteraction(Translation.NoUpdateMessage, Translation.UpdateCheckTitle, MessageOptions.OK, MessageIcon.PDFCreator);
+                    _interactionRequest.Raise(interaction);
+                }
             }
-            else
+            catch
             {
-                var interaction = new MessageInteraction(Translation.NoUpdateMessage, Translation.UpdateCheckTitle, MessageOptions.OK, MessageIcon.PDFCreator);
+                var interaction = new MessageInteraction(Translation.ErrorMessage, Translation.UpdateCheckTitle, MessageOptions.OK, MessageIcon.Exclamation);
                 _interactionRequest.Raise(interaction);
             }
         });
@@ -87,22 +100,22 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         public ICommand VisitWebsiteCommand => new DelegateCommand(VisitWebsiteExecute);
         public string PdfforgeWebsiteUrl => Urls.PdfforgeWebsiteUrl;
 
-        public bool DisplayUpdateWarning => ApplicationSettings?.UpdateInterval == UpdateInterval.Never;
+        public bool DisplayUpdateWarning => SettingsProvider.Settings?.ApplicationSettings?.UpdateInterval == UpdateInterval.Never;
 
         public UpdateInterval CurrentUpdateInterval
         {
             get
             {
-                if (ApplicationSettings == null)
+                if (SettingsProvider.Settings?.ApplicationSettings == null)
                     return UpdateInterval.Weekly;
 
                 if (GpoSettings?.UpdateInterval == null)
-                    return ApplicationSettings.UpdateInterval;
+                    return SettingsProvider.Settings.ApplicationSettings.UpdateInterval;
                 return UpdateIntervalHelper.ParseUpdateInterval(GpoSettings.UpdateInterval);
             }
             set
             {
-                ApplicationSettings.UpdateInterval = value;
+                SettingsProvider.Settings.ApplicationSettings.UpdateInterval = value;
                 RaisePropertyChanged(nameof(CurrentUpdateInterval));
                 RaisePropertyChanged(nameof(DisplayUpdateWarning));
             }

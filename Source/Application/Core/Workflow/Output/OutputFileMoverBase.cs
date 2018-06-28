@@ -125,11 +125,17 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         /// <returns>unique outputfilename</returns>
         private string EnsureUniqueFilename(UniqueFilename uniqueFilename)
         {
-            _logger.Debug("Ensuring unique filename for: " + uniqueFilename.OriginalFilename);
-            var newFilename = uniqueFilename.CreateUniqueFileName();
-            _logger.Debug("Unique filename result: " + newFilename);
-
-            return newFilename;
+            try
+            {
+                _logger.Debug("Ensuring unique filename for: " + uniqueFilename.OriginalFilename);
+                var newFilename = uniqueFilename.CreateUniqueFileName();
+                _logger.Debug("Unique filename result: " + newFilename);
+                return newFilename;
+            }
+            catch (PathTooLongException ex)
+            {
+                throw new ProcessingException(ex.Message, ErrorCode.Conversion_PathTooLong);
+            }
         }
 
         private void DeleteFile(string tempfile)
@@ -156,9 +162,9 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
                 _logger.Debug("Copied output file \"{0}\" \r\nto \"{1}\"", tempFile, outputFile);
                 return true;
             }
-            catch (IOException ioException)
+            catch (Exception ex)
             {
-                _logger.Warn("Error while copying to target file.\r\nfrom\"{0}\" \r\nto \"{1}\"\r\n{2}", tempFile, outputFile, ioException.Message);
+                _logger.Warn("Error while copying to target file.\r\nfrom\"{0}\" \r\nto \"{1}\"\r\n{2}", tempFile, outputFile, ex.Message);
             }
             return false;
         }

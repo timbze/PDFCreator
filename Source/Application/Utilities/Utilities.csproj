@@ -68,6 +68,7 @@
     <Compile Include="StringValueAttribute.cs" />
     <Compile Include="Threading\IThreadManager.cs" />
     <Compile Include="Threading\ThreadManager.cs" />
+    <Compile Include="Tokens\TokenIdentifier.cs" />
     <Compile Include="Tokens\UserToken.cs" />
     <Compile Include="UserGuide\HelpTopicAttribute.cs" />
     <Compile Include="CommandLineUtil.cs" />

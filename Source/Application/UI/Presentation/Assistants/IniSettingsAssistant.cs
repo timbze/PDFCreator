@@ -59,6 +59,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             return true;
         }
 
+        //TODO Why do we pass appSettings here? Most likely they are already in sync
         public void SaveIniSettings(ApplicationSettings appSettings)
         {
             var fileName = QuerySaveFileName();

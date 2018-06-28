@@ -61,7 +61,6 @@ namespace Presentation.UnitTest.UserControls.DebugSettings
             var viewModel = BuildModel();
 
             Assert.NotNull(viewModel.GpoSettings);
-            Assert.NotNull(viewModel.ApplicationSettings);
             Assert.NotNull(viewModel.Translation);
         }
 

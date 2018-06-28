@@ -34,6 +34,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts
 
         protected string[] AccountIsUsed { get; set; } = { "The account is used in the following profile:", "The account is used in the following profiles:" };
 
+        public string TimeoutLabel { get; protected set; } = "Timeout in seconds:";
+
         public string GetAccountIsUsedInFollowingMessage(int numberOfProfiles)
         {
             return PluralBuilder.GetFormattedPlural(numberOfProfiles, AccountIsUsed);

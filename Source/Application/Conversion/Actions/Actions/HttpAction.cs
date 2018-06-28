@@ -18,7 +18,6 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private int _requestTimeoutInSeconds = 60;
         protected override string PasswordText => "HTTP";
 
         /// <summary>
@@ -132,7 +131,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         {
             var account = job.Accounts.GetHttpAccount(job.Profile);
             var httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromSeconds(_requestTimeoutInSeconds);
+            var timeout = account.Timeout;
+
+            if (timeout < 0)
+                timeout = 60;
+
+            httpClient.Timeout = TimeSpan.FromSeconds(timeout);
             var uri = new Uri(account.Url);
             if (account.IsBasicAuthentication)
             {

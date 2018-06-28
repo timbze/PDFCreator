@@ -32,56 +32,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
 
         private void PdfCreatorTestpageExecute(object o)
         {
-            if (!QuerySaveModifiedSettings())
-                return;
-
             _testPageHelper.CreateTestPage();
         }
 
         private void WindowsTestpageExecute(object o)
         {
-            if (!QuerySaveModifiedSettings())
-                return;
-
-            _printerHelper.PrintWindowsTestPage(ApplicationSettings.PrimaryPrinter);
-        }
-
-
-        private bool AppSettingsAreModified()
-        {
-            return !ApplicationSettings.Equals(SettingsProvider.Settings.ApplicationSettings);
-        }
-
-        private void SaveAppSettings()
-        {
-            SettingsProvider.Settings.ApplicationSettings = ApplicationSettings.Copy();
-            SettingsManager.ApplyAndSaveSettings(SettingsProvider.Settings); // call apply to trigger LanguageChanged event
-        }
-        
-        private bool QuerySaveModifiedSettings()
-        {
-            if (!AppSettingsAreModified())
-                return true; //No changes -> proceed
-
-            var message = Translation.AskSaveModifiedSettings;
-            var caption = Translation.AppSettings;
-
-            var interaction = new MessageInteraction(message, caption, MessageOptions.YesNo, MessageIcon.Question);
-
-            _invoker.Invoke(interaction);
-
-            var response = interaction.Response;
-
-            if (response == MessageResponse.Yes) //Proceed with saved settings
-            {
-                SaveAppSettings();
-                return true;
-            }
-            if (response == MessageResponse.No) //Proceed with old settings
-            {
-                return true;
-            }
-            return false; //Cancel Testprinting
+            _printerHelper.PrintWindowsTestPage(SettingsProvider.Settings.ApplicationSettings.PrimaryPrinter);
         }
     }
 }

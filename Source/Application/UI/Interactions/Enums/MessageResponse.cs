@@ -6,6 +6,7 @@
         MoreInfo,
         No,
         OK,
+        Skip,
         Retry,
         Yes
     }

@@ -36,6 +36,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
         public CurrentSettingsProvider(ISettingsProvider provider)
         {
             _provider = provider;
+            _provider.SettingsChanged += (sender, args) =>
+            {
+                UpdateSettings(true);
+            };
         }
 
         public PdfCreatorSettings Settings
@@ -43,7 +47,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
             get
             {
                 if (_settings == null)
-                    UpdateSettings();
+                    UpdateSettings(false);
                 return _settings;
             }
         }
@@ -55,7 +59,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
             get
             {
                 if (_selectedProfile == null)
-                    UpdateSettings();
+                    UpdateSettings(false);
                 return _selectedProfile;
             }
             set
@@ -81,18 +85,23 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
             CloneSettings();
             SelectedProfile = _settings.GetProfileByName(_selectedProfile.Name);
             SettingsChanged?.Invoke(this, EventArgs.Empty);
+            RaisePropertyChanged(nameof(Settings));
         }
 
         public event EventHandler SettingsChanged;
 
         public event PropertyChangedEventHandler SelectedProfileChanged;
 
-        private void UpdateSettings()
+        private void UpdateSettings(bool forceUpdate)
         {
-            if (_settings == null && _provider.Settings != null)
+            if (_provider?.Settings == null)
+                return;
+
+            if (_settings == null || forceUpdate)
             {
                 CloneSettings();
                 _selectedProfile = Profiles.First();
+                SettingsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

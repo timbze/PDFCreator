@@ -23,6 +23,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
             _gpoSettings = gpoSettings;
         }
 
+        protected override void OnTranslationChanged()
+        {
+            RaisePropertyChanged(nameof(Title));
+            base.OnTranslationChanged();
+        }
+
 
         public bool DebugIsDisabled
         {

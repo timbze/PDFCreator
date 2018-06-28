@@ -16,5 +16,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Misc
         {
             UrlOpenCommand = commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.PlusHintLink);
         }
+
+        protected override void OnTranslationChanged()
+        {
+            RaisePropertyChanged(nameof(PlusHintText));
+            base.OnTranslationChanged();
+        }
     }
 }

@@ -8,11 +8,9 @@
     public class IniSettingsLoader : IIniSettingsLoader
     {
         private readonly IDataStorageFactory _dataStorageFactory;
-        private readonly ISettingsProvider _settingsProvider;
 
-        public IniSettingsLoader(ISettingsManager settingsManager, IDataStorageFactory dataStorageFactory)
+        public IniSettingsLoader(IDataStorageFactory dataStorageFactory)
         {
-            _settingsProvider = settingsManager.GetSettingsProvider();
             _dataStorageFactory = dataStorageFactory;
         }
 

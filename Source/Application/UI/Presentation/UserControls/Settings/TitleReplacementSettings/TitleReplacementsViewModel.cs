@@ -26,7 +26,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplace
         //private string _replacementTypeText;
         private string _sampleText = "Microsoft Word - Sample Text.doc";
         
-        private ObservableCollection<TitleReplacement> _titleReplacements;
+        private ObservableCollection<TitleReplacement> _titleReplacements = new ObservableCollection<TitleReplacement>();
 
         public TitleReplacementsViewModel(ITranslationUpdater transalationUpdater, ICurrentSettingsProvider settingsProvider, ICommandLocator commandLocator, IGpoSettings gpoSettings):base(transalationUpdater)
         {
@@ -36,18 +36,18 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplace
             TitleDeleteCommand = commandLocator.GetCommand<TitleReplacementRemoveCommand>();
             TitleEditCommand = commandLocator.GetCommand<TitleReplacementEditCommand>();
 
-            if (settingsProvider?.Settings != null)
-            {
-                TitleReplacements = settingsProvider.Settings.ApplicationSettings.TitleReplacement;
-            }
-            else
-            {
-                TitleReplacements = new ObservableCollection<TitleReplacement>();
-            }
+            if (_settingsProvider.Settings != null)
+                UpdateTitleReplacements();
 
-            UpdateReplacedText();
+            _settingsProvider.SettingsChanged += (sender, args) => UpdateTitleReplacements();
 
             TitleReplacements.CollectionChanged += TitleReplacementsOnCollectionChanged;
+        }
+
+        private void UpdateTitleReplacements()
+        {
+            TitleReplacements = _settingsProvider.Settings.ApplicationSettings.TitleReplacement;
+            UpdateReplacedText();
         }
 
         private void TitleReplacementsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)

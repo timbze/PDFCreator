@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security;
 using Translatable;
 
 namespace Presentation.UnitTest.UserControls
@@ -140,6 +141,25 @@ namespace Presentation.UnitTest.UserControls
     [TestFixture]
     public class LicenseSettingsViewModelTest
     {
+        private IProcessStarter _process;
+        private UnitTestInteractionRequest _interactionRequest;
+
+        private string _expectedLicenseKey;
+
+        private TimeSpan _timeout = TimeSpan.FromMilliseconds(150);
+
+        private Activation _savedActivation;
+        private Activation _activationFromServer;
+
+        private const string ValidLicenseKey = "AAAAABBBBBCCCCCDDDDDEEEEEFFFFF";
+        private const string ValidLicenseKey_Normalized = "AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-FFFFF";
+
+        private LicenseSettingsTranslation _translation = new LicenseSettingsTranslation();
+
+        private IDispatcher _dispatcher;
+        private ILicenseChecker _licenseChecker;
+        private IOfflineActivator _offlineActivator;
+
         [SetUp]
         public void Setup()
         {
@@ -159,25 +179,6 @@ namespace Presentation.UnitTest.UserControls
 
             _dispatcher = new InvokeImmediatelyDispatcher();
         }
-
-        private IProcessStarter _process;
-        private UnitTestInteractionRequest _interactionRequest;
-
-        private string _expectedLicenseKey;
-
-        private TimeSpan _timeout = TimeSpan.FromMilliseconds(150);
-
-        private Activation _savedActivation;
-        private Activation _activationFromServer;
-
-        private const string ValidLicenseKey = "AAAAABBBBBCCCCCDDDDDEEEEEFFFFF";
-        private const string ValidLicenseKey_Normalized = "AAAAA-BBBBB-CCCCC-DDDDD-EEEEE-FFFFF";
-
-        private LicenseSettingsTranslation _translation = new LicenseSettingsTranslation();
-
-        private IDispatcher _dispatcher;
-        private ILicenseChecker _licenseChecker;
-        private IOfflineActivator _offlineActivator;
 
         private LicenseSettingsViewModel BuildViewModel()
         {
@@ -345,6 +346,25 @@ namespace Presentation.UnitTest.UserControls
 
             viewModel.OfflineActivationCommand.Execute(null);
             Assert.IsTrue(wasCalled);
+        }
+
+        [Test]
+        public void OfflineActivationCommand_Execute_OfflineActivatorThrowsSecurityException_ExceptionGetsCaught()
+        {
+            var viewModel = BuildViewModel();
+
+            _offlineActivator.When(x => x.SaveActivation(Arg.Any<Activation>()))
+                .Do(x => { throw new SecurityException(); });
+
+            _offlineActivator.ValidateOfflineActivationString(Arg.Any<String>()).Returns(BuildValidActivation("").Some<Activation, LicenseError>());
+
+            _interactionRequest.RegisterInteractionHandler<OfflineActivationInteraction>(offlineActivationInteraction =>
+            {
+                offlineActivationInteraction.Success = true;
+                offlineActivationInteraction.LicenseServerAnswer = "OfflineLsa";
+            });
+
+            Assert.DoesNotThrow(() => viewModel.OfflineActivationCommand.Execute(null));
         }
 
         [Test]

@@ -36,6 +36,9 @@ namespace pdfforge.PDFCreator.Core.Controller
         /// </summary>
         public void HandleFileList(IEnumerable<string> droppedFiles)
         {
+            if (droppedFiles == null)
+                return;
+
             Logger.Debug("Launched Drag & Drop");
             var validFiles = RemoveInvalidFiles(droppedFiles);
             HandleFiles(validFiles);

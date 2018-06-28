@@ -89,11 +89,11 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
             {
                 try
                 {
-                    File.Delete(sourceFileInfo.Filename);
+                    if (File.Exists(sourceFileInfo.Filename))
+                        File.Delete(sourceFileInfo.Filename);
                 }
-                catch (IOException)
-                {
-                }
+                catch (UnauthorizedAccessException) { }
+                catch (IOException) { }
             }
             jobInfo.SourceFiles.Clear();
             DeleteInf(jobInfo);
@@ -119,9 +119,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
                 if (!string.IsNullOrEmpty(jobInfo.InfFile))
                     File.Delete(jobInfo.InfFile);
             }
-            catch (IOException)
-            {
-            }
+            catch (UnauthorizedAccessException) { }
+            catch (IOException) { }
+
             jobInfo.InfFile = null;
         }
 

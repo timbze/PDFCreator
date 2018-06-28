@@ -47,8 +47,17 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             EnsureJobFileIsInSpoolPath();
 
             _logger.Debug("Adding new job");
-            var jobInfo = _jobInfoManager.ReadFromInfFile(NewJobInfoFile);
-            _jobInfoQueue.Add(jobInfo);
+
+            try
+            {
+                var jobInfo = _jobInfoManager.ReadFromInfFile(NewJobInfoFile);
+                _jobInfoQueue.Add(jobInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.Warn(ex, $"Could not read the file '{NewJobInfoFile}'!");
+                return false;
+            }
 
             return true;
         }

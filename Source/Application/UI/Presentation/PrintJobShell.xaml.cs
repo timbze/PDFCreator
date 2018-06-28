@@ -5,6 +5,7 @@ using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
 using Prism.Regions;
+using System;
 using System.Windows;
 
 namespace pdfforge.PDFCreator.UI.Presentation
@@ -31,7 +32,7 @@ namespace pdfforge.PDFCreator.UI.Presentation
         private async void PrintJobShell_OnLoaded(object sender, RoutedEventArgs e)
         {
             await InteractiveWorkflowManager.Run();
-            Close();
+            await Dispatcher.BeginInvoke(new Action(Close));
         }
     }
 }

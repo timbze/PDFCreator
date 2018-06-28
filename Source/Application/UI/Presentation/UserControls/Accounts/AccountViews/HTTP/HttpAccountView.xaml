@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              Width="400"
              d:DataContext="{d:DesignInstance designTime:DesignTimeHttpAccountViewModel, IsDesignTimeCreatable=True}">
@@ -32,6 +33,10 @@
                              PasswordChar="•"
                              PasswordChanged="HttpServerPasswordBox_OnPasswordChanged"
                              IsEnabled="{Binding AskForPasswordLater, Converter={StaticResource NegationConverter}}" />
+            </StackPanel>
+            <StackPanel  Margin="0 5 0 5">
+                <Label Content="{Binding Translation.TimeoutLabel}" />
+                <controls:NumericUpDown Value="{Binding Timeout}" Minimum="1" MinWidth="80" HorizontalAlignment="Left"></controls:NumericUpDown>
             </StackPanel>
             <CheckBox Margin="0 5 0 20" IsChecked="{Binding AskForPasswordLater}">
                 <TextBlock TextWrapping="Wrap" Text="{Binding Translation.DontSavePassword}" />

@@ -13,6 +13,7 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
         {
             _ftpConnectionWrap = Substitute.For<IFtpConnection>();
             _pathUtil = Substitute.For<IPathUtil>();
+            _pathUtil.MAX_PATH.Returns(259);
             _uniqueFilenameForFtp = new UniqueFilenameForFtp(Filename, _ftpConnectionWrap, _pathUtil);
         }
 

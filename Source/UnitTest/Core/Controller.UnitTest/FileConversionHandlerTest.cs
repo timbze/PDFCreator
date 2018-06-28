@@ -31,6 +31,15 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Controller
         private List<string> _droppedFiles;
 
         [Test]
+        public void HandleDroppedFiles_Null_DoNothing()
+        {
+            _fileConversionHandler.HandleFileList(null);
+            Assert.AreEqual(0, _directConversionHelper.ReceivedCalls().Count());
+            Assert.AreEqual(0, _printFileHelper.ReceivedCalls().Count());
+            Assert.AreEqual(0, _fileWrap.ReceivedCalls().Count());
+        }
+
+        [Test]
         public void HandleDroppedFiles_EmptyList_DoNothing()
         {
             var droppedFiles = new List<string>();
