@@ -26,7 +26,7 @@ msgstr ""
 msgid "Delete File"
 msgid_plural "Delete Files"
 msgstr[0] "Smaž soubor"
-msgstr[1] ""
+msgstr[1] "Smaž soubory"
 msgstr[2] "Smaž soubory"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation

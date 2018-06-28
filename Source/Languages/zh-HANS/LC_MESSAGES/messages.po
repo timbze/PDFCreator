@@ -481,7 +481,7 @@ msgstr "用户取消了重新输入 SMTP 电子邮件密码的动作。"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
-msgstr "有密码保护的PDF文件和Ghostscript文件无法被转换。"
+msgstr "有密码保护的PDF文件无法被转换。"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "No repetition"

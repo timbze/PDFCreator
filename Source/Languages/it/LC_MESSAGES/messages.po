@@ -3199,7 +3199,7 @@ msgid ""
 "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\n"
 "Please select another filename and try again."
 msgstr ""
-"Impossibile salvare il file '{0}'. Forse il file è attualmente in uso o non hai le autorizzazioni necessarie.\n"
+"Impossibile salvare il file '{0}'. Forse il file è attualmente in uso o non hai le autorizzazioni necessarie. \n"
 "Per favore seleziona un altro nome e riprova."
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation

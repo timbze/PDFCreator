@@ -33,9 +33,9 @@ msgstr[2] "Pašalinti failų"
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "This printer will be mapped to the default profile."
 msgid_plural "These printers will be mapped to the default profile."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Šis spausdintuvas bus susietas su numatytuoju profiliu."
+msgstr[1] "Šie spausdintuvai bus susieti su numatytuoju profiliu."
+msgstr[2] "Šie spausdintuvų bus susieta su numatytuoju profiliu."
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
@@ -64,72 +64,81 @@ msgid_plural ""
 "Maybe the files are currently in use.\n"
 "Please try again later."
 msgstr[0] ""
+"Nepavyko pašalinti šio failo.\n"
+"Galbūt failas šiuo metu yra naudojamas.\n"
+"Pabandykite dar kartą vėliau."
 msgstr[1] ""
+"Nepavyko pašalinti šių failų.\n"
+"Galbūt failai šiuo metu yra naudojami.\n"
+"Pabandykite dar kartą vėliau."
 msgstr[2] ""
+"Nepavyko pašalinti šių failų.\n"
+"Galbūt failai šiuo metu yra naudojami.\n"
+"Pabandykite dar kartą vėliau."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "The HTTP action will be disabled for this profile."
 msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "HTTP veikimas šiame profilyje bus išjungtas."
+msgstr[1] "HTTP veikimas šiuose profiliuose bus išjungtas."
+msgstr[2] "HTTP veikimas šiuose profiliuose bus išjungtas."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "The account is used in the following profile:"
 msgid_plural "The account is used in the following profiles:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Paskyra naudojama šiame profilyje:"
+msgstr[1] "Paskyra naudojama šiuose profiliuose:"
+msgstr[2] "Paskyra naudojama šiuose profiliuose:"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The SMTP action will be disabled for this profile."
 msgid_plural "The SMTP action will be disabled for this profiles."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "SMTP veikimas šiame profilyje bus išjungtas."
+msgstr[1] "SMTP veikimas šiuose profiliuose bus išjungtas."
+msgstr[2] "SMTP veikimas šiuose profiliuose bus išjungtas."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "The FTP action will be disabled for this profile."
 msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "FTP veikimas šiame profilyje bus išjungtas."
+msgstr[1] "FTP veikimas šiuose profiliuose bus išjungtas."
+msgstr[2] "FTP veikimas šiuose profiliuose bus išjungtas."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "The profile is mapped to the following printer:"
 msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Profilis susietas su šiuo spausdintuvu:"
+msgstr[1] "Profilis susietas su šiais spausdintuvais:"
+msgstr[2] "Profilis susietas su šiais spausdintuvais:"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "There is an issue with the profile '{0}':"
 msgid_plural "There are issues with the profile '{0}':"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Yra problema su profiliu „{0}“:"
+msgstr[1] "Yra problemų su profiliu „{0}“:"
+msgstr[2] "Yra problemų su profiliu „{0}“:"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Signing will be disabled for this profile."
 msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pasirašymas bus išjungtas šiame profilyje."
+msgstr[1] "Pasirašymas bus išjungtas šiuose profiliuose."
+msgstr[2] "Pasirašymas bus išjungtas šiuose profiliuose."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "The Dropbox upload will be disabled for this profile."
 msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "„Dropbox“ įkėlimas bus išjungtas šiame profilyje."
+msgstr[1] "„Dropbox“ įkėlimas bus išjungtas šiuose profiliuose."
+msgstr[2] "„Dropbox“ įkėlimas bus išjungtas šiuose profiliuose."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
@@ -153,7 +162,7 @@ msgstr "Automatinis išsaugojimas be failo vardo šablono."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without owner password."
-msgstr "Automatinis išsaugojimas be sąvininko slaptažodžio."
+msgstr "Automatinis išsaugojimas be savininko slaptažodžio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without password for HTTP authentication."
@@ -1058,7 +1067,7 @@ msgstr "raktažodis 1 raktažodis 2"
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "A new Update is available"
-msgstr "Rastas naujas atnaujinimas"
+msgstr "Yra naujas atnaujinimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Accounts"
@@ -1066,7 +1075,7 @@ msgstr "Paskyros"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Home"
-msgstr "Į pradžią"
+msgstr "Pradžia"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
@@ -1223,7 +1232,7 @@ msgstr "Katalogas:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Don't overwrite files (adds an increasing number in case of conflict)"
-msgstr "Neperrašyti failų (prideda didėjantį skaičių konflikto atveju)"
+msgstr "Neperrašyti failų (prie vardo pridėti didėjantį skaičių konflikto atveju)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Don't overwrite files (adds an increasing number in case of conflict)."
@@ -1352,7 +1361,7 @@ msgstr "SMTP paskyra"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared.SettingControlsTranslation
 msgid "Save"
-msgstr "Išsaugoti"
+msgstr "Išsaugojimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1572,15 +1581,15 @@ msgstr "Saugus laiko serveris"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Convert PDF files"
-msgstr "Konvertuoti PDF failus"
+msgstr "PDF failų konvertavimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Create PDF files"
-msgstr "Kurti PDF failus"
+msgstr "PDF failų kūrimu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Create custom forms"
-msgstr "Kurti naudotojo formas"
+msgstr "Naudotojo formų kūrimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Download PDF Architect now"
@@ -1588,7 +1597,7 @@ msgstr "Atsisiųsti „PDF Architect“ dabar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Edit PDF files"
-msgstr "Redaguoti PDF failus"
+msgstr "PDF failų redagavimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Enjoy our free features:"
@@ -1596,7 +1605,7 @@ msgstr "Mėgaukitės nemokamomis funkcijomis:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Insert page elements"
-msgstr "Įterpti puslapio elementus"
+msgstr "Puslapio elementų įterpimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Launch PDF Architect"
@@ -1612,7 +1621,7 @@ msgstr "Optinis ženklų atpažinimas (OCR)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Other powerful PDF Architect features:"
-msgstr "Kitos „PDF Architect“ galingos funkcijos:"
+msgstr "Kitos galingos „PDF Architect“ funkcijos:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Our full-featured PDF Editor"
@@ -1628,15 +1637,15 @@ msgstr "Saugumas ir apsauga"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Send for e-signature"
-msgstr "Siųsti elektroniniam pasirašymui"
+msgstr "Siuntimas elektroniniam pasirašymui"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Split and merge files"
-msgstr "Failų padalinimas ir suliejimas"
+msgstr "Failų skaidymu ir suliejimu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "View and print any PDF"
-msgstr "Bet kurio PDF peržiūra ir spausdinimas"
+msgstr "Bet kurio PDF peržiūra ir spausdinimu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "You already have PDF Architect on your computer"
@@ -1893,30 +1902,32 @@ msgid ""
 "'{0}' already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"„{0}“ jau egzistuoja.\n"
+"Ar norite jį pakeisti?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Confirm Save As"
-msgstr ""
+msgstr "Išsaugoti Kaip patvirtinimas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Defective Profile"
-msgstr ""
+msgstr "Sugadintas profilis"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit"
-msgstr ""
+msgstr "Redaguoti"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit the profile or select another one."
-msgstr ""
+msgstr "Redaguokit profilį ar pasirinkite kitą."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File_name:"
-msgstr ""
+msgstr "Failo _vardas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Folder path is not valid"
-msgstr ""
+msgstr "Kelias iki katalogo netinkamas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Invalid path"
@@ -1924,7 +1935,7 @@ msgstr "Klaidingas kelias"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "S_ubject:"
-msgstr "Tema:"
+msgstr "T_ema:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid ""
@@ -1932,6 +1943,9 @@ msgid ""
 "The folder path must not contain any of the following characters: \n"
 " \\ / : * ? \\< >"
 msgstr ""
+"Kelias iki katalogo netinkamas arba nenurodytas. Nurodykite teisingą kelią.\n"
+"Kelias iki katalogo negali turėti nei vieno iš šių simbolių: \n"
+" \\ / : * ? \\< >"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "The path is not valid. Please enter a valid absolute path."
@@ -1939,7 +1953,7 @@ msgstr "Kelias netinkamas. Įveskite galiojantį absoliutų kelią."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path."
-msgstr ""
+msgstr "Kelias iki failo yra ilgesnis negu maksimalus leistinas ({0}) simbolių skaičius, pasirinkti trumpesnį kelią iki failo."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Author:"
@@ -1948,7 +1962,7 @@ msgstr "_Autorius:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_Cancel"
-msgstr ""
+msgstr "_Atšaukti"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
@@ -1957,11 +1971,11 @@ msgstr "_El. paštas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Folder:"
-msgstr ""
+msgstr "_Katalogas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Keywords:"
-msgstr ""
+msgstr "Ra_ktažodžiai:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
@@ -1975,7 +1989,7 @@ msgstr "_Profilis:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_Save"
-msgstr ""
+msgstr "Iš_saugoti"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Title:"
@@ -1987,7 +2001,7 @@ msgstr "Konvertuojama..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Don't show quick Actions until the next update"
-msgstr ""
+msgstr "Nerodyti greitųjų veiksmų iki kito atnaujinimo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
@@ -2129,7 +2143,7 @@ msgstr "Profilis:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "The settings contain the following problems:"
-msgstr ""
+msgstr "Nustatymuose yra šios problemos:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "_Save"
@@ -2309,7 +2323,7 @@ msgstr "Nustatyti slaptažodžius"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "This is not considered secure anymore. Use this for compatibility only."
-msgstr ""
+msgstr "Tai nebėra laikoma saugiu. Naudokite tik suderinamumo užtikrinimui."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "restrict to low quality"
@@ -2365,7 +2379,7 @@ msgstr "Rodyti parašą dokumente"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Don't save password and request it during conversion"
-msgstr ""
+msgstr "Neišsaugoti slaptažodžio ir prašyti jo konvertavimo metu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Left X:"
@@ -2481,7 +2495,7 @@ msgstr "Spalvų modelis:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "DPI"
-msgstr "Taškai colyje"
+msgstr "taškų colyje (DPI)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Document view:"
@@ -2533,11 +2547,11 @@ msgstr "Rezultato formatas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "As the text format is very limited in what can be displayed, there are many ways to create a TXT file from a printed document. You can choose between four different strategies:"
-msgstr ""
+msgstr "Kadangi tekstiniame formate yra labai daug apribojimų, tam kas gali būti rodoma, yra daug būdų kaip sukurti TXT failą iš atspausdinto dokumento. Galite pasirinkti keturias skirtingas strategijas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Same XML output format as above, but attempt processing similar to MuPDF"
-msgstr ""
+msgstr "Tas pats XML išvesties formatas, kaip nurodyta aukščiau, bet bandymas apdoroti panašus į MuPDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Text Settings"
@@ -2545,15 +2559,15 @@ msgstr "Teksto nuostatos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "UTF-8 text which approximates the original text layout"
-msgstr ""
+msgstr "UTF-8 tekstas, kuris atitinka originalų teksto išdėstymą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Unicode (UCS2) text with byte order mark (BOM) which approximates the original text layout"
-msgstr ""
+msgstr "Tekstas unikodu (UCS2) su baitų eilės žyme (BOM), kuris atitinka originalų teksto išdėstymą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "XML-escaped Unicode along with information regarding the format of the text"
-msgstr ""
+msgstr "XML-escaped tekstas unikodu, kartu su informacija apie teksto formatą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTiffTranslation
 msgid "TIFF Settings"
@@ -2573,11 +2587,11 @@ msgstr "Tema:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Only show notification for errors"
-msgstr ""
+msgstr "Rodyti tik klaidų pranešimus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Show tray notification after converting a document"
-msgstr ""
+msgstr "Rodyti pranešimą po dokumento konvertavimo dėkle"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Choose a folder"
@@ -2585,7 +2599,7 @@ msgstr "Pasirinkite katalogą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Converts all documents without asking for settings. This requires more settings to be defined in the profile."
-msgstr ""
+msgstr "Konvertuoja visus dokumentus neklausdamas parametrų. Tam reikia nurodyti daugiau parametrų profilyje."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Don't overwrite existing files"
@@ -2605,11 +2619,11 @@ msgstr "Atverti failą po išsaugojimo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Show quick actions after the documents were converted"
-msgstr ""
+msgstr "Rodyti greituosius veiksmus po dokumentų konvertavimo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Shows a window to select the filename, output format etc."
-msgstr ""
+msgstr "Rodo langą failo vardo, išvesties formato ir pan. nurodymui."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Skip print dialog (start with save dialog)"
@@ -2750,7 +2764,7 @@ msgstr "Pagrindinės"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Install new Update"
-msgstr ""
+msgstr "Įdiekite atnaujinimą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Language"
@@ -2976,11 +2990,11 @@ msgstr "Licencijos išsaugojimas visiems kompiuterio naudotojams pavyko."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Edit Title Replacement"
-msgstr ""
+msgstr "Redaguoti antraštės keitimą"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Invalid Regular Expression."
-msgstr ""
+msgstr "Klaidingas reguliarusis reiškinys."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove All"
@@ -2988,15 +3002,15 @@ msgstr "Pašalinti viską"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove at beginning"
-msgstr ""
+msgstr "Pašalinti nuo pradžios"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove at end"
-msgstr ""
+msgstr "Pašalinti nuo pabaigos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replace with regular expression"
-msgstr ""
+msgstr "Pakeisti reguliariuoju reiškiniu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replace with:"
@@ -3061,7 +3075,7 @@ msgstr "Tęsti"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Delete print job"
-msgstr ""
+msgstr "Pašalinti spausdinimo užduotį"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Files:"
@@ -3069,7 +3083,7 @@ msgstr "Failai:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Hint: You can drag the print jobs to reorder them"
-msgstr ""
+msgstr "Patarimas: Galite vilkti spausdinimo užduotis, kad jas perrūšiuoti"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "ID:"
@@ -3081,7 +3095,7 @@ msgstr "Sulieti visus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merge Print Jobs"
-msgstr ""
+msgstr "Sulieti spausdinimo užduotis"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merge Selected"
@@ -3097,7 +3111,7 @@ msgstr "Spausdintuvas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Reorder and Merge Print Jobs"
-msgstr ""
+msgstr "Perrūšiuoti ir apjungti spausdinimo užduotis"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid "Download"
@@ -3192,6 +3206,8 @@ msgid ""
 "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\n"
 "Please select another filename and try again."
 msgstr ""
+"Failas „{0}“ negali būti išsaugotas. Galbūt failas šiuo metu yra naudojamas arba neturite reikiamų leidimų.\n"
+"Pasirinkite kitą failo vardą ir bandykite dar kartą."
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid ""

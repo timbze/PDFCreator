@@ -41,7 +41,7 @@ msgid "Try out the new PDF Architect"
 msgstr "Essayer le nouveau PDF Architect"
 
 msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "Le fichier téléchargé est corrompu et a été supprimé. L'installation sera annulé !"
+msgstr "Le fichier téléchargé est corrompu et a été supprimé. L'installation sera annulée !"
 
 msgid "A shortcut has been added to your desktop."
 msgstr "Un raccourci a été ajouté sur votre bureau."
@@ -62,7 +62,7 @@ msgid "The PDFCreator setup has installed the .Net framework 4.0. This step need
 msgstr "La configuration de PDFCreator a installé le .Net Framework 4.0. Cette étape nécessite un redémarrage du système. Merci de redémarrer votre système puis recommencer la configuration.%n%nLe programme d'installation va maintenant se terminer."
 
 msgid "Merge multiple PDFs"
-msgstr "Fusionner"
+msgstr "Fusionner des PDF"
 
 msgid "PDFCreator download"
 msgstr "Télécharger PDFCreator"
@@ -74,7 +74,7 @@ msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want t
 msgstr "Une nouvelle version '%1' est disponible !%n%nVoulez-vous télécharger et installer cette version ?"
 
 msgid "Enhance PDFCreator with edit features!"
-msgstr "Améliorer PDFCreator en éditant vos fonctionnalités !"
+msgstr "Améliorer PDFCreator en éditant ses fonctionnalités !"
 
 msgid "Set installation directory and additional options"
 msgstr "Répertoire d'installation et options supplémentaires"
@@ -86,7 +86,7 @@ msgid "Please choose a printer name."
 msgstr "Veuillez choisir un nom d'imprimante."
 
 msgid "Automatic E-Sign workflows"
-msgstr "Flux automatiques E-Sign"
+msgstr "Flux E-Sign automatique"
 
 msgid "There already exists a printer with this name. Please choose another name."
 msgstr "Il existe déjà une imprimante qui porte ce nom. Veuillez choisir un autre nom."
@@ -110,13 +110,13 @@ msgid "Install printer"
 msgstr "Installer l'imprimante"
 
 msgid "Default application for PDF files"
-msgstr "Application par défaut pour les fichiers PDF"
+msgstr "Application par défaut pour fichiers PDF"
 
 msgid "Install printer driver"
 msgstr "Installer le pilote d'imprimante"
 
 msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "Le nouveau PDFArchitect sera installé. Cela peut prendre un certain temps."
+msgstr "Le nouveau PDFArchitect sera installé. Cela peut durer un certain temps."
 
 msgid "Install printer port"
 msgstr "Installer le port de l'imprimante"
@@ -125,13 +125,13 @@ msgid "Firefox integration"
 msgstr "Intégrer à Firefox"
 
 msgid "Languages"
-msgstr "Langage"
+msgstr "Langues"
 
 msgid "Internet Explorer integration"
 msgstr "Intégrer à Internet Explorer"
 
 msgid "The activation is too old! Please renew your activation."
-msgstr "Votre activation est trop ancienne ! Veuillez renouveler votre activation."
+msgstr "L'activation est trop ancienne ! Veuillez renouveler votre activation."
 
 msgid "MS Outlook previewer integration"
 msgstr "Intégration de prévisualisation MS Outlook"
@@ -140,7 +140,7 @@ msgid "Invalid answer from license server!"
 msgstr "Réponse invalide du serveur de licence !"
 
 msgid "Windows Explorer integration"
-msgstr "Intégration dans l'explorateur"
+msgstr "Intégration dans l'Explorateur"
 
 msgid "No answer from license server!"
 msgstr "Pas de réponse du serveur de licence !"
@@ -185,7 +185,7 @@ msgid "Printer name"
 msgstr "Nom"
 
 msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "Le format de la clé de licence est XXXXX-XXXXX-XXXXX-XXXXX-XXXXX XXXXX-"
+msgstr "Le format de la clé de licence est XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
 
 msgid "Choosing a printer name."
 msgstr "Choisir un nom d'imprimante."
@@ -206,19 +206,19 @@ msgid "Offline license check"
 msgstr "Vérification de licence hors ligne"
 
 msgid "This process might take several minutes."
-msgstr "Ce processus peut prendre plusieurs minutes."
+msgstr "Ce processus peut durer plusieurs minutes."
 
 msgid "The machine or the user is blocked!"
 msgstr "La machine ou l'utilisateur est bloqué !"
 
 msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr "PDFCreator vous permet de créer facilement des fichiers PDFs à partir de n'importe quel programme Windows. Utilisez-le comme une imprimante dans Word, Excel, ou toute autre application Windows."
+msgstr "PDFCreator vous permet de créer facilement des fichiers PDF depuis n'importe quel programme de Windows. Utilisez-le comme une imprimante dans Word, Excel, ou toute autre application Windows."
 
 msgid "An invalid license key is provided!"
 msgstr "Une clé de licence incorrecte a été fournie !"
 
 msgid "application files"
-msgstr "Fichiers de l'application"
+msgstr "fichiers de l'application"
 
 msgid "OK"
 msgstr "Valider"
@@ -227,7 +227,7 @@ msgid "The application '%1' is running.%n%nPlease close the application first.%n
 msgstr "L'application '%1' est en cours d'utilisation.%n%nVeuillez fermer l'application.%n%n"
 
 msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr "La version %1 n'est pas supportée ! Merci d'utiliser la dernière version %2."
+msgstr "La version %1 n'est pas supportée ! Merci d'utiliser la dernière version %2 ici."
 
 msgid "Please restart your system first to continue setup."
 msgstr "Veuillez redémarrer votre ordinateur pour poursuivre l'installation."
@@ -254,7 +254,7 @@ msgid "An older version '%1' was found.%n%nIt is not possible to update this ver
 msgstr "Une ancienne version '%1' a été trouvé.%n%nUne mise à jour vers la version '%2' n'est pas possible.%n%nVeuillez d'abord désinstaller l'application."
 
 msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "Cette application est une version de développement de PDFCreator.%n%nCe n'est pas une préversion, elle est donc susceptible de contenir de nombreux bugs voir ne pas fonctionner du tout.%n%nSi vous choisissez de l'installer malgré tout, nous aimerions avoir vos commentaires en retour."
+msgstr "Cette application est une version de développement de PDFCreator.%n%nCe n'est pas une préversion, elle est donc susceptible de contenir de nombreux bugs où ne pas fonctionner du tout.%n%nSi vous choisissez de l'installer malgré tout, nous aimerions avoir vos commentaires en retour."
 
 msgid "Other tasks:"
 msgstr "Autres tâches :"
@@ -263,7 +263,7 @@ msgid "This version doesn't support the server mode. Do you want install this ve
 msgstr "Cette version ne supporte pas le mode serveur. Voulez-vous quand-même installer cette version ?"
 
 msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "Cette mise à jour est prévue pour une version antérieure de l'application. Vous ne pouvez pas utiliser cette mise à jour."
+msgstr "Cette mise à jour est prévue pour une version ancienne de l'application. Vous ne pouvez pas utiliser cette mise à jour."
 
 msgid "Delete all application settings?"
 msgstr "Supprimer tous les paramètres de l'application ?"
@@ -272,13 +272,13 @@ msgid "Edit pages"
 msgstr "Modifier les pages"
 
 msgid "Uninstall the printer with all its components."
-msgstr "Désinstaller l'imprimante ainsi que touts ses composants."
+msgstr "Désinstaller l'imprimante ainsi que tous ses composants."
 
 msgid "Split and merge"
 msgstr "Fractionner et fusionner"
 
 msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "Valider pour mettre à jour ou Annuler pour quitter l'installation affin de désinstaller au préalable l'ancienne version."
+msgstr "Valider pour mettre à jour ou Annuler pour quitter l'installation afin de désinstaller au préalable l'ancienne version."
 
 msgid "Create"
 msgstr "Créer"
@@ -290,7 +290,7 @@ msgid "The application is already installed.%n%nFor a new installation uninstall
 msgstr "L'application est déjà installée.%n%nPour une nouvelle installation, commencer par désinstaller l'application.%n%nL'installation sera annulée."
 
 msgid "Create PDF and Bitmap files with %1"
-msgstr "Créer des fichiers PDF et images avec %1"
+msgstr "Créer des PDF et fichiers Bitmap avec %1"
 
 msgid "Do you want to cancel the setup?"
 msgstr "Voulez-vous annuler l'installation ?"
@@ -308,7 +308,7 @@ msgid "PDFCreator requires Microsoft .Net %1. Please download and install Micros
 msgstr "PDFCreator a besoin de Microsoft .Net %1. Veuillez télécharger et installer Microsoft .Net %1 puis relancez l'installation de PDFCreator."
 
 msgid "File not found (404)"
-msgstr "Fichier non trouvé (404)"
+msgstr "Fichier non-trouvé (404)"
 
 msgid "Download the latest version..."
 msgstr "Télécharger la dernière version..."
@@ -323,7 +323,7 @@ msgid "Server internal error (500)"
 msgstr "Erreur interne du serveur (500)"
 
 msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "Il y a une erreur dans votre variable d'environnement système \"Path\"%n%n-> Entrée manquante ou endommagée : %SystemRoot%\\system32\\wbem%n%nCette erreur doit être corrigée avant de poursuivre l'installation.%n%nValider pour corriger l'erreur. Vous devrez redémarrer votre système.%n%nAnnuler pour quitter l'installation."
+msgstr "Il y a une erreur dans votre variable d'environnement système \"Path\"%n%n->Entrée manquante ou endommagée : %SystemRoot%\\system32\\wbem%n%nCette erreur doit être corrigée avant de poursuivre l'installation.%n%nValider pour corriger l'erreur. Vous devrez redémarrer votre système.%n%nAnnuler pour quitter l'installation."
 
 msgid "Bad gateway (502)"
 msgstr "Passerelle injoignable (502)"
@@ -347,7 +347,7 @@ msgid "Cannot connect"
 msgstr "Connexion impossible"
 
 msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "Cette version est pas couverte par votre clé de licence ! Merci de renouveler votre licence sur %1."
+msgstr "Cette version n'est pas couverte par votre clé de licence ! Merci de renouveler votre licence sur %1."
 
 msgid "Connecting..."
 msgstr "Connexion en cours..."
@@ -365,13 +365,13 @@ msgid "Details"
 msgstr "Détails"
 
 msgid "Invalid license key!"
-msgstr "Clé de licence non valide !"
+msgstr "Clé de licence non-valide !"
 
 msgid "Download cancelled"
 msgstr "Téléchargement annulé"
 
 msgid "Licensee"
-msgstr "License"
+msgstr "Licence"
 
 msgid "Download complete"
 msgstr "Téléchargement terminé"
@@ -380,7 +380,7 @@ msgid "Offline activation string:"
 msgstr "Clé d'activation :"
 
 msgid "Download failed"
-msgstr "Erreur de téléchargement"
+msgstr "Echec du téléchargement"
 
 msgid "The authorization is failed!"
 msgstr "La demande d'autorisation a échoué !"
@@ -410,7 +410,7 @@ msgid "The application is not installed. You cannot use this patch."
 msgstr "L'application n'est pas installée. Vous ne pouvez pas utiliser cette mise à jour."
 
 msgid "The following files were not downloaded:"
-msgstr "Les fichiers suivants n'ont pas été téléchargé :"
+msgstr "Les fichiers suivants n'ont pas été téléchargés :"
 
 msgid "Edit texts and fonts"
 msgstr "Modifier les textes et les polices"
@@ -431,7 +431,7 @@ msgid "GB"
 msgstr "Go"
 
 msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "Le fichier téléchargé ne peut être vérifiée. Voulez-vous tout de même exécuter l'installation ?"
+msgstr "L'empreinte du fichier téléchargé ne peut être vérifiée. Voulez-vous tout de même lancer l'installation ?"
 
 msgid "Getting file information..."
 msgstr "Récupération des informations du fichier..."
@@ -461,7 +461,7 @@ msgid "Initializing..."
 msgstr "Initialisation en cours..."
 
 msgid "Please enter the license key."
-msgstr "Veuillez saisir la clé de licence."
+msgstr "Veuillez entrer la clé de licence."
 
 msgid "KB"
 msgstr "Ko"
@@ -479,7 +479,7 @@ msgid "MB"
 msgstr "Mo"
 
 msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "Une ancienne version '%1' a été trouvé.%nUne mise à jour est possible vers la version '%2'.%n%n"
+msgstr "L'ancienne version '%1' a été trouvé.%nLa mise à jour est possible vers la version '%2'.%n%n"
 
 msgid "MB/s"
 msgstr "Mo/s"
@@ -491,7 +491,7 @@ msgid "Remaining time:"
 msgstr "Temps restant :"
 
 msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "Installation de Microsoft .Net %1. Cela peut prendre plusieurs minutes. Merci de bien vouloir patienter."
+msgstr "Installation de Microsoft .Net %1. Cela peut durer plusieurs minutes. Merci de bien vouloir patienter."
 
 msgid "Retry"
 msgstr "Recommencer"
@@ -500,13 +500,13 @@ msgid "For the &current user only"
 msgstr "Utilisateur &courant uniquement"
 
 msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Vérifiez votre connexion et cliquez sur 'Réessayer' pour recommencer le téléchargement des fichiers, ou cliquez sur 'Annuler' pour quitter l'installation."
+msgstr "Vérifiez votre connexion et cliquez sur 'Recommencer' pour relancer le téléchargement des fichiers, ou cliquez sur 'Annuler' pour quitter l'installation."
 
 msgid "An unknown error is occurred!"
 msgstr "Une erreur inconnue s'est produite !"
 
 msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "Vérifiez votre connexion et cliquez sur 'Réessayer' pour recommencer le téléchargement des fichiers, ou cliquez sur 'Suivant' pour continuer malgré tout l'installation."
+msgstr "Vérifiez votre connexion et cliquez sur 'Recommencer' pour relancer le téléchargement des fichiers, ou cliquez sur 'Suivant' pour continuer malgré tout l'installation."
 
 msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
 msgstr "Vous avez besoin d'une nouvelle clé de licence valide pour continuer. Voulez-vous procéder à l'installation ?"
@@ -527,7 +527,7 @@ msgid "Status:"
 msgstr "Etat :"
 
 msgid "The maximum of %1 licenses is exceeded!"
-msgstr "Le maximum de %1 licence est dépassé !"
+msgstr "Le maximum de %1 licences est dépassé !"
 
 msgid "The installed application is too old. You cannot use this patch."
 msgstr "L'application installée est trop ancienne. Vous ne pouvez pas utiliser cette mise à jour."
@@ -548,4 +548,4 @@ msgid "%.2f of %.2f"
 msgstr "%.2f sur %.2f"
 
 msgid "Offline activation instructions"
-msgstr "Instructions"
+msgstr "Instructions hors-ligne"

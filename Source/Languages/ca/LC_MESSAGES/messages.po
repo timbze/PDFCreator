@@ -501,7 +501,7 @@ msgstr "L'usuari ha cancel·lat el reingrés de la contrasenya SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
-msgstr "Heu imprés un fitxer PDF protegit amb contrasenya i el Ghostcript no és capaç de convertir aquesta mena de fitxers."
+msgstr "Heu imprès un fitxer PDF protegit amb contrasenya i el Ghostcript no és capaç de convertir aquesta mena de fitxers."
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "No repetition"

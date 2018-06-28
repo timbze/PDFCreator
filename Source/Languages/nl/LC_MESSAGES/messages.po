@@ -2616,7 +2616,7 @@ msgstr "Toon de snel-acties na conversie documenten"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Shows a window to select the filename, output format etc."
-msgstr "Toont een venster om bestandsnaam, -indeling etc. te kiezen"
+msgstr "Toont een venster om bestandsnaam, -indeling etc. te kiezen."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Skip print dialog (start with save dialog)"

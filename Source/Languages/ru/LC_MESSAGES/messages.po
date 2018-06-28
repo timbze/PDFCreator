@@ -1585,7 +1585,7 @@ msgstr "Удалить учетную запись сервера времени
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Secured Time Server"
-msgstr "Защищенный Сервер времени без ввода пароля"
+msgstr "Защищенный Сервер времени без ввода пароля."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Convert PDF files"
