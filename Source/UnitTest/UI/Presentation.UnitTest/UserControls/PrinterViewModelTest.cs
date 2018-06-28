@@ -7,6 +7,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Printer;
+using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.Wrapper;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
@@ -71,8 +72,8 @@ namespace Presentation.UnitTest.UserControls
 
         private PrinterViewModel BuildViewModel(IList<ConversionProfile> profiles = null)
         {
-            var settingsProvider = Substitute.For<ISettingsProvider>();
-            settingsProvider.Settings.Returns(_settings);
+            var currentSettingsProvider = Substitute.For<ICurrentSettingsProvider>();
+            currentSettingsProvider.Settings.Returns(_settings);
 
             var printerHelper = Substitute.For<IPrinterHelper>();
             printerHelper.GetApplicablePDFCreatorPrinter(Arg.Any<string>(), Arg.Any<string>()).Returns("PDFCreator");
@@ -80,7 +81,7 @@ namespace Presentation.UnitTest.UserControls
             if (profiles != null)
                 _settings.ConversionProfiles = new ObservableCollection<ConversionProfile>(profiles);
 
-            var viewModel = new PrinterViewModel(_printerProvider, _printerActionAssistant, null, null, new DesignTimeTranslationUpdater(), printerHelper, settingsProvider, null);
+            var viewModel = new PrinterViewModel(_printerProvider, _printerActionAssistant, null, null, new DesignTimeTranslationUpdater(), printerHelper, currentSettingsProvider, null);
 
             return viewModel;
         }

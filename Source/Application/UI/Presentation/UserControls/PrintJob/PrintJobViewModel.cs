@@ -425,7 +425,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
                     return;
                 Job.Profile = value;
                 RaisePropertyChanged();
-                OutputFolder = Job.Profile.TargetDirectory;
+                if (!string.IsNullOrWhiteSpace(Job.Profile.TargetDirectory))
+                {
+                    OutputFolder = Job.Profile.TargetDirectory;
+                }
                 SetMetadata();
             }
         }
@@ -522,7 +525,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public string OutputFilename
         {
             get { return _outputFilename; }
-            set { SetProperty(ref _outputFilename, value); ComposeOutputFilename(); }
+            set
+            {
+                SetProperty(ref _outputFilename, value);
+                ComposeOutputFilename();
+            }
         }
 
         public bool IsProfileEnabled

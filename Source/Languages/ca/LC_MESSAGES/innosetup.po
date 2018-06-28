@@ -1,3 +1,9 @@
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Ha finalitzat la instal·lació del [name] a l'ordinador."
+
+msgid "Edit & Insert"
+msgstr "Edita i insereix"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Catalan (PDFCreator)\n"
@@ -5,8 +11,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Catalan <http://translate.pdfforge.org/projects/pdfcreator/"
-"innosetup/ca/>\n"
+"Language-Team: Catalan <http://translate.pdfforge.org/projects/pdfcreator/innosetup/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,701 +19,524 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid ""
-"The application is already installed.%n%nFor a new installation uninstall "
-"the application first.%n%nThe setup will be canceled."
-msgstr ""
-"L'aplicació ja està instal·lada.%n%nPer a una instal·lació nova, "
-"desinstal·leu abans la versió actual.%n%nEs cancel·larà la instal·lació."
-
-msgid ""
-"PDFCreator is already installed. It is necessary to uninstall the existing "
-"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
-"update PDFCreator now? Your PDFCreator settings and printers will be "
-"preserved."
-msgstr ""
-"El PDFCreator ja està instal·lat. Desinstal·leu la versió existent %1 abans "
-"d'instal·lar el PDFCreator %2.%n%nVoleu actualitzar el PDFCreator ara? Les "
-"configuracions i impressores del PDFCreator es conservaran."
-
-msgid ""
-"The application is already installed.%n%nAn update is not possible. Please "
-"uninstall the application first.%n%nThe setup will be canceled."
-msgstr ""
-"L'aplicació ja està instal·lada.%n%nNo es pot actualitzar. Desinstal·leu "
-"l'aplicació abans de continuar.%n%nLa instal·lació es cancel·larà."
-
-msgid "The setup will be canceled."
-msgstr "Es cancel·larà la instal·lació."
-
-msgid "Do you want to cancel the setup?"
-msgstr "Voleu cancel·lar la instal·lació?"
-
-msgid ""
-"The following applications have to be closed to proceed with the "
-"uninstallation:"
-msgstr ""
-"Heu de tancar aquestes aplicacions per procedir amb la desinstal·lació:"
-
-msgid "Compact installation"
-msgstr "Instal·lació compacta"
-
-msgid ""
-"The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr ""
-"El fitxer baixat està corrupte o s'ha suprimit. Es cancel·larà la "
-"instal·lació!"
-
-msgid "Custom installation"
-msgstr "Instal·lació personalitzada"
-
-msgid "Donate to PDFCreator"
-msgstr "Feu un donatiu al PDFCreator"
-
-msgid ""
-"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
-"wait."
-msgstr ""
-"Instal·lació del Microsoft .Net Framework %1 Això pot trigar uns minuts..."
-
-msgid ""
-"An error has occurred during the installation of Microsoft.Net Framework %1. "
-"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr ""
-"S'ha produït un error durant la instal·lació de Microsoft.Net Framework %1. "
-"(Codi d'error: %2)%n%nVoleu veure el fitxer del registre d'instal·lació .Net?"
-
-msgid ""
-"PDFCreator requires Microsoft .Net %1. Please download and install "
-"Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr ""
-"El PDFCreator requereix Microsoft .Net %1. Baixeu i instal·leu el Microsoft ."
-"Net %1 i torneu a executar la instal·lació del PDFCreator."
-
-msgid ""
-"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
-"system restart. Please reboot your system now and then start the setup again."
-"%n%nSetup will now exit."
-msgstr ""
-"La configuració del PDFCreator ha instal·lat el NET Framework 4.0. Aquest "
-"pas necessita un reinici del sistema. Reinicieu ara i després inicieu "
-"l'instal·lador novament.%n%n El programa d'instal·lació finalitzarà ara."
-
-msgid ""
-"The downloaded file could not be verified with its checksum. Do you want to "
-"start the setup anyway?"
-msgstr ""
-"El fitxer baixat no s'ha pogut verificar. Voleu iniciar la instal·lació de "
-"totes maneres?"
-
-msgid "PDFCreator download"
-msgstr "Baixa el PDFCreator"
-
-msgid "Download the latest version..."
-msgstr "Baixeu la darrera versió ..."
-
-msgid ""
-"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
-"download and install this version?"
-msgstr ""
-"Hi ha una versió nova (%1) disponible al servidor de pdfforge!%n%nVoleu "
-"baixar i instal·lar aquesta versió?"
-
-msgid "Expert settings"
-msgstr "Configuració d'expert"
-
-msgid "Set installation directory and additional options"
-msgstr "Seleccioneu la carpeta d'instal·lació i opcions addicionals"
-
-msgid ""
-"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
-"Please choose a new printer name."
-msgstr ""
-"No es permet l'ús dels símbols «!», «\\» o «,» en el nom de la impressora. "
-"Trieu un nom nou per a la impressora."
-
-msgid "Please choose a printer name."
-msgstr "Seleccioneu un nom per a la impressora."
-
-msgid ""
-"The chosen printer name is too long. The name can be 221 characters long at "
-"the most. Please choose a new printer name."
-msgstr ""
-"El nom triat per a la impressora és massa llarg. Com a màxim pot tenir 221 "
-"caràcters. Indiqueu un nom nou per a la impressora."
-
-msgid ""
-"There already exists a printer with this name. Please choose another name."
-msgstr "Ja existeix una impressora amb aquest nom. Seleccioneu-ne un altre."
-
-msgid ""
-"An error in the system environment variable 'Path' has occurred%n%n->Missing "
-"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
-"fixed first before the installation can be continued.%n%nPlease select OK if "
-"you want this error to be fixed. You have to restart your system afterwards."
-"%n%nOtherwise Cancel the installation."
-msgstr ""
-"S'ha produït un error a la variable d'entorn%n%n->Entrada que falta o "
-"corrupta:%Systemroot%\\system32\\wbem%n%nAquest error s'ha d'esmenar abans "
-"de continuar amb la instal·lació.%n%nSeleccioneu «D'acord» si voleu reparar "
-"aquest error. Cal que reinicieu l'equip a continuació.%n%nEn cas contrari, "
-"cancel·leu la instal·lació."
-
-msgid "For &all users"
-msgstr "Per a &tots els usuaris"
-
-msgid "For the &current user only"
-msgstr "Només per a l'usuari &actual"
-
-msgid "Full installation"
-msgstr "Instal·lació completa"
-
-msgid "Help"
-msgstr "Ajuda"
-
-msgid "Install printer"
-msgstr "Instal·la la impressora"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Instal·la el monitor, port i controlador de la impressora"
-
-msgid "Install printer driver"
-msgstr "Instal·la el controlador d'impressora"
-
-msgid "Install printer monitor"
-msgstr "Instal·la el monitor d'impressora"
-
-msgid "Install printer port"
-msgstr "Instal·la el port de la impressora"
-
-msgid "Offline activation instructions"
-msgstr "Instruccions d'activació fora de línia"
-
-msgid "Languages"
-msgstr "Llengües"
-
-msgid "Please wait. Checking license key..."
-msgstr "S'està verificant la clau de llicència..."
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "L'activació és molt antiga! Renoveu l'activació."
-
-msgid "Empty answer from license server!"
-msgstr "Resposta buida del servidor de llicències!"
-
-msgid "Invalid answer from license server!"
-msgstr "Resposta no vàlida del servidor de llicències!"
-
-msgid ""
-"This version is not covered by your license key! Please renew your license "
-"on %1."
-msgstr ""
-"Aquesta versió no està suportada per la vostra clau de llicència! Renoveu la "
-"llicència a %1."
-
-msgid "No answer from license server!"
-msgstr "No s'ha rebut una resposta del servidor de llicències!"
-
-msgid "An unknown error is occurred!"
-msgstr "S'ha produït un error desconegut!"
-
-msgid "Wrong answer from license server!"
-msgstr "Resposta incorrecta des del servidor de llicències!"
-
-msgid ""
-"The computer time seems to be incorrectly set! Please check your system time."
-msgstr "L'hora de l'equip no és correcta! Ajusteu l'hora de l'equip."
-
-msgid "License server answer not valid for this computer!"
-msgstr "Resposta del servidor de llicències no vàlida per aquest equip!"
-
-msgid "The license is not valid for the given product!"
-msgstr "La llicència no és vàlida per a aquest producte!"
-
-msgid "License key validation"
-msgstr "Validació de la clau de llicència"
-
-msgid "Enter the valid license key"
-msgstr "Proporcioneu una clau de llicència vàlida"
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr ""
-"Proporcioneu una clau de llicència vàlida per continuar amb la instal·lació."
-
-msgid "An error occurred validating the license key!"
-msgstr "S'ha produït un error en validar la clau de llicència!"
-
-msgid "Invalid license answer hash!"
-msgstr "El resum de la resposta de llicència no és vàlida!"
-
-msgid "Invalid license key!"
-msgstr "Clau de llicència no vàlida!"
-
-msgid "License key"
-msgstr "Clau de llicència"
-
-msgid "Please enter the license key."
-msgstr "Introduïu la clau de llicència."
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr ""
-"El format de la clau de llicència és XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Licensee"
-msgstr "Llicenciant"
-
-msgid "Message"
-msgstr "Missatge"
-
-msgid ""
-"You need a new valid license key to continue. Do you want to proceed with "
-"the installation?"
-msgstr ""
-"Necessiteu una clau de llicència vàlida nova per continuar. Voleu continuar "
-"amb la instal·lació?"
-
-msgid ""
-"No license key was given. A license key in combination with the parameters '/"
-"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
-"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr ""
-"No heu indicat cap clau de llicència. Es necessita una clau de llicència en "
-"combinació amb els paràmetres '/VerySilent' o '/Silent'. Utilitzeu el "
-"paràmetre '/%1'.%n%nExemple: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-"
-"PQRST"
-
-msgid "Offline activation string:"
-msgstr "Cadena d'activació fora de línia:"
-
-msgid "Offline license check"
-msgstr "Comprovació de llicència fora de línia"
-
-msgid "License server answer:"
-msgstr "Resposta del servidor de llicències:"
-
-msgid "The machine or the user is blocked!"
-msgstr "L'equip o l'usuari estan blocats!"
-
-msgid "The authorization is failed!"
-msgstr "L'autorització ha fallat!"
-
-msgid "An invalid license key is provided!"
-msgstr "Heu proporcionat una clau de llicència no vàlida!"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "S'ha superat el màxim de %1 de llicències!"
-
-msgid "OK"
-msgstr "D'acord"
-
-msgid "The product %1 does not exist!"
-msgstr "El producte %1 no existeix!"
-
-msgid ""
-"The version %1 is not supported! Please use the latest version from here %2."
-msgstr ""
-"La versió %1 no està suportada! Baixeu la darrera versió des d'aquí %2."
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr "Contacteu amb el servei de suport a l'adreça support@pdfforge.org!"
-
-msgid "License agreement"
-msgstr "Acord de llicència"
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr "En fer clic a «Endavant» accepteu l'acord de llicència."
-
-msgid "PDFCreator log file"
-msgstr "Fitxer de registre de PDFCreator"
-
-msgid ""
-"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
-"installation of an older version, uninstall the application first.%n%nThe "
-"setup will be canceled."
-msgstr ""
-"La versió «%1» instal·lada és més nova que la versió «%2» que voleu "
-"instal·lar!%n%nPer a la instal·lació d'una versió antiga, abans heu de "
-"desinstal·lar la versió anterior.%n%nLa instal·lació es cancel·larà."
-
-msgid ""
-"You are not a member of the administrator group.%n%n%nFor creating a PDF "
-"document out of any application, the PDFCreator is using a PostScript "
-"printerdriver.%nYou have to be a member of the administrator group, to "
-"install any printerdriver.%n%nIf you continue the installation, you will "
-"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr ""
-"No sou membre del grup, administradors.%n%n%nEl PDFCreator fa servir un "
-"controlador d'impressores PostScript per crear documents PDF des de "
-"qualsevol aplicació.%nHeu de tenir permís d'administrador per poder "
-"instal·lar aquest controlador.%n%nSi continueu amb la instal·lació, només "
-"podrà convertir fitxers PostScript existents.%n%nVoleu continuar amb la "
-"instal·lació?%n"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Per a això no cal ser membre del grup administradors.%n%n"
-
-msgid ""
-"An older version '%1' was found.%n%nIt is not possible to update this "
-"version to version '%2'.%n%nPlease uninstall the application first."
-msgstr ""
-"S'ha trobat una versió antiga «%1»!%n%No és possible actualitzar a la versió "
-"nova «%2».%n%nDesinstal·leu la versió antiga abans de continuar."
-
-msgid ""
-"An older version '%1' was found.%nIt is possible to update this version to "
-"version '%2'.%n%n"
-msgstr ""
-"S'ha trobat una versió antiga \"%1\"!%nÉs possible actualitzar a la versió "
-"\"%2\".%n%n"
-
-msgid "Other tasks:"
-msgstr "Altres tasques:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "L'aplicació no està instal·lada. No podeu utilitzar aquesta correcció."
-
-msgid ""
-"This patch is for an older application version. You cannot use this patch."
-msgstr ""
-"Aquesta correcció és per a una versió anterior de l'aplicació. No podeu "
-"utilitzar aquesta correcció."
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr ""
-"L'aplicació instal·lada és molt antiga. No es pot utilitzar aquesta "
-"correcció."
-
-msgid "Edit pages"
-msgstr "Edita les pàgines"
-
-msgid "Edit texts and fonts"
-msgstr "Edita els textos i fonts"
-
-msgid "Split and merge"
-msgstr "Dividiu i uniu"
-
-msgid "PDF to Word"
-msgstr "PDF a Word"
-
-msgid "Create"
-msgstr "Crea"
-
-msgid "Convert"
-msgstr "Converteix"
-
-msgid "Edit & Insert"
-msgstr "Edita i insereix"
-
 msgid "Review"
 msgstr "Revisa"
+
+msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgstr "El PDFCreator ja està instal·lat. Desinstal·leu la versió existent %1 abans d'instal·lar el PDFCreator %2.%n%nVoleu actualitzar el PDFCreator ara? Les configuracions i impressores del PDFCreator es conservaran."
 
 msgid "Secure & Sign"
 msgstr "Assegureu i signeu"
 
+msgid "The setup will be canceled."
+msgstr "Es cancel·larà la instal·lació."
+
 msgid "Forms"
 msgstr "Formularis"
+
+msgid "The following applications have to be closed to proceed with the uninstallation:"
+msgstr "Heu de tancar aquestes aplicacions per procedir amb la desinstal·lació:"
 
 msgid "Try out the new PDF Architect"
 msgstr "Proveu el PDF Architect nou"
 
+msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr "El fitxer baixat està corrupte o s'ha suprimit. Es cancel·larà la instal·lació!"
+
 msgid "A shortcut has been added to your desktop."
 msgstr "S'ha afegit un accés directe a l'escriptori."
 
+msgid "Donate to PDFCreator"
+msgstr "Feu un donatiu al PDFCreator"
+
 msgid "Install PDF Architect with great free features"
-msgstr ""
-"Instal·leu el PDF Architect amb un grapat de característiques gratuïtes"
+msgstr "Instal·leu el PDF Architect amb un grapat de característiques gratuïtes"
+
+msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr "S'ha produït un error durant la instal·lació de Microsoft.Net Framework %1. (Codi d'error: %2)%n%nVoleu veure el fitxer del registre d'instal·lació .Net?"
 
 msgid "Rotate, move and delete pages"
 msgstr "Gireu, moveu o suprimiu pàgines"
 
+msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
+msgstr "La configuració del PDFCreator ha instal·lat el NET Framework 4.0. Aquest pas necessita un reinici del sistema. Reinicieu ara i després inicieu l'instal·lador novament.%n%n El programa d'instal·lació finalitzarà ara."
+
 msgid "Merge multiple PDFs"
 msgstr "Fusioneu múltiples PDF"
+
+msgid "PDFCreator download"
+msgstr "Baixa el PDFCreator"
 
 msgid "Free features:"
 msgstr "Característiques gratuïtes:"
 
+msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
+msgstr "Hi ha una versió nova (%1) disponible al servidor de pdfforge!%n%nVoleu baixar i instal·lar aquesta versió?"
+
 msgid "Enhance PDFCreator with edit features!"
 msgstr "Milloreu el PDFCreator amb característiques d'edició!"
+
+msgid "Set installation directory and additional options"
+msgstr "Seleccioneu la carpeta d'instal·lació i opcions addicionals"
 
 msgid "New in PDF Architect {0}:"
 msgstr "Novetats al PDF Architect {0}:"
 
+msgid "Please choose a printer name."
+msgstr "Seleccioneu un nom per a la impressora."
+
 msgid "Automatic E-Sign workflows"
 msgstr "Flux automàtic de signatura electrònica"
+
+msgid "There already exists a printer with this name. Please choose another name."
+msgstr "Ja existeix una impressora amb aquest nom. Seleccioneu-ne un altre."
 
 msgid "Verify and remove signatures"
 msgstr "Verificació i supressió de signatures"
 
+msgid "For &all users"
+msgstr "Per a &tots els usuaris"
+
 msgid "Already installed"
 msgstr "Ja està instal·lat"
+
+msgid "Full installation"
+msgstr "Instal·lació completa"
 
 msgid "Automatic updates"
 msgstr "Actualitzacions automàtiques"
 
+msgid "Install printer"
+msgstr "Instal·la la impressora"
+
 msgid "Default application for PDF files"
 msgstr "Aplicació per defecte per a documents PDF"
+
+msgid "Install printer driver"
+msgstr "Instal·la el controlador d'impressora"
 
 msgid "The new PDF Architect will be installed. This might take a while."
 msgstr "S'està instal·lant el PDFArchitect nou. Això pot trigar una mica."
 
+msgid "Install printer port"
+msgstr "Instal·la el port de la impressora"
+
 msgid "Firefox integration"
 msgstr "Integració amb el Firefox"
+
+msgid "Languages"
+msgstr "Llengües"
 
 msgid "Internet Explorer integration"
 msgstr "Integració amb l'Internet Explorer"
 
+msgid "The activation is too old! Please renew your activation."
+msgstr "L'activació és molt antiga! Renoveu l'activació."
+
 msgid "MS Outlook previewer integration"
 msgstr "Integració amb la vista prèvia de l'Outlook"
+
+msgid "Invalid answer from license server!"
+msgstr "Resposta no vàlida del servidor de llicències!"
 
 msgid "Windows Explorer integration"
 msgstr "Integració amb l'Explorador del Windows"
 
+msgid "No answer from license server!"
+msgstr "No s'ha rebut una resposta del servidor de llicències!"
+
 msgid "No thanks"
 msgstr "No, gràcies"
 
-msgid ""
-"Please uninstall 'PDFCreator Server' before you continue with the "
-"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
-"on the same machine."
-msgstr ""
-"Desinstal·leu el «Servidor PDFCreator» abans de continuar amb la "
-"instal·lació. No és possible utilitzar el «PDFCreator» i el «Servidor "
-"PDFCreator» a la mateixa màquina."
+msgid "Wrong answer from license server!"
+msgstr "Resposta incorrecta des del servidor de llicències!"
+
+msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
+msgstr "Desinstal·leu el «Servidor PDFCreator» abans de continuar amb la instal·lació. No és possible utilitzar el «PDFCreator» i el «Servidor PDFCreator» a la mateixa màquina."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Resposta del servidor de llicències no vàlida per aquest equip!"
 
 msgid "PDFCreator setup"
 msgstr "Configuració del PDFCreator"
 
+msgid "License key validation"
+msgstr "Validació de la clau de llicència"
+
 msgid "Setup is being prepared..."
 msgstr "S'està preparant la configuració ..."
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Proporcioneu una clau de llicència vàlida per continuar amb la instal·lació."
 
 msgid "Printer"
 msgstr "Impressora"
 
-msgid ""
-"During the printer installation errors have occurred. A detailed description "
-"can be found in the file 'SetupLog.txt' in application path."
-msgstr ""
-"S'ha produït un error durant la instal·lació de la impressora. Es pot trobar "
-"una descripció detallada en el fitxer «SetupLog.txt» al directori de "
-"l'aplicació."
+msgid "Invalid license answer hash!"
+msgstr "El resum de la resposta de llicència no és vàlida!"
+
+msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
+msgstr "S'ha produït un error durant la instal·lació de la impressora. Es pot trobar una descripció detallada en el fitxer «SetupLog.txt» al directori de l'aplicació."
+
+msgid "License key"
+msgstr "Clau de llicència"
 
 msgid "Printer name"
 msgstr "Nom de la impressora"
 
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "El format de la clau de llicència és XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
 msgid "Choosing a printer name."
 msgstr "Trieu un nom d'impressora."
+
+msgid "Message"
+msgstr "Missatge"
 
 msgid "Please choose a name for the printer."
 msgstr "Seleccioneu un nom per a la impressora."
 
-msgid ""
-"PDFCreator installs a printer on your computer. With this printer each "
-"application that is able to print, can create PDF documents, bitmaps or "
-"PostScript files.%n%nName of printer:"
-msgstr ""
-"PDFCreator instal·la una impressora a l'ordinador. Amb aquesta impressora, "
-"cada aplicació amb capacitat d'imprimir pot crear fitxers PDF, Bitmaps o "
-"PostScript.%n%nNom de la impressora:"
+msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr "No heu indicat cap clau de llicència. Es necessita una clau de llicència en combinació amb els paràmetres '/VerySilent' o '/Silent'. Utilitzeu el paràmetre '/%1'.%n%nExemple: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
+msgstr "PDFCreator instal·la una impressora a l'ordinador. Amb aquesta impressora, cada aplicació amb capacitat d'imprimir pot crear fitxers PDF, Bitmaps o PostScript.%n%nNom de la impressora:"
+
+msgid "Offline license check"
+msgstr "Comprovació de llicència fora de línia"
 
 msgid "This process might take several minutes."
 msgstr "Aquest procés pot demorar diversos minuts."
 
-msgid ""
-"PDFCreator easily creates PDFs from any Windows program. Use it like a "
-"printer in Word, Excel, or any other Windows application."
-msgstr ""
-"El PDFCreator crea fitxers PDF fàcilment des de qualsevol programari a "
-"Windows. Useu-lo com a una impressora al Word, l'Excel o en qualsevol altra "
-"aplicació a Windows."
+msgid "The machine or the user is blocked!"
+msgstr "L'equip o l'usuari estan blocats!"
+
+msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
+msgstr "El PDFCreator crea fitxers PDF fàcilment des de qualsevol programari a Windows. Useu-lo com a una impressora al Word, l'Excel o en qualsevol altra aplicació a Windows."
+
+msgid "An invalid license key is provided!"
+msgstr "Heu proporcionat una clau de llicència no vàlida!"
 
 msgid "application files"
 msgstr "Fitxers de programa"
 
-msgid ""
-"The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr ""
-"L'aplicació «%1» està en ús.%n%nTanqueu l'aplicació abans de continuar.%n%n"
+msgid "OK"
+msgstr "D'acord"
+
+msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "L'aplicació «%1» està en ús.%n%nTanqueu l'aplicació abans de continuar.%n%n"
+
+msgid "The version %1 is not supported! Please use the latest version from here %2."
+msgstr "La versió %1 no està suportada! Baixeu la darrera versió des d'aquí %2."
 
 msgid "Please restart your system first to continue setup."
 msgstr "Reinicieu l'equip per continuar amb la instal·lació."
 
+msgid "License agreement"
+msgstr "Acord de llicència"
+
 msgid "PDFCreator settings"
 msgstr "Configuració del PDFCreator"
+
+msgid "PDFCreator log file"
+msgstr "Fitxer de registre de PDFCreator"
 
 msgid "Show help after setup"
 msgstr "Mostra l'ajuda després de la instal·lació"
 
-msgid ""
-"Please use \"PDFCreator Terminal Server\" for use on computers with "
-"installed Terminal Services.%n%nWould you like to have more information "
-"about \"PDFCreator Terminal Server\"?"
-msgstr ""
-"Useu el «Servidor de terminal PDFCreator» per a ordinadors amb els serveis "
-"de terminal instal·lats.%n%nVoleu obtenir més informació sobre el «Servidor "
-"de terminal PDFCreator»?"
+msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr "No sou membre del grup, administradors.%n%n%nEl PDFCreator fa servir un controlador d'impressores PostScript per crear documents PDF des de qualsevol aplicació.%nHeu de tenir permís d'administrador per poder instal·lar aquest controlador.%n%nSi continueu amb la instal·lació, només podrà convertir fitxers PostScript existents.%n%nVoleu continuar amb la instal·lació?%n"
 
-msgid ""
-"This is a developer preview of PDFCreator.%n%nThis is not an early version "
-"of the next release. It will most likely contain bugs or not work at all.%n"
-"%nIf you should dare to install it anyway, we would like to hear your "
-"feedback."
-msgstr ""
-"Aquesta és una versió preliminar del PDFCreator per a desenvolupadors.%n%nNo "
-"és una versió de prova d'un proper llançament. És molt probable que "
-"contingui errors o que no fucioni.%n%nSi voleu instal·lar igualment, ens "
-"agradaria rebre els vostres comentaris."
+msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
+msgstr "Useu el «Servidor de terminal PDFCreator» per a ordinadors amb els serveis de terminal instal·lats.%n%nVoleu obtenir més informació sobre el «Servidor de terminal PDFCreator»?"
 
-msgid ""
-"This version doesn't support the server mode. Do you want install this "
-"version anyway?"
-msgstr ""
-"Aquesta versió no suporta el mode servidor. Voleu instal·lar-la aquesta "
-"versió de totes maneres?"
+msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
+msgstr "S'ha trobat una versió antiga «%1»!%n%No és possible actualitzar a la versió nova «%2».%n%nDesinstal·leu la versió antiga abans de continuar."
+
+msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
+msgstr "Aquesta és una versió preliminar del PDFCreator per a desenvolupadors.%n%nNo és una versió de prova d'un proper llançament. És molt probable que contingui errors o que no fucioni.%n%nSi voleu instal·lar igualment, ens agradaria rebre els vostres comentaris."
+
+msgid "Other tasks:"
+msgstr "Altres tasques:"
+
+msgid "This version doesn't support the server mode. Do you want install this version anyway?"
+msgstr "Aquesta versió no suporta el mode servidor. Voleu instal·lar-la aquesta versió de totes maneres?"
+
+msgid "This patch is for an older application version. You cannot use this patch."
+msgstr "Aquesta correcció és per a una versió anterior de l'aplicació. No podeu utilitzar aquesta correcció."
 
 msgid "Delete all application settings?"
 msgstr "Voleu suprimir tots les configuracions de l'aplicació?"
 
+msgid "Edit pages"
+msgstr "Edita les pàgines"
+
 msgid "Uninstall the printer with all its components."
 msgstr "Desinstal·la la impressora i tots els components."
 
-msgid ""
-"To update, use <OK>, or cancel the setup and uninstall the older version "
-"first."
-msgstr ""
-"Per actualitzar feu clic a «D'acord» o cancel·leu la instal·lació i "
-"desinstal·leu la versió anterior abans de continuar."
+msgid "Split and merge"
+msgstr "Dividiu i uniu"
+
+msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
+msgstr "Per actualitzar feu clic a «D'acord» o cancel·leu la instal·lació i desinstal·leu la versió anterior abans de continuar."
+
+msgid "Create"
+msgstr "Crea"
 
 msgid "Create an &entry in the Windows Explorer context menu"
 msgstr "Crea una &entrada al menú contextual de l'Explorador de Windows"
 
+msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
+msgstr "L'aplicació ja està instal·lada.%n%nPer a una instal·lació nova, desinstal·leu abans la versió actual.%n%nEs cancel·larà la instal·lació."
+
 msgid "Create PDF and Bitmap files with %1"
 msgstr "Creeu fitxers PDF i mapa de bits amb %1"
+
+msgid "Do you want to cancel the setup?"
+msgstr "Voleu cancel·lar la instal·lació?"
 
 msgid "Bad request (400)"
 msgstr "Sol·licitud incorrecta (400)"
 
+msgid "Custom installation"
+msgstr "Instal·lació personalitzada"
+
 msgid "Access denied (401)"
 msgstr "Accés denegat (401)"
+
+msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr "El PDFCreator requereix Microsoft .Net %1. Baixeu i instal·leu el Microsoft .Net %1 i torneu a executar la instal·lació del PDFCreator."
 
 msgid "File not found (404)"
 msgstr "No s'ha trobat el fitxer (404)"
 
+msgid "Download the latest version..."
+msgstr "Baixeu la darrera versió ..."
+
 msgid "Proxy authentication required (407)"
 msgstr "Es requereix autenticació del servidor intermediari (407)"
+
+msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
+msgstr "No es permet l'ús dels símbols «!», «\\» o «,» en el nom de la impressora. Trieu un nom nou per a la impressora."
 
 msgid "Server internal error (500)"
 msgstr "Error intern del servidor (500)"
 
+msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
+msgstr "S'ha produït un error a la variable d'entorn%n%n->Entrada que falta o corrupta:%Systemroot%\\system32\\wbem%n%nAquest error s'ha d'esmenar abans de continuar amb la instal·lació.%n%nSeleccioneu «D'acord» si voleu reparar aquest error. Cal que reinicieu l'equip a continuació.%n%nEn cas contrari, cancel·leu la instal·lació."
+
 msgid "Bad gateway (502)"
 msgstr "Porta d'enllaç incorrecta (502)"
+
+msgid "Help"
+msgstr "Ajuda"
 
 msgid "Service temporarily unavailable (503)"
 msgstr "Servei temporalment no disponible (503)"
 
+msgid "Install printer monitor"
+msgstr "Instal·la el monitor d'impressora"
+
 msgid "Cancelling download..."
 msgstr "S'està cancel·lant la baixada..."
+
+msgid "Please wait. Checking license key..."
+msgstr "S'està verificant la clau de llicència..."
 
 msgid "Cannot connect"
 msgstr "No es pot connectar"
 
+msgid "This version is not covered by your license key! Please renew your license on %1."
+msgstr "Aquesta versió no està suportada per la vostra clau de llicència! Renoveu la llicència a %1."
+
 msgid "Connecting..."
 msgstr "S'està connectant ..."
+
+msgid "The computer time seems to be incorrectly set! Please check your system time."
+msgstr "L'hora de l'equip no és correcta! Ajusteu l'hora de l'equip."
 
 msgid "Current file"
 msgstr "Fitxer actual"
 
+msgid "Enter the valid license key"
+msgstr "Proporcioneu una clau de llicència vàlida"
+
 msgid "Details"
 msgstr "Detalls"
+
+msgid "Invalid license key!"
+msgstr "Clau de llicència no vàlida!"
 
 msgid "Download cancelled"
 msgstr "Baixada cancel·lada"
 
+msgid "Licensee"
+msgstr "Llicenciant"
+
 msgid "Download complete"
 msgstr "Baixada completa"
+
+msgid "Offline activation string:"
+msgstr "Cadena d'activació fora de línia:"
 
 msgid "Download failed"
 msgstr "Baixada fallida"
 
+msgid "The authorization is failed!"
+msgstr "L'autorització ha fallat!"
+
 msgid "Downloading..."
 msgstr "S'està baixant..."
+
+msgid "The product %1 does not exist!"
+msgstr "El producte %1 no existeix!"
 
 msgid "Please click here to revoke your previous activations."
 msgstr "Feu clic aquí per a anul·lar les activacions anteriors."
 
+msgid "By clicking on Next you accept the license agreement."
+msgstr "En fer clic a «Endavant» accepteu l'acord de llicència."
+
 msgid "Elapsed time:"
 msgstr "Temps transcorregut:"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Per a això no cal ser membre del grup administradors.%n%n"
 
 msgid "File:"
 msgstr "Fitxer:"
 
+msgid "The application is not installed. You cannot use this patch."
+msgstr "L'aplicació no està instal·lada. No podeu utilitzar aquesta correcció."
+
 msgid "The following files were not downloaded:"
 msgstr "Aquests fitxers no s'han baixat:"
+
+msgid "Edit texts and fonts"
+msgstr "Edita els textos i fonts"
 
 msgid "Downloading additional files"
 msgstr "S'estan baixant fitxers addicionals"
 
+msgid "Convert"
+msgstr "Converteix"
+
 msgid "Please wait, while setup downloading additional files..."
 msgstr "Espereu mentre es baixen els fitxers addicionals..."
+
+msgid "Compact installation"
+msgstr "Instal·lació compacta"
 
 msgid "GB"
 msgstr "GB"
 
+msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
+msgstr "El fitxer baixat no s'ha pogut verificar. Voleu iniciar la instal·lació de totes maneres?"
+
 msgid "Getting file information..."
 msgstr "S'està obtenint la informació del fitxer..."
+
+msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
+msgstr "El nom triat per a la impressora és massa llarg. Com a màxim pot tenir 221 caràcters. Indiqueu un nom nou per a la impressora."
 
 msgid "Hide"
 msgstr "Amaga"
 
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Instal·la el monitor, port i controlador de la impressora"
+
 msgid "HTTP error %d"
 msgstr "Error HTTP %d"
+
+msgid "Empty answer from license server!"
+msgstr "Resposta buida del servidor de llicències!"
 
 msgid "Ignore"
 msgstr "Ignora"
 
+msgid "The license is not valid for the given product!"
+msgstr "La llicència no és vàlida per a aquest producte!"
+
 msgid "Initializing..."
 msgstr "S'està iniciant..."
+
+msgid "Please enter the license key."
+msgstr "Introduïu la clau de llicència."
 
 msgid "KB"
 msgstr "KB"
 
+msgid "License server answer:"
+msgstr "Resposta del servidor de llicències:"
+
 msgid "KB/s"
 msgstr "KB/s"
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Contacteu amb el servei de suport a l'adreça support@pdfforge.org!"
 
 msgid "MB"
 msgstr "MB"
 
+msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
+msgstr "S'ha trobat una versió antiga \"%1\"!%nÉs possible actualitzar a la versió \"%2\".%n%n"
+
 msgid "MB/s"
 msgstr "MB/s"
+
+msgid "PDF to Word"
+msgstr "PDF a Word"
 
 msgid "Remaining time:"
 msgstr "Temps restant:"
 
+msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
+msgstr "Instal·lació del Microsoft .Net Framework %1 Això pot trigar uns minuts..."
+
 msgid "Retry"
 msgstr "Torna a provar"
 
-msgid ""
-"Check your connection and click 'Retry' to try downloading the files again, "
-"or click 'Cancel' to terminate setup."
-msgstr ""
-"Verifiqueu la connexió i feu clic a «Torna a provar» per intentar baixar els "
-"fitxers novament, o feu clic a «Cancel·la» per finalitzar la instal·lació."
+msgid "For the &current user only"
+msgstr "Només per a l'usuari &actual"
 
-msgid ""
-"Check your connection and click 'Retry' to try downloading the files again, "
-"or click 'Next' to continue installing anyway."
-msgstr ""
-"Verifiqueu la connexió i feu clic a «Torna a provar» per intentar baixar "
-"altra vegada els fitxers, o feu clic a «Endavant» per continuar la "
-"instal·lació de totes maneres."
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
+msgstr "Verifiqueu la connexió i feu clic a «Torna a provar» per intentar baixar els fitxers novament, o feu clic a «Cancel·la» per finalitzar la instal·lació."
+
+msgid "An unknown error is occurred!"
+msgstr "S'ha produït un error desconegut!"
+
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
+msgstr "Verifiqueu la connexió i feu clic a «Torna a provar» per intentar baixar altra vegada els fitxers, o feu clic a «Endavant» per continuar la instal·lació de totes maneres."
+
+msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
+msgstr "Necessiteu una clau de llicència vàlida nova per continuar. Voleu continuar amb la instal·lació?"
 
 msgid "Speed:"
 msgstr "Velocitat:"
 
+msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
+msgstr "La versió «%1» instal·lada és més nova que la versió «%2» que voleu instal·lar!%n%nPer a la instal·lació d'una versió antiga, abans heu de desinstal·lar la versió anterior.%n%nLa instal·lació es cancel·larà."
+
 msgid "Starting download..."
 msgstr "S'està iniciant la baixada..."
 
+msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
+msgstr "L'aplicació ja està instal·lada.%n%nNo es pot actualitzar. Desinstal·leu l'aplicació abans de continuar.%n%nLa instal·lació es cancel·larà."
+
 msgid "Status:"
 msgstr "Estat:"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "S'ha superat el màxim de %1 de llicències!"
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "L'aplicació instal·lada és molt antiga. No es pot utilitzar aquesta correcció."
+
+msgid "Expert settings"
+msgstr "Configuració d'expert"
+
+msgid "An error occurred validating the license key!"
+msgstr "S'ha produït un error en validar la clau de llicència!"
 
 msgid "Total progress"
 msgstr "Progrés total"
@@ -719,5 +547,5 @@ msgstr "Desconegut"
 msgid "%.2f of %.2f"
 msgstr "%.2f de %.2f"
 
-msgid "Setup has finished installing [name] on your computer."
-msgstr "Ha finalitzat la instal·lació del [name] a l'ordinador."
+msgid "Offline activation instructions"
+msgstr "Instruccions d'activació fora de línia"

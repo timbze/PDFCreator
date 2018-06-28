@@ -59,10 +59,10 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 if (mapping.PrinterName.Equals(jobInfo.SourceFiles[0].PrinterName, StringComparison.OrdinalIgnoreCase))
                 {
                     profile = settings.GetProfileByGuid(mapping.ProfileGuid);
-                    /* TODO (see below):
-                    if(mapping.ProfileGuid == LASTUSEDPROFILEGUID)
+
+                    if (mapping.ProfileGuid == ProfileGuids.LAST_USED_PROFILE_GUID)
                         profile = settings.GetLastUsedProfile();
-                    */
+
                     if (profile != null)
                         break;
                 }

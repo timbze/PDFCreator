@@ -287,5 +287,15 @@ namespace pdfforge.PDFCreator.Utilities.UnitTest.IO
 
             Assert.IsFalse(success);
         }
+
+        [Test]
+        public void CreateDirectory_InvalidCharacters_ReturnsFalse()
+        {
+            var directoryHelper = new DirectoryHelper(_directoryMock);
+
+            var success = directoryHelper.CreateDirectory(@"X:\InvalidChars\<Token>");
+
+            Assert.IsFalse(success);
+        }
     }
 }

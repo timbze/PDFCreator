@@ -72,7 +72,7 @@ namespace pdfforge.PDFCreator.Utilities.IO
 
                 return true;
             }
-            catch (PathTooLongException)
+            catch (Exception)
             {
                 return false;
             }

@@ -2,48 +2,53 @@
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "and {0} more."
 msgid_plural "and {0} more."
-msgstr[0] "還有 {0} 個。"
+msgstr[0] "y {0} más."
+msgstr[1] "y {0} más."
 
 msgid ""
 msgstr ""
-"Project-Id-Version: Chinese (Traditional) (PDFCreator)\n"
+"Project-Id-Version: Spanish (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese (Traditional) <http://translate.pdfforge.org/projects/pdfcreator/messages/zh_Hant/>\n"
-"Language: zh_Hant\n"
+"Language-Team: Spanish <http://translate.pdfforge.org/projects/pdfcreator/messages/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Delete File"
 msgid_plural "Delete Files"
-msgstr[0] "刪除檔案"
+msgstr[0] "Eliminar Archivo"
+msgstr[1] "Eliminar Archivos"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "This printer will be mapped to the default profile."
 msgid_plural "These printers will be mapped to the default profile."
-msgstr[0] "這些印表機會對應到預設設定檔。"
+msgstr[0] "Esta impresora será mapeada al perfil predeterminado."
+msgstr[1] "Estas impresoras serán mapeada al perfil predeterminado."
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Are you sure you want to delete the following file?"
 msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] "確定要刪除下列檔案？"
+msgstr[0] "¿Está seguro de que quiere eliminar este archivo?"
+msgstr[1] "¿Está seguro de que quiere eliminar estos archivos?"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "You have already converted {0} file!"
 msgid_plural "You have already converted {0} files!"
-msgstr[0] "您已轉換 {0} 個檔案！"
+msgstr[0] "¡Usted ya convirtió {0} archivo!"
+msgstr[1] "¡Usted ya convirtió {0} archivos!"
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
@@ -56,447 +61,459 @@ msgid_plural ""
 "Maybe the files are currently in use.\n"
 "Please try again later."
 msgstr[0] ""
-"無法刪除下列檔案。\n"
-"可能這些檔案正在使用中。\n"
-"請稍後再試。"
+"No se pudo eliminar el siguiente archivo.\n"
+"Quizás el archivo está en uso.\n"
+"Por favor reintente más tarde."
+msgstr[1] ""
+"No se pudieron eliminar los siguientes archivos.\n"
+"Quizás los archivos están en uso.\n"
+"Por favor reintente más tarde."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "The HTTP action will be disabled for this profile."
 msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] "此設定檔會停用 HTTP T操作。"
+msgstr[0] "La acción HTTP será deshabilitada para este perfil."
+msgstr[1] "La acción HTTP será deshabilitada para estos perfiles."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "The account is used in the following profile:"
 msgid_plural "The account is used in the following profiles:"
-msgstr[0] "該帳戶在下列設定檔下使用："
+msgstr[0] "La cuenta se usa en este perfil:"
+msgstr[1] "La cuenta se usa en estos perfiles:"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The SMTP action will be disabled for this profile."
 msgid_plural "The SMTP action will be disabled for this profiles."
-msgstr[0] "此設定檔會停用 SMTP 操作。"
+msgstr[0] "La acción SMTP será deshabilitada para este perfil."
+msgstr[1] "La acción SMTP será deshabilitada para estos perfiles."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "The FTP action will be disabled for this profile."
 msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "此設定檔會停用 FTP 操作。"
+msgstr[0] "La acción FTP será deshabilitada para este perfil."
+msgstr[1] "La acción FTP será deshabilitada para estos perfiles."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "The profile is mapped to the following printer:"
 msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] "此設定檔對應到下列印表機："
+msgstr[0] "El perfil está mapeado para la siguiente impresora:"
+msgstr[1] "El perfil está mapeado para las siguientes impresoras:"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "There is an issue with the profile '{0}':"
 msgid_plural "There are issues with the profile '{0}':"
-msgstr[0] "有些問題在此設定檔 '{0}'："
+msgstr[0] "Hay un problema con el perfil '{0}':"
+msgstr[1] "Hay problemas con el perfil '{0}':"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Signing will be disabled for this profile."
 msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "此設定檔會停用簽署。"
+msgstr[0] "La firma será deshabilitada para este perfil."
+msgstr[1] "La firma será deshabilitada para estos perfiles."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "The Dropbox upload will be disabled for this profile."
 msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "此設定檔會停用 Dropbox 上傳。"
+msgstr[0] "La subida Dropbox será deshabilitada para este perfil."
+msgstr[1] "La subida Dropbox será deshabilitada para estos perfiles."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
-msgstr "附件檔不存在。"
+msgstr "El archivo adjunto no existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file is no PDF file."
-msgstr "附件檔不是 PDF 檔。"
+msgstr "El archivo adjunto no es un documento PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
-msgstr "自動存檔時缺 FTP 伺服器密碼。"
+msgstr "Guardado automático sin contraseña de servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without certificate password."
-msgstr "自動存檔時缺憑證密碼。"
+msgstr "Guardado automático sin contraseña de certificado."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without filename template."
-msgstr "自動存檔時缺檔名範本。"
+msgstr "Guardado automático sin plantilla de nombre de archivo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without owner password."
-msgstr "自動存檔時欠缺擁有者密碼。"
+msgstr "Guardado automático sin contraseña de propietario."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without password for HTTP authentication."
-msgstr "自動存檔缺 HTTP 驗證密碼。"
+msgstr "Guardado automático sin contraseña por HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without target directory."
-msgstr "自動存檔時缺目標目錄。"
+msgstr "Guardado automático sin directorio de destino."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without user password."
-msgstr "自動存檔缺使用者密碼。"
+msgstr "Guardado automático sin contraseña de usuario."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Background file does not exist."
-msgstr "背景檔不存在。"
+msgstr "El archivo de fondo no existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Background file is no PDF file."
-msgstr "背景檔不是 PDF 檔。"
+msgstr "El archivo de fondo no es un documento PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
-msgstr "憑證檔案不存在。"
+msgstr "El certificado no existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
-msgstr "SMTP 伺服器無法驗證。"
+msgstr "No se pudo autenticar con el servidor SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not login to FTP server."
-msgstr "無法登入 FTP 伺服器。"
+msgstr "No se pudo inciar sesión en el servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not login to FTP server. Please check your Internet connection."
-msgstr "無法登入 FTP 伺服器。請檢查您的網路連線。"
+msgstr "No se pudo inciar sesión en el servidor FTP. Por favor verifique su conexión a Internet."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not open attachment file."
-msgstr "無法開啟附件檔。"
+msgstr "No se pudo abrir el archivo adjunto."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not open cover file."
-msgstr "無法開啟封面檔。"
+msgstr "No se pudo abrir el archivo de portada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not read from FTP directory to ensure unique filenames."
-msgstr "從 FTP 讀取目錄時無法確保檔名唯一性。"
+msgstr "No se puede leer desde la carpeta FTP para asegurar nombres de archivo únicos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not upload file to FTP."
-msgstr "無法 FTP 上傳檔案。"
+msgstr "No se pudo subir el archivo al servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover file does not exist."
-msgstr "封面檔不存在。"
+msgstr "El archivo de portada no existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
-msgstr "一個或多個收件人無法透過 SMTP 寄送電子郵件。"
+msgstr "El correo por SMTP no se pudo entregar a uno o más destinatarios."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error during PDF/A conversion."
-msgstr "PDF/A 轉換時發生錯誤。"
+msgstr "Error durante la conversión a PDF/A."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while adding background to the document."
-msgstr "文件加入背景檔時發生錯誤。"
+msgstr "Error agregando el fondo al documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while copying the output file."
-msgstr "複製產生的檔案時發生錯誤。"
+msgstr "Error al copia el archivo de salida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while encrypting the document."
-msgstr "加密文件時發生錯誤。"
+msgstr "Error cifrando el documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while printing the file."
-msgstr "列印檔案時發生錯誤。"
+msgstr "Error imprimiendo el archivo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while processing the document."
-msgstr "處理文件時發生錯誤。"
+msgstr "Error procesando el documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while running the script action."
-msgstr "執行指令碼動作時發生錯誤。"
+msgstr "Error ejecutando la acción del guión."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while sending e-mail over SMTP."
-msgstr "透過 SMTP 傳送電子郵件時發生錯誤。"
+msgstr "Error enviando correo por SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing the document."
-msgstr "簽署文件時發生錯誤。"
+msgstr "Error firmando el documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing. Can not connect to time server."
-msgstr "簽章時發生錯誤。無法連線至時間伺服器。"
+msgstr "Error firmando. No se pudo conectar al servidor de hora."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing. The certificate is invalid or has expired."
-msgstr "簽章時發生錯誤。此憑證是無效的或已過期。"
+msgstr "Error al firmar. El certificado expiró o no es válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while trying to log-in."
-msgstr "嘗試登入時發生錯誤。"
+msgstr "Error intentando iniciar sesión."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading and sharing the document to Dropbox."
-msgstr "上傳和分享文件至 Dropbox 時發生錯誤。"
+msgstr "Error al subir y compartir el documento con Dropbox."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading file to FTP server."
-msgstr "上傳檔案至 FTP 伺服器時發生錯誤。"
+msgstr "Error subiendo el archivo al servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading the document to Dropbox."
-msgstr "上傳文件至 Dropbox 時發生錯誤。"
+msgstr "Error al subir el documento a Dropbox."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading to HTTP server."
-msgstr "上傳至 HTTP 伺服器時發生錯誤。"
+msgstr "Error subiendo el archivo al servidor HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading to HTTP server. 401 interaction is not authorized."
-msgstr "上傳至 HTTP 伺服器時發生錯誤。401 交易未經授權。"
+msgstr "Error al subir el archivo al servidor HTTP. La interacción 401 no fue autorizada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "FTP server is not specified."
-msgstr "未指定 FTP 伺服器。"
+msgstr "No se especificó el servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "FTP server password is not specified."
-msgstr "未指定 FTP 伺服器的密碼。"
+msgstr "No se especificó la contraseña del servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "FTP server user name is not specified."
-msgstr "未指定 FTP 伺服器的使用者名稱。"
+msgstr "No se especificó el nombre de usuario del servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Failure in directory on FTP server."
-msgstr "FTP 伺服器讀取目錄時失敗。"
+msgstr "Falla en la carpeta en el servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File path too long"
-msgstr "檔案路徑太長"
+msgstr "Ruta demasiado larga"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
-msgstr "HTTP 網址必須以 'http://' 或 'https://' 開頭。"
+msgstr "La URL HTTP debe comenzar con 'http://' o 'https://'."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Internal Ghostscript error."
-msgstr "Ghostscript 內部錯誤。"
+msgstr "Error interno de Ghostscript."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Invalid SMTP e-mail recipients."
-msgstr "無效的 SMTP 電子郵件收件人。"
+msgstr "Destinatarios de e-mail SMTP inválidos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Invalid SMTP port."
-msgstr "無效的 SMTP 連接埠。"
+msgstr "Puerto de SMTP no válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Launched encryption without owner password."
-msgstr "啟用加密時欠缺擁有者密碼。"
+msgstr "Se inició el cifrado sin contraseña del propietario."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Launched encryption without user password."
-msgstr "啟用加密時欠缺使用者密碼。"
+msgstr "Se inició el cifrado sin contraseña del usuario."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Launched signing without certification password."
-msgstr "啟用簽章時欠缺憑證密碼。"
+msgstr "Se inició el cifrado sin contraseña de certificación."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Missing URL for HTTP upload."
-msgstr "HTTP 上傳欠缺網址。"
+msgstr "Falta la URL para la subida HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Missing output file for PDF processing."
-msgstr "PDF 處理時欠缺輸出檔案。"
+msgstr "No se encuentra el documento PDF de salida para procesar."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Missing user name for HTTP authentication."
-msgstr "HTTP 驗證欠缺使用者名稱。"
+msgstr "Falta el nombre de usuario para la autenticación HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No SMTP e-mail address is specified."
-msgstr "未指定 SMTP 的電子郵件地址。"
+msgstr "No se especificó una dirección de correo SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No SMTP e-mail recipients are specified."
-msgstr "未指定 SMTP 電子郵件的收件人。"
+msgstr "No se especificaron destinatarios de correo SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No SMTP e-mail server is specified."
-msgstr "未指定 SMTP 郵件伺服器。"
+msgstr "No se especificó un equipo SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No SMTP e-mail user name is specified."
-msgstr "未指定 SMTP 電子郵件的使用者名稱。"
+msgstr "No se especificó nombre de usuario de SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No attachment file is specified."
-msgstr "未指定附件檔。"
+msgstr "No se especificó un archivo adjunto."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No background file is specified."
-msgstr "未指定背景檔。"
+msgstr "No se especificó un archivo de fondo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No certification file is specified."
-msgstr "未指定憑證檔案。"
+msgstr "No se especificó un archivo de certificación."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No compatible e-mail client installed."
-msgstr "未安裝相容的電子郵件用戶端。"
+msgstr "No hay un cliente de correo compatible instalado."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No cover file is specified."
-msgstr "未指定封面檔。"
+msgstr "No se especificó un archivo de portada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No password provided for e-mail over SMTP."
-msgstr "未提供透過SMTP寄信的密碼。"
+msgstr "No se proporcionó una contraseña para e-mail por SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No script file is specified."
-msgstr "未指定指令碼檔案。"
+msgstr "No se especificó un archivo de guión."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No stamp font is specified."
-msgstr "未指定浮水印字型。"
+msgstr "No se especificó una fuente para la estampa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No stamp text is specified."
-msgstr "未指定浮水印文字。"
+msgstr "No se especificó un texto para la estampa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Not enough space for signature."
-msgstr "無足夠空間處理簽章。"
+msgstr "No hay espacio para la firma."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "PDF Architect could not open output file."
-msgstr "PDF Architect 無法開啟所輸出檔案。"
+msgstr "PDF Architect no puede abrir el archivo de salida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
-msgstr "存檔對話框的預選資料夾為空白。"
+msgstr "La carpeta preseleccionada para el diálogo de guardar está vacía."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Script file contains illegal characters."
-msgstr "指令碼檔含有不合法字元。"
+msgstr "El archivo de guión contiene caracteres inválidos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Script file does not exist."
-msgstr "指令碼檔案不存在。"
+msgstr "El archivo de guión no existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."
-msgstr "安全時間伺服器欠缺密碼。"
+msgstr "Servidor de hora seguro sin contraseña."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without user name."
-msgstr "安全時間伺服器欠缺使用者名稱。"
+msgstr "Servidor de hora seguro sin nombre de inicio de sesión."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "System could not open output file."
-msgstr "系統無法開啟輸出檔案。"
+msgstr "El sistema no puede abrir el archivo de salida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
-msgstr "此憑證欠缺私鑰。"
+msgstr "El certificado no tiene una clave privada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate password is wrong."
-msgstr "錯誤的憑證密碼。"
+msgstr "La contraseña del certificado no es correcta."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The cover file is no PDF file."
-msgstr "此封面檔不是PDF檔。"
+msgstr "El archivo de portada no es un documento PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The default printer is invalid."
-msgstr "預設印表機是無效的。"
+msgstr "La impresora predeterminada no es válida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The selected printer is invalid."
-msgstr "選取的印表機是無效的。"
+msgstr "La impresora seleccionada no es válida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The specified Dropbox access token is not configured."
-msgstr "所指定的 Dropbox 存取 token 並未設定。"
+msgstr "El token de acceso a Dropbox especificado no está configurado."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The specified Dropbox account is not configured."
-msgstr "所指定 Dropbox 帳戶並未設定。"
+msgstr "La cuenta de Dropbox especificada no está configurada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The specified FTP account is not configured."
-msgstr "所指定 FTP 帳戶並未設定。"
+msgstr "La cuenta FTP especificada no está configurada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The specified HTTP account is not configured."
-msgstr "所指定 HTTP 帳戶並未設定。"
+msgstr "La cuenta de HTTP especificada no está configurada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The specified SMTP account is not configured."
-msgstr "所指定 SMTP 帳戶並未設定。"
+msgstr "La cuenta de SMTP especificada no está configurada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The specified time server account for signing is not configured."
-msgstr "所指定時間伺服器做簽署的帳戶尚未設定。"
+msgstr "La cuenta del servidor de hora especificada para firma no está configurada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "These characters are not allowed as Dropbox folder name: < > : ? * \" |"
-msgstr "這些字元不可用於Dropbox 資料夾名稱：< > : ? * \\\" |"
+msgstr "Estos caracteres no se permiten en un nombre de carpeta Dropbox: < > : ? * \" |"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Unknown error in e-mail client action."
-msgstr "發生未知的電子郵件用戶端動作錯誤。"
+msgstr "Error desconocido en la acción del cliente de correo electrónico."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Unknown internal error."
-msgstr "未知的內部錯誤。"
+msgstr "Error interno desconocido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "User cancelled retyping FTP password."
-msgstr "使用者已取消重試 FTP 密碼。"
+msgstr "El usuario canceló el reingreso de la contraseña de FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "User cancelled retyping HTTP autentication password."
-msgstr "使用者已取消重試 HTTP 驗證密碼。"
+msgstr "El usuario canceló el reingreso de la contraseña HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "User cancelled retyping SMTP e-mail password."
-msgstr "使用者已取消重試 SMTP 電子郵件密碼。"
+msgstr "El usuario canceló el reingreso de la contraseña SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
-msgstr "您已經列印了密碼保護的 PDF 檔案，Ghostscript 不能轉換這些檔案。"
+msgstr "Usted imprimió un archivo PDF protegido por contraseña y Ghostscript no puede convertir tales archivos."
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "No repetition"
-msgstr "不重複"
+msgstr "Sin repetición"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "Repeat all pages"
-msgstr "重複全部頁面"
+msgstr "Repetir todas las páginas"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "Repeat last page"
-msgstr "重複最後頁"
+msgstr "Repetir la última página"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
 msgid "CMYK"
@@ -504,7 +521,7 @@ msgstr "CMYK"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
 msgid "Grayscale"
-msgstr "灰階"
+msgstr "Escala de grises"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ColorModel
 msgid "RGB"
@@ -513,31 +530,31 @@ msgstr "RGB"
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Automatic"
-msgstr "自動"
+msgstr "Automático"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (High)"
-msgstr "JPEG (高)"
+msgstr "JPEG (Alta)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (Low)"
-msgstr "JPEG (低)"
+msgstr "JPEG (Baja)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (Manual)"
-msgstr "JPEG (手調)"
+msgstr "JPEG (Manual)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (Maximum)"
-msgstr "JPEG (最高)"
+msgstr "JPEG (Máxima)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (Medium)"
-msgstr "JPEG (中間)"
+msgstr "JPEG (Media)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "JPEG (Minimum)"
-msgstr "JPEG (最低)"
+msgstr "JPEG (Mínima)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionColorAndGray
 msgid "ZIP"
@@ -545,120 +562,120 @@ msgstr "ZIP"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
 msgid "CCITT Fax"
-msgstr "CCITT  傳真"
+msgstr "Fax CCITT"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
 msgid "Run Length Compression"
-msgstr "執行長度壓縮"
+msgstr "Compresión RLE"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.CompressionMonochrome
 msgid "ZIP Compression"
-msgstr "ZIP 壓縮"
+msgstr "Compresión ZIP"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Attachments panel visible"
-msgstr "顯示附件面板"
+msgstr "Panel de adjuntos visible"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Document outline visible"
-msgstr "顯示文件外框"
+msgstr "Esquema del documento visible"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Fullscreen mode"
-msgstr "全螢幕模式"
+msgstr "Modo de pantalla completa"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Neither document outline nor thumbnail images visible"
-msgstr "文件外框及縮圖均不顯示"
+msgstr "Sin esquema ni miniatura visible"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Optional content group panel visible"
-msgstr "顯示內容群組選項面板"
+msgstr "Panel de contenido opcional visible"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DocumentView
 msgid "Thumbnail images visible"
-msgstr "顯示縮圖"
+msgstr "Minaturas de página visibles"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Long edge turn"
-msgstr "長邊翻轉"
+msgstr "Girar por el borde largo"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "No duplex printing"
-msgstr "不用雙工列印"
+msgstr "Sin impresión dúplex"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Short edge turn"
-msgstr "短邊翻轉"
+msgstr "Girar por el borde corto"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "16 Million Colors (24 Bit)"
-msgstr "16百萬色 (24位元)"
+msgstr "16 millones de colores (24 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "Grayscale (8 Bit)"
-msgstr "灰階 (8位元)"
+msgstr "Escala de grises (8 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
 msgid "Auto-Detect"
-msgstr "自動偵測"
+msgstr "Auto detectar"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
 msgid "Landscape"
-msgstr "橫式"
+msgstr "Apaisada"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageOrientation
 msgid "Portrait"
-msgstr "直式"
+msgstr "Alta"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Double page view (odd pages left)"
-msgstr "雙頁顯示 (奇數頁居左)"
+msgstr "Vista de dos páginas (páginas impares a la izquierda)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Double page view (odd pages right)"
-msgstr "雙頁顯示 (奇數頁居右)"
+msgstr "Vista de dos páginas (páginas impares a la derecha)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Floating double page view (odd pages left)"
-msgstr "浮動雙頁顯示 (奇數頁居左)"
+msgstr "Vista flotante de dos páginas (páginas impares a la izquierda)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Floating double page view (odd pages right)"
-msgstr "浮動雙頁顯示 (奇數頁居右)"
+msgstr "Vista flotante de dos páginas (páginas impares a la derecha)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Floating page view (one page)"
-msgstr "浮動頁面顯示 (單頁)"
+msgstr "Vista de página flotante (una página)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PageView
 msgid "Single page view"
-msgstr "單頁顯示"
+msgstr "Vista de una página"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 msgid "16 Color (4 Bit)"
-msgstr "16色 (4位元)"
+msgstr "16 colores (4 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 msgid "16 Million Colors with Transparency (32 Bit)"
-msgstr "16百萬色具透明度 (32位元)"
+msgstr "16 millones de colores con transparencia (32 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 msgid "256 Colors (8 Bit)"
-msgstr "256色 (8 位元)"
+msgstr "256 colores (8 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
 msgid "Black & White (2 Bit)"
-msgstr "黑白 (2 位元)"
+msgstr "Blanco y negro (2 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "End"
-msgstr "結尾"
+msgstr "Fin"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
@@ -668,101 +685,101 @@ msgstr "RegEx"
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replace"
-msgstr "替換為"
+msgstr "Remplazar"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Start"
-msgstr "開頭"
+msgstr "Inicio"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
 msgid "default printer"
-msgstr "預設印表機"
+msgstr "impresora predeterminada"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
 msgid "printer dialog"
-msgstr "印表機對話框"
+msgstr "diálogo de impresora"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SelectPrinter
 msgid "select printer ->"
-msgstr "選取印表機 ->"
+msgstr "seleccionar impresora ->"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
 msgid "Custom Page"
-msgstr "自訂頁"
+msgstr "Página personalizada"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
 msgid "First Page"
-msgstr "第一頁"
+msgstr "Primera página"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.SignaturePage
 msgid "Last Page"
-msgstr "最末頁"
+msgstr "Última página"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "4096 Colors (12 Bit)"
-msgstr "4096色 (12 位元)"
+msgstr "4096 colores (12 bits)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "Black & White (2 Bit G3 Fax)"
-msgstr "黑白 (2 位元 G3 傳真)"
+msgstr "Blanco y Negro (Fax 2 Bits G3)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "Black & White (2 Bit G4 Fax)"
-msgstr "黑白 (2 位元 G4 傳真)"
+msgstr "Blanco y Negro (Fax 2 Bits G4)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.TiffColor
 msgid "Black & White (2 Bit LZW)"
-msgstr "黑白 (2 位元 LZW)"
+msgstr "Blanco y Negro (2 Bits LZW)"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
 msgid "Daily"
-msgstr "每日"
+msgstr "A diario"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
 msgid "Monthly"
-msgstr "每月"
+msgstr "Mensualmente"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Never"
-msgstr "永不"
+msgstr "Nunca"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.UpdateInterval
 msgid "Weekly"
-msgstr "每周"
+msgstr "Semanalmente"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "<Default Profile>"
-msgstr "<預設設定檔>"
+msgstr "<Perfil predeterminado>"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "High Compression (small file)"
-msgstr "高壓縮比 (檔案較小)"
+msgstr "Alta compresión (archivo más pequeño)"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "High Quality (large file)"
-msgstr "高品質 (檔案較大)"
+msgstr "Alta calidad (archivo más grande)"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "JPEG (graphic file)"
-msgstr "JPEG (圖檔)"
+msgstr "JPEG (archivo de imágen)"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "PDF/A (long term preservation)"
-msgstr "PDF/A (長期保存)"
+msgstr "PDF/A (para conservación a largo plazo)"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "PNG (graphic file)"
-msgstr "PNG (圖檔)"
+msgstr "PNG (archivo de imágen)"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "Print after saving"
-msgstr "存後即印"
+msgstr "Imprimir después de guardar"
 
 #: pdfforge.PDFCreator.Core.Services.Translation.ProfileNameByGuidTranslation
 msgid "TIFF (multipage graphic file)"
-msgstr "TIFF (多頁圖檔)"
+msgstr "TIFF (archivo gráfico de varias páginas)"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
 msgid ""
@@ -770,25 +787,25 @@ msgid ""
 "\n"
 "Please visit our website for more information or contact us directly: licensing@pdfforge.org"
 msgstr ""
-"請在已安裝終端服務的電腦上使用 \"PDFCreator Terminal Server\"。\n"
+"Por favor use \"PDFCreator Terminal Server\" para equipos que tengan instalado Terminal Services.\n"
 "\n"
-"請造訪我們的網站取得更多訊息或直接聯絡：licensing@pdfforge.org"
+"Por favor visite nuestro sitio web para más información o contáctenos directamente: licensing@pdfforge.org"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
 msgid ""
 "There was an error with a component licensed by pdfforge.\n"
 "Please reinstall PDFCreator. (Error {0})"
 msgstr ""
-"有個錯誤在 pdfforge 授權的元件。\n"
-"請重新安裝 PDFCreator。(錯誤 {0})"
+"Hubo un error con un componente licenciapo por pdfforge.\n"
+"Por favor reinstale PDFCreator. (Error {0})"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
 msgid ""
 "Your license for \"{0}\" has expired.\n"
 "PDFCreator will shut down."
 msgstr ""
-"您的授權 \"{0}\" 已過期。\n"
-"PDFCreator 將關閉。"
+"Su licencia para \"{0}\" expiró.\n"
+"PDFCreator se cerrará."
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
 msgid ""
@@ -796,17 +813,17 @@ msgid ""
 "Please contact your administrator.\n"
 "PDFCreator will shut down."
 msgstr ""
-"您的授群 \"{0}\" 已過期。\n"
-"請聯繫您的系統管理員。\n"
-"PDFCreator 將關閉。"
+"Su licencia para \"{0}\" expiró.\n"
+"Por favor contacte a su administrador.\n"
+"PDFCreator se cerrará."
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
 msgid ""
 "Your license for \"{0}\" is invalid or has expired. Please check your license, otherwise PDFCreator will shutdown.\n"
 "Do you want to check your license now?"
 msgstr ""
-"您的授權 \"{0}\" 是無效或已過期。請檢核您的授權，否則 PDFCreator 將關閉，\n"
-"是否現在檢核您的授權？"
+"Su licencia para \"{0}\" no es válida o expiró. Por favor verifique su licencia, de lo contrario PDFCreator se cerrará.\n"
+"Quiere verificar su licencia ahora?"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
@@ -814,9 +831,9 @@ msgid ""
 "\n"
 "Program exiting now."
 msgstr ""
-"找不到可支援的 Ghostscript 安裝。\n"
+"No se puede encontrar una versión soportada de Ghostscript.\n"
 "\n"
-"程式現將離開。"
+"El programa se cerrará ahora."
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
@@ -824,48 +841,48 @@ msgid ""
 "\n"
 "Program exiting now."
 msgstr ""
-"Windows spooler 服務並未執行。請先啟用 spooler 服務。\n"
+"El servicio de cola de impresión de Windows no está corriendo. Por favor inicie la cola de impresión primero.\n"
 "\n"
-"程式現將離開。"
+"El programa se cerrará ahora."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid "Access Denied"
-msgstr "拒絕存取"
+msgstr "Acceso Denegado"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 msgid "An important PDFCreator file is missing ('{0}'). Please reinstall PDFCreator!"
-msgstr "有個重要的 PDFCreator 檔案遺失 ('{0}')。請重新安裝 PDFCreator！"
+msgstr "Falta un archivo importante de PDFCreator ('{0}'). ¡Por favor reinstale PDFCreator!"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Error"
-msgstr "錯誤"
+msgstr "Error"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid "No printers installed"
-msgstr "尚未安裝印表機"
+msgstr "No hay impresoras instaladas"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid "PDFCreator was not able to repair your printers. Please contact your administrator or the support to assist you in with this problem."
-msgstr "PDFCreator 無法修復所安裝的印表機。請聯絡您的系統管理員或產品支援協助解決這個問題。"
+msgstr "PDFCreator no pudo reparar sus impresoras. Por favor contacte a su administrador o al soporte técnico para asistirlo con este problema."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid "PDFCreator was not able to repair your spool folder. Please contact your administrator or the support to assist you in changing the permissions of the path '{0}'."
-msgstr "PDFCreator 無法修復緩衝目錄。請聯繫系統管理員或技術人員以協助你取得變更緩衝目錄路徑  '{0}' 的權限。"
+msgstr "PDFCreator no pudo reparar su carpeta de cola de impresión. Póngase en contacto con el administrador o el soporte técnico para que le asistan para cambiar los permisos de la carpeta '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid "RepairTool not found"
-msgstr "找不到 RepairTool"
+msgstr "No se encontró RepairTool"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid ""
 "The temporary path where PDFCreator stores the print jobs can't be accessed. This is a configuration problem on your machine and needs to be fixed. Do you want PDFCreator to attempt repairing it?\n"
 "Your spool folder is: {0}"
 msgstr ""
-"PDFCreator 存放列印作業的暫存路徑無法存取。此為您電腦的設定問題必須修正。是否由 PDFCreator 嘗試修正它？\n"
-"您的緩衝目錄為：{0}"
+"No se puede acceder a la ruta temporal donde PDFCreator almacena los trabajos de impresión. Este es un problema de configuración en su equipo y debe ser corregido. ¿Desea que PDFCreator intente repararlo?\n"
+"Su carpeta de cola de impresión es: {0}"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 msgid ""
@@ -874,230 +891,230 @@ msgid ""
 "\n"
 "Note: You might be asked to grant admin privileges while fixing the problem."
 msgstr ""
-"您並未安裝任何 PDFCreator 印表機。此問題極有可能是設定或安裝時修改所導致。\n"
-"是否重新安裝 PDFCreator 印表機來修正此問題？\n"
+"No hay ninguna impresora PDFCreator instalada. Probablemente hubo un problema durante la instalación o la instalación fue alterada posteriormente.\n"
+"¿Desea reparar esto reinstalando las impresoras PDFCreator?\n"
 "\n"
-"註：可能會詢問管理員權限以修正此問題。"
+"Nota: Es posible que se le soliciten permisos administrativos para reparar el problema."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
 msgid "By loading the file all settings and profiles will be overwritten. Do you want to continue?"
-msgstr "載入檔案會導致所有設定值及設定檔遭覆蓋。你確定要繼續？"
+msgstr "Al cargar el archivo, todos los ajustes y perfiles serán sobre escritos. ¿Desea continuar?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
 msgid "INI files (*.ini)|*.ini"
-msgstr "INI 檔 (*.ini)|*.ini"
+msgstr "Archivos INI (*.ini)|*.ini"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
 msgid "Invalid settings"
-msgstr "無效的設定值"
+msgstr "Ajustes inválidos"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
 msgid "Overwrite all settings"
-msgstr "覆蓋所有設定值"
+msgstr "Sobre escribir todos los ajustes"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
 msgid "The file does not appear to contain valid PDFCreator settings."
-msgstr "此為無效的 PDFCreator 設定檔。"
+msgstr "El archivo no contiene ajustes válidos de PDFCreator."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
 msgid "Do you want to proceed anyway?"
-msgstr "是否還要繼續？"
+msgstr "¿Quiere continuar de todos modos?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
 msgid "PDFCreator needs to temporarily change the default printer to be able to convert the file. Do you want to proceed?"
-msgstr "PDFCreator 需要暫時更換預設印表機以便轉換檔案。是否繼續？"
+msgstr "PDFCreator necesita cambiar temporalmente la impresora predeterminada para poder convertir el archivo. ¿Desea continuar?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
 msgid "The following files can't be converted:"
-msgstr "下列檔案無法轉換："
+msgstr "Los siguientes archivos no se pueden convertir:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
 msgid "You have tried to convert directories here. This is currently not supported."
-msgstr "你嘗試轉換目錄。目前並不支援此項功能。"
+msgstr "Usted intentó convertir una carpeta. Actualmente esa función no está disponible."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "A printer with the name '{0}' is already installed on your system. Please enter a new printer name:"
-msgstr "您系統已經存在印表機名稱 '{0}'，請輸入新的印表機名稱："
+msgstr "Ya existe una impresora con el nombre '{0}' instalada en el sistema. Por favor ecriba otro nombre para la impresora:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "Are you sure that you want to delete the printer '{0}'?"
-msgstr "你是否確定要刪除 '{0}' 印表機？"
+msgstr "¿Está seguro de que desea eliminar la impresora '{0}'?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Delete Printer"
-msgstr "刪除印表機"
+msgstr "Eliminar Impresora"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "Please enter printer name:"
-msgstr "請輸入印表機名稱:"
+msgstr "Por favor escriba el nombre de la impresora:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "The name is invalid or a printer with this name already exists"
-msgstr "此名稱為無效或印表機具此名稱已經存在"
+msgstr "El nombre no es válido o ya existe una impresora con este nombre"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "The printer '{0}' could not be installed."
-msgstr "印表機 '{0}' 無法安裝。"
+msgstr "No se pudo instalar la impresora '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "The printer '{0}' could not be renamed in '{1}'."
-msgstr "印表機 '{0}' 無法更名為 '{1}' 。"
+msgstr "No se pudo renombrar la impresora '{0}' a '{1}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "The printer name contains invalid characters."
-msgstr "印表機名稱含有不合法字元。"
+msgstr "El nombre de la impresora contiene caracteres no válidos."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrinterActionsAssistantTranslation
 msgid "You may not delete the last printer. Uninstall PDFCreator if you really want to remove all related printers."
-msgstr "您可能不能刪除最後的印表機。如果要刪除所有相關的印表機必須重新安裝 PDFCreator。"
+msgstr "No se puede eliminar la última impresora. Debe desinstalar PDFCreator si quiere eliminar todas las impresoras asociadas."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 msgid "Admin privileges required"
-msgstr "必須具系統管理者權限"
+msgstr "Se requieren privilegios de administrador"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 msgid "Operation failed. You probably do not have sufficient permissions."
-msgstr "操作失敗。您可能沒有足夠的權限。"
+msgstr "Falló la operación. No tiene permisos suficientes."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 msgid ""
 "This operation requires admin privileges and it looks like you are not an admin. Do you want to continue anyway?\n"
 "Note: It is safe to continue even if you are unsure if you have appropriate rights, but the operation will not be completed."
 msgstr ""
-"此項操作需要管理員權限而您似乎非管理員。是否還是要繼續？\n"
-"註：即使您不確定是否具此權限也是可以繼續，只是不一定能完成此項操作。"
+"Esta operación requiere privilegios administrativos y parece que Usted no es administrador. ¿Desea continuar de todos modos?\n"
+"Nota: Es seguro continuar incluso si no está seguro de tener los permisos apropiados, pero la operación no podrá ser completada."
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
 msgid "Do you want to continue and save your changes?"
-msgstr "是否繼續並儲存您的變更？"
+msgstr "¿Desea continuar y guardar sus cambios?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
 msgid "Save Settings"
-msgstr "儲存設定值"
+msgstr "Guardar Ajustes"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Error During Deletion"
-msgstr "刪除時發生錯誤"
+msgstr "Error Durante la Eliminación"
 
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
-msgstr "請儲存或取消設定以繼續"
+msgstr "Por favor guarde o cancele los ajustes para continuar"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "Disabled by Administrator"
-msgstr "已被系統管理員停用"
+msgstr "Deshabilitado por el Administrador"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "Set by Administrator"
-msgstr "由系統管理員設定"
+msgstr "Dispuesto por el Administrador"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "These settings have been set by your administrator and can't be changed."
-msgstr "這些設定由系統管理員設定且不允許變更。"
+msgstr "Estos ajustes fueron establecidos por su administrador y no pueden ser cambiados."
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by PDFCreator"
-msgstr "由 PDFCreator 自動產生電子郵件"
+msgstr "Correo electrónico creado automáticamente por PDFCreator"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by the free PDFCreator"
-msgstr "由免費的 PDFCreator 自動產生電子郵件"
+msgstr "Correo electrónico creado automáticamente por PDFCreator free"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "MyFile.docx"
-msgstr "我的檔案.docx"
+msgstr "MiArchivo.docx"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "OutputFilename.jpg"
-msgstr "輸出檔名.jpg"
+msgstr "ArchivoDeSalida.jpg"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "OutputFilename2.jpg"
-msgstr "輸出檔名2.jpg"
+msgstr "ArchivoDeSalida2.jpg"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "OutputFilename3.jpg"
-msgstr "輸出檔名3.jpg"
+msgstr "ArchivoDeSalida3.jpg"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "Subject from Settings"
-msgstr "主旨由設定值"
+msgstr "Asunto desde Opciones"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "Title from Printjob"
-msgstr "標題由列印作業"
+msgstr "Título desde el trabajo de impresión"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "Title from Settings"
-msgstr "標題由設定值"
+msgstr "Título desde los ajustes"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "Value for '{0}'"
-msgstr "'{0}' 的值"
+msgstr "Valor para '{0}'"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "keyword 1 keyword 2"
-msgstr "關鍵字1 關鍵字2"
+msgstr "palabraclave 1 palabraclave 2"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "A new Update is available"
-msgstr "有新的更新"
+msgstr "Hay una actualización disponible"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Accounts"
-msgstr "帳戶"
+msgstr "Cuentas"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Home"
-msgstr "首頁"
+msgstr "Inicio"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Printer"
-msgstr "印表機"
+msgstr "Impresora"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Profiles"
-msgstr "設定檔"
+msgstr "Perfiles"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "Error while converting"
-msgstr "轉換時發生錯誤"
+msgstr "Error al convertir"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "File successfully converted"
-msgstr "完成轉換檔案"
+msgstr "Archivo convertido"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "PDFCreator has successfully converted '{0}'."
-msgstr "PDFCreator 已轉換完成 '{0}'。"
+msgstr "PDFCreator convirtió '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "PDFCreator was not able to convert the document '{0}'."
-msgstr "PDFCreator 無法轉換此檔案 '{0}'。"
+msgstr "PDFCreator no puedo convertir el documento '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "License"
-msgstr "授權"
+msgstr "Licencia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "PDFCreator is free software consisting of multiple components with individual licenses."
-msgstr "PDFCreator 為免費軟體包含多個元件各別擁有自己的授權。"
+msgstr "PDFCreator es software libre y consiste de varios componentes con licencias particulares."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Please read the license section in the manual for further information on these licenses."
-msgstr "請閱讀手冊授權章節有關這些授權的更多資訊。"
+msgstr "Por favor lea la sección de licencia en el manual para mayor información sobre estas licencias."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "User Manual"
-msgstr "使用手冊"
+msgstr "Manual del usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Version"
-msgstr "版本"
+msgstr "Versión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1106,7 +1123,7 @@ msgstr "版本"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Add Dropbox Account"
-msgstr "加入 Dropbox 帳戶"
+msgstr "Agregar cuenta Dropbox"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1115,7 +1132,7 @@ msgstr "加入 Dropbox 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Add FTP Account"
-msgstr "加入 FTP 帳戶"
+msgstr "Agregar cuenta FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1124,7 +1141,7 @@ msgstr "加入 FTP 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Add HTTP Account"
-msgstr "加入 HTTP 帳戶"
+msgstr "Agregar cuenta HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1133,7 +1150,7 @@ msgstr "加入 HTTP 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Add SMTP Account"
-msgstr "加入 SMTP 帳戶"
+msgstr "Agregar cuenta SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1142,7 +1159,7 @@ msgstr "加入 SMTP 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Add Time Server Account"
-msgstr "加入時間伺服器帳戶"
+msgstr "Agregar cuenta de servidor de hora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1151,11 +1168,11 @@ msgstr "加入時間伺服器帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Are you sure you want to delete this account?"
-msgstr "是否確定要刪除此帳戶？"
+msgstr "¿Está seguro de que desea eliminar esta cuenta?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Authenticate with Dropbox"
-msgstr "Dropbox 驗證"
+msgstr "Autenticar con Dropbox"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1169,19 +1186,19 @@ msgstr "Dropbox 驗證"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared.SettingControlsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Cancel"
-msgstr "取消"
+msgstr "Cancelar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Copy"
-msgstr "複製"
+msgstr "Copiar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Copy share link to clipboard"
-msgstr "複製分享連結到剪貼簿"
+msgstr "Copiar al portapapeles el enlace para compartir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Create a link to share the uploaded files. Anyone with the link can view this file."
-msgstr "建立連結以分享已上傳檔案。任何人可透過此連結瀏覽此檔案。"
+msgstr "Crear un enlace para compartir los archivos subidos. Cualquiera con este enlace puede ver el archivo."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1190,7 +1207,7 @@ msgstr "建立連結以分享已上傳檔案。任何人可透過此連結瀏覽
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Create new accounts"
-msgstr "建立新帳戶"
+msgstr "Crear cuentas nuevas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1199,7 +1216,7 @@ msgstr "建立新帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Directory:"
-msgstr "目錄："
+msgstr "Carpeta:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1208,11 +1225,11 @@ msgstr "目錄："
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Don't overwrite files (adds an increasing number in case of conflict)"
-msgstr "不要覆蓋檔案 (發生衝突時加入一個流水號)"
+msgstr "No sobre escribir archivos (agrega un número secuencial en caso de conflicto)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Don't overwrite files (adds an increasing number in case of conflict)."
-msgstr "不要覆蓋檔案 (發生衝突時加入一個流水號)。"
+msgstr "No sobreescribir archivos (agrega un número secuencial en caso de conflicto)."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1221,7 +1238,7 @@ msgstr "不要覆蓋檔案 (發生衝突時加入一個流水號)。"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Don't save password and request it during upload."
-msgstr "不要儲存密碼並在上傳時詢問它。"
+msgstr "No guardar la contraseña y solicitarla al subir."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Dropbox"
@@ -1234,11 +1251,11 @@ msgstr "Dropbox"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Dropbox Account"
-msgstr "Dropbox 帳戶"
+msgstr "Cuenta Dropbox"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Dropbox account could not be created. Please try again."
-msgstr "Dropbox 帳戶無法建立。請再試一次。"
+msgstr "No se puede crear la cuenta Dropbox. Por favor intente nuevamente."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1247,7 +1264,7 @@ msgstr "Dropbox 帳戶無法建立。請再試一次。"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "FTP Account"
-msgstr "FTP 帳戶"
+msgstr "Cuenta FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1256,11 +1273,11 @@ msgstr "FTP 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "HTTP Account"
-msgstr "HTTP 帳戶"
+msgstr "Cuenta HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Incorrect response from Dropbox Server. Account could not be created. Please try again."
-msgstr "Dropbox 伺服器不正確回應。帳戶無法建立。請再試一次。"
+msgstr "Respuesta incorrecta del servidor Dropbox. No se puede crear la cuenta. Por favor intente nuevamente."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1269,7 +1286,7 @@ msgstr "Dropbox 伺服器不正確回應。帳戶無法建立。請再試一次�
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Manage Accounts"
-msgstr "帳戶管理"
+msgstr "Gestionar Cuentas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1278,7 +1295,7 @@ msgstr "帳戶管理"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Manage your credentials for corresponding actions. Added accounts and changes will be available for all profiles."
-msgstr "管理您的相關憑證。所有設定檔都可以使用新加入的帳戶和變更。"
+msgstr "Administre sus credenciales para las acciones correspondientes. Las cuentas añadidas y los cambios  estarán disponibles para todos los perfiles."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1292,7 +1309,7 @@ msgstr "管理您的相關憑證。所有設定檔都可以使用新加入的帳
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "OK"
-msgstr "確認"
+msgstr "Aceptar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1301,23 +1318,23 @@ msgstr "確認"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Password:"
-msgstr "密碼："
+msgstr "Contraseña:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Please define folder:"
-msgstr "請定義資料夾："
+msgstr "Por favor defina la carpeta:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Please note: Everyone who recieves this link will be able to access the file"
-msgstr "請注意：任何人收到此連結均可存取此檔案"
+msgstr "Nota: Cualquiera que reciba este enlace podrá acceder al archivo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Please select Dropbox Account:"
-msgstr "請選取 Dropbox 帳戶："
+msgstr "Por favor seleccione la cuenta Dropbox:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Remove Dropbox Account"
-msgstr "移除 Dropbox 帳戶"
+msgstr "Quitar cuenta Dropbox"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1326,7 +1343,7 @@ msgstr "移除 Dropbox 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "SMTP Account"
-msgstr "SMTP 帳戶"
+msgstr "Cuenta SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1337,7 +1354,7 @@ msgstr "SMTP 帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared.SettingControlsTranslation
 msgid "Save"
-msgstr "存檔"
+msgstr "Guardar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1347,7 +1364,7 @@ msgstr "存檔"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Select account or create a new one ->"
-msgstr "選取帳戶或建立一個新的 ->"
+msgstr "Seleccione una cuenta o cree una nueva ->"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1356,11 +1373,11 @@ msgstr "選取帳戶或建立一個新的 ->"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Server:"
-msgstr "伺服器："
+msgstr "Servidor:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "The following link has been created for your document:"
-msgstr "已為此文件建立下列連結："
+msgstr "Se creó el siguiente enlace para su documento:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1369,7 +1386,7 @@ msgstr "已為此文件建立下列連結："
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Time Server Account"
-msgstr "時間伺服器帳戶"
+msgstr "Cuenta del Servidor de Hora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1378,7 +1395,7 @@ msgstr "時間伺服器帳戶"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Timeout in seconds:"
-msgstr "超時秒數："
+msgstr "Tiempo de espera en segundos:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1387,43 +1404,43 @@ msgstr "超時秒數："
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "User Name:"
-msgstr "使用者名稱:"
+msgstr "Nombre de Usuario:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "Edit FTP Account"
-msgstr "編輯 FTP 帳戶"
+msgstr "Editar Cuenta FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "FTP Account:"
-msgstr "FTP 帳戶："
+msgstr "Cuenta FTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "FTP Server Password:"
-msgstr "FTP 伺服器密碼："
+msgstr "Contraseña del servidor FTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "FTP Upload"
-msgstr "FTP 上傳"
+msgstr "Subida FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "Please select a FTP account:"
-msgstr "請選取 FTP 帳戶："
+msgstr "Por favor seleccione la cuenta FTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "Remove FTP account"
-msgstr "移除 FTP 帳戶"
+msgstr "Quitar la cuenta FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "Upload with FTP"
-msgstr "透過 FTP 上傳"
+msgstr "Contraseña del servidor"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
-msgstr "基本驗證"
+msgstr "Autenticación Básica"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Edit HTTP Account"
-msgstr "編輯 HTTP 帳戶"
+msgstr "Editar Cuenta HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "HTTP"
@@ -1431,64 +1448,64 @@ msgstr "HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Remove HTTP Account"
-msgstr "移除 HTTP 帳戶"
+msgstr "Quitar Cuenta HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Select HTTP Account:"
-msgstr "選取 HTTP 帳戶："
+msgstr "Seleccionar Cuenta HTTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "URL:"
-msgstr "網址："
+msgstr "URL:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Attach pdfforge signature"
-msgstr "附加 pdfforge 簽章"
+msgstr "Adjuntar firma de pdfforge"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "AttachmentFile"
-msgstr "附件檔"
+msgstr "ArchivoAdjunto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "BCC:"
-msgstr "密件副本："
+msgstr "CCO:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "CC:"
-msgstr "副本："
+msgstr "CC:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "E-mail Address:"
-msgstr "電子郵件信箱："
+msgstr "Dirección de e-mail:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Edit E-mail Text"
-msgstr "編輯電子郵件內容"
+msgstr "Editar el texto del e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Edit SMTP Account"
-msgstr "編輯 SMTP 帳戶"
+msgstr "Editar Cuenta SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Hint: Multiple recipients can be separated by commas"
-msgstr "提示：以逗號分隔多個收件人"
+msgstr "Nota: Use comas para separar múltiples destinatarios"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Please select a SMTP account:"
-msgstr "請選取 SMTP 帳戶："
+msgstr "Por favor seleccione una cuenta SMTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Port:"
-msgstr "連接埠:"
+msgstr "Puerto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Remove SMTP Account"
-msgstr "移除 SMTP 帳戶"
+msgstr "Quitar Cuenta SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "SMTP"
@@ -1496,15 +1513,15 @@ msgstr "SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "SMTP Account:"
-msgstr "SMTP 帳戶："
+msgstr "Cuenta SMTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "SMTP Mail"
-msgstr "SMTP 郵件"
+msgstr "E-mail SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "SMTP Server Password:"
-msgstr "SMTP 伺服器密碼："
+msgstr "Contraseña del Servidor SMTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "SSL"
@@ -1512,120 +1529,120 @@ msgstr "SSL"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send Test E-mail"
-msgstr "傳送電子郵件測試"
+msgstr "Enviar e-mail de prueba"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send e-mail via SMTP"
-msgstr "透過 SMTP 寄送電子郵件"
+msgstr "Enviar e-mail por SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Set SMTP Server Password"
-msgstr "設定 SMTP 伺服器密碼"
+msgstr "Definir contraseña del Servidor SMTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The test e-mail was successfully sent to the following recipients:"
-msgstr "測試電子郵件已成功寄至下列收件人："
+msgstr "El e-mail de prueba fue enviado a los siguientes destinatarios:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "To:"
-msgstr "至："
+msgstr "Para:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Use Html"
-msgstr "採用 Html"
+msgstr "Usar HTML"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "_Subject:"
-msgstr "主旨(_S)："
+msgstr "_Asunto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "_Text:"
-msgstr "文字(_T)："
+msgstr "_Texto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Edit Time Server Account"
-msgstr "編輯時間伺服器帳戶"
+msgstr "Editar Cuenta del Servidor de Hora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Remove Time Server Account"
-msgstr "移除時間伺服器帳戶"
+msgstr "Quitar Cuenta del Servidor de Hora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Secured Time Server"
-msgstr "安全的時間伺服器"
+msgstr "Servidor de hora seguro"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Convert PDF files"
-msgstr "轉換 PDF 檔案"
+msgstr "Convertir archivos PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Create PDF files"
-msgstr "建立 PDF 檔案"
+msgstr "Crear archivos PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Create custom forms"
-msgstr "建立客製表單"
+msgstr "Crear formularios personalizados"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Download PDF Architect now"
-msgstr "現在就下載 PDF Architect"
+msgstr "Descargar PDF Architect ahora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Edit PDF files"
-msgstr "編輯 PDF 檔案"
+msgstr "Editar archivos PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Enjoy our free features:"
-msgstr "享受我們的免費功能："
+msgstr "Disfrute de nuestras recursos gratuitos:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Insert page elements"
-msgstr "插入頁面元件"
+msgstr "Insertar elementos de la página"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Launch PDF Architect"
-msgstr "啟動 PDF Architect"
+msgstr "Lanzar PDF Architect"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "More on PDF Architect"
-msgstr "更多關於 PDF Architect"
+msgstr "Más sobre PDF Architect"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Optical character recognition (OCR)"
-msgstr "光學文字辨識 (OCR)"
+msgstr "Reconocimiento óptico de caracteres (OCR)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Other powerful PDF Architect features:"
-msgstr "其它 PDF Architect 強大的功能："
+msgstr "Otras poderosas características de PDF Architect:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Our full-featured PDF Editor"
-msgstr "我們全功能的 PDF 編輯器"
+msgstr "Nuestro editor PDF completo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Review and Annotate"
-msgstr "評論和註釋"
+msgstr "Revisar y Anotar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Secure and Protect"
-msgstr "安全和保護"
+msgstr "Asegurar y Proteger"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Send for e-signature"
-msgstr "傳送電子簽章"
+msgstr "Enviar para firma electrónica"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Split and merge files"
-msgstr "拆分和合併檔案"
+msgstr "Dividir y combiar archivos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "View and print any PDF"
-msgstr "預覽和列印任何 PDF"
+msgstr "Ver e imprimir cualquier PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "You already have PDF Architect on your computer"
-msgstr "您電腦裡已經安裝了 PDF Architect"
+msgstr "Ya tiene PDF Architect en su equipo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Dialogs.InputBoxWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
@@ -1633,285 +1650,285 @@ msgstr "您電腦裡已經安裝了 PDF Architect"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "_Cancel"
-msgstr "取消(_C)"
+msgstr "_Cancelar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Dialogs.InputBoxWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "_OK"
-msgstr "確認(_O)"
+msgstr "_Aceptar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "... or simply drop files here!"
-msgstr "... 或者直接拖曳檔案至此！"
+msgstr "...o simplemente suelte archivos aquí!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Author:"
-msgstr "作者："
+msgstr "Autor:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Choose a File to convert"
-msgstr "選取要轉換檔案"
+msgstr "Seleccione un archivo para convertir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Clear History"
-msgstr "清空歷史紀錄"
+msgstr "Borrar historial"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Creation Date:"
-msgstr "建立日期："
+msgstr "Fecha de Creación:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Delete"
-msgstr "刪除"
+msgstr "Eliminar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Disable History"
-msgstr "停用歷史紀錄"
+msgstr "Deshabilitar Historial"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Document Info"
-msgstr "文件資訊"
+msgstr "Información del Documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Enable History"
-msgstr "啟用歷史紀錄"
+msgstr "Habilitar Historial"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Files recently created by PDFCreator:"
-msgstr "最近 PDFCreator 產生的檔案:"
+msgstr "Archivos creados recientemente por PDFCreator:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open folder"
-msgstr "開啟資料夾"
+msgstr "Abrir carpeta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with"
-msgstr "開啟用"
+msgstr "Abrir con"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Open with E-Mail Client"
-msgstr "E-Mail 用戶端開啟用"
+msgstr "Abrir con cliente de e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with PDF Architect"
-msgstr "使用 PDF Architect 開啟"
+msgstr "Abrir con PDF Architect"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with default viewer"
-msgstr "使用預設顯示工具開啟"
+msgstr "Abrir con visor predeterminado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Pages:"
-msgstr "頁次："
+msgstr "Páginas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Print to '{0}' to get started!"
-msgstr "列印到 '{0}' 開始吧！"
+msgstr "¡Imprima a '{0}' para comenzar!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Refresh History"
-msgstr "重新歷史紀錄"
+msgstr "Refrescar Historial"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Remove from history"
-msgstr "從歷史紀錄移除"
+msgstr "Quitar del historial"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "The history is empty"
-msgstr "空的歷史紀錄"
+msgstr "El historial está vacío"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Title:"
-msgstr "標題："
+msgstr "Título:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation
 msgid "More information"
-msgstr "更多資訊"
+msgstr "Más información"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation
 msgid "No"
-msgstr "否"
+msgstr "No"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation
 msgid "Retry"
-msgstr "重試"
+msgstr "Reintentar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 msgid "Yes"
-msgstr "是"
+msgstr "Sí"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.TokenHintPanelTranslation
 msgid "Add Token"
-msgstr "加入 Token"
+msgstr "Añadir Token"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.TokenHintPanelTranslation
 msgid "See hint on tokens"
-msgstr "見 token 提示"
+msgstr "Ver indicio de los tokens"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 msgid "An owner password is required to set the user passwords. Leave one or both passwords empty to get a request during the print job (passwords will not be saved)."
-msgstr "設定使用者密碼必須要擁有者密碼。保持一個或兩者密碼欄空白，會在列印時提出一個要求 (這些密碼不會儲存)。"
+msgstr "Se requiere una contraseña de propietario para disponer contraseñas de usuario. Deje una o ambas contraseñas en blanco para que se le solicite una durante la impresión (las contraseñas no se guardarán)."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 msgid "Encryption Passwords"
-msgstr "密碼加密"
+msgstr "Contraseña de cifrado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PdfPasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 msgid "Owner password (for editing):"
-msgstr "擁有者密碼 (編輯用)："
+msgstr "Contraseña de propietario (para edición):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobPasswordButtonTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Remove"
-msgstr "移除"
+msgstr "Quitar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobPasswordButtonTranslation
 msgid "Skip"
-msgstr "跳過"
+msgstr "Omitir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PdfPasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 msgid "User password (for opening):"
-msgstr "使用者密碼 (開啟用)："
+msgstr "Contraseña de usuario (para apertura):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 msgid "Invalid password for '{0}'"
-msgstr "無效密碼之 '{0}'"
+msgstr "Contraseña inválida para '{0}'"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 msgid "Leave password empty to get a request during the print job (password will not be saved)."
-msgstr "保持密碼欄空白，會在列印作業時詢問 (這些密碼不會儲存)。"
+msgstr "Deje la contraseña en blanco para que se le solicite una durante la impresión (la contraseña no será guardada)."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 msgid "Re-enter Password"
-msgstr "重新輸入密碼"
+msgstr "Vuelva a ingresar la Contraseña"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 msgid "_Remove"
-msgstr "移除(_R)"
+msgstr "Quitar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
 msgid "_Skip"
-msgstr "跳過(_S)"
+msgstr "Omitir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "BUSINESS FEATURE"
-msgstr "BUSINESS 版功能"
+msgstr "CARACTERÍSTICA COMERCIAL"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "PLUS FEATURE"
-msgstr "PLUS 版功能"
+msgstr "CARACTERÍSTICA PLUS"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "Unlock the premium features with PDFCreator Plus!"
-msgstr "解鎖 PDFCreator Plus 的高級功能！"
+msgstr "¡Habilite funcionalidad premium con PDFCreator Plus!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "You need PDFCreator Business or PDFCreator Terminal Server for this feature. Click for more information."
-msgstr "您需要 PDFCreator Business 或 PDFCreator Terminal Server 才有此功能。點此取得更多資訊。"
+msgstr "Esta característica requiere PDFCreator Business o PDF Creator Terminal Server. Haga clic aquí para más información."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "You need PDFCreator Plus, PDFCreator Business or PDFCreator Terminal Server for this feature. Click for more information."
-msgstr "您需要 PDFCreator Plus, PDFCreator Business 或 PDFCreator Terminal Server 才有此功能。點此取得更多資訊。"
+msgstr "Esta característica requiere PDFCreator Plus, PDFCreator Business o PDFCreator Terminal Server. Haga clic aquí para más información."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.HttpPasswordTranslation
 msgid "HTTP Account:"
-msgstr "HTTP 帳戶："
+msgstr "Cuenta HTTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.HttpPasswordTranslation
 msgid "HTTP Server Password:"
-msgstr "HTTP 伺服器密碼："
+msgstr "Contraseña del Servidor HTTP:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.HttpPasswordTranslation
 msgid "HTTP Upload"
-msgstr "HTTP 上傳"
+msgstr "Subida HTTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PdfPasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.ProfileSecureTranslation
 msgid "Security"
-msgstr "安全"
+msgstr "Seguridad"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "For power users like you, we recommend PDFCreator Plus to support the future development and benefit from exclusive features and priority support."
-msgstr "像你這樣的重度使用者，建議你使用 PDFCreator Plus，不但支持後續開發，也可獲得額外功能及優先的技術支援。"
+msgstr "Para usuarios avanzados como Usted, recomendamos PDFCreator Plus que permite el desarrollo futuro y beneficiarse de las características exclusivas y el soporte prioritario."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "More Information"
-msgstr "更多資訊"
+msgstr "Más Información"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid "No, thanks"
-msgstr "不用，謝謝"
+msgstr "No, gracias"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "Try PDFCreator Plus!"
-msgstr "試用 PDFCreator Plus！"
+msgstr "Probar PDFCreator Plus!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "We highly value that you are using PDFCreator!"
-msgstr "我們非常重視您的使用 PDFCreator！"
+msgstr "Apreciamos que esté usando PDFCreator!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid ""
 "'{0}' already exists.\n"
 "Do you want to replace it?"
 msgstr ""
-"'{0}' 已存在。\n"
-"是否要替換它？"
+"'{0}' ya existe.\n"
+"¿Desea remplazarlo?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Confirm Save As"
-msgstr "確認存檔為"
+msgstr "Confirmar Guardar Como"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Defective Profile"
-msgstr "不合格設定檔"
+msgstr "Perfil Defectuoso"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit"
-msgstr "編輯"
+msgstr "Editar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit the profile or select another one."
-msgstr "編輯設定檔或選取另一個。"
+msgstr "Edite el perfil o seleccione otro."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File_name:"
-msgstr "檔案名稱(_N)："
+msgstr "Nombre de _archivo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Folder path is not valid"
-msgstr "無效的資料夾路徑"
+msgstr "La ruta de la carpeta no es válida"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Invalid path"
-msgstr "無效的路徑"
+msgstr "Ruta inválida"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "S_ubject:"
-msgstr "主旨(_U)："
+msgstr "As_unto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid ""
@@ -1919,146 +1936,146 @@ msgid ""
 "The folder path must not contain any of the following characters: \n"
 " \\ / : * ? \\< >"
 msgstr ""
-"資料夾路徑是無效或空的。請輸入一個有效路徑。\n"
-"資料夾路徑不可含有下列字元：\n"
+"La ruta de la carpeta no es válida o está vacía. Por favor proporcione una ruta válida.\n"
+"La ruta no puede contener ninguno de los siguientes caracteres:\n"
 " \\ / : * ? \\< >"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "The path is not valid. Please enter a valid absolute path."
-msgstr "無效的路徑。請輸入一個有效的絕對路徑。"
+msgstr "La ruta no es válida. Por favor proporcione una ruta absoluta."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path."
-msgstr "檔案路徑長度大於最多 {0} 允許字元數，請選擇短些路徑。"
+msgstr "La ruta del archivo supera el máximo permitido de {0} caracteres, por favor seleccione una ruta más corta."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Author:"
-msgstr "作者(_A)："
+msgstr "_Autor:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_Cancel"
-msgstr "取消(_C)"
+msgstr "_Cancelar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_E-mail"
-msgstr "電子郵件(_E)"
+msgstr "_E-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Folder:"
-msgstr "資料夾(_F)："
+msgstr "_Carpeta:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Keywords:"
-msgstr "關鍵字(_K)："
+msgstr "_Palabras clave:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_Merge"
-msgstr "合併(_M)"
+msgstr "_Combinar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Profile:"
-msgstr "設定檔(_P)："
+msgstr "_Perfil:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_Save"
-msgstr "存檔(_S)"
+msgstr "_Guardar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Title:"
-msgstr "標題(_T)："
+msgstr "_Título:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.ProgressViewTranslation
 msgid "Converting..."
-msgstr "轉換中..."
+msgstr "Convirtiendo..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Don't show quick Actions until the next update"
-msgstr "到下次更新前不要顯示快捷動作"
+msgstr "No mostrar acciones rápidas hasta la siguiente actualización"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Filename:"
-msgstr "檔案名稱："
+msgstr "Nombre de archivo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Folder:"
-msgstr "資料夾："
+msgstr "Carpeta:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Quick Actions"
-msgstr "快捷動作"
+msgstr "Acciones Rápidas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by"
-msgstr "傳送用"
+msgstr "Enviar por"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by e-mail"
-msgstr "以電子郵件傳送"
+msgstr "Enviar por e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Total file size:"
-msgstr "檔案大小："
+msgstr "Tamaño total de archivo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Certificate File:"
-msgstr "憑證檔："
+msgstr "Archivo de certificado:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 msgid "Certificate _Password:"
-msgstr "驗證 密碼(_P)："
+msgstr "_Contraseña del Certificado:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.ProfileSecureTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Signature"
-msgstr "簽章"
+msgstr "Firma"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Add Printer"
-msgstr "新增印表機"
+msgstr "Agregar impresora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Last used profile"
-msgstr "最近使用的設定檔"
+msgstr "El último perfil utilizado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Manage Printers"
-msgstr "管理印表機"
+msgstr "Administrar impresoras"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Primary Printer"
-msgstr "主要印表機"
+msgstr "Impresora Primaria"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Profile"
-msgstr "設定檔"
+msgstr "Perfil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Rename Printer"
-msgstr "印表機更名"
+msgstr "Renombrar impresora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.ProfileAdvancedTranslation
 msgid "Advanced"
-msgstr "進階"
+msgstr "Avanzado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.ProfileAdvancedTranslation
 msgid "Script"
-msgstr "指令碼"
+msgstr "Guión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.ProfileAdvancedTranslation
 msgid "User Token"
-msgstr "使用者 Token"
+msgstr "Token de Usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Additional Script Parameters:"
-msgstr "額外的指令碼參數："
+msgstr "Parametro adicionales del guión:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
@@ -2066,376 +2083,376 @@ msgstr "額外的指令碼參數："
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "All files"
-msgstr "所有檔案"
+msgstr "Todos los archivos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Executable files"
-msgstr "執行檔"
+msgstr "Archivos ejecutables"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Run script"
-msgstr "執行指令碼"
+msgstr "Iniciar guión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Script Call Preview:"
-msgstr "指令碼呼叫預覽:"
+msgstr "Vista previa de la llamada al guión:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Script File:"
-msgstr "指令碼檔："
+msgstr "Archivo de guión:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Select script file"
-msgstr "選取指令碼檔"
+msgstr "Seleccione el archivo de guión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
 msgid "Wait until the script execution has ended"
-msgstr "等到指令碼執行完畢"
+msgstr "Esperar a que finalice la ejecución del guión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "Define your own tokens directly in the original document with the following pattern: \"[[[UserTokenName: User token value]]]\". Afterwards the definied value can be called via the following token: \"<User:UserTokenName>\". The original pattern will be removed from the created document. You can define any number of user tokens. You can find more information in the user guide:"
-msgstr "在文件裡定義自己的標記配對格式如下： \"[[[UserTokenName:User token value]]]\"。定義了之後，可透過下列標記格式：\"<User:UserTokenName>\" 取得該標記所對應的資料。原先的格式設定也會從文件裡移除。你可以定義任意數量的使用者標記。更多的說明詳見使用文件："
+msgstr "Defina sus propios tókenes directamente en el documento original mediante el siguiente patrón: \"[[[NombreTokenUsuario: Valor token usuario]]]\". Luego, el valor puede ser llamado mediante el siguiente token: \"<Usuario:NombreTokenUsuario>\". El patrón original será quiado del documento creado. Puede definir tantos tókenes como desee. Puede encontrar más información en esta guía:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "Extract UserTokens"
-msgstr "擷取使用者Tokens"
+msgstr "Extraer Tokens de Usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "More on user tokens"
-msgstr "更多關於使用者標記"
+msgstr "Más sobre los tókenes de usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "Defective Profiles"
-msgstr "問題設定檔"
+msgstr "Perfiles defectuosos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "Do you want to save anyway?"
-msgstr "是否確定要儲存？"
+msgstr "¿Desea guardar de todos modos?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Profile:"
-msgstr "設定檔："
+msgstr "Perfiles:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "The settings contain the following problems:"
-msgstr "此設定包含下列問題："
+msgstr "Los ajustes tienen los siguientes problemas:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 msgid "_Save"
-msgstr "_S儲存"
+msgstr "_Guardar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Add attachment"
-msgstr "加入附件"
+msgstr "Agregar adjunto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Attachment file (PDF):"
-msgstr "附件檔 (PDF)："
+msgstr "Archivo adjunto (PDF):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 msgid "PDF files"
-msgstr "PDF 檔"
+msgstr "Archivos PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Select attachment file"
-msgstr "選取附件檔"
+msgstr "Seleccione un archivo adjunto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Add background (only for PDF)"
-msgstr "加入背景檔 (僅限PDF)"
+msgstr "Añadir fondo (sólo para PDF)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Add background to attachment"
-msgstr "在附件上加入背景檔"
+msgstr "Añadir fondo al adjunto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Add background to cover"
-msgstr "在封面上加入背景檔"
+msgstr "Añadir fondo a la portada"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Background File (PDF):"
-msgstr "背景檔 (PDF)："
+msgstr "Archivo de fondo (PDF):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Repetition:"
-msgstr "重複:"
+msgstr "Repetición:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 msgid "Select background file"
-msgstr "選取背景檔"
+msgstr "Seleccionar archivo de fondo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 msgid "Add cover"
-msgstr "新增封面"
+msgstr "Agregar cubierta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 msgid "Cover file (PDF):"
-msgstr "封面檔 (PDF)："
+msgstr "Archivo de portada (PDF):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 msgid "Select cover file"
-msgstr "選取封面檔"
+msgstr "Seleccione un archivo de portada"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 msgid "Attachment"
-msgstr "附件"
+msgstr "Adjunto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 msgid "Background"
-msgstr "背景"
+msgstr "Fondo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 msgid "Cover"
-msgstr "封面"
+msgstr "Portada"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 msgid "Modify"
-msgstr "修改"
+msgstr "Modificar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Stamp"
-msgstr "浮水印"
+msgstr "Estampa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Font Color:"
-msgstr "字型顏色:"
+msgstr "Color del texto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Font:"
-msgstr "字型："
+msgstr "Fuente:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Outline Width:"
-msgstr "外框線條寬度："
+msgstr "Ancho del borde:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Show Font as outline"
-msgstr "顯示字型為外框"
+msgstr "Mostrar Fuente como contorno"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "Stamp Text:"
-msgstr "浮水印文字："
+msgstr "Texto de la estampa:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
 msgid "The selected font is not supported. Please select a different font."
-msgstr "不支援所選擇的字型。請選取其他字型。"
+msgstr "La fuente seleccionada no está permitida. Por favor seleccione otra fuente."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Add"
-msgstr "新增"
+msgstr "Agregar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Add New Profile"
-msgstr "加入新設定檔"
+msgstr "Añador Nuevo Perfil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Are you sure, you want to remove this profile?"
-msgstr "確定否，您要刪除此設定檔？"
+msgstr "¿Está seguro de que desea eliminar este perfil?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "New Profile"
-msgstr "新設定檔"
+msgstr "Nuevo perfil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Please enter new profile name:"
-msgstr "請輸入新設定檔名稱："
+msgstr "Por favor proporcione un nuevo nombre para el perfil:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Please enter profile name:"
-msgstr "請輸入設定檔名稱："
+msgstr "Por favor escriba el nombre del perfil:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Remove Profile"
-msgstr "移除設定檔"
+msgstr "Quitar Perfil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Rename"
-msgstr "重新命名"
+msgstr "Renombrar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Rename Profile"
-msgstr "重新命名設定檔"
+msgstr "Renombrar Perfil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "The entered profile name is invalid or does already exist."
-msgstr "輸入的設定檔名稱為無效或已經存在。"
+msgstr "El nombre de perfil proporcionado no es válido or no existe."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Allow the user"
-msgstr "允許此使用者"
+msgstr "Permitir al usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Encryption Level"
-msgstr "加密層級"
+msgstr "Nivel de cifrado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "High (256 Bit AES)"
-msgstr "高階 (256位元 AES)"
+msgstr "Alto (AES de 256 bits)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Low (128 Bit)"
-msgstr "低階 (128位元)"
+msgstr "Bajo (128 bits)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Medium (128 Bit AES)"
-msgstr "中階 (128位元 AES)"
+msgstr "Medio (AES de 128 bits)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Password"
-msgstr "密碼"
+msgstr "Contraseña"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Require a password to open the PDF document"
-msgstr "需要密碼以開啟 PDF 文件"
+msgstr "Solicitar una contraseña al abrir el documento PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Set Passwords"
-msgstr "設定密碼"
+msgstr "Establecer contraseñas"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "This is not considered secure anymore. Use this for compatibility only."
-msgstr "這樣不再具有安全性。僅為相容姓考量。"
+msgstr "Esto ya no se considera seguro. Úselo solo por compatibilidad."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "restrict to low quality"
-msgstr "限制為低品質"
+msgstr "restringir a baja calidad"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to copy content from the document"
-msgstr "從文件複製內容"
+msgstr "copiar contenido del documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to edit comments"
-msgstr "編輯注釋"
+msgstr "editar comentarios"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to edit the assembly"
-msgstr "組合編輯"
+msgstr "editar el ensamblado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to edit the document"
-msgstr "編輯文件"
+msgstr "editar el documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to fill forms"
-msgstr "填寫表單"
+msgstr "completar formularios"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to print the document"
-msgstr "列印文件"
+msgstr "imprimir el documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "to use a screen reader"
-msgstr "使用螢幕閱讀器"
+msgstr "usar un lector de pantalla"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.ProfileSecureTranslation
 msgid "Encryption"
-msgstr "加密"
+msgstr "Criptografía"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Allow multiple signing"
-msgstr "允許多重簽章"
+msgstr "Permitir firmas múltiples"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Certificate Password:"
-msgstr "憑證密碼："
+msgstr "Contraseña del Certificado:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Contact:"
-msgstr "接洽："
+msgstr "Contacto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Display signature in document"
-msgstr "在文件顯示簽章"
+msgstr "Mostrar firma en el documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Don't save password and request it during conversion"
-msgstr "當轉換時不要儲存與要求密碼"
+msgstr "No guardar la contraseña y solicitarla durante la conversión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Left X:"
-msgstr "左 X："
+msgstr "Izquierda X:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Left Y:"
-msgstr "左 Y："
+msgstr "Izquierda Y:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Location:"
-msgstr "位置："
+msgstr "Ubicación:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "PDF Signature"
-msgstr "PDF 簽章"
+msgstr "Firma PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "PFX/P12 files"
-msgstr "PFX/P12 檔"
+msgstr "Archivos PFX/P12"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Page:"
-msgstr "頁面："
+msgstr "Página:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Reason:"
-msgstr "原因："
+msgstr "Razón:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Right X:"
-msgstr "右 X："
+msgstr "Derecha X:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Right Y:"
-msgstr "右 Y："
+msgstr "Derecha Y:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Select Time Server:"
-msgstr "選取時間伺服器："
+msgstr "Seleccione un Servidor de Hora:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Select certificate file"
-msgstr "選取認證檔"
+msgstr "Seleccione el archivo de certificado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "The certificate file does not exist."
-msgstr "認證檔並不存在。"
+msgstr "El archivo de certificado no existe."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Check E-mail Client"
-msgstr "檢查電子郵件用戶端"
+msgstr "Verificar cliente de e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Check e-mail client"
-msgstr "檢查電子郵件用戶端"
+msgstr "Verificar el cliente de correo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Could not find MAPI client (e.g. Thunderbird or Outlook)."
-msgstr "找不到 MAPI 用戶端 (比如 Thunderbird 或 Outlook)。"
+msgstr "No se puede encontrar un cliente MAPI (por ejemplo Thunderbird u Outlook)."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "E-mail"
-msgstr "電子郵件"
+msgstr "E-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Duplex printing (if support by the printer)"
-msgstr "雙工列印 (如果印表機支援)"
+msgstr "Impresión a dos caras (si lo soporta la impresora)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Print"
-msgstr "列印"
+msgstr "Imprimir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Print document"
-msgstr "列印文件"
+msgstr "Imprimir documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Select printer:"
-msgstr "選擇印表機："
+msgstr "Seleccionar impresora:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.ProfileSendSubTabTranslation
 msgid "FTP"
@@ -2443,338 +2460,336 @@ msgstr "FTP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.ProfileSendSubTabTranslation
 msgid "Send"
-msgstr "傳送"
+msgstr "Enviar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertJpgTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPngTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTiffTranslation
 msgid "Colors:"
-msgstr "顏色："
+msgstr "Colores:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertJpgTranslation
 msgid "JPEG Settings"
-msgstr "JPEG 設定"
+msgstr "Ajustes de JPEG"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertJpgTranslation
 msgid "Quality (%):"
-msgstr "品質 (%)："
+msgstr "Calidad (%):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertJpgTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPngTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTiffTranslation
 msgid "Resolution (DPI):"
-msgstr "解析度 (DPI)："
+msgstr "Resolución (DPI):"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Color Model:"
-msgstr "色彩模式："
+msgstr "Modelo de Color:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "DPI"
-msgstr "DPI"
+msgstr "PPP"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Document view:"
-msgstr "文件顯示："
+msgstr "Vista del documento:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Factor:"
-msgstr "因素："
+msgstr "Factor:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "General Settings"
-msgstr "一般設定"
+msgstr "Ajustes Generales"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Image compression:"
-msgstr "影像壓縮："
+msgstr "Compresión de imagen:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Page Orientation:"
-msgstr "頁面方向："
+msgstr "Orientación de la Página:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Page view:"
-msgstr "頁面顯示："
+msgstr "Vista de página:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Resample images to"
-msgstr "圖片重新取樣為"
+msgstr "Remuestrear imágenes a"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Viewer Settings"
-msgstr "瀏覽設定"
+msgstr "Ajustes del visor"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Viewer opens on page:"
-msgstr "瀏覽開啟於頁次:"
+msgstr "El visor se abre en la página:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPngTranslation
 msgid "PNG Settings"
-msgstr "PNG 設定"
+msgstr "Ajustes de PNG"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTabTranslation
 msgid "Convert"
-msgstr "轉換"
+msgstr "Convertir"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTabTranslation
 msgid "Output Format"
-msgstr "輸出格式"
+msgstr "Formato de salida"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "As the text format is very limited in what can be displayed, there are many ways to create a TXT file from a printed document. You can choose between four different strategies:"
-msgstr "由於文字格式在可顯示的內容上非常有限，因此有許多方式可以從列印文件建立 TXT 文件。您可以選擇四種不同的策略："
+msgstr "Como el formato de texto es muy limitado, hay muchas maneras de crear un archivo TXT desde un documento impreso. Puede escoger entre cuatro estrategias diferentes:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Same XML output format as above, but attempt processing similar to MuPDF"
-msgstr "與上述相同的 XML 輸出格式，但嘗試處理類似於 MuPDF"
+msgstr "Misma salida XML que arriba, pero intentar procesarla de forma similar a MuPDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Text Settings"
-msgstr "文字設定"
+msgstr "Ajustes de Text"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "UTF-8 text which approximates the original text layout"
-msgstr "近似於原始文字版面的 UTF-8 文字"
+msgstr "Texto UTF-8 que se aproxima a la disposición original"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "Unicode (UCS2) text with byte order mark (BOM) which approximates the original text layout"
-msgstr "與原始文字版面近似的位元組順序記號（BOM）的 Unicode（UCS2）文字"
+msgstr "Texto Unicode (UCS2) con marca de orden de bytes (BOM) que se aproxima a la disposición original"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTextTranslation
 msgid "XML-escaped Unicode along with information regarding the format of the text"
-msgstr "XML 逸出轉義的 Unicode 以及有關文字格式的訊息"
+msgstr "Unicode con escape XML junto con información sobre el formato del texto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTiffTranslation
 msgid "TIFF Settings"
-msgstr "TIFF 設定"
+msgstr "Ajustes de TIFF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Keywords:"
-msgstr "關鍵字："
+msgstr "Palabras clave:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Metadata"
-msgstr "後設資料"
+msgstr "Metadatos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Subject:"
-msgstr "主旨："
+msgstr "Asunto:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Only show notification for errors"
-msgstr "僅於錯誤時顯示通知"
+msgstr "Sólo mostrar notificaciones de errores"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Show tray notification after converting a document"
-msgstr "轉換文件完成後顯示系統列通知"
+msgstr "Mostrar una notificación en la bandeja después de convertir un documento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Choose a folder"
-msgstr "選取一個資料夾"
+msgstr "Seleccione una carpeta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Converts all documents without asking for settings. This requires more settings to be defined in the profile."
-msgstr "轉換所有文件而不詢問設定。這需要在設定檔中作更多的設定。"
+msgstr "Convertir todos los documentos sin preguntar opciones. Es necesario que se definan más ajustes en el perfil."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Don't overwrite existing files"
-msgstr "不要覆蓋已存在檔案"
+msgstr "No sobrescribir archivos existentes"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "If a file already exists, an incrementing number is added to the filename, i.e. 'file_5.pdf'"
-msgstr "假如檔案已存在，將在檔名上加入流水號，如 'file_5.pdf'"
+msgstr "Si un archivo ya existe, se añade un número incremental al nombre, por ejemplo 'archivo_5.pdf'"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Interactive"
-msgstr "互動"
+msgstr "Interactivo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Open file after saving"
-msgstr "存檔後開啟檔案"
+msgstr "Abrir archivo después de guardarlo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Show quick actions after the documents were converted"
-msgstr "轉換文件完成後顯示快捷動作"
+msgstr "Mostrar acciones rápidas después de convertir documentos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Shows a window to select the filename, output format etc."
-msgstr "顯示視窗來選取檔案名稱、輸出格式等。"
+msgstr "Muestra una ventana para seleccionar el nombre del archivo, el formato de salida, etc."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Skip print dialog (start with save dialog)"
-msgstr "跳過列印對話框（從存檔對話框開始）"
+msgstr "Saltear el diálogo de impresión (iniciar con el diálogo de guardar)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Skip the print dialog and directly proceed to the save file dialog"
-msgstr "跳過列印對話框而直接開啟存檔對話框"
+msgstr "Saltear el diálogo de Imprimir y proceder directamente al diálogo de Guardar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Use PDF Architect for PDF files"
-msgstr "使用 PDF Architect 處理 PDF 檔案"
+msgstr "Usar PDF Architect para los archivos PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Application Settings"
-msgstr "應用程式設定"
+msgstr "Preferencias de la Aplicación"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Clear log file"
-msgstr "清除日誌檔"
+msgstr "Limpiar el archivo de registro"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Debug"
-msgstr "除錯"
+msgstr "Depuración"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Default Settings"
-msgstr "初始設定值"
+msgstr "Ajustes predeterminados"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Do you really want to restore the default settings? The current settings will be lost."
-msgstr "是否要還原為初始設定值？目前設定值將遺失。"
+msgstr "¿Desea restaurar los valores predeterminados? Se perderán los ajustes actuales."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Export Settings"
-msgstr "匯出設定值"
+msgstr "Exportar ajustes"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Load settings from file"
-msgstr "從檔案讀取設定值"
+msgstr "Cargar ajustes desde un archivo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Log file cleared"
-msgstr "日誌檔已清除"
+msgstr "Archivo de registro borrado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Logging"
-msgstr "日誌"
+msgstr "Registro"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Logging Level:"
-msgstr "日誌層別："
+msgstr "Nivel de registro:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "No log file"
-msgstr "無日誌檔"
+msgstr "No hay archivo de registro"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Print PDFCreator Test Page"
-msgstr "列印 PDFCreator 測試頁"
+msgstr "Imprimir página de prueba de PDFCreator"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Print Windows Test Page"
-msgstr "列印 Windows 測試頁"
+msgstr "Imprimir página de prueba de Windows"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Restore"
-msgstr "還原"
+msgstr "Restaurar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Restore Default Settings"
-msgstr "還原為初始設定值"
+msgstr "Restaurar valores predeterminados"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Save settings to file"
-msgstr "儲存設定值至檔案"
+msgstr "Guardar los ajustes en un archivo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Show log file"
-msgstr "顯示日誌檔"
+msgstr "Mostrar archivo de registro"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Test Pages"
-msgstr "測試頁"
+msgstr "Páginas de prueba"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "There is currently no log file available."
-msgstr "目前尚無日誌檔。"
+msgstr "No hay archivo de registro disponible."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid ""
 "You have modified the application settings. In order to print a test page with the new settings, you have to save them first.\n"
 "Do you want to save the application settings now?"
-msgstr ""
-"您已修改軟體設定。您必須先儲存設定值，才能以此設定列印測試頁。\n"
-"是否現在要儲存軟體設定值？"
+msgstr "Usted cambió los ajustes de la aplicación. Para poder imprimir una página de prueba con los nuevos ajustes es necesario que los guarde. ¿Desea guardar los ajustes de la aplicación ahora?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"
-msgstr "新增至右鍵選單"
+msgstr "Agregado al menú contextual"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Allow PDFCreator to temporarily change the default printer"
-msgstr "允許 PDFCreator 暫時更換預設印表機"
+msgstr "Permitir que PDFCreator cambie temporalmente la impresora predeterminada"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Ask"
-msgstr "詢問"
+msgstr "Preguntar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "Ask Later"
-msgstr "稍後詢問"
+msgstr "Preguntar Después"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Check for updates:"
-msgstr "檢查更新:"
+msgstr "Buscar actualizaciones:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Check now"
-msgstr "馬上檢查"
+msgstr "Buscar ahora"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Default Printer"
-msgstr "預設印表機"
+msgstr "Impresora predeterminada"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Download the latest version at:"
-msgstr "下載最新版本自："
+msgstr "Descargar la última versión de:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Explorer Context Menu Integration"
-msgstr "整合至檔案總管之右鍵選單"
+msgstr "Integración con menú del explorador"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "General"
-msgstr "一般"
+msgstr "General"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Install new Update"
-msgstr "安裝新版更新"
+msgstr "Instalar nueva Actualización"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Language"
-msgstr "語系"
+msgstr "Idioma"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid ""
 "PDFCreator was not able to look for an update.\n"
 "Please check your internet connection and retry later."
 msgstr ""
-"PDFCreator 無法搜尋更新。\n"
-"請檢查網路連線並稍後再試。"
+"PDFCreator no pudo buscar actualizaciones.\n"
+"Por favor verifique su conexión a Internet y reintente más tarde."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Please note that you won't receive any notifications about available updates!"
-msgstr "提醒你將不會再收到任何更新版本的通知！"
+msgstr "¡Recuerde que no va a recibir notificaciones sobre las actualizaciones disponibles!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Preview"
-msgstr "預覽"
+msgstr "Vista previa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Removed from context menu (Maybe you need to restart your computer)"
-msgstr "移除右鍵選單 (可能需要重啟電腦)"
+msgstr "Eliminado del menú contextual (Tal vez necesite reiniciar su equipo)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Select the application language:"
-msgstr "請選取應用程式語系："
+msgstr "Seleccione el idioma de la aplicación:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "Skip version"
-msgstr "跳過版本"
+msgstr "Saltear versión"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
@@ -2782,161 +2797,161 @@ msgid ""
 "The new version {0} is available.\n"
 "Would you like to download the new version?"
 msgstr ""
-"新版本 {0} 已提供。\n"
-"您要下載新版本嗎？"
+"Está disponible la nueva versión {0}.\n"
+"¿Le gustaría descargar la versión nueva?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Update"
-msgstr "更新"
+msgstr "Buscar actualizaciones"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Update check"
-msgstr "更新檢查"
+msgstr "Buscar actualizaciones"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Update check is already running."
-msgstr "更新檢查正在執行。"
+msgstr "La comprobación de actualizaciones ya está en curso."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "You already have the most recent version."
-msgstr "你已經安裝了最新版本。"
+msgstr "Ya tiene la versión más reciente."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Activation failed"
-msgstr "啟用失敗"
+msgstr "Falló la activación"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Activation successful"
-msgstr "啟用成功"
+msgstr "La activación tuvo éxito"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Activation valid till:"
-msgstr "有效啟用至："
+msgstr "Activación válida hasta:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Enter license key"
-msgstr "輸入授權金鑰"
+msgstr "Ingrese la clave de licencia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Error while authenticating license."
-msgstr "驗證授權時錯誤。"
+msgstr "Error al autenticar la licencia."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Expires:"
-msgstr "到期："
+msgstr "Expira:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Last activation:"
-msgstr "最近啟用："
+msgstr "Última activación:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "License Key:"
-msgstr "授權金鑰："
+msgstr "Clave de licencia:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "License status:"
-msgstr "授權狀態："
+msgstr "Estado de licencia:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Licensee:"
-msgstr "授權："
+msgstr "Licenciante:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Machine ID:"
-msgstr "電腦 ID："
+msgstr "ID de equipo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Manage licenses"
-msgstr "授權管理"
+msgstr "Administrar licencia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "No license available. Please enter a new license key."
-msgstr "無可用授權。請輸入新的授權金鑰。"
+msgstr "No se encontró una licencia. Por favor proporcione una nueva clave de licencia."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "No license key available. Please enter a new license key."
-msgstr "無可用授權金鑰。請輸入新的授權金鑰。"
+msgstr "No se encontró una clave de licencia. Por favor proporcione una nueva clave de licencia."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "Offline activation"
-msgstr "離線啟用"
+msgstr "Activación fuera de línea"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Online activation"
-msgstr "線上啟用"
+msgstr "Activación en línea"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Please enter your license key:"
-msgstr "請輸入你的授權金鑰："
+msgstr "Por favor escriba su clave de licencia:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The activation has expired. Please renew your activation."
-msgstr "啟用碼已到期。請更新你的啟用碼。"
+msgstr "La activación expiró. Por favor renueve su activación."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The activation was not successful:"
-msgstr "啟用並未成功："
+msgstr "La activación no tuvo éxito:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The activation was successful."
-msgstr "啟用已成功。"
+msgstr "La activación tuvo éxito."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license has exceeded the allowed number of activated machines."
-msgstr "已超過允許啟用電腦授權的數量。"
+msgstr "La licencia excedió el número de equipos activados."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license has expired but is valid for this version."
-msgstr "此授權已過期但此版本仍有效。"
+msgstr "La licencia expiró, pero es válida para esta versión."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license has expired. Please renew your license."
-msgstr "授權已到期。請更新你的授權。"
+msgstr "La licencia expiró. Por favor renueve su licencia."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license is not valid for this version."
-msgstr "此授權於此版本已無效。"
+msgstr "La licencia no es válida para esta versión."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license is valid."
-msgstr "有效授權。"
+msgstr "La licencia es válida."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license key consists of 30 characters or numbers, i.e. {0}"
-msgstr "授權金鑰由30個字元或數字組成，如 {0}"
+msgstr "La clave de licencia consiste de 30 caracteres o números, por ejemplo {0}"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license key contains illegal characters. Valid characters are: A-Z, 0-9 and the dash."
-msgstr "授權金鑰包含了不合法字元。有效字元為：A-Z, 0-9 及-。"
+msgstr "La licencia contiene caracteres no permitidos. Los caracteres válidos son: A-Z, 0-9 y el guión."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The license key is not valid. Please enter a new license key."
-msgstr "授權金鑰已無效。請輸入新的授權金鑰。"
+msgstr "La clave de licencia no es válida. Por favor proporcione una clave de licencia nueva."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "The machine or user is blocked. Please contact the support."
-msgstr "此電腦或使用者已被阻擋。請聯繫支援部門。"
+msgstr "El equipo o el usuario están bloqueados. Por favor contacte al soporte."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "There was a problem with the connection to the license server."
-msgstr "連線授權伺服器時發生問題。"
+msgstr "Hubo un problema con la conexión al servidor de licencia."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
 msgid "Validating license..."
-msgstr "驗證授權…"
+msgstr "Validando licencia..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "License key"
-msgstr "授權金鑰"
+msgstr "Clave de licencia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "Paste the response code here:"
-msgstr "在此貼上回覆碼："
+msgstr "Pegue el código de respuesta aquí:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "Request an activation code on our website:"
-msgstr "在我們網站上申請一個啟用碼："
+msgstr "Solicite un código de activación en nuestro sitio web:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid ""
@@ -2944,251 +2959,251 @@ msgid ""
 "It must look like '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'.\n"
 "Valid characters are: A-Z, 0-9 and the dash."
 msgstr ""
-"錯誤授權金鑰語法。\n"
-"它必須如 '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'。\n"
-"合法字元為：A-Z, 0-9 及 -。"
+"Sintaxis incorrecta en la clave de licencia.\n"
+"Debe ser algo como '12345-67890-ABCDE-EFGHI-JKLMNO-PRSTU'.\n"
+"Los caracteres válidos son: A-Z, 0-9 y el guión."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 msgid "An error occured while storing license for all users."
-msgstr "當儲存授權給所有使用者時發生錯誤。"
+msgstr "Ocurrió un error al almacenar la licencia para todos los usuarios."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 msgid "Do you want to make the license available for all users on your system?"
-msgstr "確定要讓系統的所有使用者運用此授權？"
+msgstr "¿Desea que la licencia esté disponible para todos los usuarios en este equipo?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 msgid "Licensing was succesful."
-msgstr "授權已成功。"
+msgstr "Licenciamiento exitoso."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.StoreLicenseForAllUsersWindowTranslation
 msgid "Store license for all users was successful."
-msgstr "儲存授權給所有使用者已成功。"
+msgstr "Se almacenó la licencia para todos los usuarios."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Edit Title Replacement"
-msgstr "編輯標題替換"
+msgstr "Editar la Sustitución de Título"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Invalid Regular Expression."
-msgstr "無效正則表達式。"
+msgstr "Expresión Regular Inválida."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove All"
-msgstr "全部移除"
+msgstr "Quitar Todo"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove at beginning"
-msgstr "從開頭移除"
+msgstr "Quitar al inicio"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Remove at end"
-msgstr "從結尾移除"
+msgstr "Quitar al final"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replace with regular expression"
-msgstr "用正則表達式替換"
+msgstr "Sustituir con una expresión regular"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replace with:"
-msgstr "替換為："
+msgstr "Sustituir con:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Replaced Title:"
-msgstr "已替換標題："
+msgstr "Título remplazado:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Sample Title:"
-msgstr "標題範例："
+msgstr "Título de ejemplo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Search for:"
-msgstr "搜尋："
+msgstr "Buscar:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Search mode:"
-msgstr "搜尋模式："
+msgstr "Modo de búsqueda:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Show User Guide"
-msgstr "顯示使用者指南"
+msgstr "Mostrar Guía del Usuario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Title"
-msgstr "標題"
+msgstr "Título"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "Title Replacement"
-msgstr "標題替換"
+msgstr "Remplazo de Título"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Blog"
-msgstr "部落格"
+msgstr "Blog"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Priority Support"
-msgstr "優先支援"
+msgstr "Soporte Prioritario"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
-msgstr "感謝你下載 PDFCreator。"
+msgstr "Gracias por descargar PDFCreator."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "The improvements of this version are listed in the \"What's new?\" section of the manual."
-msgstr "此版本的改善項目詳見手冊的 \"那些新功能？\"章節。"
+msgstr "Las mejoras en este versión se listan en la sección \"¿Qué hay de nuevo?\" del manual."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Welcome"
-msgstr "歡迎"
+msgstr "Bienvenido"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "What's new?"
-msgstr "那些新功能？"
+msgstr "¿Qué hay de nuevo?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Continue"
-msgstr "繼續"
+msgstr "Continuar"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Delete print job"
-msgstr "刪除列印作業"
+msgstr "Eliminar trabajo de impresión"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Files:"
-msgstr "檔案："
+msgstr "Archivos:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Hint: You can drag the print jobs to reorder them"
-msgstr "提示：您可以拖動列印作業來重新排序"
+msgstr "Sugerencia: Puede reordenar los trabajos arrastrándolos"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "ID:"
-msgstr "ID："
+msgstr "ID:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merge All"
-msgstr "合併全部"
+msgstr "Combinar todo"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merge Print Jobs"
-msgstr "合併列印作業"
+msgstr "Combiar Trabajos de Impresión"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merge Selected"
-msgstr "合併選取"
+msgstr "Combinar Seleccionados"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Merged Files"
-msgstr "合併檔案"
+msgstr "Archivos Unidos"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Printer:"
-msgstr "印表機："
+msgstr "Impresora:"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
 msgid "Reorder and Merge Print Jobs"
-msgstr "重新排序和合併列印作業"
+msgstr "Reordenar y Combiar Trabajos de Impresión"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid "Download"
-msgstr "下載"
+msgstr "Descargar"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid "More info"
-msgstr "更多資訊"
+msgstr "Más información"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid "No application is associated to open PDF files."
-msgstr "PDF檔並未關聯至開啟它的應用程式。"
+msgstr "No hay una aplicación asociada para abrir documentos PDF."
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.RecommendPdfArchitectWindowTranslation
 msgid ""
 "We recommend PDF Architect, our free PDF Viewer and Editor.\n"
 "The free edition contains a viewer and basic editing capabilities. Furthermore, you can buy optional modules, which extend the functionality according to your requirements and even provide OCR."
 msgstr ""
-"我們推薦 PDF Architect，免費 PDF 瀏覽與編輯工具。\n"
-"免費版本包含瀏覽工具及基本的編輯功能。此外，您可以購買額外模組，根據您的需求擴充功能，甚至提供OCR。"
+"Recomendamos PDF Architect, nuestro Visor y Editor PDF gratuito.\n"
+"La edición gratuita contiene un visor y capacidades básicas de edición. Además, puede comprar módulos opcionales que extienden la funcionalidad de acuerdo a sus necesidades e incluso proveen OCR."
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "Loading Update..."
-msgstr "載入更新..."
+msgstr "Cargando actualización..."
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "PDFCreator Plus Updater"
-msgstr "PDFCreator Plus 更新工具"
+msgstr "Actualizador de PDFCreator Plus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "The update will be started when you close PDFCreator"
-msgstr "關閉 PDFCreator 後才會開始更新作業"
+msgstr "La actualización iniciará cuando cierre PDFCreator"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "Install"
-msgstr "安裝"
+msgstr "Instalar"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "The MD5 hash of the downloaded file does not match the expected hash. It is possible that the file has been damaged during the download. Do you want to retry the download?"
-msgstr "下載軟體的 MD5 雜湊碼不符合。可能下載時損壞了。是否重試下載？"
+msgstr "El extracto MD5 del archivo descargado no coincide con el esperado. Es posible que el archivo se haya dañado durante la descarga. ¿Desea intentar la descarga nuevamente?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "There was a problem during the download. Do you want to download the update from the website instead?"
-msgstr "下載時遇到問題。是否改由網站來下載更新？"
+msgstr "Hubo un problema con la descarga. ¿Desea descargar la actualización manualmente?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "{0} Update"
-msgstr "{0} 更新"
+msgstr "Actualización de {0}"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "An error occurred:"
-msgstr "發生一個錯誤:"
+msgstr "Ocurrió un error:"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "JPEG file"
-msgstr "JPEG 檔"
+msgstr "Archivo JPEG"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "PDF file"
-msgstr "PDF 檔"
+msgstr "Archivo PDF"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "PDF/A-1b file"
-msgstr "PDF/A-1b 檔"
+msgstr "Archivo PDF/A-1b"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "PDF/A-2b file"
-msgstr "PDF/A-2b 檔"
+msgstr "Archivo PDF/A-2b"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "PDF/X file"
-msgstr "PDF/X 檔"
+msgstr "Archivo PDF/X"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "PNG file"
-msgstr "PNG 檔"
+msgstr "Archivo PNG"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Select destination"
-msgstr "選取目的位置"
+msgstr "Seleccione el destino"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "TIFF file"
-msgstr "TIFF 檔"
+msgstr "Archivo TIFF"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Text file"
-msgstr "文字檔"
+msgstr "Archivo de texto"
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid ""
 "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\n"
 "Please select another filename and try again."
 msgstr ""
-"檔案 '{0}' 無法存檔。可能檔案正在使用中或你不具有存取權限。\n"
-"請選取另外檔名再試。"
+"No se pudo guardar el archivo '{0}'. Quizás el archivo está en uso o no tiene los permisos necesarios.\n"
+"Por favor seleccione otro nombre e intente nuevamente."
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid ""
 "The path '{0}' is not a valid absolute path.\n"
 "Please select another filename and try again."
 msgstr ""
-"路徑 '{0}' 不是有效的絕對路徑。\n"
-"請選取另外檔名再試."
+"La ruta '{0}' no es una ruta absoluta válida.\n"
+"Por favor seleccione otro nombre e intente nuevamente."

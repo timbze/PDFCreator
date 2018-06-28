@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designTime:DesignTimeRecommendPdfArchitectWindowViewModel, IsDesignTimeCreatable=True}"
         help:HelpProvider.HelpTopic="OpenViewer"
-             MinWidth="550"
-             MinHeight="300">
+             MinWidth="600"
+             MinHeight="350">
     <UserControl.Resources>
         <ResourceDictionary Source="../Styles/MainResourceDict.xaml" />
     </UserControl.Resources>
@@ -29,27 +29,26 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" FlowDirection="LeftToRight" Orientation="Horizontal" HorizontalAlignment="Center"
-                    Margin="0,5,0,0"
+        <StackPanel Grid.Row="0" FlowDirection="LeftToRight" Orientation="Vertical" HorizontalAlignment="Stretch"
+                    Margin="0,20,0,0"
                     Visibility="{Binding Path=Interaction.ShowViewerWarning, Converter={StaticResource BoolToVisibilityConverter}}">
-            <ContentControl VerticalAlignment="Top" Margin="20,10,0,10" Width="32" Height="32"
-                            Content="{DynamicResource WarningIcon}" />
-            <TextBlock TextWrapping="Wrap" Margin="10,0,10,0" VerticalAlignment="Center" Text="{Binding Translation.ErrorText }">
+            <TextBlock TextWrapping="Wrap" Margin="10,20,10,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Bold"
+                       Text="{Binding Translation.ErrorText}" TextAlignment="Justify" Width="370">
             </TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1" FlowDirection="LeftToRight" Orientation="Vertical">
             <TextBlock Text="{Binding Translation.RecommendText }" TextWrapping="Wrap" Margin="10,10,10,0"
-                       TextAlignment="Center" LineHeight="10" Width="550">
+                       TextAlignment="Justify" LineHeight="10" Width="370" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             </TextBlock>
             <ContentControl Height="56" IsTabStop="False" Content="{DynamicResource PDFArchitectLogo}"
-                            HorizontalAlignment="Center" Margin="15" />
+                            HorizontalAlignment="Center" Margin="15 30 15 15" />
         </StackPanel>
 
-        <DockPanel Grid.Row="2" Background="{x:Static SystemColors.ControlBrush}"  FlowDirection="LeftToRight"  Width="Auto" LastChildFill="True">
+        <DockPanel Grid.Row="2" FlowDirection="LeftToRight"  Width="Auto" LastChildFill="True">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="{Binding Translation.DownloadButtonContent }" Command="{Binding DownloadCommand}" />
-                <Button Content="{Binding Translation.InfoButtonContent}" Command="{Binding InfoCommand}" />
-                <Button Content="{Binding Translation.NoButtonContent }" IsCancel="true" />
+                <Button Content="{Binding Translation.DownloadButtonContent }"  Style="{DynamicResource LargeGreenButton}" Command="{Binding DownloadCommand}" Margin="5 5 5 20" Padding="10" />
+                <Button Content="{Binding Translation.InfoButtonContent}" Style="{DynamicResource LargeGreyButton}" Command="{Binding InfoCommand}" Margin="5 5 5 20" Padding="10" />
+                <Button Content="{Binding Translation.NoButtonContent }" Style="{DynamicResource LargeRedButton}" IsCancel="true" Margin="5 5 5 20" Padding="10" />
             </StackPanel>
         </DockPanel>
     </Grid>

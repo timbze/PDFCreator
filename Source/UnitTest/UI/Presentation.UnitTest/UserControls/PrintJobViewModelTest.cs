@@ -63,14 +63,16 @@ namespace Presentation.UnitTest.UserControls
             {
                 Name = "PDF Profile",
                 OutputFormat = OutputFormat.Pdf,
-                FileNameTemplate = "X:\\test.pdf"
+                FileNameTemplate = "X:\\test.pdf",
+                TargetDirectory = "c:\\Test\\"
             };
 
             _pngProfile = new ConversionProfile
             {
                 Name = "PDF Profile",
                 OutputFormat = OutputFormat.Png,
-                FileNameTemplate = "X:\\test.png"
+                FileNameTemplate = "X:\\test.png",
+                TargetDirectory = "c:\\Test\\"
             };
 
             _settings.ConversionProfiles.Add(_pdfProfile);
@@ -696,6 +698,29 @@ namespace Presentation.UnitTest.UserControls
 
             Assert.AreNotEqual(_pdfProfile.Name, pdfProfile.Name);
             Assert.AreNotSame(_pdfProfile, pdfProfile);
+        }
+
+        [Test]
+        public void HaveProperOutputFolder_ChangeProfileWithEmptyOutputFolder_FolderDoesNotChange()
+        {
+            var emptyProfile = new ConversionProfile
+            {
+                Name = "PDF Profile",
+                OutputFormat = OutputFormat.Pdf,
+                FileNameTemplate = "X:\\test.pdf",
+                TargetDirectory = ""
+            };
+
+            _settings.ConversionProfiles.Add(emptyProfile);
+
+            var vm = BuildViewModel();
+            var job = BuildJob(_pdfProfile);
+            vm.ExecuteWorkflowStep(job);
+            vm.OutputFilename = "testFile.pdf";
+            vm.OutputFolder = "c:\\Test\\Folder\\";
+            vm.SelectedProfile = emptyProfile;
+
+            Assert.AreNotEqual(string.Empty, vm.OutputFolder);
         }
 
         [Test]

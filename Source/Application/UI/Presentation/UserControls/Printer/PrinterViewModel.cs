@@ -3,9 +3,9 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Services.Translation;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.UI.Presentation.Wrapper;
 using pdfforge.PDFCreator.Utilities;
@@ -26,29 +26,32 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
         private readonly ConversionProfile _dummyLastUsedProfile = new ConversionProfile
         {
             Name = "<Last used profile>",
-            Guid = ""
+            Guid = ProfileGuids.LAST_USED_PROFILE_GUID
         };
 
         private readonly IOsHelper _osHelper;
         private readonly IPrinterActionsAssistant _printerActionsAssistant;
         private readonly IPrinterHelper _printerHelper;
+        private readonly ICurrentSettingsProvider _currentSettingsProvider;
         private readonly IGpoSettings _gpoSettings;
 
         private readonly IPrinterProvider _printerProvider;
 
-        private ApplicationSettings _applicationSettings;
+        public ApplicationSettings ApplicationSettings => _currentSettingsProvider?.Settings?.ApplicationSettings;
 
-        private IList<ConversionProfile> _conversionProfiles;
+        //private ObservableCollection<ConversionProfile> _conversionProfiles;
         private ConversionProfile _defaultProfile;
+
         private ICollection<string> _pdfCreatorPrinters;
         private Helper.SynchronizedCollection<PrinterMappingWrapper> _printerMappings;
         private ICollectionView _printerMappingView;
 
-        public PrinterViewModel(IPrinterProvider printerProvider, IPrinterActionsAssistant printerActionsAssistant, IOsHelper osHelper, TranslationHelper translationHelper, ITranslationUpdater translationUpdater, IPrinterHelper printerHelper, ISettingsProvider settingsProvider, IGpoSettings gpoSettings)
+        public PrinterViewModel(IPrinterProvider printerProvider, IPrinterActionsAssistant printerActionsAssistant, IOsHelper osHelper, TranslationHelper translationHelper, ITranslationUpdater translationUpdater, IPrinterHelper printerHelper, ICurrentSettingsProvider currentSettingsProvider, IGpoSettings gpoSettings)
             : base(translationUpdater)
         {
             _osHelper = osHelper;
             _printerHelper = printerHelper;
+            _currentSettingsProvider = currentSettingsProvider;
             _gpoSettings = gpoSettings;
             _printerActionsAssistant = printerActionsAssistant;
             _printerProvider = printerProvider;
@@ -58,7 +61,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
             DeletePrinterCommand = new DelegateCommand(DeletePrinterCommandExecute, ModifyPrinterCommandCanExecute);
             SetPrimaryPrinterCommand = new DelegateCommand(SetPrimaryPrinter);
 
-            SetSettingsAndRaiseNotifications(settingsProvider.Settings, gpoSettings);
+            if (_currentSettingsProvider != null)
+                SetSettingsAndRaiseNotifications(_currentSettingsProvider.Settings, gpoSettings);
         }
 
         private void SetPrimaryPrinter(object parameter)
@@ -76,12 +80,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
             get { return _osHelper.UserIsAdministrator() ? Visibility.Collapsed : Visibility.Visible; }
         }
 
-        public IList<ConversionProfile> ConversionProfiles
+        public ObservableCollection<ConversionProfile> ConversionProfiles
         {
-            get { return _conversionProfiles; }
+            get { return _currentSettingsProvider.Settings.ConversionProfiles; }
             set
             {
-                _conversionProfiles = value;
                 RaisePropertyChanged(nameof(ConversionProfiles));
 
                 _defaultProfile = ConversionProfiles.FirstOrDefault(x => x.Guid == ProfileGuids.DEFAULT_PROFILE_GUID);
@@ -94,7 +97,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
         {
             get
             {
-                var profiles = _conversionProfiles.ToList();
+                var profiles = ConversionProfiles.ToList();
                 _dummyLastUsedProfile.Name = "<" + Translation.LastUsedProfileMapping + ">";
                 profiles.Insert(0, _dummyLastUsedProfile);
                 return profiles;
@@ -125,21 +128,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
         {
             get
             {
-                if (_applicationSettings == null)
+                if (ApplicationSettings == null)
                     return null;
-                if (string.IsNullOrEmpty(_applicationSettings.PrimaryPrinter) ||
-                    PrinterMappings.All(o => o.PrinterName != _applicationSettings.PrimaryPrinter))
+                if (string.IsNullOrEmpty(ApplicationSettings.PrimaryPrinter) ||
+                    PrinterMappings.All(o => o.PrinterName != ApplicationSettings.PrimaryPrinter))
                 {
-                    _applicationSettings.PrimaryPrinter = _printerHelper.GetApplicablePDFCreatorPrinter("PDFCreator",
+                    ApplicationSettings.PrimaryPrinter = _printerHelper.GetApplicablePDFCreatorPrinter("PDFCreator",
                         "PDFCreator");
                 }
 
-                return _applicationSettings.PrimaryPrinter;
+                return ApplicationSettings.PrimaryPrinter;
             }
             set
             {
-                _applicationSettings.PrimaryPrinter = value;
-                UpdatePrimaryPrinter(_applicationSettings.PrimaryPrinter);
+                ApplicationSettings.PrimaryPrinter = value;
+                UpdatePrimaryPrinter(ApplicationSettings.PrimaryPrinter);
                 RaisePropertyChanged(nameof(PrimaryPrinter));
             }
         }
@@ -149,10 +152,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
             if (settings == null)
                 return;
 
-            _applicationSettings = settings.ApplicationSettings;
+            //ApplicationSettings = settings.ApplicationSettings;
             ConversionProfiles = settings.ConversionProfiles;
 
-            RaisePropertyChanged(nameof(_applicationSettings));
+            RaisePropertyChanged(nameof(ApplicationSettings));
             RaisePropertyChanged(nameof(ConversionProfiles));
 
             UpdatePrinterList();
@@ -165,11 +168,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
 
         private void PrinterMappings_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            _applicationSettings.PrinterMappings.Clear();
+            ApplicationSettings.PrinterMappings.Clear();
 
             foreach (var printerMappingWrapper in PrinterMappings)
             {
-                _applicationSettings.PrinterMappings.Add(printerMappingWrapper.PrinterMapping);
+                ApplicationSettings.PrinterMappings.Add(printerMappingWrapper.PrinterMapping);
                 if (printerMappingWrapper.Profile == null)
                     printerMappingWrapper.Profile = _defaultProfile;
             }
@@ -215,18 +218,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
 
         private void ApplyPrinterMappings()
         {
-            if (_applicationSettings?.PrinterMappings != null)
+            if (ApplicationSettings?.PrinterMappings != null)
             {
                 var mappingWrappers = new List<PrinterMappingWrapper>();
 
-                foreach (var printerMapping in _applicationSettings.PrinterMappings)
+                foreach (var printerMapping in ApplicationSettings.PrinterMappings)
                 {
-                    var mappingWrapper = new PrinterMappingWrapper(printerMapping, ConversionProfiles);
-                    if (printerMapping.ProfileGuid == _dummyLastUsedProfile.Guid)
-                    {
-                        mappingWrapper.Profile = _dummyLastUsedProfile;
-                    }
-                    else if (mappingWrapper.Profile == null)
+                    var mappingWrapper = new PrinterMappingWrapper(printerMapping, PrinterMappingProfiles);
+                    if (mappingWrapper.Profile == null)
                     {
                         mappingWrapper.Profile = _defaultProfile;
                     }
@@ -319,7 +318,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
         {
             get
             {
-                if (_applicationSettings == null)
+                if (ApplicationSettings == null)
                     return false;
 
                 return _gpoSettings != null && (_gpoSettings.DisablePrinterTab || _gpoSettings.DisableApplicationSettings);
@@ -329,8 +328,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Printer
         private void UpdatePrinterCollectionViews()
         {
             UpdatePrinterList();
-            CollectionViewSource.GetDefaultView(_applicationSettings.PrinterMappings).Refresh();
+            CollectionViewSource.GetDefaultView(ApplicationSettings.PrinterMappings).Refresh();
             CollectionViewSource.GetDefaultView(PdfCreatorPrinters).Refresh();
+        }
+
+        protected override void OnTranslationChanged()
+        {
+            base.OnTranslationChanged();
+
+            if (PrinterMappings != null)
+            {
+                foreach (var mappingWrapper in PrinterMappings)
+                {
+                    mappingWrapper.Profile = PrinterMappingProfiles?.FirstOrDefault(x => x.Guid == mappingWrapper.Profile.Guid);
+                }
+            }
         }
     }
 }

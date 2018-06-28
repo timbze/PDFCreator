@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Controller.UnitTest")]
-[assembly: AssemblyCopyright("Copyright pdfforge GmbH 2017")]
+[assembly: AssemblyCopyright("Copyright pdfforge GmbH 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
