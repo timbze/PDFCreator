@@ -50,7 +50,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _editCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<HttpAccountEditCommand>().Returns(_editCommand);
 
-            _viewModel = new HttpActionViewModel(translationUpdater, settingsProvider, commandLocator);
+            _viewModel = new HttpActionViewModel(translationUpdater, settingsProvider, commandLocator, null);
         }
 
         [Test]

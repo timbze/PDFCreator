@@ -291,23 +291,25 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
         private void EmailExecute(object obj)
         {
-            if (_interactiveProfileChecker.CheckWithErrorResultInOverlay(_job))
+            var tempDirectory = _pathUtil.Combine(_tempFolderProvider.TempFolder,
+                Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
+            Directory.CreateDirectory(tempDirectory);
+
+            _job.OutputFilenameTemplate = _pathUtil.Combine(tempDirectory, OutputFilename);
+
+            if (!_interactiveProfileChecker.CheckWithErrorResultInOverlay(_job))
             {
-                _job.Passwords = JobPasswordHelper.GetJobPasswords(_job.Profile, _job.Accounts);
-
-                var tempDirectory = _pathUtil.Combine(_tempFolderProvider.TempFolder,
-                    Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
-
-                Directory.CreateDirectory(tempDirectory);
-
-                _job.OutputFilenameTemplate = _pathUtil.Combine(tempDirectory, OutputFilename);
-
-                _job.Profile.EmailClientSettings.Enabled = true;
-                _job.Profile.OpenViewer = false;
-                _job.Profile.OpenWithPdfArchitect = false;
-
-                FinishInteraction();
+                try
+                {
+                    Directory.Delete(tempDirectory);
+                }
+                catch { }
             }
+
+            _job.Profile.EmailClientSettings.Enabled = true;
+            _job.Profile.OpenViewer = false;
+
+            CallFinishInteraction();
         }
 
         private void CancelExecute(object obj)

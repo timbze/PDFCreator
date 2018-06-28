@@ -1,5 +1,6 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Trigger;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -22,9 +23,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.En
                 EditionHintOptionProvider editionHintOptionProvider,
                 IUserGuideHelper userGuideHelper,
                 ITranslationUpdater translationUpdater,
-                ISelectedProfileProvider selectedProfile
+                ISelectedProfileProvider selectedProfile,
+                IDispatcher dispatcher
             )
-        : base(translationUpdater, selectedProfile)
+        : base(translationUpdater, selectedProfile, dispatcher)
         {
             _interactionRequest = interactionRequest;
             _userGuideHelper = userGuideHelper;

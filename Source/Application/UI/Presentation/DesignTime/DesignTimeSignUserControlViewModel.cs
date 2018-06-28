@@ -7,7 +7,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
 {
     public class DesignTimeSignUserControlViewModel : SignUserControlViewModel
     {
-        public DesignTimeSignUserControlViewModel() : base(null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator(), new SignaturePasswordCheck(), null, new DesignTimeTokenViewModelFactory())
+        public DesignTimeSignUserControlViewModel() : base(null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator(), new SignaturePasswordCheck(), null, new DesignTimeTokenViewModelFactory(), null)
         {
         }
     }

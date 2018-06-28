@@ -213,7 +213,7 @@ namespace pdfforge.PDFCreator.Utilities
 
             if (!path.StartsWith(@"\\"))
             {
-                var driveLetter = path[0];
+                var driveLetter = char.ToUpperInvariant(path[0]);
                 if (driveLetter >= 'A' && driveLetter <= 'Z')
                     return PathUtilStatus.Success;
 

@@ -65,7 +65,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _tokenHelper = new TokenHelper(new DesignTimeTranslationUpdater());
             _tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            _viewModel = new SmtpActionViewModel(_interactionRequest, _smtpTest, translationUpdater, currentSettingsProvider, commandLocator, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
+            _viewModel = new SmtpActionViewModel(_interactionRequest, _smtpTest, translationUpdater, currentSettingsProvider, commandLocator, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())), null);
         }
 
         [Test]

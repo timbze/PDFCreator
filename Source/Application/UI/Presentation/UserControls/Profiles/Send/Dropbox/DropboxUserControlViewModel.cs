@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
@@ -19,8 +20,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Dropbox
         public IMacroCommand AddDropboxAccountCommand { get; set; }
         public ObservableCollection<DropboxAccount> DropboxAccounts { get; set; }
 
-        public DropboxUserControlViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory)
-            : base(translationUpdater, currentSettingsProvider)
+        public DropboxUserControlViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, currentSettingsProvider, dispatcher)
         {
             AddDropboxAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<DropboxAccountAddCommand>()

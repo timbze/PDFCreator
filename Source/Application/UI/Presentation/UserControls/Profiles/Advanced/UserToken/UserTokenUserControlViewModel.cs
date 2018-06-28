@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Help;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
@@ -9,7 +10,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Use
 {
     public class UserTokenUserControlViewModel : ProfileUserControlViewModel<UserTokenTranslation>
     {
-        public UserTokenUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, IUserGuideLauncher userGuideLauncher) : base(translationUpdater, profile)
+        public UserTokenUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, IUserGuideLauncher userGuideLauncher, IDispatcher dispatcher) : base(translationUpdater, profile, dispatcher)
         {
             OpenUserGuideCommand = new DelegateCommand(o => userGuideLauncher?.ShowHelpTopic(HelpTopic.UserTokens));
         }
@@ -19,7 +20,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Use
 
     public class DesignTimeUserTokenUserControlViewModel : UserTokenUserControlViewModel
     {
-        public DesignTimeUserTokenUserControlViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new UserGuideLauncher())
+        public DesignTimeUserTokenUserControlViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new UserGuideLauncher(), null)
         {
         }
     }

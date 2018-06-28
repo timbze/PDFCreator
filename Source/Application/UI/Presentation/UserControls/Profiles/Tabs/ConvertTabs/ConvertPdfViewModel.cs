@@ -8,7 +8,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.Convert
     {
         private readonly OutputFormatHelper _outputFormatHelper = new OutputFormatHelper();
 
-        public ConvertPdfViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile) : base(translationUpdater, selectedProfile)
+        public ConvertPdfViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile, IDispatcher dispatcher) : base(translationUpdater, selectedProfile, dispatcher)
         {
             CurrentProfileChanged += (sender, args) =>
             {

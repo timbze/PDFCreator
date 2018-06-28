@@ -5,6 +5,7 @@ using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using Prism.Mvvm;
 using System;
+using System.ComponentModel;
 using Translatable;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.TabHelper
@@ -35,7 +36,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.TabHelper
             Profile = profile;
             _commandLocator = commandLocator;
 
-            profile.SelectedProfileChanged += (sender, args) => RaisePropertyChanged(nameof(IsChecked));
+            profile.SelectedProfileChanged += OnProfileOnSelectedProfileChanged;
+        }
+
+        private void OnProfileOnSelectedProfileChanged(object sender, PropertyChangedEventArgs args)
+        {
+            RaisePropertyChanged(nameof(IsChecked));
         }
 
         public void Init<TTranslation>(Func<TTranslation, string> titleId, Func<ConversionProfile, IProfileSetting> setting, PrismNavigationValueObject navigationObject) where TTranslation : ITranslatable, new()
@@ -56,7 +62,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.TabHelper
             var setting = _setting(Profile.SelectedProfile);
             setting.Enabled = value;
             _navigationObject.Activate.Invoke();
-            //(_commandLocator.GetCommand<NavigatePrismRegionCommand>() as NavigatePrismRegionCommand)?.Navigate(_navigationObject);
         }
 
         public bool GetIsChecked()

@@ -43,7 +43,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _tokenHelper = new TokenHelper(new DesignTimeTranslationUpdater());
             _tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            _viewModel = new MailClientControlViewModel(_interactionRequest, _mailClientTest, translationUpdater, currentSettingsProvider, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
+            _viewModel = new MailClientControlViewModel(_interactionRequest, _mailClientTest, translationUpdater, currentSettingsProvider, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())), null);
         }
 
         [Test]

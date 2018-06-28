@@ -17,6 +17,7 @@ using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Misc;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
+using pdfforge.PDFCreator.UI.ViewModels;
 using Prism.Regions;
 using SimpleInjector;
 using System;
@@ -33,6 +34,11 @@ namespace pdfforge.PDFCreator.Editions.PDFCreator
         protected override bool ShowWelcomeWindow => true;
         protected override EditionHintOptionProvider ShowOnlyForPlusAndBusinessHint => new EditionHintOptionProvider(true, true);
         protected override ButtonDisplayOptions ButtonDisplayOptions => new ButtonDisplayOptions(false, false);
+
+        protected override void RegisterSettingsLoader(Container container)
+        {
+            container.RegisterSingleton<ISettingsLoader, SettingsLoader>();
+        }
 
         protected override void RegisterUpdateAssistant(Container container)
         {

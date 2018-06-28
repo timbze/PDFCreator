@@ -26,9 +26,9 @@ msgstr ""
 #. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
 msgid "Do you want to convert the {0} selected file?"
 msgid_plural "Do you want to convert the {0} selected files?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Chceš převést vybraný soubor {0}?"
+msgstr[1] "Chceš převést vybrané soubory {0}?"
+msgstr[2] "Chceš převést vybrané soubory {0}?"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
@@ -182,19 +182,16 @@ msgid "Attachment file is no PDF file."
 msgstr "Příloha není typu PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path contains illegal characters."
 msgstr "Soubor se skriptem obsahuje neplatné znaky."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is invalid absolute path."
-msgstr "Viditelný panel s přílohami"
+msgstr "Cesta k příloze není absolutní cesta."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is too long."
-msgstr "Soubor souboru je příliš dlouhý"
+msgstr "Soubor přílohy je příliš dlouhý."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
@@ -233,36 +230,32 @@ msgid "Background file is no PDF file."
 msgstr "Soubor na pozadí není typu PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path contains illegal characters."
-msgstr "Soubor se skriptem obsahuje neplatné znaky."
+msgstr "Soubor s pozadím obsahuje neplatné znaky."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Background path is invalid absolute path."
-msgstr ""
+msgstr "Cesta k pozadí není platná absolutní cesta."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path is too long."
-msgstr "Soubor na pozadí není typu PDF."
+msgstr "Cesta k pozdaí je příliš dlouhá."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "Soubor s certifikátem neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path contains illegal characters."
-msgstr "Soubor se skriptem obsahuje neplatné znaky."
+msgstr "Soubor s certifikátem obsahuje neplatné znaky."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate path is invalid absolute path."
-msgstr ""
+msgstr "Cesta k cxertifikátu není platná absolutní cesta."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path is too long."
-msgstr "Soubor souboru je příliš dlouhý"
+msgstr "Cesta k certifikátu je příliš dlouhá."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
@@ -297,22 +290,20 @@ msgid "Cover file does not exist."
 msgstr "Soubor s obálkou neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path contains illegal characters."
-msgstr "Soubor se skriptem obsahuje neplatné znaky."
+msgstr "Soubor s obalem obsahuje neplatné znaky."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover path is invalid absolute path."
-msgstr ""
+msgstr "Cesta k obalu je naplatná absolutní cesta."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path is too long."
-msgstr "Soubor souboru je příliš dlouhý"
+msgstr "Cesa k obalu je příliš dlouhá."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Custom viewer was not found."
-msgstr ""
+msgstr "Vlastní prohlížeč není dostupný."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
@@ -403,24 +394,20 @@ msgid "Failure in directory on FTP server."
 msgstr "Nastalo selhání v adresáři na FTP serveru."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for JPEG viewer does not exist."
-msgstr "Soubor s obálkou neexistuje."
+msgstr "Soubor pro prohlížeč obrázků neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for PDF viewer does not exist."
-msgstr "Soubor s obálkou neexistuje."
+msgstr "Soubor pro PDF prohlížeč neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for PNG viewer does not exist."
-msgstr "Soubor s obálkou neexistuje."
+msgstr "Soubor pro PNG prohlížeč neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for TIFF viewer does not exist."
-msgstr "Soubor s obálkou neexistuje."
+msgstr "Soubor pro TIFF prohlížeč neexistuje."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy

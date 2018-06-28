@@ -6,19 +6,21 @@ using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared
 {
-    public class SettingControlsViewModel: TranslatableViewModelBase<SettingControlsTranslation>
+    public class SettingControlsViewModel : TranslatableViewModelBase<SettingControlsTranslation>
     {
-        public SettingControlsViewModel(ITranslationUpdater translationUpdater, ICommandLocator commandLocator):base(translationUpdater)
+        public SettingControlsViewModel(ITranslationUpdater translationUpdater, ICommandLocator commandLocator) : base(translationUpdater)
         {
             SaveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<EvaluateSettingsAndNotifyUserCommandExceptWhenSettingsChanged>()
                 .AddCommand<SaveChangedSettingsCommand>()
                 .AddCommand<NavigateToMainTabCommand>()
+                .AddCommand<RaiseEditSettingsFinishedEventCommand>()
                 .Build();
 
             CancelCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<CancelApplicationSettingsChangesCommand>()
                 .AddCommand<NavigateToMainTabCommand>()
+                .AddCommand<RaiseEditSettingsFinishedEventCommand>()
                 .Build();
         }
 

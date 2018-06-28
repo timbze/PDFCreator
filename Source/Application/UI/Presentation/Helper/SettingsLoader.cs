@@ -21,19 +21,19 @@ namespace pdfforge.PDFCreator.UI.ViewModels
         void SaveSettingsInRegistry(PdfCreatorSettings settings);
     }
 
-    public class SettingsLoader : ISettingsLoader
+    public abstract class SettingsLoaderBase : ISettingsLoader
     {
-        private readonly IInstallationPathProvider _installationPathProvider;
+        protected readonly IInstallationPathProvider InstallationPathProvider;
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPrinterHelper _printerHelper;
         private readonly ITranslationHelper _translationHelper;
         private readonly ISettingsMover _settingsMover;
 
-        public SettingsLoader(ITranslationHelper translationHelper, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, IPrinterHelper printerHelper)
+        public SettingsLoaderBase(ITranslationHelper translationHelper, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, IPrinterHelper printerHelper)
         {
             _settingsMover = settingsMover;
-            _installationPathProvider = installationPathProvider;
+            InstallationPathProvider = installationPathProvider;
             _printerHelper = printerHelper;
             _translationHelper = translationHelper;
         }
@@ -72,16 +72,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
 
             if (!CheckValidSettings(settings))
             {
-                var defaultSettings = profileBuilder.CreateDefaultSettings(FindPrimaryPrinter(), regStorage, settings.ApplicationSettings.Language);
-
-                if (DefaultUserSettingsExist())
-                {
-                    settings = LoadDefaultUserSettings(defaultSettings, profileBuilder, regStorage);
-                }
-                else
-                {
-                    settings = defaultSettings;
-                }
+                settings = CreateDefaultSettings(FindPrimaryPrinter(), regStorage, settings.ApplicationSettings.Language);
             }
 
             CheckAndAddMissingDefaultProfile(settings, profileBuilder);
@@ -95,25 +86,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
             return settings;
         }
 
-        private PdfCreatorSettings LoadDefaultUserSettings(PdfCreatorSettings defaultSettings, DefaultSettingsBuilder settingsBuilder,
-            IStorage regStorage)
-        {
-            var defaultUserStorage = new RegistryStorage(RegistryHive.Users,
-                @".DEFAULT\" + _installationPathProvider.SettingsRegistryPath);
-
-            var data = Data.CreateDataStorage();
-            defaultUserStorage.Data = data;
-
-            // Store default settings and then load the machine defaults from HKEY_USERS\.DEFAULT to give them prefrence
-            defaultSettings.StoreValues(data, "");
-            defaultUserStorage.ReadData("", false);
-
-            // And then load the combined settings with default user overriding our defaults
-            var settings = settingsBuilder.CreateEmptySettings(regStorage);
-            settings.ReadValues(data, "");
-
-            return settings;
-        }
+        protected abstract PdfCreatorSettings CreateDefaultSettings(string primaryPrinter, IStorage storage, string defaultLanguage);
 
         private void LogProfiles(PdfCreatorSettings settings)
         {
@@ -136,7 +109,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
 
         private IStorage BuildStorage()
         {
-            var storage = new RegistryStorage(RegistryHive.CurrentUser, _installationPathProvider.SettingsRegistryPath);
+            var storage = new RegistryStorage(RegistryHive.CurrentUser, InstallationPathProvider.SettingsRegistryPath);
             storage.ClearOnWrite = true;
 
             return storage;
@@ -144,13 +117,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
 
         private bool UserSettingsExist()
         {
-            using (var k = Registry.CurrentUser.OpenSubKey(_installationPathProvider.SettingsRegistryPath))
-                return k != null;
-        }
-
-        private bool DefaultUserSettingsExist()
-        {
-            using (var k = Registry.Users.OpenSubKey(@".DEFAULT\" + _installationPathProvider.SettingsRegistryPath))
+            using (var k = Registry.CurrentUser.OpenSubKey(InstallationPathProvider.SettingsRegistryPath))
                 return k != null;
         }
 
@@ -170,8 +137,8 @@ namespace pdfforge.PDFCreator.UI.ViewModels
         {
             var regKeys = new List<string>
             {
-                @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\" + _installationPathProvider.ApplicationGuid,
-                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" + _installationPathProvider.ApplicationGuid
+                @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\" + InstallationPathProvider.ApplicationGuid,
+                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" + InstallationPathProvider.ApplicationGuid
             };
 
             string printer = null;
@@ -266,6 +233,62 @@ namespace pdfforge.PDFCreator.UI.ViewModels
                 settings.ApplicationSettings.PrimaryPrinter =
                     _printerHelper.GetApplicablePDFCreatorPrinter("PDFCreator", "PDFCreator") ?? "";
             }
+        }
+    }
+
+    public class SettingsLoaderBusiness : SettingsLoaderBase
+    {
+        public SettingsLoaderBusiness(ITranslationHelper translationHelper, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, IPrinterHelper printerHelper) : base(translationHelper, settingsMover, installationPathProvider, printerHelper)
+        {
+        }
+
+        private bool DefaultUserSettingsExist()
+        {
+            using (var k = Registry.Users.OpenSubKey(@".DEFAULT\" + InstallationPathProvider.SettingsRegistryPath))
+                return k != null;
+        }
+
+        private PdfCreatorSettings LoadDefaultUserSettings(PdfCreatorSettings defaultSettings, DefaultSettingsBuilder settingsBuilder,
+            IStorage regStorage)
+        {
+            var defaultUserStorage = new RegistryStorage(RegistryHive.Users,
+                @".DEFAULT\" + InstallationPathProvider.SettingsRegistryPath);
+
+            var data = Data.CreateDataStorage();
+            defaultUserStorage.Data = data;
+
+            // Store default settings and then load the machine defaults from HKEY_USERS\.DEFAULT to give them prefrence
+            defaultSettings.StoreValues(data, "");
+            defaultUserStorage.ReadData("", false);
+
+            // And then load the combined settings with default user overriding our defaults
+            var settings = settingsBuilder.CreateEmptySettings(regStorage);
+            settings.ReadValues(data, "");
+
+            return settings;
+        }
+
+        protected override PdfCreatorSettings CreateDefaultSettings(string primaryPrinter, IStorage storage, string defaultLanguage)
+        {
+            var profileBuilder = new DefaultSettingsBuilder();
+            var defaultSettings = profileBuilder.CreateDefaultSettings(primaryPrinter, storage, defaultLanguage);
+
+            return DefaultUserSettingsExist()
+                ? LoadDefaultUserSettings(defaultSettings, profileBuilder, storage)
+                : defaultSettings;
+        }
+    }
+
+    public class SettingsLoader : SettingsLoaderBase
+    {
+        public SettingsLoader(ITranslationHelper translationHelper, ISettingsMover settingsMover, IInstallationPathProvider installationPathProvider, IPrinterHelper printerHelper) : base(translationHelper, settingsMover, installationPathProvider, printerHelper)
+        {
+        }
+
+        protected override PdfCreatorSettings CreateDefaultSettings(string primaryPrinter, IStorage storage, string defaultLanguage)
+        {
+            var profileBuilder = new DefaultSettingsBuilder();
+            return profileBuilder.CreateDefaultSettings(primaryPrinter, storage, defaultLanguage);
         }
     }
 }

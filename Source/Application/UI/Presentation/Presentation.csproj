@@ -124,6 +124,7 @@
     <Compile Include="Commands\ProfileCommands\ProfileRenameCommand.cs" />
     <Compile Include="Commands\ProfileCommands\ShowLockLayerCommand.cs" />
     <Compile Include="Commands\ProfileCommands\WaitProfileModificationCommand.cs" />
+    <Compile Include="Commands\RaiseEditSettingsFinishedEventCommand.cs" />
     <Compile Include="Commands\SaveChangedSettingsCommand.cs" />
     <Compile Include="Commands\AccountCommands\FtpAccountAddCommand.cs" />
     <Compile Include="Commands\TitleReplacements\TitleReplacementAddCommand.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Controls\DesignTimeTokenViewModel.cs" />
     <Compile Include="Converter\CompareWithTresholdToValueConverter.cs" />
     <Compile Include="DesignTime\Helper\DesignTimeTokenViewModelFactory.cs" />
+    <Compile Include="Events\EditSettingsFinishedEvent.cs" />
     <Compile Include="Helper\SettingsChanged.cs" />
     <Compile Include="Helper\Tokens\SelectedProfileTokenViewModelBuilder.cs" />
     <Compile Include="Helper\Tokens\TokenViewModelBuilder.cs" />

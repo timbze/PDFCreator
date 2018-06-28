@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
@@ -60,8 +61,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
             IOpenFileInteractionHelper openFileInteractionHelper, EditionHintOptionProvider editionHintOptionProvider,
             ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider,
             ICommandLocator commandLocator, ISignaturePasswordCheck signaturePasswordCheck,
-            IFile file, ITokenViewModelFactory tokenViewModelFactory)
-        : base(translationUpdater, currentSettingsProvider)
+            IFile file, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+        : base(translationUpdater, currentSettingsProvider, dispatcher)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
 

@@ -17,6 +17,7 @@ using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
+using pdfforge.PDFCreator.UI.ViewModels;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
         protected override ButtonDisplayOptions ButtonDisplayOptions => new ButtonDisplayOptions(true, true);
 
         public bool ValidOnTerminalServer => Customization.ApplyCustomization.Equals("true", StringComparison.InvariantCultureIgnoreCase);
+
+        protected override void RegisterSettingsLoader(Container container)
+        {
+            container.RegisterSingleton<ISettingsLoader, SettingsLoaderBusiness>();
+        }
 
         protected override void RegisterUpdateAssistant(Container container)
         {

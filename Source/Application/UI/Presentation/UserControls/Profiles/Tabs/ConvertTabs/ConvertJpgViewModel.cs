@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using System.Windows;
 
@@ -6,7 +7,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.Convert
 {
     public class ConvertJpgViewModel : ProfileUserControlViewModel<ConvertJpgTranslation>
     {
-        public ConvertJpgViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile) : base(translationUpdater, selectedProfile)
+        public ConvertJpgViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile, IDispatcher dispatcher) : base(translationUpdater, selectedProfile, dispatcher)
         {
             LostFocusCommand = new DelegateCommand<RoutedEventArgs>(OnLostFocus);
         }

@@ -526,7 +526,7 @@ msgstr "脚本文件路径是无效的绝对路径。"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "ScriptFile path is too long."
-msgstr "脚本文件路径太长。"
+msgstr "脚本文件路径太长"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."

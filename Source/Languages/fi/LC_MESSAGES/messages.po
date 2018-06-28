@@ -25,8 +25,8 @@ msgstr ""
 #. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
 msgid "Do you want to convert the {0} selected file?"
 msgid_plural "Do you want to convert the {0} selected files?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Muunnetaanko {0} valittu tiedosto?"
+msgstr[1] "Muunnetaanko {0} valittua tiedostoa?"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
@@ -42,11 +42,10 @@ msgstr[1] "Allekirjoittaminen estetään näissä profiileissa."
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#, fuzzy
 msgid "and {0} more."
 msgid_plural "and {0} more."
 msgstr[0] "ja {0} lisää."
-msgstr[1] "ja {0} lisää."
+msgstr[1] "ja vielä {0} lisää."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -124,8 +123,8 @@ msgstr[1] "Dropbox:iin lataaminen estetään näissä profiileissa."
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Delete File"
 msgid_plural "Delete Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poista tiedosto"
+msgstr[1] "Poista tiedostot"
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
@@ -133,8 +132,8 @@ msgstr[1] ""
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Are you sure you want to delete the following file?"
 msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poistetaanko seuraava tiedosto?"
+msgstr[1] "Poistetaanko seuraavat tiedostot?"
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
@@ -149,7 +148,13 @@ msgid_plural ""
 "Maybe the files are currently in use.\n"
 "Please try again later."
 msgstr[0] ""
+"Seuraavaa tiedosto ei voitu poistaa.\n"
+"Tiedosto voi olla käytössä.\n"
+"Yritä poistoa myöhemmin uudelleen."
 msgstr[1] ""
+"Seuraavia tiedostoja ei voitu poistaa.\n"
+"Tiedostot voivat olla käytössä.\n"
+"Yritä poistoa myöhemmin uudelleen."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
@@ -160,23 +165,20 @@ msgid "Attachment file is no PDF file."
 msgstr "Liitetiedosto ei ole PDF-tiedosto."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Liitetiedoston polussa on kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is invalid absolute path."
-msgstr "Näytä liitetiedostot"
+msgstr "Liitetiedoston polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is too long."
-msgstr "Tiedoston ja sen polun nimi on liian pitkä"
+msgstr "Liitetiedoston polun nimi on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
-msgstr "Automattitallennus ilman salasanaa."
+msgstr "Automaattitallennus ilman salasanaa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without certificate password."
@@ -211,36 +213,32 @@ msgid "Background file is no PDF file."
 msgstr "Taustatiedosto ei ole PDF-tiedosto."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Taustatiedoston polussa on kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Background path is invalid absolute path."
-msgstr ""
+msgstr "Taustatiedoston polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path is too long."
-msgstr "Taustatiedosto ei ole PDF-tiedosto."
+msgstr "Taustatiedoston polun nimi on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "Varmennetiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Varmennetiedoston polussa on kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate path is invalid absolute path."
-msgstr ""
+msgstr "Varmennetiedoston polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path is too long."
-msgstr "Tiedoston ja sen polun nimi on liian pitkä"
+msgstr "Varmennetiedoston  polun nimi on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
@@ -275,22 +273,20 @@ msgid "Cover file does not exist."
 msgstr "Kansitiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Kansitiedoston polussa on kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover path is invalid absolute path."
-msgstr ""
+msgstr "Kansitiedoston polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path is too long."
-msgstr "Tiedoston ja sen polun nimi on liian pitkä"
+msgstr "Kansitiedoston polun nimi on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Custom viewer was not found."
-msgstr ""
+msgstr "Mukautettua katseluohjelmaa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
@@ -381,46 +377,40 @@ msgid "Failure in directory on FTP server."
 msgstr "Virhe FTP-palvelimen kansiossa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for JPEG viewer does not exist."
-msgstr "Kansitiedostoa ei löydy."
+msgstr "JPEG-katselutiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for PDF viewer does not exist."
-msgstr "Kansitiedostoa ei löydy."
+msgstr "PDF-katselutiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for PNG viewer does not exist."
-msgstr "Kansitiedostoa ei löydy."
+msgstr "PNG-katselutiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for TIFF viewer does not exist."
-msgstr "Kansitiedostoa ei löydy."
+msgstr "TIFF-katselutiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "File for Text viewer does not exist."
-msgstr "Varmennetiedostoa ei löydy."
+msgstr "Tekstitiedoston katselutiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
-msgstr "Tiedoston ja sen polun nimi on liian pitkä"
+msgstr "Tiedostopolun nimi on liian pitkä"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Filename template contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Tiedostonimipohja sisältää kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Ftp directory path is invalid ftp path."
-msgstr ""
+msgstr "FTP-kansiopolku ei ole kelvollinen."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
-msgstr "HTTP.osoitteen tulee alkaa 'http://' tai 'https://'."
+msgstr "HTTP-osoitteen tulee alkaa 'http://' tai 'https://'."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Internal Ghostscript error."
@@ -428,7 +418,7 @@ msgstr "Sisäinen Ghostscript-virhe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Invalid SMTP e-mail recipients."
-msgstr ""
+msgstr "Sähköpostin vastaanottaja ei kelpaa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Invalid SMTP port."
@@ -496,7 +486,7 @@ msgstr "Kansitiedostoa ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No password provided for e-mail over SMTP."
-msgstr ""
+msgstr "Sähköpostia varten ei ole annettu salasanaa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "No script file is specified."
@@ -520,23 +510,23 @@ msgstr "Sovellus ei voinut luoda tulostustiedostoa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Path for JPEG viewer is empty."
-msgstr ""
+msgstr "JPEG-kuvankatseluohjelman polkua ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Path for PDF viewer is empty."
-msgstr ""
+msgstr "PDF-katseluohjelman polkua ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Path for PNG viewer is empty."
-msgstr ""
+msgstr "PNG-kuvankatseluohjelman polkua ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Path for TIFF viewer is empty."
-msgstr ""
+msgstr "TIFF-kuvankatseluohjelman polkua ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Path for Text viewer is empty."
-msgstr ""
+msgstr "Tekstinlukuohjelman polkua ei ole määritetty."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
@@ -544,7 +534,7 @@ msgstr "Tallennuskansio on tyhjä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Script file contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Komentosarjatiedosto sisältää kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Script file does not exist."
@@ -552,12 +542,11 @@ msgstr "Komentosarjatiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "ScriptFile path is invalid absolute path."
-msgstr ""
+msgstr "Komentosarjatiedoston polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "ScriptFile path is too long."
-msgstr "Tiedoston ja sen polun nimi on liian pitkä"
+msgstr "Komentosarjatiedoston polun nimi on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."
@@ -572,17 +561,16 @@ msgid "System could not open output file."
 msgstr "Järjestelmä ei voinut avata tulostustiedostoa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Target directory contains illegal characters."
-msgstr "Skriptitiedosto sisältää kiellettyjä merkkejä."
+msgstr "Kohdekansion nimessä on kiellettyjä merkkejä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Target directory is invalid absolute path."
-msgstr ""
+msgstr "Kohdekansion polku ei ole kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Target directory is too long."
-msgstr ""
+msgstr "Kohdetiedoston polku on liian pitkä."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
@@ -606,10 +594,13 @@ msgid ""
 "The folder path must not contain any of the following characters: \n"
 " \\ / : * ? \\< >"
 msgstr ""
+"Kansiopolkua ei ole tai se on virheellinen, syötä kelvollinen polku.\n"
+"Polun nimessä ei saa esiintyä seuraaavvia merkkejä:\n"
+" \\ / : * ? \\< >"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The path is not valid. Please enter a valid absolute path."
-msgstr ""
+msgstr "Polku ei kelpaa. Syötä kelvollinen absoluuttinen polku."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The selected printer is invalid."
@@ -666,7 +657,7 @@ msgstr "Peruutettu sähköpostipalvelimen salasanan uudelleenkirjoitus."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
-msgstr ""
+msgstr "Tulostettu PDF-tiedosto on salasanasuojattu, eikä sellaisia voida muuntaa Ghostscript:llä."
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "No repetition"
@@ -997,6 +988,10 @@ msgid ""
 "\n"
 "Please contact: licensing@pdfforge.org"
 msgstr ""
+"Kokeiluversio on vanhentunut {0}.\n"
+"PDFCreator suljetaan.\n"
+"\n"
+"Ota yhteyttä: licensing@pdfforge.org"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
@@ -1163,32 +1158,28 @@ msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Error During Deletion"
-msgstr ""
+msgstr "Poistamisen aikana ilmeni virhe"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
-#, fuzzy
 msgid "Default Viewer"
-msgstr "Oletustulostin"
+msgstr "Oletuskatselusovellus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to save anyway?"
 msgstr "Tallennetaanko silti?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
-#, fuzzy
 msgid "Do you want to save your changes?"
-msgstr "Jatketaanko tallentaen muutokset?"
+msgstr "Tallennetaanko muutokset?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
-#, fuzzy
 msgid "PDFCreator Settings"
-msgstr "Oletusarvot"
+msgstr "Asetusarvot"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
-#, fuzzy
 msgid "You have invalid settings."
-msgstr "Asetusarvo ei ole kelvollinen"
+msgstr "Asetusarvot eivät ole kelvollisia."
 
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
@@ -1244,7 +1235,7 @@ msgstr "Otsikko asetuksista"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "Value for '{0}'"
-msgstr ""
+msgstr "Arvo kohteelle '{0}'"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
 msgid "keyword 1 keyword 2"
@@ -1253,7 +1244,7 @@ msgstr "avainsana 1 avainsana 2"
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
 msgid "A new Update is available"
-msgstr ""
+msgstr "Uusi päivitys on saatavilla"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Accounts"
@@ -1274,19 +1265,19 @@ msgstr "Profiilit"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "Error while converting"
-msgstr ""
+msgstr "Muunnettaessa ilmeni virhe"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "File successfully converted"
-msgstr ""
+msgstr "Tiedoston muuntaminen onnistui"
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "PDFCreator has successfully converted '{0}'."
-msgstr ""
+msgstr "PDFCreator muunsi onnistuneesti kohteen '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
 msgid "PDFCreator was not able to convert the document '{0}'."
-msgstr ""
+msgstr "PDFCreator ei voinut muuntaa kohdetta '{0}'."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.LicenseSettingsTranslation
@@ -1295,7 +1286,7 @@ msgstr "Käyttöoikeussopimus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "PDFCreator is free software consisting of multiple components with individual licenses."
-msgstr "PDFCreator on ilmainen sovellus koostuen useista ohjelmistokomponenteista joilla on erilliset käyttöehdot."
+msgstr "PDFCreator on ilmainen sovellus koostuen useista sovelluskomponenteista joilla on erilliset käyttöehdot."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Please read the license section in the manual for further information on these licenses."
@@ -1304,7 +1295,7 @@ msgstr "Lisätietoja on käyttöohjeen kohdassa \"Käyttöoikeussopimus\"."
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Priority Support"
-msgstr ""
+msgstr "Nopea tuki"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "User Manual"
@@ -1516,7 +1507,7 @@ msgstr "OK"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Password:"
-msgstr "Aseta salasana:"
+msgstr "Salasana:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Please define folder:"
@@ -1593,7 +1584,7 @@ msgstr "Aikapalvelintili"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Timeout in seconds:"
-msgstr ""
+msgstr "Aikakatkaisu sekunteina:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1633,13 +1624,12 @@ msgid "Upload with FTP"
 msgstr "FTP-palvelimen salasana"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-#, fuzzy
 msgid "Viewer not found"
-msgstr "Korjaustyökalua ei ole käytettävissä"
+msgstr "Katselusovellusta ei löydy"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "Viewer was not found, please check your settings."
-msgstr ""
+msgstr "Katseluohjelmaa ei löytynyt, tarkista asetukset."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
@@ -1677,21 +1667,21 @@ msgstr "Liitetiedosto"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "BCC:"
-msgstr ""
+msgstr "Piilokopio:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "CC:"
-msgstr ""
+msgstr "Kopio:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "E-mail Address:"
-msgstr ""
+msgstr "Sähköpostiosoite:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Edit E-mail Text"
-msgstr ""
+msgstr "Muokkaa sähköpostisanomaa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Edit SMTP Account"
@@ -1700,7 +1690,7 @@ msgstr "Muokkaa SMTP-tiliä"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Hint: Multiple recipients can be separated by commas"
-msgstr ""
+msgstr "Vihje: Useampi vastaanottaja voidaan erottaa toisistaan pilkuilla"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Please select a SMTP account:"
@@ -1736,7 +1726,7 @@ msgstr "SSL"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send Test E-mail"
-msgstr ""
+msgstr "Sähköpostin lähetyksen testaus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send e-mail via SMTP"
@@ -1748,12 +1738,12 @@ msgstr "Syötä SMTP-palvelimen salasana"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "The test e-mail was successfully sent to the following recipients:"
-msgstr ""
+msgstr "Sähköpostin toiminnan testausta varten lähetettiin sanoma seuraaville vastaanottajille:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "To:"
-msgstr ""
+msgstr "Vastaanottaja:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Use Html"
@@ -1880,15 +1870,15 @@ msgstr "Valitse muunnettava tiedosto"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Clear History"
-msgstr ""
+msgstr "Tyhjennä historia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Delete"
-msgstr ""
+msgstr "Poista"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Disable History"
-msgstr ""
+msgstr "Poista historia käytöstä"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
@@ -1897,35 +1887,35 @@ msgstr "Tiedoston tietoja"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Enable History"
-msgstr ""
+msgstr "Ota historia käyttöön"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Files recently created by PDFCreator:"
-msgstr ""
+msgstr "Viimeisimmät tiedostot, jotka luotiin käyttäen PDFCreator:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open folder"
-msgstr ""
+msgstr "Avaa kansio"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with"
-msgstr ""
+msgstr "Avaa..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Open with E-Mail Client"
-msgstr ""
+msgstr "Avaa sähköpostisovelluksessa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with PDF Architect"
-msgstr ""
+msgstr "Avaa sovelluksessa PDF Architect"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with default viewer"
-msgstr ""
+msgstr "Avaa oletuskatselusovelluksessa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
@@ -1938,15 +1928,15 @@ msgstr "Aloita tulostamalla '{0}':lle!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Refresh History"
-msgstr ""
+msgstr "Päivitä historia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Remove from history"
-msgstr ""
+msgstr "Poista historiasta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "The history is empty"
-msgstr ""
+msgstr "Ei tapahtumia"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
@@ -2128,7 +2118,7 @@ msgstr "_Peruuta"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
 msgid "_E-mail"
-msgstr ""
+msgstr "_Lähetä"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Folder:"
@@ -2162,7 +2152,7 @@ msgstr "Muunnetaan..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Don't show quick Actions until the next update"
-msgstr ""
+msgstr "Piilota pikatoiminnot seuraavaan päivitykseen asti"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
@@ -2176,19 +2166,19 @@ msgstr "Kansio:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Quick Actions"
-msgstr ""
+msgstr "Pikatoiminnot"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by"
-msgstr ""
+msgstr "Lähetä"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by e-mail"
-msgstr ""
+msgstr "Lähetä sähköpostitse"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Total file size:"
-msgstr ""
+msgstr "Tiedostokoko:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.SignaturePasswordTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
@@ -2227,7 +2217,7 @@ msgstr "Profiili"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
 msgid "Rename Printer"
-msgstr "Tulostimen uudelleennimeäminen"
+msgstr "Uudelleennimeä tulostin"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.ProfileAdvancedTranslation
 msgid "Advanced"
@@ -2516,7 +2506,7 @@ msgstr "Salli monta allekirjoitusta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Certificate Password:"
-msgstr ""
+msgstr "Varmenteen salasana:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Contact:"
@@ -2528,7 +2518,7 @@ msgstr "Näytä asiakirjassa allekirjoitus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Don't save password and request it during conversion"
-msgstr ""
+msgstr "Ei salasanan tallennusta, kysy tarvittaessa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Left X:"
@@ -2580,7 +2570,7 @@ msgstr "Varmennetiedostoa ei löydy."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Check E-mail Client"
-msgstr ""
+msgstr "Tarkista sähköpostisovellus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Check e-mail client"
@@ -2592,7 +2582,7 @@ msgstr "MAPI-pohjaista sähköpostisovellusta ei ole asennettu (esim. Thunderbir
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "E-mail"
-msgstr ""
+msgstr "Sähköposti"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Duplex printing (if support by the printer)"
@@ -2736,11 +2726,11 @@ msgstr "Aihe:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Only show notification for errors"
-msgstr ""
+msgstr "Näytä vain virheilmoitukset"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
 msgid "Show tray notification after converting a document"
-msgstr ""
+msgstr "Näytä ilmoitus tiedoston muuntamisen jälkeen"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Choose a folder"
@@ -2768,7 +2758,7 @@ msgstr "Avaa tallennuksen jälkeen"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Show quick actions after the documents were converted"
-msgstr ""
+msgstr "Näytä pikatoiminnot tiedostomuunnosten jälkeen"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Shows a window to select the filename, output format etc."
@@ -2867,22 +2857,20 @@ msgstr ""
 "Tallennetaanko asetusarvot nyt?"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
-#, fuzzy
 msgid "Additional Parameters:"
-msgstr "Komentosarjan lisäparametrit:"
+msgstr "Lisäparametrit:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
-#, fuzzy
 msgid "Executable Path:"
-msgstr "Suorituskelpoiset tiedostot"
+msgstr "Sovellus ja sen polku:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
-msgstr ""
+msgstr "Luotujen tiedostojen katseluun käytettävä sovellus voidaan määrittää tässä. Mikäli sitä ei määritetä, käytetään Windowsin oletussovellusta."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Viewer"
-msgstr ""
+msgstr "Katselusovellus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"
@@ -2927,7 +2915,7 @@ msgstr "Yleiset"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Install new Update"
-msgstr ""
+msgstr "Asenna päivitys"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Language"
@@ -2938,6 +2926,8 @@ msgid ""
 "PDFCreator was not able to look for an update.\n"
 "Please check your internet connection and retry later."
 msgstr ""
+"Sovelluksen päivitystarpeen tarkastus epäonnistui.\n"
+"Tarkista verkkoyhteys ja yritä myöhemmin uudelleen."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Please note that you won't receive any notifications about available updates!"
@@ -3207,7 +3197,7 @@ msgstr "Otsikon korvaus"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Blog"
-msgstr ""
+msgstr "Blogi"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
@@ -3215,7 +3205,7 @@ msgstr "Kiitos, että latasit sovelluksen PDFCreator."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "The improvements of this version are listed in the \"What's new?\" section of the manual."
-msgstr ""
+msgstr "Tämän version parannukset ja muutokset on lueteltu ohjeen kohdassa \"Muutoshistoria\"."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Welcome"
@@ -3359,9 +3349,13 @@ msgid ""
 "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\n"
 "Please select another filename and try again."
 msgstr ""
+"Tiedoston {0} tallennus epäonnistui. Tiedosto voi olla käytössä tai käyttöoikeudet eivät ole riittävät.\n"
+"Valitse toinen tiedostonimi ja yritä uudelleen."
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid ""
 "The path '{0}' is not a valid absolute path.\n"
 "Please select another filename and try again."
 msgstr ""
+"Polku '{0}' ei ole kelvollinen absoluuttinen polku\n"
+"Valitse toinen polku ja yritä uudelleen."

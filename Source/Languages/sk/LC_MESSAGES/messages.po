@@ -762,7 +762,7 @@ msgstr "Viditeľné náhľady stránok"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Long edge turn"
-msgstr "Ohnúť na dlhej strane"
+msgstr "Prevrátiť pozdĺž dlhého okraja"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "No duplex printing"
@@ -770,7 +770,7 @@ msgstr "Obojstranná tlač je zakázaná"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Short edge turn"
-msgstr "Ohnúť na krátkej strane"
+msgstr "Prevrátiť pozdĺž krátkeho okraja"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
@@ -1433,7 +1433,7 @@ msgstr "Neprepisovať súbory (bude pridaná rozširujúca číslica v prípade 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
 msgid "Don't save password and request it during upload."
-msgstr "Neukladať heslo a požadovať ho počas nahrávania."
+msgstr "Neukladať heslo a požadovať ho počas každého nahrávania."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
 msgid "Dropbox"
@@ -1907,7 +1907,7 @@ msgstr "Otvoriť priečinok"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Open with"
-msgstr "Otvoriť v programe"
+msgstr "Otvoriť v ..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Open with E-Mail Client"
@@ -2433,7 +2433,7 @@ msgstr "Názov profilu je neplatný alebo neexistuje."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Allow the user"
-msgstr "Povoliť používateľa"
+msgstr "Povoliť používateľovi"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "Encryption Level"
@@ -2521,7 +2521,7 @@ msgstr "Zobraziť podpis dokumentu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Don't save password and request it during conversion"
-msgstr "Neukladať heslo a žiadať ho počas prevodu"
+msgstr "Neukladať heslo a žiadať ho počas každého prevodu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
 msgid "Left X:"
@@ -2809,11 +2809,11 @@ msgstr "Súbor záznamu bol vyčistený"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Logging"
-msgstr "Prihlásenie"
+msgstr "Záznam"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Logging Level:"
-msgstr "Úroveň prihlasovania:"
+msgstr "Úroveň zaznamenávania:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "No log file"
@@ -2821,11 +2821,11 @@ msgstr "Žiadny súbor záznamu"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Print PDFCreator Test Page"
-msgstr "Tlačiť PDFCreator test. stranku"
+msgstr "Tlačiť PDFCreator testovaciu stránku"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Print Windows Test Page"
-msgstr "Tlačiť Windows test. stránku"
+msgstr "Tlačiť Windows testovaciu stránku"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Restore"
@@ -2885,7 +2885,7 @@ msgstr "Povoliť PDFCreatoru dočasne zmeniť predvolenú tlačiareň"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Ask"
-msgstr "Požiadavka"
+msgstr "Zobraziť požiadavku"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
@@ -3114,7 +3114,7 @@ msgstr "Prilepte tu kód odpovede:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid "Request an activation code on our website:"
-msgstr "Požiadavka na aktiváciu kódu na našej webstránke:"
+msgstr "Požiadavku na aktiváciu kódu zadajte na našej webstránke:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 msgid ""

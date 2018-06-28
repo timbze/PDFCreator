@@ -1,8 +1,8 @@
 msgid "https://license.pdfforge.org"
 msgstr "https://license.pdfforge.org"
 
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "Nenhuma chave da licença foi informada! Ela é absolutamente necessária, em combinação com parâmetros '/VerySilent' ou '/Silent'! Por favor, use o parâmetro '/%1'.%n%nExemplo: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgid "OK"
+msgstr "OK"
 
 msgid ""
 msgstr ""
@@ -17,575 +17,592 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "No thanks"
-msgstr "Não, obrigado"
+msgid "Offline activation instructions"
+msgstr "Instruções para a Ativação Offline"
 
 msgid "(Domain\\Username)"
 msgstr "(Domínio\\Nome do Usuário)"
 
-msgid "OK"
-msgstr "OK"
+msgid "Offline activation string:"
+msgstr "String da ativação off-line:"
 
 msgid "A shortcut has been added to your desktop."
 msgstr "Foi adicionado um atalho à sua área de trabalho."
 
-msgid "Offline activation instructions"
-msgstr "Instruções para a Ativação Offline"
+msgid "Offline license check"
+msgstr "Verificar a licença off-line"
 
 msgid "Already installed"
 msgstr "Já está instalado"
 
-msgid "Offline activation string:"
-msgstr "String da ativação off-line:"
+msgid "Other tasks:"
+msgstr "Outras tarefas:"
 
 msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
 msgstr "Ocorreu um erro na variável de ambiente do sistema 'Caminho'%n%n->Entrada ausente ou danificada: %Systemroot%\\system32\\wbem%n%nEste erro deverá ser corrigido antes de continuar instalando.%n%nPor favor, selecione OK se você quer corrigir este erro. Você precisará reiniciar seu sistema posteriormente.%n%nCaso contrário, cancele a instalação."
 
-msgid "Offline license check"
-msgstr "Verificar a licença off-line"
+msgid "PDF to Word"
+msgstr "PDF para Word"
 
 msgid "An invalid license key is provided!"
 msgstr "Foi informado uma chave da licença inválida!"
 
-msgid "Other tasks:"
-msgstr "Outras tarefas:"
+msgid "PDFCreator download"
+msgstr "Baixar o PDFCreator"
 
 msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
 msgstr "Foi encontrado uma versão mais antiga '%1'.%nÉ possível atualizar esta versão para a versão '%2'.%n%n"
 
-msgid "PDF to Word"
-msgstr "PDF para Word"
+msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
+msgstr "O PDFCreator cria facilmente PDFs a partir de qualquer programa do Windows. Use-o como uma impressora no Word, Excel, ou quaisquer outros aplicativos do Windows."
 
 msgid "Automatic E-Sign workflows"
 msgstr "Fluxos de tarefas automáticas E-Sign"
 
-msgid "PDFCreator download"
-msgstr "Baixar o PDFCreator"
+msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
+msgstr "O PDFCreator instala uma impressora no seu computador. Com ela, qualquer aplicativo com capacidade de impressão pode criar documentos PDF, bitmaps ou arquivos PostScript.%n%nNome da impressora:"
 
 msgid "Bad gateway (502)"
 msgstr "Entrada errada (502)"
 
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr "O PDFCreator cria facilmente PDFs a partir de qualquer programa do Windows. Use-o como uma impressora no Word, Excel, ou quaisquer outros aplicativos do Windows."
+msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgstr "O PDFCreator já está instalado! É necessário desinstalar a instalação existente (versão %1) antes de instalar o PDFCreator %2.%n%nVocê quer atualizar o PDFCreator agora? As suas opções do PDFCreator e impressoras serão preservadas."
 
 msgid "By clicking on Next you accept the license agreement."
 msgstr "Clicando em Avançar, você aceita o acordo da licença."
 
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "O PDFCreator instala uma impressora no seu computador. Com ela, qualquer aplicativo com capacidade de impressão pode criar documentos PDF, bitmaps ou arquivos PostScript.%n%nNome da impressora:"
+msgid "PDFCreator license service configuration"
+msgstr "Configurações do serviço de licença do PDFCreator"
 
 msgid "Cannot connect"
 msgstr "Não é possível conectar"
 
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
-msgstr "O PDFCreator já está instalado! É necessário desinstalar a instalação existente (versão %1) antes de instalar o PDFCreator %2.%n%nVocê quer atualizar o PDFCreator agora? As suas opções do PDFCreator e impressoras serão preservadas."
+msgid "PDFCreator log file"
+msgstr "Arquivo de registro do PDFCreator"
 
 msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
 msgstr "Verifique a sua conexão e clique em 'Repetir' para tentar baixar os arquivos novamente, ou clique em 'Avançar' para continuar instalando assim mesmo."
 
-msgid "PDFCreator license service configuration"
-msgstr "Configurações do serviço de licença do PDFCreator"
+msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr "O PDFCreator requer o Microsoft .Net %1. Por favor, baixe-o, instale-o e execute o instalador do PDFCreator novamente."
 
 msgid "Click here to revoke previous activations"
 msgstr "Clique aqui para revogar ativações anteriores"
 
-msgid "PDFCreator log file"
-msgstr "Arquivo de registro do PDFCreator"
+msgid "PDFCreator settings"
+msgstr "Opções do PDFCreator"
 
 msgid "Connecting..."
 msgstr "Conectando..."
 
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "O PDFCreator requer o Microsoft .Net %1. Por favor, baixe-o, instale-o e execute o instalador do PDFCreator novamente."
+msgid "PDFCreator setup"
+msgstr "Instalação do PDFCreator"
 
 msgid "Create"
 msgstr "Criar"
 
-msgid "PDFCreator settings"
-msgstr "Opções do PDFCreator"
+msgid "Password:"
+msgstr "Senha:"
 
 msgid "Create an &entry in the Windows Explorer context menu"
 msgstr "Criar uma &entrada no menu de contexto do Windows Explorer"
 
-msgid "PDFCreator setup"
-msgstr "Instalação do PDFCreator"
+msgid "Please choose a name for the printer."
+msgstr "Por favor, escolha um nome para a impressora."
 
 msgid "Custom installation"
 msgstr "Personalizar a instalação"
 
-msgid "Password:"
-msgstr "Senha:"
+msgid "Please choose a printer name."
+msgstr "Por favor, escolha um nome de impressora."
 
 msgid "Delete all application settings?"
 msgstr "Você quer excluir todas as opções do aplicativo?"
 
-msgid "Please choose a name for the printer."
-msgstr "Por favor, escolha um nome para a impressora."
+msgid "Please click here to revoke your previous activations."
+msgstr "Por favor, clique aqui para revogar suas ativações anteriores."
 
 msgid "Do you want to cancel the setup?"
 msgstr "Você quer cancelar a instalação?"
 
-msgid "Please choose a printer name."
-msgstr "Por favor, escolha um nome de impressora."
-
-msgid "Download cancelled"
-msgstr "Download cancelado"
-
-msgid "Please click here to revoke your previous activations."
-msgstr "Por favor, clique aqui para revogar suas ativações anteriores."
-
-msgid "Download failed"
-msgstr "Falha ao baixar"
-
 msgid "Please contact the support at support@pdfforge.org!"
 msgstr "Por favor, contate o suporte em support@pdfforge.org!"
-
-msgid "Downloading additional files"
-msgstr "Baixar Arquivos Adicionais"
-
-msgid "Please enter the license key."
-msgstr "Por favor, digite a chave da licença."
-
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "Ocorreram erros durante a instalação da impressora. Uma descrição detalhada deles pode ser encontrada no arquivo 'SetupLog.txt' no caminho do aplicativo."
-
-msgid "Please make sure that this account has the right to logon as a service."
-msgstr "Por favor, assegure-se que esta conta tem o direito de fazer logon como um serviço."
-
-msgid "Edit pages"
-msgstr "Editar as páginas"
-
-msgid "Please restart your system first to continue setup."
-msgstr "Por favor, primeiro reinicie o seu sistema para continuar instalando."
-
-msgid "Elapsed time:"
-msgstr "Tempo decorrido:"
-
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
-msgstr "Por favor, desinstale o 'Servidor PDFCreator' antes de continuar instalando. Não é possível usar o 'PDFCreator' e o 'Servidor PDFCreator' na mesma máquina."
-
-msgid "Enhance PDFCreator with edit features!"
-msgstr "O PDFCreator foi aprimorado com recursos de edição!"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr "Por favor, use o \"Servidor do Terminal do PDFCreator\" para usar em computadores com Serviços de Terminais instalados!% n%nVocê quer obter mais informações sobre o \"Servidor do Terminal do PDFCreator\"?"
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "Informe a chave da licença válida e continue instalando."
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "Por favor, aguarde enquanto o programa de instalação baixa os arquivos adicionais..."
-
-msgid "File not found (404)"
-msgstr "O arquivo não foi encontrado (404)"
-
-msgid "Please wait. Checking license key..."
-msgstr "Por favor, aguarde. Verificando a chave da licença..."
-
-msgid "Firefox integration"
-msgstr "Integrar ao Firefox"
-
-msgid "Printer"
-msgstr "Impressora"
-
-msgid "For the &current user only"
-msgstr "Apenas &para o usuário atual"
-
-msgid "Printer name"
-msgstr "Nome da impressora"
-
-msgid "Forms"
-msgstr "Formulários"
-
-msgid "Proxy authentication required (407)"
-msgstr "Autenticação Proxy necessária (407)"
-
-msgid "Full installation"
-msgstr "Instalação completa"
-
-msgid "Remaining time:"
-msgstr "Tempo restante:"
-
-msgid "Getting file information..."
-msgstr "Obtendo as informações do arquivo..."
-
-msgid "Retry"
-msgstr "Repetir"
-
-msgid "Help"
-msgstr "Ajuda"
-
-msgid "Review"
-msgstr "Rever"
-
-msgid "Ignore"
-msgstr "Ignorar"
-
-msgid "Rotate, move and delete pages"
-msgstr "Girar, mover e excluir páginas"
-
-msgid "Install PDF Architect with great free features"
-msgstr "Instalar o PDF Architect com ótimos recursos gratuitos"
-
-msgid "Run PDFCreator license service under an user account"
-msgstr "Execute o serviço da licença do PDFCreator com uma conta de usuário"
-
-msgid "Install printer driver"
-msgstr "Instalar o driver da impressora"
-
-msgid "Run PDFCreator license service under the SYSTEM account"
-msgstr "Executar o serviço da licença PDFCreator com a conta do SISTEMA"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Instalar monitor, porta e drivers da impressora e a impressora"
-
-msgid "Secure & Sign"
-msgstr "Proteger & Assinar"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "Instalando o Microsoft .Net Framework %1. Isto pode demorar alguns minutos. Por favor, aguarde..."
-
-msgid "Server internal error (500)"
-msgstr "Erro interno do servidor (500)"
-
-msgid "Invalid answer from license server!"
-msgstr "Resposta inválida do servidor da licença!"
-
-msgid "Service logon test: Logon successful."
-msgstr "Teste do logon do serviço: Logon feito com êxito."
-
-msgid "Invalid license key!"
-msgstr "A chave da licença é inválida!"
-
-msgid "Service logon test: The Login failed!"
-msgstr "Teste do logon do serviço: Falha no login!"
-
-msgid "KB"
-msgstr "KB"
-
-msgid "Service logon test: The username or password is incorrect!"
-msgstr "Teste do logon do serviço: O nome de usuário ou a senha está errado!"
-
-msgid "Languages"
-msgstr "Idiomas"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "Serviço temporariamente indisponível (503)"
-
-msgid "License key"
-msgstr "Chave da Licença"
-
-msgid "Set installation directory and additional options"
-msgstr "Definir a pasta de instalação e as opções adicionais"
-
-msgid "License server answer not valid for this computer!"
-msgstr "O servidor responde que a licença é inválida para este computador!"
-
-msgid "Set up account information for PDFCreator license service"
-msgstr "Definir as informações de conta do serviço da licença PDFCreator"
-
-msgid "Licensee"
-msgstr "Licenciado(a)"
-
-msgid "Setup has finished installing [name] on your computer."
-msgstr "O programa de instalação concluiu a instalação do [name] no seu computador."
-
-msgid "MB/s"
-msgstr "MB/s"
-
-msgid "Setup is being prepared..."
-msgstr "A instalação está sendo preparada..."
-
-msgid "Merge multiple PDFs"
-msgstr "Unir vários PDFs"
-
-msgid "Show help after setup"
-msgstr "Exibir a Ajuda após instalar"
-
-msgid "New in PDF Architect {0}:"
-msgstr "Novo no PDF Architect {0}:"
-
-msgid "Specify a user account to run the PDFCreator license service:"
-msgstr "Especifique uma conta de usuário para executar o serviço da licença PDFCreator:"
-
-msgid "%.2f of %.2f"
-msgstr "%.2f de %.2f"
-
-msgid "Speed:"
-msgstr "Velocidade:"
-
-msgid "Access denied (401)"
-msgstr "Acesso negado (401)"
-
-msgid "Split and merge"
-msgstr "Dividir e unir"
-
-msgid "An error occurred validating the license key!"
-msgstr "Ocorreu um erro ao validar a chave da licença!"
-
-msgid "Starting download..."
-msgstr "Começando a baixar..."
-
-msgid "An unknown error is occurred!"
-msgstr "Ocorreu um erro desconhecido!"
-
-msgid "Status:"
-msgstr "Status:"
-
-msgid "Bad request (400)"
-msgstr "Pedido errado (400)"
-
-msgid "Stop license service"
-msgstr "Parar o serviço da licença"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Verifique a sua conexão e clique em 'Repetir' para tentar baixar os arquivos novamente, ou clique em 'Cancelar' para sair."
-
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "O instalador do PDFCreator instalou o .Net Framework 4.0. Esta etapa precisa de uma reinicialização do sistema. Por favor, reinicie-o agora e, a seguir, reinicie a instalação.%n%nO Instalador agora será fechado."
-
-msgid "Compact installation"
-msgstr "Instalação compacta"
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "A ativação é muito antiga! Por favor, renove-a."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "Criar PDFs e arquivos Bitmap com o %1"
-
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "O aplicativo '%1' está em execução.%n%nPor favor, feche-o primeiro.%n%n"
-
-msgid "Default application for PDF files"
-msgstr "Aplicativo padrão para arquivos PDF"
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "O aplicativo já está instalado.%n%nNão é possível atualizar. Por favor, primeiro desinstale o aplicativo.%n%nA instalação será cancelada."
 
 msgid "Donate to PDFCreator"
 msgstr "Doar ao PDFCreator"
 
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "O aplicativo já está instalado.%n%nPara reinstalá-lo, primeiro desinstale-o.%n%nA instalação será cancelada."
-
-msgid "Download the latest version..."
-msgstr "Baixar a versão mais recente..."
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "O aplicativo não está instalado. Você não pode usar este patch."
-
-msgid "Edit & Insert"
-msgstr "Editar & Inserir"
-
-msgid "The authorization is failed!"
-msgstr "Falha ao autorizar!"
-
-msgid "Empty answer from license server!"
-msgstr "Resposta vazia do servidor da licença!"
-
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "O nome escolhido é muito grande. Ele pode ter 221 caracteres, no máximo. Por favor, escolha outro nome."
-
-msgid "Expert settings"
-msgstr "Opções Avançadas"
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "O horário do computador parece estar configurado incorretamente! Por favor, verifique-o."
-
-msgid "For &all users"
-msgstr "Para &todos os usuários"
-
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "O arquivo baixado não pode ser verificado com a sua soma de verificação. Você quer iniciar a instalação assim mesmo?"
-
-msgid "Free features:"
-msgstr "Recursos gratuitos:"
-
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "O arquivo baixado está danificado e foi excluído. A instalação será cancelada!"
-
-msgid "HTTP error %d"
-msgstr "Erro HTTP %d"
-
-msgid "The following applications have to be closed to proceed with the uninstallation:"
-msgstr "Os seguintes aplicativos precisam ser fechados para continuar desinstalando:"
-
-msgid "Initializing..."
-msgstr "Inicializando..."
-
-msgid "The following files were not downloaded:"
-msgstr "Os seguintes arquivos não foram baixados:"
-
-msgid "Install printer monitor"
-msgstr "Instalar o monitor da impressora"
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "O formato da chave da licença é XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Internet Explorer integration"
-msgstr "Integrar ao Internet Explorer"
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr "O aplicativo instalado é muito antigo. Você não pode usar este patch."
-
-msgid "It is not allowed to use the symbols '!','\\\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "É proibido usar os símbolos '!','\\\\' ou ',' no nome da impressora. Por favor, escolha um novo nome de impressora."
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "A versão instalada '%1' é mais recente do que a instalação desta versão '%2'.%n%nPara instalar uma versão mais antiga, primeiro desinstale o aplicativo.%n%nA instalação será cancelada."
-
-msgid "License agreement"
-msgstr "Acordo da Licença"
-
-msgid "The license is not valid for the given product!"
-msgstr "A licença é inválida para o produto informado!"
-
-msgid "License server answer:"
-msgstr "Resposta do servidor da licença:"
-
-msgid "The machine or the user is blocked!"
-msgstr "A máquina ou o usuário está bloqueado!"
-
-msgid "MS Outlook previewer integration"
-msgstr "Integrar ao pré-visualizador do MS Outlook"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "O máximo de %1 licenças foi ultrapassado!"
-
-msgid "No answer from license server!"
-msgstr "Nenhuma resposta do servidor da licença!"
-
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "O novo PDF Architect será instalado. Isto poderá demorar um pouco."
-
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "Ocorreu um erro ao instalar o Microsoft.NET Framework %1. (Código do erro: %2)%n%nVocê quer ver o arquivo de registro da instalação .Net?"
-
-msgid "The product %1 does not exist!"
-msgstr "O produto %1 não existe!"
-
-msgid "Automatic updates"
-msgstr "Atualizações automáticas"
-
-msgid "The service needs to be able to contact 'license.pdfforge.org' and have permission to write to HKLM."
-msgstr "O serviço precisa ser capaz de contatar 'licence.pdfforge.org' e ter permissão para gravar para HKLM."
-
-msgid "Choosing a printer name."
-msgstr "Escolha um nome da impressora."
-
-msgid "The setup will be canceled."
-msgstr "A instalação será cancelada."
-
-msgid "Current file"
-msgstr "Arquivo atual"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr "A versão %1 não é suportada! Por favor, use a versão mais recente aqui %2."
+msgid "Please enter the license key."
+msgstr "Por favor, digite a chave da licença."
 
 msgid "Download complete"
 msgstr "Download concluído"
 
-msgid "There already exists a printer with this name. Please choose another name."
-msgstr "Já existe uma impressora com este nome. Por favor, escolha outro nome."
+msgid "Please make sure that this account has the right to logon as a service."
+msgstr "Por favor, assegure-se que esta conta tem o direito de fazer logon como um serviço."
 
-msgid "Edit texts and fonts"
-msgstr "Editar textos e fontes"
+msgid "Download the latest version..."
+msgstr "Baixar a versão mais recente..."
 
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "Esta é uma prévia do desenvolvedor do PDFCreator.%n%nEla não é uma versão mais nova do próximo lançamento. Provavelmente ela conterá erros ou não funcionará corretamente.%n%nSe você se atrever a instalá-la assim mesmo, gostaríamos de ouvir seus comentários."
-
-msgid "File:"
-msgstr "Arquivo:"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "Este patch é para uma versão mais antiga do aplicativo. Você não pode usá-lo."
-
-msgid "GB"
-msgstr "GB"
-
-msgid "This process might take several minutes."
-msgstr "Este processo pode demorar alguns minutos."
-
-msgid "Install printer"
-msgstr "Instalar impressora"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "Esta versão não suporta o modo de servidor. Você quer instalá-la assim mesmo?"
-
-msgid "Invalid license answer hash!"
-msgstr "A resposta do hash da licença é inválida!"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "Esta versão não é coberta pela sua chave de licença! Por favor, renove-a em %1."
-
-msgid "License key validation"
-msgstr "Validar a chave da licença"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "Para atualizar, use <OK> ou cancele a instalação e primeiro desinstale a versão mais antiga."
-
-msgid "Message"
-msgstr "Mensagem"
-
-msgid "Total progress"
-msgstr "Progresso total"
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "Foi encontrado uma versão mais antiga '%1'.%n%nNão é possível atualizar esta versão para a versão '%2'.%n%nPor favor, primeiro desinstale o aplicativo."
-
-msgid "Try out the new PDF Architect"
-msgstr "Testar o novo PDF Architect"
-
-msgid "Convert"
-msgstr "Converter"
-
-msgid "Uninstall license service"
-msgstr "Desinstalar o serviço da licença"
+msgid "Please restart your system first to continue setup."
+msgstr "Por favor, primeiro reinicie o seu sistema para continuar instalando."
 
 msgid "Downloading..."
 msgstr "Baixando..."
 
-msgid "Uninstall the printer with all its components."
-msgstr "Desinstalar a impressora com todos os seus componentes."
+msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
+msgstr "Por favor, desinstale o 'Servidor PDFCreator' antes de continuar instalando. Não é possível usar o 'PDFCreator' e o 'Servidor PDFCreator' na mesma máquina."
 
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Para isto, você não precisa ser um membro do grupo de administradores.%n%n"
+msgid "Edit & Insert"
+msgstr "Editar & Inserir"
 
-msgid "Unknown"
-msgstr "Desconhecido"
+msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
+msgstr "Por favor, use o \"Servidor do Terminal do PDFCreator\" para usar em computadores com Serviços de Terminais instalados!% n%nVocê quer obter mais informações sobre o \"Servidor do Terminal do PDFCreator\"?"
 
-msgid "Install printer port"
-msgstr "Instalar porta da impressora"
+msgid "Edit texts and fonts"
+msgstr "Editar textos e fontes"
 
-msgid "Username:"
-msgstr "Nome de usuário:"
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Por favor, aguarde enquanto o programa de instalação baixa os arquivos adicionais..."
 
-msgid "MB"
-msgstr "MB"
+msgid "Empty answer from license server!"
+msgstr "Resposta vazia do servidor da licença!"
 
-msgid "Verify and remove signatures"
-msgstr "Verificar e remover assinaturas"
-
-msgid "Cancelling download..."
-msgstr "Parando de baixar..."
-
-msgid "Windows Explorer integration"
-msgstr "Integrar ao Windows Explorer"
+msgid "Please wait. Checking license key..."
+msgstr "Por favor, aguarde. Verificando a chave da licença..."
 
 msgid "Enter the valid license key"
 msgstr "Digite a chave da licença válida"
 
-msgid "Wrong answer from license server!"
-msgstr "Resposta errada do servidor da licença!"
+msgid "Printer"
+msgstr "Impressora"
 
-msgid "Details"
-msgstr "Detalhes"
+msgid "Expert settings"
+msgstr "Opções Avançadas"
+
+msgid "Printer name"
+msgstr "Nome da impressora"
+
+msgid "File:"
+msgstr "Arquivo:"
+
+msgid "Privacy Policy"
+msgstr ""
+
+msgid "For &all users"
+msgstr "Para &todos os usuários"
+
+msgid "Proxy authentication required (407)"
+msgstr "Autenticação Proxy necessária (407)"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Para isto, você não precisa ser um membro do grupo de administradores.%n%n"
+
+msgid "Remaining time:"
+msgstr "Tempo restante:"
+
+msgid "Free features:"
+msgstr "Recursos gratuitos:"
+
+msgid "Retry"
+msgstr "Repetir"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Review"
+msgstr "Rever"
+
+msgid "HTTP error %d"
+msgstr "Erro HTTP %d"
+
+msgid "Rotate, move and delete pages"
+msgstr "Girar, mover e excluir páginas"
 
 msgid "Hide"
 msgstr "Ocultar"
 
+msgid "Run PDFCreator license service under an user account"
+msgstr "Execute o serviço da licença do PDFCreator com uma conta de usuário"
+
+msgid "Initializing..."
+msgstr "Inicializando..."
+
+msgid "Run PDFCreator license service under the SYSTEM account"
+msgstr "Executar o serviço da licença PDFCreator com a conta do SISTEMA"
+
+msgid "Install printer"
+msgstr "Instalar impressora"
+
+msgid "Secure & Sign"
+msgstr "Proteger & Assinar"
+
+msgid "Install printer monitor"
+msgstr "Instalar o monitor da impressora"
+
+msgid "Server internal error (500)"
+msgstr "Erro interno do servidor (500)"
+
+msgid "Install printer port"
+msgstr "Instalar porta da impressora"
+
+msgid "Service logon test: Logon successful."
+msgstr "Teste do logon do serviço: Logon feito com êxito."
+
+msgid "Internet Explorer integration"
+msgstr "Integrar ao Internet Explorer"
+
+msgid "Service logon test: The Login failed!"
+msgstr "Teste do logon do serviço: Falha no login!"
+
+msgid "Invalid license answer hash!"
+msgstr "A resposta do hash da licença é inválida!"
+
+msgid "Service logon test: The username or password is incorrect!"
+msgstr "Teste do logon do serviço: O nome de usuário ou a senha está errado!"
+
+msgid "It is not allowed to use the symbols '!','\\\\' or ',' in the printer name. Please choose a new printer name."
+msgstr "É proibido usar os símbolos '!','\\\\' ou ',' no nome da impressora. Por favor, escolha um novo nome de impressora."
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Serviço temporariamente indisponível (503)"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "Set installation directory and additional options"
+msgstr "Definir a pasta de instalação e as opções adicionais"
+
+msgid "License agreement"
+msgstr "Acordo da Licença"
+
+msgid "Set up account information for PDFCreator license service"
+msgstr "Definir as informações de conta do serviço da licença PDFCreator"
+
+msgid "License key validation"
+msgstr "Validar a chave da licença"
+
+msgid "Setup has finished installing [name] on your computer."
+msgstr "O programa de instalação concluiu a instalação do [name] no seu computador."
+
+msgid "License server answer:"
+msgstr "Resposta do servidor da licença:"
+
+msgid "Setup is being prepared..."
+msgstr "A instalação está sendo preparada..."
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Show help after setup"
+msgstr "Exibir a Ajuda após instalar"
+
+msgid "MS Outlook previewer integration"
+msgstr "Integrar ao pré-visualizador do MS Outlook"
+
+msgid "Specify a user account to run the PDFCreator license service:"
+msgstr "Especifique uma conta de usuário para executar o serviço da licença PDFCreator:"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Speed:"
+msgstr "Velocidade:"
+
+msgid "No answer from license server!"
+msgstr "Nenhuma resposta do servidor da licença!"
+
+msgid "Split and merge"
+msgstr "Dividir e unir"
+
+msgid "No thanks"
+msgstr "Não, obrigado"
+
+msgid "Starting download..."
+msgstr "Começando a baixar..."
+
 msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
 msgstr "Uma nova versão (%1) está disponível nos servidores da pdfforge!%n%nVocê quer baixá-la e instalá-la?"
+
+msgid "Status:"
+msgstr "Status:"
+
+msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr "Ocorreu um erro ao instalar o Microsoft.NET Framework %1. (Código do erro: %2)%n%nVocê quer ver o arquivo de registro da instalação .Net?"
+
+msgid "Stop license service"
+msgstr "Parar o serviço da licença"
+
+msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
+msgstr "Foi encontrado uma versão mais antiga '%1'.%n%nNão é possível atualizar esta versão para a versão '%2'.%n%nPor favor, primeiro desinstale o aplicativo."
+
+msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
+msgstr "O instalador do PDFCreator instalou o .Net Framework 4.0. Esta etapa precisa de uma reinicialização do sistema. Por favor, reinicie-o agora e, a seguir, reinicie a instalação.%n%nO Instalador agora será fechado."
+
+msgid "Automatic updates"
+msgstr "Atualizações automáticas"
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "A ativação é muito antiga! Por favor, renove-a."
+
+msgid "Cancelling download..."
+msgstr "Parando de baixar..."
+
+msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "O aplicativo '%1' está em execução.%n%nPor favor, feche-o primeiro.%n%n"
+
+msgid "Choosing a printer name."
+msgstr "Escolha um nome da impressora."
+
+msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
+msgstr "O aplicativo já está instalado.%n%nNão é possível atualizar. Por favor, primeiro desinstale o aplicativo.%n%nA instalação será cancelada."
+
+msgid "Convert"
+msgstr "Converter"
+
+msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
+msgstr "O aplicativo já está instalado.%n%nPara reinstalá-lo, primeiro desinstale-o.%n%nA instalação será cancelada."
+
+msgid "Current file"
+msgstr "Arquivo atual"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "O aplicativo não está instalado. Você não pode usar este patch."
+
+msgid "Details"
+msgstr "Detalhes"
+
+msgid "The authorization is failed!"
+msgstr "Falha ao autorizar!"
+
+msgid "Download cancelled"
+msgstr "Download cancelado"
+
+msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
+msgstr "O nome escolhido é muito grande. Ele pode ter 221 caracteres, no máximo. Por favor, escolha outro nome."
+
+msgid "Downloading additional files"
+msgstr "Baixar Arquivos Adicionais"
+
+msgid "The computer time seems to be incorrectly set! Please check your system time."
+msgstr "O horário do computador parece estar configurado incorretamente! Por favor, verifique-o."
+
+msgid "Edit pages"
+msgstr "Editar as páginas"
+
+msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
+msgstr "O arquivo baixado não pode ser verificado com a sua soma de verificação. Você quer iniciar a instalação assim mesmo?"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "O PDFCreator foi aprimorado com recursos de edição!"
+
+msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr "O arquivo baixado está danificado e foi excluído. A instalação será cancelada!"
+
+msgid "File not found (404)"
+msgstr "O arquivo não foi encontrado (404)"
+
+msgid "The following applications have to be closed to proceed with the uninstallation:"
+msgstr "Os seguintes aplicativos precisam ser fechados para continuar desinstalando:"
+
+msgid "For the &current user only"
+msgstr "Apenas &para o usuário atual"
+
+msgid "The following files were not downloaded:"
+msgstr "Os seguintes arquivos não foram baixados:"
+
+msgid "Full installation"
+msgstr "Instalação completa"
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "O formato da chave da licença é XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "O aplicativo instalado é muito antigo. Você não pode usar este patch."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Instalar o PDF Architect com ótimos recursos gratuitos"
+
+msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
+msgstr "A versão instalada '%1' é mais recente do que a instalação desta versão '%2'.%n%nPara instalar uma versão mais antiga, primeiro desinstale o aplicativo.%n%nA instalação será cancelada."
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Instalar monitor, porta e drivers da impressora e a impressora"
+
+msgid "The license is not valid for the given product!"
+msgstr "A licença é inválida para o produto informado!"
+
+msgid "Invalid answer from license server!"
+msgstr "Resposta inválida do servidor da licença!"
+
+msgid "The machine or the user is blocked!"
+msgstr "A máquina ou o usuário está bloqueado!"
+
+msgid "KB"
+msgstr "KB"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "O máximo de %1 licenças foi ultrapassado!"
+
+msgid "License key"
+msgstr "Chave da Licença"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "O novo PDF Architect será instalado. Isto poderá demorar um pouco."
+
+msgid "Licensee"
+msgstr "Licenciado(a)"
+
+msgid "The product %1 does not exist!"
+msgstr "O produto %1 não existe!"
+
+msgid "Merge multiple PDFs"
+msgstr "Unir vários PDFs"
+
+msgid "The service needs to be able to contact 'license.pdfforge.org' and have permission to write to HKLM."
+msgstr "O serviço precisa ser capaz de contatar 'licence.pdfforge.org' e ter permissão para gravar para HKLM."
+
+msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr "Nenhuma chave da licença foi informada! Ela é absolutamente necessária, em combinação com parâmetros '/VerySilent' ou '/Silent'! Por favor, use o parâmetro '/%1'.%n%nExemplo: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "The setup detected that this computer is part of a Windows domain. There is no support for {#Edition} in Windows domains anymore!%n%nPlease use PDFCreator Business. You can find more information here:%nhttps://go.pdfforge.org/pdfcreator-business/upgrade%n%nBy clicking on 'Yes' you confirm you aren't installing {#Edition} in an enterprise environment!"
+msgstr ""
+
+msgid "Access denied (401)"
+msgstr "Acesso negado (401)"
+
+msgid "The setup will be canceled."
+msgstr "A instalação será cancelada."
+
+msgid "An unknown error is occurred!"
+msgstr "Ocorreu um erro desconhecido!"
+
+msgid "The version %1 is not supported! Please use the latest version from here %2."
+msgstr "A versão %1 não é suportada! Por favor, use a versão mais recente aqui %2."
+
+msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
+msgstr "Verifique a sua conexão e clique em 'Repetir' para tentar baixar os arquivos novamente, ou clique em 'Cancelar' para sair."
+
+msgid "There already exists a printer with this name. Please choose another name."
+msgstr "Já existe uma impressora com este nome. Por favor, escolha outro nome."
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Criar PDFs e arquivos Bitmap com o %1"
+
+msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
+msgstr "Esta é uma prévia do desenvolvedor do PDFCreator.%n%nEla não é uma versão mais nova do próximo lançamento. Provavelmente ela conterá erros ou não funcionará corretamente.%n%nSe você se atrever a instalá-la assim mesmo, gostaríamos de ouvir seus comentários."
+
+#, fuzzy
+#| msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
+msgid "Do you want to proceed with the installation?"
+msgstr "Você precisa de uma nova chave da licença válida para continuar! Você quer continuar instalando?"
+
+msgid "This patch is for an older application version. You cannot use this patch."
+msgstr "Este patch é para uma versão mais antiga do aplicativo. Você não pode usá-lo."
+
+msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
+msgstr "Ocorreram erros durante a instalação da impressora. Uma descrição detalhada deles pode ser encontrada no arquivo 'SetupLog.txt' no caminho do aplicativo."
+
+msgid "This process might take several minutes."
+msgstr "Este processo pode demorar alguns minutos."
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Informe a chave da licença válida e continue instalando."
+
+msgid "This version doesn't support the server mode. Do you want install this version anyway?"
+msgstr "Esta versão não suporta o modo de servidor. Você quer instalá-la assim mesmo?"
+
+msgid "Forms"
+msgstr "Formulários"
+
+msgid "This version is not covered by your license key! Please renew your license on %1."
+msgstr "Esta versão não é coberta pela sua chave de licença! Por favor, renove-a em %1."
+
+msgid "Ignore"
+msgstr "Ignorar"
+
+msgid "To continue the installation on this machine, you will first need to purchase additional licenses.%nTo add more licenses to your existing key, please send your current key and the amount of licenses you'd like to add to licensing@pdfforge.org."
+msgstr ""
+
+msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
+msgstr "Instalando o Microsoft .Net Framework %1. Isto pode demorar alguns minutos. Por favor, aguarde..."
+
+msgid "To continue with the installation, you need to revoke your previous activations in our license portal license.pdfforge.org.%n%nThis step is required because the new version will generate a different machine ID, which is more resistant towards Windows updates and system changes.%n%nIf you need help, please contact our Support team at support@pdfforge.org."
+msgstr ""
+
+msgid "Languages"
+msgstr "Idiomas"
+
+msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
+msgstr "Para atualizar, use <OK> ou cancele a instalação e primeiro desinstale a versão mais antiga."
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Total progress"
+msgstr "Progresso total"
+
+msgid "%.2f of %.2f"
+msgstr "%.2f de %.2f"
+
+msgid "Try out the new PDF Architect"
+msgstr "Testar o novo PDF Architect"
+
+msgid "Bad request (400)"
+msgstr "Pedido errado (400)"
+
+msgid "Uninstall license service"
+msgstr "Desinstalar o serviço da licença"
+
+msgid "Default application for PDF files"
+msgstr "Aplicativo padrão para arquivos PDF"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Desinstalar a impressora com todos os seus componentes."
+
+msgid "Elapsed time:"
+msgstr "Tempo decorrido:"
+
+msgid "Unknown"
+msgstr "Desconhecido"
+
+msgid "Getting file information..."
+msgstr "Obtendo as informações do arquivo..."
+
+msgid "Username:"
+msgstr "Nome de usuário:"
+
+msgid "Invalid license key!"
+msgstr "A chave da licença é inválida!"
+
+msgid "Verify and remove signatures"
+msgstr "Verificar e remover assinaturas"
+
+msgid "New in PDF Architect {0}:"
+msgstr "Novo no PDF Architect {0}:"
+
+msgid "Windows Explorer integration"
+msgstr "Integrar ao Windows Explorer"
+
+msgid "Compact installation"
+msgstr "Instalação compacta"
+
+msgid "Wrong answer from license server!"
+msgstr "Resposta errada do servidor da licença!"
+
+msgid "License server answer not valid for this computer!"
+msgstr "O servidor responde que a licença é inválida para este computador!"
+
+msgid "An error occurred validating the license key!"
+msgstr "Ocorreu um erro ao validar a chave da licença!"
+
+msgid "Download failed"
+msgstr "Falha ao baixar"
+
+msgid "Install printer driver"
+msgstr "Instalar o driver da impressora"
 
 msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
 msgstr "Você não é um membro do grupo de administradores.%n%n%nPara criar um documento PDF a partir de qualquer aplicativo, o PDFCreator usa um driver de impressora PostScript.%nVocê precisa ser um membro do grupo de administradores para instalar quaisquer drivers de impressora.%n%nSe você continuar instalando, poderá apenas converter arquivos PostScript existentes.%n%nVocê quer continuar instalando?%n"
@@ -596,5 +613,5 @@ msgstr "Você precisa de uma nova chave da licença válida para continuar! Voc�
 msgid "application files"
 msgstr "Arquivos do aplicativo"
 
-msgid "KB/s"
-msgstr "KB/s"
+msgid "Firefox integration"
+msgstr "Integrar ao Firefox"

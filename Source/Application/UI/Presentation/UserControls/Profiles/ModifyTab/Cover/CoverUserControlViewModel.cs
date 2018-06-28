@@ -1,4 +1,5 @@
 ﻿using Optional;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
@@ -17,7 +18,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Co
         public TokenViewModel<ConversionProfile> CoverPageTokenViewModel { get; set; }
 
         public CoverUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater,
-            ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfile)
+            ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher) : base(translationUpdater, selectedProfile, dispatcher)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
 
@@ -59,7 +60,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Co
 
     public class DesignTimeCoverUserControlViewModel : CoverUserControlViewModel
     {
-        public DesignTimeCoverUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
+        public DesignTimeCoverUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null, null)
         {
         }
     }

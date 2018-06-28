@@ -1,5 +1,6 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -23,7 +24,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.St
         public TokenViewModel<ConversionProfile> StampUserControlTokenViewModel { get; set; }
 
         public StampUserControlViewModel(IInteractionInvoker interactionInvoker, IFontHelper fontHelper, TokenHelper tokenHelper,
-                        ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, profile)
+                        ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, profile, dispatcher)
         {
             _interactionInvoker = interactionInvoker;
             _fontHelper = fontHelper;
@@ -132,7 +134,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.St
 
     public class DesignTimeStampUserControlViewModel : StampUserControlViewModel
     {
-        public DesignTimeStampUserControlViewModel() : base(null, null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null)
+        public DesignTimeStampUserControlViewModel() : base(null, null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
         {
         }
     }

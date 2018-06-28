@@ -24,6 +24,7 @@ using pdfforge.PDFCreator.UI.Presentation.Help;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
+using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.Utilities;
 using SimpleInjector;
 using System;
@@ -41,6 +42,11 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorTerminalServer
         protected override EditionHintOptionProvider ShowOnlyForPlusAndBusinessHint => new EditionHintOptionProvider(false, false);
 
         protected override ButtonDisplayOptions ButtonDisplayOptions => new ButtonDisplayOptions(true, true);
+
+        protected override void RegisterSettingsLoader(Container container)
+        {
+            container.RegisterSingleton<ISettingsLoader, SettingsLoaderBusiness>();
+        }
 
         protected override void RegisterUpdateAssistant(Container container)
         {

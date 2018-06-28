@@ -48,8 +48,8 @@ msgstr[2] "Подписание будет отключено для этих  �
 msgid "and {0} more."
 msgid_plural "and {0} more."
 msgstr[0] "и {0} ещё."
-msgstr[1] "и {0}  ещё."
-msgstr[2] "и {0}  ещё."
+msgstr[1] "и {0} ещё."
+msgstr[2] "и {0} ещё."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -1782,7 +1782,7 @@ msgstr "Удалить учетную запись сервера времени
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 msgid "Secured Time Server"
-msgstr "Защищенный Сервер времени без ввода пароля."
+msgstr "Защищенный сервер времени без ввода пароля"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
 msgid "Convert PDF files"

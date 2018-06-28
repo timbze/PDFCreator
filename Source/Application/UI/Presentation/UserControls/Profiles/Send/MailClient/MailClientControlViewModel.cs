@@ -1,5 +1,6 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Trigger;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -21,7 +22,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailCli
         private EmailClientSettings EmailClientSettings => CurrentProfile?.EmailClientSettings;
 
         public MailClientControlViewModel(IInteractionRequest interactionRequest, IClientTestEmail clientTestEmail, ITranslationUpdater translationUpdater,
-            ISelectedProfileProvider selectedProfileProvider, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfileProvider)
+            ISelectedProfileProvider selectedProfileProvider, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher) : base(translationUpdater, selectedProfileProvider, dispatcher)
         {
             _interactionRequest = interactionRequest;
             _clientTestEmail = clientTestEmail;

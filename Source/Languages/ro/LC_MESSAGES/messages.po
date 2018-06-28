@@ -2864,7 +2864,7 @@ msgstr "Imprimare pagină de test Windows"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Restore"
-msgstr "Restabilire"
+msgstr "Recuperare"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Restore Default Settings"

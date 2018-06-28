@@ -1,4 +1,5 @@
 ﻿using Optional;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
@@ -16,7 +17,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Ba
         public TokenViewModel<ConversionProfile> BackgroundTokenViewModel { get; set; }
 
         public BackgroundUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater,
-                                              ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfile)
+                                              ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, selectedProfile, null)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
 
@@ -57,7 +59,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Ba
 
     public class DesignTimeBackgroundUserControlViewModel : BackgroundUserControlViewModel
     {
-        public DesignTimeBackgroundUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
+        public DesignTimeBackgroundUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null, null)
         {
         }
     }

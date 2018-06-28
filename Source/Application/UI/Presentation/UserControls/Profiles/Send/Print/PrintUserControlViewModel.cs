@@ -1,4 +1,5 @@
-﻿using pdfforge.PDFCreator.Conversion.Settings.Enums;
+﻿using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
@@ -11,7 +12,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print
 {
     public class PrintUserControlViewModel : ProfileUserControlViewModel<PrintTabTranslation>
     {
-        public PrintUserControlViewModel(ISystemPrinterProvider systemPrinterProvider, ITranslationUpdater translationUpdater, ISelectedProfileProvider profile) : base(translationUpdater, profile)
+        public PrintUserControlViewModel(ISystemPrinterProvider systemPrinterProvider, ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, IDispatcher dispatcher) : base(translationUpdater, profile, dispatcher)
         {
             _systemPrinterProvider = systemPrinterProvider;
         }
@@ -56,7 +57,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print
 
     public class DesignTimePrintUserControlViewModel : PrintUserControlViewModel
     {
-        public DesignTimePrintUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimePrintUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null)
         {
         }
     }

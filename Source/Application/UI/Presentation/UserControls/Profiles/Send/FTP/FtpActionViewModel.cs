@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
@@ -24,8 +25,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.FTP
 
         public TokenViewModel<ConversionProfile> DirectoryTokenViewModel { get; set; }
 
-        public FtpActionViewModel(TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory)
-            : base(translationUpdater, currentSettingsProvider)
+        public FtpActionViewModel(TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, currentSettingsProvider, dispatcher)
         {
             // TODO update on translation change!
             DirectoryTokenViewModel = tokenViewModelFactory

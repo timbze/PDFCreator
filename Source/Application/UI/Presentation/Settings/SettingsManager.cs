@@ -74,9 +74,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
             LoadAllSettingsSynchronized();
 
             var version = _versionHelper.ApplicationVersion.ToString();
+
             if (version != _settingsProvider.Settings.ApplicationSettings.LastLoginVersion)
             {
-                _firstTimeCommands.ToList().ForEach(x => x.Execute(null));
+                _firstTimeCommands.ToList().ForEach(x => x.Execute(_versionHelper.ApplicationVersion));
                 _settingsProvider.Settings.ApplicationSettings.LastLoginVersion = version;
             }
         }

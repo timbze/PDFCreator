@@ -1,5 +1,6 @@
 ﻿using Optional;
 using pdfforge.PDFCreator.Conversion.Actions;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
@@ -19,8 +20,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
         private readonly IScriptActionHelper _scriptActionHelper;
 
-        public ScriptUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider provider, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory)
-            : base(translationUpdater, provider)
+        public ScriptUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider provider, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, provider, dispatcher)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
             _scriptActionHelper = scriptActionHelper;
@@ -112,7 +113,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
 
     public class DesignTimeScriptUserControlViewModel : ScriptUserControlViewModel
     {
-        public DesignTimeScriptUserControlViewModel() : base(new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCurrentSettingsProvider(), null, null, null, new DesignTimeTokenViewModelFactory())
+        public DesignTimeScriptUserControlViewModel() : base(new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCurrentSettingsProvider(), null, null, null, new DesignTimeTokenViewModelFactory(), null)
         {
         }
     }

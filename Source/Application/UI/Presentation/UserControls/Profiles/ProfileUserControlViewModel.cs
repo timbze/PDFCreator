@@ -1,4 +1,5 @@
-﻿using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using System;
@@ -9,14 +10,16 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
 {
     public class ProfileUserControlViewModel<TTranslation> : TranslatableViewModelBase<TTranslation> where TTranslation : ITranslatable, new()
     {
-        private readonly ISelectedProfileProvider _selectedProfile;
-        public ConversionProfile CurrentProfile => _selectedProfile.SelectedProfile;
+        private readonly ISelectedProfileProvider _selectedProfileProvider;
+        private readonly IDispatcher _dispatcher;
+        public ConversionProfile CurrentProfile => _selectedProfileProvider.SelectedProfile;
 
         public event EventHandler CurrentProfileChanged;
 
-        public ProfileUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile) : base(translationUpdater)
+        public ProfileUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile, IDispatcher dispatcher) : base(translationUpdater)
         {
-            _selectedProfile = selectedProfile;
+            _selectedProfileProvider = selectedProfile;
+            _dispatcher = dispatcher;
             selectedProfile.SelectedProfileChanged += OnCurrentProfileChanged;
             selectedProfile.SettingsChanged += OnCurrentSettingsChanged;
         }
@@ -28,8 +31,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
 
         protected virtual void OnCurrentProfileChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            CurrentProfileChanged?.Invoke(this, EventArgs.Empty);
-            RaisePropertyChanged(nameof(CurrentProfile));
+            _dispatcher?.BeginInvoke(() =>
+            {
+                CurrentProfileChanged?.Invoke(this, EventArgs.Empty);
+                RaisePropertyChanged(nameof(CurrentProfile));
+            });
         }
     }
 }

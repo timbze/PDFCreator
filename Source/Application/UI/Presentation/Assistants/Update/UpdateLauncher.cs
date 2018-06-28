@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using pdfforge.Obsidian;
+﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Windows;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Threading;
+using System;
+using System.Diagnostics;
 using Translatable;
 
 namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
@@ -67,7 +67,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
                     {
                         done = true;
                         _threadManager.UpdateAfterShutdownAction =
-                            () => Process.Start(interaction.DownloadedFile);
+                            () => LaunchDownloadedFile(interaction.DownloadedFile);
                         continue;
                     }
 
@@ -78,7 +78,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
                         continue;
 
                     _threadManager.UpdateAfterShutdownAction =
-                        () => Process.Start(interaction.DownloadedFile);
+                        () => LaunchDownloadedFile(interaction.DownloadedFile);
                     done = true;
                 }
             }
@@ -91,6 +91,18 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
                 {
                     Process.Start(version.DownloadUrl);
                 }
+            }
+        }
+
+        private void LaunchDownloadedFile(string filename)
+        {
+            try
+            {
+                Process.Start(filename);
+            }
+            catch
+            {
+                // Do nothing when this fails
             }
         }
 

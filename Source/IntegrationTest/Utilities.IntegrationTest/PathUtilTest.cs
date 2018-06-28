@@ -26,11 +26,13 @@ namespace PDFCreator.Utilities.IntegrationTest
             TempFileHelper.CleanUp();
         }
 
-        [TestCase(@"C:\Test.txt")]
         [TestCase(@"A:\Test.txt")]
         [TestCase(@"Z:\Test.txt")]
         [TestCase(@"X:\Test\Folder\With\Many\Sub\Folders\test.txt")]
         [TestCase(@"\\TestServer\SomeFolder\Test.txt")]
+        [TestCase(@"a:\Test.txt")]
+        [TestCase(@"z:\Test.txt")]
+        [TestCase(@"x:\Test\Folder\With\Many\Sub\Folders\test.txt")]
         public void TestValidRootedPath(string validPath)
         {
             Assert.IsTrue(_pathUtil.IsValidRootedPath(validPath), "Expected '" + validPath + "' to be a valid path");

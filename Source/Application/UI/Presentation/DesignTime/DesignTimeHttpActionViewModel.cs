@@ -6,7 +6,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
 {
     public class DesignTimeHttpActionViewModel : HttpActionViewModel
     {
-        public DesignTimeHttpActionViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator())
+        public DesignTimeHttpActionViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator(), null)
         {
         }
     }

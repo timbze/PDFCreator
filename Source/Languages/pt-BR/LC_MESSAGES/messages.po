@@ -25,8 +25,8 @@ msgstr ""
 #. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
 msgid "Do you want to convert the {0} selected file?"
 msgid_plural "Do you want to convert the {0} selected files?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Deseja converter o {0} arquivo selecionado?"
+msgstr[1] "Deseja converter os {0} arquivos selecionados?"
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
@@ -165,19 +165,16 @@ msgid "Attachment file is no PDF file."
 msgstr "O arquivo anexo não é um arquivo PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "O atalho de ligação contem caracteres não permitidos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is invalid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+msgstr "O atalho de ligação é um atalho absolutamente inválido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Attachment path is too long."
-msgstr "O caminho do arquivo é muito grande"
+msgstr "O nome de acesso é muito longo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
@@ -216,50 +213,44 @@ msgid "Background file is no PDF file."
 msgstr "O arquivo do fundo não é um arquivo PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "O atalho de fundo contem caracteres não permitidos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path is invalid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+msgstr "O atalho de fundo é absolutamente inválido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Background path is too long."
-msgstr "O arquivo do fundo não é um arquivo PDF."
+msgstr "A ligação ao arquivo de fundo é muito extenso."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "O arquivo do certificado não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "O caminho do arquivo de certificado contem caracteres ilegais."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path is invalid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+msgstr "O certificado de acesso é inválido. Por favor, digite um acesso absoluto válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Certificate path is too long."
-msgstr "O caminho do arquivo é muito grande"
+msgstr "O acesso de certificação é muito extenso."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
-msgstr "Não é possível autorizar o servidor SMTP."
+msgstr "Não autorizado para o servidor SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not login to FTP server."
-msgstr "Não é possível fazer login no servidor FTP."
+msgstr "Não é possível fazer inscrição para o servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not login to FTP server. Please check your Internet connection."
-msgstr "Não é possível fazer login no servidor FTP. Por favor, verifique sua conexão com a internet."
+msgstr "Não é possível fazer inscrição para o servidor FTP. Por favor, verifique sua conexão com a internet."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not open attachment file."
@@ -267,50 +258,47 @@ msgstr "Não é possível abrir o arquivo anexo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not open cover file."
-msgstr "Não é possível abrir o arquivo da folha de rosto."
+msgstr "Não é possível abrir o arquivo de cobertura."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not read from FTP directory to ensure unique filenames."
-msgstr "Não é possível ler a pasta FTP para garantir nomes de arquivos exclusivos."
+msgstr "Não é possível ler a pasta FTP para assegurar nomes de arquivos exclusivos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not upload file to FTP."
-msgstr "Não é possível enviar o arquivo para FTP."
+msgstr "Não é possível enviar o arquivo para o FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover file does not exist."
-msgstr "O arquivo da folha de rosto não existe."
+msgstr "O arquivo de cobertura não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "O arquivo frontal contem caracteres não permitidos."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path is invalid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+msgstr "O acesso frontal é inválido. Por favor, digite um acesso absoluto válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#, fuzzy
 msgid "Cover path is too long."
-msgstr "O caminho do arquivo é muito grande"
+msgstr "O acesso frontal é muito extenso."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Custom viewer was not found."
-msgstr ""
+msgstr "O visualizador remunerado não foi encontrado."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
-msgstr "O e-mail através do SMTP não pode ser entregue à um ou mais destinatários."
+msgstr "A mensagem em SMTP não pode ser entregue a um ou mais destinatários."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error during PDF/A conversion."
-msgstr "Erro durante a conversão PDF/A."
+msgstr "Erro durante a conversão A/PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while adding background to the document."
-msgstr "Erro ao adicionar o fundo ao documento."
+msgstr "Erro enquanto adicionando o fundo ao documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while copying the output file."
@@ -318,43 +306,43 @@ msgstr "Erro ao copiar o arquivo de saída."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while encrypting the document."
-msgstr "Erro ao criptografar o documento."
+msgstr "Erro durante a criptografação do documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while printing the file."
-msgstr "Erro ao imprimir o arquivo."
+msgstr "Erro durante a impressão do arquivo."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while processing the document."
-msgstr "Erro ao processar o documento."
+msgstr "Erro durante o processamento do documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while running the script action."
-msgstr "Erro ao executar a ação do script."
+msgstr "Erro durante rodar a ação de escrita."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while sending e-mail over SMTP."
-msgstr "Erro ao enviar o e-mail através do SMTP."
+msgstr "Erro durante o envio de mensagem sobre SMTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing the document."
-msgstr "Erro ao assinar o documento."
+msgstr "Erro durante a assinatura do documento."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing. Can not connect to time server."
-msgstr "Erro ao assinar. Não é possível conectar ao servidor de hora."
+msgstr "Erro durante a assinatura. Não é possível conectar ao servidor atual."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while signing. The certificate is invalid or has expired."
-msgstr "Erro ao assinar. O certificado é inválido ou expirou."
+msgstr "Erro durante a assinatura. O certificado é inválido ou expirou."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while trying to log-in."
-msgstr "Erro ao tentar fazer login."
+msgstr "Erro enquanto tentando assinar."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading and sharing the document to Dropbox."
-msgstr "Erro ao enviar e compartilhar o documento ao Dropbox."
+msgstr "Erro enquanto carregando e compartilhando  o documento para o Dropbox."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading file to FTP server."
@@ -362,11 +350,11 @@ msgstr "Erro ao enviar o arquivo ao servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading the document to Dropbox."
-msgstr "Erro ao enviar o documento ao Dropbox."
+msgstr "Erro ao enviar o documento para o Dropbox."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading to HTTP server."
-msgstr "Erro ao enviar ao servidor HTTP."
+msgstr "Erro durante o envio ao servidor HTTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Error while uploading to HTTP server. 401 interaction is not authorized."
@@ -382,7 +370,7 @@ msgstr "A senha do servidor FTP não foi especificada."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "FTP server user name is not specified."
-msgstr "O nome do usuário do servidor FTP não foi especificado."
+msgstr "O nome do usuário do servidor FTP não está especificado."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Failure in directory on FTP server."
@@ -391,41 +379,41 @@ msgstr "Falha no diretório no servidor FTP."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "File for JPEG viewer does not exist."
-msgstr "O arquivo da folha de rosto não existe."
+msgstr "O arquivo para o visualizador de JPEG não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "File for PDF viewer does not exist."
-msgstr "O arquivo da folha de rosto não existe."
+msgstr "O arquivo para o visualizador de PDF não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "File for PNG viewer does not exist."
-msgstr "O arquivo da folha de rosto não existe."
+msgstr "O arquivo para o visualizador de PNG não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "File for TIFF viewer does not exist."
-msgstr "O arquivo da folha de rosto não existe."
+msgstr "O arquivo para o visualizador de TIFF não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "File for Text viewer does not exist."
-msgstr "O arquivo do certificado não existe."
+msgstr "O arquivo para o visualizador de TXT não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
-msgstr "O caminho do arquivo é muito grande"
+msgstr "O arquivo anexado é muito extenso."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "Filename template contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "O nome do arquivo modelo contem caracteres ilegais."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "Ftp directory path is invalid ftp path."
-msgstr "O caminho da pasta é inválido"
+msgstr "O caminho da pasta FTP é inválido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
@@ -528,24 +516,29 @@ msgid "PDF Architect could not open output file."
 msgstr "O PDF Architect não pode abrir o arquivo de saída."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Path for JPEG viewer is empty."
-msgstr ""
+msgstr "O arquivo para o visualizador de JPEG está vazio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Path for PDF viewer is empty."
-msgstr ""
+msgstr "O arquivo para o visualizador de PDF está vazio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Path for PNG viewer is empty."
-msgstr ""
+msgstr "O arquivo para o visualizador de PNG está vazio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Path for TIFF viewer is empty."
-msgstr ""
+msgstr "O arquivo para o visualizador de TIFF está vazio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Path for Text viewer is empty."
-msgstr ""
+msgstr "O arquivo para o visualizador de arquivos de texto (TXT) está vazio."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
@@ -584,16 +577,17 @@ msgstr "O sistema não pode abrir o arquivo de saída."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "Target directory contains illegal characters."
-msgstr "O arquivo do script contem caracteres ilegais."
+msgstr "A pasta de destino contem caracteres ilegais."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 #, fuzzy
 msgid "Target directory is invalid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+msgstr "O caminho da pasta de destino é inválido. Por favor, digite um caminho absoluto válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
 msgid "Target directory is too long."
-msgstr ""
+msgstr "A pasta de destino é muito longa."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
@@ -1005,12 +999,17 @@ msgstr ""
 "Você quer verificar sua licença agora?"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+#, fuzzy
 msgid ""
 "Your trial has expired on {0}.\n"
 "PDFCreator will shut down.\n"
 "\n"
 "Please contact: licensing@pdfforge.org"
 msgstr ""
+"O modo de avaliação termina em {0}.\n"
+"O PDFCreator será encerrado.\n"
+"\n"
+"Por favor, contate: licensing@pdfforge.org"
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
@@ -1183,16 +1182,15 @@ msgstr "Erro Durante a Exclusão"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 #, fuzzy
 msgid "Default Viewer"
-msgstr "Impressora Padrão"
+msgstr "Impressora padrão"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to save anyway?"
 msgstr "Você quer salvar assim mesmo?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
-#, fuzzy
 msgid "Do you want to save your changes?"
-msgstr "Você quer continuar e salvar suas alterações?"
+msgstr "Você quer salvar suas alterações?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 #, fuzzy
@@ -1649,11 +1647,12 @@ msgstr "Enviar com FTP"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 #, fuzzy
 msgid "Viewer not found"
-msgstr "A ferramenta de reparo não foi encontrada"
+msgstr "O visualizador não foi encontrado"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#, fuzzy
 msgid "Viewer was not found, please check your settings."
-msgstr ""
+msgstr "O visualizador não foi encontrado. Por favor, verifique as suas configurações."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
@@ -2880,20 +2879,22 @@ msgstr ""
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 #, fuzzy
 msgid "Additional Parameters:"
-msgstr "Parâmetros Adicionais do Script:"
+msgstr "Parâmetros adicionais do script:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 #, fuzzy
 msgid "Executable Path:"
-msgstr "Arquivos executáveis"
+msgstr "Caminho para os arquivos executáveis:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
 msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
-msgstr ""
+msgstr "Aqui você pode configurar um programa para visualizador os documentos que gerou. Será o usado o programa padrão definido no Windows se você não selecionar nada aqui."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
 msgid "Viewer"
-msgstr ""
+msgstr "Visualizador"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"

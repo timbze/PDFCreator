@@ -86,7 +86,7 @@ namespace Presentation.UnitTest.UserControls.Profile
         {
             _viewModel = new SignUserControlViewModel(_openFileInteractionHelper,
                 _editionHintOptionProvider, _translationUpdater, _currentSettingsProvider,
-                _commandLocator, _signaturePasswordCheck, _file, new TokenViewModelFactory(_currentSettingsProvider, _tokenHelper));
+                _commandLocator, _signaturePasswordCheck, _file, new TokenViewModelFactory(_currentSettingsProvider, _tokenHelper), null);
         }
 
         [Test]

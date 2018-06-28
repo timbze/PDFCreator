@@ -44,8 +44,8 @@ msgstr[1] "Signering forhindres for disse profiler."
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "and {0} more."
 msgid_plural "and {0} more."
-msgstr[0] "og {0} til."
-msgstr[1] "og {0} til."
+msgstr[0] "og {0} yderligere."
+msgstr[1] "og {0} yderligere."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
@@ -54,8 +54,8 @@ msgstr[1] "og {0} til."
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "The FTP action will be disabled for this profile."
 msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "FTP-handling forhindres for denne profil."
-msgstr[1] "FTP-handling forhindres for disse profiler."
+msgstr[0] "FTP-handlingen vil blive deaktiveret for denne profil."
+msgstr[1] "FTP-handlingen vil blive deaktiveret for disse profiler."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
@@ -162,7 +162,7 @@ msgstr "Vedhæftningen findes ikke."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file is no PDF file."
-msgstr "Vedhæftede fil er ikke en PDF."
+msgstr "Den vedhæftede fil er ikke en PDF-fil."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment path contains illegal characters."
@@ -198,7 +198,7 @@ msgstr "Gem automatisk uden adgangskode til HTTP-autentificering."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without target directory."
-msgstr "Gem automatisk uden målmappe."
+msgstr "Gem automatisk uden destinationsmappe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without user password."
@@ -242,7 +242,7 @@ msgstr "Certifikatstien er for lang."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
-msgstr "Kunne ikke godkendes på SMTP-server."
+msgstr "Kunne ikke autorisere på SMTP-server."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not login to FTP server."
@@ -657,7 +657,7 @@ msgstr "Bruger afbrød indtastning af SMTP-e-mailadgangskode."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
-msgstr "En PDF-fil, der er beskyttet med adgangskode, er udskrevet og Ghostscript kan ikke konvertere sådanne filer."
+msgstr "Du har udskrevet en adgangskodebeskyttet PDF-fil, og Ghostscript kan ikke konvertere sådanne filer."
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.BackgroundRepetition
 msgid "No repetition"
@@ -754,7 +754,7 @@ msgstr "Miniaturer vises"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Long edge turn"
-msgstr "Vend på langs"
+msgstr "Vend om den lange kant"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "No duplex printing"
@@ -762,7 +762,7 @@ msgstr "Ikke duplex"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.DuplexPrint
 msgid "Short edge turn"
-msgstr "Vend til stående"
+msgstr "Vend om den korte kant"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.JpegColor
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.PngColor
@@ -836,7 +836,7 @@ msgstr "Slut"
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
 msgid "RegEx"
-msgstr "RegEx"
+msgstr "Regulært udtryk"
 
 #: pdfforge.PDFCreator.Conversion.Settings.Enums.ReplacementType
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation
@@ -1060,8 +1060,8 @@ msgid ""
 "\n"
 "Note: You might be asked to grant admin privileges while fixing the problem."
 msgstr ""
-"Der er ikke installeret en PDFCreator printer. Sandsynligvis var der et problem under opsætningen eller installationen er ændret efterfølgende.\n"
-"Skal dette ordnes ved at geninstallere PDFCreator printer(ne)?\n"
+"Der er ikke installeret en PDFCreator-printer. Sandsynligvis var der et problem under opsætningen eller installationen er ændret efterfølgende.\n"
+"Skal dette ordnes ved at geninstallere PDFCreator-printer(ne)?\n"
 "\n"
 "Bemærk: Der kræves sandsynligvis administratorrettigheder."
 
@@ -1171,7 +1171,7 @@ msgstr "Gem alligevel?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to save your changes?"
-msgstr "Gem ændringerne?"
+msgstr "Vil du gemme ændringerne?"
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "PDFCreator Settings"
@@ -1195,7 +1195,7 @@ msgstr "Sat af administrator"
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
 msgid "These settings have been set by your administrator and can't be changed."
-msgstr "Indstillet af administrator. Det kan ikke ændres."
+msgstr "Disse indstillinger er sat af din administrator og kan ikke ændres."
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by PDFCreator"
@@ -1658,7 +1658,7 @@ msgstr "URL:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Attach pdfforge signature"
-msgstr "Vedhæft pdfforge signatur"
+msgstr "Vedhæft pdfforge-signatur"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "AttachmentFile"
@@ -1681,7 +1681,7 @@ msgstr "E-mailadresse:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
 msgid "Edit E-mail Text"
-msgstr "Rediger tekst i  e-mail"
+msgstr "Rediger tekst i e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Edit SMTP Account"
@@ -1726,7 +1726,7 @@ msgstr "SSL"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send Test E-mail"
-msgstr "Send test e-mail"
+msgstr "Send test-e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Send e-mail via SMTP"
@@ -1747,7 +1747,7 @@ msgstr "Til:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Use Html"
-msgstr "Brug Html"
+msgstr "Brug HTML"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "_Subject:"
@@ -2028,11 +2028,11 @@ msgstr "BUSINESS FUNKTION"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "PLUS FEATURE"
-msgstr "PLUS FUNKTION"
+msgstr "PLUS-FUNKTION"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "Unlock the premium features with PDFCreator Plus!"
-msgstr "Adgang til premium funktioner med PDFCreator Plus!"
+msgstr "Oplås premium-funktioner med PDFCreator Plus!"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
 msgid "You need PDFCreator Business or PDFCreator Terminal Server for this feature. Click for more information."
@@ -2170,11 +2170,11 @@ msgstr "Hurtige handlinger"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by"
-msgstr "Sendt af"
+msgstr "Send via"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Send by e-mail"
-msgstr "Send med e-mail"
+msgstr "Send via e-mail"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Total file size:"
@@ -2271,7 +2271,7 @@ msgstr "Vent til udførelsen af script er slut"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "Define your own tokens directly in the original document with the following pattern: \"[[[UserTokenName: User token value]]]\". Afterwards the definied value can be called via the following token: \"<User:UserTokenName>\". The original pattern will be removed from the created document. You can define any number of user tokens. You can find more information in the user guide:"
-msgstr "Definer egne tokens direkte i originaldokumentet efter dette mønster: \"[[[UserTokenName: Bruger token værdi]]]\". Efterfølgende kan den definerede værdi kaldes med følgende token: \"<User:UserTokenName>\". Det originale mønster fjernes fra det oprettede dokument. Der kan defineres et vilkårligt antal af bruger tokens. Se mere information i denne guide:"
+msgstr "Definer egne tokens direkte i originaldokumentet efter dette mønster: \"[[[Brugertokennavn: Brugertokenværdi]]]\". Efterfølgende kan den definerede værdi kaldes med følgende token: \"<User:Brugertokennavn>\". Det originale mønster vil blive fjernet fra det oprettede dokument. Du kan definere et vilkårligt antal brugertokens. Se mere information i denne guide:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "Extract UserTokens"
@@ -2349,7 +2349,7 @@ msgstr "Forside"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 msgid "Modify"
-msgstr "Ændre"
+msgstr "Ændr"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.ProfileModifyTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp.DocumentTabTranslation
@@ -2459,7 +2459,7 @@ msgstr "Adgangskoder"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "This is not considered secure anymore. Use this for compatibility only."
-msgstr "Dette betragtes ikke mere som sikkert. Brug kun til kompatibilitet."
+msgstr "Dette betragtes ikke længere som sikkert. Brug kun til kompatibilitet."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "restrict to low quality"
@@ -2587,7 +2587,7 @@ msgstr "Duplex (hvis printeren kan det)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Print"
-msgstr "Print"
+msgstr "Udskriv"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Print.PrintTabTranslation
 msgid "Print document"
@@ -2659,7 +2659,7 @@ msgstr "Eksempel:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Resample images to"
-msgstr "Nedsample billeder til"
+msgstr "Sænk opløsning til"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPdfTranslation
 msgid "Viewer Settings"
@@ -2755,7 +2755,7 @@ msgstr "Åbn den gemte fil"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Show quick actions after the documents were converted"
-msgstr "Vis hurtige handlinger efter dokumenter var konverteret"
+msgstr "Vis hurtige handlinger efter dokumenterne er konverteret"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Shows a window to select the filename, output format etc."
@@ -2787,7 +2787,7 @@ msgstr "Standardindstillinger"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Do you really want to restore the default settings? The current settings will be lost."
-msgstr "Skal standardindstillingerne retableres? Nuværende indstillinger går så tabt."
+msgstr "Skal standardindstillingerne virkelig genoprettes? De nuværende indstillinger vil gå tabt."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSettings.DebugSettingsTranslation
 msgid "Export Settings"

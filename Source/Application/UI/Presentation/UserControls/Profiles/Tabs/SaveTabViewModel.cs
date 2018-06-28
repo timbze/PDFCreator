@@ -1,4 +1,5 @@
-﻿using pdfforge.PDFCreator.Conversion.Settings;
+﻿using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.Controls;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
@@ -27,8 +28,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs
 
         public SaveTabViewModel(TokenButtonFunctionProvider buttonFunctionProvider, ISelectedProfileProvider selectedProfileProvider,
             ITranslationUpdater translationUpdater, EditionHintOptionProvider editionHintOptionProvider, TokenHelper tokenHelper,
-            ITokenViewModelFactory tokenViewModelFactory)
-            : base(translationUpdater, selectedProfileProvider)
+            ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher)
+            : base(translationUpdater, selectedProfileProvider, dispatcher)
         {
             AllowSkipPrintDialog = !editionHintOptionProvider.ShowOnlyForPlusAndBusinessHint;
             _buttonFunctionProvider = buttonFunctionProvider;

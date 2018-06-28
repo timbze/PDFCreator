@@ -113,6 +113,9 @@ msgstr ""
 msgid "Do you want to cancel the setup?"
 msgstr ""
 
+msgid "Do you want to proceed with the installation?"
+msgstr ""
+
 msgid "Donate to PDFCreator"
 msgstr ""
 
@@ -389,6 +392,9 @@ msgstr ""
 msgid "Printer name"
 msgstr ""
 
+msgid "Privacy Policy"
+msgstr ""
+
 msgid "Proxy authentication required (407)"
 msgstr ""
 
@@ -527,6 +533,9 @@ msgstr ""
 msgid "The service needs to be able to contact 'license.pdfforge.org' and have permission to write to HKLM."
 msgstr ""
 
+msgid "The setup detected that this computer is part of a Windows domain. There is no support for {#Edition} in Windows domains anymore!%n%nPlease use PDFCreator Business. You can find more information here:%nhttps://go.pdfforge.org/pdfcreator-business/upgrade%n%nBy clicking on 'Yes' you confirm you aren't installing {#Edition} in an enterprise environment!"
+msgstr ""
+
 msgid "The setup will be canceled."
 msgstr ""
 
@@ -549,6 +558,12 @@ msgid "This version doesn't support the server mode. Do you want install this ve
 msgstr ""
 
 msgid "This version is not covered by your license key! Please renew your license on %1."
+msgstr ""
+
+msgid "To continue the installation on this machine, you will first need to purchase additional licenses.%nTo add more licenses to your existing key, please send your current key and the amount of licenses you'd like to add to licensing@pdfforge.org."
+msgstr ""
+
+msgid "To continue with the installation, you need to revoke your previous activations in our license portal license.pdfforge.org.%n%nThis step is required because the new version will generate a different machine ID, which is more resistant towards Windows updates and system changes.%n%nIf you need help, please contact our Support team at support@pdfforge.org."
 msgstr ""
 
 msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."

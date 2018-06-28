@@ -1,9 +1,9 @@
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-msgid "The Dropbox upload will be disabled for this profile."
-msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "Der Dropbox-Upload wird für dieses Profil deaktiviert."
-msgstr[1] "Der Dropbox-Upload wird für diese Profile deaktiviert."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "The profile is mapped to the following printer:"
+msgid_plural "The profile is mapped to the following printers:"
+msgstr[0] "Das Profil ist dem folgenden Drucker zugeordnet:"
+msgstr[1] "Das Profil ist den folgenden Druckern zugeordnet:"
 
 msgid ""
 msgstr ""
@@ -18,25 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 2.0.6\n"
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Delete File"
-msgid_plural "Delete Files"
-msgstr[0] "Datei löschen"
-msgstr[1] "Dateien löschen"
-
 #. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
 msgid "Do you want to convert the {0} selected file?"
 msgid_plural "Do you want to convert the {0} selected files?"
 msgstr[0] "Möchten Sie die {0} ausgewählte Datei überschreiben?"
 msgstr[1] "Möchten Sie die {0} ausgewählten Dateien überschreiben?"
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Are you sure you want to delete the following file?"
-msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] "Sind Sie sicher, dass Sie die folgende Datei löschen möchten?"
-msgstr[1] "Sind Sie sicher, dass Sie die folgenden Dateien löschen möchten?"
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+msgid "Signing will be disabled for this profile."
+msgid_plural "Signing will be disabled for this profiles."
+msgstr[0] "Signieren wird für dieses Profil deaktiviert."
+msgstr[1] "Signieren wird für diese Profile deaktiviert."
 
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
@@ -45,24 +38,12 @@ msgid_plural "and {0} more."
 msgstr[0] "und {0} weitere."
 msgstr[1] "und {0} weitere."
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid ""
-"Could not delete the following file.\n"
-"Maybe the file is currently in use.\n"
-"Please try again later."
-msgid_plural ""
-"Could not delete the following files.\n"
-"Maybe the files are currently in use.\n"
-"Please try again later."
-msgstr[0] ""
-"Die folgende Datei konnte nicht gelöscht werden.\n"
-"Vielleicht ist sie gerade in Verwendung.\n"
-"Bitte versuchen Sie es später erneut."
-msgstr[1] ""
-"Die folgenden Dateien konnten nicht gelöscht werden.\n"
-"Vielleicht sind sie gerade in Verwendung.\n"
-"Bitte versuchen Sie es später erneut."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "The FTP action will be disabled for this profile."
+msgid_plural "The FTP action will be disabled for this profiles."
+msgstr[0] "Die FTP-Aktion wird für dieses Profil deaktiviert."
+msgstr[1] "Die FTP-Aktion wird für diese Profile deaktiviert."
 
 # pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
 # pdfforge.PDFCreator.UI.ViewModels.WindowViewModels.Translations.PlusHintWindowTranslation
@@ -73,6 +54,13 @@ msgid "You have already converted {0} file!"
 msgid_plural "You have already converted {0} files!"
 msgstr[0] "Sie haben bereits {0} Datei konvertiert!"
 msgstr[1] "Sie haben bereits {0} Dateien konvertiert!"
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+msgid "The HTTP action will be disabled for this profile."
+msgid_plural "The HTTP action will be disabled for this profiles."
+msgstr[0] "Die HTTP-Aktion wird für dieses Profil deaktiviert."
+msgstr[1] "Die HTTP-Aktion wird für diese Profile deaktiviert."
 
 # pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
@@ -95,33 +83,45 @@ msgid_plural "The account is used in the following profiles:"
 msgstr[0] "Dieses Konto wird in folgendem Profil verwendet:"
 msgstr[1] "Dieses Konto wird in folgenden Profilen verwendet:"
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "The profile is mapped to the following printer:"
-msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] "Das Profil ist dem folgenden Drucker zugeordnet:"
-msgstr[1] "Das Profil ist den folgenden Druckern zugeordnet:"
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+msgid "The Dropbox upload will be disabled for this profile."
+msgid_plural "The Dropbox upload will be disabled for this profiles."
+msgstr[0] "Der Dropbox-Upload wird für dieses Profil deaktiviert."
+msgstr[1] "Der Dropbox-Upload wird für diese Profile deaktiviert."
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-msgid "Signing will be disabled for this profile."
-msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "Signieren wird für dieses Profil deaktiviert."
-msgstr[1] "Signieren wird für diese Profile deaktiviert."
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Delete File"
+msgid_plural "Delete Files"
+msgstr[0] "Datei löschen"
+msgstr[1] "Dateien löschen"
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "The FTP action will be disabled for this profile."
-msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "Die FTP-Aktion wird für dieses Profil deaktiviert."
-msgstr[1] "Die FTP-Aktion wird für diese Profile deaktiviert."
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Are you sure you want to delete the following file?"
+msgid_plural "Are you sure you want to delete the following files?"
+msgstr[0] "Sind Sie sicher, dass Sie die folgende Datei löschen möchten?"
+msgstr[1] "Sind Sie sicher, dass Sie die folgenden Dateien löschen möchten?"
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-msgid "The HTTP action will be disabled for this profile."
-msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] "Die HTTP-Aktion wird für dieses Profil deaktiviert."
-msgstr[1] "Die HTTP-Aktion wird für diese Profile deaktiviert."
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid ""
+"Could not delete the following file.\n"
+"Maybe the file is currently in use.\n"
+"Please try again later."
+msgid_plural ""
+"Could not delete the following files.\n"
+"Maybe the files are currently in use.\n"
+"Please try again later."
+msgstr[0] ""
+"Die folgende Datei konnte nicht gelöscht werden.\n"
+"Vielleicht ist sie gerade in Verwendung.\n"
+"Bitte versuchen Sie es später erneut."
+msgstr[1] ""
+"Die folgenden Dateien konnten nicht gelöscht werden.\n"
+"Vielleicht sind sie gerade in Verwendung.\n"
+"Bitte versuchen Sie es später erneut."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
@@ -2428,7 +2428,7 @@ msgstr "Passwörter hinterlegen"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "This is not considered secure anymore. Use this for compatibility only."
-msgstr "Dies wird inzwischen als unsicher erachtet. Nur für Komptabilität verwenden."
+msgstr "Dies wird inzwischen als unsicher erachtet. Nur für Kompatibilität verwenden."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Encrypt.EncryptUserControlTranslation
 msgid "restrict to low quality"

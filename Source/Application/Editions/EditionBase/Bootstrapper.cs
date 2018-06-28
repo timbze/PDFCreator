@@ -260,7 +260,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<IMaybePipedApplicationStarter, MaybePipedApplicationStarter>();
             container.Register<ITokenReplacerFactory, TokenReplacerFactory>();
 
-            container.RegisterSingleton<ISettingsLoader, SettingsLoader>();
             container.RegisterSingleton<ISettingsChanged, SettingsChanged>();
 
             container.RegisterSingleton<IJobHistoryStorage, JobHistoryJsonFileStorage>();
@@ -296,6 +295,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             container.RegisterSingleton<IGpoSettings>(GetGpoSettings);
 
+            RegisterSettingsLoader(container);
             RegisterCurrentSettingsProvider(container);
             RegisterFolderProvider(container);
             RegisterUserGuideHelper(container);
@@ -354,6 +354,8 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
                 typeof(ResetShowQuickActionCommand)
             });
         }
+
+        protected abstract void RegisterSettingsLoader(Container container);
 
         protected abstract void RegisterUpdateAssistant(Container container);
 

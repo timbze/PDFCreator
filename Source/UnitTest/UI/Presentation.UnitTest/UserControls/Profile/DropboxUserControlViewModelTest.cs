@@ -44,7 +44,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _addCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<DropboxAccountAddCommand>().Returns(_addCommand);
 
-            _viewModel = new DropboxUserControlViewModel(translationUpdater, settingsProvider, commandLocator, new TokenViewModelFactory(settingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
+            _viewModel = new DropboxUserControlViewModel(translationUpdater, settingsProvider, commandLocator, new TokenViewModelFactory(settingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())), null);
         }
 
         [Test]

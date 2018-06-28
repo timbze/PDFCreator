@@ -1,5 +1,6 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Trigger;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
@@ -38,7 +39,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailSmt
         private EmailSmtpSettings EmailSmtpSettings => CurrentProfile?.EmailSmtpSettings;
 
         public SmtpActionViewModel(IInteractionRequest interactionRequest, ISmtpTest smtpTest, ITranslationUpdater updater, ICurrentSettingsProvider currentSettingsProvider,
-            ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory) : base(updater, currentSettingsProvider)
+            ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory, IDispatcher dispatcher) : base(updater, currentSettingsProvider, dispatcher)
         {
             _interactionRequest = interactionRequest;
             _smtpTest = smtpTest;

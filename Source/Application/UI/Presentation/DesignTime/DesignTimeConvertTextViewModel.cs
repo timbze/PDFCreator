@@ -6,7 +6,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
 {
     public class DesignTimeConvertTextViewModel : ConvertTextViewModel
     {
-        public DesignTimeConvertTextViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimeConvertTextViewModel() : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null)
         {
             CurrentProfile.OutputFormat = OutputFormat.Txt;
         }

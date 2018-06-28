@@ -1747,7 +1747,7 @@ msgstr "A:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "Use Html"
-msgstr "Utilizza Html"
+msgstr "Utilizza HTML"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
 msgid "_Subject:"
@@ -2152,7 +2152,7 @@ msgstr "Conversione..."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Don't show quick Actions until the next update"
-msgstr "Non mostrare Azioni rapide fino al prossimo aggiornamento"
+msgstr "Non mostrare Azioni Rapide fino al prossimo aggiornamento"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
@@ -2863,7 +2863,7 @@ msgstr "Percorso eseguibile:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
-msgstr "Qui puoi impostare un programma personalizzato per visualizzare i tuoi documenti creati. Se qui non selezioni nulla sarà utilizzato il programma predefinito di Windows."
+msgstr "Qui puoi impostare un programma personalizzato per visualizzare i tuoi documenti creati. Il programma predefinito di Windows sarà utilizzato se  qui non selezioni nulla."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Viewer"

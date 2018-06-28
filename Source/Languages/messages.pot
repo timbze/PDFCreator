@@ -2578,7 +2578,7 @@ msgstr ""
 msgid "Error while copying the output file."
 msgstr ""
 
-#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
 msgstr ""
 
@@ -2754,7 +2754,7 @@ msgstr ""
 msgid "The path is not valid. Please enter a valid absolute path."
 msgstr ""
 
-#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The folder path is not valid or empty. Please enter a valid path. \nThe folder path must not contain any of the following characters: \n \\ / : * ? \\< >"
 msgstr ""
 

@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.TabHelper;
@@ -8,7 +9,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.Convert
 {
     public class ConvertTabViewModel : ProfileUserControlViewModel<ConvertTabTranslation>, ITabViewModel
     {
-        public ConvertTabViewModel(ITranslationUpdater updater, ISelectedProfileProvider selectedProfile) : base(updater, selectedProfile)
+        public ConvertTabViewModel(ITranslationUpdater updater, ISelectedProfileProvider selectedProfile, IDispatcher dispatcher) : base(updater, selectedProfile, dispatcher)
         {
             SetOutputFormatCommand = new DelegateCommand<OutputFormat>(SetOutputFormatExecute);
             CurrentProfileChanged += (sender, args) => RaisePropertyChanged(nameof(OutputFormat));

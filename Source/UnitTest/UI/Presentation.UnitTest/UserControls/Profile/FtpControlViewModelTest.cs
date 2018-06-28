@@ -54,7 +54,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _editCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<FtpAccountEditCommand>().Returns(_editCommand);
 
-            _viewModel = new FtpActionViewModel(tokenHelper, translationUpdater, settingsProvider, commandLocator, new TokenViewModelFactory(settingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
+            _viewModel = new FtpActionViewModel(tokenHelper, translationUpdater, settingsProvider, commandLocator, new TokenViewModelFactory(settingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())), null);
         }
 
         [Test]

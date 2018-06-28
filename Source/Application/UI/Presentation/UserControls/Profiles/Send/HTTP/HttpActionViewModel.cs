@@ -1,4 +1,5 @@
 ﻿using pdfforge.Obsidian;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
@@ -20,8 +21,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.HTTP
         public IMacroCommand EditAccountCommand { get; }
         public IMacroCommand AddAccountCommand { get; }
 
-        public HttpActionViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator)
-            : base(translationUpdater, currentSettingsProvider)
+        public HttpActionViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, IDispatcher dispatcher)
+            : base(translationUpdater, currentSettingsProvider, dispatcher)
         {
             if (currentSettingsProvider?.Settings != null)
             {
