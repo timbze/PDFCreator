@@ -5,7 +5,6 @@ using pdfforge.Obsidian.Trigger;
 using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License;
-using pdfforge.PDFCreator.UI.Presentation.Wrapper;
 using System;
 
 namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
@@ -13,7 +12,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
     internal class DesignTimeLicenseSettingsViewModel : LicenseSettingsViewModel
     {
         public DesignTimeLicenseSettingsViewModel()
-            : base(null, new DesignTimeLicenseChecker(), new UnlicensedOfflineActivator(), new InteractionRequest(), new DispatcherWrapper(), new DesignTimeTranslationUpdater(), null)
+            : base(null, new DesignTimeLicenseChecker(), new UnlicensedOfflineActivator(), new InteractionRequest(), new DesignTimeTranslationUpdater(), null)
         {
         }
     }

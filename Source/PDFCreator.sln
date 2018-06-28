@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Application\Conversion\Jobs\Jobs.csproj", "{18354054-45F6-4F51-8730-D05643A400A3}"
 EndProject
@@ -34,7 +34,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solutio
 		..\paket.dependencies = ..\paket.dependencies
 		..\ResourceHackerHelper.fsx = ..\ResourceHackerHelper.fsx
 		..\upload.fsx = ..\upload.fsx
-		..\userguideHelper.fsx = ..\userguideHelper.fsx
 		..\WeblateHelper.fsx = ..\WeblateHelper.fsx
 	EndProjectSection
 EndProject
@@ -184,6 +183,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings.UnitTest", "UnitTest\Conversion\SettingsUnitTest\Settings.UnitTest.csproj", "{DFD7AE01-4FD9-4F94-A290-5FE9230F5D0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComWrapper", "Application\Ui\ComWrapper\ComWrapper.csproj", "{33141A90-DEDC-4F9C-9C7B-C3C99DD9E20B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actions.UnitTest", "Actions.UnitTest\Actions.UnitTest.csproj", "{26DA0D64-A55C-445A-9CF4-C79FDB399945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -435,6 +436,10 @@ Global
 		{33141A90-DEDC-4F9C-9C7B-C3C99DD9E20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33141A90-DEDC-4F9C-9C7B-C3C99DD9E20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33141A90-DEDC-4F9C-9C7B-C3C99DD9E20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DA0D64-A55C-445A-9CF4-C79FDB399945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DA0D64-A55C-445A-9CF4-C79FDB399945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DA0D64-A55C-445A-9CF4-C79FDB399945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DA0D64-A55C-445A-9CF4-C79FDB399945}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -516,6 +521,7 @@ Global
 		{43110D5B-B2DD-44F1-9131-F88C6401DB39} = {F23AA6BA-784E-47B5-91F0-E18A5092C55F}
 		{DFD7AE01-4FD9-4F94-A290-5FE9230F5D0B} = {57114181-ADAD-4B4B-BE7F-2918B08A03C7}
 		{33141A90-DEDC-4F9C-9C7B-C3C99DD9E20B} = {A97C7679-B987-4DDA-93F9-699B3F373737}
+		{26DA0D64-A55C-445A-9CF4-C79FDB399945} = {57114181-ADAD-4B4B-BE7F-2918B08A03C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC8344E8-CE7D-4262-AB89-1D9010A3FBA9}

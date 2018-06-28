@@ -1,16 +1,17 @@
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "and {0} more."
-msgid_plural "and {0} more."
-msgstr[0] "i {0} fitxer més."
-msgstr[1] "i {0} fitxers més."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "The profile is mapped to the following printer:"
+msgid_plural "The profile is mapped to the following printers:"
+msgstr[0] "El perfil està assignat a la impressora següent:"
+msgstr[1] "El perfil està assignat a les impressores següents:"
 
 msgid ""
 msgstr ""
 "Project-Id-Version: Catalan (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Catalan <http://translate.pdfforge.org/projects/pdfcreator/messages/ca/>\n"
 "Language: ca\n"
@@ -20,28 +21,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
+# pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+msgid "Do you want to convert the {0} selected file?"
+msgid_plural "Do you want to convert the {0} selected files?"
+msgstr[0] "Voleu convertir el fitxer seleccionat?"
+msgstr[1] "Voleu convertir els {0} fitxers seleccionats?"
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+msgid "Signing will be disabled for this profile."
+msgid_plural "Signing will be disabled for this profiles."
+msgstr[0] "La signatura es desactivarà per a aquest perfil."
+msgstr[1] "La signatura es desactivarà per a aquests perfils."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Delete File"
-msgid_plural "Delete Files"
-msgstr[0] "Suprimeix el fitxer"
-msgstr[1] "Suprimeix els fitxers"
+msgid "and {0} more."
+msgid_plural "and {0} more."
+msgstr[0] "i {0} fitxer més."
+msgstr[1] "i {0} fitxers més."
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "This printer will be mapped to the default profile."
-msgid_plural "These printers will be mapped to the default profile."
-msgstr[0] "Aquesta impressora s'assignarà al perfil predeterminat."
-msgstr[1] "Aquestes impressores s'assignaran al perfil predeterminat."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "The FTP action will be disabled for this profile."
+msgid_plural "The FTP action will be disabled for this profiles."
+msgstr[0] "L'acció FTP es desactivarà per a aquest perfil."
+msgstr[1] "L'acció FTP es desactivarà per a aquests perfils."
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Are you sure you want to delete the following file?"
-msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] "Esteu segur que voleu suprimir el fitxer següent?"
-msgstr[1] "Esteu segur que voleu suprimir els fitxers següents?"
-
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
@@ -50,6 +67,76 @@ msgid_plural "You have already converted {0} files!"
 msgstr[0] "Ja heu convertit {0} fitxer!"
 msgstr[1] "Ja heu convertit {0} fitxers!"
 
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+msgid "The HTTP action will be disabled for this profile."
+msgid_plural "The HTTP action will be disabled for this profiles."
+msgstr[0] "L'acció HTTP es desactivarà per a aquest perfil."
+msgstr[1] "L'acció HTTP es desactivarà per a aquests perfils."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+msgid "The SMTP action will be disabled for this profile."
+msgid_plural "The SMTP action will be disabled for this profiles."
+msgstr[0] "L'acció SMTP es desactivarà per a aquest perfil."
+msgstr[1] "L'acció SMTP es desactivarà per a aquests perfils."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "This printer will be mapped to the default profile."
+msgid_plural "These printers will be mapped to the default profile."
+msgstr[0] "Aquesta impressora s'assignarà al perfil predeterminat."
+msgstr[1] "Aquestes impressores s'assignaran al perfil predeterminat."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+msgid "The account is used in the following profile:"
+msgid_plural "The account is used in the following profiles:"
+msgstr[0] "El compte s'usa en el perfil següent:"
+msgstr[1] "El compte s'usa en els perfils següents:"
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+msgid "The Dropbox upload will be disabled for this profile."
+msgid_plural "The Dropbox upload will be disabled for this profiles."
+msgstr[0] "La pujada a Dropbox es desactivarà per a aquest perfil."
+msgstr[1] "La pujada a Dropbox es desactivarà per a aquests perfils."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Delete File"
+msgid_plural "Delete Files"
+msgstr[0] "Suprimeix el fitxer"
+msgstr[1] "Suprimeix els fitxers"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Are you sure you want to delete the following file?"
+msgid_plural "Are you sure you want to delete the following files?"
+msgstr[0] "Esteu segur que voleu suprimir el fitxer següent?"
+msgstr[1] "Esteu segur que voleu suprimir els fitxers següents?"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid ""
@@ -69,70 +156,6 @@ msgstr[1] ""
 "Potser els fitxers estan en ús ara mateix.\n"
 "Torneu-ho a intentar més tard."
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-msgid "The HTTP action will be disabled for this profile."
-msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] "L'acció HTTP es desactivarà per a aquest perfil."
-msgstr[1] "L'acció HTTP es desactivarà per a aquests perfils."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-msgid "The account is used in the following profile:"
-msgid_plural "The account is used in the following profiles:"
-msgstr[0] "El compte s'usa en el perfil següent:"
-msgstr[1] "El compte s'usa en els perfils següents:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "The SMTP action will be disabled for this profile."
-msgid_plural "The SMTP action will be disabled for this profiles."
-msgstr[0] "L'acció SMTP es desactivarà per a aquest perfil."
-msgstr[1] "L'acció SMTP es desactivarà per a aquests perfils."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "The FTP action will be disabled for this profile."
-msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "L'acció FTP es desactivarà per a aquest perfil."
-msgstr[1] "L'acció FTP es desactivarà per a aquests perfils."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "The profile is mapped to the following printer:"
-msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] "El perfil està assignat a la impressora següent:"
-msgstr[1] "El perfil està assignat a les impressores següents:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "There is an issue with the profile '{0}':"
-msgid_plural "There are issues with the profile '{0}':"
-msgstr[0] "Hi ha un problema amb el perfil «{0}»:"
-msgstr[1] "Hi ha problemes amb el perfil «{0}»:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-msgid "Signing will be disabled for this profile."
-msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "La signatura es desactivarà per a aquest perfil."
-msgstr[1] "La signatura es desactivarà per a aquests perfils."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-msgid "The Dropbox upload will be disabled for this profile."
-msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "La pujada a Dropbox es desactivarà per a aquest perfil."
-msgstr[1] "La pujada a Dropbox es desactivarà per a aquests perfils."
-
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
 msgstr "El fitxer adjunt no existeix."
@@ -140,6 +163,18 @@ msgstr "El fitxer adjunt no existeix."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file is no PDF file."
 msgstr "El fitxer adjunt no és un document PDF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment path contains illegal characters."
+msgstr "El camí de l'adjunt conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment path is invalid absolute path."
+msgstr "El camí de l'adjunt no és una camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Attachment path is too long."
+msgstr "El camí de l'adjunt és massa llarg."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
@@ -178,8 +213,32 @@ msgid "Background file is no PDF file."
 msgstr "El fitxer de fons no és un document PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background path contains illegal characters."
+msgstr "El camí de fons conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background path is invalid absolute path."
+msgstr "El camí de fons no és un camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Background path is too long."
+msgstr "El camí és massa llarg."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "El certificat no existeix."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Certificate path contains illegal characters."
+msgstr "El camí del certificat conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Certificate path is invalid absolute path."
+msgstr "El camí del certificat no és un camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Certificate path is too long."
+msgstr "El camí del certificat és massa llarg."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
@@ -212,6 +271,22 @@ msgstr "No s'ha pogut pujar el fitxer al servidor FTP."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover file does not exist."
 msgstr "El fitxer de portada no existeix."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Cover path contains illegal characters."
+msgstr "El camí de la coberta conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Cover path is invalid absolute path."
+msgstr "El camí de la coberta no és una camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Cover path is too long."
+msgstr "El camí del fitxer és massa llarg."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Custom viewer was not found."
+msgstr "No s'ha trobat cap visor personalitzat."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
@@ -302,9 +377,36 @@ msgid "Failure in directory on FTP server."
 msgstr "Fallada en la carpeta en el servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+msgid "File for JPEG viewer does not exist."
+msgstr "No existeix cap fitxer per al visor JPEG."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "File for PDF viewer does not exist."
+msgstr "No existeix cap fitxer per al visor PDF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "File for PNG viewer does not exist."
+msgstr "No existeix cap fitxer per al visor PNG."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "File for TIFF viewer does not exist."
+msgstr "No existeix cap fitxer per al visor TIFF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "File for Text viewer does not exist."
+msgstr "No existeix cap fitxer per al visor de text."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
 msgstr "El camí del fitxer és massa llarg"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Filename template contains illegal characters."
+msgstr "La plantilla del nom de fitxer conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Ftp directory path is invalid ftp path."
+msgstr "El camí de la carpeta ftp no és vàlid."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
@@ -407,6 +509,26 @@ msgid "PDF Architect could not open output file."
 msgstr "El PDF Architect no pot obrir el fitxer de sortida."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for JPEG viewer is empty."
+msgstr "El camí del visor JPEG és buit."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PDF viewer is empty."
+msgstr "El camí del visor PDF és buit."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PNG viewer is empty."
+msgstr "El camí del visor PNG és buit."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for TIFF viewer is empty."
+msgstr "El camí del visor TIFF és buit."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for Text viewer is empty."
+msgstr "El camí del visor per al fitxer de text és buit."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
 msgstr "La carpeta preseleccionada per al diàleg desar és buida."
 
@@ -419,6 +541,14 @@ msgid "Script file does not exist."
 msgstr "El fitxer script no existeix."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "ScriptFile path is invalid absolute path."
+msgstr "El camí del fitxer script no és camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "ScriptFile path is too long."
+msgstr "El camí del fitxer script és massa llarg."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."
 msgstr "Servidor horari segur sense contrasenya."
 
@@ -429,6 +559,18 @@ msgstr "Servidor horari segur sense nom d'usuari."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "System could not open output file."
 msgstr "El sistema no pot obrir el fitxer de sortida."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Target directory contains illegal characters."
+msgstr "El camí del fitxer script conté caràcters no permesos."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Target directory is invalid absolute path."
+msgstr "El directori de destinació no és un camí absolut vàlid."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Target directory is too long."
+msgstr "El camí de destinació és massa llarg."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
@@ -445,6 +587,20 @@ msgstr "El fitxer de portada no és un document PDF."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The default printer is invalid."
 msgstr "La impressora predeterminada no és vàlida."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid ""
+"The folder path is not valid or empty. Please enter a valid path. \n"
+"The folder path must not contain any of the following characters: \n"
+" \\ / : * ? \\< >"
+msgstr ""
+"El camí de la carpeta no és vàlid o és buit. Introduïu un camí vàlid.\n"
+"El camí de la carpeta no pot contenir cap dels caràcters següents:\n"
+" \\ / : * ? \\< >"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The path is not valid. Please enter a valid absolute path."
+msgstr "El camí no és vàlid. Introduïu un camí absolut vàlid."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The selected printer is invalid."
@@ -825,6 +981,18 @@ msgstr ""
 "La llicència per a «{0}» no és vàlida o ha caducat. Verifiqueu la llicència; en cas contrari es tancarà el PDFCreator.\n"
 "Voleu verificar la llicència ara?"
 
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your trial has expired on {0}.\n"
+"PDFCreator will shut down.\n"
+"\n"
+"Please contact: licensing@pdfforge.org"
+msgstr ""
+"Ha caducat el període de proves el {0}.\n"
+"Es tancarà el PDFCreator.\n"
+"\n"
+"Contacteu amb: licensing@pdfforge.org"
+
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
 "Can't find a supported Ghostscript installation.\n"
@@ -856,6 +1024,7 @@ msgstr "Falta un fitxer important del PDFCreator ('{0}'). Torneu a instal·lar e
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Error"
 msgstr "Error"
@@ -905,6 +1074,7 @@ msgid "INI files (*.ini)|*.ini"
 msgstr "Fitxers INI (*.ini)|*.ini"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 msgid "Invalid settings"
 msgstr "Els paràmetres no són vàlids"
 
@@ -917,6 +1087,7 @@ msgid "The file does not appear to contain valid PDFCreator settings."
 msgstr "El fitxer no conté paràmetres vàlids del PDFCreator."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to proceed anyway?"
 msgstr "Voleu processar-ho igualment?"
 
@@ -985,17 +1156,30 @@ msgstr ""
 "Aquesta operació requereix drets d'administrador i sembla que no teniu aquests privilegis. Voleu continuar igualment?\n"
 "Nota: És segur continuar fins i tot si no esteu segurs que teniu els drets apropiats, perquè l'operació no es podrà completar."
 
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Do you want to continue and save your changes?"
-msgstr "Voleu continuar i desar els canvis?"
-
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Save Settings"
-msgstr "Desa la configuració"
-
 #: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Error During Deletion"
 msgstr "S'ha produït un error durant la supressió"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Default Viewer"
+msgstr "Visor per defecte"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "Do you want to save anyway?"
+msgstr "Voleu desar-ho de totes formes?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "Do you want to save your changes?"
+msgstr "Voleu desar els canvis?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "PDFCreator Settings"
+msgstr "Configuració del PDFCreator"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "You have invalid settings."
+msgstr "Els paràmetres no són vàlids."
 
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
@@ -1107,6 +1291,11 @@ msgstr "El PDFCreator és programari gratuït que conté múltiples components a
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Please read the license section in the manual for further information on these licenses."
 msgstr "Per a més informació, feu un cop d'ull a la secció Llicències del manual d'usuari."
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
+msgid "Priority Support"
+msgstr "Suport prioritari"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "User Manual"
@@ -1434,6 +1623,14 @@ msgstr "Suprimeix el compte FTP"
 msgid "Upload with FTP"
 msgstr "Contrasenya Servidor"
 
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "Viewer not found"
+msgstr "No s'ha trobat cap visor"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "Viewer was not found, please check your settings."
+msgstr "No s'ha trobat cap visor. Verifiqueu la configuració."
+
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
 msgstr "Autenticació bàsica"
@@ -1646,7 +1843,6 @@ msgstr "Ja teniu el PDF Architect en l'ordinador"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Dialogs.InputBoxWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "_Cancel"
@@ -1675,10 +1871,6 @@ msgstr "Trieu el fitxer per convertir"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Clear History"
 msgstr "Buida l'historial"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
-msgid "Creation Date:"
-msgstr "Data de creació:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Delete"
@@ -1903,50 +2095,16 @@ msgid "Confirm Save As"
 msgstr "Confirma Anomena i desa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Defective Profile"
-msgstr "Perfil defectuós"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit"
 msgstr "Edita"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Edit the profile or select another one."
-msgstr "Modifiqueu el perfil o seleccioneu-ne un altre."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File_name:"
 msgstr "_Nom del fitxer:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Folder path is not valid"
-msgstr "El camí de la carpeta no és vàlid"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Invalid path"
-msgstr "Camí no vàlid"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "S_ubject:"
 msgstr "Ass_umpte:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid ""
-"The folder path is not valid or empty. Please enter a valid path. \n"
-"The folder path must not contain any of the following characters: \n"
-" \\ / : * ? \\< >"
-msgstr ""
-"El camí de la carpeta no és vàlid o és buit. Introduïu un camí vàlid.\n"
-"El camí de la carpeta no pot contenir cap dels caràcters següents:\n"
-" \\ / : * ? \\< >"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path is not valid. Please enter a valid absolute path."
-msgstr "El camí no és vàlid. Introduïu un camí absolut vàlid."
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path."
-msgstr "El camí al fitxer sobrepassa el màxim de {0} caràcters permesos, seleccioneu un camí més curt."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Author:"
@@ -2082,10 +2240,12 @@ msgstr "Paràmetres Addicionals Script:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "All files"
 msgstr "Tots els fitxers"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Executable files"
 msgstr "Fitxers executables"
 
@@ -2120,27 +2280,6 @@ msgstr "Extreu els identificadors d'usuari"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "More on user tokens"
 msgstr "Més sobre els identificadors d'usuari"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Defective Profiles"
-msgstr "Perfils defectuosos"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Do you want to save anyway?"
-msgstr "Voleu desar-ho de totes formes?"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "Profile:"
-msgstr "Perfils:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "The settings contain the following problems:"
-msgstr "S'han trobat errors a la configuració:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "_Save"
-msgstr "De_sa"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Add attachment"
@@ -2265,6 +2404,10 @@ msgstr "Escriviu el nom del perfil nou:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Please enter profile name:"
 msgstr "Escriviu el nom del perfil:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "Profile:"
+msgstr "Perfils:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Remove Profile"
@@ -2623,10 +2766,6 @@ msgid "Skip print dialog (start with save dialog)"
 msgstr "Omet la finestra d'impressió (inicia amb l'opció Desa)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
-msgid "Skip the print dialog and directly proceed to the save file dialog"
-msgstr "Omet el diàleg d'impressió i vés directament al diàleg de desament"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Use PDF Architect for PDF files"
 msgstr "Associa el PDF Architect per als fitxers PDF"
 
@@ -2713,6 +2852,22 @@ msgid ""
 msgstr ""
 "Heu modificat la configuració. Per imprimir una pàgina de prova amb la configuració nova, primer l'heu de desar.\n"
 "Voleu desar la configuració ara?"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Additional Parameters:"
+msgstr "Paràmetres Addicionals:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Executable Path:"
+msgstr "Camí de l'executable:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
+msgstr "Aquí podeu configurar una aplicació personalitzada per a visualitzar els documents generats. S'utilitzarà l'aplicació predeterminada al Windows si no n'indiqueu cap."
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Viewer"
+msgstr "Visor"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"
@@ -3042,10 +3197,6 @@ msgid "Blog"
 msgstr "Blog"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
-msgid "Priority Support"
-msgstr "Suport prioritari"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
 msgstr "Gràcies per baixar el PDFCreator."
 
@@ -3129,10 +3280,6 @@ msgstr ""
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "Loading Update..."
 msgstr "S'està carregant l'actualització..."
-
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
-msgid "PDFCreator Plus Updater"
-msgstr "Actualitzador del PDFCreator Plus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "The update will be started when you close PDFCreator"

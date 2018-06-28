@@ -20,19 +20,19 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         MailClient_GenericError = 11999,
 
         [Translation("No certification file is specified.")]
-        ProfileCheck_NoCertificationFileSpecified = 12100,
+        ProfileCheck_NoCertificationFile = 12100,
 
         [Translation("Certificate file does not exist.")]
-        ProfileCheck_CertificateFileDoesNotExist = 12101,
+        CertificateFile_CertificateFileDoesNotExist = 12101,
 
         [Translation("Automatic saving without certificate password.")]
-        ProfileCheck_AutoSaveWithoutCertificatePassword = 12102,
+        Signature_AutoSaveWithoutCertificatePassword = 12102,
 
         [Translation("Secured Time Server without user name.")]
-        ProfileCheck_SecureTimeServerWithoutUsername = 12103,
+        Signature_SecuredTimeServerWithoutUsername = 12103,
 
         [Translation("Secured Time Server without password.")]
-        ProfileCheck_SecureTimeServerWithoutPassword = 12104,
+        Signature_SecuredTimeServerWithoutPassword = 12104,
 
         [Translation("The certificate password is wrong.")]
         Signature_WrongCertificatePassword = 12200,
@@ -78,6 +78,12 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("Script file contains illegal characters.")]
         Script_IllegalCharacters = 14102,
+
+        [Translation("ScriptFile path is invalid absolute path.")]
+        Script_InvalidRootedPath = 14103,
+
+        [Translation("ScriptFile path is too long.")]
+        Script_PathTooLong = 14104,
 
         [Translation("Error while running the script action.")]
         Script_GenericError = 14999,
@@ -187,6 +193,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         [Translation("Automatic saving without filename template.")]
         AutoSave_NoFilenameTemplate = 21101,
 
+        [Translation("Filename template contains illegal characters.")]
+        FilenameTemplate_IllegalCharacters = 21102,
+
         [Translation("No cover file is specified.")]
         Cover_NoFileSpecified = 22100,
 
@@ -288,5 +297,101 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("Error while trying to log-in.")]
         PasswordAction_Login_Error = 33001,
+
+        [Translation("Automatic saving without target directory.")]
+        TargetDirectory_NotSetForAutoSave = 34001,
+
+        [Translation("Target directory is invalid absolute path.")]
+        TargetDirectory_InvalidRootedPath = 34002,
+
+        [Translation("Target directory is too long.")]
+        TargetDirectory_TooLong = 34003,
+
+        [Translation("Target directory contains illegal characters.")]
+        TargetDirectory_IllegalCharacters = 34004,
+
+        [Translation("Cover path is invalid absolute path.")]
+        CoverPage_InvalidRootedPath = 35001,
+
+        [Translation("Cover path is too long.")]
+        CoverPage_TooLong = 35002,
+
+        [Translation("Cover path contains illegal characters.")]
+        CoverPage_IllegalCharacters = 35003,
+
+        [Translation("Background path is invalid absolute path.")]
+        BackgroundPage_InvalidRootedPath = 36001,
+
+        [Translation("Background path is too long.")]
+        BackgroundPage_TooLong = 36002,
+
+        [Translation("Background path contains illegal characters.")]
+        BackgroundPage_IllegalCharacters = 36003,
+
+        [Translation("Attachment path is invalid absolute path.")]
+        AttachmentPage_InvalidRootedPath = 37001,
+
+        [Translation("Attachment path is too long.")]
+        AttachmentPage_TooLong = 37002,
+
+        [Translation("Attachment path contains illegal characters.")]
+        AttachmentPage_IllegalCharacters = 37003,
+
+        [Translation("Certificate path is invalid absolute path.")]
+        CertificateFile_InvalidRootedPath = 38001,
+
+        [Translation("Certificate path is too long.")]
+        CertificateFile_TooLong = 38002,
+
+        [Translation("Certificate path contains illegal characters.")]
+        CertificateFile_IllegalCharacters = 38003,
+
+        [Translation("Ftp directory path is invalid ftp path.")]
+        FtpDirectory_InvalidFtpPath = 40001,
+
+        [Translation("Custom viewer was not found.")]
+        DefaultViewer_Not_Found = 41000,
+
+        [Translation("Path for PDF viewer is empty.")]
+        DefaultViewer_PathIsEmpty_for_Pdf = 41001,
+
+        [Translation("File for PDF viewer does not exist.")]
+        DefaultViewer_FileDoesNotExist_For_Pdf = 41002,
+
+        [Translation("Path for JPEG viewer is empty.")]
+        DefaultViewer_PathIsEmpty_for_Jpeg = 41003,
+
+        [Translation("File for JPEG viewer does not exist.")]
+        DefaultViewer_FileDoesNotExist_For_Jpeg = 41004,
+
+        [Translation("Path for PNG viewer is empty.")]
+        DefaultViewer_PathIsEmpty_for_Png = 41005,
+
+        [Translation("File for PNG viewer does not exist.")]
+        DefaultViewer_FileDoesNotExist_For_Png = 41006,
+
+        [Translation("Path for TIFF viewer is empty.")]
+        DefaultViewer_PathIsEmpty_for_Tif = 41007,
+
+        [Translation("File for TIFF viewer does not exist.")]
+        DefaultViewer_FileDoesNotExist_For_Tif = 41008,
+
+        [Translation("Path for Text viewer is empty.")]
+        DefaultViewer_PathIsEmpty_for_Txt = 41009,
+
+        [Translation("File for Text viewer does not exist.")]
+        DefaultViewer_FileDoesNotExist_For_Txt = 41010,
+
+        [Translation("The path is not valid. Please enter a valid absolute path.")]
+        FilePath_InvalidRootedPath = 42000,
+
+        [Translation("The folder path is not valid or empty. Please enter a valid path. \nThe folder path must not contain any of the following characters: \n" + @" \ / : * ? \" + "< >")]
+        FilePath_InvalidCharacters = 42001,
+
+        //todo: Better translation
+        //Replace {0} with fix value for _pathUtil.MAX_PATH or find a way to set it dynamically
+        //[Translation("The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path.")]
+        [Translation("File path too long")]
+        FilePath_TooLong = 42002,
     }
 }

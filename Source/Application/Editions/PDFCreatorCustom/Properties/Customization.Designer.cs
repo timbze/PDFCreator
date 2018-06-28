@@ -107,6 +107,15 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IBj+Z+Lo24NKq82TWC8KlA==.
+        /// </summary>
+        internal static string TrialExpireDate {
+            get {
+                return ResourceManager.GetString("TrialExpireDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to false.
         /// </summary>
         internal static string ValidOnTerminalServer {

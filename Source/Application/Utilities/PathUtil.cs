@@ -3,8 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Security;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using SystemInterface.IO;
-using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Utilities
 {
@@ -14,6 +14,10 @@ namespace pdfforge.PDFCreator.Utilities
         int MAX_PATH { get; }
 
         string ELLIPSIS { get; }
+
+        string GetFileName(string path);
+
+        string GetFileNameWithoutExtension(string path);
 
         string GetLongDirectoryName(string givenPath);
 
@@ -26,13 +30,24 @@ namespace pdfforge.PDFCreator.Utilities
         bool CheckWritability(string directory);
 
         bool IsValidRootedPath(string path);
+
+        PathUtilStatus IsValidRootedPathWithResponse(string path);
+
+        bool IsValidFilename(string fileName);
+
+        string Combine(string path1, string path2);
+
+        bool HasExtension(string path);
+
+        string GetExtension(string path);
+
+        string ChangeExtension(string path, string extension);
     }
 
     public class PathUtil : IPathUtil
     {
         private readonly IDirectory _directory;
         private readonly IPath _path;
-        private readonly IPathSafe _pathSafe = new PathWrapSafe();
 
         public PathUtil(IPath path, IDirectory directory)
         {
@@ -63,6 +78,27 @@ namespace pdfforge.PDFCreator.Utilities
             return folder;
         }
 
+        public string GetFileName(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return "";
+
+            if (!path.Contains(@"\"))
+                return path;
+
+            var pos = path.LastIndexOf(@"\");
+
+            var fileName = path.Substring(pos + 1);
+
+            return fileName;
+        }
+
+        public string GetFileNameWithoutExtension(string path)
+        {
+            var fileName = GetFileName(path);
+            return ChangeExtension(fileName, "");
+        }
+
         /// <summary>
         ///     Adds ellipsis to a path with a length longer than 255.
         /// </summary>
@@ -85,8 +121,8 @@ namespace pdfforge.PDFCreator.Utilities
                 int minUsefulFileLength = 4;
 
                 var directory = GetLongDirectoryName(filePath) ?? "";
-                var file = _pathSafe.GetFileNameWithoutExtension(filePath);
-                var extension = _pathSafe.GetExtension(filePath);
+                var file = GetFileNameWithoutExtension(filePath);
+                var extension = GetExtension(filePath);
 
                 var remainingLengthForFile = maxLength - directory.Length - extension.Length - ELLIPSIS.Length - 1; // substract -1 to account for the slash between path and filename
                 if (remainingLengthForFile < minUsefulFileLength)
@@ -97,7 +133,7 @@ namespace pdfforge.PDFCreator.Utilities
                 var partLength = remainingLengthForFile / 2;
 
                 file = file.Substring(0, partLength) + ELLIPSIS + file.Substring(file.Length - partLength, partLength);
-                filePath = _pathSafe.Combine(directory, file + extension);
+                filePath = Combine(directory, file + extension);
             }
 
             return filePath;
@@ -144,39 +180,134 @@ namespace pdfforge.PDFCreator.Utilities
         /// <returns>true, if the path is valid</returns>
         public bool IsValidRootedPath(string path)
         {
+            return IsValidRootedPathWithResponse(path) == PathUtilStatus.Success;
+        }
+
+        public PathUtilStatus IsValidRootedPathWithResponse(string path)
+        {
             if (string.IsNullOrEmpty(path))
-                return false;
+                return PathUtilStatus.PathWasNullOrEmpty;
 
             if (path.Length < 3)
-                return false;
+                return PathUtilStatus.InvalidRootedPath;
 
             if (((path.IndexOf(":", StringComparison.Ordinal) != 1) || (path.IndexOf("\\", StringComparison.Ordinal) != 2)) && !path.StartsWith(@"\\"))
-                return false;
+                return PathUtilStatus.InvalidRootedPath;
 
             try
             {
                 var fi = new FileInfo(path);
-
-                if (!path.StartsWith(@"\\"))
-                {
-                    var driveLetter = path[0];
-                    return (driveLetter >= 'A') && (driveLetter <= 'Z');
-                }
             }
             catch (ArgumentException)
             {
-                return false;
+                return PathUtilStatus.ArgumentEx;
             }
             catch (NotSupportedException)
             {
-                return false;
+                return PathUtilStatus.NotSupportedEx;
             }
             catch (PathTooLongException)
             {
-                return false;
+                return PathUtilStatus.PathTooLongEx;
             }
+
+            if (!path.StartsWith(@"\\"))
+            {
+                var driveLetter = path[0];
+                if (driveLetter >= 'A' && driveLetter <= 'Z')
+                    return PathUtilStatus.Success;
+
+                return PathUtilStatus.InvalidRootedPath;
+            }
+
+            return PathUtilStatus.Success;
+        }
+
+        //todo: Is this the same as valid rooted path?
+        public bool IsValidFilename(string fileName)
+        {
+            Regex containsABadCharacter = new Regex("[" + Regex.Escape(new string(Path.GetInvalidFileNameChars())) + "]");
+
+            if (containsABadCharacter.IsMatch(fileName))
+                return false;
 
             return true;
         }
+
+        public string Combine(string path1, string path2)
+        {
+            if (string.IsNullOrWhiteSpace(path1) && string.IsNullOrWhiteSpace(path2))
+                return "";
+            if (!string.IsNullOrWhiteSpace(path1) && string.IsNullOrWhiteSpace(path2))
+                return path1;
+            if (string.IsNullOrWhiteSpace(path1) && !string.IsNullOrWhiteSpace(path2))
+                return path2;
+
+            path1 = path1.Trim();
+            path2 = path2.Trim();
+
+            while (path1.EndsWith(@"\") && path1.Length > 0)
+            {
+                path1 = path1.Remove(path1.Length - 1).Trim();
+            }
+
+            while (path2.StartsWith(@"\") && path2.Length > 0)
+            {
+                path2 = path2.Remove(0, 1).Trim();
+            }
+
+            return path1 + @"\" + path2;
+        }
+
+        public bool HasExtension(string path)
+        {
+            if (path == null)
+                return false;
+
+            path = path.Trim();
+            var lastIndexOfPeriod = path.LastIndexOf(".", StringComparison.Ordinal);
+            if (lastIndexOfPeriod == path.Length - 1)
+                return false;
+
+            var lastIndexOfBackslash = path.LastIndexOf(@"\", StringComparison.Ordinal);
+
+            return lastIndexOfPeriod > lastIndexOfBackslash;
+        }
+
+        public string GetExtension(string path)
+        {
+            if (!HasExtension(path))
+                return "";
+            if (path == null)
+                return "";
+            path = path.Trim();
+            var spiltByPeriod = path.Split('.');
+            return "." + spiltByPeriod.LastOrDefault();
+        }
+
+        public string ChangeExtension(string path, string extension)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                path = "";
+
+            if (string.IsNullOrWhiteSpace(extension))
+                extension = "";
+
+            var currentExtension = GetExtension(path);
+            if (!string.IsNullOrWhiteSpace(currentExtension))
+                path = path.Substring(0, path.LastIndexOf(currentExtension));
+
+            return path + extension;
+        }
+    }
+
+    public enum PathUtilStatus
+    {
+        Success,
+        PathWasNullOrEmpty,
+        InvalidRootedPath,
+        ArgumentEx,
+        PathTooLongEx,
+        NotSupportedEx,
     }
 }

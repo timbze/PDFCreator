@@ -19,7 +19,7 @@
                    FontFamily="{DynamicResource Yorkten-Regular}"
                    Margin="-3">
             <Run Text="{Binding ApplicationName, FallbackValue=PDFCreator, Mode=OneWay}" />
-            <!--<Run Text="BETA" />-->
+            <Run x:Name="TrialText" FontSize="26" />
         </TextBlock>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="17">

@@ -14,4 +14,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.Helper
             sound.Play();
         }
     }
+
+    public class DesignTimeSoundPlayer : ISoundPlayer
+    {
+        public void Play(SystemSound sound)
+        {
+            //Play no f***ing sound!
+        }
+    }
 }

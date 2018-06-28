@@ -14,6 +14,18 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
     [TestFixture]
     public class ConversionWorkflowTest
     {
+        private Job _job;
+        private JobInfo _jobInfo;
+        private ConversionProfile _profile;
+        private IProfileChecker _profileChecker;
+        private readonly ActionResult _validActionResult = new ActionResult();
+
+        private ConversionWorkflow _workflow;
+        private ITargetFileNameComposer _query;
+        private IJobRunner _jobRunner;
+        private IJobDataUpdater _jobDataUpdater;
+        private INotificationService _notificationService;
+
         [SetUp]
         public void SetUp()
         {
@@ -24,10 +36,11 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
                     Title = "Test"
                 }
             };
+            _profile = new ConversionProfile();
             _job = new Job(_jobInfo, _profile, new JobTranslations(), new Accounts());
             _job.OutputFiles.Add("X:\\test.pdf");
             _profileChecker = Substitute.For<IProfileChecker>();
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(_validActionResult);
+            _profileChecker.CheckJob(Arg.Any<Job>()).Returns(_validActionResult);
 
             _query = Substitute.For<ITargetFileNameComposer>();
             _jobRunner = Substitute.For<IJobRunner>();
@@ -37,21 +50,9 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             _workflow = new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _query, null, _notificationService);
         }
 
-        private Job _job;
-        private JobInfo _jobInfo;
-        private readonly ConversionProfile _profile = new ConversionProfile();
-        private IProfileChecker _profileChecker;
-        private readonly ActionResult _validActionResult = new ActionResult();
-
-        private ConversionWorkflow _workflow;
-        private ITargetFileNameComposer _query;
-        private IJobRunner _jobRunner;
-        private IJobDataUpdater _jobDataUpdater;
-        private INotificationService _notificationService;
-
         private void SetUpConditionsForCompleteWorkflow()
         {
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(_validActionResult);
+            _profileChecker.CheckJob(Arg.Any<Job>()).Returns(_validActionResult);
         }
 
         [Test]
@@ -97,7 +98,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             {
                 _jobDataUpdater.UpdateTokensAndMetadata(_job);
                 _query.ComposeTargetFileName(_job);
-                _profileChecker.ProfileCheck(_job.Profile, _job.Accounts);
+                _profileChecker.CheckJob(_job);
                 _jobRunner.RunJob(_job, Arg.Any<IOutputFileMover>());
             });
         }
@@ -138,32 +139,72 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         {
             var errorResult = new ActionResult(ErrorCode.Conversion_UnknownError);
             SetUpConditionsForCompleteWorkflow();
-            _profileChecker.ProfileCheck(_profile, new Accounts()).Returns(errorResult);
+            _profileChecker.CheckJob(_job).Returns(errorResult);
 
             var workflowResult = _workflow.RunWorkflow(_job);
             Assert.AreEqual(WorkflowResult.Error, workflowResult);
         }
 
         [Test]
-        public void AutoWorkflow_NotificationWasCalled()
+        public void AutoSaveWorkflow_NotificationWasCalled()
         {
             var workflowResult = _workflow.RunWorkflow(_job);
 
-            _notificationService.Received().ShowInfoNotification(Arg.Any<string>());
+            _notificationService.Received().ShowInfoNotification(Arg.Any<string>(), Arg.Any<string>());
             _notificationService.DidNotReceive().ShowErrorNotification(Arg.Any<string>());
         }
 
         [Test]
-        public void AutoWorkflow_DoWorkflowThrowsError_NotificationErrorWasCalled()
+        public void AutoSaveWorkflow_InfoNotificationsDisabled_DoesNotCallNotifications()
         {
-            var errorResult = new ActionResult(ErrorCode.Conversion_UnknownError);
-            SetUpConditionsForCompleteWorkflow();
-            _profileChecker.ProfileCheck(_profile, new Accounts()).Returns(errorResult);
+            _job.Profile.ShowAllNotifications = false;
+            _job.Profile.ShowOnlyErrorNotifications = true;
 
             var workflowResult = _workflow.RunWorkflow(_job);
 
-            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>());
+            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>(), Arg.Any<string>());
+            _notificationService.DidNotReceive().ShowErrorNotification(Arg.Any<string>());
+        }
+
+        [Test]
+        public void AutoSaveWorkflow_OnlyErrorNotificationsEnabled_DoesNotCallNotifications()
+        {
+            _job.Profile.ShowAllNotifications = false;
+            _job.Profile.ShowOnlyErrorNotifications = true;
+
+            var workflowResult = _workflow.RunWorkflow(_job);
+
+            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>(), Arg.Any<string>());
+            _notificationService.DidNotReceive().ShowErrorNotification(Arg.Any<string>());
+        }
+
+        [Test]
+        public void AutoSaveWorkflow_DoWorkflowThrowsError_NotificationErrorWasCalled()
+        {
+            var errorResult = new ActionResult(ErrorCode.Conversion_UnknownError);
+            SetUpConditionsForCompleteWorkflow();
+            _profileChecker.CheckJob(_job).Returns(errorResult);
+
+            var workflowResult = _workflow.RunWorkflow(_job);
+
+            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>(), Arg.Any<string>());
             _notificationService.Received().ShowErrorNotification(Arg.Any<string>());
+        }
+
+        [Test]
+        public void AutoSaveWorkflow_DoWorkflowThrowsErrorAndNotificationsDisabled_DoesNotCallNotifications()
+        {
+            _job.Profile.ShowAllNotifications = false;
+            _job.Profile.ShowOnlyErrorNotifications = false;
+
+            var errorResult = new ActionResult(ErrorCode.Conversion_UnknownError);
+            SetUpConditionsForCompleteWorkflow();
+            _profileChecker.CheckJob(_job).Returns(errorResult);
+
+            var workflowResult = _workflow.RunWorkflow(_job);
+
+            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>(), Arg.Any<string>());
+            _notificationService.DidNotReceive().ShowErrorNotification(Arg.Any<string>());
         }
     }
 }

@@ -4,7 +4,6 @@ using Optional;
 using pdfforge.LicenseValidator.Interface;
 using pdfforge.LicenseValidator.Interface.Data;
 using pdfforge.Obsidian.Trigger;
-using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
@@ -15,9 +14,9 @@ using pdfforge.PDFCreator.Utilities.Process;
 using pdfforge.PDFCreator.Utilities.Threading;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Security;
+using System.Threading.Tasks;
 using Translatable;
 
 namespace Presentation.UnitTest.UserControls
@@ -37,8 +36,6 @@ namespace Presentation.UnitTest.UserControls
             _licenseChecker.GetSavedActivation().Returns(x => _savedActivation.SomeNotNull(LicenseError.NoActivation));
             _licenseChecker.ActivateWithoutSaving(Arg.Any<string>()).Returns(key => _activationFromServer.SomeNotNull(LicenseError.NoActivation));
             _interactionRequest = new UnitTestInteractionRequest();
-
-            _dispatcher = new InvokeImmediatelyDispatcher();
         }
 
         private IProcessStarter _process;
@@ -47,19 +44,18 @@ namespace Presentation.UnitTest.UserControls
         private Activation _savedActivation;
         private Activation _activationFromServer;
 
-        private IDispatcher _dispatcher;
         private ILicenseChecker _licenseChecker;
 
         private LicenseSettingsViewModel BuildViewModel()
         {
-            return new LicenseSettingsOnlineViewModel(_process, _licenseChecker, _interactionRequest, _dispatcher, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
+            return new LicenseSettingsOnlineViewModel(_process, _licenseChecker, _interactionRequest, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
         }
 
         [Test]
         public void CheckCanExecuteOfflineActivationCommand_ReturnsFalse()
         {
             var licenseSettingsViewModel = BuildViewModel();
-            Assert.IsFalse(licenseSettingsViewModel.OfflineActivationCommand.CanExecute(null));
+            Assert.IsFalse(licenseSettingsViewModel.OfflineActivationAsyncCommand.CanExecute(null));
         }
 
         [Test]
@@ -74,7 +70,7 @@ namespace Presentation.UnitTest.UserControls
         {
             var licenseSettingsViewModel = BuildViewModel();
 
-            Assert.Throws<InvalidOperationException>(() => licenseSettingsViewModel.OfflineActivationCommand.Execute(null));
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await licenseSettingsViewModel.OfflineActivationAsyncCommand.ExecuteAsync(null));
         }
     }
 
@@ -94,8 +90,6 @@ namespace Presentation.UnitTest.UserControls
             _licenseChecker.ActivateWithoutSaving(Arg.Any<string>()).Returns(key => _activationFromServer.SomeNotNull(LicenseError.NoActivation));
             _offlineActivator = Substitute.For<IOfflineActivator>();
             _interactionInvoker = Substitute.For<IInteractionRequest>();
-
-            _dispatcher = new InvokeImmediatelyDispatcher();
         }
 
         private IProcessStarter _process;
@@ -106,20 +100,19 @@ namespace Presentation.UnitTest.UserControls
         private Activation _savedActivation;
         private Activation _activationFromServer;
 
-        private IDispatcher _dispatcher;
         private ILicenseChecker _licenseChecker;
         private IOfflineActivator _offlineActivator;
 
         private LicenseSettingsViewModel BuildViewModel()
         {
-            return new LicenseSettingsOfflineViewModel(_process, _licenseChecker, _offlineActivator, _interactionInvoker, _dispatcher, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
+            return new LicenseSettingsOfflineViewModel(_process, _licenseChecker, _offlineActivator, _interactionInvoker, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
         }
 
         [Test]
         public void CheckCanExecuteOnlineActivationCommand_ReturnsFalse()
         {
             var licenseSettingsViewModel = BuildViewModel();
-            Assert.IsFalse(licenseSettingsViewModel.OnlineActivationCommand.CanExecute(null));
+            Assert.IsFalse(licenseSettingsViewModel.OnlineActivationAsyncCommand.CanExecute(null));
         }
 
         [Test]
@@ -134,7 +127,7 @@ namespace Presentation.UnitTest.UserControls
         {
             var licenseSettingsViewModel = BuildViewModel();
 
-            Assert.Throws<InvalidOperationException>(() => licenseSettingsViewModel.OnlineActivationCommand.Execute(null));
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await licenseSettingsViewModel.OnlineActivationAsyncCommand.ExecuteAsync(null));
         }
     }
 
@@ -146,8 +139,6 @@ namespace Presentation.UnitTest.UserControls
 
         private string _expectedLicenseKey;
 
-        private TimeSpan _timeout = TimeSpan.FromMilliseconds(150);
-
         private Activation _savedActivation;
         private Activation _activationFromServer;
 
@@ -156,16 +147,12 @@ namespace Presentation.UnitTest.UserControls
 
         private LicenseSettingsTranslation _translation = new LicenseSettingsTranslation();
 
-        private IDispatcher _dispatcher;
         private ILicenseChecker _licenseChecker;
         private IOfflineActivator _offlineActivator;
 
         [SetUp]
         public void Setup()
         {
-            if (Debugger.IsAttached)
-                _timeout = TimeSpan.FromMinutes(5);
-
             _savedActivation = null;
             _expectedLicenseKey = null;
             _activationFromServer = null;
@@ -176,13 +163,11 @@ namespace Presentation.UnitTest.UserControls
             _licenseChecker.ActivateWithoutSaving(Arg.Any<string>()).Returns(key => _activationFromServer.SomeNotNull(LicenseError.NoActivation));
             _offlineActivator = Substitute.For<IOfflineActivator>();
             _interactionRequest = new UnitTestInteractionRequest();
-
-            _dispatcher = new InvokeImmediatelyDispatcher();
         }
 
         private LicenseSettingsViewModel BuildViewModel()
         {
-            return new LicenseSettingsViewModel(_process, _licenseChecker, _offlineActivator, _interactionRequest, _dispatcher, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
+            return new LicenseSettingsViewModel(_process, _licenseChecker, _offlineActivator, _interactionRequest, new TranslationUpdater(new TranslationFactory(), new ThreadManager()), null);
         }
 
         private Activation BuildValidActivation(string key)
@@ -326,11 +311,12 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OfflineActivationCommand_Executed_RaisesCloseWindowEvent()
+        public async Task OfflineActivationCommand_Executed_RaisesCloseWindowEvent()
         {
             var viewModel = BuildViewModel();
             var wasCalled = false;
             const string expectedOfflineLsa = "OfflineLsa";
+            _offlineActivator.ValidateOfflineActivationString(expectedOfflineLsa).Returns(BuildValidActivation("KEY").Some<Activation, LicenseError>());
 
             _interactionRequest.RegisterInteractionHandler<OfflineActivationInteraction>(offlineActivationInteraction =>
             {
@@ -338,18 +324,17 @@ namespace Presentation.UnitTest.UserControls
                 offlineActivationInteraction.LicenseServerAnswer = expectedOfflineLsa;
             });
 
-            viewModel.CloseLicenseWindowEvent +=
-                (sender, args) =>
+            viewModel.CloseLicenseWindowEvent += (s, e) =>
                 {
                     wasCalled = true;
                 };
 
-            viewModel.OfflineActivationCommand.Execute(null);
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
             Assert.IsTrue(wasCalled);
         }
 
         [Test]
-        public void OfflineActivationCommand_Execute_OfflineActivatorThrowsSecurityException_ExceptionGetsCaught()
+        public async Task OfflineActivationCommand_Execute_OfflineActivatorThrowsSecurityException_ExceptionGetsCaught()
         {
             var viewModel = BuildViewModel();
 
@@ -364,7 +349,7 @@ namespace Presentation.UnitTest.UserControls
                 offlineActivationInteraction.LicenseServerAnswer = "OfflineLsa";
             });
 
-            Assert.DoesNotThrow(() => viewModel.OfflineActivationCommand.Execute(null));
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
         }
 
         [Test]
@@ -548,11 +533,11 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            Assert.IsTrue(viewModel.OfflineActivationCommand.CanExecute(null));
+            Assert.IsTrue(viewModel.OfflineActivationAsyncCommand.CanExecute(null));
         }
 
         [Test]
-        public void OfflineActivationCommandExecute_LicenseCheckerOfflineActivationStringFromLicenseServer_GetsCalledWithExpectedOfflineLsa()
+        public async Task OfflineActivationCommandExecute_LicenseCheckerOfflineActivationStringFromLicenseServer_GetsCalledWithExpectedOfflineLsa()
         {
             _savedActivation = null;
 
@@ -566,13 +551,13 @@ namespace Presentation.UnitTest.UserControls
                 offlineActivationInteraction.LicenseServerAnswer = expectedOfflineLsa;
             });
 
-            viewModel.OfflineActivationCommand.Execute(null);
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
 
             _offlineActivator.Received().ValidateOfflineActivationString(expectedOfflineLsa);
         }
 
         [Test]
-        public void OfflineActivationCommandExecute_OfflineActivationInteractionContainsLicenseKeyWithDashes()
+        public async Task OfflineActivationCommandExecute_OfflineActivationInteractionContainsLicenseKeyWithDashes_KeyGetsNormalized()
         {
             _savedActivation = new Activation(true) { Key = ValidLicenseKey_Normalized };
 
@@ -583,11 +568,11 @@ namespace Presentation.UnitTest.UserControls
                 Assert.AreEqual(ValidLicenseKey_Normalized, offlineActivationInteraction.LicenseKey);
             });
 
-            viewModel.OfflineActivationCommand.Execute(null);
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
         }
 
         [Test]
-        public void OfflineActivationCommandExecute_UserCancelsOfflineActivation_ActivationHelper()
+        public async Task OfflineActivationCommandExecute_UserCancelsOfflineActivation_ActivationHelper()
         {
             var viewModel = BuildViewModel();
 
@@ -596,14 +581,14 @@ namespace Presentation.UnitTest.UserControls
                 offlineActivationInteraction.Success = false;
             });
 
-            viewModel.OfflineActivationCommand.Execute(null);
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
 
             _offlineActivator.DidNotReceive().ActivateOfflineActivationString(Arg.Any<string>());
             _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
         }
 
         [Test]
-        public void OfflineActivatorIsNull_ExecuteOfflineActivationCommandExecute_ValidateOfflineActivationStringDoesntGetCalled()
+        public async Task OfflineActivatorIsNull_ExecuteOfflineActivationCommandExecute_ValidateOfflineActivationStringDoesntGetCalled()
         {
             var called = false;
 
@@ -611,12 +596,12 @@ namespace Presentation.UnitTest.UserControls
 
             _offlineActivator = null;
             var viewModel = BuildViewModel();
-            viewModel.OfflineActivationCommand.Execute(null);
+            await viewModel.OfflineActivationAsyncCommand.ExecuteAsync(null);
             Assert.IsFalse(called);
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewEditionAndInformUser()
+        public async Task OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewEditionAndInformUser()
         {
             _savedActivation = null;
 
@@ -630,9 +615,8 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
 
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
@@ -643,7 +627,7 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
+        public async Task OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
         {
             _expectedLicenseKey = "not empty";
             CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
@@ -651,14 +635,13 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
             _interactionRequest.AssertWasRaised<StoreLicenseForAllUsersInteraction>();
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SavesActivation()
+        public async Task OnlineActivationCommand_CurrentActivationIsNotValid_LicenseCheckerActivationIsValid_SavesActivation()
         {
             _savedActivation = null;
             _expectedLicenseKey = "given-key";
@@ -668,15 +651,36 @@ namespace Presentation.UnitTest.UserControls
             _activationFromServer = BuildValidActivation(_expectedLicenseKey);
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.Received().SaveActivation(_activationFromServer);
             Assert.AreEqual(_expectedLicenseKey.ToUpper(), viewModel.LicenseKey);
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsValid_ActivationWithNewKeyIsBlocked_DoNotSaveNewActivation()
+        public async Task OnlineActivationCommand_LicenseCheckerActivationIsValid_CallsCloseLicenseWindowEvent()
+        {
+            var wasCalled = false;
+            _savedActivation = null;
+            _expectedLicenseKey = "given-key";
+
+            CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
+
+            _activationFromServer = BuildValidActivation(_expectedLicenseKey);
+            var viewModel = BuildViewModel();
+
+            viewModel.CloseLicenseWindowEvent += (s, e) =>
+            {
+                wasCalled = true;
+            };
+
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
+
+            Assert.IsTrue(wasCalled);
+        }
+
+        [Test]
+        public async Task OnlineActivationCommand_CurrentActivationIsValid_ActivationWithNewKeyIsBlocked_DoNotSaveNewActivation()
         {
             _savedActivation = BuildValidActivation("saved activation key");
             _activationFromServer = BuildBlockedActivation("Not the saved activation key");
@@ -685,14 +689,13 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.DidNotReceive().SaveActivation(_activationFromServer);
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewActivationAndInformUser()
+        public async Task OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsNotValid_DoNotSaveNewActivationAndInformUser()
         {
             _savedActivation = null;
 
@@ -701,9 +704,8 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.DidNotReceive().SaveActivation(Arg.Any<Activation>());
 
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
@@ -714,7 +716,7 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
+        public async Task OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_SaveNewActivationAndStoreLicenseForAllUsersQuery()
         {
             _expectedLicenseKey = "not empty";
 
@@ -726,16 +728,14 @@ namespace Presentation.UnitTest.UserControls
             var propertyChangedEvents = new List<string>();
             viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            var success = viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
-            Assert.IsTrue(success);
             _licenseChecker.Received().SaveActivation(_activationFromServer);
             _interactionRequest.AssertWasRaised<StoreLicenseForAllUsersInteraction>();
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_ShareLicenseForAllUsersDisabled__SaveLicenseAndInformUser()
+        public async Task OnlineActivationCommand_CurrentActivationIsValid_LicenseCheckerActivationIsValid_ShareLicenseForAllUsersDisabled__SaveLicenseAndInformUser()
         {
             _expectedLicenseKey = "not empty";
             CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
@@ -746,9 +746,7 @@ namespace Presentation.UnitTest.UserControls
 
             viewModel.ShareLicenseForAllUsersEnabled = false; //Important for this test!!!!
 
-            viewModel.OnlineActivationCommand.Execute(null);
-
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
             _licenseChecker.Received().SaveActivation(_activationFromServer);
             _interactionRequest.AssertWasNotRaised<StoreLicenseForAllUsersInteraction>();
@@ -761,7 +759,7 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OnlineActivationCommand_CurrentActivationIsValid_ReActivationBlocksCurrentKey_SaveNewActivationAndInformUser()
+        public async Task OnlineActivationCommand_CurrentActivationIsValid_ReActivationBlocksCurrentKey_SaveNewActivationAndInformUser()
         {
             _savedActivation = BuildValidActivation("saved activation key");
             _activationFromServer = new Activation(true);
@@ -771,9 +769,8 @@ namespace Presentation.UnitTest.UserControls
             CreateLicenseKeyEnteredInteraction("not null or empty");
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.Received().SaveActivation(_activationFromServer);
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
             Assert.AreEqual(_translation.ActivationFailed, messageInteraction.Title);
@@ -782,36 +779,34 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OnlineActivationCommand_IsNotExecutableWhileExecuting()
+        public async Task OnlineActivationCommand_IsNotExecutableWhileExecuting()
         {
             _expectedLicenseKey = "given-key";
             CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
             var enterLicenseCommandIsExecutable = true;
             var viewModel = BuildViewModel();
             _licenseChecker.When(x => x.ActivateWithoutSaving(Arg.Any<string>())).Do(
-                x => { enterLicenseCommandIsExecutable = viewModel.OnlineActivationCommand.CanExecute(null); });
+                x => { enterLicenseCommandIsExecutable = viewModel.OnlineActivationAsyncCommand.CanExecute(null); });
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             Assert.IsFalse(enterLicenseCommandIsExecutable);
         }
 
         [Test]
-        public void OnlineActivationCommand_WhenExecuted_CallsLicenseChecker()
+        public async Task OnlineActivationCommand_WhenExecuted_CallsLicenseChecker()
         {
             _expectedLicenseKey = "ABCDEF";
             CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
 
             var viewModel = BuildViewModel();
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
             _licenseChecker.Received().ActivateWithoutSaving(_expectedLicenseKey);
         }
 
         [Test]
-        public void OnlineActivationCommand_WhenExecuted_RaisesPropertyChanged()
+        public async Task OnlineActivationCommand_WhenExecuted_RaisesPropertyChanged()
         {
             _expectedLicenseKey = "ABCDEF";
             CreateLicenseKeyEnteredInteraction(_expectedLicenseKey);
@@ -819,11 +814,8 @@ namespace Presentation.UnitTest.UserControls
             var propertyChangedEvents = new List<string>();
             viewModel.PropertyChanged += (sender, args) => propertyChangedEvents.Add(args.PropertyName);
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
-            viewModel.LicenseCheckFinishedEvent.WaitOne(_timeout);
-
-            Assert.Contains(nameof(viewModel.IsCheckingLicense), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseKey), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseStatusForView), propertyChangedEvents);
             Assert.Contains(nameof(viewModel.LicenseStatusText), propertyChangedEvents);
@@ -833,13 +825,13 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void OnlineActivationCommand_WhenKeyIsNull_DoesNotCallLicenseChecker()
+        public async Task OnlineActivationCommand_WhenKeyIsNull_DoesNotCallLicenseChecker()
         {
             CreateCancelledInputInteraction();
 
             var viewModel = BuildViewModel();
 
-            viewModel.OnlineActivationCommand.Execute(null);
+            await viewModel.OnlineActivationAsyncCommand.ExecuteAsync(null);
 
             _licenseChecker.DidNotReceiveWithAnyArgs().ActivateWithoutSaving("");
         }
@@ -851,7 +843,7 @@ namespace Presentation.UnitTest.UserControls
 
             var viewModel = BuildViewModel();
 
-            Assert.IsTrue(viewModel.OnlineActivationCommand.CanExecute(null));
+            Assert.IsTrue(viewModel.OnlineActivationAsyncCommand.CanExecute(null));
         }
 
         [Test]

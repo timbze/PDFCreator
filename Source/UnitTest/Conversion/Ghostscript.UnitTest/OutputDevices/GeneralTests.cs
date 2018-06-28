@@ -1,25 +1,31 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using System.Collections.ObjectModel;
 using System.Linq;
+using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
 {
     [TestFixture]
     internal class GeneralTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-            _outputDevice = ParametersTestHelper.GenerateDevice(OutputFormat.Pdf);
-            _ghostscriptVersion = ParametersTestHelper.GhostscriptVersionDummie;
-        }
-
+        private IFile _fileWrap;
         private OutputDevice _outputDevice;
         private Collection<string> _parameterStrings;
         private GhostscriptVersion _ghostscriptVersion;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _fileWrap = Substitute.For<IFile>();
+            _fileWrap.Exists(Arg.Any<string>()).Returns(true);
+
+            _outputDevice = ParametersTestHelper.GenerateDevice(OutputFormat.Pdf, _fileWrap);
+            _ghostscriptVersion = ParametersTestHelper.GhostscriptVersionDummie;
+        }
 
         [Test]
         public void ParametersTest_AttachmentPage()

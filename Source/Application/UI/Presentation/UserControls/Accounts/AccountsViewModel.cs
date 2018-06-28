@@ -2,7 +2,6 @@
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Services;
-using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
@@ -11,6 +10,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts
 {
@@ -50,75 +50,24 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts
 
             ConflateAllAccounts(_currentSettingsProvider.Settings);
 
-            FtpAccountAddCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<FtpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
+            FtpAccountAddCommand = commandLocator.GetCommand<FtpAccountAddCommand>();
+            FtpAccountRemoveCommand = commandLocator.GetCommand<FtpAccountRemoveCommand>();
+            FtpAccountEditCommand = commandLocator.GetCommand<FtpAccountEditCommand>();
 
-            FtpAccountRemoveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<FtpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
+            SmtpAccountAddCommand = commandLocator.GetCommand<SmtpAccountAddCommand>();
+            SmtpAccountRemoveCommand = commandLocator.GetCommand<SmtpAccountRemoveCommand>();
+            SmtpAccountEditCommand = commandLocator.GetCommand<SmtpAccountEditCommand>();
 
-            FtpAccountEditCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<FtpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
+            HttpAccountAddCommand = commandLocator.GetCommand<HttpAccountAddCommand>();
+            HttpAccountRemoveCommand = commandLocator.GetCommand<HttpAccountRemoveCommand>();
+            HttpAccountEditCommand = commandLocator.GetCommand<HttpAccountEditCommand>();
 
-            SmtpAccountAddCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<SmtpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
+            DropboxAccountAddCommand = commandLocator.GetCommand<DropboxAccountAddCommand>();
+            DropboxAccountRemoveCommand = commandLocator.GetCommand<DropboxAccountRemoveCommand>();
 
-            SmtpAccountRemoveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<SmtpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            SmtpAccountEditCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<SmtpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            HttpAccountAddCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<HttpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            HttpAccountRemoveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<HttpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            HttpAccountEditCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<HttpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            DropboxAccountAddCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<DropboxAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            DropboxAccountRemoveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<DropboxAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            TimeServerAccountAddCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<TimeServerAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            TimeServerAccountRemoveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<TimeServerAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
-
-            TimeServerAccountEditCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<TimeServerAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .Build();
+            TimeServerAccountAddCommand = commandLocator.GetCommand<TimeServerAccountAddCommand>();
+            TimeServerAccountRemoveCommand = commandLocator.GetCommand<TimeServerAccountRemoveCommand>();
+            TimeServerAccountEditCommand = commandLocator.GetCommand<TimeServerAccountEditCommand>();
 
             if (_currentSettingsProvider != null)
                 _currentSettingsProvider.SelectedProfileChanged += CurrentSettingsProviderOnSelectedProfileChanged;
@@ -172,23 +121,23 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts
             RaisePropertyChanged(nameof(ShowAddAccountsHint));
         }
 
-        public IMacroCommand FtpAccountAddCommand { get; }
-        public IMacroCommand FtpAccountRemoveCommand { get; }
-        public IMacroCommand FtpAccountEditCommand { get; }
+        public ICommand FtpAccountAddCommand { get; }
+        public ICommand FtpAccountRemoveCommand { get; }
+        public ICommand FtpAccountEditCommand { get; }
 
-        public IMacroCommand SmtpAccountAddCommand { get; }
-        public IMacroCommand SmtpAccountRemoveCommand { get; }
-        public IMacroCommand SmtpAccountEditCommand { get; }
+        public ICommand SmtpAccountAddCommand { get; }
+        public ICommand SmtpAccountRemoveCommand { get; }
+        public ICommand SmtpAccountEditCommand { get; }
 
-        public IMacroCommand HttpAccountAddCommand { get; }
-        public IMacroCommand HttpAccountRemoveCommand { get; }
-        public IMacroCommand HttpAccountEditCommand { get; }
+        public ICommand HttpAccountAddCommand { get; }
+        public ICommand HttpAccountRemoveCommand { get; }
+        public ICommand HttpAccountEditCommand { get; }
 
-        public IMacroCommand DropboxAccountAddCommand { get; }
-        public IMacroCommand DropboxAccountRemoveCommand { get; }
+        public ICommand DropboxAccountAddCommand { get; }
+        public ICommand DropboxAccountRemoveCommand { get; }
 
-        public IMacroCommand TimeServerAccountAddCommand { get; }
-        public IMacroCommand TimeServerAccountRemoveCommand { get; }
-        public IMacroCommand TimeServerAccountEditCommand { get; }
+        public ICommand TimeServerAccountAddCommand { get; }
+        public ICommand TimeServerAccountRemoveCommand { get; }
+        public ICommand TimeServerAccountEditCommand { get; }
     }
 }

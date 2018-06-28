@@ -1,16 +1,17 @@
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "and {0} more."
-msgid_plural "and {0} more."
-msgstr[0] "e mais {0}."
-msgstr[1] "e mais {0}."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "The profile is mapped to the following printer:"
+msgid_plural "The profile is mapped to the following printers:"
+msgstr[0] "O perfil está mapeado para a seguinte impressora:"
+msgstr[1] "O perfil está mapeado para as seguintes impressoras"
 
 msgid ""
 msgstr ""
 "Project-Id-Version: Portuguese (Brazil) (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese (Brazil) <http://translate.pdfforge.org/projects/pdfcreator/messages/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,28 +21,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2.16\n"
 
+# pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+msgid "Do you want to convert the {0} selected file?"
+msgid_plural "Do you want to convert the {0} selected files?"
+msgstr[0] ""
+msgstr[1] ""
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+msgid "Signing will be disabled for this profile."
+msgid_plural "Signing will be disabled for this profiles."
+msgstr[0] "A assinatura será desabilitada para este perfil."
+msgstr[1] "A assinatura será desabilitada para estes perfis."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Delete File"
-msgid_plural "Delete Files"
-msgstr[0] "Excluir Arquivo"
-msgstr[1] "Excluir Arquivos"
+msgid "and {0} more."
+msgid_plural "and {0} more."
+msgstr[0] "e {0} mais."
+msgstr[1] "e {0} mais."
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "This printer will be mapped to the default profile."
-msgid_plural "These printers will be mapped to the default profile."
-msgstr[0] "Esta impressora será mapeada para o perfil padrão."
-msgstr[1] "Estas impressoras serão mapeadas para o perfil padrão."
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "The FTP action will be disabled for this profile."
+msgid_plural "The FTP action will be disabled for this profiles."
+msgstr[0] "A ação FTP será desabilitada para este perfil."
+msgstr[1] "A ação FTP será desabilitada para estes perfis."
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Are you sure you want to delete the following file?"
-msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] "Você quer mesmo excluir o seguinte arquivo?"
-msgstr[1] "Você quer mesmo excluir os seguintes arquivos?"
-
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
@@ -50,6 +67,76 @@ msgid_plural "You have already converted {0} files!"
 msgstr[0] "Você já converteu {0} arquivo!"
 msgstr[1] "Você já converteu {0} arquivos!"
 
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+msgid "The HTTP action will be disabled for this profile."
+msgid_plural "The HTTP action will be disabled for this profiles."
+msgstr[0] "A ação HTTP será desabilitada para este perfil."
+msgstr[1] "A ação HTTP será desabilitada para estes perfis."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+msgid "The SMTP action will be disabled for this profile."
+msgid_plural "The SMTP action will be disabled for this profiles."
+msgstr[0] "A ação SMTP será desabilitada para este perfil."
+msgstr[1] "A ação SMTP será desabilitada para estes perfis."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "This printer will be mapped to the default profile."
+msgid_plural "These printers will be mapped to the default profile."
+msgstr[0] "Esta impressora será mapeada para o perfil padrão."
+msgstr[1] "Estas impressoras serão mapeadas para o perfil padrão."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+msgid "The account is used in the following profile:"
+msgid_plural "The account is used in the following profiles:"
+msgstr[0] "A conta é usada no seguinte perfil:"
+msgstr[1] "A conta é usada nos seguintes perfis:"
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+msgid "The Dropbox upload will be disabled for this profile."
+msgid_plural "The Dropbox upload will be disabled for this profiles."
+msgstr[0] "O envio do Dropbox será desabilitado para este perfil."
+msgstr[1] "O envio do Dropbox será desabilitado para estes perfis."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Delete File"
+msgid_plural "Delete Files"
+msgstr[0] "Excluir Arquivo"
+msgstr[1] "Excluir Arquivos"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Are you sure you want to delete the following file?"
+msgid_plural "Are you sure you want to delete the following files?"
+msgstr[0] "Você quer mesmo excluir o seguinte arquivo?"
+msgstr[1] "Você quer mesmo excluir os seguintes arquivos?"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid ""
@@ -69,70 +156,6 @@ msgstr[1] ""
 "Talvez eles estejam atualmente em uso.\n"
 "Por favor, tente novamente depois."
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-msgid "The HTTP action will be disabled for this profile."
-msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] "A ação HTTP será desabilitada para este perfil."
-msgstr[1] "A ação HTTP será desabilitada para estes perfis."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-msgid "The account is used in the following profile:"
-msgid_plural "The account is used in the following profiles:"
-msgstr[0] "A conta é usada no seguinte perfil:"
-msgstr[1] "A conta é usada nos seguintes perfis:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "The SMTP action will be disabled for this profile."
-msgid_plural "The SMTP action will be disabled for this profiles."
-msgstr[0] "A ação SMTP será desabilitada para este perfil."
-msgstr[1] "A ação SMTP será desabilitada para estes perfis."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "The FTP action will be disabled for this profile."
-msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "A ação FTP será desabilitada para este perfil."
-msgstr[1] "A ação FTP será desabilitada para estes perfis."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "The profile is mapped to the following printer:"
-msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] "O perfil está mapeado para a seguinte impressora:"
-msgstr[1] "O perfil está mapeado para as seguintes impressoras"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "There is an issue with the profile '{0}':"
-msgid_plural "There are issues with the profile '{0}':"
-msgstr[0] "Há um problema com o perfil '{0}':"
-msgstr[1] "Há problemas com o perfil '{0}':"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-msgid "Signing will be disabled for this profile."
-msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "A assinatura será desabilitada para este perfil."
-msgstr[1] "A assinatura será desabilitada para estes perfis."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-msgid "The Dropbox upload will be disabled for this profile."
-msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "O envio do Dropbox será desabilitado para este perfil."
-msgstr[1] "O envio do Dropbox será desabilitado para estes perfis."
-
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
 msgstr "O arquivo anexo não existe."
@@ -140,6 +163,21 @@ msgstr "O arquivo anexo não existe."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file is no PDF file."
 msgstr "O arquivo anexo não é um arquivo PDF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path is too long."
+msgstr "O caminho do arquivo é muito grande"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
@@ -178,8 +216,38 @@ msgid "Background file is no PDF file."
 msgstr "O arquivo do fundo não é um arquivo PDF."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path is too long."
+msgstr "O arquivo do fundo não é um arquivo PDF."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "O arquivo do certificado não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path is too long."
+msgstr "O caminho do arquivo é muito grande"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
@@ -212,6 +280,25 @@ msgstr "Não é possível enviar o arquivo para FTP."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover file does not exist."
 msgstr "O arquivo da folha de rosto não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path is too long."
+msgstr "O caminho do arquivo é muito grande"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Custom viewer was not found."
+msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
@@ -302,9 +389,43 @@ msgid "Failure in directory on FTP server."
 msgstr "Falha no diretório no servidor FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+#, fuzzy
+msgid "File for JPEG viewer does not exist."
+msgstr "O arquivo da folha de rosto não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for PDF viewer does not exist."
+msgstr "O arquivo da folha de rosto não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for PNG viewer does not exist."
+msgstr "O arquivo da folha de rosto não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for TIFF viewer does not exist."
+msgstr "O arquivo da folha de rosto não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for Text viewer does not exist."
+msgstr "O arquivo do certificado não existe."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
 msgstr "O caminho do arquivo é muito grande"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Filename template contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Ftp directory path is invalid ftp path."
+msgstr "O caminho da pasta é inválido"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
@@ -407,6 +528,26 @@ msgid "PDF Architect could not open output file."
 msgstr "O PDF Architect não pode abrir o arquivo de saída."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for JPEG viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PDF viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PNG viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for TIFF viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for Text viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
 msgstr "A pasta pré-selecionada para a janela salvar está vazia."
 
@@ -419,6 +560,16 @@ msgid "Script file does not exist."
 msgstr "O arquivo do script não existe."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "ScriptFile path is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "ScriptFile path is too long."
+msgstr "O caminho do arquivo é muito grande"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."
 msgstr "Servidor de Hora Protegido sem senha."
 
@@ -429,6 +580,20 @@ msgstr "Servidor de Hora Protegido sem nome do usuário."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "System could not open output file."
 msgstr "O sistema não pode abrir o arquivo de saída."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Target directory contains illegal characters."
+msgstr "O arquivo do script contem caracteres ilegais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Target directory is invalid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Target directory is too long."
+msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
@@ -445,6 +610,20 @@ msgstr "O arquivo da folha de rosto não é um arquivo PDF."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The default printer is invalid."
 msgstr "A impressora padrão é inválida."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid ""
+"The folder path is not valid or empty. Please enter a valid path. \n"
+"The folder path must not contain any of the following characters: \n"
+" \\ / : * ? \\< >"
+msgstr ""
+"O caminho da pasta é inválido ou está vazio. Por favor, digite um caminho válido. \n"
+"O caminho não deve conter quaisquer dos seguintes caracteres: \n"
+" \\ / : * ? \\< >"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The path is not valid. Please enter a valid absolute path."
+msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The selected printer is invalid."
@@ -825,6 +1004,14 @@ msgstr ""
 "Sua licença do \"{0}\" é inválida ou expirou. Por favor, verifique sua licença, caso contrário, o PDFCreator será fechado.\n"
 "Você quer verificar sua licença agora?"
 
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your trial has expired on {0}.\n"
+"PDFCreator will shut down.\n"
+"\n"
+"Please contact: licensing@pdfforge.org"
+msgstr ""
+
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
 "Can't find a supported Ghostscript installation.\n"
@@ -856,6 +1043,7 @@ msgstr "Um arquivo importante do PDFCreator está ausente ('{0}'). Por favor, re
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Error"
 msgstr "Erro"
@@ -905,6 +1093,7 @@ msgid "INI files (*.ini)|*.ini"
 msgstr "Arquivos INI (*.ini)|*.ini"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 msgid "Invalid settings"
 msgstr "Opções inválidas"
 
@@ -917,6 +1106,7 @@ msgid "The file does not appear to contain valid PDFCreator settings."
 msgstr "O arquivo não parece conter as opções válidas do PDFCreator."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to proceed anyway?"
 msgstr "Você quer continuar assim mesmo?"
 
@@ -985,17 +1175,34 @@ msgstr ""
 "Esta operação requer privilégios de administrador e parece que você não é um administrador. Você quer continuar assim mesmo?\n"
 "Nota: É seguro continuar mesmo se você não tem certeza se você possui os direitos apropriados, mas a operação não será concluída."
 
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Do you want to continue and save your changes?"
-msgstr "Você quer continuar e salvar suas alterações?"
-
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Save Settings"
-msgstr "Salvar Opções"
-
 #: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Error During Deletion"
 msgstr "Erro Durante a Exclusão"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Default Viewer"
+msgstr "Impressora Padrão"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "Do you want to save anyway?"
+msgstr "Você quer salvar assim mesmo?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "Do you want to save your changes?"
+msgstr "Você quer continuar e salvar suas alterações?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "PDFCreator Settings"
+msgstr "Opções Padrão"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "You have invalid settings."
+msgstr "Opções inválidas"
 
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
@@ -1107,6 +1314,11 @@ msgstr "O PDFCreator é um software gratuito composto por vários componentes co
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Please read the license section in the manual for further information on these licenses."
 msgstr "Por favor, leia a seção de licença no manual para obter mais informações sobre essas licenças."
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
+msgid "Priority Support"
+msgstr "Suporte Prioritário"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "User Manual"
@@ -1434,6 +1646,15 @@ msgstr "Remover conta FTP"
 msgid "Upload with FTP"
 msgstr "Enviar com FTP"
 
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#, fuzzy
+msgid "Viewer not found"
+msgstr "A ferramenta de reparo não foi encontrada"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "Viewer was not found, please check your settings."
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
 msgstr "Autenticação Básica"
@@ -1646,7 +1867,6 @@ msgstr "O PDF Architect já está instalado no seu computador"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Dialogs.InputBoxWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "_Cancel"
@@ -1675,10 +1895,6 @@ msgstr "Escolha um arquivo para converter"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Clear History"
 msgstr "Limpar Histórico"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
-msgid "Creation Date:"
-msgstr "Data de Criação:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Delete"
@@ -1903,50 +2119,16 @@ msgid "Confirm Save As"
 msgstr "Confirmar Salvar Como"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Defective Profile"
-msgstr "Perfil Defectivo"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit"
 msgstr "Editar"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Edit the profile or select another one."
-msgstr "Edite o perfil ou selecione outro."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File_name:"
 msgstr "Nome do _arquivo:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Folder path is not valid"
-msgstr "O caminho da pasta é inválido"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Invalid path"
-msgstr "Caminho inválido"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "S_ubject:"
 msgstr "A_ssunto:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid ""
-"The folder path is not valid or empty. Please enter a valid path. \n"
-"The folder path must not contain any of the following characters: \n"
-" \\ / : * ? \\< >"
-msgstr ""
-"O caminho da pasta é inválido ou está vazio. Por favor, digite um caminho válido. \n"
-"O caminho não deve conter quaisquer dos seguintes caracteres: \n"
-" \\ / : * ? \\< >"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path is not valid. Please enter a valid absolute path."
-msgstr "O caminho é inválido. Por favor, digite um caminho absoluto válido."
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path."
-msgstr "O caminho para o arquivo é maior do que o máximo de {0} caracteres permitido, por favor, escolha um caminho de arquivo menor."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Author:"
@@ -2082,10 +2264,12 @@ msgstr "Parâmetros Adicionais do Script:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "All files"
 msgstr "Todos arquivos"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Executable files"
 msgstr "Arquivos executáveis"
 
@@ -2120,27 +2304,6 @@ msgstr "Extrair Tokens de Usuário"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "More on user tokens"
 msgstr "Mais informações sobre tokens do usuário"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Defective Profiles"
-msgstr "Perfis Danificados"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Do you want to save anyway?"
-msgstr "Você quer salvar assim mesmo?"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "Profile:"
-msgstr "Perfil:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "The settings contain the following problems:"
-msgstr "As opções contém os seguintes problemas:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "_Save"
-msgstr "_Salvar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Add attachment"
@@ -2265,6 +2428,10 @@ msgstr "Por favor, digite o nome do novo perfil:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Please enter profile name:"
 msgstr "Por favor, digite o nome do perfil:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "Profile:"
+msgstr "Perfil:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Remove Profile"
@@ -2623,10 +2790,6 @@ msgid "Skip print dialog (start with save dialog)"
 msgstr "Ignorar a janela de impressão (iniciar com a janela salvar)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
-msgid "Skip the print dialog and directly proceed to the save file dialog"
-msgstr "Ignorar a janela de impressão e ir diretamente à janela salvar arquivo"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Use PDF Architect for PDF files"
 msgstr "Usar o PDF Architect para arquivos PDF"
 
@@ -2713,6 +2876,24 @@ msgid ""
 msgstr ""
 "Você alterou as opções do aplicativo. Para imprimir uma página de teste com as novas opções, você deve salvá-las primeiro.\n"
 "Você quer salvar as opções do aplicativo agora?"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Additional Parameters:"
+msgstr "Parâmetros Adicionais do Script:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Executable Path:"
+msgstr "Arquivos executáveis"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Viewer"
+msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"
@@ -3042,10 +3223,6 @@ msgid "Blog"
 msgstr "Blog"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
-msgid "Priority Support"
-msgstr "Suporte Prioritário"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
 msgstr "Obrigado por baixar o PDFCreator."
 
@@ -3129,10 +3306,6 @@ msgstr ""
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "Loading Update..."
 msgstr "Carregando a Atualização..."
-
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
-msgid "PDFCreator Plus Updater"
-msgstr "Atualizador do PDFCreator Plus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "The update will be started when you close PDFCreator"

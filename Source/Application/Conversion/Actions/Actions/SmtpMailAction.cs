@@ -1,5 +1,6 @@
 ﻿using NLog;
 using pdfforge.Mail;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -10,27 +11,33 @@ using Attachment = System.Net.Mail.Attachment;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
+    public interface ISmtpMailAction : IAction, ICheckable
+    { }
+
     public class SmtpMailAction : RetypePasswordActionBase, ISmtpMailAction
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         protected override string PasswordText => "SMTP";
 
-        public override ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public override void ApplyPreSpecifiedTokens(Job job)
+        {
+            job.Profile.EmailSmtpSettings.Recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients)
+                                                                        .Replace(';', ',');
+            job.Profile.EmailSmtpSettings.RecipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsCc)
+                                                                          .Replace(';', ',');
+            job.Profile.EmailSmtpSettings.RecipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsBcc)
+                                                                           .Replace(';', ',');
+        }
+
+        public override ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel)
         {
             var actionResult = new ActionResult();
 
-            if (!profile.EmailSmtpSettings.Enabled)
+            if (!IsEnabled(profile))
                 return actionResult;
 
             var smtpAccount = accounts.GetSmtpAccount(profile);
-
-            return Check(profile, smtpAccount);
-        }
-
-        private ActionResult Check(ConversionProfile profile, SmtpAccount smtpAccount)
-        {
-            var actionResult = new ActionResult();
 
             if (smtpAccount == null)
             {
@@ -44,11 +51,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 Logger.Error("No SMTP email address is specified.");
                 actionResult.Add(ErrorCode.Smtp_NoEmailAddress);
             }
-            if (string.IsNullOrWhiteSpace(profile.EmailSmtpSettings.Recipients))
-            {
-                Logger.Error("No SMTP email recipients are specified.");
-                actionResult.Add(ErrorCode.Smtp_NoRecipients);
-            }
+
             if (string.IsNullOrWhiteSpace(smtpAccount.Server))
             {
                 Logger.Error("No SMTP host is specified.");
@@ -67,6 +70,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 actionResult.Add(ErrorCode.Smtp_NoUserSpecified);
             }
 
+            if (string.IsNullOrWhiteSpace(profile.EmailSmtpSettings.Recipients))
+            {
+                Logger.Error("No SMTP email recipients are specified.");
+                actionResult.Add(ErrorCode.Smtp_NoRecipients);
+            }
+
             if (profile.AutoSave.Enabled)
             {
                 if (string.IsNullOrWhiteSpace(smtpAccount.Password))
@@ -83,32 +92,20 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         {
             var smtpAccount = job.Accounts.GetSmtpAccount(job.Profile);
 
-            var actionResult = Check(job.Profile, smtpAccount);
-            if (!actionResult)
-            {
-                Logger.Error("Canceled SMTP mail action.");
-                return actionResult;
-            }
-
             if (string.IsNullOrEmpty(job.Passwords.SmtpPassword))
             {
                 Logger.Error("SendMailOverSmtp canceled. Action launched without Password.");
                 return new ActionResult(ErrorCode.Smtp_NoPasswordSpecified);
             }
 
-            var recipientsTo = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients.Replace(';', ','));
-            var recipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsCc.Replace(';', ','));
-            var recipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsBcc.Replace(';', ','));
-
             MailMessage mail;
-
             try
             {
-                mail = new MailMessage(smtpAccount.Address, recipientsTo);
+                mail = new MailMessage(smtpAccount.Address, job.Profile.EmailSmtpSettings.Recipients);
             }
             catch (Exception e) when (e is FormatException || e is ArgumentException)
             {
-                Logger.Error($"\'{recipientsTo}\' is no valid SMTP e-mail recipient: " + e.Message);
+                Logger.Error($"\'{job.Profile.EmailSmtpSettings.Recipients}\' is no valid SMTP e-mail recipient: " + e.Message);
                 return new ActionResult(ErrorCode.Smtp_InvalidRecipients);
             }
 
@@ -116,8 +113,8 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             // (AddRecipients does this already, but can't be reused for the constructor)
             try
             {
-                AddRecipients(mail, RecipientType.Cc, recipientsCc);
-                AddRecipients(mail, RecipientType.Bcc, recipientsBcc);
+                AddRecipients(mail, RecipientType.Cc, job.Profile.EmailSmtpSettings.RecipientsCc);
+                AddRecipients(mail, RecipientType.Bcc, job.Profile.EmailSmtpSettings.RecipientsBcc);
             }
             catch
             {

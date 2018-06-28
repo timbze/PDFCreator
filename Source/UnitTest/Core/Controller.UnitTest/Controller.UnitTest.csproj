@@ -51,7 +51,6 @@
     </When>
   </Choose>
   <ItemGroup>
-    <Compile Include="FileConversionHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -109,7 +109,7 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
             _commandLocator.GetCommand<TimeServerAccountRemoveCommand>().Returns(_timeServerAccountRemoveCommand);
 
             _saveApplicationSettingsChangesCommand = Substitute.For<ICommand>();
-            _commandLocator.GetCommand<SaveApplicationSettingsChangesCommand>().Returns(_saveApplicationSettingsChangesCommand);
+            _commandLocator.GetCommand<SaveChangedSettingsCommand>().Returns(_saveApplicationSettingsChangesCommand);
 
             InitViewModel();
         }
@@ -184,22 +184,19 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
         [Test]
         public void Initialize_FtpAccountAddCommandIsSet()
         {
-            Assert.AreSame(_ftpAccountAddCommand, _viewModel.FtpAccountAddCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.FtpAccountAddCommand.GetCommand(1));
+            Assert.AreSame(_ftpAccountAddCommand, _viewModel.FtpAccountAddCommand);
         }
 
         [Test]
         public void Initialize_FtpAccountEditCommandIsSet()
         {
-            Assert.AreSame(_ftpAccountEditCommand, _viewModel.FtpAccountEditCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.FtpAccountEditCommand.GetCommand(1));
+            Assert.AreSame(_ftpAccountEditCommand, _viewModel.FtpAccountEditCommand);
         }
 
         [Test]
         public void Initialize_FtpAccountRemoveCommandIsSet()
         {
-            Assert.AreSame(_ftpAccountRemoveCommand, _viewModel.FtpAccountRemoveCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.FtpAccountRemoveCommand.GetCommand(1));
+            Assert.AreSame(_ftpAccountRemoveCommand, _viewModel.FtpAccountRemoveCommand);
         }
 
         #endregion FTP Accounts
@@ -239,22 +236,19 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
         [Test]
         public void Initialize_SmtpAccountAddCommandIsSet()
         {
-            Assert.AreSame(_smtpAccountAddCommand, _viewModel.SmtpAccountAddCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.SmtpAccountAddCommand.GetCommand(1));
+            Assert.AreSame(_smtpAccountAddCommand, _viewModel.SmtpAccountAddCommand);
         }
 
         [Test]
         public void Initialize_SmtpAccountEditCommandIsSet()
         {
-            Assert.AreSame(_smtpAccountEditCommand, _viewModel.SmtpAccountEditCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.SmtpAccountEditCommand.GetCommand(1));
+            Assert.AreSame(_smtpAccountEditCommand, _viewModel.SmtpAccountEditCommand);
         }
 
         [Test]
         public void Initialize_SmtpAccountRemoveCommandIsSet()
         {
-            Assert.AreSame(_smtpAccountRemoveCommand, _viewModel.SmtpAccountRemoveCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.SmtpAccountRemoveCommand.GetCommand(1));
+            Assert.AreSame(_smtpAccountRemoveCommand, _viewModel.SmtpAccountRemoveCommand);
         }
 
         #endregion SMTP Accounts
@@ -294,22 +288,19 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
         [Test]
         public void Initialize_HttpAccountAddCommandIsSet()
         {
-            Assert.AreSame(_httpAccountAddCommand, _viewModel.HttpAccountAddCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.HttpAccountAddCommand.GetCommand(1));
+            Assert.AreSame(_httpAccountAddCommand, _viewModel.HttpAccountAddCommand);
         }
 
         [Test]
         public void Initialize_HttpAccountEditCommandIsSet()
         {
-            Assert.AreSame(_httpAccountEditCommand, _viewModel.HttpAccountEditCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.HttpAccountEditCommand.GetCommand(1));
+            Assert.AreSame(_httpAccountEditCommand, _viewModel.HttpAccountEditCommand);
         }
 
         [Test]
         public void Initialize_HttpAccountRemoveCommandIsSet()
         {
-            Assert.AreSame(_httpAccountRemoveCommand, _viewModel.HttpAccountRemoveCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.HttpAccountRemoveCommand.GetCommand(1));
+            Assert.AreSame(_httpAccountRemoveCommand, _viewModel.HttpAccountRemoveCommand);
         }
 
         #endregion HTTP Accounts
@@ -349,15 +340,13 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
         [Test]
         public void Initialize_DropboxAccountAddCommandIsSet()
         {
-            Assert.AreSame(_dropboxAccountAddCommand, _viewModel.DropboxAccountAddCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.DropboxAccountAddCommand.GetCommand(1));
+            Assert.AreSame(_dropboxAccountAddCommand, _viewModel.DropboxAccountAddCommand);
         }
 
         [Test]
         public void Initialize_DropboxAccountRemoveCommandIsSet()
         {
-            Assert.AreSame(_dropboxAccountRemoveCommand, _viewModel.DropboxAccountRemoveCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.DropboxAccountRemoveCommand.GetCommand(1));
+            Assert.AreSame(_dropboxAccountRemoveCommand, _viewModel.DropboxAccountRemoveCommand);
         }
 
         #endregion Dropbox Accounts
@@ -397,22 +386,19 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
         [Test]
         public void Initialize_TimeServerAccountAddCommandIsSet()
         {
-            Assert.AreSame(_timeServerAccountAddCommand, _viewModel.TimeServerAccountAddCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.TimeServerAccountAddCommand.GetCommand(1));
+            Assert.AreSame(_timeServerAccountAddCommand, _viewModel.TimeServerAccountAddCommand);
         }
 
         [Test]
         public void Initialize_TimeServerAccountEditCommandIsSet()
         {
-            Assert.AreSame(_timeServerAccountEditCommand, _viewModel.TimeServerAccountEditCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.TimeServerAccountEditCommand.GetCommand(1));
+            Assert.AreSame(_timeServerAccountEditCommand, _viewModel.TimeServerAccountEditCommand);
         }
 
         [Test]
         public void Initialize_TimeServerAccountRemoveCommandIsSet()
         {
-            Assert.AreSame(_timeServerAccountRemoveCommand, _viewModel.TimeServerAccountRemoveCommand.GetCommand(0));
-            Assert.AreSame(_saveApplicationSettingsChangesCommand, _viewModel.TimeServerAccountRemoveCommand.GetCommand(1));
+            Assert.AreSame(_timeServerAccountRemoveCommand, _viewModel.TimeServerAccountRemoveCommand);
         }
 
         #endregion TimeServer Accounts

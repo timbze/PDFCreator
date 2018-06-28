@@ -1,7 +1,6 @@
 ﻿using NLog;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings.Enums;
-using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.Utilities;
@@ -16,12 +15,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         private readonly IPathUtil _pathUtil;
-        private readonly IParametersManager _parametersManager;
+        private readonly OutputFormatHelper _outputFormatHelper;
 
-        public TargetFileNameComposer(IPathUtil pathUtil, IParametersManager parametersManager)
+        public TargetFileNameComposer(IPathUtil pathUtil)
         {
             _pathUtil = pathUtil;
-            _parametersManager = parametersManager;
+            _outputFormatHelper = new OutputFormatHelper();
         }
 
         public string ComposeTargetFileName(Job job)
@@ -54,38 +53,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
         public string ComposeOutputFilename(Job job)
         {
             var outputFilename = ValidName.MakeValidFileName(job.TokenReplacer.ReplaceTokens(job.Profile.FileNameTemplate));
-
-            switch (job.Profile.OutputFormat)
-            {
-                case OutputFormat.Pdf:
-                case OutputFormat.PdfA1B:
-                case OutputFormat.PdfA2B:
-                case OutputFormat.PdfX:
-                    outputFilename += ".pdf";
-                    break;
-
-                case OutputFormat.Jpeg:
-                    outputFilename += ".jpg";
-                    break;
-
-                case OutputFormat.Png:
-                    outputFilename += ".png";
-                    break;
-
-                case OutputFormat.Tif:
-                    outputFilename += ".tif";
-                    break;
-
-                case OutputFormat.Txt:
-                    outputFilename += ".txt";
-                    break;
-
-                default:
-                    _logger.Warn("Can't find a supported Output format! File format is defaulted to .pdf");
-                    outputFilename += ".pdf";
-                    break;
-            }
-
+            outputFilename += _outputFormatHelper.GetExtension(job.Profile.OutputFormat);
             return outputFilename;
         }
     }

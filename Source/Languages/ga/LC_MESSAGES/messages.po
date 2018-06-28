@@ -1,3 +1,54 @@
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "The profile is mapped to the following printer:"
+msgid_plural "The profile is mapped to the following printers:"
+msgstr[0] "Tá an bheathaisnéisín nasctha leis an gclóire seo a leanas:"
+msgstr[1] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
+msgstr[2] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
+msgstr[3] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
+msgstr[4] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
+
+msgid ""
+msgstr ""
+"Project-Id-Version: Irish (PDFCreator)\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Irish <http://translate.pdfforge.org/projects/pdfcreator/messages/ga/>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :(n>6 && n<11) ? 3 : 4;\n"
+"X-Generator: Weblate 2.16\n"
+
+# pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Assistants.FileConversionAssistantTranslation
+msgid "Do you want to convert the {0} selected file?"
+msgid_plural "Do you want to convert the {0} selected files?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
+msgid "Signing will be disabled for this profile."
+msgid_plural "Signing will be disabled for this profiles."
+msgstr[0] "Díchumasófar sínithe don bheathaisnéisín seo."
+msgstr[1] "Díchumasófar sínithe do na beathaisnéisíní seo."
+msgstr[2] "Díchumasófar sínithe do na beathaisnéisíní seo."
+msgstr[3] "Díchumasófar sínithe do na beathaisnéisíní seo."
+msgstr[4] "Díchumasófar sínithe do na beathaisnéisíní seo."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #, fuzzy
@@ -9,53 +60,21 @@ msgstr[2] "agus {0} eile."
 msgstr[3] "agus {0} eile."
 msgstr[4] "agus {0} eile."
 
-msgid ""
-msgstr ""
-"Project-Id-Version: Irish (PDFCreator)\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Irish <http://translate.pdfforge.org/projects/pdfcreator/messages/ga/>\n"
-"Language: ga\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :(n>6 && n<11) ? 3 : 4;\n"
-"X-Generator: Weblate 2.16\n"
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "The FTP action will be disabled for this profile."
+msgid_plural "The FTP action will be disabled for this profiles."
+msgstr[0] "Díchumasófar an gníomh FTP don bheathaisnéisín seo."
+msgstr[1] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
+msgstr[2] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
+msgstr[3] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
+msgstr[4] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
 
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#, fuzzy
-msgid "Delete File"
-msgid_plural "Delete Files"
-msgstr[0] "Scrios aon chomhad"
-msgstr[1] "Scrios comhaid"
-msgstr[2] "Scrios comhaid"
-msgstr[3] "Scrios comhaid"
-msgstr[4] "Scrios comhaid"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "This printer will be mapped to the default profile."
-msgid_plural "These printers will be mapped to the default profile."
-msgstr[0] "Nascfar an clóire seo leis an mbeathaisnéisín réamhshocraithe."
-msgstr[1] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
-msgstr[2] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
-msgstr[3] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
-msgstr[4] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
-
-# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
-msgid "Are you sure you want to delete the following file?"
-msgid_plural "Are you sure you want to delete the following files?"
-msgstr[0] "An bhfuil tú cinnte gur mian leat an comhad seo a leanas a scriosadh?"
-msgstr[1] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
-msgstr[2] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
-msgstr[3] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
-msgstr[4] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
-
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 # pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
@@ -67,6 +86,98 @@ msgstr[2] "Tá {0} chomhad tiontaithe agat cheana féin!"
 msgstr[3] "Tá {0} gcomhad tiontaithe agat cheana féin!"
 msgstr[4] "Tá {0} chomhad tiontaithe agat cheana féin!"
 
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
+msgid "The HTTP action will be disabled for this profile."
+msgid_plural "The HTTP action will be disabled for this profiles."
+msgstr[0] "Díchumasófar an gníomh HTTP don bheathaisnéisín seo."
+msgstr[1] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
+msgstr[2] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
+msgstr[3] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
+msgstr[4] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+msgid "The SMTP action will be disabled for this profile."
+msgid_plural "The SMTP action will be disabled for this profiles."
+msgstr[0] "Díchumasófar an gníomh SMTP don bheathaisnéisín seo."
+msgstr[1] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
+msgstr[2] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
+msgstr[3] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
+msgstr[4] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "This printer will be mapped to the default profile."
+msgid_plural "These printers will be mapped to the default profile."
+msgstr[0] "Nascfar an clóire seo leis an mbeathaisnéisín réamhshocraithe."
+msgstr[1] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
+msgstr[2] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
+msgstr[3] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
+msgstr[4] "Nascfar na clóirí seo leis an mbeathaisnéisín réamhshocraithe."
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
+msgid "The account is used in the following profile:"
+msgid_plural "The account is used in the following profiles:"
+msgstr[0] "Baintear feidhm as an gcuntas sa bheathaisnéisín seo a leanas:"
+msgstr[1] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
+msgstr[2] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
+msgstr[3] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
+msgstr[4] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
+
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
+msgid "The Dropbox upload will be disabled for this profile."
+msgid_plural "The Dropbox upload will be disabled for this profiles."
+msgstr[0] "Díchumasófar an t-uasluchtú Dropbox don bheathaisnéisín seo."
+msgstr[1] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
+msgstr[2] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
+msgstr[3] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
+msgstr[4] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#, fuzzy
+msgid "Delete File"
+msgid_plural "Delete Files"
+msgstr[0] "Scrios aon chomhad"
+msgstr[1] "Scrios comhaid"
+msgstr[2] "Scrios comhaid"
+msgstr[3] "Scrios comhaid"
+msgstr[4] "Scrios comhaid"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Are you sure you want to delete the following file?"
+msgid_plural "Are you sure you want to delete the following files?"
+msgstr[0] "An bhfuil tú cinnte gur mian leat an comhad seo a leanas a scriosadh?"
+msgstr[1] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
+msgstr[2] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
+msgstr[3] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
+msgstr[4] "An bhfuil tú cinnte gur mian leat na comhaid seo a leanas a scriosadh?"
+
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+# pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 # pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 #. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid ""
@@ -83,94 +194,6 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
-msgid "The HTTP action will be disabled for this profile."
-msgid_plural "The HTTP action will be disabled for this profiles."
-msgstr[0] "Díchumasófar an gníomh HTTP don bheathaisnéisín seo."
-msgstr[1] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
-msgstr[2] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
-msgstr[3] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
-msgstr[4] "Díchumasófar an gníomh HTTP do na beathaisnéisíní seo."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation
-msgid "The account is used in the following profile:"
-msgid_plural "The account is used in the following profiles:"
-msgstr[0] "Baintear feidhm as an gcuntas sa bheathaisnéisín seo a leanas:"
-msgstr[1] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
-msgstr[2] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
-msgstr[3] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
-msgstr[4] "Baintear feidhm as an gcuntas sna beathaisnéisíní seo a leanas:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "The SMTP action will be disabled for this profile."
-msgid_plural "The SMTP action will be disabled for this profiles."
-msgstr[0] "Díchumasófar an gníomh SMTP don bheathaisnéisín seo."
-msgstr[1] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
-msgstr[2] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
-msgstr[3] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
-msgstr[4] "Díchumasófar an gníomh SMTP do na beathaisnéisíní seo."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "The FTP action will be disabled for this profile."
-msgid_plural "The FTP action will be disabled for this profiles."
-msgstr[0] "Díchumasófar an gníomh FTP don bheathaisnéisín seo."
-msgstr[1] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
-msgstr[2] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
-msgstr[3] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
-msgstr[4] "Díchumasófar an gníomh FTP do na beathaisnéisíní seo."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "The profile is mapped to the following printer:"
-msgid_plural "The profile is mapped to the following printers:"
-msgstr[0] "Tá an bheathaisnéisín nasctha leis an gclóire seo a leanas:"
-msgstr[1] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
-msgstr[2] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
-msgstr[3] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
-msgstr[4] "Tá an bheathaisnéisín nasctha leis na clóirí seo a leanas:"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "There is an issue with the profile '{0}':"
-msgid_plural "There are issues with the profile '{0}':"
-msgstr[0] "Baineann fadhb leis an mbeathaisnéisín '{0}':"
-msgstr[1] "Baineann fadhbanna leis an mbeathaisnéisín '{0}':"
-msgstr[2] "Baineann fadhbanna leis an mbeathaisnéisín '{0}':"
-msgstr[3] "Baineann fadhbanna leis an mbeathaisnéisín '{0}':"
-msgstr[4] "Baineann fadhbanna leis an mbeathaisnéisín '{0}':"
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation
-msgid "Signing will be disabled for this profile."
-msgid_plural "Signing will be disabled for this profiles."
-msgstr[0] "Díchumasófar sínithe don bheathaisnéisín seo."
-msgstr[1] "Díchumasófar sínithe do na beathaisnéisíní seo."
-msgstr[2] "Díchumasófar sínithe do na beathaisnéisíní seo."
-msgstr[3] "Díchumasófar sínithe do na beathaisnéisíní seo."
-msgstr[4] "Díchumasófar sínithe do na beathaisnéisíní seo."
-
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-# pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-#. pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation
-msgid "The Dropbox upload will be disabled for this profile."
-msgid_plural "The Dropbox upload will be disabled for this profiles."
-msgstr[0] "Díchumasófar an t-uasluchtú Dropbox don bheathaisnéisín seo."
-msgstr[1] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
-msgstr[2] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
-msgstr[3] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
-msgstr[4] "Díchumasófar an t-uasluchtú Dropbox do na beathaisnéisíní seo."
-
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file does not exist."
 msgstr "Ní ann don chomhad ceangaltáin."
@@ -178,6 +201,21 @@ msgstr "Ní ann don chomhad ceangaltáin."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Attachment file is no PDF file."
 msgstr "Ní comhad PDF é an comhad ceangaltáin."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Attachment path is too long."
+msgstr "Tá conair an chomhaid rófhada"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Automatic saving without FTP server password."
@@ -216,8 +254,38 @@ msgid "Background file is no PDF file."
 msgstr "Ní comhad PDF é an comhad cúlra."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Background path is too long."
+msgstr "Ní comhad PDF é an comhad cúlra."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Certificate file does not exist."
 msgstr "Ní ann don chomhad teastais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Certificate path is too long."
+msgstr "Tá conair an chomhaid rófhada"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Could not authorize to SMTP server."
@@ -250,6 +318,25 @@ msgstr "Níorbh fhéidir comhad a uasluchtú le FTP."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Cover file does not exist."
 msgstr "Ní ann don chomhad clúdaigh."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Cover path is too long."
+msgstr "Tá conair an chomhaid rófhada"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Custom viewer was not found."
+msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "E-mail over SMTP could not be delivered to one or more recipients."
@@ -340,9 +427,43 @@ msgid "Failure in directory on FTP server."
 msgstr "Tharla teip i gcomhadlann ar an bhfreastalaí FTP."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+#, fuzzy
+msgid "File for JPEG viewer does not exist."
+msgstr "Ní ann don chomhad clúdaigh."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for PDF viewer does not exist."
+msgstr "Ní ann don chomhad clúdaigh."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for PNG viewer does not exist."
+msgstr "Ní ann don chomhad clúdaigh."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for TIFF viewer does not exist."
+msgstr "Ní ann don chomhad clúdaigh."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "File for Text viewer does not exist."
+msgstr "Ní ann don chomhad teastais."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
 msgstr "Tá conair an chomhaid rófhada"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Filename template contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Ftp directory path is invalid ftp path."
+msgstr "Níl conair an fhillteáin bailí"
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "HTTP URL must start with 'http://' or 'https://'."
@@ -445,6 +566,26 @@ msgid "PDF Architect could not open output file."
 msgstr "Níorbh fhéidir le PDF Architect an comhad aschuir a oscailt."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for JPEG viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PDF viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for PNG viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for TIFF viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Path for Text viewer is empty."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Preselected folder for save dialog is empty."
 msgstr "Tá an fillteán réamhroghnaithe don taisceadh folamh."
 
@@ -457,6 +598,16 @@ msgid "Script file does not exist."
 msgstr "Ní ann don chomhad scripte."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "ScriptFile path is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "ScriptFile path is too long."
+msgstr "Tá conair an chomhaid rófhada"
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Secured Time Server without password."
 msgstr "Freastalaí ama daingnithe gan focal faire."
 
@@ -467,6 +618,20 @@ msgstr "Freastalaí ama daingnithe gan ainm úsáideora."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "System could not open output file."
 msgstr "Níorbh fhéidir leis an gcóras an comhad aschuir a oscailt."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Target directory contains illegal characters."
+msgstr "Tá carachtair neamhdhleathacha sa chomhad scripte."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+#, fuzzy
+msgid "Target directory is invalid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "Target directory is too long."
+msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The certificate has no private key."
@@ -483,6 +648,17 @@ msgstr "Ní comhad PDF é an comhad clúdaigh."
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The default printer is invalid."
 msgstr "Níl an clóire réamhshocraithe bailí."
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid ""
+"The folder path is not valid or empty. Please enter a valid path. \n"
+"The folder path must not contain any of the following characters: \n"
+" \\ / : * ? \\< >"
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "The path is not valid. Please enter a valid absolute path."
+msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "The selected printer is invalid."
@@ -863,6 +1039,14 @@ msgstr ""
 "Tá do cheadúnas i gcomhair \"{0}\" neamhbhailí nó d'éag sé. Dearbháil do cheadúnas, nó scoirfidh PDFCreator.\n"
 "An mian leat do cheadúnas a dhearbháil anois?"
 
+#: pdfforge.PDFCreator.Core.Startup.Translations.ProgramTranslation
+msgid ""
+"Your trial has expired on {0}.\n"
+"PDFCreator will shut down.\n"
+"\n"
+"Please contact: licensing@pdfforge.org"
+msgstr ""
+
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid ""
 "Can't find a supported Ghostscript installation.\n"
@@ -894,6 +1078,7 @@ msgstr "Tá comhad PDFCreator tábhachtach in easnamh ('{0}'). Suiteáil PDFCrea
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "Error"
 msgstr "Botún"
@@ -943,6 +1128,7 @@ msgid "INI files (*.ini)|*.ini"
 msgstr "Comhaid INI (*.ini)|*.ini"
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.LoadSettingsTranslationTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Workflow.InteractiveProfileCheckerTranslation
 msgid "Invalid settings"
 msgstr "Socruithe neamhbhailí"
 
@@ -955,6 +1141,7 @@ msgid "The file does not appear to contain valid PDFCreator settings."
 msgstr "Tá an dealramh ar an gcomhad nach bhfuil aon socruithe PDFCreator bailí ann."
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
 msgid "Do you want to proceed anyway?"
 msgstr "Ar mhaith leat dul ar aghaidh cibé ar bith?"
 
@@ -1023,17 +1210,34 @@ msgstr ""
 "Is gá duit pribhléidí riarthóra a bheith agat don oibríocht seo agus tá an dealramh air nach riarthóir thú. Ar mhaith leat leanúint ar aghaidh cibé ar bith?\n"
 "Aire: Tá sé sábháilte leanúint ar aghaidh fiú mura bhfuil tú cinnte go bhfuil na cearta cuí agat, ach ní chríochnófar an oibríocht."
 
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Do you want to continue and save your changes?"
-msgstr "An mian leat leanúint ar aghaidh agus do chuid athruithe a chur i dtaisce?"
-
-#: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
-msgid "Save Settings"
-msgstr "Taisc na socruithe"
-
 #: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
 msgid "Error During Deletion"
 msgstr "Botún i rith an scriosta"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Default Viewer"
+msgstr "An clóire réamhshocraithe"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+msgid "Do you want to save anyway?"
+msgstr "Ar mhaith leat é a thaisceadh cibé ar bith?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "Do you want to save your changes?"
+msgstr "An mian leat leanúint ar aghaidh agus do chuid athruithe a chur i dtaisce?"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "PDFCreator Settings"
+msgstr "Na réamhshocruithe"
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.EvaluateSettingsAndNotifyUserTranslation
+#, fuzzy
+msgid "You have invalid settings."
+msgstr "Socruithe neamhbhailí"
 
 #: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
 msgid "Please save or cancel settings to continue"
@@ -1145,6 +1349,11 @@ msgstr "Is oideasra saor in aisce é PDFCreator comhdhéanta d'iliomad comhphái
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "Please read the license section in the manual for further information on these licenses."
 msgstr "Léigh an chuid sa lámhleabhar maidir le ceadúnais i gcomhair tuilleadh faisnéis faoi na ceadúnais seo."
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
+msgid "Priority Support"
+msgstr "Tacaíocht tosaíochta"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.AboutViewTranslation
 msgid "User Manual"
@@ -1472,6 +1681,15 @@ msgstr "Bain cuntas FTP"
 msgid "Upload with FTP"
 msgstr "Uasluchtaigh le FTP"
 
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#, fuzzy
+msgid "Viewer not found"
+msgstr "Níor aimsíodh RepairTool"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+msgid "Viewer was not found, please check your settings."
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
 msgid "Basic Authentication"
 msgstr "Fíordheimhniú bunúsach"
@@ -1685,7 +1903,6 @@ msgstr "Tá PDF Architect ar do ríomhaire agat cheana féin"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Dialogs.InputBoxWindowTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password.PasswordOverlayTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License.OfflineActivationViewModelTranslation
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "_Cancel"
@@ -1714,10 +1931,6 @@ msgstr "Roghnaigh Comhad le tiontú"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Clear History"
 msgstr "Glan an t-oireas"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
-msgid "Creation Date:"
-msgstr "Dáta cruthaithe:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Delete"
@@ -1942,47 +2155,16 @@ msgid "Confirm Save As"
 msgstr "Deimhnigh an taisceadh mar"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Defective Profile"
-msgstr "Beathaisnéisín lochtach"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "Edit"
 msgstr "Eagar"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Edit the profile or select another one."
-msgstr "Cuir an bheathaisnéisín in eagar nó roghnaigh ceann eile."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "File_name:"
 msgstr "Comhad_ainm:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Folder path is not valid"
-msgstr "Níl conair an fhillteáin bailí"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Invalid path"
-msgstr "Conair neamhbhailí"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "S_ubject:"
 msgstr "Á_bhar:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid ""
-"The folder path is not valid or empty. Please enter a valid path. \n"
-"The folder path must not contain any of the following characters: \n"
-" \\ / : * ? \\< >"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path is not valid. Please enter a valid absolute path."
-msgstr "Níl an chonair bailí. Cuir isteach conair bhailí."
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path."
-msgstr "Tá an chonair chuig an gcomhad níos faide ná na {0} gcarachtar a cheadaítear. Roghnaigh conair níos giorra."
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgid "_Author:"
@@ -2118,10 +2300,12 @@ msgstr "Paraiméadair scripte bhreise:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background.BackgroundSettingsAndActionTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover.CoverSettingsTranslation
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "All files"
 msgstr "Gach comhad"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Script.ScriptTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
 msgid "Executable files"
 msgstr "Comhaid inrite"
 
@@ -2156,27 +2340,6 @@ msgstr "Bain amach téacschomharthaí úsáideora"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "More on user tokens"
 msgstr "Tuilleadh eolais faoi théacschomharthaí úsáideora"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Defective Profiles"
-msgstr "Beathaisnéisíní lochtacha"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "Do you want to save anyway?"
-msgstr "Ar mhaith leat é a thaisceadh cibé ar bith?"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
-msgid "Profile:"
-msgstr "Beathaisnéisín:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "The settings contain the following problems:"
-msgstr "Tá na fadhbanna seo a leanas sna socruithe:"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
-msgid "_Save"
-msgstr "_Taisc"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment.AttachmentSettingsAndActionTranslation
 msgid "Add attachment"
@@ -2301,6 +2464,10 @@ msgstr "Cuir isteach ainm nua don bheathaisnéisín:"
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Please enter profile name:"
 msgstr "Cuir isteach ainm na beathaisnéisíne:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
+msgid "Profile:"
+msgstr "Beathaisnéisín:"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ProfileMangementTranslation
 msgid "Remove Profile"
@@ -2659,10 +2826,6 @@ msgid "Skip print dialog (start with save dialog)"
 msgstr "Léim thar fuinneog an chlóbhuailte (tosaigh le fuinneog an taiscthe)"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
-msgid "Skip the print dialog and directly proceed to the save file dialog"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
 msgid "Use PDF Architect for PDF files"
 msgstr "Bain feidhm as PDF Architect do chomhaid PDF"
 
@@ -2749,6 +2912,24 @@ msgid ""
 msgstr ""
 "Tá socruithe an fheichmchláir mionathraithe agat. Le gur féidir leathanach tástála a chlóbhualadh leis na socruithe nua, is gá na socruithe a thaisceadh ar dtús.\n"
 "An mian leat socruithe an fheidhmchláir a thaisceadh anois?"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Additional Parameters:"
+msgstr "Paraiméadair scripte bhreise:"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+#, fuzzy
+msgid "Executable Path:"
+msgstr "Comhaid inrite"
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Here you can setup a custom program for viewing your generated documents. The windows default program will be used if you don't select anything here."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DefaultViewerSettings.DefaultViewerTranslation
+msgid "Viewer"
+msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Added to context menu"
@@ -3078,10 +3259,6 @@ msgid "Blog"
 msgstr "Blag"
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
-msgid "Priority Support"
-msgstr "Tacaíocht tosaíochta"
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
 msgstr "Go raibh maith agat as ucht PDFCreator a íosluchtú."
 
@@ -3165,10 +3342,6 @@ msgstr ""
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "Loading Update..."
 msgstr "Ag luchtú an nuashonraithe..."
-
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
-msgid "PDFCreator Plus Updater"
-msgstr "Nuashonraitheoir PDFCreator Plus"
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateDownloadWindowTranslation
 msgid "The update will be started when you close PDFCreator"

@@ -13,10 +13,10 @@
         Background="{x:Static SystemColors.ControlBrush}">
     <Grid MinHeight="100">
         <StackPanel Margin="10 20 10 10">
-            <TextBlock Text="{Binding Translation.LoadingUpdateText}" Margin="0 3">Loading update...</TextBlock>
+            <TextBlock Text="{Binding Translation.LoadingUpdateText}" Margin="0 3" />
             <ProgressBar Name="ProgressBar" Height="20" Maximum="100" Value="{Binding ProgressPercentage, Mode=OneWay}" />
             <TextBlock Name="DownloadSpeedText" HorizontalAlignment="Center" Text="{Binding DownloadSpeedText}" />
-            <TextBlock  Text="{Binding Translation.InstallHintText}" Margin="0 3" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+            <TextBlock  Text="{Binding Translation.InstallHintText}" Margin="0 3" HorizontalAlignment="Center" TextWrapping="Wrap" />
 
             <Button DockPanel.Dock="Right" Padding="5" MinWidth="100"
                     Command="{Binding CancelCommand}" IsCancel="True" HorizontalAlignment="Right" Height="40"

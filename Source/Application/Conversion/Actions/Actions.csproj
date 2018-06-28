@@ -49,9 +49,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="SystemWrapper, Version=9.6.171.928, Culture=neutral, PublicKeyToken=9861416082383a00, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionManager.cs" />
+    <Compile Include="Actions\DefaultViewerCheck.cs" />
     <Compile Include="Actions\DefaultViewerAction.cs" />
     <Compile Include="Actions\Dropbox\DropboxAction.cs" />
     <Compile Include="Actions\Dropbox\DropboxAppData.cs" />
@@ -59,11 +64,12 @@
     <Compile Include="Actions\Dropbox\DropboxUserInfo.cs" />
     <Compile Include="Actions\Dropbox\WinInetHelper.cs" />
     <Compile Include="Actions\EMailClientAction.cs" />
+    <Compile Include="Actions\Interface\IDefaultViewerAction.cs" />
+    <Compile Include="Actions\Interface\IEMailClientAction.cs" />
     <Compile Include="Actions\RetypePasswordActionBase.cs" />
     <Compile Include="Actions\HttpAction.cs" />
     <Compile Include="Actions\FtpAction.cs" />
     <Compile Include="Actions\Dropbox\IDropboxService.cs" />
-    <Compile Include="Actions\ISmtpMailAction.cs" />
     <Compile Include="Queries\IRecommendArchitect.cs" />
     <Compile Include="IScriptActionHelper.cs" />
     <Compile Include="Actions\PrintingAction.cs" />

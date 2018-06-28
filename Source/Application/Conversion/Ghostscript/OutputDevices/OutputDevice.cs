@@ -120,16 +120,14 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 parameters.Add(stampFileName);
             }
 
-            if (Job.Profile.CoverPage.Enabled)
-                parameters.Add(PathHelper.GetShortPathName(Job.Profile.CoverPage.File));
+            SetCover(Job, parameters);
 
             foreach (var sfi in Job.JobInfo.SourceFiles)
             {
                 parameters.Add(PathHelper.GetShortPathName(sfi.Filename));
             }
 
-            if (Job.Profile.AttachmentPage.Enabled)
-                parameters.Add(PathHelper.GetShortPathName(Job.Profile.AttachmentPage.File));
+            SetAttachment(Job, parameters);
 
             // Compose name of the pdfmark file based on the location and name of the inf file
             var pdfMarkFileName = PathSafe.Combine(Job.JobTempFolder, "metadata.mtd");
@@ -139,6 +137,34 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
             parameters.Add(pdfMarkFileName);
 
             return parameters;
+        }
+
+        private void SetCover(Job job, IList<string> parameters)
+        {
+            if (Job.Profile.CoverPage.Enabled)
+            {
+                var coverFile = job.TokenReplacer.ReplaceTokens(Job.Profile.CoverPage.File);
+
+                if (!FileWrap.Exists(coverFile))
+                    return; // todo: Inform user. Probably way sooner.
+
+                coverFile = PathHelper.GetShortPathName(coverFile);
+                parameters.Add(PathHelper.GetShortPathName(coverFile));
+            }
+        }
+
+        private void SetAttachment(Job job, IList<string> parameters)
+        {
+            if (Job.Profile.AttachmentPage.Enabled)
+            {
+                var attachmentFile = job.TokenReplacer.ReplaceTokens(Job.Profile.AttachmentPage.File);
+
+                if (!FileWrap.Exists(attachmentFile))
+                    return; // todo: Inform user. Probably way sooner.
+
+                attachmentFile = PathHelper.GetShortPathName(attachmentFile);
+                parameters.Add(PathHelper.GetShortPathName(attachmentFile));
+            }
         }
 
         protected virtual void AddOutputfileParameter(IList<string> parameters)
@@ -207,7 +233,8 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
                 outlineString = "true charpath stroke";
             }
 
-            var stampText = tokenReplacer.ReplaceTokens(profile.Stamping.StampText);
+            var textWithTokens = tokenReplacer.ReplaceTokens(profile.Stamping.StampText);
+            var stampText = RemoveIllegalCharacters(textWithTokens);
 
             // Only Latin1 chars are allowed here
             stampString = stampString.Replace("[STAMPSTRING]",
@@ -235,10 +262,11 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
             FileWrap.WriteAllText(filename, stampString);
         }
 
-        /*private string GetPostscriptFontName(string font)
+        private string RemoveIllegalCharacters(string text)
         {
-            return font.Replace(" ", "");
-        }*/
+            var bytes = Encoding.GetEncoding("ISO-8859-1").GetBytes(text);
+            return Encoding.GetEncoding("ISO-8859-1").GetString(bytes);
+        }
 
         protected string EncodeGhostscriptParametersOctal(string String)
         {
@@ -301,8 +329,6 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices
         /// </summary>
         /// <param name="parameters">The current list of parameters. This list may be modified in inherited classes.</param>
         protected abstract void AddDeviceSpecificParameters(IList<string> parameters);
-
-        //protected abstract void SetDeviceSpecificOutputFile(IList<string> parameters);
 
         protected abstract string ComposeOutputFilename();
 

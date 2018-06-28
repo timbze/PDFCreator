@@ -8,6 +8,7 @@ namespace pdfforge.PDFCreator.Core.Startup.Translations
         private string LicenseInvalid { get; set; } = "Your license for \"{0}\" is invalid or has expired. Please check your license, otherwise PDFCreator will shutdown.\nDo you want to check your license now?";
         private string LicenseInvalidAfterReactivation { get; set; } = "Your license for \"{0}\" has expired.\nPDFCreator will shut down.";
         private string LicenseInvalidGpoHideLicenseTab { get; set; } = "Your license for \"{0}\" has expired.\nPlease contact your administrator.\nPDFCreator will shut down.";
+        private string TrialExpired { get; set; } = "Your trial has expired on {0}.\nPDFCreator will shut down.\n\nPlease contact: licensing@pdfforge.org";
         public string UsePDFCreatorTerminalServer { get; private set; } = "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.\n\nPlease visit our website for more information or contact us directly: licensing@pdfforge.org";
 
         public string GetFormattedLicenseInvalidGpoHideLicenseTab(string editionWithVersionNumber)
@@ -28,6 +29,11 @@ namespace pdfforge.PDFCreator.Core.Startup.Translations
         public string GetFormattedErrorWithLicensedComponentTranslation(int errorCode)
         {
             return string.Format(ErrorWithLicensedComponent, errorCode);
+        }
+
+        public string GetFormattedTrialExpiredTranslation(string trialExpireDate)
+        {
+            return string.Format(TrialExpired, trialExpireDate);
         }
     }
 }

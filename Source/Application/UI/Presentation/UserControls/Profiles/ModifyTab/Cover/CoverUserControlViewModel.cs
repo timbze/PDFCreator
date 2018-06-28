@@ -1,7 +1,10 @@
-﻿using pdfforge.Obsidian;
+﻿using Optional;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Cover
 {
@@ -9,26 +12,32 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Co
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
 
-        public CoverUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile) : base(translationUpdater, selectedProfile)
+        public TokenReplacer TokenReplacer { get; }
+
+        public TokenViewModel<ConversionProfile> CoverPageTokenViewModel { get; set; }
+
+        public CoverUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater,
+            ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfile)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
 
-            SelectCoverCommand = new DelegateCommand(SelectCoverExecute);
-        }
-
-        public DelegateCommand SelectCoverCommand { get; set; }
-
-        public bool IsEnabled
-        {
-            get { return CurrentProfile != null && CurrentProfile.CoverPage.Enabled; }
-            set
+            if (tokenHelper != null)
             {
-                CurrentProfile.CoverPage.Enabled = value;
-                RaisePropertyChanged(nameof(IsEnabled));
+                TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+                var tokens = tokenHelper.GetTokenListForExternalFiles();
+
+                CoverPageTokenViewModel = tokenViewModelFactory.BuilderWithSelectedProfile()
+                    .WithSelector(p => p.CoverPage.File)
+                    .WithTokenList(tokens)
+                    .WithTokenReplacerPreview(TokenReplacer)
+                    .WithButtonCommand(SelectCoverPageAction)
+                    .Build();
+
+                RaisePropertyChanged(nameof(CoverPageTokenViewModel));
             }
         }
 
-        private void SelectCoverExecute(object obj)
+        private Option<string> SelectCoverPageAction(string s1)
         {
             var title = Translation.SelectCoverFile;
             var filter = Translation.PDFFiles
@@ -37,17 +46,20 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Co
                          + @" (*.*)|*.*";
 
             var interactionResult = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.CoverPage.File, title, filter);
+
             interactionResult.MatchSome(s =>
             {
-                CurrentProfile.CoverPage.File = s;
-                RaisePropertyChanged(nameof(CurrentProfile));
+                CoverPageTokenViewModel.Text = s;
+                CoverPageTokenViewModel.RaiseTextChanged();
             });
+
+            return interactionResult;
         }
     }
 
     public class DesignTimeCoverUserControlViewModel : CoverUserControlViewModel
     {
-        public DesignTimeCoverUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimeCoverUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
         {
         }
     }

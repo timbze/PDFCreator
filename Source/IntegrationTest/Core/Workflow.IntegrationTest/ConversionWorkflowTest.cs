@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Jobs;
+using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Workflow;
@@ -176,7 +177,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _settings.ConversionProfiles[0].TitleTemplate = "<PrintJobName> by <PrintJobAuthor>";
 
             var profileChecker = Substitute.For<IProfileChecker>();
-            profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            profileChecker.CheckJob(Arg.Any<Job>()).Returns(new ActionResult());
 
             var job = _jobBuilder.BuildJobFromJobInfo(_th.JobInfo, _settings);
             var autoSaveWorkflow = _workflowFactory.CreateWorkflow(WorkflowModeEnum.Autosave);

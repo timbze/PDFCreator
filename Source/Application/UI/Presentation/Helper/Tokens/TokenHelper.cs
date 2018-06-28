@@ -121,6 +121,40 @@ namespace pdfforge.PDFCreator.UI.Presentation.Helper.Tokens
             return tokenList;
         }
 
+        public List<string> GetTokenListForExternalFiles()
+
+        {
+            var tokenList = GetTokenListWithFormatting();
+            tokenList.Remove("<Author>");
+            tokenList.Remove("<OutputFilePath>");
+            tokenList.Remove("<DropboxHtmlLinks>");
+            tokenList.Remove("<DropboxFullLinks>");
+            tokenList.Remove("<Counter>");
+            tokenList.Remove("<JobID>");
+            tokenList.Remove("<Keywords>");
+            tokenList.Remove("<NumberOfCopies>");
+            tokenList.Remove("<NumberOfPages>");
+            tokenList.Remove("<OutputFilePath>");
+            tokenList.Remove("<OutputFilenames>");
+            tokenList.Remove("<PrinterName>");
+            tokenList.Remove("<PrintJobAuthor>");
+            tokenList.Remove("<SessionID>");
+            tokenList.Remove("<Title>");
+            tokenList.Remove("<PrintJobName>");
+            tokenList.Remove("<Subject>");
+
+            return tokenList;
+        }
+
+        public List<string> GetTokenListForStamp()
+
+        {
+            var tokenList = GetTokenListWithFormatting();
+            tokenList.Remove("<DropboxHtmlLinks>");
+            tokenList.Remove("<DropboxFullLinks>");
+            return tokenList;
+        }
+
         public List<string> GetTokenListForEmail()
         {
             var tokenList = GetTokenListWithFormatting();

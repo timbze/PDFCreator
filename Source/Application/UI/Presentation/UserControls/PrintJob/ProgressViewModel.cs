@@ -52,11 +52,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
                     job.OnJobHasError += OnAnErrorOccurredInJob;
 
-                    // TODO: Maybe move to a more resonable place, i.e. trigger conversion as result of the task?
-                    var preCheck = _profileChecker.ProfileCheck(job.Profile, job.Accounts);
-                    if (!preCheck)
-                        throw new ProcessingException("Invalid Profile", preCheck[0]);
-
                     _jobRunner.RunJob(job, _outputFileMover);
 
                     _finishedEvent.WaitOne();

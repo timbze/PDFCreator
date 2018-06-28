@@ -1,9 +1,11 @@
-﻿using pdfforge.Obsidian.Trigger;
+﻿using pdfforge.Obsidian;
+using pdfforge.Obsidian.Trigger;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Controller.Routing;
 using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
@@ -14,7 +16,6 @@ using pdfforge.PDFCreator.UI.Presentation.Routing;
 using pdfforge.PDFCreator.UI.Presentation.UserControls;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using System;
@@ -29,7 +30,6 @@ namespace pdfforge.PDFCreator.UI.Presentation
         public IInteractionRequest InteractionRequest { get; }
 
         private readonly IEventAggregator _aggregator;
-        private readonly ICommandLocator _commandLocator;
         private string _activePath = MainRegionViewNames.HomeView;
         private Action _closeViewAction;
         private readonly IDispatcher _dispatcher;
@@ -56,7 +56,6 @@ namespace pdfforge.PDFCreator.UI.Presentation
             : base(translation)
         {
             _aggregator = aggregator;
-            _commandLocator = commandLocator;
             ApplicationName = applicationName;
             InteractionRequest = interactionRequest;
 
@@ -67,10 +66,15 @@ namespace pdfforge.PDFCreator.UI.Presentation
             GpoSettings = gpoSettings;
 
             NavigateCommand = commandLocator?.CreateMacroCommand()
-            .AddCommand<SaveAndContinueEvaluationCommand>()
-            .AddCommand<SaveApplicationSettingsChangesCommand>()
-            .AddCommand<NavigateMainTabCommand>()
-            .Build();
+                .AddCommand<EvaluateSettingsAndNotifyUserCommand>()
+                .AddCommand<SaveChangedSettingsCommand>()
+                .AddCommand<NavigateToMainTabCommand>()
+                .Build();
+
+            CloseCommand = commandLocator?.CreateMacroCommand()
+                .AddCommand<EvaluateSettingsAndNotifyUserCommand>()
+                .AddCommand<SaveChangedSettingsCommand>()
+                .Build();
 
             DragEnterCommand = new DelegateCommand<DragEventArgs>(dragAndDrop.HandleDragEnter);
             DragDropCommand = new DelegateCommand<DragEventArgs>(dragAndDrop.HandleDropEvent);
@@ -144,6 +148,8 @@ namespace pdfforge.PDFCreator.UI.Presentation
 
         public ICommand NavigateCommand { get; set; }
 
+        public IMacroCommand CloseCommand { get; set; }
+
         public string ActivePath
         {
             set
@@ -165,23 +171,6 @@ namespace pdfforge.PDFCreator.UI.Presentation
         public void Init(Action close)
         {
             _closeViewAction = close;
-        }
-
-        public bool CanClose()
-        {
-            var macroCommand = _commandLocator.CreateMacroCommand()
-                .AddCommand<SaveAndContinueEvaluationCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .AddCommand(new DelegateCommand(OnCloseMainWindow))
-                .Build();
-
-            if (macroCommand.CanExecute(null))
-            {
-                var booleanMacroResult = macroCommand.ExecuteWithResult(null);
-                return booleanMacroResult?.Result ?? false;
-            }
-
-            return true;
         }
 
         public void OnClosed()

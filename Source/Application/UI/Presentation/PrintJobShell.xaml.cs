@@ -23,7 +23,7 @@ namespace pdfforge.PDFCreator.UI.Presentation
             Closing += (sender, args) => InteractiveWorkflowManager.Cancel = true;
             hightlightColorRegistration.RegisterHighlightColorResource(this);
 
-            if (viewCustomization.ApplyCustomization)
+            if (viewCustomization.CustomizationEnabled)
             {
                 Title = viewCustomization.PrintJobWindowCaption;
             }

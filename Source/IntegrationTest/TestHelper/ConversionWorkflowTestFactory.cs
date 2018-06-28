@@ -29,7 +29,7 @@ namespace PDFCreator.TestUtilities
 
     internal class TestNotificationService : INotificationService
     {
-        public void ShowInfoNotification(string documentName)
+        public void ShowInfoNotification(string documentName, string documentPath)
         {
         }
 

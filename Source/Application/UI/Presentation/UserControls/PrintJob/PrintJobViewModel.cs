@@ -7,7 +7,6 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.Core.Services;
-using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
@@ -29,7 +28,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows.Input;
 using SystemInterface.IO;
@@ -42,35 +40,31 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public IGpoSettings GpoSettings { get; }
         private readonly ISettingsProvider _settingsProvider;
         private readonly IFileNameQuery _saveFileQuery;
-        private readonly IProfileChecker _profileChecker;
         private readonly IInteractionRequest _interactionRequest;
-        private readonly ErrorCodeInterpreter _errorCodeInterpreter;
         private readonly ISelectedProfileProvider _selectedProfileProvider;
         private readonly IFile _file;
         private readonly ITempFolderProvider _tempFolderProvider;
         private readonly IPathUtil _pathUtil;
         private readonly IDispatcher _dispatcher;
         private readonly IDirectoryHelper _directoryHelper;
-        private PathWrapSafe _pathSafe = new PathWrapSafe();
+        private readonly IInteractiveProfileChecker _interactiveProfileChecker;
+        private readonly PathWrapSafe _pathSafe = new PathWrapSafe();
         private Job _job;
         private string _outputFolder = "";
         private string _outputFilename = "";
         private string _latestDialogFilePath = "";
         private string _title;
-
         private string _author;
-
         private string _keyword;
         private string _subject;
+        private readonly OutputFormatHelper _outputFormatHelper;
 
         public PrintJobViewModel(
-                                    ISettingsProvider settingsProvider,
+            ISettingsProvider settingsProvider,
             ITranslationUpdater translationUpdater,
             IJobInfoQueue jobInfoQueue,
             IFileNameQuery saveFileQuery,
             IInteractionRequest interactionRequest,
-            IProfileChecker profileChecker,
-            ErrorCodeInterpreter errorCodeInterpreter,
             ICommandLocator commandsLocator,
             IEventAggregator eventAggregator,
             ISelectedProfileProvider selectedProfileProvider,
@@ -79,21 +73,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
             IFile file,
             IGpoSettings gpoSettings,
             IDispatcher dispatcher,
-            IDirectoryHelper directoryHelper)
+            IDirectoryHelper directoryHelper,
+            IInteractiveProfileChecker interactiveProfileChecker)
             : base(translationUpdater)
         {
             GpoSettings = gpoSettings;
             _settingsProvider = settingsProvider;
             _saveFileQuery = saveFileQuery;
-            _profileChecker = profileChecker;
             _interactionRequest = interactionRequest;
-            _errorCodeInterpreter = errorCodeInterpreter;
             _selectedProfileProvider = selectedProfileProvider;
             _file = file;
             _tempFolderProvider = tempFolderProvider;
             _pathUtil = pathUtil;
             _dispatcher = dispatcher;
             _directoryHelper = directoryHelper;
+            _interactiveProfileChecker = interactiveProfileChecker;
 
             SaveCommand = new DelegateCommand(SaveExecute, CanExecute);
             SendByEmailCommand = new DelegateCommand(EmailExecute);
@@ -101,6 +95,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
             CancelCommand = new DelegateCommand(CancelExecute);
             SetOutputFormatCommand = new DelegateCommand<OutputFormat>(SetOutputFormatExecute);
             BrowseFileCommand = new DelegateCommand(BrowseFileExecute);
+
+            _outputFormatHelper = new OutputFormatHelper();
 
             SetupEditProfileCommand(commandsLocator, eventAggregator);
 
@@ -170,24 +166,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
             if (Job?.Profile?.OutputFormat == null)
                 return;
 
-            var filename = ValidName.MakeValidFileName(OutputFilename);
-            OutputFilename = _pathSafe.ChangeExtension(filename, GetExtension(Job.Profile.OutputFormat));
-        }
+            var outputFormat = Job.Profile.OutputFormat;
 
-        private string GetExtension(OutputFormat outputFormat)
-        {
-            var formatString = outputFormat.ToString().ToLowerInvariant();
-
-            if (formatString.StartsWith("pdf"))
-                return "pdf";
-
-            return formatString;
+            OutputFilename = _outputFormatHelper.EnsureValidExtension(OutputFilename, outputFormat);
         }
 
         private void ComposeOutputFilename()
         {
-            if (ValidName.IsValidPath(OutputFolder))
-                _job.OutputFilenameTemplate = _pathSafe.Combine(OutputFolder, ValidName.MakeValidFileName(OutputFilename));
+            _job.OutputFilenameTemplate = _pathUtil.Combine(OutputFolder, OutputFilename);
         }
 
         private void BrowseFileExecute(object parameter)
@@ -233,7 +219,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
         private void SetOutputFilenameAndFolder(string filenameTemplate)
         {
-            OutputFilename = Path.GetFileName(filenameTemplate);
+            OutputFilename = _pathUtil.GetFileName(filenameTemplate);
             OutputFolder = _pathUtil.GetLongDirectoryName(filenameTemplate);
         }
 
@@ -262,82 +248,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         {
             ChangeOutputFormat(); //Ensure extension before the checks
 
-            if (FolderPathIsValid())
-            {
-                if (CheckIfProfileIsValidElseNotifyUser())
-                    if (CheckValidPathLengthElseNotifyUser())
-                        if (CheckIfFileExistsElseNotifyUser())
-                            if (CheckIfPathIsValidRootPathElseNotifyUser())
-                                CallFinishInteraction();
-            }
-        }
-
-        private bool CheckIfPathIsValidRootPathElseNotifyUser()
-        {
-            var filePath = _pathSafe.Combine(OutputFolder, OutputFilename);
-
-            if (_pathUtil.IsValidRootedPath(filePath))
-                return true;
-
-            var title = Translation.VolumeLabelInvalidTitle.ToUpper(CultureInfo.CurrentCulture);
-            var text = Translation.VolumeLabelInvalid;
-
-            var interaction = new MessageInteraction(text, title, MessageOptions.OK, MessageIcon.Exclamation);
-
-            _interactionRequest.Raise(interaction);
-
-            return false;
-        }
-
-        private bool FolderPathIsValid()
-        {
-            if (!string.IsNullOrWhiteSpace(OutputFolder) && ValidName.IsValidPath(OutputFolder))
-                return true;
-
-            var title = Translation.FolderPathIsNotValidTitle.ToUpper(CultureInfo.CurrentCulture);
-            var text = Translation.FolderPathIsNotValid;
-
-            var interaction = new MessageInteraction(text, title, MessageOptions.OK, MessageIcon.Exclamation);
-
-            _interactionRequest.Raise(interaction);
-
-            return false;
-        }
-
-        private bool CheckValidPathLengthElseNotifyUser()
-        {
-            var filePath = _pathSafe.Combine(OutputFolder, OutputFilename);
-
-            if (filePath.Length < _pathUtil.MAX_PATH)
-                return true;
-
-            var title = Translation.FilePathTooLongTitle.ToUpper(CultureInfo.CurrentCulture);
-            var text = Translation.FormatFilePathTooLongDescription(_pathUtil.MAX_PATH);
-
-            var interaction = new MessageInteraction(text, title, MessageOptions.OK, MessageIcon.Exclamation);
-
-            _interactionRequest.Raise(interaction);
-
-            return false;
-        }
-
-        private bool CheckIfProfileIsValidElseNotifyUser()
-        {
-            var profileCheckResult = _profileChecker.ProfileCheck(_job.Profile, _job.Accounts);
-
-            if (!profileCheckResult)
-            {
-                var title = Translation.DefectiveProfile;
-                var message = new StringBuilder();
-                message.AppendLine(Translation.GetProfileIsDefectiveMessage(_job.Profile.Name, profileCheckResult));
-                message.AppendLine();
-                message.AppendLine(_errorCodeInterpreter.GetErrorText(profileCheckResult, true, "\u2022"));
-                message.AppendLine(Translation.EditOrSelectNewProfile);
-                var interaction = new MessageInteraction(message.ToString(), title, MessageOptions.OK, MessageIcon.Exclamation);
-                _interactionRequest.Raise(interaction);
-                return false;
-            }
-            return true;
+            if (_interactiveProfileChecker.CheckWithErrorResultInOverlay(_job))
+                if (CheckIfFileExistsElseNotifyUser())
+                    CallFinishInteraction();
         }
 
         private bool CheckIfFileExistsElseNotifyUser()
@@ -378,16 +291,16 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
 
         private void EmailExecute(object obj)
         {
-            if (CheckIfProfileIsValidElseNotifyUser())
+            if (_interactiveProfileChecker.CheckWithErrorResultInOverlay(_job))
             {
                 _job.Passwords = JobPasswordHelper.GetJobPasswords(_job.Profile, _job.Accounts);
 
-                var tempDirectory = Path.Combine(_tempFolderProvider.TempFolder,
+                var tempDirectory = _pathUtil.Combine(_tempFolderProvider.TempFolder,
                     Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
 
                 Directory.CreateDirectory(tempDirectory);
 
-                _job.OutputFilenameTemplate = Path.Combine(tempDirectory, OutputFilename);
+                _job.OutputFilenameTemplate = _pathUtil.Combine(tempDirectory, OutputFilename);
 
                 _job.Profile.EmailClientSettings.Enabled = true;
                 _job.Profile.OpenViewer = false;

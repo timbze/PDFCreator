@@ -8,6 +8,6 @@
         public static string HomeView { get; } = nameof(Home.HomeView);
         public static string PrinterView { get; } = nameof(Printer.PrinterView);
         public static string ProfilesView { get; } = nameof(Profiles.ProfilesView);
-        public static string SettingsView { get; } = nameof(Settings.SettingsView);
+        public static string SettingsView { get; } = nameof(Settings.ApplicationSettingsView);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Utilities.Tokens;
 using System.Linq;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
@@ -12,6 +14,15 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
     [TestFixture]
     internal class DropboxActionTest
     {
+        private Job _job;
+        private DropboxAction _dropboxAction;
+        private IDropboxService _dropboxService;
+        private readonly string _accountId = "myaccountid";
+        private readonly string _accessToken = "acccessToken";
+        private ConversionProfile _profile;
+        private DropboxAccount _dropboxAccount;
+        private Accounts _accounts;
+
         [SetUp]
         public void SetUp()
         {
@@ -31,19 +42,55 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _dropboxAction = new DropboxAction(_dropboxService);
         }
 
-        private Job _job;
-        private DropboxAction _dropboxAction;
-        private IDropboxService _dropboxService;
-        private readonly string _accountId = "myaccountid";
-        private readonly string _accessToken = "acccessToken";
-        private ConversionProfile _profile;
-        private DropboxAccount _dropboxAccount;
-        private Accounts _accounts;
+        [Test]
+        public void IsEnabled_ResturnsDropBoxSettingEnabled()
+        {
+            _profile.DropboxSettings.Enabled = true;
+            Assert.IsTrue(_dropboxAction.IsEnabled(_profile));
 
-        #region Testing isCheck method
+            _profile.DropboxSettings.Enabled = false;
+            Assert.IsFalse(_dropboxAction.IsEnabled(_profile));
+        }
 
         [Test]
-        public void Check_DropBox_Settings_AccessToken_IsNullOrEmpty()
+        public void ApplyTokens_ReplacesTokensInSharedFolder()
+        {
+            var token = "<Token>";
+            var tokenKey = "Token";
+            var tokenValue = "TokenValue";
+            var tokenReplacer = new TokenReplacer();
+            tokenReplacer.AddStringToken(tokenKey, tokenValue);
+            _profile.DropboxSettings.SharedFolder = token;
+            var job = new Job(null, _profile, null, _accounts);
+            job.TokenReplacer = tokenReplacer;
+
+            _dropboxAction.ApplyPreSpecifiedTokens(job);
+
+            Assert.AreEqual(tokenValue, _profile.DropboxSettings.SharedFolder);
+        }
+
+        #region Testing Check method
+
+        [Test]
+        public void Check_ValidDropBoxSettings_ResultIsTrue()
+        {
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void Check_NoAccountDefined_ReturnsErrorCode()
+        {
+            _profile.DropboxSettings.AccountId = "Some unavailable ID";
+
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.AreEqual(ErrorCode.Dropbox_AccountNotSpecified, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void Check_NoAccessToken_ReturnsErrorCode()
         {
             _profile.DropboxSettings.Enabled = true;
             _dropboxAccount.AccountId = _accountId;
@@ -51,58 +98,61 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _job = new Job(new JobInfo(), _profile, new JobTranslations(), _accounts);
 
-            var result = _dropboxAction.Check(_profile, _accounts);
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
             Assert.AreEqual(ErrorCode.Dropbox_AccessTokenNotSpecified, result.FirstOrDefault());
         }
 
         [Test]
-        public void Check_ValidDropBoxSettings_EverythingOK()
-        {
-            var result = _dropboxAction.Check(_profile, _accounts);
-
-            Assert.AreEqual(result, new ActionResult());
-        }
-
-        [Test]
-        public void Check_InvalidDropboxSharedFolderName_ReturnsErrorCodeInvalidFoderName()
+        public void Check_InvalidDropboxSharedFolderName_ReturnsErrorCode()
         {
             _profile.DropboxSettings.SharedFolder = "!pdfforge.";
 
-            var result = _dropboxAction.Check(_profile, _accounts);
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
         }
 
         [Test]
-        public void Check_EverythingOkWithTokenInsideFolderName_ReturnsTrue()
+        public void Check_CheckLevelProfile_InvalidCharsInSharedFolder_ReturnsErrorCode()
         {
-            _profile.DropboxSettings.SharedFolder = "<DateTime> PDfForge";
+            _profile.DropboxSettings.SharedFolder = "':', '?', '*', '|', '\"', ' * ', '.'";
 
-            var result = _dropboxAction.Check(_profile, _accounts);
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void Check_CheckLevelProfile_TokenWithInvalidCharsInSharedFolder_ReturnsTrue()
+        {
+            _profile.DropboxSettings.SharedFolder = "<Token:format ':', '?', '*', '|', '\"', ' * ', '.'>";
+
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.AreEqual(result, new ActionResult());
         }
 
-        #endregion Testing isCheck method
-
         [Test]
-        public void Check_Is_DropBoxSetting_Enabled()
+        public void Check_CheckLevelJob_TokenWithInvalidCharsInSharedFolder_ReturnsErrorCode()
         {
-            var profile = new ConversionProfile();
-            profile.DropboxSettings.Enabled = true;
+            _profile.DropboxSettings.SharedFolder = "<Token:format ':', '?', '*', '|', '\"', ' * ', '.'>";
 
-            Assert.IsTrue(_dropboxAction.IsEnabled(profile));
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Job);
+
+            Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
         }
 
         [Test]
-        public void DropBoxSettingsNoAccountDefined_ReturnsErrorDropbox_AccountNotSpecified()
+        public void Check_CheckLevelJob_TokenInSharedFolder_ReturnsTrue()
         {
-            _profile.DropboxSettings.AccountId = "Some unavailable ID";
+            _profile.DropboxSettings.SharedFolder = "<TokenWithoutColon>";
 
-            var result = _dropboxAction.Check(_profile, _accounts);
+            var result = _dropboxAction.Check(_profile, _accounts, CheckLevel.Job);
 
-            Assert.AreEqual(ErrorCode.Dropbox_AccountNotSpecified, result.FirstOrDefault());
+            Assert.IsTrue(result);
         }
+
+        #endregion Testing Check method
 
         [Test]
         public void UploadFile_ReturnsActionResult()
@@ -129,16 +179,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             _dropboxService.Received()
                 .UploadFiles(_accessToken, sanitizedFolder, _job.OutputFiles, _profile.DropboxSettings.EnsureUniqueFilenames, _job.JobTempOutputFolder);
-        }
-
-        [Test]
-        public void DropBoxSettingsInvalidFolderName_ReturnsErrorDropbox_InvalidFolderName()
-        {
-            _profile.DropboxSettings.SharedFolder += ": ?";
-
-            var result = _dropboxAction.Check(_profile, _accounts);
-
-            Assert.AreEqual(ErrorCode.Dropbox_InvalidFolderName, result.FirstOrDefault());
         }
 
         [Test]

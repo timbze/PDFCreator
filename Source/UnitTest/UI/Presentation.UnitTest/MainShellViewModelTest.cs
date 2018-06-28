@@ -37,7 +37,7 @@ namespace Presentation.UnitTest
             _eventAggregator = new EventAggregator();
             _updateAssistant = Substitute.For<IUpdateAssistant>();
 
-            ViewModel = new MainShellViewModel(new DragAndDropEventHandler(Substitute.For<IFileConversionHandler>()), new TranslationUpdater(new TranslationFactory(),
+            ViewModel = new MainShellViewModel(new DragAndDropEventHandler(Substitute.For<IFileConversionAssistant>()), new TranslationUpdater(new TranslationFactory(),
                 new ThreadManager()), new ApplicationNameProvider("Free"), new InteractionRequest(), new EventAggregator(), commandLocator, null, null, null, null, _updateAssistant, _eventAggregator);
         }
 

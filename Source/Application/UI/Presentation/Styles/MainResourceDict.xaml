@@ -33,6 +33,7 @@
         <ResourceDictionary Source="ComboBox.xaml" />
         <ResourceDictionary Source="TabControl.xaml" />
         <ResourceDictionary Source="IconButton.xaml" />
+        <ResourceDictionary Source="ToggleButton.xaml" />
         <ResourceDictionary Source="Textblock/RoundDarkBackgroundTextbox.xaml" />
         <ResourceDictionary Source="NoChromeButton.xaml" />
         <ResourceDictionary Source="ChildWindowOverlay.xaml" />

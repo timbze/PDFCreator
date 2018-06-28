@@ -57,6 +57,14 @@
     <Compile Include="SettingsUpgraderTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\packages\setup\PDFCreator.UserGuide\content\chm\PDFCreator_english.chm">
+      <Link>PDFCreator_english.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\..\packages\setup\PDFCreator.UserGuide\content\chm\PDFCreator_german.chm">
+      <Link>PDFCreator_german.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="paket.references" />
   </ItemGroup>

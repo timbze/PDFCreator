@@ -69,7 +69,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestHelper.Job.Profile.PdfSettings.Signature.SignReason = "The Reason is Testing";
 
             _timeServerAccount.AccountId = "TestAccountId";
-            _timeServerAccount.Url = "https://freetsa.org/tsr";
+            _timeServerAccount.Url = "http://timestamp.digicert.com";
             _timeServerAccount.IsSecured = false;
 
             TestHelper.Job.Profile.PdfSettings.Signature.TimeServerAccountId = _timeServerAccount.AccountId;
@@ -113,7 +113,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
             TestTimeServer("http://timestamp.digicert.com");
         }
 
-        [Test]
+        [Test, Ignore("FreeTSA is currently down")]
         public void TimeServer_FreeTSA()
         {
             TestTimeServer("https://freetsa.org/tsr");

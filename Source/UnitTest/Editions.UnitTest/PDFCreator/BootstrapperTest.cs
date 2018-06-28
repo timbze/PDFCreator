@@ -37,7 +37,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
         private readonly Type[] _lifestyleMismatchAcceptableClasses =
         {
             typeof(IJobInfoQueueManager),
-            typeof(IFileConversionHandler),
+            typeof(IFileConversionAssistant),
             typeof(IUpdateAssistant)
         };
 

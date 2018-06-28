@@ -57,13 +57,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Actions\ActionResultTest.cs" />
+    <Compile Include="Actions\DefaultViewerActionTest.cs" />
     <Compile Include="Actions\DropboxActionTest.cs" />
     <Compile Include="Actions\EmailClientActionTest.cs" />
     <Compile Include="Actions\FtpActionUnitTest.cs" />
     <Compile Include="Actions\HttpActionUnitTest.cs" />
-    <Compile Include="Actions\ScriptActionTest.cs" />
+    <Compile Include="Actions\ScriptActionUnitTest.cs" />
     <Compile Include="Actions\SmtpActionTest.cs" />
     <Compile Include="GhostscriptConverterTest.cs" />
+    <Compile Include="Jobs\ErrorCodeTest.cs" />
     <Compile Include="Jobs\JobBuilderTest.cs" />
     <Compile Include="Jobs\SpooledJobFinderTest.cs" />
     <Compile Include="Jobs\JobCleanUpTest.cs" />

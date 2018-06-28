@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper
 {
-    public class DesignTimeFileConversionHandler : IFileConversionHandler
+    public class DesignTimeFileConversionAssistant : IFileConversionAssistant
     {
         public void HandleFileList(IEnumerable<string> droppedFiles)
         {
@@ -13,7 +13,7 @@ namespace pdfforge.PDFCreator.UI.DesignTimeViewModels.Helper
 
     public class DesignTimeDragAndDropHandler : DragAndDropEventHandler
     {
-        public DesignTimeDragAndDropHandler() : base(new DesignTimeFileConversionHandler())
+        public DesignTimeDragAndDropHandler() : base(new DesignTimeFileConversionAssistant())
         {
         }
     }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Ghostscript;
 using pdfforge.PDFCreator.Conversion.Ghostscript.OutputDevices;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
@@ -6,7 +7,6 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
-using Rhino.Mocks;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -24,16 +24,16 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
             get { return new GhostscriptVersion("dummyVersion", "gsDummie.exe", "gsLibDummie"); }
         }
 
-        public static OutputDevice GenerateDevice(OutputFormat outputFormat)
+        public static OutputDevice GenerateDevice(OutputFormat outputFormat, IFile fileWrap = null)
         {
             var jobStub = GenerateJobStub(outputFormat);
 
-            var fileStub = MockRepository.GenerateStub<IFile>();
+            var fileStub = fileWrap ?? Substitute.For<IFile>();
 
-            var osHelperStub = MockRepository.GenerateStub<IOsHelper>();
-            osHelperStub.Stub(x => x.WindowsFontsFolder).Return(WindowsFontsFolderDummie);
+            var osHelperStub = Substitute.For<IOsHelper>();
+            osHelperStub.WindowsFontsFolder.Returns(WindowsFontsFolderDummie);
 
-            var commandLineUtilStub = MockRepository.GenerateStub<ICommandLineUtil>();
+            var commandLineUtilStub = Substitute.For<ICommandLineUtil>();
 
             OutputDevice device = null;
 

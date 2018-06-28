@@ -23,11 +23,15 @@ namespace pdfforge.PDFCreator.Utilities
 
     public class PdfArchitectCheck : IPdfArchitectCheck
     {
+        private string _cachedInstallationPath;
+        private bool _wasSearched;
+
         private readonly IFile _file;
 
         // Tuple format: Item1: DisplayName in Registry, Item2: name of the exe file that has to exist in the InstallLocation
         private readonly Tuple<string, string>[] _pdfArchitectCandidates =
         {
+            new Tuple<string, string>("PDF Architect 6", "architect.exe"),
             new Tuple<string, string>("PDF Architect 5", "architect.exe"),
             new Tuple<string, string>("PDF Architect 4", "architect.exe"),
             new Tuple<string, string>("PDF Architect 3", "PDF Architect 3.exe"),
@@ -56,6 +60,17 @@ namespace pdfforge.PDFCreator.Utilities
         /// </summary>
         /// <returns>Returns installation path if a known version of PDF Architect is installed, else null</returns>
         public string GetInstallationPath()
+        {
+            if (_wasSearched)
+                return _cachedInstallationPath;
+
+            _cachedInstallationPath = DoGetInstallationPath();
+            _wasSearched = true;
+
+            return _cachedInstallationPath;
+        }
+
+        private string DoGetInstallationPath()
         {
             foreach (var pdfArchitectCandidate in _pdfArchitectCandidates)
             {
@@ -129,35 +144,6 @@ namespace pdfforge.PDFCreator.Utilities
                 }
             }
             return null;
-        }
-    }
-
-    public class CachedPdfArchitectCheck : IPdfArchitectCheck
-    {
-        private readonly PdfArchitectCheck _pdfArchitectCheck;
-        private string _installationPath;
-
-        private bool _wasSearched;
-
-        public CachedPdfArchitectCheck(PdfArchitectCheck pdfArchitectCheck)
-        {
-            _pdfArchitectCheck = pdfArchitectCheck;
-        }
-
-        public string GetInstallationPath()
-        {
-            if (_wasSearched)
-                return _installationPath;
-
-            _installationPath = _pdfArchitectCheck.GetInstallationPath();
-            _wasSearched = true;
-
-            return _installationPath;
-        }
-
-        public bool IsInstalled()
-        {
-            return GetInstallationPath() != null;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews
         public string FtpServerPassword { get; private set; } = "FTP Server Password:";
 
         private string[] FtpGetsDisabled { get; set; } = { "The FTP action will be disabled for this profile.", "The FTP action will be disabled for this profiles." };
+        public string ErrorCustomViewNotFoundTitle { get; private set; } = "Viewer not found";
+        public string ErrorCustomViewNotFoundDesc { get; private set; } = "Viewer was not found, please check your settings.";
 
         public string GetFtpGetsDisabledMessage(int numberOfProfiles)
         {

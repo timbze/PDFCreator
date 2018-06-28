@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
+using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
-using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using System;
@@ -14,11 +14,12 @@ namespace pdfforge.PDFCreator.UI.Presentation
     public partial class MainShell : MetroWindow, IWhitelisted
     {
         private MainShellViewModel _mainShellViewModel;
+        private bool _skipSettingsCheck;
         public IUpdateAssistant UpdateAssistant { get; }
 
         public MainShellViewModel ViewModel => (MainShellViewModel)DataContext;
 
-        public MainShell(MainShellViewModel vm, IHightlightColorRegistration hightlightColorRegistration, IUpdateAssistant updateAssistant, ViewCustomization viewCustomization)
+        public MainShell(MainShellViewModel vm, IHightlightColorRegistration hightlightColorRegistration, IUpdateAssistant updateAssistant)
         {
             _mainShellViewModel = vm;
             UpdateAssistant = updateAssistant;
@@ -26,17 +27,6 @@ namespace pdfforge.PDFCreator.UI.Presentation
             _mainShellViewModel.Init(Close);
             InitializeComponent();
             hightlightColorRegistration.RegisterHighlightColorResource(this);
-
-            if (viewCustomization.ApplyCustomization)
-            {
-                Title = Title + " " + viewCustomization.MainWindowText;
-            }
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = !_mainShellViewModel.CanClose();
-            base.OnClosing(e);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -58,6 +48,25 @@ namespace pdfforge.PDFCreator.UI.Presentation
                 WindowState = WindowState.Maximized;
 
             FocusManager.SetFocusedElement(this, HomeButton);
+        }
+
+        private async void MainShell_OnClosing(object sender, CancelEventArgs e)
+        {
+            if (_skipSettingsCheck)
+            {
+                return;
+            }
+
+            e.Cancel = true;
+            _skipSettingsCheck = false;
+            var result = await _mainShellViewModel.CloseCommand.ExecuteAsync(null);
+
+            if (result == ResponseStatus.Success)
+            {
+                _skipSettingsCheck = true;
+                // Invoke required because we can't call Close during the closing event
+                Dispatcher.BeginInvoke(new Action(Close));
+            }
         }
     }
 }

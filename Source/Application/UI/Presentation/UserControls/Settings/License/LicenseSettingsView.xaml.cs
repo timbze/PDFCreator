@@ -1,5 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows.Forms;
 using Prism.Regions;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License
 {
@@ -10,6 +11,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.License
     [ViewSortHint("100")]
     public partial class LicenseSettingsView : UserControl
     {
+        public LicenseSettingsViewModel ViewModel => (LicenseSettingsViewModel) DataContext;
+
         public LicenseSettingsView(LicenseSettingsViewModel viewModel)
         {
             InitializeComponent();

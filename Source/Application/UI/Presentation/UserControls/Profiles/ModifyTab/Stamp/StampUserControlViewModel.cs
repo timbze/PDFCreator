@@ -7,8 +7,11 @@ using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.Utilities.Tokens;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Text;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp
 {
@@ -16,8 +19,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.St
     {
         private readonly IFontHelper _fontHelper;
         private readonly IInteractionInvoker _interactionInvoker;
+        private TokenReplacer _tokenReplacer;
+        public TokenViewModel<ConversionProfile> StampUserControlTokenViewModel { get; set; }
 
-        public StampUserControlViewModel(IInteractionInvoker interactionInvoker, IFontHelper fontHelper, TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ISelectedProfileProvider profile) : base(translationUpdater, profile)
+        public StampUserControlViewModel(IInteractionInvoker interactionInvoker, IFontHelper fontHelper, TokenHelper tokenHelper,
+                        ITranslationUpdater translationUpdater, ISelectedProfileProvider profile, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, profile)
         {
             _interactionInvoker = interactionInvoker;
             _fontHelper = fontHelper;
@@ -26,6 +32,30 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.St
             {
                 UpdateFontButtonText(CurrentProfile.Stamping);
             }
+
+            translationUpdater.RegisterAndSetTranslation(tf =>
+            {
+                _tokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+                var tokens = tokenHelper.GetTokenListForStamp();
+                SetTokenViewModels(tokenViewModelFactory, tokens);
+            });
+        }
+
+        private void SetTokenViewModels(ITokenViewModelFactory tokenViewModelFactory, List<string> tokens)
+        {
+            StampUserControlTokenViewModel = tokenViewModelFactory
+                .BuilderWithSelectedProfile()
+                .WithSelector(p => p.Stamping.StampText)
+                .WithTokenList(tokens)
+                .WithTokenCustomPreview(TokenReplace)
+                .Build();
+        }
+
+        private string TokenReplace(string text)
+        {
+            var textWithTokens = _tokenReplacer.ReplaceTokens(text);
+            var bytes = Encoding.GetEncoding("ISO-8859-1").GetBytes(textWithTokens); // Remove illegal characters (e.g. chinese characters).
+            return Encoding.GetEncoding("ISO-8859-1").GetString(bytes);
         }
 
         public string FontButtonText { get; set; }
@@ -102,7 +132,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.St
 
     public class DesignTimeStampUserControlViewModel : StampUserControlViewModel
     {
-        public DesignTimeStampUserControlViewModel() : base(null, null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimeStampUserControlViewModel() : base(null, null, null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null)
         {
         }
     }

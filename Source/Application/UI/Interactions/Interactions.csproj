@@ -67,13 +67,11 @@
     <Compile Include="OfflineActivationInteraction.cs" />
     <Compile Include="PasswordMiddleButton.cs" />
     <Compile Include="PrintJobInteraction.cs" />
-    <Compile Include="ProfileProblemsInteraction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecommendPdfArchitectInteraction.cs" />
     <Compile Include="SignaturePasswordInteraction.cs" />
     <Compile Include="StoreLicenseForAllUsersInteraction.cs" />
     <Compile Include="UpdateDownloadInteraction.cs" />
-    <Compile Include="ValidateContinueWithSavingInteraction.cs" />
     <Compile Include="WelcomeInteraction.cs" />
   </ItemGroup>
   <ItemGroup>

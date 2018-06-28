@@ -87,9 +87,8 @@ namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
 
             foreach (var dir in candidates)
             {
-                var dirCandidate = Path.GetFullPath(Path.Combine(dir, @"build\chm"));
-                if (Directory.Exists(dirCandidate) && Directory.GetFiles(dirCandidate, "*.chm").Length > 0)
-                    return dirCandidate;
+                if (Directory.Exists(dir) && Directory.GetFiles(dir, "*.chm").Length > 0)
+                    return dir;
             }
 
             throw new IOException("Could not find user guide folder");

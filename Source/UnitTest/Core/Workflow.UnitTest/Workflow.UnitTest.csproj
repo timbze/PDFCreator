@@ -54,6 +54,7 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Compile Include="AppSettingsCheckerTest.cs" />
     <Compile Include="AutoSaveOutputFileMoverTest.cs" />
     <Compile Include="ConversionWorkflowTest.cs" />
     <Compile Include="FailingFileCopy.cs" />
@@ -97,6 +98,10 @@
     <ProjectReference Include="..\..\..\Application\Conversion\ActionsInterface\ActionsInterface.csproj">
       <Project>{8DE100B3-17E1-46E3-830B-5E0B072483CA}</Project>
       <Name>ActionsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Conversion\Actions\Actions.csproj">
+      <Project>{1DBB980A-80ED-4263-BC5D-B90377466E14}</Project>
+      <Name>Actions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Conversion\ConverterInterface\ConverterInterface.csproj">
       <Project>{2856C862-70EC-42CB-9BD4-A889BD6EC1F7}</Project>

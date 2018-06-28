@@ -29,7 +29,8 @@
                    help:HelpProvider.HelpTopic="General"
                    x:Name="MainView"
                    d:DataContext="{d:DesignInstance designTime:DesignTimeMainShellViewModel, IsDesignTimeCreatable=True}"
-                   Loaded="MainShell_OnLoaded">
+                   Loaded="MainShell_OnLoaded"
+                   Closing="MainShell_OnClosing">
 
     <metro:MetroWindow.Resources>
         <ResourceDictionary Source="Styles/MainResourceDict.xaml" />

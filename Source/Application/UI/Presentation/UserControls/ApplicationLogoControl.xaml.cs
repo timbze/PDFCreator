@@ -18,10 +18,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls
 
             InitializeComponent();
 
-            if (viewCustomization?.ApplyCustomization == true)
-            {
-                CustomEditionText.Text = viewCustomization.MainWindowText;
-            }
+            CustomEditionText.Text = viewCustomization?.MainWindowText;
+            TrialText.Text = viewCustomization?.TrialText;
         }
     }
 }

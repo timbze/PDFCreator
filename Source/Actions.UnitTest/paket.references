@@ -1,0 +1,5 @@
+﻿SystemInterface
+
+group test
+    NUnit
+    NSubstitute

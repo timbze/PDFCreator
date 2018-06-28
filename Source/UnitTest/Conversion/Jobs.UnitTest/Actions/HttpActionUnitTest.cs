@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 
@@ -48,7 +49,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         public void Check_ActionIsDisabled_ReturnsSucessfulActionResult()
         {
             _profile.HttpSettings.Enabled = false;
-            var result = _httpAction.Check(_profile, _accounts);
+
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
             Assert.IsTrue(result);
         }
 
@@ -57,16 +60,19 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _profile.HttpSettings.AccountId = " ";
 
-            var actionResult = _httpAction.Check(_profile, _accounts);
-            Assert.Contains(ErrorCode.HTTP_NoAccount, actionResult);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.Contains(ErrorCode.HTTP_NoAccount, result);
         }
 
         [Test]
         public void Check_SetAccountDoesNotExist_ActionResultContainsCorrespondingErrorCode()
         {
             _accounts.HttpAccounts.Clear();
-            var actionResult = _httpAction.Check(_profile, _accounts);
-            Assert.Contains(ErrorCode.HTTP_NoAccount, actionResult);
+
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.Contains(ErrorCode.HTTP_NoAccount, result);
         }
 
         [Test]
@@ -74,7 +80,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_NoUrl, result);
         }
@@ -85,7 +91,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _httpAccount.IsBasicAuthentication = true;
             _httpAccount.UserName = "";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_NoUserNameForAuth, result);
         }
@@ -97,7 +103,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _httpAccount.IsBasicAuthentication = true;
             _httpAccount.Password = "";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_NoPasswordForAuthWithAutoSave, result);
         }
@@ -106,7 +112,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         public void SetURLWithoutHttpPrefix_Check_ReturnsMustStartWithHttpError()
         {
             _httpAccount.Url = "noHttp.com";
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
             Assert.Contains(ErrorCode.HTTP_NoUrl, result);
         }
 
@@ -114,7 +120,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         public void SetWithHTTPs_Check_ReturnValid()
         {
             _httpAccount.Url = "https://SomeAdress.com";
-            var result = _httpAction.Check(_profile, _accounts);
+
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
             Assert.IsTrue(result);
         }
 
@@ -122,14 +130,17 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         public void SetURLWithCaseInsensitiveHttp_Check_ReturnsValid()
         {
             _httpAccount.Url = "hTtP://someUrl.com";
-            var result = _httpAction.Check(_profile, _accounts);
+
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
             Assert.IsTrue(result);
         }
 
         [Test]
         public void Check_ValidSettings_ReturnsSucessfulActionResult()
         {
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
             Assert.IsTrue(result);
         }
 
@@ -138,7 +149,9 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _profile.AutoSave.Enabled = false;
             _httpAccount.IsBasicAuthentication = true;
-            var result = _httpAction.Check(_profile, _accounts);
+
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
             Assert.IsTrue(result);
         }
 
@@ -147,7 +160,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "ftp://www.validurlbutnothttp.com";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_MustStartWithHttp, result);
         }
@@ -157,7 +170,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "ldap://www.ldapurl.com";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_MustStartWithHttp, result);
         }
@@ -167,7 +180,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "mailto:someone@example.com";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_MustStartWithHttp, result);
         }
@@ -177,7 +190,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "file://localhost.com";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_MustStartWithHttp, result);
         }
@@ -187,7 +200,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _httpAccount.Url = "irc://irc.dal.net";
 
-            var result = _httpAction.Check(_profile, _accounts);
+            var result = _httpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
             Assert.Contains(ErrorCode.HTTP_MustStartWithHttp, result);
         }

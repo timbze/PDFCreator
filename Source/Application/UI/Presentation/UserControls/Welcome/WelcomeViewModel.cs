@@ -8,7 +8,6 @@ using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
-using pdfforge.PDFCreator.Utilities.Process;
 using System;
 using System.Windows.Input;
 
@@ -16,8 +15,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome
 {
     public class WelcomeViewModel : OverlayViewModelBase<WelcomeInteraction, WelcomeWindowTranslation>, IWhitelisted
     {
-        private readonly IProcessStarter _processStarter;
-
         public WelcomeViewModel(ICommandLocator commandLocator, ITranslationUpdater translationUpdater, EditionHintOptionProvider editionHintOptionProvider)
             : base(translationUpdater)
         {

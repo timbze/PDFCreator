@@ -29,6 +29,7 @@ namespace pdfforge.PDFCreator.UI.Presentation
 
         public static string MetadataTabContentRegion = "MetadataTabContent";
         public static string TitleReplacementTabContentRegion = "TitleReplacementTabContentRegion";
+        public static string DefaultViewerTabContentRegion = "DefaultViewerTabContentRegion";
 
         public static string LicenseSettingsContentRegion = "LicenseSettingsContentRegion";
 

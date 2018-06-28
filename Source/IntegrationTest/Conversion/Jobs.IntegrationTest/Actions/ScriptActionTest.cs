@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
-using pdfforge.PDFCreator.Conversion.Jobs;
-using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 using pdfforge.PDFCreator.Utilities.Tokens;
 using System.IO;
@@ -59,36 +58,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
 
         private ScriptAction BuildScriptAction()
         {
-            return new ScriptAction(new PathWrap(), new ProcessStarter(), new FileWrap());
-        }
-
-        [Test]
-        public void Check_WithDisabledScriptingAndIllegalPath_ReturnsTrue()
-        {
-            var scriptAction = BuildScriptAction();
-            var profile = new ConversionProfile();
-            profile.Scripting.Enabled = false;
-            profile.Scripting.ScriptFile = ">test.exe";
-
-            var result = scriptAction.Check(profile, new Accounts());
-
-            Assert.IsTrue(result);
-        }
-
-        [Test]
-        public void Check_WithTokenInPath_AllowsPath()
-        {
-            var scriptAction = BuildScriptAction();
-            var profile = new ConversionProfile();
-            profile.Scripting.Enabled = true;
-            profile.Scripting.ScriptFile = "<Environment:TMP>\\unique_file_name-3453454353453453462.exe";
-
-            var result = scriptAction.Check(profile, new Accounts());
-
-            // ignore File not found error code
-            result.RemoveAll(x => x == ErrorCode.Script_FileDoesNotExist);
-
-            Assert.IsTrue(result);
+            return new ScriptAction(new PathWrap(), new ProcessStarter(), new FileWrap(), new PathUtil(new PathWrap(), new DirectoryWrap()));
         }
 
         [Test]
@@ -125,17 +95,6 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             var result = scriptAction.ComposeScriptParameters("--myparam <foo>", new[] { @"C:\file1.pdf" }, tokenReplacer);
 
             Assert.AreEqual("--myparam bar \"C:\\file1.pdf\"", result);
-        }
-
-        [Test]
-        public void ComposeScriptPath_WithUnkownToken_ReturnsValidFilename()
-        {
-            var tokenReplacer = new TokenReplacer();
-
-            var scriptAction = BuildScriptAction();
-            var result = scriptAction.ComposeScriptPath(@"C:\Test\<unknown>", tokenReplacer);
-
-            Assert.AreEqual(@"C:\Test\_unknown_", result);
         }
 
         [Test]

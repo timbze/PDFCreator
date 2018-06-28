@@ -20,7 +20,7 @@ namespace Presentation.UnitTest.Windows
         {
             _jobList = new List<JobInfo> { new JobInfo(), new JobInfo(), new JobInfo() };
             _jobInfoQueue = Substitute.For<IJobInfoQueue>();
-            _dragAndDrop = new DragAndDropEventHandler(Substitute.For<IFileConversionHandler>());
+            _dragAndDrop = new DragAndDropEventHandler(Substitute.For<IFileConversionAssistant>());
             _jobInfoManager = Substitute.For<IJobInfoManager>();
             _dispatcher = new InvokeImmediatelyDispatcher();
             _jobInfoQueue.JobInfos.Returns(_jobList);

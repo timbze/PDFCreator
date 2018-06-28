@@ -26,6 +26,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Help
 
         [HelpTopic("pdfcreator/pdfcreator-settings/application-settings/title")] AppTitle,
 
+        [HelpTopic("pdfcreator/pdfcreator-settings/application-settings/defaultviewer")] AppViewer,
+
         [HelpTopic("pdfcreator/pdfcreator-settings/application-settings/debug")] AppDebug,
 
         [HelpTopic("pdfcreator/pdfcreator-settings/application-settings/license")] AppLicense,

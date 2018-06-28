@@ -1,11 +1,13 @@
 ﻿using NLog;
+using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Workflow;
-using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
+using pdfforge.PDFCreator.UI.Presentation.Commands.QuickActions;
 using pdfforge.PDFCreator.Utilities.Threading;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using ToastNotifications;
@@ -17,9 +19,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
 {
     public class NotificationService : INotificationService
     {
-        private Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly ITranslationFactory _translationFactory;
-        private readonly ISelectedProfileProvider _profileProvider;
         private readonly IThreadManager _threadManager;
         private Notifier _toastNotifier;
 
@@ -27,11 +28,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
 
         private bool ToastNotifierIsNull => _toastNotifier == null;
 
-        public NotificationService(ITranslationFactory translationFactory, ISelectedProfileProvider profileProvider, IThreadManager threadManager)
+        private readonly ICommand _openDocumentInExplorerCommand;
+
+        public NotificationService(ITranslationFactory translationFactory, IThreadManager threadManager, ICommandLocator commandLocator)
         {
             _translationFactory = translationFactory;
-            _profileProvider = profileProvider;
             _threadManager = threadManager;
+
+            _openDocumentInExplorerCommand = commandLocator.GetCommand<QuickActionOpenExplorerLocationCommand>();
         }
 
         private void StartBackgroundWindow()
@@ -80,28 +84,23 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
             SetWindowLong(wndHelper.Handle, (int)GetWindowLongFields.GWL_EXSTYLE, (IntPtr)exStyle);
         }
 
-        public void ShowInfoNotification(string documentName)
+        public void ShowInfoNotification(string documentName, string documentPath)
         {
             if (ToastNotifierIsNull)
                 StartBackgroundWindow();
 
-            if (_profileProvider?.SelectedProfile != null)
-            {
-                if (_profileProvider.SelectedProfile.ShowAllNotifications && !_profileProvider.SelectedProfile.ShowOnlyErrorNotifications)
+            var synchedThread = new ThreadStart(() =>
                 {
-                    var synchedThread = new ThreadStart(() =>
-                        {
-                            _logger.Debug("Creating thread of ShowInfoNotification()");
-                            var translation = _translationFactory.CreateTranslation<NotificationTranslation>();
-                            _toastNotifier?.Notify<NotificationViewModel>(() => new NotificationViewModel(translation.SuccessTitle, translation.FormatSuccessNotificationMessage(documentName), NotificationType.Success));
+                    _logger.Debug("Creating thread of ShowInfoNotification()");
+                    var translation = _translationFactory.CreateTranslation<NotificationTranslation>();
+                    _toastNotifier?.Notify<NotificationViewModel>(() => new NotificationViewModel(translation.SuccessTitle, translation.FormatSuccessNotificationMessage(documentName)
+                        , NotificationType.Info, _openDocumentInExplorerCommand, documentPath));
 
-                            Thread.Sleep(_notificationDisplayTimeSpan);
-                        }
-                    );
-
-                    _threadManager.StartSynchronizedUiThread(synchedThread, "SingleNotificationCall");
+                    Thread.Sleep(_notificationDisplayTimeSpan);
                 }
-            }
+            );
+
+            _threadManager.StartSynchronizedUiThread(synchedThread, "SingleNotificationCall");
         }
 
         public void ShowErrorNotification(string documentName)
@@ -109,24 +108,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
             if (ToastNotifierIsNull)
                 StartBackgroundWindow();
 
-            if (_profileProvider?.SelectedProfile != null)
-            {
-                if (_profileProvider.SelectedProfile.ShowAllNotifications
-                    || _profileProvider.SelectedProfile.ShowOnlyErrorNotifications)
+            var synchedThread = new ThreadStart(() =>
                 {
-                    var synchedThread = new ThreadStart(() =>
-                        {
-                            _logger.Debug("Creating thread of ShowErrorNotification()");
-                            var translation = _translationFactory.CreateTranslation<NotificationTranslation>();
-                            _toastNotifier.Notify<NotificationViewModel>(() => new NotificationViewModel(translation.ErrorTitle, translation.FormatErrorNotificationMessage(documentName), NotificationType.Error));
+                    _logger.Debug("Creating thread of ShowErrorNotification()");
+                    var translation = _translationFactory.CreateTranslation<NotificationTranslation>();
+                    _toastNotifier.Notify<NotificationViewModel>(() => new NotificationViewModel(translation.ErrorTitle, translation.FormatErrorNotificationMessage(documentName), NotificationType.Error));
 
-                            Thread.Sleep(_notificationDisplayTimeSpan);
-                        }
-                    );
-
-                    _threadManager.StartSynchronizedUiThread(synchedThread, "SingleErrorNotificationCall");
+                    Thread.Sleep(_notificationDisplayTimeSpan);
                 }
-            }
+            );
+
+            _threadManager.StartSynchronizedUiThread(synchedThread, "SingleErrorNotificationCall");
         }
 
         [DllImport("user32.dll")]

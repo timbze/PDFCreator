@@ -2,14 +2,14 @@
 {
     public interface INotificationService
     {
-        void ShowInfoNotification(string documentName);
+        void ShowInfoNotification(string documentName, string documentPath);
 
         void ShowErrorNotification(string documentName);
     }
 
     public class DisabledNotificationService : INotificationService
     {
-        public void ShowInfoNotification(string documentName)
+        public void ShowInfoNotification(string documentName, string documentPath)
         {
         }
 

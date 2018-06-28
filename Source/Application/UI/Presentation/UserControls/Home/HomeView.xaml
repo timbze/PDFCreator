@@ -19,6 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converter:BoolToVisibilityConverter x:Key="VisibleWhenFalse" TrueValue="Collapsed" FalseValue="Visible" />
             <converter:BoolToVisibilityConverter x:Key="VisibleWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
+            <converter:BoolToVisibilityConverter x:Key="HiddenWhenFalse" TrueValue="Visible" FalseValue="Hidden" />
             <converter:CompareWithTresholdToValueConverter x:Key="ZeroHeightForHistoryCount" Treshold="4" SmallerOrEqualValue="800" BiggerValue="0" />
             <converter:CompareWithTresholdToValueConverter x:Key="MaxHeightForHistoryCount" Treshold="4" SmallerOrEqualValue="0" BiggerValue="150" />
         </ResourceDictionary>
@@ -237,13 +238,18 @@
                                 <DockPanel LastChildFill="True">
                                     <Button DockPanel.Dock="Right"
                                             Margin="0 0 5 5"
-                                            Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Converter={StaticResource VisibleWhenTrue}}"
+                                            Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Converter={StaticResource HiddenWhenFalse}}"
                                             Command="{Binding DataContext.RemoveHistoricJobCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                                             CommandParameter="{Binding}"
                                             Style="{DynamicResource ListBoxButton}"
                                             Content="{StaticResource Cross}"
                                             Width="10" Height="10"
                                             ToolTip="{Binding DataContext.Translation.RemoveFromHistory, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                    <TextBlock DockPanel.Dock="Right"
+                                               Text="{Binding CreationTime}"
+                                               Foreground="#555555"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0" />
                                     <TextBlock
                                                Margin="1 2 0 5"
                                                Padding="0"
@@ -283,10 +289,6 @@
                                     <DockPanel>
                                         <TextBlock Text="{Binding DataContext.Translation.PagesLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
                                         <TextBlock Text="{Binding NumberOfPages}" Margin="5 0 0 0" />
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock Text="{Binding DataContext.Translation.CreationDateLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
-                                        <TextBlock Text="{Binding CreationTime}" Margin="5 0 0 0" />
                                     </DockPanel>
                                 </StackPanel>
 

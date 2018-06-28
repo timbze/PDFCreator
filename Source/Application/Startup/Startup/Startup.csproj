@@ -74,6 +74,7 @@
     <Compile Include="StartConditions\CheckSpoolFolderCondition.cs" />
     <Compile Include="StartConditions\SpoolFolderAccess.cs" />
     <Compile Include="StartConditions\TerminalServerNotAllowedCondition.cs" />
+    <Compile Include="StartConditions\TrialStartupCondition.cs" />
     <Compile Include="StaticPropertiesHack.cs" />
     <Compile Include="Translations\ProgramTranslation.cs" />
     <Compile Include="Translations\StartupTranslation.cs" />

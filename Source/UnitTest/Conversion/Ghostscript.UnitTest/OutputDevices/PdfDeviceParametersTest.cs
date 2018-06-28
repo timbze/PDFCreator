@@ -13,7 +13,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
     {
         private GhostscriptVersion _ghostscriptVersion;
         private Collection<string> _parameterStrings;
-
         private OutputDevice _pdfDevice;
 
         [SetUp]
@@ -565,63 +564,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Ghostscript.OutputDevices
 
             Assert.Contains("-dMonoImageDownsampleType=/Bicubic", _parameterStrings, "Missing parameter.");
             Assert.Contains("-dMonoImageResolution=" + 2400, _parameterStrings, "Missing parameter.");
-        }
-
-        [Test]
-        public void ParametersTest_CoverPage()
-        {
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            _pdfDevice.Job.Profile.CoverPage.Enabled = true;
-            const string coverFile = "CoverFile.pdf";
-            _pdfDevice.Job.Profile.CoverPage.File = coverFile;
-
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-
-            Assert.Contains(coverFile, _parameterStrings, "Missing parameter.");
-            var fIndex = _parameterStrings.IndexOf("-f");
-            Assert.Less(fIndex, _parameterStrings.IndexOf(coverFile), "CoverFile not behind -f parameter.");
-
-            _pdfDevice.Job.Profile.CoverPage.Enabled = false;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.AreEqual(-1, _parameterStrings.IndexOf(coverFile), "Falsely set CoverFile.");
-        }
-
-        [Test]
-        public void ParametersTest_AttachmentPage()
-        {
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            _pdfDevice.Job.Profile.AttachmentPage.Enabled = true;
-            const string attachmentFile = "AttachmentFile.pdf";
-            _pdfDevice.Job.Profile.AttachmentPage.File = attachmentFile;
-
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-
-            Assert.Contains(attachmentFile, _parameterStrings, "Missing parameter.");
-            var fIndex = _parameterStrings.IndexOf("-f");
-            Assert.Less(fIndex, _parameterStrings.IndexOf(attachmentFile), "AttachmentFile not behind -f parameter.");
-
-            _pdfDevice.Job.Profile.AttachmentPage.Enabled = false;
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-            Assert.AreEqual(-1, _parameterStrings.IndexOf(attachmentFile), "Falsely set AttachmentFile.");
-        }
-
-        [Test]
-        public void ParametersTest_CoverAndAttachmentPage()
-        {
-            _pdfDevice.Job.Profile.OutputFormat = OutputFormat.Pdf;
-            _pdfDevice.Job.Profile.CoverPage.Enabled = true;
-            const string coverFile = "CoverFile.pdf";
-            _pdfDevice.Job.Profile.CoverPage.File = coverFile;
-            _pdfDevice.Job.Profile.AttachmentPage.Enabled = true;
-            const string attachmentFile = "AttachmentFile.pdf";
-            _pdfDevice.Job.Profile.AttachmentPage.File = attachmentFile;
-
-            _parameterStrings = new Collection<string>(_pdfDevice.GetGhostScriptParameters(_ghostscriptVersion));
-
-            var coverIndex = _parameterStrings.IndexOf(coverFile);
-            var attachmentIndex = _parameterStrings.IndexOf(attachmentFile);
-
-            Assert.LessOrEqual(coverIndex - attachmentIndex, -2, "No further (file)parameter between cover and attachment file.");
         }
     }
 }

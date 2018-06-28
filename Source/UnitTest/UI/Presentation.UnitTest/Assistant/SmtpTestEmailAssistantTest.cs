@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -63,7 +64,7 @@ namespace Presentation.UnitTest.Assistant
             _file = Substitute.For<IFile>();
             _path = Substitute.For<IPath>();
             _smtpAction = Substitute.For<ISmtpMailAction>();
-            _smtpAction.Check(Arg.Any<ConversionProfile>(), _accounts).Returns(x => new ActionResult());
+            _smtpAction.Check(Arg.Any<ConversionProfile>(), _accounts, Arg.Any<CheckLevel>()).Returns(x => new ActionResult());
             _smtpAction.ProcessJob(Arg.Any<Job>()).Returns(x => new ActionResult());
             //_smtpAction.GetSmtpAccount(_profile, _accounts).Returns(_smtpTestAccount);
 
@@ -144,21 +145,25 @@ namespace Presentation.UnitTest.Assistant
 
             assistant.SendTestMail(_profile, _accounts);
 
-            _smtpAction.Received().ProcessJob(Arg.Any<Job>());
+            Received.InOrder(() =>
+            {
+                _smtpAction.Received().ApplyPreSpecifiedTokens(Arg.Any<Job>());
+                _smtpAction.Check(_profile, _accounts, CheckLevel.Job);
+                _smtpAction.Received().ProcessJob(Arg.Any<Job>());
+            });
         }
 
         [Test]
         public void WhenProfileInvalid_DisplaysErrorMessage()
         {
             var expectedError = ErrorCode.Smtp_NoPasswordSpecified;
-            _smtpAction.Check(_profile, _accounts).Returns(x => new ActionResult(expectedError));
+            _smtpAction.ProcessJob(Arg.Any<Job>()).Returns(x => new ActionResult(expectedError));
             var assistant = BuildAssistant();
+
             assistant.SendTestMail(_profile, _accounts);
 
             _interactionRequest.AssertWasRaised<MessageInteraction>();
-
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
-
             Assert.AreEqual(_translation.SendTestMail, messageInteraction.Title);
             Assert.AreEqual(TranslationAttribute.GetValue(expectedError), messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);

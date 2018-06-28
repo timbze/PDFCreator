@@ -8,11 +8,11 @@ using pdfforge.PDFCreator.Utilities.Process;
 using pdfforge.PDFCreator.Utilities.Tokens;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using SystemInterface.Diagnostics;
 using SystemInterface.IO;
+using SystemWrapper.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -23,15 +23,19 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
     public class ScriptAction : IAction, ICheckable, IScriptActionHelper
     {
         private readonly IFile _file;
+        private readonly IPathUtil _pathUtil;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPath _path;
+        private readonly IPathSafe _pathSafe;
         private readonly IProcessStarter _processStarter;
 
-        public ScriptAction(IPath path, IProcessStarter processStarter, IFile file)
+        public ScriptAction(IPath path, IProcessStarter processStarter, IFile file, IPathUtil pathUtil)
         {
             _path = path;
             _processStarter = processStarter;
             _file = file;
+            _pathUtil = pathUtil;
+            _pathSafe = new PathWrapSafe();
         }
 
         /// <summary>
@@ -43,21 +47,13 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         {
             _logger.Debug("Launched Script-Action");
 
-            var actionResult = Check(job.Profile, job.Accounts);
+            ApplyPreSpecifiedTokens(job);
+            var actionResult = Check(job.Profile, job.Accounts, CheckLevel.Job);
             if (!actionResult)
                 return actionResult;
 
-            _logger.Debug("Script-File in Profile: " + job.Profile.Scripting.ScriptFile);
-            var scriptFile = ComposeScriptPath(job.Profile.Scripting.ScriptFile, job.TokenReplacer);
-            scriptFile = _path.GetFullPath(scriptFile);
-            _logger.Debug("Composed Script-File: " + scriptFile);
-
-            if (!_file.Exists(scriptFile))
-            {
-                _logger.Error($"The composed Script-File: \'{scriptFile}\' does not exist");
-                actionResult.Add(ErrorCode.Script_FileDoesNotExist);
-                return actionResult;
-            }
+            var scriptFile = job.Profile.Scripting.ScriptFile;
+            _logger.Debug("Script-File: " + scriptFile);
 
             IProcess process = _processStarter.CreateProcess(scriptFile);
 
@@ -66,7 +62,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             process.StartInfo.Arguments = parameters;
             _logger.Debug("Script-Parameters: " + parameters);
 
-            var scriptDir = Path.GetDirectoryName(scriptFile);
+            var scriptDir = _pathSafe.GetDirectoryName(scriptFile);
             if (scriptDir != null)
                 process.StartInfo.WorkingDirectory = scriptDir;
 
@@ -105,57 +101,24 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             return profile.Scripting.Enabled;
         }
 
-        /// <summary>
-        ///     Check for complete profile
-        /// </summary>
-        /// <param name="profile"></param>
-        /// <param name="accounts">accounts are not used here, but are required for common ICheckable</param>
-        /// <returns>ActionResult</returns>
-        public ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public void ApplyPreSpecifiedTokens(Job job)
         {
-            var actionResult = new ActionResult();
-
-            if (!profile.Scripting.Enabled)
-                return actionResult;
-
-            if (string.IsNullOrWhiteSpace(profile.Scripting.ScriptFile))
-            {
-                _logger.Error("Missing script file.");
-                actionResult.Add(ErrorCode.Script_NoScriptFileSpecified);
-                return actionResult;
-            }
-
-            //Skip check for Tokens
-            if (TokenIdentifier.ContainsTokens(profile.Scripting.ScriptFile))
-                return actionResult;
-
-            if (!ValidName.IsValidPath(profile.Scripting.ScriptFile))
-            {
-                _logger.Error("The script file \"" + profile.Scripting.ScriptFile + "\" contains illegal characters.");
-                actionResult.Add(ErrorCode.Script_IllegalCharacters);
-                return actionResult;
-            }
-
-            //Skip check for network path
-            if (profile.Scripting.ScriptFile.StartsWith(@"\\"))
-                return actionResult;
-
-            if (!_file.Exists(profile.Scripting.ScriptFile))
-            {
-                _logger.Error("The script file \"" + profile.Scripting.ScriptFile + "\" does not exist.");
-                actionResult.Add(ErrorCode.Script_FileDoesNotExist);
-                return actionResult;
-            }
-
-            return actionResult;
+            job.Profile.Scripting.ScriptFile = ComposeScriptPath(job.Profile.Scripting.ScriptFile, job.TokenReplacer);
         }
 
         public string ComposeScriptPath(string path, TokenReplacer tokenReplacer)
         {
-            var composedPath = tokenReplacer.ReplaceTokens(path);
-            composedPath = ValidName.MakeValidFolderName(composedPath);
+            var scriptPath = tokenReplacer.ReplaceTokens(path);
+            try
+            {
+                scriptPath = _path.GetFullPath(scriptPath);
+            }
+            catch
+            {
+                //Check will deal with it later
+            }
 
-            return composedPath;
+            return scriptPath;
         }
 
         public string ComposeScriptParameters(string parameterString, IList<string> outputFiles, TokenReplacer tokenReplacer)
@@ -166,6 +129,57 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             composedParameters.Append(string.Join(" ", outputFiles.Select(s => "\"" + _path.GetFullPath(s) + "\"")));
 
             return composedParameters.ToString();
+        }
+
+        /// <summary>
+        ///     Check for valid profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="accounts">accounts are not used here, but are required for common ICheckable</param>
+        /// <param name="checkLevel"></param>
+        /// <returns>ActionResult</returns>
+        public ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel)
+        {
+            if (!IsEnabled(profile))
+                return new ActionResult();
+
+            var isJobLevelCheck = checkLevel == CheckLevel.Job;
+
+            if (string.IsNullOrWhiteSpace(profile.Scripting.ScriptFile))
+                return new ActionResult(ErrorCode.Script_NoScriptFileSpecified);
+
+            //Skip further check for tokens
+            if (!isJobLevelCheck
+                && TokenIdentifier.ContainsTokens(profile.Scripting.ScriptFile))
+                return new ActionResult();
+
+            var pathUtilStatus = _pathUtil.IsValidRootedPathWithResponse(profile.Scripting.ScriptFile);
+            switch (pathUtilStatus)
+            {
+                case PathUtilStatus.InvalidRootedPath:
+                    return new ActionResult(ErrorCode.Script_InvalidRootedPath);
+
+                case PathUtilStatus.PathTooLongEx:
+                    return new ActionResult(ErrorCode.Script_PathTooLong);
+
+                case PathUtilStatus.NotSupportedEx:
+                    return new ActionResult(ErrorCode.Script_InvalidRootedPath);
+
+                case PathUtilStatus.ArgumentEx:
+                    return new ActionResult(ErrorCode.Script_IllegalCharacters);
+            }
+
+            //Skip check for network path
+            if (!isJobLevelCheck && profile.Scripting.ScriptFile.StartsWith(@"\\"))
+                return new ActionResult();
+
+            if (!_file.Exists(profile.Scripting.ScriptFile))
+            {
+                _logger.Error("The script file \"" + profile.Scripting.ScriptFile + "\" does not exist.");
+                return new ActionResult(ErrorCode.Script_FileDoesNotExist);
+            }
+
+            return new ActionResult();
         }
     }
 }

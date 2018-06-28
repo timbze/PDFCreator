@@ -2,6 +2,7 @@
 using NSubstitute.Core;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
@@ -13,13 +14,30 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using static pdfforge.PDFCreator.Conversion.Jobs.ErrorCode;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 {
     [TestFixture]
     internal class FtpActionUnitTest
     {
+        private const string JobFtpPassword = "JobFtpPassword";
+        private const string ProfileServer = "ProfileServer";
+        private const string ProfileUserName = "ProfileUserName";
+
+        private FtpAction _ftpAction;
+        private IFtpConnection _ftpConnectionWrap;
+        private IPathUtil _pathUtil;
+
+        private Job _job;
+        private ConversionProfile _profile;
+        private Accounts _accounts;
+        private FtpAccount _ftpTestAccount;
+
+        private string _host;
+        private string _userName;
+        private string _password;
+
         [SetUp]
         public void Setup()
         {
@@ -58,65 +76,178 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _job.TokenReplacer = new TokenReplacer();
         }
 
-        private const string JobFtpPassword = "JobFtpPassword";
-        private const string ProfileServer = "ProfileServer";
-        private const string ProfileUserName = "ProfileUserName";
-
-        private FtpAction _ftpAction;
-        private IFtpConnection _ftpConnectionWrap;
-        private IPathUtil _pathUtil;
-
-        private Job _job;
-        private ConversionProfile _profile;
-        private Accounts _accounts;
-        private FtpAccount _ftpTestAccount;
-
-        private string _host;
-        private string _userName;
-        private string _password;
+        [Test]
+        public void IsEnabled_ReturnsFtpEnabled()
+        {
+            _profile.Ftp.Enabled = true;
+            Assert.IsTrue(_ftpAction.IsEnabled(_profile));
+            _profile.Ftp.Enabled = false;
+            Assert.IsFalse(_ftpAction.IsEnabled(_profile));
+        }
 
         [Test]
-        public void ProcessInvalidJob_NoAccount_ResultContainsAssociatedCode()
+        public void ApplyTokens_RepalcesTokensInFtpDirectoryAndMakesItValid()
+        {
+            var token = "<Token>";
+            var tokenKey = "Token";
+            var tokenValue = "TokenValue";
+            var tokenReplacer = new TokenReplacer();
+            tokenReplacer.AddStringToken(tokenKey, tokenValue);
+            _profile.Ftp.Directory = token + "?*";
+            var job = new Job(null, _profile, null, _accounts);
+            job.TokenReplacer = tokenReplacer;
+
+            _ftpAction.ApplyPreSpecifiedTokens(job);
+
+            Assert.AreEqual(tokenValue + "_", _profile.Ftp.Directory);
+        }
+
+        #region Check
+
+        [Test]
+        public void Check_FtpDisabled_RetunsTrue()
+        {
+            _profile.Ftp.Enabled = false;
+            _profile.Ftp.AccountId = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + result);
+        }
+
+        [Test]
+        public void Check_NoAutoSave_ValidSettings_RetunsTrue()
+        {
+            _profile.AutoSave.Enabled = false;
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + result);
+        }
+
+        [Test]
+        public void Check_AutoSave_ValidSettings_RetunsTrue()
+        {
+            _profile.AutoSave.Enabled = true;
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result, "Unexpected errorcodes:" + result);
+        }
+
+        [Test]
+        public void Check_InvalidAccount_RetunsErrorCode()
         {
             _profile.Ftp.AccountId = "Some unavailble Account ID";
 
-            var results = _ftpAction.ProcessJob(_job);
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
 
-            Assert.AreEqual(Ftp_NoAccount, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_NoAccount, result.FirstOrDefault());
         }
 
         [Test]
-        public void ProcessInvalidJob_AutoSaveNoPasswordSpecified_ResultContainsAssociatedCode()
+        public void Check_NoServer_RetunsErrorCode()
+        {
+            _ftpTestAccount.Server = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.AreEqual(ErrorCode.Ftp_NoServer, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void Check_NoUsername_RetunsErrorCode()
+        {
+            _ftpTestAccount.UserName = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.AreEqual(ErrorCode.Ftp_NoUser, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void Check_AutoSaveAndNoPassword_RetunsErrorCode()
         {
             _profile.AutoSave.Enabled = true;
             _ftpTestAccount.Password = "";
-            var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_AutoSaveWithoutPassword, results[0]);
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.AreEqual(ErrorCode.Ftp_AutoSaveWithoutPassword, result.FirstOrDefault());
         }
 
         [Test]
-        public void ProcessInvalidJob_NoJobFtpPassword_ResultIsTrue()
+        public void Check_NoAutoSaveAndNoPassword_RetunsTrue()
         {
-            _job.Passwords = new JobPasswords();
-            var results = _ftpAction.ProcessJob(_job); //The action deals with missing passwords and handels them itself...
-            Assert.IsTrue(results);
+            _profile.AutoSave.Enabled = false;
+            _ftpTestAccount.Password = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result);
         }
 
         [Test]
-        public void ProcessInvalidJob_NoServerSpecified_ResultContainsAssociatedCode()
+        public void Check_CheckLevelProfile_DirectoryContainsToken_RetunsTrue()
         {
+            _profile.Ftp.Directory = "<Token>";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Profile);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void Check_CheckLevelJob_DirectoryContainsToken_RetunsErrorCode()
+        {
+            _profile.Ftp.Directory = "<Token>";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Job);
+
+            Assert.AreEqual(ErrorCode.FtpDirectory_InvalidFtpPath, result.FirstOrDefault());
+        }
+
+        [Test]
+        public void Check_CheckLevelJob_NoAutoSave_AllErrors()
+        {
+            _profile.AutoSave.Enabled = false;
+            _profile.Ftp.Directory = "<Token>";
             _ftpTestAccount.Server = "";
-            var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_NoServer, results[0]);
+            _ftpTestAccount.UserName = "";
+            //_ftpTestAccount.Password = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Job);
+
+            Assert.Contains(ErrorCode.Ftp_NoServer, result, "CheckJob did not detect missing FTP server.");
+            result.Remove(ErrorCode.Ftp_NoServer);
+            Assert.Contains(ErrorCode.Ftp_NoUser, result, "CheckJob did not detect missing FTP username.");
+            result.Remove(ErrorCode.Ftp_NoUser);
+            Assert.Contains(ErrorCode.FtpDirectory_InvalidFtpPath, result, "CheckJob did not detect InvalidFtpPath");
+            result.Remove(ErrorCode.FtpDirectory_InvalidFtpPath);
+            Assert.IsTrue(result, "Unexpected errorcodes:" + result);
         }
 
         [Test]
-        public void ProcessInvalidJob_NoUserNameSpecified_ResultContainsAssociatedCode()
+        public void Check_CheckLevelJob_AutoSave_AllErrors()
         {
+            _profile.AutoSave.Enabled = true;
+            _profile.Ftp.Directory = "<Token>";
+            _ftpTestAccount.Server = "";
             _ftpTestAccount.UserName = "";
-            var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_NoUser, results[0]);
+            _ftpTestAccount.Password = "";
+
+            var result = _ftpAction.Check(_profile, _accounts, CheckLevel.Job);
+
+            Assert.Contains(ErrorCode.Ftp_NoServer, result, "CheckJob did not detect missing FTP server.");
+            result.Remove(ErrorCode.Ftp_NoServer);
+            Assert.Contains(ErrorCode.Ftp_NoUser, result, "CheckJob did not detect missing FTP username.");
+            result.Remove(ErrorCode.Ftp_NoUser);
+            Assert.Contains(ErrorCode.Ftp_AutoSaveWithoutPassword, result, "CheckJob did not detect AutoSaveWithoutPassword.");
+            result.Remove(ErrorCode.Ftp_AutoSaveWithoutPassword);
+            Assert.Contains(ErrorCode.FtpDirectory_InvalidFtpPath, result, "CheckJob did not detect InvalidFtpPath.");
+            result.Remove(ErrorCode.FtpDirectory_InvalidFtpPath);
+            Assert.IsTrue(result, "Unexpected errorcodes:" + result);
         }
+
+        #endregion Check
 
         [Test]
         public void ProcessValidJob_CreateDirectoryThrowsExpection_CallFtpClose_ResultContainsAssociatedCode()
@@ -124,7 +255,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile.Ftp.Directory = "D";
             _ftpConnectionWrap.When(x => x.CreateDirectory("D")).Do(x => { throw new Exception(); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_DirectoryError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_DirectoryError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -181,7 +312,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile.Ftp.Directory = "D";
             _ftpConnectionWrap.When(x => x.DirectoryExists("D")).Do(x => { throw new Exception(); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_DirectoryError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_DirectoryError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -215,7 +346,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _ftpConnectionWrap.When(x => x.Open()).Do(x => { throw new Exception(); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_LoginError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_LoginError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -224,7 +355,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _ftpConnectionWrap.When(x => x.Open()).Do(x => { throw new Win32Exception(); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_LoginError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_LoginError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -234,7 +365,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         {
             _ftpConnectionWrap.When(x => x.Open()).Do(x => { throw new Win32Exception(12007); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_ConnectionError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_ConnectionError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -248,7 +379,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             var results = _ftpAction.ProcessJob(_job);
 
-            Assert.AreEqual(Ftp_UploadError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_UploadError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -289,7 +420,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             _profile.Ftp.Directory = "D";
             _ftpConnectionWrap.When(x => x.SetCurrentDirectory("D")).Do(x => { throw new Exception(); });
             var results = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(Ftp_DirectoryError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_DirectoryError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -356,7 +487,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             var results = _ftpAction.ProcessJob(_job);
 
-            Assert.AreEqual(Ftp_DirectoryReadError, results[0]);
+            Assert.AreEqual(ErrorCode.Ftp_DirectoryReadError, results[0]);
             _ftpConnectionWrap.Received(1).Close();
         }
 
@@ -368,136 +499,8 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
 
             var result = _ftpAction.ProcessJob(_job);
 
-            Assert.IsTrue(result.Contains(PasswordAction_Login_Error));
+            Assert.IsTrue(result.Contains(ErrorCode.PasswordAction_Login_Error));
             _ftpConnectionWrap.Received(1).Close();
         }
-
-        #region actioncheck
-
-        [Test]
-        public void FTPSettings_Autosave_valid()
-        {
-            _profile.Ftp.Enabled = true;
-            SetValidAutoSaveSettings();
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_Autosave_MultipleErrors()   //TODO move these tests to FtpActionTest
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "";
-            _ftpTestAccount.Server = "";
-            _ftpTestAccount.UserName = "";
-            _ftpTestAccount.Password = "";
-            SetValidAutoSaveSettings();
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.Contains(ErrorCode.Ftp_NoServer, result, "ProfileCheck did not detect missing FTP server.");
-            result.Remove(ErrorCode.Ftp_NoServer);
-            Assert.Contains(ErrorCode.Ftp_NoUser, result, "ProfileCheck did not detect missing FTP username.");
-            result.Remove(ErrorCode.Ftp_NoUser);
-            Assert.Contains(ErrorCode.Ftp_AutoSaveWithoutPassword, result, "ProfileCheck did not detect missing FTP password for autosave.");
-            result.Remove(ErrorCode.Ftp_AutoSaveWithoutPassword);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_Autosave_NoPassword()
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "random ftp directory";
-            _ftpTestAccount.Server = "random ftp server";
-            _ftpTestAccount.UserName = "random ftp username";
-            _ftpTestAccount.Password = "";
-            SetValidAutoSaveSettings();
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.Contains(ErrorCode.Ftp_AutoSaveWithoutPassword, result, "ProfileCheck did not detect missing FTP password for autosave.");
-            result.Remove(ErrorCode.Ftp_AutoSaveWithoutPassword);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_NoAutosave_MultipleErrors()
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "";
-            _ftpTestAccount.Server = "";
-            _ftpTestAccount.UserName = "";
-            _ftpTestAccount.Password = "";
-            _profile.AutoSave.Enabled = false;
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.Contains(ErrorCode.Ftp_NoServer, result, "ProfileCheck did not detect missing FTP server.");
-            result.Remove(ErrorCode.Ftp_NoServer);
-            Assert.Contains(ErrorCode.Ftp_NoUser, result, "ProfileCheck did not detect missing FTP username.");
-            result.Remove(ErrorCode.Ftp_NoUser);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_NoAutosave_NoServer()
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "random ftp directory";
-            _ftpTestAccount.Server = "";
-            _ftpTestAccount.UserName = "random ftp username";
-            _ftpTestAccount.Password = "";
-            _profile.AutoSave.Enabled = false;
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.Contains(ErrorCode.Ftp_NoServer, result, "ProfileCheck did not detect missing FTP server.");
-            result.Remove(ErrorCode.Ftp_NoServer);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_NoAutosave_NoUsername()
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "random ftp directory";
-            _ftpTestAccount.Server = "random ftp server";
-            _ftpTestAccount.UserName = "";
-            _ftpTestAccount.Password = "";
-            _profile.AutoSave.Enabled = false;
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.Contains(ErrorCode.Ftp_NoUser, result, "ProfileCheck did not detect missing FTP username.");
-            result.Remove(ErrorCode.Ftp_NoUser);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void FTPSettings_NoAutosave_valid()
-        {
-            _profile.Ftp.Enabled = true;
-            _profile.Ftp.Directory = "random ftp directory";
-            _ftpTestAccount.Server = "random ftp server";
-            _ftpTestAccount.UserName = "random ftp username";
-            _ftpTestAccount.Password = "";
-            _profile.AutoSave.Enabled = false;
-
-            var result = _ftpAction.Check(_profile, _accounts);
-
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        private void SetValidAutoSaveSettings()
-        {
-            _profile.AutoSave.Enabled = true;
-            _profile.TargetDirectory = "random autosave directory";
-            _profile.FileNameTemplate = "random autosave filename";
-        }
-
-        #endregion actioncheck
     }
 }

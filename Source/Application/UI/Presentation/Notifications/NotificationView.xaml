@@ -6,6 +6,8 @@
                               xmlns:local="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Notifications"
                               xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
                               xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+                              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                              xmlns:beh="clr-namespace:pdfforge.Obsidian;assembly=Obsidian"
                               mc:Ignorable="d"
                               d:DesignHeight="130" d:DesignWidth="350"
                               d:DataContext="{d:DesignInstance local:NotificationViewModel}">
@@ -15,6 +17,23 @@
     </core:NotificationDisplayPart.Resources>
 
     <Border Background="#2F2B2B" BorderThickness="1" BorderBrush="#565454">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Cursor" Value="Hand"></Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding OnClickCommand}" Value="{x:Null}">
+                        <Setter Property="Cursor" Value="Arrow" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <i:Interaction.Behaviors>
+            <beh:EventToCommandBehavior Command="{Binding OnClickCommand}"
+                                        CommandParameter="{Binding OnClickParameter}"
+                                        Event="MouseDown" />
+        </i:Interaction.Behaviors>
+
         <Border.Resources>
             <converter:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed" x:Key="VisibleWhenTrueConverter" />
         </Border.Resources>
@@ -69,6 +88,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Click="CloseButton_Click"
+                    Cursor="Arrow"
                     Style="{StaticResource SystemCloseButton}">
                 <Button.Content>
                     <Grid Width="10" Height="12" RenderTransform="1,0,0,1,0,1">

@@ -34,7 +34,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Commands.FirstTimeCommands
             }
             if (hasChanges)
             {
-                _commandLocator.GetCommand<SaveApplicationSettingsChangesCommand>().Execute(null);
+                _commandLocator.GetCommand<SaveChangedSettingsCommand>().Execute(null);
             }
         }
 

@@ -70,19 +70,23 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
                 defaultConditions.Add(typeof(TerminalServerNotAllowedCondition));
 
             defaultConditions.Add(typeof(PdfToolsLicensingStartUpCondition));
+            defaultConditions.Add(typeof(TrialStartupCondition));
 
             return defaultConditions;
         }
 
         protected override ViewCustomization BuildCustomization()
         {
+            var viewCustomization = ViewCustomization.DefaultCustomization;
+
             if (Customization.ApplyCustomization.Equals("true", StringComparison.InvariantCultureIgnoreCase))
             {
-                return new ViewCustomization(Customization.AboutDialog, Customization.MainForm, Customization.PrintJobWindowCaption, Customization.customlogo);
+                viewCustomization.ApplyCustomization(Customization.MainForm, Customization.PrintJobWindowCaption, Customization.customlogo);
             }
 
-            // TODO maybe throw exeption instead?
-            return ViewCustomization.DefaultCustomization;
+            viewCustomization.ApplyTrial(Customization.TrialExpireDate);
+
+            return viewCustomization;
         }
 
         protected override void RegisterPdfProcessor(Container container)

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assistants\ApplicationTranslation.cs" />
+    <Compile Include="Assistants\FileConversionAssistant.cs" />
     <Compile Include="Assistants\IniSettingsAssistant.cs" />
     <Compile Include="Assistants\IUpdateAssistant.cs" />
     <Compile Include="Assistants\PrinterActionsAssistant.cs" />
@@ -101,24 +102,20 @@
     <Compile Include="Commands\AccountCommands\FtpAccountEditCommand.cs" />
     <Compile Include="Commands\CancelApplicationSettingsChangesCommand.cs" />
     <Compile Include="Commands\AccountCommands\FtpAccountRemoveCommand.cs" />
-    <Compile Include="Commands\CheckProfileCommand.cs" />
     <Compile Include="Commands\DeleteHistoricFilesCommand.cs" />
     <Compile Include="Commands\DeleteFilesTranslation.cs" />
     <Compile Include="Commands\FirstTimeCommands\IFirstTimeCommand.cs" />
     <Compile Include="Commands\FirstTimeCommands\ResetShowQuickActionCommand.cs" />
     <Compile Include="Commands\NavigatePrismRegionCommand.cs" />
     <Compile Include="Commands\PrioritySupportUrlOpenCommand.cs" />
-    <Compile Include="Commands\QuickAction\HistoricJob\HistoricJobOpenExplorerLocationCommand.cs" />
-    <Compile Include="Commands\QuickAction\HistoricJob\HistoricJobOpenWithDefaultCommand.cs" />
-    <Compile Include="Commands\QuickAction\HistoricJob\HistoricJobOpenWithPdfArchitectCommand.cs" />
-    <Compile Include="Commands\QuickAction\HistoricJob\HistoricJobOpenMailClientCommand.cs" />
-    <Compile Include="Commands\QuickAction\Job\JobQuickActionOpenExplorerLocationCommand.cs" />
-    <Compile Include="Commands\QuickAction\Job\JobQuickActionOpenWithDefaultCommand.cs" />
-    <Compile Include="Commands\QuickAction\Job\JobQuickActionSendEmailCommand.cs" />
-    <Compile Include="Commands\SaveAndContinueEvaluationCommand.cs" />
-    <Compile Include="Commands\ContiueAndSaveEvaluationTranslation.cs" />
+    <Compile Include="Commands\QuickActions\QuickActionCommandBase.cs" />
+    <Compile Include="Commands\QuickActions\QuickActionOpenExplorerLocationCommand.cs" />
+    <Compile Include="Commands\QuickActions\QuickActionOpenWithDefaultCommand.cs" />
+    <Compile Include="Commands\QuickActions\QuickActionOpenMailClientCommand.cs" />
+    <Compile Include="Commands\EvaluateSettingsAndNotifyUserCommand.cs" />
+    <Compile Include="Commands\EvaluateSettingsAndNotifyUserTranslation.cs" />
     <Compile Include="Commands\CopyToClipboardCommand.cs" />
-    <Compile Include="Commands\NavigateMainTabCommand.cs" />
+    <Compile Include="Commands\NavigateToMainTabCommand.cs" />
     <Compile Include="Commands\ProfileCommands\HideLockLayerCommand.cs" />
     <Compile Include="Commands\ProfileCommands\OpenProfileCommand.cs" />
     <Compile Include="Commands\ProfileCommands\ProfileAddCommand.cs" />
@@ -127,7 +124,7 @@
     <Compile Include="Commands\ProfileCommands\ProfileRenameCommand.cs" />
     <Compile Include="Commands\ProfileCommands\ShowLockLayerCommand.cs" />
     <Compile Include="Commands\ProfileCommands\WaitProfileModificationCommand.cs" />
-    <Compile Include="Commands\SaveApplicationSettingsChangesCommand.cs" />
+    <Compile Include="Commands\SaveChangedSettingsCommand.cs" />
     <Compile Include="Commands\AccountCommands\FtpAccountAddCommand.cs" />
     <Compile Include="Commands\TitleReplacements\TitleReplacementAddCommand.cs" />
     <Compile Include="Commands\TitleReplacements\TitleReplacementEditCommand.cs" />
@@ -138,6 +135,7 @@
     <Compile Include="Controls\DesignTimeTokenViewModel.cs" />
     <Compile Include="Converter\CompareWithTresholdToValueConverter.cs" />
     <Compile Include="DesignTime\Helper\DesignTimeTokenViewModelFactory.cs" />
+    <Compile Include="Helper\SettingsChanged.cs" />
     <Compile Include="Helper\Tokens\SelectedProfileTokenViewModelBuilder.cs" />
     <Compile Include="Helper\Tokens\TokenViewModelBuilder.cs" />
     <Compile Include="Helper\Tokens\TokenViewModelFactory.cs" />
@@ -186,7 +184,7 @@
     <Compile Include="DesignTime\DesignTimeUpdateAssistant.cs" />
     <Compile Include="DesignTime\DesignTimeUpdateHintViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeLicenseSettingsViewModel.cs" />
-    <Compile Include="DesignTime\DesignTimeMessageUserControlViewModel.cs" />
+    <Compile Include="DesignTime\DesignTimeMessageViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeRecommendPdfArchitectWindowViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeSignUserControlViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeTimeServerAccountViewModel.cs" />
@@ -284,8 +282,9 @@
     </Compile>
     <Compile Include="Notifications\NotificationService.cs" />
     <Compile Include="Notifications\NotificationViewModel.cs" />
+    <Compile Include="Commands\QuickActions\QuickActionOpenWithPdfArchitectCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Commands\QuickAction\Job\JobQuickActionOpenWithPdfArchitectCommand.cs" />
+    <Compile Include="RegionHelper.cs" />
     <Compile Include="RegionManager\ManagedRegionManager.cs" />
     <Compile Include="Routing\StartupNavigationAction.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
@@ -319,10 +318,10 @@
     </Compile>
     <Compile Include="UserControls\Dialogs\InputBoxWindowTranslation.cs" />
     <Compile Include="UserControls\Dialogs\InputBoxWindowViewModel.cs" />
-    <Compile Include="UserControls\Misc\MessageUserControl.xaml.cs">
-      <DependentUpon>MessageUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\Misc\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Misc\MessageUserControlViewModel.cs" />
+    <Compile Include="UserControls\Misc\MessageViewModel.cs" />
     <Compile Include="UserControls\Misc\MessageWindowTranslation.cs" />
     <Compile Include="UserControls\Misc\PlusHintControl.xaml.cs">
       <DependentUpon>PlusHintControl.xaml</DependentUpon>
@@ -367,12 +366,6 @@
     <Compile Include="UserControls\Profiles\Advanced\UserToken\UserTokenUserControl.xaml.cs">
       <DependentUpon>UserTokenUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Profiles\DefectiveProfilesView.xaml.cs">
-      <DependentUpon>DefectiveProfilesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Profiles\DefectiveProfilesViewTranslation.cs" />
-    <Compile Include="UserControls\Profiles\DefectiveProfilesViewModel.cs" />
-    <Compile Include="DesignTime\DesignTimeDefectiveProfilesViewModel.cs" />
     <Compile Include="UserControls\Profiles\Send\HTTP\HttpActionUserControl.xaml.cs">
       <DependentUpon>HttpActionUserControl.xaml</DependentUpon>
     </Compile>
@@ -414,6 +407,11 @@
     </Compile>
     <Compile Include="UserControls\Profiles\Tabs\NotificationsLevelSettingsViewModel.cs" />
     <Compile Include="UserControls\Profiles\Tabs\NotificationsLevelSettingsTranslation.cs" />
+    <Compile Include="UserControls\Settings\DefaultViewerSettings\DefaultViewerView.xaml.cs">
+      <DependentUpon>DefaultViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\DefaultViewerSettings\DefaultViewerViewModel.cs" />
+    <Compile Include="UserControls\Settings\DefaultViewerSettings\DefaultViewerTranslation.cs" />
     <Compile Include="UserControls\Welcome\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
@@ -612,6 +610,8 @@
     <Compile Include="WorkflowQuery\ErrorNotifier.cs" />
     <Compile Include="WorkflowQuery\InteractiveFileNameQuery.cs" />
     <Compile Include="WorkflowQuery\InteractiveWorkflowTranslation.cs" />
+    <Compile Include="Workflow\InteractiveProfileChecker.cs" />
+    <Compile Include="Workflow\InteractiveProfileCheckerTranslation.cs" />
     <Compile Include="Workflow\InteractiveWorkflow.cs" />
     <Compile Include="Workflow\InteractiveWorkflowManager.cs" />
     <Compile Include="MainShellTranslation.cs" />
@@ -706,8 +706,8 @@
     </Compile>
     <Compile Include="UserControls\Settings\License\LicenseSettingsViewModel.cs" />
     <Compile Include="UserControls\Settings\License\LicenseSettingsTranslation.cs" />
-    <Compile Include="UserControls\Settings\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
+    <Compile Include="UserControls\Settings\ApplicationSettingsView.xaml.cs">
+      <DependentUpon>ApplicationSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Settings\SettingsViewModel.cs" />
     <Compile Include="UserControls\Settings\TitleReplacementSettings\TitleReplacementsView.xaml.cs">
@@ -789,6 +789,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\PdfCreatorDropDownButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -825,7 +829,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Misc\MessageUserControl.xaml">
+    <Page Include="UserControls\Misc\MessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -860,10 +864,6 @@
     <Page Include="UserControls\Accounts\AccountViews\FTP\FtpAccountView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Profiles\DefectiveProfilesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Profiles\Send\Dropbox\DropboxUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -914,6 +914,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Profiles\Tabs\NotificatonsLevelSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Settings\DefaultViewerSettings\DefaultViewerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1177,7 +1181,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Settings\SettingsView.xaml">
+    <Page Include="UserControls\Settings\ApplicationSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1225,6 +1229,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="..\..\..\..\packages\setup\PDFCreator.UserGuide\content\chm\PDFCreator_english.chm">
+      <Link>PDFCreator_english.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\..\packages\setup\PDFCreator.UserGuide\content\chm\PDFCreator_german.chm">
+      <Link>PDFCreator_german.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="paket.references" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1261,6 +1273,10 @@
     <ProjectReference Include="..\..\Core\Controller\Controller.csproj">
       <Project>{BE1A6F7D-6439-4361-8E96-DF90B4BFE000}</Project>
       <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\DirectConversion\DirectConversion.csproj">
+      <Project>{2D918F3C-5403-4346-98CF-FB53A5D09951}</Project>
+      <Name>DirectConversion</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Printing\Printing.csproj">
       <Project>{FD68EB7E-2AE8-4C8E-BA9C-71F9AD98E33E}</Project>

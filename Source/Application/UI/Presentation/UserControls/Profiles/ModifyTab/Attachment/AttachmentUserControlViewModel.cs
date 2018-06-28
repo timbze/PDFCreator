@@ -1,7 +1,10 @@
-﻿using pdfforge.Obsidian;
+﻿using Optional;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Attachment
 {
@@ -9,26 +12,33 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.At
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
 
-        public AttachmentUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater transupdater, ISelectedProfileProvider selectedProfile) : base(transupdater, selectedProfile)
+        public TokenReplacer TokenReplacer { get; }
+
+        public TokenViewModel<ConversionProfile> AttachmentFileTokenViewModel { get; set; }
+
+        public AttachmentUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater,
+                                              ISelectedProfileProvider selectedProfile,
+                                              TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfile)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
 
-            SelectAttatchmenCommand = new DelegateCommand(SelectAttatchmentExecute);
-        }
-
-        public DelegateCommand SelectAttatchmenCommand { get; set; }
-
-        public bool IsEnabled
-        {
-            get { return CurrentProfile != null && CurrentProfile.AttachmentPage.Enabled; }
-            set
+            if (tokenHelper != null)
             {
-                CurrentProfile.AttachmentPage.Enabled = value;
-                RaisePropertyChanged(nameof(IsEnabled));
+                TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+                var tokens = tokenHelper.GetTokenListForExternalFiles();
+
+                AttachmentFileTokenViewModel = tokenViewModelFactory.BuilderWithSelectedProfile()
+                    .WithSelector(p => p.AttachmentPage.File)
+                    .WithTokenList(tokens)
+                    .WithTokenReplacerPreview(TokenReplacer)
+                    .WithButtonCommand(SelectAttatchmentAction)
+                    .Build();
+
+                RaisePropertyChanged(nameof(AttachmentFileTokenViewModel));
             }
         }
 
-        private void SelectAttatchmentExecute(object obj)
+        private Option<string> SelectAttatchmentAction(string s1)
         {
             var title = Translation.SelectAttachmentFile;
             var filter = Translation.PDFFiles
@@ -40,15 +50,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.At
 
             interactionResult.MatchSome(s =>
             {
-                CurrentProfile.AttachmentPage.File = s;
-                RaisePropertyChanged(nameof(CurrentProfile));
+                AttachmentFileTokenViewModel.Text = s;
+                AttachmentFileTokenViewModel.RaiseTextChanged();
             });
+
+            return interactionResult;
         }
     }
 
     public class DesignTimeAttachmentUserControlViewModel : AttachmentUserControlViewModel
     {
-        public DesignTimeAttachmentUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimeAttachmentUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
         {
         }
     }

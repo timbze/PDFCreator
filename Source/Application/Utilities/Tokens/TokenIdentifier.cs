@@ -9,7 +9,7 @@ namespace pdfforge.PDFCreator.Utilities.Tokens
             if (string.IsNullOrWhiteSpace(parameter))
                 return false;
 
-            return Regex.IsMatch(parameter, @"<[\S\s]+>");
+            return Regex.IsMatch(parameter, @"<.+?>");
         }
     }
 }

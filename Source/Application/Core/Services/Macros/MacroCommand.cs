@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -12,7 +13,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
         private int _runIndex = 0;
         private object _parameter;
         private BooleanMacroResult _result;
-        private TaskCompletionSource<IMacroResult> _resultTask;
+        private Action<BooleanMacroResult> _callback = null;
 
         public event EventHandler MacroIsDone;
 
@@ -33,9 +34,9 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
             }
         }
 
-        public void ExecuteWithAsyncResult(object parameter, TaskCompletionSource<IMacroResult> resultTask)
+        public void ExecuteWithAsyncResult(object parameter, Action<BooleanMacroResult> callback = null)
         {
-            _resultTask = resultTask;
+            _callback = callback;
             _result = new BooleanMacroResult(false);
             Execute(parameter);
         }
@@ -92,7 +93,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
         {
             _result?.SetResult(success);
             MacroIsDone?.Invoke(this, new MacroAreDoneEventArgs(_result));
-            _resultTask?.SetResult(_result);
+            _callback?.Invoke(_result);
         }
 
         public bool CanExecute(object parameter)
@@ -111,6 +112,51 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
             _runIndex = -1;
 
             Next(this, new MacroCommandIsDoneEventArgs(ResponseStatus.Success));
+        }
+
+        public async Task<ResponseStatus> ExecuteAsync(object parameter)
+        {
+            ResponseStatus status = ResponseStatus.Success;
+
+            foreach (var command in CommandList)
+            {
+                if (status == ResponseStatus.Skip)
+                {
+                    status = ResponseStatus.Success;
+                    continue;
+                }
+
+                var waitableCommand = command as IWaitableCommand;
+
+                if (waitableCommand != null)
+                {
+                    var resetEvent = new ManualResetEventSlim();
+
+                    waitableCommand.IsDone += (sender, args) =>
+                    {
+                        status = args.ResponseStatus;
+                        resetEvent.Set();
+                    };
+                    waitableCommand.Execute(parameter);
+
+                    await Task.Run(() =>
+                    {
+                        resetEvent.Wait();
+                    });
+                }
+                else
+                {
+                    command.Execute(parameter);
+                }
+
+                if (status == ResponseStatus.Cancel || status == ResponseStatus.Error)
+                {
+                    break;
+                }
+            }
+
+            InvokeAllDone(true);
+            return status;
         }
 
         // has to be implemented because of ICommand

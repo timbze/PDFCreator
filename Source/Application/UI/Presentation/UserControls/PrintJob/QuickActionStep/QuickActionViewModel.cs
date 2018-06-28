@@ -3,7 +3,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
-using pdfforge.PDFCreator.UI.Presentation.Commands.QuickAction;
+using pdfforge.PDFCreator.UI.Presentation.Commands.QuickActions;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
@@ -39,7 +39,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionS
 
         private void OnFinish(object obj)
         {
-            _commandLocator.GetCommand<SaveApplicationSettingsChangesCommand>().Execute(null);
+            _commandLocator.GetCommand<SaveChangedSettingsCommand>().Execute(null);
             StepFinished?.Invoke(this, EventArgs.Empty);
         }
 
@@ -47,14 +47,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionS
         {
             QuickActionOpenList = new List<QuickActionListItemVo>
             {
-                new QuickActionListItemVo(Translation.OpenPDFArchitect, _commandLocator.GetCommand<JobQuickActionOpenWithPdfArchitectCommand>(), StartQuickActionCommand),
-                new QuickActionListItemVo(Translation.OpenDefaultProgram, _commandLocator.GetCommand<JobQuickActionOpenWithDefaultCommand>(),StartQuickActionCommand),
-                new QuickActionListItemVo(Translation.OpenExplorer, _commandLocator.GetCommand<JobQuickActionOpenExplorerLocationCommand>(),StartQuickActionCommand)
+                new QuickActionListItemVo(Translation.OpenPDFArchitect, _commandLocator.GetCommand<QuickActionOpenWithPdfArchitectCommand>(), StartQuickActionCommand),
+                new QuickActionListItemVo(Translation.OpenDefaultProgram, _commandLocator.GetCommand<QuickActionOpenWithDefaultCommand>(),StartQuickActionCommand),
+                new QuickActionListItemVo(Translation.OpenExplorer, _commandLocator.GetCommand<QuickActionOpenExplorerLocationCommand>(),StartQuickActionCommand)
             };
 
             QuickActionSendList = new List<QuickActionListItemVo>
             {
-                new QuickActionListItemVo(Translation.SendEmail, _commandLocator.GetCommand<JobQuickActionSendEmailCommand>(), StartQuickActionCommand)
+                new QuickActionListItemVo(Translation.SendEmail, _commandLocator.GetCommand<QuickActionOpenMailClientCommand>(), StartQuickActionCommand)
             };
         }
 
@@ -127,7 +127,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionS
             {
                 if (_job != null && _currentSettingsProvider != null)
                 {
-                    var conversionProfile = _currentSettingsProvider.Profiles.First(x => x.Equals(_job.Profile));
+                    var conversionProfile = _currentSettingsProvider.Settings.GetProfileByGuid(_job.Profile.Guid);
                     conversionProfile.ShowQuickActions = !value;
                     _job.Profile.ShowQuickActions = !value;
                     RaisePropertyChanged(nameof(IsActive));

@@ -52,6 +52,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assistant\FileConversionAssistantTest.cs" />
     <Compile Include="Assistant\IniSettingsAssistantTest.cs" />
     <Compile Include="Assistant\RepairPrinterAssistantTest.cs" />
     <Compile Include="Assistant\RepairSpoolFolderAssistantTest.cs" />
@@ -68,12 +69,13 @@
     <Compile Include="Commands\AccountsCommands\SmtpAccountRemoveCommandTest.cs" />
     <Compile Include="Commands\AccountsCommands\SmtpAccountEditCommandTest.cs" />
     <Compile Include="Commands\AccountsCommands\SmtpAccountAddCommandTest.cs" />
-    <Compile Include="Commands\CheckProfilecommandTest.cs" />
+    <Compile Include="Commands\EvaluateSettingsAndNotifyUserCommandTest.cs" />
     <Compile Include="Commands\CopyToClipboardCommandTest.cs" />
     <Compile Include="Commands\DeleteHistoricFilesCommandTest.cs" />
     <Compile Include="Commands\Macros\MacroCommandTest.cs" />
     <Compile Include="Commands\PrioritySupportUrlOpenCommandTest.cs" />
-    <Compile Include="Commands\QuickAction\QuickActionSendEmailCommandTest.cs" />
+    <Compile Include="Commands\QuickAction\QuickActionOpenEmailClientCommandTest.cs" />
+    <Compile Include="Commands\QuickAction\QuickActionOpenWithDefaultCommandTest.cs" />
     <Compile Include="Converter\AreEqualConverterTest.cs" />
     <Compile Include="Helper\ClientTestEmailTest.cs" />
     <Compile Include="Helper\LastSaveDirectoryHelperTest.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Helper\UserGuideHelperTest.cs" />
     <Compile Include="Overlay\Encryption\EncryptionPasswordOverlayViewModelTest.cs" />
     <Compile Include="Overlay\Password\PasswordOverlayViewModelTest.cs" />
+    <Compile Include="UnitTestTranslationUpdater.cs" />
     <Compile Include="UserControls\AccountViewModels\TimeServerAccountViewModelTest.cs" />
     <Compile Include="UserControls\AccountViewModels\AccountsViewModelTest.cs" />
     <Compile Include="UserControls\AccountViewModels\HttpAccountViewModelTest.cs" />
@@ -93,7 +96,7 @@
     <Compile Include="UserControls\AccountViewModels\SmtpAccountViewModelTest.cs" />
     <Compile Include="UserControls\AccountViewModels\FtpAccountViewModelTest.cs" />
     <Compile Include="UserControls\Dialogs\InputBoxWindowViewModelTest.cs" />
-    <Compile Include="UserControls\Dialogs\MessageUserControlViewModelTest.cs" />
+    <Compile Include="UserControls\Dialogs\MessageViewModelTest.cs" />
     <Compile Include="UserControls\Misc\PlusHintLinkViewModelTest.cs" />
     <Compile Include="Commands\SkipPrintDialogCommandTest.cs" />
     <Compile Include="UserControls\Profile\CurrentSettingsProviderTest.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Windows\ManagePrintJobsViewModelTest.cs" />
     <Compile Include="WorkflowQuery\InteractiveFileNameQueryTest.cs" />
     <Compile Include="Workflow\Steps\DropboxSharedLinkStepTest.cs" />
+    <Compile Include="Workflow\Steps\InteractiveProfileCheckerTest.cs" />
     <Compile Include="Workflow\Steps\QuickActionStepTest.cs" />
     <Compile Include="Workflow\Steps\SignaturePasswordStepTest.cs" />
     <Compile Include="Workflow\Steps\SmtpPasswordStepTest.cs" />
@@ -190,6 +194,10 @@
     <ProjectReference Include="..\..\..\Application\Core\Controller\Controller.csproj">
       <Project>{BE1A6F7D-6439-4361-8E96-DF90B4BFE000}</Project>
       <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Core\DirectConversion\DirectConversion.csproj">
+      <Project>{2D918F3C-5403-4346-98CF-FB53A5D09951}</Project>
+      <Name>DirectConversion</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Core\Printing\Printing.csproj">
       <Project>{FD68EB7E-2AE8-4C8E-BA9C-71F9AD98E33E}</Project>

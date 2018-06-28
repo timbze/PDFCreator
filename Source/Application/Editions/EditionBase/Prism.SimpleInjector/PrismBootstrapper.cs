@@ -124,7 +124,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase.Prism.SimpleInjector
             container.RegisterTypeForNavigation<HomeView>();
             container.RegisterTypeForNavigation<PrinterView>();
             container.RegisterTypeForNavigation<ProfilesView>();
-            container.RegisterTypeForNavigation<SettingsView>();
+            container.RegisterTypeForNavigation<ApplicationSettingsView>();
             container.RegisterTypeForNavigation<PrintJobView>();
             container.RegisterTypeForNavigation<PdfPasswordView>();
             container.RegisterTypeForNavigation<QuickActionView>();

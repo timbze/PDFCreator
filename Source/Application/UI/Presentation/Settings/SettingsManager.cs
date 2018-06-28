@@ -8,6 +8,7 @@ using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.Commands.FirstTimeCommands;
+using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.Utilities;
 
@@ -19,17 +20,16 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
         private readonly IInstallationPathProvider _installationPathProvider;
         private readonly IVersionHelper _versionHelper;
         private readonly IEnumerable<IFirstTimeCommand> _firstTimeCommands;
-        private readonly ICommandLocator _commandLocator;
         private readonly SettingsProvider _settingsProvider;
 
-        public SettingsManager(SettingsProvider settingsProvider, ISettingsLoader loader, IInstallationPathProvider installationPathProvider, IVersionHelper versionHelper, IEnumerable<IFirstTimeCommand> firstTimeCommands, ICommandLocator commandLocator)
+        public SettingsManager(SettingsProvider settingsProvider, ISettingsLoader loader, IInstallationPathProvider installationPathProvider, 
+            IVersionHelper versionHelper, IEnumerable<IFirstTimeCommand> firstTimeCommands)
         {
             _settingsProvider = settingsProvider;
             _loader = loader;
             _installationPathProvider = installationPathProvider;
             _versionHelper = versionHelper;
             _firstTimeCommands = firstTimeCommands;
-            _commandLocator = commandLocator;
         }
 
         private void LoadAllSettingsSynchronized()
@@ -54,10 +54,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
         public void SaveCurrentSettings()
         {
             // Synchronize across processes with a Mutex to avoid partial reads/writes
-            RunSynchronized(SaveSettings);
+            RunSynchronized(DoSaveSettings);
         }
 
-        private void SaveSettings()
+        private void DoSaveSettings()
         {
             var settings = _settingsProvider.Settings;
             _loader.SaveSettingsInRegistry(settings);
@@ -80,7 +80,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Settings
                 _settingsProvider.Settings.ApplicationSettings.LastLoginVersion = version;
             }
         }
-        
+
         private void RunSynchronized(Action action)
         {
             var mutexName = "PDFCreator-Settings" + _installationPathProvider.ApplicationGuid;

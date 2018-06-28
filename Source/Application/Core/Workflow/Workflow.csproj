@@ -74,11 +74,16 @@
     <Compile Include="Exceptions\WorkflowException.cs" />
     <Compile Include="JobDataUpdater.cs" />
     <Compile Include="Queries\IErrorNotifier.cs" />
+    <Compile Include="AppSettingsChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Conversion\ActionsInterface\ActionsInterface.csproj">
       <Project>{8de100b3-17e1-46e3-830b-5e0b072483ca}</Project>
       <Name>ActionsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conversion\Actions\Actions.csproj">
+      <Project>{1DBB980A-80ED-4263-BC5D-B90377466E14}</Project>
+      <Name>Actions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Conversion\ConverterInterface\ConverterInterface.csproj">
       <Project>{2856c862-70ec-42cb-9bd4-a889bd6ec1f7}</Project>

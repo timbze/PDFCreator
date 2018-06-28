@@ -10,7 +10,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
 
         ICommand GetCommand(int index);
 
-        void ExecuteWithAsyncResult(object parameter, TaskCompletionSource<IMacroResult> resultTask);
+        Task<ResponseStatus> ExecuteAsync(object parameter);
 
         BooleanMacroResult ExecuteWithResult(object parameter);
     }

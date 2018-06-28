@@ -8,5 +8,7 @@ dependencies
 	Translatable = LOCKEDVERSION
 files
 	bin/Release/PDFCreator.Settings.dll ==> lib
+    settings.xml ==> content
+    Enums/**/* => content/Enums
 references
 	PDFCreator.Settings.dll

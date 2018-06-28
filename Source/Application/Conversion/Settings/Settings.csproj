@@ -49,6 +49,7 @@
     <Compile Include="ApplicationProperties.cs" />
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="AttachmentPage.cs" />
+    <Compile Include="ApplicationSettingsCustom.cs" />
     <Compile Include="AttachmentPageCustom.cs" />
     <Compile Include="AutoSave.cs" />
     <Compile Include="AutoSaveCustom.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="ConversionProfile.Custom.cs" />
     <Compile Include="CoverPage.cs" />
     <Compile Include="CoverPageCustom.cs" />
+    <Compile Include="DefaultViewer.cs" />
     <Compile Include="DropboxAccount.cs" />
     <Compile Include="DropboxSettings.cs" />
     <Compile Include="DropboxSettingsCustom.cs" />

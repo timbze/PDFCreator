@@ -15,6 +15,7 @@
         ProfileSettings,
         GeneralSettings,
         TitleReplacementSettings,
-        LicenseSettings
+        LicenseSettings,
+        DefaultViewerSettings
     }
 }

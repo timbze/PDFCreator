@@ -12,6 +12,8 @@ namespace pdfforge.PDFCreator.Utilities
 
         private static readonly string InvalidFtpCharRegex = $@"/\\|[{Regex.Escape(new string(Path.GetInvalidPathChars()) + ":*?")}]+";
 
+        private static readonly char[] InvalidDropBoxChars = new[] { ':', '?', '*', '|', '"', '*', '.' };
+
         public static string MakeValidFileName(string name)
         {
             return Regex.Replace(name, InvalidFileCharRegex, "_");
@@ -45,6 +47,7 @@ namespace pdfforge.PDFCreator.Utilities
             return !Regex.IsMatch(path, InvalidFtpCharRegex);
         }
 
+        //Todo: Check if this is obsolete and can be replaced by PathUtil.IsValidRootedPath
         public static bool IsValidPath(string name)
         {
             var containsABadCharacter = new Regex(InvalidPathCharRegex);
@@ -55,6 +58,11 @@ namespace pdfforge.PDFCreator.Utilities
 
             // other checks for UNC, drive-path format, etc
             return true;
+        }
+
+        public static bool IsValidDropboxFolder(string folder)
+        {
+            return folder.IndexOfAny(InvalidDropBoxChars) == -1;
         }
     }
 }

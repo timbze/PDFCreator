@@ -28,7 +28,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _parametersManager = Substitute.For<IParametersManager>();
             // We need some special syntax here to make NSubsitute work here: .Returns(x => new MainWindowStart(...));
             _resolver.ResolveAppStart<MainWindowStart>().Returns(x => new MainWindowStart(null, starter, Substitute.For<IPdfArchitectCheck>(), Substitute.For<IMainWindowThreadLauncher>()));
-            _resolver.ResolveAppStart<DragAndDropStart>().Returns(x => new DragAndDropStart(Substitute.For<IFileConversionHandler>(), starter));
+            _resolver.ResolveAppStart<DragAndDropStart>().Returns(x => new DragAndDropStart(Substitute.For<IFileConversionAssistant>(), starter));
             _resolver.ResolveAppStart<PrintFileStart>().Returns(x => new PrintFileStart(Substitute.For<ICheckAllStartupConditions>(), Substitute.For<IPrintFileHelper>(), null));
             _resolver.ResolveAppStart<NewPsJobStart>().Returns(x => new NewPsJobStart(null, null, starter, null, null));
             _resolver.ResolveAppStart<NewPdfJobStart>().Returns(x => new NewPdfJobStart(null, null, starter, null, null));

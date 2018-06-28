@@ -207,6 +207,9 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                     job.Profile.PdfSettings.Signature.SignContact = job.TokenReplacer.ReplaceTokens(job.Profile.PdfSettings.Signature.SignContact);
                     job.Profile.PdfSettings.Signature.SignLocation = job.TokenReplacer.ReplaceTokens(job.Profile.PdfSettings.Signature.SignLocation);
                 }
+
+                if (job.Profile.BackgroundPage.Enabled)
+                    job.Profile.BackgroundPage.File = job.TokenReplacer.ReplaceTokens(job.Profile.BackgroundPage.File);
             }
             catch (Exception ex)
             {

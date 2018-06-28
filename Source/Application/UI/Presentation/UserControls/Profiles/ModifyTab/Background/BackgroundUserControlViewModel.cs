@@ -1,33 +1,42 @@
-﻿using pdfforge.Obsidian;
+﻿using Optional;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.Utilities.Tokens;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Background
 {
     public class BackgroundUserControlViewModel : ProfileUserControlViewModel<BackgroundSettingsAndActionTranslation>
     {
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
+        public TokenReplacer TokenReplacer { get; }
 
-        public BackgroundUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile) : base(translationUpdater, selectedProfile)
+        public TokenViewModel<ConversionProfile> BackgroundTokenViewModel { get; set; }
+
+        public BackgroundUserControlViewModel(IOpenFileInteractionHelper openFileInteractionHelper, ITranslationUpdater translationUpdater,
+                                              ISelectedProfileProvider selectedProfile, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfile)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
-            SelectBackgroundCommand = new DelegateCommand(SelectBackgroundExecute);
-        }
 
-        public DelegateCommand SelectBackgroundCommand { get; private set; }
-
-        public bool IsEnabled
-        {
-            get { return CurrentProfile != null && CurrentProfile.BackgroundPage.Enabled; }
-            set
+            if (tokenHelper != null)
             {
-                CurrentProfile.BackgroundPage.Enabled = value;
-                RaisePropertyChanged(nameof(IsEnabled));
+                TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+                var tokens = tokenHelper.GetTokenListForExternalFiles();
+
+                BackgroundTokenViewModel = tokenViewModelFactory.BuilderWithSelectedProfile()
+                    .WithSelector(p => p.BackgroundPage.File)
+                    .WithTokenList(tokens)
+                    .WithTokenReplacerPreview(TokenReplacer)
+                    .WithButtonCommand(SelectBackgroundAction)
+                    .Build();
+
+                RaisePropertyChanged(nameof(BackgroundTokenViewModel));
             }
         }
 
-        private void SelectBackgroundExecute(object obj)
+        private Option<string> SelectBackgroundAction(string s1)
         {
             var titel = Translation.SelectBackgroundFile;
             var filter = Translation.PDFFiles
@@ -38,15 +47,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Ba
             var interactionResult = _openFileInteractionHelper.StartOpenFileInteraction(CurrentProfile.BackgroundPage.File, titel, filter);
             interactionResult.MatchSome(s =>
             {
-                CurrentProfile.BackgroundPage.File = s;
-                RaisePropertyChanged(nameof(CurrentProfile));
+                BackgroundTokenViewModel.Text = s;
+                BackgroundTokenViewModel.RaiseTextChanged();
             });
+
+            return interactionResult;
         }
     }
 
     public class DesignTimeBackgroundUserControlViewModel : BackgroundUserControlViewModel
     {
-        public DesignTimeBackgroundUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider())
+        public DesignTimeBackgroundUserControlViewModel() : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), null, null)
         {
         }
     }

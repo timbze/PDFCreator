@@ -20,25 +20,32 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
         protected override string PasswordText => "HTTP";
 
+        public override void ApplyPreSpecifiedTokens(Job job)
+        {
+            //nothing to do here
+        }
+
         /// <summary>
         ///     Check if the profile is configured properly for this action
         /// </summary>
         /// <param name="profile">The profile to check</param>
-        /// <param name="account">Current accounts</param>
+        /// <param name="accounts">Current accounts</param>
+        /// <param name="checkLevel"></param>
         /// <returns>ActionResult with configuration problems</returns>
-        public override ActionResult Check(ConversionProfile profile, Accounts account)
+        public override ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel)
         {
             var actionResult = new ActionResult();
 
-            if (!profile.HttpSettings.Enabled)
+            if (!IsEnabled(profile))
                 return actionResult;
 
-            var httpAccount = account.GetHttpAccount(profile);
+            var httpAccount = accounts.GetHttpAccount(profile);
             if (httpAccount == null)
             {
                 actionResult.Add(ErrorCode.HTTP_NoAccount);
                 return actionResult;
             }
+
             Uri isValidUrl;
             if (!Uri.TryCreate(httpAccount.Url, UriKind.Absolute, out isValidUrl))
             {

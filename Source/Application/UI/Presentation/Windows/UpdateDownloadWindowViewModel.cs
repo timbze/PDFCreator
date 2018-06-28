@@ -1,5 +1,6 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
+using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
@@ -23,18 +24,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         private readonly ITempFolderProvider _tempFolderProvider;
         private readonly IReadableFileSizeFormatter _readableFileSizeFormatter;
+        private readonly ApplicationNameProvider _applicationNameProvider;
         private string _downloadLocation;
         private DownloadSpeed _downloadSpeed;
         private DateTime _lastUpdate;
         private WebClient _webClient;
 
-        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider, ITranslationUpdater translationUpdater, IReadableFileSizeFormatter readableFileSizeFormatter)
+        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider,
+            ITranslationUpdater translationUpdater, IReadableFileSizeFormatter readableFileSizeFormatter, ApplicationNameProvider applicationNameProvider)
             : base(translationUpdater)
         {
             _directory = directory;
             _file = file;
             _tempFolderProvider = tempFolderProvider;
             _readableFileSizeFormatter = readableFileSizeFormatter;
+            _applicationNameProvider = applicationNameProvider;
             _dispatcher = Dispatcher.CurrentDispatcher;
 
             CancelCommand = new DelegateCommand(ExecuteCancel);
@@ -51,7 +55,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             StartDownload(Interaction.DownloadUrl);
         }
 
-        public override string Title => Translation.Title;
+        public override string Title => _applicationNameProvider.ApplicationNameWithEdition;
 
         private void StartDownload(string downloadUrl)
         {

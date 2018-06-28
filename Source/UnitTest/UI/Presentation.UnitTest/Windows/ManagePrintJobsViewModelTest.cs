@@ -22,7 +22,7 @@ namespace Presentation.UnitTest.Windows
         {
             _wasCalled = false;
             _queueStub = Substitute.For<IJobInfoQueue>();
-            _dragDrop = new DragAndDropEventHandler(Substitute.For<IFileConversionHandler>());
+            _dragDrop = new DragAndDropEventHandler(Substitute.For<IFileConversionAssistant>());
             _jobInfoManager = Substitute.For<IJobInfoManager>();
             _dispatcher = new InvokeImmediatelyDispatcher();
             _jobInfoStub = new JobInfo();

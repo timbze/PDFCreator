@@ -1,6 +1,7 @@
 ﻿using pdfforge.PDFCreator.Conversion.Jobs.Annotations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using ToastNotifications.Core;
 
 namespace pdfforge.PDFCreator.UI.Presentation.Notifications
@@ -8,6 +9,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
     public class NotificationViewModel : NotificationBase, INotifyPropertyChanged
     {
         private NotificationView _notificationView;
+
+        public ICommand OnClickCommand { get; }
+        public object OnClickParameter { get; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -28,7 +32,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
             }
         }
 
-        public bool IsSuccess => NotificationType == NotificationType.Success;
+        public bool IsSuccess => NotificationType == NotificationType.Info;
         public bool IsError => NotificationType == NotificationType.Error;
 
         private string _message;
@@ -46,11 +50,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
             }
         }
 
-        public NotificationViewModel(string title, string message, NotificationType type)
+        public NotificationViewModel(string title, string message, NotificationType type, ICommand onClickCommand = null, object onClickParameter = null)
         {
             Title = title;
             Message = message;
             NotificationType = type;
+
+            OnClickCommand = onClickCommand;
+            OnClickParameter = onClickParameter;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -66,7 +73,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Notifications
 
     public enum NotificationType
     {
-        Success,
+        Info,
         Error
     }
 }

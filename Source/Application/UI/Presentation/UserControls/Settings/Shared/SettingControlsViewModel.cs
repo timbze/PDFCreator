@@ -3,7 +3,6 @@ using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
-using Prism.Mvvm;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared
 {
@@ -12,14 +11,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared
         public SettingControlsViewModel(ITranslationUpdater translationUpdater, ICommandLocator commandLocator):base(translationUpdater)
         {
             SaveCommand = commandLocator.CreateMacroCommand()
-                .AddCommand<CheckProfileCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .AddCommand<NavigateMainTabCommand>()
+                .AddCommand<EvaluateSettingsAndNotifyUserCommandExceptWhenSettingsChanged>()
+                .AddCommand<SaveChangedSettingsCommand>()
+                .AddCommand<NavigateToMainTabCommand>()
                 .Build();
 
             CancelCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<CancelApplicationSettingsChangesCommand>()
-                .AddCommand<NavigateMainTabCommand>()
+                .AddCommand<NavigateToMainTabCommand>()
                 .Build();
         }
 

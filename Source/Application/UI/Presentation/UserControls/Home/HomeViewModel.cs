@@ -7,8 +7,7 @@ using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
-using pdfforge.PDFCreator.UI.Presentation.Commands.QuickAction;
-using pdfforge.PDFCreator.UI.Presentation.Commands.QuickAction.HistoricJob;
+using pdfforge.PDFCreator.UI.Presentation.Commands.QuickActions;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
@@ -21,18 +20,18 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Home
 {
     public class HomeViewModel : TranslatableViewModelBase<HomeViewTranslation>
     {
-        private readonly IFileConversionHandler _fileConversionHandler;
+        private readonly IFileConversionAssistant _fileConversionAssistant;
         private readonly IPrinterHelper _printerHelper;
         private readonly ISettingsProvider _settingsProvider;
         private readonly IInteractionInvoker _interactionInvoker;
 
-        public HomeViewModel(IInteractionInvoker interactionInvoker, IFileConversionHandler fileConversionHandler, ITranslationUpdater translationUpdater,
+        public HomeViewModel(IInteractionInvoker interactionInvoker, IFileConversionAssistant fileConversionAssistant, ITranslationUpdater translationUpdater,
                              IPrinterHelper printerHelper, ISettingsProvider settingsProvider, IJobHistoryManager jobHistoryManager, IDispatcher dispatcher,
                              ICommandLocator commandLocator)
             : base(translationUpdater)
         {
             _interactionInvoker = interactionInvoker;
-            _fileConversionHandler = fileConversionHandler;
+            _fileConversionAssistant = fileConversionAssistant;
             _printerHelper = printerHelper;
             _settingsProvider = settingsProvider;
 
@@ -60,10 +59,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Home
 
             QuickActionOpenList = new List<QuickActionListItemVo>
             {
-                new QuickActionListItemVo(Translation.OpenPDFArchitect, commandLocator.GetCommand<HistoricJobOpenWithPdfArchitectCommand>(), StartQuickActionCommand),
-                new QuickActionListItemVo(Translation.OpenDefaultProgram, commandLocator.GetCommand<HistoricJobOpenWithDefaultCommand>(), StartQuickActionCommand),
-                new QuickActionListItemVo(Translation.OpenExplorer, commandLocator.GetCommand<HistoricJobOpenExplorerLocationCommand>(), StartQuickActionCommand),
-                new QuickActionListItemVo(Translation.OpenMailClient, commandLocator.GetCommand<HistoricJobOpenMailClientCommand>(), StartQuickActionCommand)
+                new QuickActionListItemVo(Translation.OpenPDFArchitect, commandLocator.GetCommand<QuickActionOpenWithPdfArchitectCommand>(), StartQuickActionCommand),
+                new QuickActionListItemVo(Translation.OpenDefaultProgram, commandLocator.GetCommand<QuickActionOpenWithDefaultCommand>(), StartQuickActionCommand),
+                new QuickActionListItemVo(Translation.OpenExplorer, commandLocator.GetCommand<QuickActionOpenExplorerLocationCommand>(), StartQuickActionCommand),
+                new QuickActionListItemVo(Translation.OpenMailClient, commandLocator.GetCommand<QuickActionOpenMailClientCommand>(), StartQuickActionCommand)
             };
         }
 
@@ -125,7 +124,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Home
                 return;
 
             var file = interaction.FileName;
-            _fileConversionHandler.HandleFileList(new List<string> { file });
+            _fileConversionAssistant.HandleFileList(new List<string> { file });
         }
 
         protected override void OnTranslationChanged()

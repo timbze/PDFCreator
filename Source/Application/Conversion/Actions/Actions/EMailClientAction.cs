@@ -1,6 +1,6 @@
 ﻿using NLog;
 using pdfforge.Mail;
-using pdfforge.PDFCreator.Conversion.ActionsInterface;
+using pdfforge.PDFCreator.Conversion.Actions.Actions.Interface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
-    public class EMailClientAction : IAction
+    public class EMailClientAction : IEMailClientAction
     {
         private readonly IEmailClientFactory _emailClientFactory;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
@@ -32,9 +32,9 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             if (hasSignature)
                 signature = job.JobTranslations.EmailSignature;
 
-            var recipientsTo = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Recipients);
-            var recipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsCc);
-            var recipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsBcc);
+            var recipientsTo = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Recipients).Replace(';', ',');
+            var recipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsCc).Replace(';', ',');
+            var recipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsBcc).Replace(';', ',');
 
             var hasAttachments = !SkipFileAttachments(job);
             IList<string> attachments = hasAttachments ? job.OutputFiles : null;

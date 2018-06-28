@@ -13,7 +13,8 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
         //todo: Test this
         public ActionResult ProcessJob(Job job)
         {
-            var actionResult = Check(job.Profile, job.Accounts);
+            ApplyPreSpecifiedTokens(job);
+            var actionResult = Check(job.Profile, job.Accounts, CheckLevel.Job);
             if (!actionResult)
                 return actionResult;
 
@@ -49,6 +50,8 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
         protected abstract string PasswordText { get; }
 
-        public abstract ActionResult Check(ConversionProfile profile, Accounts accounts);
+        public abstract void ApplyPreSpecifiedTokens(Job job);
+
+        public abstract ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel);
     }
 }

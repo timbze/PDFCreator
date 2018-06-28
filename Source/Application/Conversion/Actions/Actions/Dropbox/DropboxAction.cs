@@ -1,7 +1,9 @@
-﻿using pdfforge.PDFCreator.Conversion.ActionsInterface;
+﻿using NLog;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Tokens;
 using System.Linq;
 
@@ -9,6 +11,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
 {
     public class DropboxAction : IAction, ICheckable
     {
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IDropboxService _dropboxService;
 
         public DropboxAction(IDropboxService dropboxService)
@@ -18,9 +21,15 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
 
         public ActionResult ProcessJob(Job job)
         {
+            _logger.Debug("Launched Dropbox Action");
+
+            ApplyPreSpecifiedTokens(job);
+            var actionResult = Check(job.Profile, job.Accounts, CheckLevel.Job);
+            if (!actionResult)
+                return actionResult;
+
             var sharedLink = job.Profile.DropboxSettings.CreateShareLink;
             var shareFolder = job.TokenReplacer.ReplaceTokens(job.Profile.DropboxSettings.SharedFolder);
-            shareFolder = shareFolder.Replace("\\", "/");
 
             var currentDropBoxAccount = job.Accounts.GetDropboxAccount(job.Profile);
             if (sharedLink)
@@ -64,24 +73,34 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions.Dropbox
             return profile.DropboxSettings.Enabled;
         }
 
-        public ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public void ApplyPreSpecifiedTokens(Job job)
         {
-            if (!profile.DropboxSettings.Enabled)
+            job.Profile.DropboxSettings.SharedFolder = job.TokenReplacer.ReplaceTokens(job.Profile.DropboxSettings.SharedFolder)
+                                                                        .Replace("\\", "/");
+        }
+
+        public ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel)
+        {
+            if (!IsEnabled(profile))
                 return new ActionResult();
+
+            var isJobLevelCheck = checkLevel == CheckLevel.Job;
 
             var account = accounts.GetDropboxAccount(profile);
 
             if (account == null)
                 return new ActionResult(ErrorCode.Dropbox_AccountNotSpecified);
 
-            var listOfInvalidCharacthers = new[] { ':', '?', '*', '|', '"', '*', '.' };
-            if (profile.DropboxSettings.SharedFolder.IndexOfAny(listOfInvalidCharacthers) != -1)
-                return new ActionResult(ErrorCode.Dropbox_InvalidFolderName);
-
             var accessToken = account.AccessToken;
 
             if (string.IsNullOrEmpty(accessToken))
                 return new ActionResult(ErrorCode.Dropbox_AccessTokenNotSpecified);
+
+            if (!isJobLevelCheck && TokenIdentifier.ContainsTokens(profile.DropboxSettings.SharedFolder))
+                return new ActionResult();
+
+            if (!ValidName.IsValidDropboxFolder(profile.DropboxSettings.SharedFolder))
+                return new ActionResult(ErrorCode.Dropbox_InvalidFolderName);
 
             return new ActionResult();
         }

@@ -70,6 +70,10 @@
   </Target>
   -->
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Utilities.csproj">
+      <Project>{EA29538B-89A5-4FB3-AE0F-5E2370E852F8}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Jobs\Jobs.csproj">
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>

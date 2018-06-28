@@ -6,6 +6,7 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Ftp;
 using pdfforge.PDFCreator.Utilities.IO;
+using pdfforge.PDFCreator.Utilities.Tokens;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -26,11 +27,19 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             _pathUtil = pathUtil;
         }
 
-        public override ActionResult Check(ConversionProfile profile, Accounts accounts)
+        public override void ApplyPreSpecifiedTokens(Job job)
+        {
+            job.Profile.Ftp.Directory = job.TokenReplacer.ReplaceTokens(job.Profile.Ftp.Directory);
+            job.Profile.Ftp.Directory = ValidName.MakeValidFtpPath(job.Profile.Ftp.Directory);
+        }
+
+        public override ActionResult Check(ConversionProfile profile, Accounts accounts, CheckLevel checkLevel)
         {
             var actionResult = new ActionResult();
             if (!IsEnabled(profile))
                 return actionResult;
+
+            var isFinal = checkLevel == CheckLevel.Job;
 
             var ftpAccount = accounts.GetFtpAccount(profile);
             if (ftpAccount == null)
@@ -58,6 +67,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 Logger.Error("Automatic saving without ftp password.");
                 actionResult.Add(ErrorCode.Ftp_AutoSaveWithoutPassword);
             }
+
+            if (!isFinal && TokenIdentifier.ContainsTokens(profile.Ftp.Directory))
+                return actionResult;
+
+            if (!ValidName.IsValidFtpPath(profile.Ftp.Directory))
+                actionResult.Add(ErrorCode.FtpDirectory_InvalidFtpPath);
 
             return actionResult;
         }
@@ -102,10 +117,10 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             }
 
             var fullDirectory = job.TokenReplacer.ReplaceTokens(job.Profile.Ftp.Directory).Trim();
-            if (!IsValidPath(fullDirectory))
+            if (!ValidName.IsValidFtpPath(fullDirectory))
             {
                 Logger.Warn("Directory contains invalid characters \"" + fullDirectory + "\"");
-                fullDirectory = MakeValidPath(fullDirectory);
+                fullDirectory = ValidName.MakeValidFtpPath(fullDirectory);
             }
 
             Logger.Debug("Directory on ftp server: " + fullDirectory);
@@ -135,7 +150,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             foreach (var file in job.OutputFiles)
             {
                 var targetFile = Path.GetFileName(file);
-                targetFile = MakeValidPath(targetFile);
+                targetFile = ValidName.MakeValidFtpPath(targetFile);
                 if (job.Profile.Ftp.EnsureUniqueFilenames)
                 {
                     Logger.Debug("Make unique filename for " + targetFile);
@@ -167,22 +182,6 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
             ftpConnection.Close();
             return new ActionResult();
-        }
-
-        private bool IsValidPath(string path)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            return ValidName.IsValidFtpPath(path);
-        }
-
-        private string MakeValidPath(string path)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            return ValidName.MakeValidFtpPath(path);
         }
 
         protected override void SetPassword(Job job, string password)

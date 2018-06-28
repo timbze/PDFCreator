@@ -44,6 +44,9 @@
     <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\..\..\packages\test\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>

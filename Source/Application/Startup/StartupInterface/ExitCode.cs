@@ -11,6 +11,7 @@
         LicenseInvalidAndNotReactivated = 22,
         LicenseInvalidAfterReactivation = 23,
         LicenseInvalidAndHiddenWithGpo = 24,
+        TrialExpired = 25,
         SpoolFolderInaccessible = 31,
         SpoolerNotRunning = 32,
         InvalidSettingsFile = 41,

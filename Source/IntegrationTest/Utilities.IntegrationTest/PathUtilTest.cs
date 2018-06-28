@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Utilities;
+using Ploeh.AutoFixture;
 using System;
 using SystemWrapper.IO;
 
@@ -9,9 +10,13 @@ namespace PDFCreator.Utilities.IntegrationTest
     [TestFixture]
     internal class PathUtilTest
     {
+        private IPathUtil _pathUtil;
+        private IFixture _fixture;
+
         [SetUp]
         public void SetUp()
         {
+            _fixture = new Fixture();
             _pathUtil = new PathUtil(new PathWrap(), new DirectoryWrap());
         }
 
@@ -20,8 +25,6 @@ namespace PDFCreator.Utilities.IntegrationTest
         {
             TempFileHelper.CleanUp();
         }
-
-        private IPathUtil _pathUtil;
 
         [TestCase(@"C:\Test.txt")]
         [TestCase(@"A:\Test.txt")]
@@ -165,6 +168,46 @@ namespace PDFCreator.Utilities.IntegrationTest
             var file = folder + "\\test.txt";
 
             Assert.AreEqual(folder, _pathUtil.GetLongDirectoryName(file));
+        }
+
+        [Test]
+        public void IsValidRootedPath_PathTooLong_ReturnsFalse()
+        {
+            var path = "C:\\" + string.Join(string.Empty, _fixture.CreateMany<string>(10)) + ".pdf";
+
+            var result = _pathUtil.IsValidRootedPath(path);
+
+            Assert.IsFalse(result, "Expected '" + path + "' to be too long.");
+        }
+
+        [Test]
+        public void IsValidRootedPath_PathWithIllegalChars_ReturnsFalse()
+        {
+            var path = "C:\\||**..**.pdf";
+
+            var result = _pathUtil.IsValidRootedPath(path);
+
+            Assert.IsFalse(result, "Expected '" + path + "' to contain illegal characters.");
+        }
+
+        [Test]
+        public void IsValidRootedPath_PathCausesNotSupportedException_ReturnsFalse()
+        {
+            var path = "C:\\OhNo:ThisPahtIsNotSupported.pdf";
+
+            var result = _pathUtil.IsValidRootedPath(path);
+
+            Assert.IsFalse(result, "Expected '" + path + "' to cause a NotSupportedException.");
+        }
+
+        [Test]
+        public void IsValidRootedPath_PathStartsWithCorrectSyntaxAndLetter_ReturnsTrue()
+        {
+            var path = "C:\\ThisPahtIsCorrect.pdf";
+
+            var result = _pathUtil.IsValidRootedPath(path);
+
+            Assert.IsTrue(result, "Expected '" + path + "' to be valid.");
         }
     }
 }

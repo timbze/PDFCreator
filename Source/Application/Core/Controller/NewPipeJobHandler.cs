@@ -12,7 +12,7 @@ namespace pdfforge.PDFCreator.Core.Controller
 {
     public class NewPipeJobHandler : IPipeMessageHandler
     {
-        private readonly IFileConversionHandler _fileConversionHandler;
+        private readonly IFileConversionAssistant _fileConversionAssistant;
         private readonly IJobInfoManager _jobInfoManager;
         private readonly IThreadManager _threadManager;
         private readonly IJobInfoQueue _jobInfoQueue;
@@ -20,11 +20,11 @@ namespace pdfforge.PDFCreator.Core.Controller
         private readonly IMainWindowThreadLauncher _mainWindowThreadLauncher;
         private readonly ISettingsManager _settingsManager;
 
-        public NewPipeJobHandler(IJobInfoQueue jobInfoQueue, ISettingsManager settingsManager, IFileConversionHandler fileConversionHandler, IMainWindowThreadLauncher mainWindowThreadLauncher, IJobInfoManager jobInfoManager, IThreadManager threadManager)
+        public NewPipeJobHandler(IJobInfoQueue jobInfoQueue, ISettingsManager settingsManager, IFileConversionAssistant fileConversionAssistant, IMainWindowThreadLauncher mainWindowThreadLauncher, IJobInfoManager jobInfoManager, IThreadManager threadManager)
         {
             _jobInfoQueue = jobInfoQueue;
             _settingsManager = settingsManager;
-            _fileConversionHandler = fileConversionHandler;
+            _fileConversionAssistant = fileConversionAssistant;
             _mainWindowThreadLauncher = mainWindowThreadLauncher;
             _jobInfoManager = jobInfoManager;
             _threadManager = threadManager;
@@ -56,7 +56,7 @@ namespace pdfforge.PDFCreator.Core.Controller
         {
             var droppedFiles = message.Split('|');
 
-            var threadStart = new ThreadStart(() => _fileConversionHandler.HandleFileList(droppedFiles));
+            var threadStart = new ThreadStart(() => _fileConversionAssistant.HandleFileList(droppedFiles));
 
             _threadManager.StartSynchronizedUiThread(threadStart, "PipeDragAndDrop");
         }

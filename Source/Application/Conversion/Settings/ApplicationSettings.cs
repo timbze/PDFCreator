@@ -26,6 +26,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		
 		public Accounts Accounts { get; set; } = new Accounts();
 		
+		public ObservableCollection<DefaultViewer> DefaultViewers { get; set; } = new ObservableCollection<DefaultViewer>();
 		public JobHistory JobHistory { get; set; } = new JobHistory();
 		
 		public ObservableCollection<PrinterMapping> PrinterMappings { get; set; } = new ObservableCollection<PrinterMapping>();
@@ -53,6 +54,18 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public void ReadValues(Data data, string path)
 		{
 			Accounts.ReadValues(data, path + @"Accounts\");
+			
+			try
+			{
+				int numClasses = int.Parse(data.GetValue(@"" + path + @"DefaultViewers\numClasses"));
+				for (int i = 0; i < numClasses; i++)
+				{
+					DefaultViewer tmp = new DefaultViewer();
+					tmp.ReadValues(data, @"" + path + @"DefaultViewers\" + i + @"\");
+					DefaultViewers.Add(tmp);
+				}
+			} catch {}
+			
 			JobHistory.ReadValues(data, path + @"JobHistory\");
 			
 			try
@@ -91,6 +104,14 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public void StoreValues(Data data, string path)
 		{
 			Accounts.StoreValues(data, path + @"Accounts\");
+			
+			for (int i = 0; i < DefaultViewers.Count; i++)
+			{
+				DefaultViewer tmp = DefaultViewers[i];
+				tmp.StoreValues(data, @"" + path + @"DefaultViewers\" + i + @"\");
+			}
+			data.SetValue(@"" + path + @"DefaultViewers\numClasses", DefaultViewers.Count.ToString());
+			
 			JobHistory.StoreValues(data, path + @"JobHistory\");
 			
 			for (int i = 0; i < PrinterMappings.Count; i++)
@@ -123,6 +144,13 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			ApplicationSettings copy = new ApplicationSettings();
 			
 			copy.Accounts = Accounts.Copy();
+			
+			copy.DefaultViewers = new ObservableCollection<DefaultViewer>();
+			for (int i = 0; i < DefaultViewers.Count; i++)
+			{
+				copy.DefaultViewers.Add(DefaultViewers[i].Copy());
+			}
+			
 			copy.JobHistory = JobHistory.Copy();
 			
 			copy.PrinterMappings = new ObservableCollection<PrinterMapping>();
@@ -156,6 +184,13 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			ApplicationSettings v = o as ApplicationSettings;
 			
 			if (!Accounts.Equals(v.Accounts)) return false;
+			
+			if (DefaultViewers.Count != v.DefaultViewers.Count) return false;
+			for (int i = 0; i < DefaultViewers.Count; i++)
+			{
+				if (!DefaultViewers[i].Equals(v.DefaultViewers[i])) return false;
+			}
+			
 			if (!JobHistory.Equals(v.JobHistory)) return false;
 			
 			if (PrinterMappings.Count != v.PrinterMappings.Count) return false;
@@ -189,6 +224,12 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			
 			sb.AppendLine("[Accounts]");
 			sb.AppendLine(Accounts.ToString());
+			
+			for (int i = 0; i < DefaultViewers.Count; i++)
+			{
+				sb.AppendLine(DefaultViewers.ToString());
+			}
+			
 			sb.AppendLine("[JobHistory]");
 			sb.AppendLine(JobHistory.ToString());
 			

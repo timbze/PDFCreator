@@ -34,6 +34,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 
             var accounts = new Accounts();
             var timeServerAccount = new TimeServerAccount();
+            timeServerAccount.Url = "http://timestamp.digicert.com";
             timeServerAccount.AccountId = "ExistingTimerServerAccountId";
             accounts.TimeServerAccounts.Add(timeServerAccount);
             _th.Job.Accounts = accounts;

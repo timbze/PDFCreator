@@ -1,13 +1,11 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Query;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Core.Services;
-using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
@@ -16,6 +14,7 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob;
+using pdfforge.PDFCreator.UI.Presentation.Workflow;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.IO;
@@ -23,9 +22,9 @@ using pdfforge.PDFCreator.Utilities.Threading;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using SystemInterface.IO;
+using SystemWrapper.IO;
 using Translatable;
 
 namespace Presentation.UnitTest.UserControls
@@ -38,26 +37,25 @@ namespace Presentation.UnitTest.UserControls
         private ConversionProfile _pngProfile;
         private IJobInfoQueue _jobInfoQueue;
         private IFileNameQuery _saveFileQuery;
-        private IProfileChecker _profileChecker;
         private UnitTestInteractionRequest _interactionRequest;
         private readonly PrintJobViewTranslation _translation = new PrintJobViewTranslation();
-        private readonly ErrorCodeInterpreter _errorCodeInterpreter = new ErrorCodeInterpreter(new TranslationFactory());
         private IFile _file;
         private static string _filepathFromSaveDialog = @"DirectoryFromSaveDialog\FilenameFromSaveDialog.pdf";
         private readonly string _folderFromSaveDialog = Path.GetDirectoryName(_filepathFromSaveDialog);
         private readonly string _filenameFromSaveDialog = Path.GetFileName(_filepathFromSaveDialog);
         private IPathUtil _pathUtil;
         private IDirectoryHelper _directoryHelper;
+        private IInteractiveProfileChecker _interactiveProfileChecker;
 
         [SetUp]
         public void Setup()
         {
             _settings = new PdfCreatorSettings(null);
             _jobInfoQueue = Substitute.For<IJobInfoQueue>();
-            _profileChecker = Substitute.For<IProfileChecker>();
             _interactionRequest = new UnitTestInteractionRequest();
             _file = Substitute.For<IFile>();
             _directoryHelper = Substitute.For<IDirectoryHelper>();
+            _interactiveProfileChecker = Substitute.For<IInteractiveProfileChecker>();
 
             _pdfProfile = new ConversionProfile
             {
@@ -90,9 +88,13 @@ namespace Presentation.UnitTest.UserControls
             _pathUtil.MAX_PATH.Returns(259);
             _pathUtil.GetLongDirectoryName(Arg.Any<string>()).Returns(x => Path.GetDirectoryName(x.Arg<string>()));
 
+            var pathUtil = new PathUtil(new PathWrap(), new DirectoryWrap()); //todo
+            _pathUtil.GetFileName(Arg.Any<string>()).Returns(s => pathUtil.GetFileName(s.Arg<string>()));
+            _pathUtil.Combine(Arg.Any<string>(), Arg.Any<string>()).Returns(s => pathUtil.Combine(s.ArgAt<string>(0), s.ArgAt<string>(1)));
+
             return new PrintJobViewModel(settingsProvider, new TranslationUpdater(new TranslationFactory(), new ThreadManager()),
-                _jobInfoQueue, _saveFileQuery, _interactionRequest, _profileChecker, _errorCodeInterpreter, new DesignTimeCommandLocator(),
-                null, null, null, _pathUtil, _file, null, null, _directoryHelper);
+                _jobInfoQueue, _saveFileQuery, _interactionRequest, new DesignTimeCommandLocator(),
+                null, null, null, _pathUtil, _file, null, null, _directoryHelper, _interactiveProfileChecker);
         }
 
         private Job BuildJob(ConversionProfile profile)
@@ -180,7 +182,6 @@ namespace Presentation.UnitTest.UserControls
         {
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(new ActionResult());
 
             vm.ExecuteWorkflowStep(job);
 
@@ -193,8 +194,8 @@ namespace Presentation.UnitTest.UserControls
             var eventWasRaised = false;
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
 
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(new ActionResult());
             vm.StepFinished += (sender, args) => eventWasRaised = true;
             vm.ExecuteWorkflowStep(job);
 
@@ -209,7 +210,7 @@ namespace Presentation.UnitTest.UserControls
             var expectedPassword = "PDF Owner Password";
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
             job.Profile.PdfSettings.Security.OwnerPassword = expectedPassword;
 
             vm.ExecuteWorkflowStep(job);
@@ -224,8 +225,8 @@ namespace Presentation.UnitTest.UserControls
             var expectedPassword = "PDF Owner Password";
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(new ActionResult());
             job.Profile.PdfSettings.Security.OwnerPassword = expectedPassword;
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
 
             vm.ExecuteWorkflowStep(job);
             vm.SaveCommand.Execute(null);
@@ -234,37 +235,10 @@ namespace Presentation.UnitTest.UserControls
         }
 
         [Test]
-        public void SaveCommand_Execute_JobProfileIsNotValid_NotifyUserWithCorrectMessageInteraction()
-        {
-            var vm = BuildViewModel();
-            var job = BuildJob(_pdfProfile);
-            var faultyResult = new ActionResult(ErrorCode.Ftp_NoAccount); //Random error code, to make the profile invalid
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(faultyResult);
-
-            vm.ExecuteWorkflowStep(job);
-            vm.SaveCommand.Execute(null);
-
-            var interaction = _interactionRequest.AssertWasRaised<MessageInteraction>();
-
-            Assert.AreEqual(_translation.DefectiveProfile, interaction?.Title, "interaction title");
-            var messageSb = new StringBuilder();
-            messageSb.AppendLine(_translation.GetProfileIsDefectiveMessage(job.Profile.Name, faultyResult));
-            messageSb.AppendLine();
-            messageSb.AppendLine(_errorCodeInterpreter.GetErrorText(faultyResult, true, "\u2022"));
-            messageSb.AppendLine(_translation.EditOrSelectNewProfile);
-            var message = messageSb.ToString();
-            Assert.AreEqual(message, interaction?.Text, "interaction text");
-            Assert.AreEqual(MessageOptions.OK, interaction?.Buttons, "interaction buttons");
-            Assert.AreEqual(MessageIcon.Exclamation, interaction?.Icon, "interaction icon");
-        }
-
-        [Test]
         public void SaveCommand_Execute_JobProfileIsNotValid_DoesNotCallFinishEvent()
         {
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
-            var faultyResult = new ActionResult(ErrorCode.Ftp_NoAccount); //Random error code, to make the profile invalid
-            _profileChecker.ProfileCheck(job.Profile, job.Accounts).Returns(faultyResult);
             vm.ExecuteWorkflowStep(job);
             var eventWasRaised = false;
             vm.StepFinished += (sender, args) => eventWasRaised = true;
@@ -280,7 +254,7 @@ namespace Presentation.UnitTest.UserControls
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -299,7 +273,7 @@ namespace Presentation.UnitTest.UserControls
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -318,7 +292,7 @@ namespace Presentation.UnitTest.UserControls
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -339,7 +313,7 @@ namespace Presentation.UnitTest.UserControls
             var vm = BuildViewModel();
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
 
             vm.BrowseFileCommand.Execute(null);
             _file.Exists(Arg.Any<string>()).Returns(true);
@@ -362,7 +336,7 @@ namespace Presentation.UnitTest.UserControls
             var vm = BuildViewModel(saveDialogResult: false); //User cancels SaveFileDialog
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
+            _interactiveProfileChecker.CheckWithErrorResultInOverlay(job).Returns(true);
             vm.BrowseFileCommand.Execute(null);
             _file.Exists(Arg.Any<string>()).Returns(true);
             vm.OutputFilename = _filenameFromSaveDialog;
@@ -386,7 +360,6 @@ namespace Presentation.UnitTest.UserControls
             vm.ExecuteWorkflowStep(job);
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
             _interactionRequest.Raise(Arg.Do<MessageInteraction>(i => i.Response = MessageResponse.No)); //User cancels
             vm.BrowseFileCommand.Execute(null);
             _file.Exists(Arg.Any<string>()).Returns(true);
@@ -406,7 +379,6 @@ namespace Presentation.UnitTest.UserControls
             vm.ExecuteWorkflowStep(job);
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
             _interactionRequest.Raise(Arg.Do<MessageInteraction>(i => i.Response = MessageResponse.Yes)); //User applies
             vm.BrowseFileCommand.Execute(null);
             _file.Exists(Arg.Any<string>()).Returns(true);
@@ -425,7 +397,6 @@ namespace Presentation.UnitTest.UserControls
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
 
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -452,7 +423,6 @@ namespace Presentation.UnitTest.UserControls
             var job = BuildJob(_pdfProfile);
             vm.ExecuteWorkflowStep(job);
 
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -479,7 +449,6 @@ namespace Presentation.UnitTest.UserControls
 
             vm.ExecuteWorkflowStep(job);
 
-            _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(new ActionResult());
             var stepFinishedRaised = false;
             vm.StepFinished += (sender, args) => stepFinishedRaised = true;
 
@@ -653,6 +622,32 @@ namespace Presentation.UnitTest.UserControls
 
             Assert.AreEqual(vm.OutputFormat, expectedOutputFormat);
             Assert.AreEqual(job.Profile.OutputFormat, expectedOutputFormat);
+        }
+
+        [Test]
+        public void SetOutputFormatCommand_FilenameWithoutKnownExtension_AddsExtension()
+        {
+            var vm = BuildViewModel();
+            var job = BuildJob(_pdfProfile);
+            vm.SetJob(job);
+            vm.OutputFilename = "Test.abc";
+
+            vm.SetOutputFormatCommand.Execute(OutputFormat.Jpeg);
+
+            Assert.AreEqual("Test.abc.jpg", vm.OutputFilename);
+        }
+
+        [Test]
+        public void SetOutputFormatCommand_FilenameWithKnownExtension_SetsExtension()
+        {
+            var vm = BuildViewModel();
+            var job = BuildJob(_pdfProfile);
+            vm.SetJob(job);
+            vm.OutputFilename = "Test.abc.pdf";
+
+            vm.SetOutputFormatCommand.Execute(OutputFormat.Jpeg);
+
+            Assert.AreEqual("Test.abc.jpg", vm.OutputFilename);
         }
 
         [Test]

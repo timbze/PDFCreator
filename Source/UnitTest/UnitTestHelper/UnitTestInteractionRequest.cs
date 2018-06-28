@@ -4,7 +4,6 @@ using pdfforge.Obsidian.Trigger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace pdfforge.PDFCreator.UnitTest.UnitTestHelper
@@ -72,14 +71,11 @@ namespace pdfforge.PDFCreator.UnitTest.UnitTestHelper
 
         public async Task<T> RaiseAsync<T>(T context) where T : IInteraction
         {
-            var resetEvent = new ManualResetEventSlim();
             var task = Task.Run(() =>
             {
-                resetEvent.Wait();
+                Raise(context);
                 return context;
             });
-
-            Raised?.Invoke(this, new InteractionRequestEventArgs(context, () => resetEvent.Set()));
 
             return await task;
         }

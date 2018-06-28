@@ -13,7 +13,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls
             DataContext = viewModel;
             InitializeComponent();
 
-            if (viewCustomization.ApplyCustomization && viewCustomization.CustomLogo != null)
+            if (viewCustomization.CustomizationEnabled && viewCustomization.CustomLogo != null)
             {
                 using (MemoryStream memory = new MemoryStream())
                 {

@@ -26,12 +26,13 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
         private readonly IPathUtil _pathUtil;
         private readonly ILastSaveDirectoryHelper _lastSaveDirectoryHelper;
         private readonly IDirectoryHelper _directoryHelper;
+        private readonly InteractiveProfileChecker _interactiveProfileChecker;
         private readonly ITargetFileNameComposer _targetFileNameComposer;
 
         public InteractiveWorkflow(IShellManager shellManager, ITargetFileNameComposer targetFileNameComposer, IJobDataUpdater jobDataUpdater,
                                    IPathSafe pathSafe, IErrorNotifier errorNotifier, ISettingsProvider settingsProvider,
                                    ICommandLocator commandLocator, IPathUtil pathUtil, ILastSaveDirectoryHelper lastSaveDirectoryHelper,
-                                   IDirectoryHelper directoryHelper
+                                   IDirectoryHelper directoryHelper, InteractiveProfileChecker interactiveProfileChecker
             )
         {
             _shellManager = shellManager;
@@ -42,6 +43,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             _pathUtil = pathUtil;
             _lastSaveDirectoryHelper = lastSaveDirectoryHelper;
             _directoryHelper = directoryHelper;
+            _interactiveProfileChecker = interactiveProfileChecker;
             _targetFileNameComposer = targetFileNameComposer;
 
             JobDataUpdater = jobDataUpdater;
@@ -57,7 +59,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             _lastSaveDirectoryHelper.Apply(job);
 
             if (job.Profile.SkipPrintDialog)
-                _commandLocator.GetCommand<SkipPrintDialogCommand>().Execute(job);
+            {
+                if (_interactiveProfileChecker.CheckWithErrorResultInWindow(job))
+                {
+                    _commandLocator.GetCommand<SkipPrintDialogCommand>().Execute(job);
+                }
+                else
+                {
+                    //Enable PrintJobView for invalid profiles
+                    job.Profile.SkipPrintDialog = false;
+                }
+            }
 
             _logger.Debug("Starting PrintJobWindow");
 
@@ -65,7 +77,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             {
                 _shellManager.ShowPrintJobShell(job);
                 _settingsProvider.Settings.ApplicationSettings.LastUsedProfileGuid = job.Profile.Guid;
-                
+
                 if (job.IsSuccessful)
                 {
                     _lastSaveDirectoryHelper.Save(job);
@@ -82,7 +94,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             var filePath = _targetFileNameComposer.ComposeTargetFileName(job);
 
             var folderName = _pathUtil.GetLongDirectoryName(filePath);
-            //_pathSafe.GetDirectoryName(filePath);
 
             if (string.IsNullOrEmpty(folderName))
                 folderName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

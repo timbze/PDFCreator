@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.ModifyTab.Stamp"
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
              xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
+             xmlns:controls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:DesignTimeStampUserControlViewModel, IsDesignTimeCreatable=True}"
              Style="{DynamicResource TabUserControl}"
@@ -33,17 +34,20 @@
                 <Label Grid.Row="1" Grid.Column="1" Margin="0 0 5 0" Content="{Binding Translation.StampFontLabelContent}" />
                 <Label Grid.Row="1" Grid.Column="2" Margin="0 0 5 0"
                        Content="{Binding Translation.StampFontColorLabelContent}" />
-                <TextBox Name="StampText"
-                         Grid.Row="2" Grid.Column="0" Margin="0 0 5 0"
-                         Text="{Binding CurrentProfile.Stamping.StampText, Mode=TwoWay}"
-                         TextChanged="TextBoxBase_OnTextChanged"
-                         VerticalAlignment="Center" />
-                <Button Grid.Row="2" Grid.Column="1" Margin="0 0 5 0" Content="{Binding FontButtonText}"
+                <StackPanel Grid.Row="2">
+                    <!--<Label Content="{Binding Translation.DropboxSharedFolderNameContent}" />-->
+                    <controls:TokenControl DataContext="{Binding StampUserControlTokenViewModel}" />
+                </StackPanel>
+                <Button Grid.Row="2" Grid.Column="1" Margin="5 0" Content="{Binding FontButtonText}"
                         Command="{Binding ChooseStampFont}" Width="150"
-                        Style="{DynamicResource LightGreyButton}" />
+                        Style="{DynamicResource LightGreyButton}"
+                        VerticalAlignment="Top"
+                        MinHeight="38" />
                 <Button Grid.Row="2" Grid.Column="2"
                         Command="{Binding ChooseStampColor}"
-                        Style="{DynamicResource LightGreyButton}">
+                        Style="{DynamicResource LightGreyButton}"
+                        VerticalAlignment="Top"
+                        MinHeight="38">
                     <Rectangle Height="16" Width="32">
                         <Rectangle.Fill>
                             <SolidColorBrush

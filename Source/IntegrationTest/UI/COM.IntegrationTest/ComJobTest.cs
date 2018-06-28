@@ -7,7 +7,6 @@ using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Printing;
 using pdfforge.PDFCreator.Core.Printing.Port;
 using pdfforge.PDFCreator.Core.Printing.Printer;
-using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -52,7 +51,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 
             var settingsLoader = new SettingsLoader(translationHelper, Substitute.For<ISettingsMover>(), installationPathProvider, Substitute.For<IPrinterHelper>());
 
-            var settingsManager = new SettingsManager(settingsProvider, settingsLoader, installationPathProvider, new VersionHelper(Assembly.GetExecutingAssembly()), new List<IFirstTimeCommand>(), Substitute.For<ICommandLocator>());
+            var settingsManager = new SettingsManager(settingsProvider, settingsLoader, installationPathProvider, new VersionHelper(Assembly.GetExecutingAssembly()), new List<IFirstTimeCommand>());
             settingsManager.LoadAllSettings();
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());

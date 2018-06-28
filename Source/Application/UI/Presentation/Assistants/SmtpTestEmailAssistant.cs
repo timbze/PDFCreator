@@ -1,6 +1,7 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.Obsidian.Trigger;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.ActionsInterface;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
@@ -76,30 +77,30 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
 
             currentProfile.AutoSave.Enabled = false;
 
-            var actionResult = _smtpMailAction.Check(currentProfile, accounts);
-
-            if (!actionResult.IsSuccess)
-            {
-                DisplayErrorMessage(actionResult);
-                return;
-            }
-
             var jobTranslations = new JobTranslations();
             jobTranslations.EmailSignature = _mailSignatureHelper.ComposeMailSignature();
 
-            var testFile = _path.Combine(_path.GetTempPath(), _translation.AttachmentFile + ".pdf");
-            _file.WriteAllText(testFile, @"PDFCreator", Encoding.GetEncoding("Unicode"));
+            var job = CreateJob(jobTranslations, currentProfile, accounts);
 
-            var job = CreateJob(jobTranslations, currentProfile, accounts, testFile);
+            _smtpMailAction.ApplyPreSpecifiedTokens(job);
+            var result = _smtpMailAction.Check(job.Profile, job.Accounts, CheckLevel.Job);
+            if (!result)
+            {
+                DisplayResult(result, job);
+                return;
+            }
 
-            var success = TrySetJobPasswords(job, profile);
-            if (!success)
+            if (!TrySetJobPasswords(job, profile))
                 return;
 
-            actionResult = _smtpMailAction.ProcessJob(job);
+            var testFile = _path.Combine(_path.GetTempPath(), _translation.AttachmentFile + ".pdf");
+            _file.WriteAllText(testFile, @"PDFCreator", Encoding.GetEncoding("Unicode"));
+            job.OutputFiles.Add(testFile);
+
+            result = _smtpMailAction.ProcessJob(job);
+            DisplayResult(result, job);
 
             _file.Delete(testFile);
-            DisplayResult(actionResult, job);
         }
 
         private bool TrySetJobPasswords(Job job, ConversionProfile profile)
@@ -135,13 +136,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             return true;
         }
 
-        private Job CreateJob(JobTranslations jobTranslations, ConversionProfile currentProfile, Accounts accounts, string outputFile)
+        private Job CreateJob(JobTranslations jobTranslations, ConversionProfile currentProfile, Accounts accounts)
         {
             var jobInfo = new JobInfo();
             var job = new Job(jobInfo, currentProfile, jobTranslations, accounts);
             job.JobInfo.Metadata = new Metadata();
             job.JobInfo.SourceFiles.Add(new SourceFileInfo { Filename = "test.ps" });
-            job.OutputFiles.Add(outputFile);
             job.TokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
             return job;

@@ -118,7 +118,7 @@
                 </Grid>
 
                 <DockPanel Height="30" HorizontalAlignment="Center" LastChildFill="False" Margin="0 10"
-                           Visibility="{Binding IsCheckingLicense, Converter={StaticResource BoolToVisibilityConverter}}">
+                           Visibility="{Binding OnlineActivationAsyncCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Viewbox DockPanel.Dock="Left">
                         <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Center"  />
                     </Viewbox>
@@ -133,14 +133,14 @@
                                        Text="{Binding Translation.ManageLicenses}" />
                         </StackPanel>
                     </Button>
-                    <Button Command="{Binding OnlineActivationCommand}" Style="{DynamicResource LightGreyButton}" Margin="0 0 15 0"  MinWidth="160" FontSize="15"
+                    <Button Command="{Binding OnlineActivationAsyncCommand}" Style="{DynamicResource LightGreyButton}" Margin="0 0 15 0"  MinWidth="160" FontSize="15"
                                     Visibility="{Binding ShowOnlineActivation, Converter={StaticResource BoolToVisibilityConverter}}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center"
                                                Text="{Binding Translation.OnlineActivation}" />
                         </StackPanel>
                     </Button>
-                    <Button Command="{Binding OfflineActivationCommand}" Style="{DynamicResource LightGreyButton}" Margin="0 0 0 0"  MinWidth="160" FontSize="15"
+                    <Button Command="{Binding OfflineActivationAsyncCommand}" Style="{DynamicResource LightGreyButton}" Margin="0 0 0 0"  MinWidth="160" FontSize="15"
                                     Visibility="{Binding ShowOfflineActivation, Converter={StaticResource BoolToVisibilityConverter}}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center"

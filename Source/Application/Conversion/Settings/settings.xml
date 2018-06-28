@@ -124,6 +124,21 @@
             </value>
           </classarray>
         </class>
+        <classarray name="DefaultViewer" propertyName="DefaultViewers" readonly="False" classtype="Class">
+          <comment />
+          <value name="IsActive" type="value" datatype="Bool" enumname="" defaultvalue="" islist="False">
+            <comment />
+          </value>
+          <value name="Parameters" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment />
+          </value>
+          <value name="Path" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment />
+          </value>
+          <value name="OutputFormat" type="value" datatype="Enum" enumname="OutputFormat" defaultvalue="OutputFormat.Pdf" islist="False">
+            <comment />
+          </value>
+        </classarray>
         <class name="JobHistory" propertyName="JobHistory" readonly="False" classtype="Class">
           <comment />
           <value name="Capacity" type="value" datatype="Int" enumname="" defaultvalue="30" islist="False">

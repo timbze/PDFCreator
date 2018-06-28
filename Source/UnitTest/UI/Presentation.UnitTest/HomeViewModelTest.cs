@@ -22,19 +22,19 @@ namespace Presentation.UnitTest
         public void Setup()
         {
             _interactionInvoker = Substitute.For<IInteractionInvoker>();
-            _fileConversionHandler = Substitute.For<IFileConversionHandler>();
+            _fileConversionAssistant = Substitute.For<IFileConversionAssistant>();
             var printerHelper = Substitute.For<IPrinterHelper>();
             printerHelper.GetApplicablePDFCreatorPrinter(Arg.Any<string>()).Returns("Some Default Printer");
             var settingsProvider = Substitute.For<ISettingsProvider>();
             var jobHistoryManager = Substitute.For<IJobHistoryManager>();
             var commandLocator = Substitute.For<ICommandLocator>();
 
-            HomeViewModel = new HomeViewModel(_interactionInvoker, _fileConversionHandler, new DesignTimeTranslationUpdater(), printerHelper,
+            HomeViewModel = new HomeViewModel(_interactionInvoker, _fileConversionAssistant, new DesignTimeTranslationUpdater(), printerHelper,
                 settingsProvider, jobHistoryManager, new InvokeImmediatelyDispatcher(), commandLocator);
         }
 
         private IInteractionInvoker _interactionInvoker;
-        private IFileConversionHandler _fileConversionHandler;
+        private IFileConversionAssistant _fileConversionAssistant;
 
         public HomeViewModel HomeViewModel { get; set; }
 
@@ -59,7 +59,7 @@ namespace Presentation.UnitTest
             HomeViewModel.ConvertFileCommand.Execute(null);
 
             _interactionInvoker.Received(1).Invoke(Arg.Any<OpenFileInteraction>());
-            _fileConversionHandler.Received(1).HandleFileList(Arg.Is<List<string>>(l => l.Single().Equals(selectedFile)));
+            _fileConversionAssistant.Received(1).HandleFileList(Arg.Is<List<string>>(l => l.Single().Equals(selectedFile)));
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Presentation.UnitTest
             HomeViewModel.ConvertFileCommand.Execute(null);
 
             _interactionInvoker.Received(1).Invoke(Arg.Any<OpenFileInteraction>());
-            _fileConversionHandler.DidNotReceiveWithAnyArgs().HandleFileList(Arg.Any<List<string>>());
+            _fileConversionAssistant.DidNotReceiveWithAnyArgs().HandleFileList(Arg.Any<List<string>>());
         }
     }
 }
