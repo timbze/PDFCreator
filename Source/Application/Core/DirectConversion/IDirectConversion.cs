@@ -7,6 +7,6 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
         ///     Create inf file from ps file.
         /// </summary>
         /// <returns>inf file in spool folder</returns>
-        string TransformToInfFile(string file, string printerName = "PDFCreator");
+        string TransformToInfFile(string file, string printerName = "PDFCreator", string profileParameter = "", string outputFileParameter = "");
     }
 }

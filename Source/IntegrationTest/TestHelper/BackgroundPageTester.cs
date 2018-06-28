@@ -12,11 +12,13 @@ namespace PDFCreator.TestUtilities
             BackgroundOnPage(job.OutputFiles[0], pageNumber);
         }
 
-        public static void BackgroundOnPage(string pdfFile, int pageNumber = 1)
+        private static void BackgroundOnPage(string pdfFile, int pageNumber = 1)
         {
-            var reader = new PdfReader(pdfFile);
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, pageNumber).Replace("\n", "").Replace(" ", "").Replace("1", "");
-            Assert.IsTrue(pageText.Contains("Background"), "Did not add background to " + pageNumber + ". page of document.");
+            using (var reader = new PdfReader(pdfFile))
+            {
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, pageNumber).Replace("\n", "").Replace(" ", "").Replace("1", "");
+                Assert.IsTrue(pageText.Contains("Background"), "Did not add background to " + pageNumber + ". page of document.");
+            }
         }
     }
 }

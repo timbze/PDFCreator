@@ -1,7 +1,9 @@
-﻿NUnit
-NSubstitute
-DataStorage
+﻿DataStorage
 SystemInterface
-RhinoMocks
-AutoFixture
-AutoFixture.AutoNSubstitute
+
+group test
+    AutoFixture
+    AutoFixture.AutoNSubstitute
+    NSubstitute
+    NUnit
+    RhinoMocks

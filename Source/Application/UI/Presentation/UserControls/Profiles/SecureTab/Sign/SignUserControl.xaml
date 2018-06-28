@@ -9,8 +9,9 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
     xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+    xmlns:controls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
+    d:DesignHeight="500" d:DesignWidth="500"
     d:DataContext="{d:DesignInstance designTime:DesignTimeSignUserControlViewModel, IsDesignTimeCreatable=True}"
     Style="{DynamicResource TabUserControl}"
     help:HelpProvider.HelpTopic="PdfSignature">
@@ -20,13 +21,15 @@
                 <ResourceDictionary Source="../../../../Styles/LightGreyButton.xaml" />
                 <ResourceDictionary Source="../../../../Styles/PDFCreatorIcons.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <converter:EqualsNullConverter x:Key="NullToVisibilityConverter" EqualValue="Visible" NotEqualValue="Collapsed" />
             <converter:EqualsNullConverter x:Key="NullToEnabledConverter" EqualValue="false" NotEqualValue="true" />
-
+            <converter:BoolToVisibilityConverter x:Key="VisibleWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
+            <converter:BoolToVisibilityConverter x:Key="CollapsedWhenTrue" TrueValue="Collapsed" FalseValue="Visible" />
+            <converter:BoolNegationConverter x:Key="BoolNegationConverter" />
+            <converter:StringIsNullOrWhiteSpaceConverter x:Key="CollapedWhenNullOrWhiteSpace" TrueValue="Collapsed" FalseValue="Visible" />
+            <converter:StringIsNullOrWhiteSpaceConverter x:Key="FalseWhenNullOrWhiteSpace" TrueValue="false" FalseValue="true" />
             <system:Boolean x:Key="True">True</system:Boolean>
             <system:Boolean x:Key="False">False</system:Boolean>
-            <converter:StringIsNullOrWhiteSpaceToBoolConverter x:Key="StringIsNullOrWhiteSpaceToBoolConverter" />
             <converter:AreEqualConverter Reference="{x:Static enums:SignaturePage.CustomPage}"
                                      EqualValue="{StaticResource True}" NotEqualValue="{StaticResource False}"
                                      x:Key="SignaturePageIsCustomPageConverter" />
@@ -38,29 +41,58 @@
                 <StackPanel IsEnabled="{Binding ElementName=SignatureCheckBox, Path=IsChecked}">
                     <Label Content="{Binding Translation.CertificateFileLabel}" />
                     <DockPanel>
-                        <Button DockPanel.Dock="Right" Margin="5 0 0 0"
-                            Padding="10,0,10,0" Command="{Binding SignaturePasswordCommand}"
-                            IsEnabled="{Binding Text, ElementName=CertificationFileTextBox, Converter={StaticResource StringIsNullOrWhiteSpaceToBoolConverter}}"
-                            Content="{Binding Translation.SignaturePasswordButton}" />
                         <Button DockPanel.Dock="Right" Width="25" Margin="5 0 0 0"
                             Padding="0" Command="{Binding ChooseCertificateFileCommand}">
                             ...
                         </Button>
-                        <TextBox DockPanel.Dock="Left"
-                             Text="{Binding Signature.CertificateFile, Mode=TwoWay}" />
+                        <TextBox DockPanel.Dock="Left" Name="CertificationFileTextBox"
+                             Text="{Binding CertificateFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
                     </DockPanel>
-                    <UniformGrid Columns="3" Margin="0 5 0 0">
+                    <StackPanel IsEnabled="{Binding Text, ElementName=CertificationFileTextBox, Converter={StaticResource FalseWhenNullOrWhiteSpace}}">
+                        <StackPanel IsEnabled="{Binding AskForPasswordLater, Converter={StaticResource BoolNegationConverter}}">
+                            <Label>
+                                <TextBlock Text="{Binding Translation.CertificatePasswordLabel}" />
+                            </Label>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Visibility="{Binding AskForPasswordLater, Converter={StaticResource CollapsedWhenTrue}}">
+                                    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Visibility="{Binding Text, ElementName=CertificationFileTextBox, Converter={StaticResource CollapedWhenNullOrWhiteSpace}}">
+                                        <Viewbox Stretch="Uniform" Width="18"
+                                     Visibility="{Binding CertificatePasswordIsValid, Converter={StaticResource VisibleWhenTrue}}">
+                                            <Path Data="{DynamicResource AcceptIconPath}" Fill="#6fae7f" />
+                                        </Viewbox>
+                                        <Viewbox Stretch="Uniform" Width="18"
+                                     Visibility="{Binding CertificatePasswordIsValid, Converter={StaticResource CollapsedWhenTrue}}">
+                                            <Path Data="{DynamicResource WarningIconPath}" Fill="#db3232" />
+                                        </Viewbox>
+                                    </StackPanel>
+                                </StackPanel>
+                                <PasswordBox
+                                Name="CertificatePasswordBox"
+                                PasswordChar="•"
+                                Visibility="{Binding ElementName=SignaturePasswordLabel, Path=Visibility}"
+                                PasswordChanged="PwbSignaturePasswordChanged">
+                                </PasswordBox>
+                            </DockPanel>
+                        </StackPanel>
+                        <CheckBox Margin="0 5 0 0" IsChecked="{Binding AskForPasswordLater}" DockPanel.Dock="Bottom">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Translation.DontSavePassword}" />
+                        </CheckBox>
+                    </StackPanel>
+                    <UniformGrid Columns="3" Margin="0 10 0 0">
                         <DockPanel>
                             <Label DockPanel.Dock="Top" Content="{Binding Translation.ReasonLabel}" />
-                            <TextBox Text="{Binding CurrentProfile.PdfSettings.Signature.SignReason}" />
+                            <controls:TokenControl DataContext="{Binding SignReasonTokenViewModel}"></controls:TokenControl>
                         </DockPanel>
                         <DockPanel Margin="10 0 0 0">
                             <Label DockPanel.Dock="Top" Content="{Binding Translation.ContactLabel}" />
-                            <TextBox Text="{Binding CurrentProfile.PdfSettings.Signature.SignContact}" />
+                            <controls:TokenControl DataContext="{Binding SignContactTokenViewModel}"></controls:TokenControl>
                         </DockPanel>
                         <DockPanel Margin="10 0 0 0">
                             <Label DockPanel.Dock="Top" Content="{Binding Translation.LocationLabel}" />
-                            <TextBox Text="{Binding CurrentProfile.PdfSettings.Signature.SignLocation}" />
+                            <controls:TokenControl DataContext="{Binding SignLocationTokenViewModel}"></controls:TokenControl>
                         </DockPanel>
                     </UniformGrid>
                     <CheckBox Margin="0,10,0,0"
@@ -119,6 +151,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition />

@@ -1,6 +1,8 @@
-﻿NUnit
-DataStorage
-NSubstitute
+﻿DataStorage
 Obsidian
 SimpleInjector
 Translatable
+
+group test
+    NSubstitute
+    NUnit

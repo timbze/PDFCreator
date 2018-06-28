@@ -1,8 +1,10 @@
-﻿NUnit
-NSubstitute
-iTextSharp
+﻿iTextSharp
 SystemWrapper
 SystemInterface
 DataStorage
 SimpleInjector
-RhinoMocks
+
+group test
+    NSubstitute
+    NUnit
+    RhinoMocks

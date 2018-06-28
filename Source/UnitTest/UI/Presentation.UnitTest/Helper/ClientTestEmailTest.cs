@@ -7,6 +7,7 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using System;
 using System.Linq;
 using SystemInterface.IO;
@@ -66,8 +67,8 @@ namespace Presentation.UnitTest.Helper
 
             _clientTestEmail.SendTestEmail(_emailClientSettings);
 
-            Assert.AreEqual(1, currentEmail.To.Count, "Wrong number of recipients");
-            Assert.IsTrue(currentEmail.To.Contains("recipient"), "Wrong recipient");
+            Assert.AreEqual(1, currentEmail.Recipients.Count, "Wrong number of recipients");
+            Assert.IsTrue(currentEmail.Recipients.Any(r => r.Address == "recipient"), "Wrong recipient");
             Assert.AreEqual("content", currentEmail.Body, "Wrong mail body");
             Assert.AreEqual("subject", currentEmail.Subject, "Wrong subject");
             Assert.IsTrue(currentEmail.Html, "Wrong Html setting");
@@ -107,10 +108,10 @@ namespace Presentation.UnitTest.Helper
 
             _clientTestEmail.SendTestEmail(_emailClientSettings);
 
-            Assert.AreEqual(3, currentEmail.To.Count, "Wrong number of recipients");
-            Assert.IsTrue(currentEmail.To.Contains("recipient1@pdffrog.quak"), "Missing first recipient");
-            Assert.IsTrue(currentEmail.To.Contains("recipient2@pdffrog.quak"), "Missing second recipient");
-            Assert.IsTrue(currentEmail.To.Contains("recipient3@pdffrog.quak"), "Missing third recipient");
+            Assert.AreEqual(3, currentEmail.Recipients.Count, "Wrong number of recipients");
+            Assert.IsTrue(currentEmail.Recipients.Any(r => r.Address == "recipient1@pdffrog.quak"), "Missing first recipient");
+            Assert.IsTrue(currentEmail.Recipients.Any(r => r.Address == "recipient2@pdffrog.quak"), "Missing second recipient");
+            Assert.IsTrue(currentEmail.Recipients.Any(r => r.Address == "recipient3@pdffrog.quak"), "Missing third recipient");
         }
 
         [Test]

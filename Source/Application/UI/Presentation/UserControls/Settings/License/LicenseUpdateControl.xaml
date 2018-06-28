@@ -8,6 +8,6 @@
              d:DesignHeight="300" d:DesignWidth="300"
              help:HelpProvider.HelpTopic="AppLicense">
 
-    <StackPanel Name="PartContent">
+    <StackPanel Name="PartContent" Margin="0 0 0 30">
     </StackPanel>
 </UserControl>

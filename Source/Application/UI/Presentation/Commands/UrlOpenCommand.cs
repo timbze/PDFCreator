@@ -7,21 +7,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.Commands
     public class UrlOpenCommand : IInitializedCommand<string>
     {
         private readonly IProcessStarter _processStarter;
-        private string _url;
+        protected string Url { get; set; }
 
         public UrlOpenCommand(IProcessStarter processStarter)
         {
             _processStarter = processStarter;
         }
 
-        public bool CanExecute(object parameter)
+        public virtual bool CanExecute(object parameter)
         {
             return true;
         }
 
         public void Execute(object parameter)
         {
-            var url = parameter as string ?? _url;
+            var url = parameter as string ?? Url;
 
             try
             {
@@ -35,7 +35,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Commands
 
         public void Init(string parameter)
         {
-            _url = parameter;
+            Url = parameter;
         }
 
 #pragma warning disable CS0067

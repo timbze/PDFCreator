@@ -148,16 +148,5 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			return base.GetHashCode();
 		}
 		
-// Custom Code starts here
-// START_CUSTOM_SECTION:GENERAL
-// END_CUSTOM_SECTION:GENERAL
-// Custom Code ends here. Do not edit below
-		
-// Custom Code starts here
-// START_CUSTOM_SECTION:INCLUDES
-
-// END_CUSTOM_SECTION:INCLUDES
-// Custom Code ends here. Do not edit below
-		
 	}
 }

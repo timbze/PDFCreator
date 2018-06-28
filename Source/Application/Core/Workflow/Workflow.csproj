@@ -40,9 +40,6 @@
     <AssemblyOriginatorKeyFile>pdfforge.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Obsidian">
-      <HintPath>..\..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -56,6 +53,7 @@
     <Compile Include="IJobInfoQueue.cs" />
     <Compile Include="IMailSignatureHelper.cs" />
     <Compile Include="IManagePrintJobExceptionHandler.cs" />
+    <Compile Include="INotificationService.cs" />
     <Compile Include="JobCleanUp.cs" />
     <Compile Include="JobBuilder.cs" />
     <Compile Include="JobPasswordHelper.cs" />
@@ -89,6 +87,10 @@
     <ProjectReference Include="..\..\Conversion\Processing\PdfProcessingInterface\PdfProcessingInterface.csproj">
       <Project>{f7126398-bb4f-49af-ad90-0f23d2eddcfe}</Project>
       <Name>PdfProcessingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{c6058628-42b2-4cf6-a4be-622ad45f6e42}</Project>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\SettingsManagement\SettingsManagement.csproj">
       <Project>{9b31d8cd-4e32-4925-b696-7d1cf02f0142}</Project>

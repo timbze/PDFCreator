@@ -25,10 +25,15 @@ namespace Presentation.UnitTest
         [SetUp]
         public void Setup()
         {
-            var commandLocator = Substitute.For<ICommandLocator>();
             _navigateMainTabCommand = Substitute.For<IMacroCommand>();
-            commandLocator.GetMacroCommand().Returns(_navigateMainTabCommand);
-            _navigateMainTabCommand.AddCommand<ICommand>().Returns(_navigateMainTabCommand);
+
+            var macroBuilder = Substitute.For<IMacroCommandBuilder>();
+            macroBuilder.AddCommand<ICommand>().Returns(macroBuilder);
+            macroBuilder.Build().Returns(_navigateMainTabCommand);
+
+            var commandLocator = Substitute.For<ICommandLocator>();
+            commandLocator.CreateMacroCommand().Returns(macroBuilder);
+
             _eventAggregator = new EventAggregator();
             _updateAssistant = Substitute.For<IUpdateAssistant>();
 

@@ -40,6 +40,13 @@
             FillRule="NonZero" />
     </GeometryGroup>
 
+    <GeometryGroup x:Key="AcceptHookPath" x:Shared="False">
+        <EllipseGeometry RadiusX="22" RadiusY="22" Center="22 22"></EllipseGeometry>
+        <PathGeometry
+            Figures="m 30.90625 13.75 -11.21875 13.46875 -5.5 -5.53125 -2.84375 2.84375 7.0625 7.0625 1.5625 1.5625 L 21.375 31.46875 34 16.3125 30.90625 13.75 z"
+            FillRule="EvenOdd" />
+    </GeometryGroup>
+
     <Viewbox x:Key="WarningIcon" Stretch="Uniform" x:Shared="False">
         <Canvas Width="10.49682" Height="9.1628255">
             <Path Fill="{DynamicResource WarningYellowBrush}">
@@ -61,13 +68,6 @@
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>
-        </Canvas>
-    </Viewbox>
-
-    <Viewbox x:Key="RightArrow">
-        <Canvas Width="176.604" Height="176.604">
-            <Ellipse Fill="{StaticResource TagForegroundBrush}" Margin="10" Width="146.604" Height="156.604" />
-            <Path Fill="{StaticResource TagBackgroundBrush}" Data="F1 M 118.369,108.859 L 82.763,129.416 L 82.763,117.721 L 98.113,108.859 L 133.719,88.302 L 98.113,67.745 L 82.763,58.883 L 82.763,47.188 L 118.369,67.745 L 153.975,88.302 L 118.369,108.859 Z M 22.629,93.366 L 22.629,83.238 L 99.221,83.238 L 99.221,93.366 L 22.629,93.366 Z M 88.302,0.000 C 39.534,0.000 0.000,39.534 0.000,88.302 C 0.000,137.070 39.534,176.604 88.302,176.604 C 137.070,176.604 176.604,137.070 176.604,88.302 C 176.604,39.534 137.070,0.000 88.302,0.000 Z" />
         </Canvas>
     </Viewbox>
 

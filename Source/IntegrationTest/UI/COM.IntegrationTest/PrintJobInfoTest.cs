@@ -20,7 +20,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class PrintJobInfoTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void CleanDependencies()
         {
             ComDependencyBuilder.ResetDependencies();

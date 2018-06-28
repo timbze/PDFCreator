@@ -3,34 +3,49 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
+using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.IO;
+using System.IO;
 using SystemInterface.IO;
 
 namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 {
     internal class AutoSaveOutputFileMoverTest
     {
+        private AutosaveOutputFileMover _autosaveOutputFileMover;
+        private IFile _file;
+        private IPathUtil _pathUtil;
         private Job _job;
         private string[] _singleTempOutputfile;
-        private string[] _multipleTempOutputFiles;
-        private string[] _multipleTempOutputFilesWithTwoDigits;
+        private IDirectoryHelper _directoryHelper;
 
         [SetUp]
         public void Setup()
         {
             var jobInfo = new JobInfo();
             _job = new Job(jobInfo, new ConversionProfile(), new JobTranslations(), new Accounts());
+            _job.OutputFilenameTemplate = @"X:\temp\test.pdf";
 
             _singleTempOutputfile = new[] { @"output1.pdf" };
-            _multipleTempOutputFiles = new[] { @"output1.png", @"output2.png", @"output3.png" };
-            _multipleTempOutputFilesWithTwoDigits = new[]
-            {
-                @"output1.png", @"output2.png", @"output3.png",
-                @"output4.png", @"output5.png", @"output6.png",
-                @"output7.png", @"output8.png", @"output9.png",
-                @"output10.png"
-            };
+
+            _file = Substitute.For<IFile>();
+            _file.Exists(Arg.Any<string>()).Returns(true);
+            _directoryHelper = Substitute.For<IDirectoryHelper>();
+
+            var path = Substitute.For<IPath>();
+
+            _pathUtil = new PathUtil(path, Substitute.For<IDirectory>());
+
+            _autosaveOutputFileMover = new AutosaveOutputFileMover(Substitute.For<IDirectory>(), _file, _pathUtil, _directoryHelper);
+        }
+
+        [Test]
+        public void MoveOutPutFiles_InvalidRootedPath_ThrowsAbortWorkflowException()
+        {
+            _job.OutputFilenameTemplate = @"test.pdf";
+            Assert.Throws<AbortWorkflowException>(() => _autosaveOutputFileMover.MoveOutputFiles(_job));
         }
 
         [Test]
@@ -38,30 +53,28 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         {
             var outputFile = _singleTempOutputfile[0];
 
-            var fileStub = Substitute.For<IFile>();
-            fileStub.Exists(outputFile).Returns(true);
-            fileStub.Exists(Arg.Is<string>(x => x != outputFile)).Returns(false);
+            _file.Exists(Arg.Is<string>(x => x != outputFile)).Returns(false);
 
-            var outputFileMover = BuildAutosaveFileMover(fileStub);
             _job.Profile.AutoSave.Enabled = true;
             _job.Profile.AutoSave.EnsureUniqueFilenames = true;
 
             _job.TempOutputFiles = _singleTempOutputfile;
 
-            outputFileMover.MoveOutputFiles(_job);
+            _autosaveOutputFileMover.MoveOutputFiles(_job);
 
             _job.TempOutputFiles = _singleTempOutputfile;
 
-            outputFileMover.MoveOutputFiles(_job);
+            _autosaveOutputFileMover.MoveOutputFiles(_job);
 
             Assert.AreNotEqual(outputFile, _job.OutputFiles[0], "EnsureUniqueFilename was not applied");
         }
 
-        private AutosaveOutputFileMover BuildAutosaveFileMover(IFile file)
+        [Test]
+        public void SingleFile_Calls_DirectoryHelper()
         {
-            var pathUtil = Substitute.For<IPathUtil>();
+            _autosaveOutputFileMover.MoveOutputFiles(_job);
 
-            return new AutosaveOutputFileMover(Substitute.For<IDirectory>(), file, pathUtil);
+            _directoryHelper.Received(1).CreateDirectory(Path.GetDirectoryName(_job.OutputFilenameTemplate));
         }
     }
 }

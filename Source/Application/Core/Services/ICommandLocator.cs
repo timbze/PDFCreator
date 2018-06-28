@@ -7,8 +7,8 @@ namespace pdfforge.PDFCreator.Core.Services
     {
         ICommand GetCommand<T>() where T : class, ICommand;
 
-        IMacroCommand GetMacroCommand();
-
         ICommand GetInitializedCommand<TCommand, TParameter>(TParameter parameter) where TCommand : class, IInitializedCommand<TParameter>;
+
+        IMacroCommandBuilder CreateMacroCommand();
     }
 }

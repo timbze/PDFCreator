@@ -27,6 +27,7 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
             }
             _logger.Debug("Ghostscript Version: " + gsVersion.Version + " loaded from " + gsVersion.ExePath);
             var ghostscript = new GhostScript(gsVersion);
+            ghostscript.Timeout = TimeSpan.FromMinutes(10);
 
             OutputDevice printingDevice = new PrintingDevice(job);
             ghostscript.Run(printingDevice, job.JobTempFolder);

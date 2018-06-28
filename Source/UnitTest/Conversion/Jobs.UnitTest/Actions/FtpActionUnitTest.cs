@@ -361,11 +361,14 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         }
 
         [Test]
-        public void ProcessValidJob_FtpOpenThrowsWin32ExceptionNativeErrorCode12014_CallFtpClose_ResultsAreEmpty()
+        public void ProcessValidJob_FtpOpenFailsWithWrongPassword_CallFtpClose_ResultsIsLoginError()
         {
+            // raise error for wrong password
             _ftpConnectionWrap.When(x => x.Open()).Do(x => { throw new Win32Exception(12014); });
+
             var result = _ftpAction.ProcessJob(_job);
-            Assert.AreEqual(0, result.Count);
+
+            Assert.IsTrue(result.Contains(PasswordAction_Login_Error));
             _ftpConnectionWrap.Received(1).Close();
         }
 

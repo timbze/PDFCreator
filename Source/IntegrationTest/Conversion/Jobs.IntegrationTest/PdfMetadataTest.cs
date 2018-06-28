@@ -37,13 +37,14 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 
             _th.RunGsJob();
 
-            var pdf = new PdfReader(_th.Job.OutputFiles[0]);
-
-            Assert.AreEqual(_th.Job.JobInfo.Metadata.Title, pdf.Info["Title"], "Wrong Title in Metadata");
-            Assert.AreEqual(_th.Job.JobInfo.Metadata.Subject, pdf.Info["Subject"], "Wrong Subject in Metadata");
-            Assert.AreEqual(_th.Job.JobInfo.Metadata.Keywords, pdf.Info["Keywords"], "Wrong Keywords in Metadata");
-            Assert.AreEqual(_th.Job.JobInfo.Metadata.Author, pdf.Info["Author"], "Wrong Author in Metadata");
-            Assert.AreEqual(_th.Job.JobInfo.Metadata.Producer, pdf.Info["Producer"], "Wrong Producer in Metadata");
+            using (var pdf = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                Assert.AreEqual(_th.Job.JobInfo.Metadata.Title, pdf.Info["Title"], "Wrong Title in Metadata");
+                Assert.AreEqual(_th.Job.JobInfo.Metadata.Subject, pdf.Info["Subject"], "Wrong Subject in Metadata");
+                Assert.AreEqual(_th.Job.JobInfo.Metadata.Keywords, pdf.Info["Keywords"], "Wrong Keywords in Metadata");
+                Assert.AreEqual(_th.Job.JobInfo.Metadata.Author, pdf.Info["Author"], "Wrong Author in Metadata");
+                Assert.AreEqual(_th.Job.JobInfo.Metadata.Producer, pdf.Info["Producer"], "Wrong Producer in Metadata");
+            }
         }
     }
 }

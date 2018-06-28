@@ -11,14 +11,16 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.Shared
     {
         public SettingControlsViewModel(ITranslationUpdater translationUpdater, ICommandLocator commandLocator):base(translationUpdater)
         {
-            SaveCommand = commandLocator.GetMacroCommand()
+            SaveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<CheckProfileCommand>()
                 .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .AddCommand<NavigateMainTabCommand>();
+                .AddCommand<NavigateMainTabCommand>()
+                .Build();
 
-            CancelCommand = commandLocator.GetMacroCommand()
+            CancelCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<CancelApplicationSettingsChangesCommand>()
-                .AddCommand<NavigateMainTabCommand>();
+                .AddCommand<NavigateMainTabCommand>()
+                .Build();
         }
 
         public ICommand SaveCommand { get; private set; }

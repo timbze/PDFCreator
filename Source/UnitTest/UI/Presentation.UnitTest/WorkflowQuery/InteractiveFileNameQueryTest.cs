@@ -1,15 +1,16 @@
-﻿using System;
-using System.IO;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.WorkflowQuery;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.IO;
 
 namespace Presentation.UnitTest.WorkflowQuery
 {
@@ -18,6 +19,7 @@ namespace Presentation.UnitTest.WorkflowQuery
     {
         private IInteractionInvoker _interactionInvoker;
         private IDirectoryHelper _directoryHelper;
+        private InteractiveWorkflowTranslation _translation;
         private string _someDirectory = @"X:\Test\Some Folder";
         private string _someFile = @"test.pdf";
         private string _someFilePath;
@@ -28,6 +30,7 @@ namespace Presentation.UnitTest.WorkflowQuery
             _interactionInvoker = Substitute.For<IInteractionInvoker>();
             _directoryHelper = Substitute.For<IDirectoryHelper>();
             _someFilePath = Path.Combine(_someDirectory, _someFile);
+            _translation = new InteractiveWorkflowTranslation();
         }
 
         private InteractiveFileNameQuery BuildFileNameQuery()
@@ -144,17 +147,37 @@ namespace Presentation.UnitTest.WorkflowQuery
         }
 
         [Test]
-        public void RetypeFileName_NotifiesUser()
+        public void RetypeFileName_RetypeReasonIsCopyError_NotifiesUserWithCopyErrorMessage()
         {
-            var translation = new InteractiveWorkflowTranslation();
             HandleMessageInteraction(interaction => interaction.Response = MessageResponse.OK);
             HandleSaveFileInteraction(interaction => interaction.Success = false);
+
             var query = BuildFileNameQuery();
 
-            query.RetypeFileName(_someFile, OutputFormat.Pdf);
+            query.RetypeFileNameQuery(_someFile, OutputFormat.Pdf, RetypeReason.CopyError);
 
-            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Text.Contains(translation.RetypeFilenameMessage)));
-            _interactionInvoker.Received().Invoke(Arg.Any<SaveFileInteraction>());
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Title.Equals("PDFCreator")));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Text.Contains(_someFile)));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Text.Equals(_translation.FormatCopyErrorMessage(_someFile))));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Buttons == MessageOptions.OK));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Icon == MessageIcon.Warning));
+        }
+
+        [Test]
+        public void RetypeFileName_RetypeReasonIsInvalidRootedPath_NotifiesUserWithInvalidRootedPathMessage()
+        {
+            HandleMessageInteraction(interaction => interaction.Response = MessageResponse.OK);
+            HandleSaveFileInteraction(interaction => interaction.Success = false);
+
+            var query = BuildFileNameQuery();
+
+            query.RetypeFileNameQuery(_someFile, OutputFormat.Pdf, RetypeReason.InvalidRootedPath);
+
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Title.Equals("PDFCreator")));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Text.Contains(_someFile)));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Text.Equals(_translation.FormatInvalidRootedPathMessage(_someFile))));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Buttons == MessageOptions.OK));
+            _interactionInvoker.Received().Invoke(Arg.Is<MessageInteraction>(i => i.Icon == MessageIcon.Warning));
         }
 
         [Test]
@@ -164,7 +187,7 @@ namespace Presentation.UnitTest.WorkflowQuery
             HandleSaveFileInteraction(interaction => interaction.Success = false);
             var query = BuildFileNameQuery();
 
-            var result = query.RetypeFileName(_someFile, OutputFormat.Pdf);
+            var result = query.RetypeFileNameQuery(_someFile, OutputFormat.Pdf, RetypeReason.CopyError);
 
             Assert.IsFalse(result.Success);
         }
@@ -180,7 +203,7 @@ namespace Presentation.UnitTest.WorkflowQuery
             });
             var query = BuildFileNameQuery();
 
-            var result = query.RetypeFileName(_someFile, OutputFormat.Pdf);
+            var result = query.RetypeFileNameQuery(_someFile, OutputFormat.Pdf, RetypeReason.CopyError);
 
             Assert.IsTrue(result.Success);
             Assert.AreEqual(_someFilePath, result.Data);
@@ -198,7 +221,7 @@ namespace Presentation.UnitTest.WorkflowQuery
 
             var query = BuildFileNameQuery();
 
-            query.RetypeFileName(_someFile, outputFormat);
+            query.RetypeFileNameQuery(_someFile, outputFormat, RetypeReason.CopyError);
 
             // Filter has the Format "Title|filter|Title2|filter2" => we only expect one pipe for a single entry
             Assert.AreEqual(2, saveFileInteraction.Filter.Split('|').Length);

@@ -31,7 +31,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
         public string AskLater { get; private set; } = "Ask Later";
         public string SkipVersion { get; private set; } = "Skip version";
         public string Install { get; private set; } = "Install new Update";
-
+        
         public EnumTranslation<UpdateInterval>[] UpdateIntervals { get; private set; } = EnumTranslation<UpdateInterval>.CreateDefaultEnumTranslation();
 
         private string NewUpdateMessage { get; set; } = "The new version {0} is available.\nWould you like to download the new version?";

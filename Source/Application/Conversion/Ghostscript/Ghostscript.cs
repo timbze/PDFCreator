@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace pdfforge.PDFCreator.Conversion.Ghostscript
 {
@@ -24,6 +25,8 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
         public GhostscriptVersion GhostscriptVersion { get; }
 
         public event EventHandler<OutputEventArgs> Output;
+
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromHours(24);
 
         private bool Run(IList<string> parameters, string tempOutputFolder)
         {
@@ -63,6 +66,21 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
 
             p.StartInfo.Arguments = string.Format("@\"{0}\"", parameterFile);
 
+            var gsThread = new Thread(() => RunAndReadStdOut(p));
+            gsThread.Start();
+
+            if (!gsThread.Join(Timeout))
+            {
+                _logger.Error($"The ghostscript did not finish within {Timeout.TotalMinutes} minutes");
+                p.Kill();
+                return false;
+            }
+
+            return p.ExitCode == 0;
+        }
+
+        private void RunAndReadStdOut(Process p)
+        {
             p.Start();
             // Do not wait for the child process to exit before
             // reading to the end of its redirected stream.
@@ -88,8 +106,6 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
                 RaiseOutputEvent(sbout.ToString());
 
             p.WaitForExit();
-
-            return p.ExitCode == 0;
         }
 
         private void RaiseOutputEvent(string message)
@@ -109,11 +125,6 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript
         {
             var parameters = (List<string>)output.GetGhostScriptParameters(GhostscriptVersion);
             var success = Run(parameters.ToArray(), tempOutputFolder);
-
-            var outputFolder = Path.GetDirectoryName(output.Job.OutputFilenameTemplate);
-
-            if (outputFolder != null && !Directory.Exists(outputFolder))
-                Directory.CreateDirectory(outputFolder);
 
             CollectTempOutputFiles(output.Job);
 

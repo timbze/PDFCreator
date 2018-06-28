@@ -8,7 +8,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
 {
     public class MacroCommand : IMacroCommand
     {
-        protected readonly List<ICommand> CommandsList = new List<ICommand>();
+        protected List<ICommand> CommandList;
         private int _runIndex = 0;
         private object _parameter;
         private BooleanMacroResult _result;
@@ -16,35 +16,21 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
 
         public event EventHandler MacroIsDone;
 
-        protected ICommandLocator Locator { get; set; }
-
-        public MacroCommand(ICommandLocator locator)
-        {
-            Locator = locator;
-        }
-
-        public IMacroCommand AddCommand(ICommand command)
-        {
-            if (command == null)
-                return this;
-
-            command.CanExecuteChanged += (sender, args) => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-            CommandsList.Add(command);
-            return this;
-        }
-
         public ICommand GetCommand(int index)
         {
-            if (index > CommandsList.Count)
+            if (index > CommandList.Count)
                 return null;
-            return CommandsList[index];
+            return CommandList[index];
         }
 
-        public IMacroCommand AddCommand<T>() where T : class, ICommand
+        public MacroCommand(List<ICommand> commandList)
         {
-            var command = Locator?.GetCommand<T>();
-            AddCommand(command);
-            return this;
+            CommandList = commandList;
+
+            foreach (var command in commandList)
+            {
+                command.CanExecuteChanged += (sender, args) => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public void ExecuteWithAsyncResult(object parameter, TaskCompletionSource<IMacroResult> resultTask)
@@ -81,9 +67,9 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
                 Next(sender, new MacroCommandIsDoneEventArgs(ResponseStatus.Success));
             }
 
-            if (CommandsList.Count > _runIndex)
+            if (CommandList.Count > _runIndex)
             {
-                var command = CommandsList.ElementAt(_runIndex);
+                var command = CommandList.ElementAt(_runIndex);
                 var macroCommand = command as IWaitableCommand;
                 if (macroCommand != null)
                 {
@@ -111,7 +97,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
 
         public bool CanExecute(object parameter)
         {
-            foreach (var command in CommandsList)
+            foreach (var command in CommandList)
             {
                 if (!command.CanExecute(parameter))
                     return false;

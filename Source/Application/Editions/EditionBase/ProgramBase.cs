@@ -86,7 +86,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             var resolver = new SimpleInjectorAppStartResolver(_container);
 
-            var appStartFactory = new AppStartFactory(resolver);
+            var appStartFactory = new AppStartFactory(resolver, _container.GetInstance<IParametersManager>());
             var appStart = appStartFactory.CreateApplicationStart(args);
 
             var helpCommandHandler = _container.GetInstance<HelpCommandHandler>();

@@ -23,14 +23,12 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <param name="pdfVersion">PDF Version as string, i.e. "1.6"</param>
         /// <returns>Stamper with content of source file stream, aiming to destination file</returns>
         /// <exception cref="ProcessingException">In case of any error</exception>
-        internal static Tuple<PdfStamper, FileStream> CreateStamperAccordingToEncryptionAndSignature(string sourceFile, string destinationFile, ConversionProfile profile,
+        internal static Tuple<PdfStamper, FileStream, PdfReader> CreateStamperAccordingToEncryptionAndSignature(string sourceFile, string destinationFile, ConversionProfile profile,
             char pdfVersion)
         {
-            Tuple<PdfStamper, FileStream> stamper;
-
             try
             {
-                stamper = DoCreateStamperAccordingToEncryptionAndSignature(sourceFile, destinationFile, profile, pdfVersion);
+                return DoCreateStamperAccordingToEncryptionAndSignature(sourceFile, destinationFile, profile, pdfVersion);
             }
             catch (ProcessingException)
             {
@@ -40,17 +38,15 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 throw new ProcessingException(ex.GetType() + " while creating stamper:" + Environment.NewLine + ex.Message, ErrorCode.Encryption_GenericError, ex);
             }
-
-            return stamper;
         }
 
-        private static Tuple<PdfStamper, FileStream> DoCreateStamperAccordingToEncryptionAndSignature(string sourceFilename, string destinationFilename, ConversionProfile profile, char pdfVersion)
+        private static Tuple<PdfStamper, FileStream, PdfReader> DoCreateStamperAccordingToEncryptionAndSignature(string sourceFilename, string destinationFilename, ConversionProfile profile, char pdfVersion)
         {
             Logger.Debug("Started creating PdfStamper according to Encryption.");
 
             var reader = new PdfReader(sourceFilename);
             var fileStream = new FileStream(destinationFilename, FileMode.Create, FileAccess.Write);
-            PdfStamper stamper = null;
+            PdfStamper stamper;
 
             if (profile.PdfSettings.Signature.Enabled)
                 stamper = PdfStamper.CreateSignature(reader, fileStream, pdfVersion);
@@ -61,7 +57,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 throw new ProcessingException("PDFStamper could not be created", ErrorCode.Encryption_Error);
             }
-            return new Tuple<PdfStamper, FileStream>(stamper, fileStream);
+            return new Tuple<PdfStamper, FileStream, PdfReader>(stamper, fileStream, reader);
         }
     }
 }

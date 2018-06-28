@@ -51,6 +51,7 @@
     <Compile Include="IInstallationPathProvider.cs" />
     <Compile Include="IniSettingsLoader.cs" />
     <Compile Include="IPDFCreatorNameProvider.cs" />
+    <Compile Include="IParametersManager.cs" />
     <Compile Include="ISettingsManager.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

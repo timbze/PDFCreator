@@ -59,6 +59,7 @@
     <Compile Include="CompressMonochrome.cs" />
     <Compile Include="CompressMonochromeCustom.cs" />
     <Compile Include="ConversionProfile.cs" />
+    <Compile Include="ConversionProfile.Custom.cs" />
     <Compile Include="CoverPage.cs" />
     <Compile Include="CoverPageCustom.cs" />
     <Compile Include="DropboxAccount.cs" />
@@ -89,7 +90,11 @@
     <Compile Include="Ftp.cs" />
     <Compile Include="FtpCustom.cs" />
     <Compile Include="FtpAccount.cs" />
+    <Compile Include="Parameters.cs" />
+    <Compile Include="ParameterSettings.cs" />
+    <Compile Include="JobHistory.cs" />
     <Compile Include="PdfCreatorSettings.Custom.cs" />
+    <Compile Include="PrinterMapping.Custom.cs" />
     <Compile Include="TimeServerAccount.Custom.cs" />
     <Compile Include="HttpAccount.Custom.cs" />
     <Compile Include="FtpAccount.Custom.cs" />
@@ -112,7 +117,6 @@
     <Compile Include="ProfileSorter.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveDialog.cs" />
     <Compile Include="Scripting.cs" />
     <Compile Include="ScriptingCustom.cs" />
     <Compile Include="Security.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="TiffSettings.cs" />
     <Compile Include="TimeServerAccount.cs" />
     <Compile Include="TitleReplacement.cs" />
+    <Compile Include="TitleReplacement.Custom.cs" />
     <Compile Include="UserTokens.cs" />
     <Compile Include="UserTokensCustom.cs" />
   </ItemGroup>

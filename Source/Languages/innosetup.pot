@@ -3,6 +3,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language: en\n"
 
 msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."

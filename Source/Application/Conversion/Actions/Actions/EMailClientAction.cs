@@ -5,6 +5,7 @@ using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using System;
+using System.Collections.Generic;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -20,31 +21,51 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
         public ActionResult ProcessJob(Job job)
         {
+            _logger.Info("Launched client e-mail action");
+
+            var subject = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Subject);
+            var body = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Content);
+            var isHtml = job.Profile.EmailClientSettings.Html;
+            var hasSignature = job.Profile.EmailClientSettings.AddSignature;
+            var signature = string.Empty;
+
+            if (hasSignature)
+                signature = job.JobTranslations.EmailSignature;
+
+            var recipientsTo = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Recipients);
+            var recipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsCc);
+            var recipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.RecipientsBcc);
+
+            var hasAttachments = !SkipFileAttachments(job);
+            IList<string> attachments = hasAttachments ? job.OutputFiles : null;
+
+            return Process(subject, body, isHtml, hasSignature, signature, recipientsTo, recipientsCc, recipientsBcc, hasAttachments, attachments);
+        }
+
+        public ActionResult Process(string subject, string body, bool isHtml, bool hasSignature, string signature, string recipientsTo, string recipientsCc, string recipientsBcc, bool hasAttachments, IEnumerable<string> attachedFiles)
+        {
             try
             {
                 _logger.Info("Launched client e-mail action");
 
                 var message = new Email();
 
-                message.Subject = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Subject);
-                message.Body = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Content);
-                message.Html = job.Profile.EmailClientSettings.Html;
-                if (job.Profile.EmailClientSettings.AddSignature)
+                message.Subject = subject;
+                message.Body = body;
+                message.Html = isHtml;
+
+                if (hasSignature)
                 {
-                    // if html option is checked replace newLine with <br />
-                    message.Body += job.Profile.EmailClientSettings.Html ? job.JobTranslations.EmailSignature.Replace(Environment.NewLine, "<br>") : job.JobTranslations.EmailSignature;
+                    message.Body += isHtml ? signature.Replace(Environment.NewLine, "<br>") : signature;
                 }
 
-                var recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailClientSettings.Recipients);
-                foreach (var recipient in recipients.Replace(',', ';').Split(';'))
-                {
-                    if (!string.IsNullOrWhiteSpace(recipient))
-                        message.To.Add(recipient.Trim());
-                }
+                message.Recipients.AddTo(recipientsTo);
+                message.Recipients.AddCc(recipientsCc);
+                message.Recipients.AddBcc(recipientsBcc);
 
-                if (!SkipFileAttachments(job))
+                if (hasAttachments)
                 {
-                    foreach (var file in job.OutputFiles)
+                    foreach (var file in attachedFiles)
                     {
                         message.Attachments.Add(new Attachment(file));
                     }

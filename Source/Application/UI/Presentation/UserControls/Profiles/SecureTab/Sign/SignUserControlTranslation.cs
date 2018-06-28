@@ -7,7 +7,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
     {
         public string SignatureTabHeader { get; private set; } = "Signature";
         public string CertificateFileLabel { get; private set; } = "Certificate File:";
-        public string SignaturePasswordButton { get; private set; } = "Set Password";
+        public string CertificatePasswordLabel { get; private set; } = "Certificate Password:";
+        public string DontSavePassword { get; private set; } = "Don't save password and request it during conversion";
         public string ReasonLabel { get; private set; } = "Reason:";
         public string ContactLabel { get; private set; } = "Contact:";
         public string LocationLabel { get; private set; } = "Location:";

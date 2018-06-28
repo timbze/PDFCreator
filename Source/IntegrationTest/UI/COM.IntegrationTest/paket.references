@@ -1,8 +1,10 @@
-﻿NUnit
-NSubstitute
-SystemInterface
+﻿SystemInterface
 SystemWrapper
 NLog
 SimpleInjector
 Obsidian
 Translatable
+
+group test
+    NSubstitute
+    NUnit

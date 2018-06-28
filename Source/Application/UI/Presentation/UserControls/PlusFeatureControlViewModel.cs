@@ -25,6 +25,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls
         {
             _processStarter = processStarter;
             ShowPlusHint = editionHintOptionProvider.ShowOnlyForPlusAndBusinessHint;
+            RaisePropertyChanged(nameof(ShowPlusHint));
         }
 
         public RequiredEdition Edition

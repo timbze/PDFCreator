@@ -3,7 +3,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailSmtp;
@@ -36,7 +36,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _tokenHelper = new TokenHelper(new DesignTimeTranslationUpdater());
             _tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            _viewModel = new EditEmailTextViewModel(translationUpdater, mailSignatureHelper, _tokenHelper);
+            _viewModel = new EditEmailTextViewModel(translationUpdater, mailSignatureHelper, _tokenHelper, new TokenViewModelFactory(null, _tokenHelper));
             _viewModel.SetInteraction(_interaction);
         }
 

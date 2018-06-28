@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs;
@@ -37,7 +37,7 @@ namespace Presentation.UnitTest.UserControls.Profile
 
             var translationUpdater = new TranslationUpdater(_translationFactory, Substitute.For<IThreadManager>());
 
-            return new MetadataViewModel(translationUpdater, _currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater()));
+            return new MetadataViewModel(translationUpdater, new TokenHelper(new DesignTimeTranslationUpdater()), new TokenViewModelFactory(_currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
         }
 
         [Test]
@@ -157,17 +157,12 @@ namespace Presentation.UnitTest.UserControls.Profile
         {
             var vm = BuildViewModel();
 
-            var titleProperty = new PropertyChangedListenerMock(vm, nameof(vm.TitleTokenViewModel));
-            var authorProperty = new PropertyChangedListenerMock(vm, nameof(vm.AuthorTokenViewModel));
-            var subjectProperty = new PropertyChangedListenerMock(vm, nameof(vm.SubjectTokenViewModel));
-            var keywordsProperty = new PropertyChangedListenerMock(vm, nameof(vm.KeywordsTokenViewModel));
+            var titleProperty = false;
+            vm.TitleTokenViewModel.TextChanged += (sender, args) => titleProperty = true;
 
             _currentSettingsProvider.SelectedProfileChanged += Raise.Event<PropertyChangedEventHandler>(this, new PropertyChangedEventArgs(""));
 
-            Assert.IsTrue(titleProperty.WasCalled);
-            Assert.IsTrue(authorProperty.WasCalled);
-            Assert.IsTrue(subjectProperty.WasCalled);
-            Assert.IsTrue(keywordsProperty.WasCalled);
+            Assert.IsTrue(titleProperty);
         }
     }
 }

@@ -38,5 +38,7 @@
         <ResourceDictionary Source="ChildWindowOverlay.xaml" />
         <ResourceDictionary Source="CustomListView.xaml" />
         <ResourceDictionary Source="GPOLayerStyle.xaml" />
+        <ResourceDictionary Source="CloseButton.xaml" />
+        <ResourceDictionary Source="PdfCreatorDropDownButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

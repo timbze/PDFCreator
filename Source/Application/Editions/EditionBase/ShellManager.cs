@@ -69,7 +69,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             //TODO This is required to avoid a deadlock in Visual Studio when XAML Diagnostics is enabled
             if (timeSinceLastWindow.TotalMilliseconds < 1500 && Debugger.IsAttached)
-                Thread.Sleep(1500);
+                Thread.Sleep(2500);
 
             _lastOpenWindowTime = DateTime.Now;
         }

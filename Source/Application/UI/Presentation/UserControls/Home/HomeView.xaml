@@ -4,23 +4,114 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
+             xmlns:jobHistory="clr-namespace:pdfforge.PDFCreator.Core.Services.JobHistory;assembly=PDFCreator.Services"
+             xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance designTime:DesignTimeHomeViewModel, IsDesignTimeCreatable=True}">
-    <Grid HorizontalAlignment="Center" Margin="50 50">
+             d:DataContext="{d:DesignInstance designTime:DesignTimeHomeViewModel, IsDesignTimeCreatable=True}"
+             help:HelpProvider.HelpTopic="Home">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/ListBox.xaml" />
+                <ResourceDictionary Source="../../Styles/MainResourceDict.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converter:BoolToVisibilityConverter x:Key="VisibleWhenFalse" TrueValue="Collapsed" FalseValue="Visible" />
+            <converter:BoolToVisibilityConverter x:Key="VisibleWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
+            <converter:CompareWithTresholdToValueConverter x:Key="ZeroHeightForHistoryCount" Treshold="4" SmallerOrEqualValue="800" BiggerValue="0" />
+            <converter:CompareWithTresholdToValueConverter x:Key="MaxHeightForHistoryCount" Treshold="4" SmallerOrEqualValue="0" BiggerValue="150" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Center" Margin="20 0"
+          Width="780">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <!-- spacing above -->
             <RowDefinition Height="*" />
+            <!-- Small PrintToPDFCreator + DropZone-->
+            <RowDefinition Height="10*" MaxHeight="{Binding NumberOfHistoricJobs, Converter={StaticResource MaxHeightForHistoryCount}}" />
+            <!-- "Print to PDFCreator" -->
+            <RowDefinition Height="10*" MaxHeight="{Binding NumberOfHistoricJobs, Converter={StaticResource ZeroHeightForHistoryCount}}" />
+            <!-- separator -->
+            <RowDefinition Height="Auto" MaxHeight="{Binding NumberOfHistoricJobs, Converter={StaticResource ZeroHeightForHistoryCount}}" />
+            <!-- Drop zone -->
+            <RowDefinition Height="20*" MaxHeight="{Binding NumberOfHistoricJobs, Converter={StaticResource ZeroHeightForHistoryCount}}" />
+            <!-- separator -->
+            <RowDefinition Height="Auto" />
+            <!-- History -->
+            <RowDefinition Height="20*" MinHeight="175" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Margin="80 20" HorizontalAlignment="Center">
-            <ContentControl IsTabStop="False" Width="120">
+
+        <!-- Small PrintToHeader + DropZone-->
+        <Viewbox Grid.Row="1" Margin="0 0 0 5" StretchDirection="DownOnly">
+            <StackPanel Orientation="Horizontal">
+                <DockPanel LastChildFill="True">
+                    <Border SnapsToDevicePixels="True"
+                        DockPanel.Dock="Top" x:Name="DragDropBorder2"
+                        Style="{DynamicResource DragDropBorderStyle}"
+                        Background="Transparent">
+
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <DockPanel Grid.Row="1" Grid.Column="1"
+                                    Margin="10" HorizontalAlignment="Center">
+                                <ContentControl IsTabStop="False" Height="75">
+                                    <DynamicResource ResourceKey="HomeViewLogo" />
+                                </ContentControl>
+                                <TextBlock VerticalAlignment="Center" FontSize="12" TextWrapping="Wrap" Margin="10 0 0 0"
+                                               MaxWidth="300"
+                                               Text="{Binding CallToActionText}" />
+                            </DockPanel>
+
+                            <Button Grid.Row="1" Grid.Column="2"
+                                Margin="10"
+                                Width="200" Padding="10 10"
+                                HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                Style="{DynamicResource FlatPdfCreatorButton}"
+                                Command="{Binding ConvertFileCommand}">
+                                <TextBlock Text="{Binding Translation.ChooseFileButton}"
+                                               FontSize="12" TextWrapping="Wrap"
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Center" />
+                            </Button>
+
+                            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                   Margin="10 " Text="{Binding Translation.DragDropText}"
+                                   FontSize="12"
+                                   HorizontalAlignment="Center" Foreground="Gray"
+                                   Opacity="{Binding ElementName=DragDropBorder2, Path=BorderBrush.Opacity}" />
+                        </Grid>
+                    </Border>
+                </DockPanel>
+            </StackPanel>
+        </Viewbox>
+
+        <!-- Big PrintToHeader -->
+        <DockPanel Grid.Row="2" Margin="30 10" HorizontalAlignment="Center" MaxHeight="100">
+            <ContentControl IsTabStop="False">
                 <DynamicResource ResourceKey="HomeViewLogo" />
             </ContentControl>
-            <TextBlock VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap" Margin="30 0 0 0"
+            <TextBlock VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap" Margin="50 0 0 0"
                        Text="{Binding CallToActionText}" />
         </DockPanel>
-        <Separator Grid.Row="1" />
-        <DockPanel Grid.Row="2" LastChildFill="True" Margin="0 10 0 0">
+
+        <Separator Grid.Row="3" />
+
+        <!-- Big DropZone -->
+        <DockPanel Grid.Row="4" LastChildFill="True" Margin="10">
             <Border SnapsToDevicePixels="True"
                     x:Name="DragDropBorder"
                     DockPanel.Dock="Top"
@@ -42,11 +133,183 @@
                             Command="{Binding ConvertFileCommand}"
                             Content="{Binding Translation.ChooseFileButton}" />
 
-                    <TextBlock Grid.Row="2" Margin="10 " Text="{Binding Translation.DragDropText}"
+                    <TextBlock Grid.Row="2" Text="{Binding Translation.DragDropText}"
                                HorizontalAlignment="Center" Foreground="Gray"
                                Opacity="{Binding ElementName=DragDropBorder, Path=BorderBrush.Opacity}" />
                 </Grid>
             </Border>
         </DockPanel>
+
+        <Separator Grid.Row="5" />
+
+        <!-- History -->
+        <Grid Grid.Row="6" Margin="10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left" FontSize="15" TextWrapping="Wrap"
+                       Text="{Binding Translation.RecentFilesLabel}" />
+            <controls:DropDownButton Grid.Row="0" Grid.Column="1"
+                                     Height="25"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     ArrowVisibility="Collapsed"
+                                     Cursor="Hand">
+                <controls:DropDownButton.Resources>
+                    <SolidColorBrush x:Key="GrayBrush8" Color="Transparent" />
+                </controls:DropDownButton.Resources>
+                <controls:DropDownButton.IconTemplate>
+                    <ItemContainerTemplate>
+                        <ContentControl Content="{StaticResource SettingsGrey}" Focusable="False" />
+                    </ItemContainerTemplate>
+                </controls:DropDownButton.IconTemplate>
+                <controls:DropDownButton.Items>
+                    <MenuItem Command="{Binding ToggleHistoryEnabledCommand}"
+                              Margin="-20 0">
+                        <MenuItem.Header>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Translation.EnableHistory}"
+                                           Visibility="{Binding HistoryEnabled, Converter={StaticResource VisibleWhenFalse}}" />
+                                <TextBlock Text="{Binding Translation.DisableHistory}"
+                                           Visibility="{Binding HistoryEnabled, Converter={StaticResource VisibleWhenTrue}}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Header="{Binding Translation.ClearHistory}"
+                              Command="{Binding ClearHistoryCommand}"
+                              Margin="-20 0" />
+                    <MenuItem Header="{Binding Translation.RefreshHistory}"
+                              Command="{Binding RefreshHistoryCommand}"
+                              Margin="-20 0" />
+                </controls:DropDownButton.Items>
+            </controls:DropDownButton>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                       Visibility="Visible"
+                       Text="{Binding Translation.HistoryIsEmpty}"
+                       Margin="10"
+                       FontStyle="Italic"
+                       TextAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DataContext.JobHistory.IsEmpty, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Value="true">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     ItemsSource="{Binding JobHistory, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                     IsSynchronizedWithCurrentItem="True"
+                     Grid.IsSharedSizeScope="True"
+                     VerticalAlignment="Stretch"
+                     Margin="0 5 0 0">
+                <ListBox.Style>
+                    <Style TargetType="ListBox"  BasedOn="{StaticResource {x:Type ListBox}}">
+                        <Setter Property="ItemContainerStyle">
+                            <Setter.Value>
+                                <Style TargetType="ListBoxItem"  BasedOn="{StaticResource PdfCreatorListBoxItemStyle}">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Style>
+                <ListBox.Resources>
+                    <DataTemplate DataType="{x:Type jobHistory:HistoricJob}">
+                        <Expander IsExpanded="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
+                                  BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                                  Cursor="Hand"
+                                  Width="740">
+                            <Expander.Header>
+                                <DockPanel LastChildFill="True">
+                                    <Button DockPanel.Dock="Right"
+                                            Margin="0 0 5 5"
+                                            Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Converter={StaticResource VisibleWhenTrue}}"
+                                            Command="{Binding DataContext.RemoveHistoricJobCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{DynamicResource ListBoxButton}"
+                                            Content="{StaticResource Cross}"
+                                            Width="10" Height="10"
+                                            ToolTip="{Binding DataContext.Translation.RemoveFromHistory, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                    <TextBlock
+                                               Margin="1 2 0 5"
+                                               Padding="0"
+                                               Text="{Binding Path=HistoricFiles[0].FileName}"
+                                               TextWrapping="Wrap" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <Grid Margin="25 -10 0 5"
+                                   HorizontalAlignment="Stretch">
+                                <Grid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{Binding Path=HistoricFiles[0].Directory}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock Text="{Binding DataContext.Translation.DocumentInfo, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                               FontSize="12" FontWeight="DemiBold" Margin="0 3 0 0" />
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding DataContext.Translation.TitleLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                        <TextBlock Text="{Binding Metadata.Title}" Margin="5 0 0 0" />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding DataContext.Translation.AuthorLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                        <TextBlock Text="{Binding Metadata.Author}" Margin="5 0 0 0" />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding DataContext.Translation.PagesLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                        <TextBlock Text="{Binding NumberOfPages}" Margin="5 0 0 0" />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding DataContext.Translation.CreationDateLabel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                        <TextBlock Text="{Binding CreationTime}" Margin="5 0 0 0" />
+                                    </DockPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                    <controls:DropDownButton
+                                        ItemsSource="{Binding DataContext.QuickActionOpenList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        Content ="{Binding DataContext.Translation.OpenWith, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        Margin="10 0 0 0"
+                                        Width="110"
+                                        Style ="{DynamicResource CustomColorDropDownButton}" />
+                                    <Button
+                                        Content="{Binding DataContext.Translation.DeleteFile, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        Style="{DynamicResource FlatGreyButton}"
+                                        Command="{Binding DataContext.DeleteHistoricFilesCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        CommandParameter="{Binding HistoricFiles}"
+                                        Margin="10 0 0 0"
+                                        Width="110" />
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
+                    </DataTemplate>
+                </ListBox.Resources>
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>

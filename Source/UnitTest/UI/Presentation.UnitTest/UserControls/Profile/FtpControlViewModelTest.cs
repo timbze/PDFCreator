@@ -6,7 +6,7 @@ using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.FTP;
@@ -46,8 +46,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             settingsProvider.Settings.Returns(settings);
 
             var commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator.GetMacroCommand().Returns(x => new MacroCommand(commandLocator));
+            commandLocator.CreateMacroCommand().Returns(x => new MacroCommandBuilder(commandLocator));
 
             _addCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<FtpAccountAddCommand>().Returns(_addCommand);
@@ -55,7 +54,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _editCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<FtpAccountEditCommand>().Returns(_editCommand);
 
-            _viewModel = new FtpActionViewModel(tokenHelper, translationUpdater, settingsProvider, commandLocator);
+            _viewModel = new FtpActionViewModel(tokenHelper, translationUpdater, settingsProvider, commandLocator, new TokenViewModelFactory(settingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
         }
 
         [Test]

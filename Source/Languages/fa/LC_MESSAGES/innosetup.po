@@ -1,17 +1,12 @@
-msgid "Setup has finished installing [name] on your computer."
-msgstr "راه انداز نصب [name] را در رایانه شما به پایان رسانده است."
-
-msgid "Edit & Insert"
-msgstr "ویرایش & قرار دادن"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: Persian (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 10:38+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Persian <http://translate.pdfforge.org/projects/pdfcreator/innosetup/fa/>\n"
+"Language-Team: Persian <http://translate.pdfforge.org/projects/pdfcreator/"
+"innosetup/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,524 +14,680 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "Review"
-msgstr "بازبینی"
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"برنامه از قبل نصب شده است.%n%nبرای نصب جدید ابتدا نسخه قدیمی را حذف کنید.%n"
+"%nراه انداز لغو خواهد شد."
 
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
-msgstr "PDFCreator از قبل نصب شده است. حذف نسخه نصب شده موجود (نسخه %1) قبل از نصبPDFCreator %2 ضروری است%n%nآیا حالا میخواهید PDFCreator را بروز رسانی کنید؟ تنظیمات PDFCreator و چاپگر ها حفظ خواهند شد."
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"PDFCreator از قبل نصب شده است. حذف نسخه نصب شده موجود (نسخه %1) قبل از "
+"نصبPDFCreator %2 ضروری است%n%nآیا حالا میخواهید PDFCreator را بروز رسانی "
+"کنید؟ تنظیمات PDFCreator و چاپگر ها حفظ خواهند شد."
 
-msgid "Secure & Sign"
-msgstr "امن & امضاء"
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"برنامه از قبل نصب شده است.%n%nبروز رسانی امکان ندارد. لطفا ابتدا برنامه را "
+"حذف کنید.%n%nراه انداز لغو خواهد شد."
 
 msgid "The setup will be canceled."
 msgstr "راه انداز لغو شد."
 
-msgid "Forms"
-msgstr "برگه ها"
-
-msgid "The following applications have to be closed to proceed with the uninstallation:"
-msgstr "برای ادامه حذف،برنامه های زیر باید بسته شوند:"
-
-msgid "Try out the new PDF Architect"
-msgstr "نسخه PDF Architect جدید را امتحان کنید"
-
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "فایل دانلود شده خراب است و باید حذف شود.راه اندازی لغو شد!"
-
-msgid "A shortcut has been added to your desktop."
-msgstr "یک میانبر به دسکتاپ شما اضافه شد."
-
-msgid "Donate to PDFCreator"
-msgstr "کمک مالی به PDFCreator"
-
-msgid "Install PDF Architect with great free features"
-msgstr "برنامه PDF Architect با ویژگی های رایگان عالی نصب کنید"
-
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "یک خطا حین نصب مایکروسافت دات نت فریم ورک رخ داده است %1. (کد خطا: %2)%n%nآیا میخواهید فایل وقایع نصب دات نت را ببینید؟"
-
-msgid "Rotate, move and delete pages"
-msgstr "چرخش،جابجایی و حذف صفحات"
-
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "راه انداز PDFCreator دات نت فریم ورک 4.0 را نصب کرده است. این مرحله نیاز به ریستارت سیستم است. لطفا حالا سیستم خود را ریستارت کرده و سپس راه انداز را دوباره اجرا کنید.%n%nحالا از راه انداز خارج میشود."
-
-msgid "Merge multiple PDFs"
-msgstr "ادغام چندین PDFs"
-
-msgid "PDFCreator download"
-msgstr "دانلود PDFCreator"
-
-msgid "Free features:"
-msgstr "ویژگی های رایگان:"
-
-msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
-msgstr "یک نسخه جدید (%1) در سرورهای pdfforge موجود است!%n%nآیا می خواهید این نسخه را دانلود و نصب کنید؟"
-
-msgid "Enhance PDFCreator with edit features!"
-msgstr "بهسازی PDFCreator با ویژگی های ویرایش!"
-
-msgid "Set installation directory and additional options"
-msgstr "تنظیم دایرکتوری نصب و گزینه های بیشتر"
-
-msgid "New in PDF Architect {0}:"
-msgstr "تغییرات در PDF Architect {0}:"
-
-msgid "Please choose a printer name."
-msgstr "لطفا نام چاپگر را انتخاب کنید."
-
-msgid "Automatic E-Sign workflows"
-msgstr "امضای دیجیتالی گردش کار خودکار"
-
-msgid "There already exists a printer with this name. Please choose another name."
-msgstr "چاپگری با این نام از قبل موجود است.لطفا نام دیگری انتخاب کنید."
-
-msgid "Verify and remove signatures"
-msgstr "بازبینی و حذف امضای دیجیتالی"
-
-msgid "For &all users"
-msgstr "&برای همه کاربران"
-
-msgid "Already installed"
-msgstr "از قبل نصب شده است"
-
-msgid "Full installation"
-msgstr "نصب کامل"
-
-msgid "Automatic updates"
-msgstr "بروز رسانی خودکار"
-
-msgid "Install printer"
-msgstr "نصب چاپگر"
-
-msgid "Default application for PDF files"
-msgstr "برنامه پیش فرض برای فایل های PDF"
-
-msgid "Install printer driver"
-msgstr "نصب درایور چاپگر"
-
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "نسخه جدید PDF Architect نصب خواهد شد. این مدتی طول می کشد."
-
-msgid "Install printer port"
-msgstr "نصب پورت چاپگر"
-
-msgid "Firefox integration"
-msgstr "یکپارچگی با فایرفاکس"
-
-msgid "Languages"
-msgstr "زبان ها"
-
-msgid "Internet Explorer integration"
-msgstr "یکپارچگی با  اینترنت اکسپلورر"
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "فعالسازی خیلی قدیمی است.لطفا فعالسازی خود را تازه کنید."
-
-msgid "MS Outlook previewer integration"
-msgstr "یکپارچگی نمایش دهنده اُوت لوک"
-
-msgid "Invalid answer from license server!"
-msgstr "پاسخ سرور مجوز معتبر نیست!"
-
-msgid "Windows Explorer integration"
-msgstr "یکپارچگی با ویندوز اکسپلورر"
-
-msgid "No answer from license server!"
-msgstr "پاسخی از سرور مجوز ندارد!"
-
-msgid "No thanks"
-msgstr "نه ممنونم"
-
-msgid "Wrong answer from license server!"
-msgstr "پاسخ دریافت شده از سرور مجوز اشتباه است!"
-
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
-msgstr "لطفا 'PDFCreator Server' را قبل از ادامه نصب حذف کنید. امکان استفاده 'PDFCreator' و 'PDFCreator Server' در یک دستگاه نیست."
-
-msgid "License server answer not valid for this computer!"
-msgstr "پاسخ سرور مجوز برای این رایانه معتبر نیست!"
-
-msgid "PDFCreator setup"
-msgstr "راه انداز PDFCreator"
-
-msgid "License key validation"
-msgstr "معتبرسازی کلید مجوز"
-
-msgid "Setup is being prepared..."
-msgstr "راه انداز در حال آماده سازی است..."
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "کلید مجوز معتبر را وارد کنید و نصب را ادامه دهید."
-
-msgid "Printer"
-msgstr "چاپگر"
-
-msgid "Invalid license answer hash!"
-msgstr "هَش پاسخ مجوز نامعتبر است!"
-
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "حین نصب چاپگر خطا رخ داده است.توضیح همراه با جزئیات را میتوان در فایل  'SetupLog.txt' در مسیر نصب برنامه یافت."
-
-msgid "License key"
-msgstr "کلید مجوز"
-
-msgid "Printer name"
-msgstr "نام چاپگر"
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "فرمت کلید مجوز اینطور است XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Choosing a printer name."
-msgstr "نام چاپگر را انتخاب کنید."
-
-msgid "Message"
-msgstr "پیام"
-
-msgid "Please choose a name for the printer."
-msgstr "لطفا یک نام برای چاپگر انتخاب کنید."
-
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "کلید مجوزی ارائه نشده است. یک کلید مجوز با ترکیب پارامترهای '/VerySilent' یا '/Silent'  کاملا نیاز است! لطفا از پارامتر استفاده کنید '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "PDFCreator یک چاپگر در رایانه شما نصبخواهد کرد. با این چاپگر،هر برنامه ای که قادر به چاپ باشد، میتواند فایل پی دی اِف،بیت مپ،یا فایل پست اسکریپت ایجاد کند.%n%nنام چاپگر:"
-
-msgid "Offline license check"
-msgstr "بررسی آفلاین مجوز"
-
-msgid "This process might take several minutes."
-msgstr "این فرآیند ممکن است چند دقیقه طول بکشد."
-
-msgid "The machine or the user is blocked!"
-msgstr "کاربر یا دستگاه مسدود شده است!"
-
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr "PDFCreator به آسانی از هر برنامه ویندوزی فایل پی دی اِف می سازد. از آن مانند چاپگر در برنامه هایی مانند Word، Excel، یا هر برنامه ویندوزی دیگر استفاده کنید."
-
-msgid "An invalid license key is provided!"
-msgstr "کلید مجوز نامعتبر ارائه شده است!"
-
-msgid "application files"
-msgstr "فایل های برنامه"
-
-msgid "OK"
-msgstr "&تأييد"
-
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "برنامه '%1' در اِجرا است.%n%nلطفا ابتدا برنامه را ببندید.%n%n"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr "نسخه %1 پشتیبانی نشده است! لطفا از اینجا جدیدترین نسخه %2 را استفاده کنید."
-
-msgid "Please restart your system first to continue setup."
-msgstr "برای ادامه نصب لطفا ابتدا سیستم خود را ریستارت کنید."
-
-msgid "License agreement"
-msgstr "توافقنامه مجوز"
-
-msgid "PDFCreator settings"
-msgstr "تنظیمات برنامه"
-
-msgid "PDFCreator log file"
-msgstr "فایل وقایع PDFCreator"
-
-msgid "Show help after setup"
-msgstr "نمایش راهنما بعد از نصب"
-
-msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr "شما عضوی از گروه آدمین ها نیستید.%n%n%nبرای ایجاد سند پی دی اِف از هر برنامه ای، برنامه از درایور چاپگر پست اسکریپت استفاده می کند.%nبرای نصب هر گونه درایور چاپگر شما باید عضوی از گروه اکانت آدمین باشید.%n%nاگر نصب را ادامه دهید،شما فقط قادر به تبدیل فایل های پست اسکریپت موجود هستید.%n%nنصب ادامه یابد؟%n"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr "لطفا از \"PDFCreator Terminal Server\" در رایانه هایی که سرویس ترمینال دارند استفاده کنید.%n%nآیا اطلاعات بیشتری درباره \"PDFCreator Terminal Server\" میخواهید؟"
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "یک نسخه قدیمی '%1' یافت نشد.%n%nامکان بروز رسانی این نسخه به نسخه '%2' وجود ندارد.%n%nلطفا ابتدا برنامه را حذف کنید."
-
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "این نسخه پیشنمایش توسعه دهنده PDFCreator هست.%n%nاین نسخه زودتر نسخه جدید برنامه نیست. این بیشتر ممکن است حاوی مشکلات باشد و اصلا کار نکند.%n%nاگر از مشکلات آن آگاه هستید آن را نصب کنید،ما تمایل داریم بازخورد شما را بشنویم."
-
-msgid "Other tasks:"
-msgstr "سایر وظایف:"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "این نسخه حالت سرور را پشتیبانی نمی کند.بهر حال میخواهید این نسخه را نصب کنید؟"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "این وصله برای نسخه قدیمی برنامه است.شما نمیتوانید از این وصله استفاده کنید."
-
-msgid "Delete all application settings?"
-msgstr "همه تنظیمات برنامه حذف شود؟"
-
-msgid "Edit pages"
-msgstr "ویرایش صفحات"
-
-msgid "Uninstall the printer with all its components."
-msgstr "حذف چاپگر با همه کامپاننت های آن."
-
-msgid "Split and merge"
-msgstr "تقسیم و ادغام"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "برای بروز رسانی، از <تایید> استفاده کنید، یا راه اندازه را لغو کرده و ابتدا نسخه قدیمی را حذف کنید."
-
-msgid "Create"
-msgstr "ایجاد"
-
-msgid "Create an &entry in the Windows Explorer context menu"
-msgstr "ایجادیک ورودی& در منوی کلیک راست اکسپلورر"
-
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "برنامه از قبل نصب شده است.%n%nبرای نصب جدید ابتدا نسخه قدیمی را حذف کنید.%n%nراه انداز لغو خواهد شد."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "ایجاد PDF و فایل بیت مپ با %1"
-
 msgid "Do you want to cancel the setup?"
 msgstr "آیا میخواهید راه انداز را لغو کنید؟"
 
-msgid "Bad request (400)"
-msgstr "درخواست بد (400)"
-
-msgid "Custom installation"
-msgstr "نصب دستی"
-
-msgid "Access denied (401)"
-msgstr "دسترسی رد شد (401)"
-
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "PDFCreator نیاز به دات نت %1 دارد لطفا مایکروسافت دات نت %1 را داناود و نصب کنید و سپس راه انداز برنامه را مجدد اِجرا کنید."
-
-msgid "File not found (404)"
-msgstr "فایل یافت نشد (404)"
-
-msgid "Download the latest version..."
-msgstr "دانلود جدیدترین نسخه..."
-
-msgid "Proxy authentication required (407)"
-msgstr "احراز هویت پراکسی نیاز است (407)"
-
-msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "اجازه استفاده از نماد های '!','\\' یا ',' را در نام چاپگر ندارید. لطفا نام جدیدی برای چاپگر انتخاب کنید."
-
-msgid "Server internal error (500)"
-msgstr "خطای داخلی سرور (500)"
-
-msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "یک خطا در متغییر محیطی سیستم 'Path' رخ داده است%n%n->ورودی گم شده یا خراب است: %Systemroot%\\system32\\wbem%n%nقبل از ادامه نصب این مشکل باید حل شود.%n%nاگر میخواهید مشکل حل شود روی تایید کلیک کنید. بعد از این باید سیستم را ریستارت کنید.%n%nدر غیر اینصورت نصب را لغو کنید."
-
-msgid "Bad gateway (502)"
-msgstr "دروازه بد است (502)"
-
-msgid "Help"
-msgstr "راهنما"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "سرور موقتا در دسترس نیست (503)"
-
-msgid "Install printer monitor"
-msgstr "نصب نظارت چاپگر"
-
-msgid "Cancelling download..."
-msgstr "در حال لغو دانلود..."
-
-msgid "Please wait. Checking license key..."
-msgstr "منتظر بمانید.بررسی کلید مجوز..."
-
-msgid "Cannot connect"
-msgstr "نمیتوان متصل شد"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "این نسخه تحت کلید مجوز شما نیست! لطفا آن را در %1 تازه سازی کنید."
-
-msgid "Connecting..."
-msgstr "در حال اتصال..."
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "زمان رایانه بنظر اشتباه تنظیم شده است.لطفا زمان سیستم را بررسی کنید."
-
-msgid "Current file"
-msgstr "فایل فعلی"
-
-msgid "Enter the valid license key"
-msgstr "کلید مجوز معتبر را وارد کنید"
-
-msgid "Details"
-msgstr "جزئیات"
-
-msgid "Invalid license key!"
-msgstr "کلید مجوز نامعتبر است!"
-
-msgid "Download cancelled"
-msgstr "دانلود لغو شد"
-
-msgid "Licensee"
-msgstr "مجوز"
-
-msgid "Download complete"
-msgstr "دانلود کامل شد"
-
-msgid "Offline activation string:"
-msgstr "استرینگ فعالسازی آفلاین:"
-
-msgid "Download failed"
-msgstr "دانلود موفق نشد"
-
-msgid "The authorization is failed!"
-msgstr "احراز هویت موفق به انجام نشد!"
-
-msgid "Downloading..."
-msgstr "در حال دانلود..."
-
-msgid "The product %1 does not exist!"
-msgstr "محصول %1 وجود ندارد!"
-
-msgid "Please click here to revoke your previous activations."
-msgstr "برای لغو فعالسازی قبلی خود اینجا کلیک کنید."
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr "با کلیک روی بعدی شما توافقنامه مجوز را می پذیرید."
-
-msgid "Elapsed time:"
-msgstr "زمان سپری شده:"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "برای این نیازی نیست شما عضوی از گروه آدمین ها باشید.%n%n"
-
-msgid "File:"
-msgstr "فایل:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "برنامه نصب نشده است.شما نمیتوانید از این وصله استفاده کنید."
-
-msgid "The following files were not downloaded:"
-msgstr "فایل های زیر دانلود نشده است:"
-
-msgid "Edit texts and fonts"
-msgstr "ویرایش متن ها و فونت ها"
-
-msgid "Downloading additional files"
-msgstr "دانلود فایل های اضافه"
-
-msgid "Convert"
-msgstr "تبدیل"
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "لطفا تا دانلود فایل های اضافه منتظر بمانید..."
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr "برای ادامه حذف،برنامه های زیر باید بسته شوند:"
 
 msgid "Compact installation"
 msgstr "نصب کم حجم"
 
-msgid "GB"
-msgstr "گیگابایت"
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr "فایل دانلود شده خراب است و باید حذف شود.راه اندازی لغو شد!"
 
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "دانلود را نمیتوان با چک سام آن بازبینی کرد.بهرحال میخواهید راه اندازی را ادامه دهید؟"
+msgid "Custom installation"
+msgstr "نصب دستی"
 
-msgid "Getting file information..."
-msgstr "دریافت اطلاعات فایل..."
+msgid "Donate to PDFCreator"
+msgstr "کمک مالی به PDFCreator"
 
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "نام چاپگر انتخاب شده خیلی بلند است. نام میتواند حداکثر 221 کاراکتر داشته باشد. لطفا نام جدیدی برای چاپگر انتخاب کنید."
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
+msgstr ""
+"در حال نصب دات نت فریم ورک %1 ممکن است چند دقیقه طول بکشد.منتظر بمانید."
 
-msgid "Hide"
-msgstr "مخفی"
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+"یک خطا حین نصب مایکروسافت دات نت فریم ورک رخ داده است %1. (کد خطا: %2)%n"
+"%nآیا میخواهید فایل وقایع نصب دات نت را ببینید؟"
 
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "نظارت چاپگر،پورت چاپگر،درایور چاپگر و چاپگر را نصب کنید"
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install "
+"Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+"PDFCreator نیاز به دات نت %1 دارد لطفا مایکروسافت دات نت %1 را داناود و نصب "
+"کنید و سپس راه انداز برنامه را مجدد اِجرا کنید."
 
-msgid "HTTP error %d"
-msgstr "خطای اِچ تی تی پی %d"
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup again."
+"%n%nSetup will now exit."
+msgstr ""
+"راه انداز PDFCreator دات نت فریم ورک 4.0 را نصب کرده است. این مرحله نیاز به "
+"ریستارت سیستم است. لطفا حالا سیستم خود را ریستارت کرده و سپس راه انداز را "
+"دوباره اجرا کنید.%n%nحالا از راه انداز خارج میشود."
 
-msgid "Empty answer from license server!"
-msgstr "پاسخ سرور مجوز خالی است!"
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"دانلود را نمیتوان با چک سام آن بازبینی کرد.بهرحال میخواهید راه اندازی را "
+"ادامه دهید؟"
 
-msgid "Ignore"
-msgstr "چشمپوشی"
+msgid "PDFCreator download"
+msgstr "دانلود PDFCreator"
 
-msgid "The license is not valid for the given product!"
-msgstr "مجوز برای محصول ارائه شده نیست!"
+msgid "Download the latest version..."
+msgstr "دانلود جدیدترین نسخه..."
 
-msgid "Initializing..."
-msgstr "در حال مقدار دهی اولیه..."
-
-msgid "Please enter the license key."
-msgstr "لطفا کلید مجوز را وارد کنید."
-
-msgid "KB"
-msgstr "کیلوبایت"
-
-msgid "License server answer:"
-msgstr "پاسخ سرور مجوز:"
-
-msgid "KB/s"
-msgstr "کیلوبایت/ثانیه"
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr "لطفا با پشتیبانی با ایمیل تماس بگیرید support@pdfforge.org!"
-
-msgid "MB"
-msgstr "مگابایت"
-
-msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "یک نسخه قدیمی '%1' یافت نشد.%nامکان بروز رسانی این نسخه به نسخه '%2' وجود دارد.%n%n"
-
-msgid "MB/s"
-msgstr "مگابایت/ثانیه"
-
-msgid "PDF to Word"
-msgstr "PDF به Word"
-
-msgid "Remaining time:"
-msgstr "زمان باقیمانده:"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "در حال نصب دات نت فریم ورک %1 ممکن است چند دقیقه طول بکشد.منتظر بمانید."
-
-msgid "Retry"
-msgstr "دوباره"
-
-msgid "For the &current user only"
-msgstr "&فقط برای کاربر فعلی"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "ارتباط خود را بررسی کرده و روی 'دوباره' برای دانلود دوباره فایل کلیک کنید، یا روی 'لغو' برایبستن راه انداز کلیک کنید."
-
-msgid "An unknown error is occurred!"
-msgstr "یک خطای ناشناخته رخ داده است!"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "ارتباط خود را بررسی کرده و روی 'دوباره' برای دانلود دوباره فایل کلیک کنید، یا روی 'بعدی' برای ادامه نصب به هر نحو کلیک کنید."
-
-msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
-msgstr "شما به کلید مجوز معتبر جدید برای ادامه نیاز دارید.آیا میخواهید نصب را ادامه دهید؟"
-
-msgid "Speed:"
-msgstr "سرعت:"
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "نسخه نصب شده '%1' از راه انداز '%2' جدیدتر است.%n%nبرای نصب نسخه قدیمی، ابتدا برنامه را حذف کنید.%n%nراه انداز لغو شده است."
-
-msgid "Starting download..."
-msgstr "شروع دانلود..."
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "برنامه از قبل نصب شده است.%n%nبروز رسانی امکان ندارد. لطفا ابتدا برنامه را حذف کنید.%n%nراه انداز لغو خواهد شد."
-
-msgid "Status:"
-msgstr "وضعیت:"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "مقدار حداکثر %1 مجوز تخطی کرده است!"
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr "برنامه نصب شده خیلی قدیمی است.شما نمیتوانید از این وصله استفاده کنید."
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"یک نسخه جدید (%1) در سرورهای pdfforge موجود است!%n%nآیا می خواهید این نسخه "
+"را دانلود و نصب کنید؟"
 
 msgid "Expert settings"
 msgstr "خروجیگیری تنظیمات"
 
+msgid "Set installation directory and additional options"
+msgstr "تنظیم دایرکتوری نصب و گزینه های بیشتر"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"اجازه استفاده از نماد های '!','\\' یا ',' را در نام چاپگر ندارید. لطفا نام "
+"جدیدی برای چاپگر انتخاب کنید."
+
+msgid "Please choose a printer name."
+msgstr "لطفا نام چاپگر را انتخاب کنید."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"نام چاپگر انتخاب شده خیلی بلند است. نام میتواند حداکثر 221 کاراکتر داشته "
+"باشد. لطفا نام جدیدی برای چاپگر انتخاب کنید."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "چاپگری با این نام از قبل موجود است.لطفا نام دیگری انتخاب کنید."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system afterwards."
+"%n%nOtherwise Cancel the installation."
+msgstr ""
+"یک خطا در متغییر محیطی سیستم 'Path' رخ داده است%n%n->ورودی گم شده یا خراب "
+"است: %Systemroot%\\system32\\wbem%n%nقبل از ادامه نصب این مشکل باید حل شود.%n"
+"%nاگر میخواهید مشکل حل شود روی تایید کلیک کنید. بعد از این باید سیستم را "
+"ریستارت کنید.%n%nدر غیر اینصورت نصب را لغو کنید."
+
+msgid "For &all users"
+msgstr "&برای همه کاربران"
+
+msgid "For the &current user only"
+msgstr "&فقط برای کاربر فعلی"
+
+msgid "Full installation"
+msgstr "نصب کامل"
+
+msgid "Help"
+msgstr "راهنما"
+
+msgid "Install printer"
+msgstr "نصب چاپگر"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "نظارت چاپگر،پورت چاپگر،درایور چاپگر و چاپگر را نصب کنید"
+
+msgid "Install printer driver"
+msgstr "نصب درایور چاپگر"
+
+msgid "Install printer monitor"
+msgstr "نصب نظارت چاپگر"
+
+msgid "Install printer port"
+msgstr "نصب پورت چاپگر"
+
+msgid "Offline activation instructions"
+msgstr "راهنمای فعالسازی آفلاین"
+
+msgid "Languages"
+msgstr "زبان ها"
+
+msgid "Please wait. Checking license key..."
+msgstr "منتظر بمانید.بررسی کلید مجوز..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "فعالسازی خیلی قدیمی است.لطفا فعالسازی خود را تازه کنید."
+
+msgid "Empty answer from license server!"
+msgstr "پاسخ سرور مجوز خالی است!"
+
+msgid "Invalid answer from license server!"
+msgstr "پاسخ سرور مجوز معتبر نیست!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr "این نسخه تحت کلید مجوز شما نیست! لطفا آن را در %1 تازه سازی کنید."
+
+msgid "No answer from license server!"
+msgstr "پاسخی از سرور مجوز ندارد!"
+
+msgid "An unknown error is occurred!"
+msgstr "یک خطای ناشناخته رخ داده است!"
+
+msgid "Wrong answer from license server!"
+msgstr "پاسخ دریافت شده از سرور مجوز اشتباه است!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr "زمان رایانه بنظر اشتباه تنظیم شده است.لطفا زمان سیستم را بررسی کنید."
+
+msgid "License server answer not valid for this computer!"
+msgstr "پاسخ سرور مجوز برای این رایانه معتبر نیست!"
+
+msgid "The license is not valid for the given product!"
+msgstr "مجوز برای محصول ارائه شده نیست!"
+
+msgid "License key validation"
+msgstr "معتبرسازی کلید مجوز"
+
+msgid "Enter the valid license key"
+msgstr "کلید مجوز معتبر را وارد کنید"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "کلید مجوز معتبر را وارد کنید و نصب را ادامه دهید."
+
 msgid "An error occurred validating the license key!"
 msgstr "یک خزا حین معتبرسازی کلید مجوز رخ داد!"
+
+msgid "Invalid license answer hash!"
+msgstr "هَش پاسخ مجوز نامعتبر است!"
+
+msgid "Invalid license key!"
+msgstr "کلید مجوز نامعتبر است!"
+
+msgid "License key"
+msgstr "کلید مجوز"
+
+msgid "Please enter the license key."
+msgstr "لطفا کلید مجوز را وارد کنید."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "فرمت کلید مجوز اینطور است XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "مجوز"
+
+msgid "Message"
+msgstr "پیام"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"شما به کلید مجوز معتبر جدید برای ادامه نیاز دارید.آیا میخواهید نصب را ادامه "
+"دهید؟"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
+"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"کلید مجوزی ارائه نشده است. یک کلید مجوز با ترکیب پارامترهای '/VerySilent' یا "
+"'/Silent'  کاملا نیاز است! لطفا از پارامتر استفاده کنید '/%1'.%n%nSample: "
+"%2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "استرینگ فعالسازی آفلاین:"
+
+msgid "Offline license check"
+msgstr "بررسی آفلاین مجوز"
+
+msgid "License server answer:"
+msgstr "پاسخ سرور مجوز:"
+
+msgid "The machine or the user is blocked!"
+msgstr "کاربر یا دستگاه مسدود شده است!"
+
+msgid "The authorization is failed!"
+msgstr "احراز هویت موفق به انجام نشد!"
+
+msgid "An invalid license key is provided!"
+msgstr "کلید مجوز نامعتبر ارائه شده است!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "مقدار حداکثر %1 مجوز تخطی کرده است!"
+
+msgid "OK"
+msgstr "&تأييد"
+
+msgid "The product %1 does not exist!"
+msgstr "محصول %1 وجود ندارد!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr ""
+"نسخه %1 پشتیبانی نشده است! لطفا از اینجا جدیدترین نسخه %2 را استفاده کنید."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "لطفا با پشتیبانی با ایمیل تماس بگیرید support@pdfforge.org!"
+
+msgid "License agreement"
+msgstr "توافقنامه مجوز"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "با کلیک روی بعدی شما توافقنامه مجوز را می پذیرید."
+
+msgid "PDFCreator log file"
+msgstr "فایل وقایع PDFCreator"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"نسخه نصب شده '%1' از راه انداز '%2' جدیدتر است.%n%nبرای نصب نسخه قدیمی، "
+"ابتدا برنامه را حذف کنید.%n%nراه انداز لغو شده است."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"شما عضوی از گروه آدمین ها نیستید.%n%n%nبرای ایجاد سند پی دی اِف از هر برنامه "
+"ای، برنامه از درایور چاپگر پست اسکریپت استفاده می کند.%nبرای نصب هر گونه "
+"درایور چاپگر شما باید عضوی از گروه اکانت آدمین باشید.%n%nاگر نصب را ادامه "
+"دهید،شما فقط قادر به تبدیل فایل های پست اسکریپت موجود هستید.%n%nنصب ادامه "
+"یابد؟%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "برای این نیازی نیست شما عضوی از گروه آدمین ها باشید.%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"یک نسخه قدیمی '%1' یافت نشد.%n%nامکان بروز رسانی این نسخه به نسخه '%2' وجود "
+"ندارد.%n%nلطفا ابتدا برنامه را حذف کنید."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"یک نسخه قدیمی '%1' یافت نشد.%nامکان بروز رسانی این نسخه به نسخه '%2' وجود "
+"دارد.%n%n"
+
+msgid "Other tasks:"
+msgstr "سایر وظایف:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "برنامه نصب نشده است.شما نمیتوانید از این وصله استفاده کنید."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr ""
+"این وصله برای نسخه قدیمی برنامه است.شما نمیتوانید از این وصله استفاده کنید."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "برنامه نصب شده خیلی قدیمی است.شما نمیتوانید از این وصله استفاده کنید."
+
+msgid "Edit pages"
+msgstr "ویرایش صفحات"
+
+msgid "Edit texts and fonts"
+msgstr "ویرایش متن ها و فونت ها"
+
+msgid "Split and merge"
+msgstr "تقسیم و ادغام"
+
+msgid "PDF to Word"
+msgstr "PDF به Word"
+
+msgid "Create"
+msgstr "ایجاد"
+
+msgid "Convert"
+msgstr "تبدیل"
+
+msgid "Edit & Insert"
+msgstr "ویرایش & قرار دادن"
+
+msgid "Review"
+msgstr "بازبینی"
+
+msgid "Secure & Sign"
+msgstr "امن & امضاء"
+
+msgid "Forms"
+msgstr "برگه ها"
+
+msgid "Try out the new PDF Architect"
+msgstr "نسخه PDF Architect جدید را امتحان کنید"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "یک میانبر به دسکتاپ شما اضافه شد."
+
+msgid "Install PDF Architect with great free features"
+msgstr "برنامه PDF Architect با ویژگی های رایگان عالی نصب کنید"
+
+msgid "Rotate, move and delete pages"
+msgstr "چرخش،جابجایی و حذف صفحات"
+
+msgid "Merge multiple PDFs"
+msgstr "ادغام چندین PDFs"
+
+msgid "Free features:"
+msgstr "ویژگی های رایگان:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "بهسازی PDFCreator با ویژگی های ویرایش!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "تغییرات در PDF Architect {0}:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "امضای دیجیتالی گردش کار خودکار"
+
+msgid "Verify and remove signatures"
+msgstr "بازبینی و حذف امضای دیجیتالی"
+
+msgid "Already installed"
+msgstr "از قبل نصب شده است"
+
+msgid "Automatic updates"
+msgstr "بروز رسانی خودکار"
+
+msgid "Default application for PDF files"
+msgstr "برنامه پیش فرض برای فایل های PDF"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "نسخه جدید PDF Architect نصب خواهد شد. این مدتی طول می کشد."
+
+msgid "Firefox integration"
+msgstr "یکپارچگی با فایرفاکس"
+
+msgid "Internet Explorer integration"
+msgstr "یکپارچگی با  اینترنت اکسپلورر"
+
+msgid "MS Outlook previewer integration"
+msgstr "یکپارچگی نمایش دهنده اُوت لوک"
+
+msgid "Windows Explorer integration"
+msgstr "یکپارچگی با ویندوز اکسپلورر"
+
+msgid "No thanks"
+msgstr "نه ممنونم"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"لطفا 'PDFCreator Server' را قبل از ادامه نصب حذف کنید. امکان استفاده "
+"'PDFCreator' و 'PDFCreator Server' در یک دستگاه نیست."
+
+msgid "PDFCreator setup"
+msgstr "راه انداز PDFCreator"
+
+msgid "Setup is being prepared..."
+msgstr "راه انداز در حال آماده سازی است..."
+
+msgid "Printer"
+msgstr "چاپگر"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"حین نصب چاپگر خطا رخ داده است.توضیح همراه با جزئیات را میتوان در فایل  "
+"'SetupLog.txt' در مسیر نصب برنامه یافت."
+
+msgid "Printer name"
+msgstr "نام چاپگر"
+
+msgid "Choosing a printer name."
+msgstr "نام چاپگر را انتخاب کنید."
+
+msgid "Please choose a name for the printer."
+msgstr "لطفا یک نام برای چاپگر انتخاب کنید."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"PDFCreator یک چاپگر در رایانه شما نصبخواهد کرد. با این چاپگر،هر برنامه ای که "
+"قادر به چاپ باشد، میتواند فایل پی دی اِف،بیت مپ،یا فایل پست اسکریپت ایجاد کند."
+"%n%nنام چاپگر:"
+
+msgid "This process might take several minutes."
+msgstr "این فرآیند ممکن است چند دقیقه طول بکشد."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"PDFCreator به آسانی از هر برنامه ویندوزی فایل پی دی اِف می سازد. از آن مانند "
+"چاپگر در برنامه هایی مانند Word، Excel، یا هر برنامه ویندوزی دیگر استفاده "
+"کنید."
+
+msgid "application files"
+msgstr "فایل های برنامه"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "برنامه '%1' در اِجرا است.%n%nلطفا ابتدا برنامه را ببندید.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "برای ادامه نصب لطفا ابتدا سیستم خود را ریستارت کنید."
+
+msgid "PDFCreator settings"
+msgstr "تنظیمات برنامه"
+
+msgid "Show help after setup"
+msgstr "نمایش راهنما بعد از نصب"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"لطفا از \"PDFCreator Terminal Server\" در رایانه هایی که سرویس ترمینال دارند "
+"استفاده کنید.%n%nآیا اطلاعات بیشتری درباره \"PDFCreator Terminal Server\" "
+"میخواهید؟"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n"
+"%nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"این نسخه پیشنمایش توسعه دهنده PDFCreator هست.%n%nاین نسخه زودتر نسخه جدید "
+"برنامه نیست. این بیشتر ممکن است حاوی مشکلات باشد و اصلا کار نکند.%n%nاگر از "
+"مشکلات آن آگاه هستید آن را نصب کنید،ما تمایل داریم بازخورد شما را بشنویم."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"این نسخه حالت سرور را پشتیبانی نمی کند.بهر حال میخواهید این نسخه را نصب کنید؟"
+
+msgid "Delete all application settings?"
+msgstr "همه تنظیمات برنامه حذف شود؟"
+
+msgid "Uninstall the printer with all its components."
+msgstr "حذف چاپگر با همه کامپاننت های آن."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"برای بروز رسانی، از <تایید> استفاده کنید، یا راه اندازه را لغو کرده و ابتدا "
+"نسخه قدیمی را حذف کنید."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "ایجادیک ورودی& در منوی کلیک راست اکسپلورر"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "ایجاد PDF و فایل بیت مپ با %1"
+
+msgid "Bad request (400)"
+msgstr "درخواست بد (400)"
+
+msgid "Access denied (401)"
+msgstr "دسترسی رد شد (401)"
+
+msgid "File not found (404)"
+msgstr "فایل یافت نشد (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "احراز هویت پراکسی نیاز است (407)"
+
+msgid "Server internal error (500)"
+msgstr "خطای داخلی سرور (500)"
+
+msgid "Bad gateway (502)"
+msgstr "دروازه بد است (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "سرور موقتا در دسترس نیست (503)"
+
+msgid "Cancelling download..."
+msgstr "در حال لغو دانلود..."
+
+msgid "Cannot connect"
+msgstr "نمیتوان متصل شد"
+
+msgid "Connecting..."
+msgstr "در حال اتصال..."
+
+msgid "Current file"
+msgstr "فایل فعلی"
+
+msgid "Details"
+msgstr "جزئیات"
+
+msgid "Download cancelled"
+msgstr "دانلود لغو شد"
+
+msgid "Download complete"
+msgstr "دانلود کامل شد"
+
+msgid "Download failed"
+msgstr "دانلود موفق نشد"
+
+msgid "Downloading..."
+msgstr "در حال دانلود..."
+
+msgid "Please click here to revoke your previous activations."
+msgstr "برای لغو فعالسازی قبلی خود اینجا کلیک کنید."
+
+msgid "Elapsed time:"
+msgstr "زمان سپری شده:"
+
+msgid "File:"
+msgstr "فایل:"
+
+msgid "The following files were not downloaded:"
+msgstr "فایل های زیر دانلود نشده است:"
+
+msgid "Downloading additional files"
+msgstr "دانلود فایل های اضافه"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "لطفا تا دانلود فایل های اضافه منتظر بمانید..."
+
+msgid "GB"
+msgstr "گیگابایت"
+
+msgid "Getting file information..."
+msgstr "دریافت اطلاعات فایل..."
+
+msgid "Hide"
+msgstr "مخفی"
+
+msgid "HTTP error %d"
+msgstr "خطای اِچ تی تی پی %d"
+
+msgid "Ignore"
+msgstr "چشمپوشی"
+
+msgid "Initializing..."
+msgstr "در حال مقدار دهی اولیه..."
+
+msgid "KB"
+msgstr "کیلوبایت"
+
+msgid "KB/s"
+msgstr "کیلوبایت/ثانیه"
+
+msgid "MB"
+msgstr "مگابایت"
+
+msgid "MB/s"
+msgstr "مگابایت/ثانیه"
+
+msgid "Remaining time:"
+msgstr "زمان باقیمانده:"
+
+msgid "Retry"
+msgstr "دوباره"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"ارتباط خود را بررسی کرده و روی 'دوباره' برای دانلود دوباره فایل کلیک کنید، "
+"یا روی 'لغو' برایبستن راه انداز کلیک کنید."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"ارتباط خود را بررسی کرده و روی 'دوباره' برای دانلود دوباره فایل کلیک کنید، "
+"یا روی 'بعدی' برای ادامه نصب به هر نحو کلیک کنید."
+
+msgid "Speed:"
+msgstr "سرعت:"
+
+msgid "Starting download..."
+msgstr "شروع دانلود..."
+
+msgid "Status:"
+msgstr "وضعیت:"
 
 msgid "Total progress"
 msgstr "مجموع پیشرفت"
@@ -547,5 +698,5 @@ msgstr "ناشناخته"
 msgid "%.2f of %.2f"
 msgstr "%.2f از %.2f"
 
-msgid "Offline activation instructions"
-msgstr "راهنمای فعالسازی آفلاین"
+msgid "Setup has finished installing [name] on your computer."
+msgstr "راه انداز نصب [name] را در رایانه شما به پایان رسانده است."

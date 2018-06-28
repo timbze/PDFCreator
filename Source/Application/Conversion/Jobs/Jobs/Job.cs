@@ -82,11 +82,6 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         public string JobTempFileName { get; set; } = "output";
 
         /// <summary>
-        ///     Flag to skip the SaveFileDialog (Therefore an OutputFilename must be set)
-        /// </summary>
-        public bool SkipSaveFileDialog { get; set; }
-
-        /// <summary>
         /// ShareLinks from upload actions like Dropbox
         /// </summary>
         public JobShareLinks ShareLinks { get; set; } = new JobShareLinks();
@@ -95,6 +90,11 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
         ///     If true, the job has completed execution
         /// </summary>
         public bool Completed { get; set; }
+
+        /// <summary>
+        ///     If true, the job has successfully completed execution
+        /// </summary>
+        public bool IsSuccessful { get; set; }
 
         /// <summary>
         ///     A list of output files produced during the conversion
@@ -135,12 +135,18 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.Jobs
             OnJobProgressChanged?.Invoke(this, new JobProgressChangedEventArgs(this, percentProgress));
         }
 
-        public void OnErrorDuringLogin(Action<string> continueAction, Action abortAction, string actionDisplayName)
+        public void OnErrorDuringLogin(Action<string> continueAction, Action<LoginQueryResult> abortAction, string actionDisplayName)
         {
             if (OnJobHasError == null)
-                abortAction();
+                abortAction(LoginQueryResult.AbortWithError);
             else
                 OnJobHasError(this, new JobLoginFailedEventArgs(continueAction, abortAction, actionDisplayName));
         }
+    }
+
+    public enum LoginQueryResult
+    {
+        AbortWithError,
+        AbortedByUser
     }
 }

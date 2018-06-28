@@ -3,8 +3,8 @@ using pdfforge.Obsidian.Trigger;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
-using pdfforge.PDFCreator.UI.Presentation.Controls;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient
@@ -13,29 +13,44 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailCli
     {
         private readonly IClientTestEmail _clientTestEmail;
         private readonly IInteractionRequest _interactionRequest;
-        public TokenViewModel RecipientsTokenViewModel { get; private set; }
+        public TokenViewModel<ConversionProfile> RecipientsTokenViewModel { get; private set; }
+        public TokenViewModel<ConversionProfile> RecipientsCcTokenViewModel { get; private set; }
+        public TokenViewModel<ConversionProfile> RecipientsBccTokenViewModel { get; private set; }
         public DelegateCommand EmailClientTestCommand { get; set; }
         public DelegateCommand EditEmailTextCommand { get; set; }
         private EmailClientSettings EmailClientSettings => CurrentProfile?.EmailClientSettings;
 
         public MailClientControlViewModel(IInteractionRequest interactionRequest, IClientTestEmail clientTestEmail, ITranslationUpdater translationUpdater,
-            ISelectedProfileProvider selectedProfileProvider, TokenHelper tokenHelper) : base(translationUpdater, selectedProfileProvider)
+            ISelectedProfileProvider selectedProfileProvider, ITokenViewModelFactory tokenViewModelFactory) : base(translationUpdater, selectedProfileProvider)
         {
             _interactionRequest = interactionRequest;
             _clientTestEmail = clientTestEmail;
 
-            var tokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
-            var tokens = tokenHelper.GetTokenListForEmailRecipients();
-            if (CurrentProfile?.EmailClientSettings != null)
-                RecipientsTokenViewModel = new TokenViewModel(
-                    v => EmailClientSettings.Recipients = v,
-                    () => EmailClientSettings.Recipients,
-                    tokens,
-                    s => tokenReplacer.ReplaceTokens(s));
-            RaisePropertyChanged(nameof(RecipientsTokenViewModel));
+            CreateTokenViewModels(tokenViewModelFactory);
 
             EmailClientTestCommand = new DelegateCommand(EmailClientTestExecute);
             EditEmailTextCommand = new DelegateCommand(EditEmailTextExecute);
+        }
+
+        private void CreateTokenViewModels(ITokenViewModelFactory tokenViewModelFactory)
+        {
+            var builder = tokenViewModelFactory
+                .BuilderWithSelectedProfile()
+                .WithDefaultTokenReplacerPreview(th => th.GetTokenListForEmailRecipients());
+
+            RecipientsTokenViewModel = builder
+                .WithSelector(p => p.EmailClientSettings.Recipients)
+                .Build();
+
+            RecipientsCcTokenViewModel = builder
+                .WithSelector(p => p.EmailClientSettings.RecipientsCc)
+                .Build();
+
+            RecipientsBccTokenViewModel = builder
+                .WithSelector(p => p.EmailClientSettings.RecipientsBcc)
+                .Build();
+
+            RaisePropertyChanged(nameof(RecipientsTokenViewModel));
         }
 
         private void EmailClientTestExecute(object obj)

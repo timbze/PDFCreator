@@ -21,15 +21,19 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 
             while (actionResult.Contains(ErrorCode.PasswordAction_Login_Error))
             {
-                var aborted = false;
+                LoginQueryResult? abortReason = null;
 
                 job.OnErrorDuringLogin(password => SetPassword(job, password),
-                                        () => aborted = true, PasswordText);
+                                        reason => abortReason = reason, PasswordText);
 
-                if (aborted)
+                if (abortReason != null)
                 {
-                    //todo: This makes the return succesfull. Do we really want this?
-                    actionResult.Remove(actionResult.First(code => code == ErrorCode.PasswordAction_Login_Error));
+                    if (abortReason == LoginQueryResult.AbortedByUser)
+                    {
+                        // if the user decides to abort, we don't want to see this as error. If there is no way to requery (i.e. during autosave), we want to keep this error!
+                        actionResult.Remove(actionResult.First(code => code == ErrorCode.PasswordAction_Login_Error));
+                    }
+
                     break;
                 }
 

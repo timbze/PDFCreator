@@ -3,6 +3,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient;
@@ -42,7 +43,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _tokenHelper = new TokenHelper(new DesignTimeTranslationUpdater());
             _tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            _viewModel = new MailClientControlViewModel(_interactionRequest, _mailClientTest, translationUpdater, currentSettingsProvider, _tokenHelper);
+            _viewModel = new MailClientControlViewModel(_interactionRequest, _mailClientTest, translationUpdater, currentSettingsProvider, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
         }
 
         [Test]

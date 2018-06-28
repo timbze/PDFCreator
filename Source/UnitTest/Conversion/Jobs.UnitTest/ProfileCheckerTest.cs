@@ -337,27 +337,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs
         }
 
         [Test]
-        public void EmptyFolderForSaveDialog()
-        {
-            _profile.SaveDialog.SetDirectory = true;
-            _profile.TargetDirectory = "";
-            var result = _profileChecker.ProfileCheck(_profile, _accounts);
-            Assert.Contains(SaveDialog_NoPreselectedFolder, result, "ProfileCheck did not detect empty folder for save dialog.");
-            result.Remove(SaveDialog_NoPreselectedFolder);
-            Assert.IsTrue(result, "Unexpected errorcodes:" + Environment.NewLine + result);
-        }
-
-        [Test]
-        public void EmptyFolderForSaveDialog_EnabledAutosave_IsValid()
-        {
-            _profile.SaveDialog.SetDirectory = true;
-            _profile.TargetDirectory = "";
-            _profile.AutoSave.Enabled = true;
-            var result = _profileChecker.ProfileCheck(_profile, _accounts);
-            Assert.IsFalse(result.Contains(SaveDialog_NoPreselectedFolder), "ProfileCheck should ignore empty folder for save dialog if Autosave is enabled.");
-        }
-
-        [Test]
         public void ActionChecks_CallsAllResolvedActionChecks()
         {
             var expectedCodes = new Dictionary<ICheckable, ErrorCode>();

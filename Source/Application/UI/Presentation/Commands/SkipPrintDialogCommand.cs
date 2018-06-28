@@ -1,4 +1,5 @@
 ﻿using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using System;
 using System.Windows.Input;
@@ -26,15 +27,18 @@ namespace pdfforge.PDFCreator.UI.Presentation.Commands
             var job = parameter as Job;
 
             var folder = _pathSafe.GetDirectoryName(job.OutputFilenameTemplate) ?? "";
+
             var filename = _pathSafe.GetFileName(job.OutputFilenameTemplate) ?? "";
 
             var result = _saveFileQuery.GetFileName(folder, filename, job.Profile.OutputFormat);
 
-            if (result.Success)
+            if (!result.Success)
             {
-                job.OutputFilenameTemplate = result.Data.Filepath;
-                job.Profile.OutputFormat = result.Data.OutputFormat;
+                throw new AbortWorkflowException("User cancelled in SaveFileDialog");
             }
+
+            job.OutputFilenameTemplate = result.Data.Filepath;
+            job.Profile.OutputFormat = result.Data.OutputFormat;
         }
 
 #pragma warning disable CS0067

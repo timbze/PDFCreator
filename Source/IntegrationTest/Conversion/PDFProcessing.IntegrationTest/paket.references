@@ -1,7 +1,9 @@
 iTextSharp
-NUnit
 PdfTools.PdfAValidator
 PdfTools.LibPdf
 SystemInterface
 SystemWrapper
 SimpleInjector
+
+group test
+    NUnit

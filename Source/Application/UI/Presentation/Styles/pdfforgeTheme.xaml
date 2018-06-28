@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="options">
 
     <Color x:Key="HighlightColor">#FFB22121</Color>
@@ -15,6 +16,11 @@
     <Color x:Key="AccentColor3">#99D72828</Color>
     <!--20%-->
     <Color x:Key="AccentColor4">#66D72828</Color>
+
+    <Color x:Key="CloseButtonColorMouseOver1">#e61300</Color>
+    <Color x:Key="CloseButtonColorMouseOver2">#d1d1d1</Color>
+    <Color x:Key="CloseButtonColorIsPressed1">#cc1100</Color>
+    <Color x:Key="CloseButtonColorIsEnabled">#515151</Color>
 
     <!-- re-set brushes too -->
     <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource HighlightColor}" options:Freeze="True" />
@@ -52,4 +58,9 @@
     <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchBrush.Win10" Color="{StaticResource AccentColor}" options:Freeze="True" />
     <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchMouseOverBrush.Win10" Color="{StaticResource AccentColor2}" options:Freeze="True" />
     <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.ThumbIndicatorCheckedBrush.Win10" Color="{StaticResource IdealForegroundColor}" options:Freeze="True" />
+
+    <SolidColorBrush x:Key="CloseButtonBackroundMouseOverBrush" Color="{StaticResource CloseButtonColorMouseOver1}" options:Freeze="True" />
+    <SolidColorBrush x:Key="CloseButtonForegroundMouseOverBrush" Color="{StaticResource CloseButtonColorMouseOver2}" options:Freeze="True" />
+    <SolidColorBrush x:Key="CloseButtonBackgroundIsPressedBrush" Color="{StaticResource CloseButtonColorIsPressed1}" options:Freeze="True" />
+    <SolidColorBrush x:Key="CloseButtonForegroundIsEnabledBrush" Color="{StaticResource CloseButtonColorIsEnabled}" options:Freeze="True" />
 </ResourceDictionary>

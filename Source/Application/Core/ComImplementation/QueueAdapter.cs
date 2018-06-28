@@ -184,11 +184,11 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
             }
         }
 
+        //todo Why is it implemented like this ?
         private string ComposeMailSignature()
         {
             return "\r\n\r\n______________________________\r\n\r\n"
-                   +
-                   "Created with PDFCreator"
+                   + "Created with PDFCreator"
                    + "\r\nwww.pdfforge.org";
         }
     }

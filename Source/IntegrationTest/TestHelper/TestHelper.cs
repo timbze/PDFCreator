@@ -12,6 +12,7 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,7 +99,7 @@ namespace PDFCreator.TestUtilities
 
         public void CleanUp()
         {
-            Retry.Do(DoCleanUp, retryInterval: TimeSpan.FromSeconds(2), retryCount: 10);
+            Retry.Do(DoCleanUp, retryInterval: TimeSpan.FromMilliseconds(250), retryCount: 10);
         }
 
         private List<string> GeneratePSFileList(PSfiles psFiles, string tmpTestFolder)
@@ -363,8 +364,7 @@ namespace PDFCreator.TestUtilities
             SetUpGhostscript();
             InitMissingData();
 
-            //todo:
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), new FileWrap(), new PathUtil(new PathWrap(), new DirectoryWrap()));
+            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), new FileWrap(), new PathUtil(new PathWrap(), new DirectoryWrap()), new DirectoryHelper(new DirectoryWrap()));
 
             _jobRunner.RunJob(Job, outputFileMover);
         }

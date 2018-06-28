@@ -63,16 +63,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         #region General tests
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void NoDropboxAccessToken_ThrowsArgumentException()
         {
-            _dropboxService.ParseAccessToken(new Uri("https://www.dropbox.com/1/oauth2/redirect_receiver#state=eb3399f60f50429b94af8360ec377079&error_description=The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.&error=access_denied"));
+            var uri = new Uri("https://www.dropbox.com/1/oauth2/redirect_receiver#state=eb3399f60f50429b94af8360ec377079&error_description=The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.&error=access_denied");
+            Assert.Throws<ArgumentException>(() => _dropboxService.ParseAccessToken(uri));
         }
 
         [Test]
         public void CanParseAccessToken_ReturnsNonEmptyString()
         {
-            var url = $"https://www.dropbox.com/1/oauth2/redirect_receiver#access_token=" + DROPBOX_ACCESSTOKEN + "&token_type=bearer&state=1bc3f668b579483caeef4d177871144c&uid=601383411&account_id=dbid%3AAADDGW8GLuF6MWlqODbOkPRcT0GTpWakl8s";
+            var url = "https://www.dropbox.com/1/oauth2/redirect_receiver#access_token=" + DROPBOX_ACCESSTOKEN + "&token_type=bearer&state=1bc3f668b579483caeef4d177871144c&uid=601383411&account_id=dbid%3AAADDGW8GLuF6MWlqODbOkPRcT0GTpWakl8s";
             var result = _dropboxService.ParseAccessToken(new Uri(url));
             Assert.AreEqual(DROPBOX_ACCESSTOKEN, result);
         }
@@ -82,7 +82,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         {
             var result = _dropboxService.GetAuthorizeUri(APP_KEY, REDIRECT_URI);
             // check is authentication url starts with redirecturi. if not test is failed.
-            Assert.IsNotNullOrEmpty(result.AbsoluteUri);
+            Assert.IsNotNull(result.AbsoluteUri);
+            Assert.IsNotEmpty(result.AbsoluteUri);
         }
 
         [Test]
@@ -92,15 +93,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         }
 
         [Test]
-        public void GetDropboxUserAccountId()
-        {
-            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccountId);
-        }
-
-        [Test]
         public void SetUserInfoAndCheckAccountInfo_ReturnsNonEmptyString()
         {
-            Assert.IsNotNullOrEmpty(_dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccountId);
+            var userInfo = _dropboxService.GetDropUserInfo(DROPBOX_ACCESSTOKEN).AccountId;
+            Assert.IsNotNull(userInfo);
+            Assert.IsNotEmpty(userInfo);
         }
 
         #endregion General tests

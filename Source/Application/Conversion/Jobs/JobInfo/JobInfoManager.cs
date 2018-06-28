@@ -62,7 +62,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
 
             var infData = Data.CreateDataStorage();
             var ini = new IniStorage(Encoding.GetEncoding("Unicode"));
-            ini.SetData(infData);
+            ini.Data = infData;
 
             var sourceFileReader = new SourceFileInfoDataReader();
 
@@ -132,7 +132,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
             jobInfo.InfFile = infFile;
             var infData = Data.CreateDataStorage();
             var ini = new IniStorage(Encoding.GetEncoding("Unicode"));
-            ini.SetData(infData);
+            ini.Data = infData;
             ini.ReadData(infFile);
 
             var sourceFiles = new ObservableCollection<SourceFileInfo>();
@@ -150,6 +150,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
             {
                 metadata.PrintJobAuthor = sourceFiles[0].Author;
                 metadata.PrintJobName = titleReplacer.Replace(sourceFiles[0].DocumentTitle);
+
+                jobInfo.OutputFileParameter = sourceFiles[0].OutputFile;
+                jobInfo.ProfileParameter = sourceFiles[0].Profile;
 
                 jobInfo.JobType = sourceFiles[0].Type;
             }

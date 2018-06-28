@@ -11,9 +11,11 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using pdfforge.PDFCreator.Utilities.Tokens;
 using System;
 using SystemInterface.IO;
 using Translatable;
@@ -35,6 +37,8 @@ namespace Presentation.UnitTest.Assistant
         private SmtpTranslation _translation;
         private readonly string _mailSignature = "___ " + Environment.NewLine + "Signature";
         private IInteractionInvoker _interactionInvoker;
+        private ITokenReplacerFactory _tokenReplacerFactory;
+        private TokenReplacer _tokenReplacer;
 
         [SetUp]
         public void Setup()
@@ -66,12 +70,16 @@ namespace Presentation.UnitTest.Assistant
             _mailSignatureHelper = Substitute.For<IMailSignatureHelper>();
             _mailSignatureHelper.ComposeMailSignature().Returns(_mailSignature);
 
+            _tokenReplacer = new TokenReplacer();
+            _tokenReplacerFactory = Substitute.For<ITokenReplacerFactory>();
+            _tokenReplacerFactory.BuildTokenReplacerWithOutputfiles(Arg.Any<Job>()).Returns(_tokenReplacer);
+
             _translation = new SmtpTranslation();
         }
 
         private SmtpTestEmailAssistant BuildAssistant()
         {
-            return new SmtpTestEmailAssistant(new DesignTimeTranslationUpdater(), _interactionRequest, _file, _smtpAction, _path, _mailSignatureHelper, new ErrorCodeInterpreter(new TranslationFactory()), _interactionInvoker);
+            return new SmtpTestEmailAssistant(new DesignTimeTranslationUpdater(), _interactionRequest, _file, _smtpAction, _path, _mailSignatureHelper, new ErrorCodeInterpreter(new TranslationFactory()), _interactionInvoker, new TokenHelper(new DesignTimeTranslationUpdater()));
         }
 
         [Test]
@@ -86,7 +94,7 @@ namespace Presentation.UnitTest.Assistant
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
 
             Assert.AreEqual(_translation.SendTestMail, messageInteraction.Title);
-            Assert.AreEqual(_translation.GetTestMailSentFormattedTranslation(string.Empty), messageInteraction.Text);
+            StringAssert.StartsWith(_translation.TestMailSent, messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Info, messageInteraction.Icon);
         }
 
@@ -151,7 +159,6 @@ namespace Presentation.UnitTest.Assistant
 
             var messageInteraction = _interactionRequest.AssertWasRaised<MessageInteraction>();
 
-            var errorCodeInt = (int)expectedError;
             Assert.AreEqual(_translation.SendTestMail, messageInteraction.Title);
             Assert.AreEqual(TranslationAttribute.GetValue(expectedError), messageInteraction.Text);
             Assert.AreEqual(MessageIcon.Error, messageInteraction.Icon);
@@ -166,6 +173,34 @@ namespace Presentation.UnitTest.Assistant
             assistant.SendTestMail(_profile, _accounts);
 
             _smtpAction.DidNotReceive().ProcessJob(Arg.Any<Job>());
+        }
+
+        [Test]
+        public void DuringPasswordInteraction_ShowsRecipientsWithReplacedTokens()
+        {
+            var recipientToWithToken = "<username>@to.local";
+            var recipientCcWithToken = "<username>@cc.local";
+            var recipientBccWithToken = "<username>@bcc.local";
+            var expectedUserName = Environment.UserName;
+
+            _profile.EmailSmtpSettings.Recipients = recipientToWithToken;
+            _profile.EmailSmtpSettings.RecipientsCc = recipientCcWithToken;
+            _profile.EmailSmtpSettings.RecipientsBcc = recipientBccWithToken;
+            _tokenReplacer.AddStringToken("username", expectedUserName);
+            //_interactionRequest.RegisterInteractionHandler<PasswordOverlayInteraction>(interaction => interaction.Result = PasswordResult.Cancel);
+            PasswordOverlayInteraction interaction = null;
+            _interactionInvoker.Invoke(Arg.Do<PasswordOverlayInteraction>(i =>
+            {
+                interaction = i;
+                i.Result = PasswordResult.Cancel;
+            }));
+
+            var assistant = BuildAssistant();
+            assistant.SendTestMail(_profile, _accounts);
+
+            StringAssert.Contains(recipientToWithToken.Replace("<username>", expectedUserName), interaction.IntroText);
+            StringAssert.Contains(recipientCcWithToken.Replace("<username>", expectedUserName), interaction.IntroText);
+            StringAssert.Contains(recipientBccWithToken.Replace("<username>", expectedUserName), interaction.IntroText);
         }
 
         [Test]

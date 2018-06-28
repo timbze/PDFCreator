@@ -1,17 +1,12 @@
-msgid "Setup has finished installing [name] on your computer."
-msgstr "Paigaldaja lõpetas paigalduse [name] nimelisse arvutisse."
-
-msgid "Edit & Insert"
-msgstr "Muuda ja aseta"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 10:38+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Estonian <http://translate.pdfforge.org/projects/pdfcreator/innosetup/et/>\n"
+"Language-Team: Estonian <http://translate.pdfforge.org/projects/pdfcreator/"
+"innosetup/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,526 +14,675 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "Review"
-msgstr "Vaata üle"
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programm on juba paigaldatud.%n%nUueks paigaldamiseks tuleks eemaldada "
+"paigaldatud progamm.%n%nPaigaldamine katkestati."
 
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
 msgstr ""
 
-msgid "Secure & Sign"
-msgstr "Turva & signeeri"
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programm on juba paigaldatud.%n%nUuendamine pole võimalik! Enne tuleks "
+"eemaldada paigaldatud progamm.%n%nPaigaldamine katkestati."
 
 msgid "The setup will be canceled."
 msgstr "Paigaldamine katkestatakse."
 
-msgid "Forms"
-msgstr "Vormid"
+msgid "Do you want to cancel the setup?"
+msgstr "Kas soovid paigaldamist katkestada?"
 
-msgid "The following applications have to be closed to proceed with the uninstallation:"
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
 msgstr "Järgnevad programmid oleks vaja sulgeda, et jätkata eemaldamisega:"
 
-msgid "Try out the new PDF Architect"
-msgstr "Proovi uut PDF Architecti"
+msgid "Compact installation"
+msgstr "Kompaktne paigaldamine"
 
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "Alla laetud fail on vigane ja ta kustutati ära. Paigaldamine katkestatud.!"
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+"Alla laetud fail on vigane ja ta kustutati ära. Paigaldamine katkestatud.!"
 
-msgid "A shortcut has been added to your desktop."
-msgstr "Sinu ekraanile luuakse otsetee"
+msgid "Custom installation"
+msgstr "Kohandatud paigaldamine"
 
 msgid "Donate to PDFCreator"
 msgstr "Anneta PDFCreator'ile"
 
-msgid "Install PDF Architect with great free features"
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
 msgstr ""
+"Paigaldan  Microsoft .Net Framework %1 See võtab mõned minutid. Palun oodake."
 
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "Viga Microsoft.Net Framework %1 paigaldamisel. (Veateade: %2)%n%nKas soovid vaadata .Net paigalduse logifaili?"
-
-msgid "Rotate, move and delete pages"
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
 msgstr ""
+"Viga Microsoft.Net Framework %1 paigaldamisel. (Veateade: %2)%n%nKas soovid "
+"vaadata .Net paigalduse logifaili?"
 
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "PDFCreator paigaldas .Net framework 4.0. Järgneva sammuna oleks vaja taaskäivitada arvuti. Palun taaskäivita arvuti ja pöördu tagasi PDFCreatori paigaldamise juurde.%n%nHetkel lõpetab paigaldaja töö."
-
-msgid "Merge multiple PDFs"
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install "
+"Microsoft .Net %1 and then rerun the PDFCreator setup."
 msgstr ""
+"PDFCreator vajab Microsoft .Net %1. Palun lae all aja paigalda Microsoft ."
+"Net %1 ja siis paigalda PDFCreator uuesti."
+
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup again."
+"%n%nSetup will now exit."
+msgstr ""
+"PDFCreator paigaldas .Net framework 4.0. Järgneva sammuna oleks vaja "
+"taaskäivitada arvuti. Palun taaskäivita arvuti ja pöördu tagasi PDFCreatori "
+"paigaldamise juurde.%n%nHetkel lõpetab paigaldaja töö."
+
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"Alla laetud fail ei vasta kontrollidele. Kas soovid seda siiski käivitada?"
 
 msgid "PDFCreator download"
 msgstr "PDFCreator'i alla laadimine"
 
-msgid "Free features:"
-msgstr ""
+msgid "Download the latest version..."
+msgstr "Laen alla viimast versiooni..."
 
-msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
-msgstr "Uus versioon (%1) on pdfforge serveris saadaval!%n%nKas soovid seda versiooni alla laadida ja paigaldada?"
-
-msgid "Enhance PDFCreator with edit features!"
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
 msgstr ""
+"Uus versioon (%1) on pdfforge serveris saadaval!%n%nKas soovid seda "
+"versiooni alla laadida ja paigaldada?"
+
+msgid "Expert settings"
+msgstr "Eksperdi seaded"
 
 msgid "Set installation directory and additional options"
 msgstr "Määra paigalduskaust ja muudki seaded"
 
 #, fuzzy
-msgid "New in PDF Architect {0}:"
-msgstr "Proovi uut PDF Architecti"
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"Printeri nimetuses ei ole lubatud kasutada sümboleid \"!\",\"\" või \",\". "
+"Palun vali muu nimetus."
 
 msgid "Please choose a printer name."
 msgstr "Palun vali printeri nimi."
 
-msgid "Automatic E-Sign workflows"
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
 msgstr ""
+"Valitud printeri nimi on liiga pikk. Nimi võib olla kuni 221 tähemärki pikk. "
+"Palun vali lühem printeri nimi."
 
-msgid "There already exists a printer with this name. Please choose another name."
+msgid ""
+"There already exists a printer with this name. Please choose another name."
 msgstr "Sellise nimega printer on juba olemas. Palun vali teistsugune nimi."
 
-msgid "Verify and remove signatures"
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system afterwards."
+"%n%nOtherwise Cancel the installation."
 msgstr ""
+"Süsteemi keskkonnamuutuja \"Tee\" viga%n%n->Puuduv või rikutud sissekanne: "
+"%Systemroot%\\system32\\wbem%n%nSee viga tuleb parandada enne kui "
+"paigaldamist saab jätkata.%n%nPalun vali OK kui soovid seda viga parandada. "
+"Peale seda tuleb süsteem uuesti käivitada.%n%nVastasel juhul vali Loobu "
+"paigaldamist loobumiseks."
 
 msgid "For &all users"
 msgstr "&Kõigile kasutajatele"
 
-msgid "Already installed"
-msgstr "Juba paigaldatud"
+msgid "For the &current user only"
+msgstr "&Ainult praegusele kasutajale"
 
 msgid "Full installation"
 msgstr "Täielik paigaldamine"
 
-msgid "Automatic updates"
-msgstr "Automaatsed uuendused"
+msgid "Help"
+msgstr "Spikker"
 
 msgid "Install printer"
 msgstr "Paigalda printer"
 
-msgid "Default application for PDF files"
-msgstr "Vaikeprogramm PDF failidele"
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr ""
+"Paigalda printeri jälgija, printeri port, printeri draiverid ja printer"
 
 msgid "Install printer driver"
 msgstr "Paigalda printeri draiver"
 
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "Paigaldatakse uus PDFArchitect. See võtab natuke aega."
+msgid "Install printer monitor"
+msgstr "Paigalda printeri jälgija"
 
 msgid "Install printer port"
 msgstr "Paigalda printeri port"
 
-msgid "Firefox integration"
-msgstr "Integreeri FireFoxiga"
+msgid "Offline activation instructions"
+msgstr "Võrguta aktiveerimise juhised"
 
 msgid "Languages"
 msgstr "Keeled"
 
-msgid "Internet Explorer integration"
-msgstr "Integreeri Internet Exploreriga"
+msgid "Please wait. Checking license key..."
+msgstr "Palun oota. Kontrollime litsentsivõtit..."
 
 msgid "The activation is too old! Please renew your activation."
 msgstr "Aktiveering on liiga vana! Palun uuenda aktiveeringut."
 
-msgid "MS Outlook previewer integration"
-msgstr "Integreeri MS Outlook eelvaatajaga"
+msgid "Empty answer from license server!"
+msgstr "Tühi vastus litsentsiserverilt!"
 
 msgid "Invalid answer from license server!"
 msgstr "Vigane vastus litsentsiserverilt!"
 
-msgid "Windows Explorer integration"
-msgstr "Integreeri Windows Exploreriga"
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr ""
+"See litsentsivõti ei vasta sinu versioonile! Palun uuenda litsentsi "
+"versioonini %1."
 
 msgid "No answer from license server!"
 msgstr "Ei saanud litsentsiserverilt vastust!"
 
-msgid "No thanks"
-msgstr ""
+msgid "An unknown error is occurred!"
+msgstr "Tundmatu viga!"
 
 msgid "Wrong answer from license server!"
 msgstr "Vale vastus litsentsiserverilt!"
 
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
 msgstr ""
+"Arvuti kellaaeg tundub vale olevat või on valesti määratud! Palun vaata üle."
 
 msgid "License server answer not valid for this computer!"
 msgstr "Litsentsiserveri vastus ei vasta sellele arvutile!"
 
-msgid "PDFCreator setup"
-msgstr "PDFCreator'i paigaldamine"
+msgid "The license is not valid for the given product!"
+msgstr ""
 
 msgid "License key validation"
 msgstr "Litsentsivõtme valideerimine"
 
-msgid "Setup is being prepared..."
-msgstr "Paigaldamise eeltööd ..."
+msgid "Enter the valid license key"
+msgstr "Sisesta kehtiv litsentsivõti"
 
 msgid "Enter the valid license key and continue with the installation."
 msgstr "Sisesta kehtiv litsentsivõti ja jätka paigaldusega."
 
-msgid "Printer"
-msgstr "Printer"
+msgid "An error occurred validating the license key!"
+msgstr "Võtme valideerimisel saadi veateade!"
 
 msgid "Invalid license answer hash!"
 msgstr ""
 
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "Vead printeri paigaldamise käigus. Detailse kirjelduse leiab \"SetupLog.txt\" failist programmi kaustas."
+msgid "Invalid license key!"
+msgstr "Vigane litsentsivõti!"
 
 msgid "License key"
 msgstr ""
 
-msgid "Printer name"
-msgstr "Printeri nimi"
+msgid "Please enter the license key."
+msgstr "Palun sisesta litsentsivõti."
 
 msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
 msgstr "Litsentsivõtme formaat on kujul XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
 
-msgid "Choosing a printer name."
-msgstr "Valin printeri nime."
+msgid "Licensee"
+msgstr "Litsents"
 
 msgid "Message"
 msgstr "Teade"
 
-msgid "Please choose a name for the printer."
-msgstr "Palun vali nimi printerile."
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
 
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "Litsentsivõtit ei sisestatud. Litsentsivõti parameetritega '/VerySilent' või '/Silent' on nõutav! Palun kasuta parameetrit '/%1'.%n%nNäide: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
+"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Litsentsivõtit ei sisestatud. Litsentsivõti parameetritega '/VerySilent' või "
+"'/Silent' on nõutav! Palun kasuta parameetrit '/%1'.%n%nNäide: %2 /Silent /"
+"%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
 
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "PDFCreator paigaldab Teie arvutisse printeri. Selle kõikidele programmidele kättesaadava printeri abil saab luua PDF-faile, bittraster faile või PostScript-faile.%n%nPrinteri nimi:"
+msgid "Offline activation string:"
+msgstr "Võrguta aktiveerimise string:"
 
 msgid "Offline license check"
 msgstr "Võrguta litsentsi kontrollimine"
 
-msgid "This process might take several minutes."
-msgstr "See võib võtta mitmeid minuteid aega."
+msgid "License server answer:"
+msgstr "Litsentsiserveri vastus:"
 
 msgid "The machine or the user is blocked!"
 msgstr ""
 
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
+msgid "The authorization is failed!"
 msgstr ""
 
 msgid "An invalid license key is provided!"
 msgstr ""
 
-msgid "application files"
-msgstr "Programmifailid"
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr ""
 
 msgid "OK"
 msgstr "OK"
 
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "Programm \"%1\" töötab.%n%nPalun sulge see programm.%n%n"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr ""
-
-msgid "Please restart your system first to continue setup."
-msgstr "Palun taaskäivita süsteem paigaldamise jätkamiseks."
-
-msgid "License agreement"
-msgstr ""
-
-msgid "PDFCreator settings"
-msgstr "PDFCreator'i suvandid"
-
-msgid "PDFCreator log file"
-msgstr "PDFCreator'i logifail"
-
-msgid "Show help after setup"
-msgstr "Ava peale sulgemist spikker"
-
-msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr "Te pole ülemate grupi liige.%n%n%nSuvalisest programmist pdf-faili loomiseks kasutab PDFCreator PostScript printeri draivereid.%nPrinteri draiverite paigaldamiseks peab olema ülemate grupi liige.%n%nKui jätkate paigaldamist, saate teisendada üksnes olemasolevaid PostScript faile.%n%nKas jätkan paigaldamist?"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr ""
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "Leiti vanem \"%1\" versioon!%n%nSeda versiooni ei saa uuendada versiooniks \"%2\".%n%nPalun eemalda esmalt programm."
-
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "See on arendaja versioon PDFCreatorist.%n%nSee pole järgmise väljalaske eelne versioon. See võib sisaldada erinevaid vigasid või mitte üldse töötada.%n%nKui sa seda siiski paigaldada soovid, siis ootame ka sinu tagasisidet."
-
-msgid "Other tasks:"
-msgstr "Muud tegumid:"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "See versioon ei tote serveri laadi. Kas soovid seda versiooni siiski paigaldada?"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "See paik on vanema programmiversiooni jaoks! Ei saa seda paika kasutada."
-
-msgid "Delete all application settings?"
-msgstr "Kas kustutan kõik programmi seaded?"
-
-msgid "Edit pages"
-msgstr "Muuda lehti"
-
-msgid "Uninstall the printer with all its components."
-msgstr "Eemalda printer koos kõigi lisadega."
-
-msgid "Split and merge"
-msgstr "Tükelda ja ühenda"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "Uuendamiseks vali <OK> või katkesta paigaldamine ja eemalda esmalt vanem versioon."
-
-msgid "Create"
-msgstr "Loo"
-
-msgid "Create an &entry in the Windows Explorer context menu"
-msgstr "Loo Windows Exploreri hüpikmenüü &sissekanne"
-
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Programm on juba paigaldatud.%n%nUueks paigaldamiseks tuleks eemaldada paigaldatud progamm.%n%nPaigaldamine katkestati."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "Loo PDF ja bittraster failid %1-ga"
-
-msgid "Do you want to cancel the setup?"
-msgstr "Kas soovid paigaldamist katkestada?"
-
-msgid "Bad request (400)"
-msgstr "Vale päring (400)"
-
-msgid "Custom installation"
-msgstr "Kohandatud paigaldamine"
-
-msgid "Access denied (401)"
-msgstr "Juurdepääs keelatud (401)"
-
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "PDFCreator vajab Microsoft .Net %1. Palun lae all aja paigalda Microsoft .Net %1 ja siis paigalda PDFCreator uuesti."
-
-msgid "File not found (404)"
-msgstr "Faili ei ole (404)"
-
-msgid "Download the latest version..."
-msgstr "Laen alla viimast versiooni..."
-
-msgid "Proxy authentication required (407)"
-msgstr "Proxy autentimine nõutav (407)"
-
-#, fuzzy
-msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "Printeri nimetuses ei ole lubatud kasutada sümboleid \"!\",\"\" või \",\". Palun vali muu nimetus."
-
-msgid "Server internal error (500)"
-msgstr "Serveri viga (500)"
-
-msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "Süsteemi keskkonnamuutuja \"Tee\" viga%n%n->Puuduv või rikutud sissekanne: %Systemroot%\\system32\\wbem%n%nSee viga tuleb parandada enne kui paigaldamist saab jätkata.%n%nPalun vali OK kui soovid seda viga parandada. Peale seda tuleb süsteem uuesti käivitada.%n%nVastasel juhul vali Loobu paigaldamist loobumiseks."
-
-msgid "Bad gateway (502)"
-msgstr "Lüüsi viga (502)"
-
-msgid "Help"
-msgstr "Spikker"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "Teenus pole hetkel kättesaadav (503)"
-
-msgid "Install printer monitor"
-msgstr "Paigalda printeri jälgija"
-
-msgid "Cancelling download..."
-msgstr "Katkestan allalaadimist..."
-
-msgid "Please wait. Checking license key..."
-msgstr "Palun oota. Kontrollime litsentsivõtit..."
-
-msgid "Cannot connect"
-msgstr "Ei suuda ühendada"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "See litsentsivõti ei vasta sinu versioonile! Palun uuenda litsentsi versioonini %1."
-
-msgid "Connecting..."
-msgstr "Ühendan..."
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "Arvuti kellaaeg tundub vale olevat või on valesti määratud! Palun vaata üle."
-
-msgid "Current file"
-msgstr "Praegune fail"
-
-msgid "Enter the valid license key"
-msgstr "Sisesta kehtiv litsentsivõti"
-
-msgid "Details"
-msgstr "Detailid"
-
-msgid "Invalid license key!"
-msgstr "Vigane litsentsivõti!"
-
-msgid "Download cancelled"
-msgstr "Allalaadimine katkestatud"
-
-msgid "Licensee"
-msgstr "Litsents"
-
-msgid "Download complete"
-msgstr "Allalaadimine lõpetatud"
-
-msgid "Offline activation string:"
-msgstr "Võrguta aktiveerimise string:"
-
-msgid "Download failed"
-msgstr "Allalaadimine nurjus"
-
-msgid "The authorization is failed!"
-msgstr ""
-
-msgid "Downloading..."
-msgstr "Allalaadimine..."
-
 msgid "The product %1 does not exist!"
 msgstr ""
 
-msgid "Please click here to revoke your previous activations."
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr ""
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr ""
+
+msgid "License agreement"
 msgstr ""
 
 msgid "By clicking on Next you accept the license agreement."
 msgstr ""
 
-msgid "Elapsed time:"
-msgstr "Eeldatav aeg:"
+msgid "PDFCreator log file"
+msgstr "PDFCreator'i logifail"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"Paigaldatud versioon \"%1\" on uuem kui paigaldatav versioon \"%2\"!%n"
+"%nVanema versiooni paigaldamiseks tuleks eemaldada paigaldatud progamm.%n"
+"%nPaigaldamine katkestati."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Te pole ülemate grupi liige.%n%n%nSuvalisest programmist pdf-faili loomiseks "
+"kasutab PDFCreator PostScript printeri draivereid.%nPrinteri draiverite "
+"paigaldamiseks peab olema ülemate grupi liige.%n%nKui jätkate paigaldamist, "
+"saate teisendada üksnes olemasolevaid PostScript faile.%n%nKas jätkan "
+"paigaldamist?"
 
 msgid "For this you don't have to be a member of the administrator group.%n%n"
 msgstr "Selleks ei pea olema ülemate grupi liige."
 
-msgid "File:"
-msgstr "Fail:"
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"Leiti vanem \"%1\" versioon!%n%nSeda versiooni ei saa uuendada versiooniks "
+"\"%2\".%n%nPalun eemalda esmalt programm."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"Leiti vanem \"%1\" versioon!%n%nSeda versiooni saab uuendada versiooniks "
+"\"%2\"."
+
+msgid "Other tasks:"
+msgstr "Muud tegumid:"
 
 msgid "The application is not installed. You cannot use this patch."
 msgstr "Programmi pole paigaldatud! Ei saa seda paika kasutada."
 
-msgid "The following files were not downloaded:"
-msgstr "Järgnevaid faile ei suudetud alla laadida:"
-
-msgid "Edit texts and fonts"
-msgstr "Muuda teksti ja fonte"
-
-msgid "Downloading additional files"
-msgstr "Laen alla lisafaile"
-
-msgid "Convert"
-msgstr "Konverteeri"
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "Palun oota, paigaldaja laeb alla lisafaile..."
-
-msgid "Compact installation"
-msgstr "Kompaktne paigaldamine"
-
-msgid "GB"
-msgstr "GB"
-
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "Alla laetud fail ei vasta kontrollidele. Kas soovid seda siiski käivitada?"
-
-msgid "Getting file information..."
-msgstr "Uurin faili infot..."
-
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "Valitud printeri nimi on liiga pikk. Nimi võib olla kuni 221 tähemärki pikk. Palun vali lühem printeri nimi."
-
-msgid "Hide"
-msgstr "Peida"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Paigalda printeri jälgija, printeri port, printeri draiverid ja printer"
-
-msgid "HTTP error %d"
-msgstr "HTTP viga %d"
-
-msgid "Empty answer from license server!"
-msgstr "Tühi vastus litsentsiserverilt!"
-
-msgid "Ignore"
-msgstr "Eira"
-
-msgid "The license is not valid for the given product!"
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
 msgstr ""
-
-msgid "Initializing..."
-msgstr "Alustan..."
-
-msgid "Please enter the license key."
-msgstr "Palun sisesta litsentsivõti."
-
-msgid "KB"
-msgstr "KB"
-
-msgid "License server answer:"
-msgstr "Litsentsiserveri vastus:"
-
-msgid "KB/s"
-msgstr "KB/s"
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr ""
-
-msgid "MB"
-msgstr "MB"
-
-msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "Leiti vanem \"%1\" versioon!%n%nSeda versiooni saab uuendada versiooniks \"%2\"."
-
-msgid "MB/s"
-msgstr "MB/s"
-
-msgid "PDF to Word"
-msgstr "PDF Wordi failiks"
-
-msgid "Remaining time:"
-msgstr "Järele jäänud aeg:"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "Paigaldan  Microsoft .Net Framework %1 See võtab mõned minutid. Palun oodake."
-
-msgid "Retry"
-msgstr "Korda"
-
-msgid "For the &current user only"
-msgstr "&Ainult praegusele kasutajale"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Kontrolli oma võrguühendust ja kliki 'Korda' et uuesti alla laadida, või siis kliki 'Katkesta' et paigaldust katkestada."
-
-msgid "An unknown error is occurred!"
-msgstr "Tundmatu viga!"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "Kontrolli oma võrguühendust ja kliki 'Korda' et uuesti alla laadida, või siis kliki 'Edasi' et jätkata paigaldusega."
-
-msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
-msgstr ""
-
-msgid "Speed:"
-msgstr "Kiirus:"
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Paigaldatud versioon \"%1\" on uuem kui paigaldatav versioon \"%2\"!%n%nVanema versiooni paigaldamiseks tuleks eemaldada paigaldatud progamm.%n%nPaigaldamine katkestati."
-
-msgid "Starting download..."
-msgstr "Alustan allalaadimist..."
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Programm on juba paigaldatud.%n%nUuendamine pole võimalik! Enne tuleks eemaldada paigaldatud progamm.%n%nPaigaldamine katkestati."
-
-msgid "Status:"
-msgstr "Staatus:"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr ""
+"See paik on vanema programmiversiooni jaoks! Ei saa seda paika kasutada."
 
 msgid "The installed application is too old. You cannot use this patch."
 msgstr "Paigaldatud programm on liiga vana! Ei saa seda paika kasutada."
 
-msgid "Expert settings"
-msgstr "Eksperdi seaded"
+msgid "Edit pages"
+msgstr "Muuda lehti"
 
-msgid "An error occurred validating the license key!"
-msgstr "Võtme valideerimisel saadi veateade!"
+msgid "Edit texts and fonts"
+msgstr "Muuda teksti ja fonte"
+
+msgid "Split and merge"
+msgstr "Tükelda ja ühenda"
+
+msgid "PDF to Word"
+msgstr "PDF Wordi failiks"
+
+msgid "Create"
+msgstr "Loo"
+
+msgid "Convert"
+msgstr "Konverteeri"
+
+msgid "Edit & Insert"
+msgstr "Muuda ja aseta"
+
+msgid "Review"
+msgstr "Vaata üle"
+
+msgid "Secure & Sign"
+msgstr "Turva & signeeri"
+
+msgid "Forms"
+msgstr "Vormid"
+
+msgid "Try out the new PDF Architect"
+msgstr "Proovi uut PDF Architecti"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "Sinu ekraanile luuakse otsetee"
+
+msgid "Install PDF Architect with great free features"
+msgstr ""
+
+msgid "Rotate, move and delete pages"
+msgstr ""
+
+msgid "Merge multiple PDFs"
+msgstr ""
+
+msgid "Free features:"
+msgstr ""
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr ""
+
+#, fuzzy
+msgid "New in PDF Architect {0}:"
+msgstr "Proovi uut PDF Architecti"
+
+msgid "Automatic E-Sign workflows"
+msgstr ""
+
+msgid "Verify and remove signatures"
+msgstr ""
+
+msgid "Already installed"
+msgstr "Juba paigaldatud"
+
+msgid "Automatic updates"
+msgstr "Automaatsed uuendused"
+
+msgid "Default application for PDF files"
+msgstr "Vaikeprogramm PDF failidele"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "Paigaldatakse uus PDFArchitect. See võtab natuke aega."
+
+msgid "Firefox integration"
+msgstr "Integreeri FireFoxiga"
+
+msgid "Internet Explorer integration"
+msgstr "Integreeri Internet Exploreriga"
+
+msgid "MS Outlook previewer integration"
+msgstr "Integreeri MS Outlook eelvaatajaga"
+
+msgid "Windows Explorer integration"
+msgstr "Integreeri Windows Exploreriga"
+
+msgid "No thanks"
+msgstr ""
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+
+msgid "PDFCreator setup"
+msgstr "PDFCreator'i paigaldamine"
+
+msgid "Setup is being prepared..."
+msgstr "Paigaldamise eeltööd ..."
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"Vead printeri paigaldamise käigus. Detailse kirjelduse leiab \"SetupLog.txt"
+"\" failist programmi kaustas."
+
+msgid "Printer name"
+msgstr "Printeri nimi"
+
+msgid "Choosing a printer name."
+msgstr "Valin printeri nime."
+
+msgid "Please choose a name for the printer."
+msgstr "Palun vali nimi printerile."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"PDFCreator paigaldab Teie arvutisse printeri. Selle kõikidele programmidele "
+"kättesaadava printeri abil saab luua PDF-faile, bittraster faile või "
+"PostScript-faile.%n%nPrinteri nimi:"
+
+msgid "This process might take several minutes."
+msgstr "See võib võtta mitmeid minuteid aega."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+
+msgid "application files"
+msgstr "Programmifailid"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Programm \"%1\" töötab.%n%nPalun sulge see programm.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Palun taaskäivita süsteem paigaldamise jätkamiseks."
+
+msgid "PDFCreator settings"
+msgstr "PDFCreator'i suvandid"
+
+msgid "Show help after setup"
+msgstr "Ava peale sulgemist spikker"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n"
+"%nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"See on arendaja versioon PDFCreatorist.%n%nSee pole järgmise väljalaske "
+"eelne versioon. See võib sisaldada erinevaid vigasid või mitte üldse töötada."
+"%n%nKui sa seda siiski paigaldada soovid, siis ootame ka sinu tagasisidet."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"See versioon ei tote serveri laadi. Kas soovid seda versiooni siiski "
+"paigaldada?"
+
+msgid "Delete all application settings?"
+msgstr "Kas kustutan kõik programmi seaded?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Eemalda printer koos kõigi lisadega."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"Uuendamiseks vali <OK> või katkesta paigaldamine ja eemalda esmalt vanem "
+"versioon."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "Loo Windows Exploreri hüpikmenüü &sissekanne"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Loo PDF ja bittraster failid %1-ga"
+
+msgid "Bad request (400)"
+msgstr "Vale päring (400)"
+
+msgid "Access denied (401)"
+msgstr "Juurdepääs keelatud (401)"
+
+msgid "File not found (404)"
+msgstr "Faili ei ole (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Proxy autentimine nõutav (407)"
+
+msgid "Server internal error (500)"
+msgstr "Serveri viga (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Lüüsi viga (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Teenus pole hetkel kättesaadav (503)"
+
+msgid "Cancelling download..."
+msgstr "Katkestan allalaadimist..."
+
+msgid "Cannot connect"
+msgstr "Ei suuda ühendada"
+
+msgid "Connecting..."
+msgstr "Ühendan..."
+
+msgid "Current file"
+msgstr "Praegune fail"
+
+msgid "Details"
+msgstr "Detailid"
+
+msgid "Download cancelled"
+msgstr "Allalaadimine katkestatud"
+
+msgid "Download complete"
+msgstr "Allalaadimine lõpetatud"
+
+msgid "Download failed"
+msgstr "Allalaadimine nurjus"
+
+msgid "Downloading..."
+msgstr "Allalaadimine..."
+
+msgid "Please click here to revoke your previous activations."
+msgstr ""
+
+msgid "Elapsed time:"
+msgstr "Eeldatav aeg:"
+
+msgid "File:"
+msgstr "Fail:"
+
+msgid "The following files were not downloaded:"
+msgstr "Järgnevaid faile ei suudetud alla laadida:"
+
+msgid "Downloading additional files"
+msgstr "Laen alla lisafaile"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Palun oota, paigaldaja laeb alla lisafaile..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Uurin faili infot..."
+
+msgid "Hide"
+msgstr "Peida"
+
+msgid "HTTP error %d"
+msgstr "HTTP viga %d"
+
+msgid "Ignore"
+msgstr "Eira"
+
+msgid "Initializing..."
+msgstr "Alustan..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Remaining time:"
+msgstr "Järele jäänud aeg:"
+
+msgid "Retry"
+msgstr "Korda"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Kontrolli oma võrguühendust ja kliki 'Korda' et uuesti alla laadida, või "
+"siis kliki 'Katkesta' et paigaldust katkestada."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Kontrolli oma võrguühendust ja kliki 'Korda' et uuesti alla laadida, või "
+"siis kliki 'Edasi' et jätkata paigaldusega."
+
+msgid "Speed:"
+msgstr "Kiirus:"
+
+msgid "Starting download..."
+msgstr "Alustan allalaadimist..."
+
+msgid "Status:"
+msgstr "Staatus:"
 
 msgid "Total progress"
 msgstr "Progress"
@@ -549,5 +693,5 @@ msgstr "Tundmatu"
 msgid "%.2f of %.2f"
 msgstr "%.2f - %.2f -st"
 
-msgid "Offline activation instructions"
-msgstr "Võrguta aktiveerimise juhised"
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Paigaldaja lõpetas paigalduse [name] nimelisse arvutisse."

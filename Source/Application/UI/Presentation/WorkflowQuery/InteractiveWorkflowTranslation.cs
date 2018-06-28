@@ -12,9 +12,20 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
         public string PdfFile { get; private set; } = "PDF file";
         public string PdfXFile { get; private set; } = "PDF/X file";
         public string PngFile { get; private set; } = "PNG file";
-        public string RetypeFilenameMessage { get; private set; } = "The file could not be saved. Maybe the file is currently in use or you do not have the required permissions.\nPlease select another filename and try again.";
+        private string InvalidRootedPathMessage { get; set; } = "The path '{0}' is not a valid absolute path.\nPlease select another filename and try again.";
+        private string CopyErrorMessage { get; set; } = "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\nPlease select another filename and try again.";
         public string SelectDestination { get; private set; } = "Select destination";
         public string TextFile { get; private set; } = "Text file";
         public string TiffFile { get; private set; } = "TIFF file";
+
+        public string FormatInvalidRootedPathMessage(string filePath)
+        {
+            return string.Format(InvalidRootedPathMessage, filePath);
+        }
+
+        public string FormatCopyErrorMessage(string filePath)
+        {
+            return string.Format(CopyErrorMessage, filePath);
+        }
     }
 }

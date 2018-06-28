@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using PDFCreator.TestUtilities;
 using pdfforge.PDFCreator.Conversion.Actions.Actions;
+using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using System.Linq;
 using System.Net;
@@ -53,7 +54,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         private HttpAccount _account;
         private Thread _serverThread;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void InitFixture()
         {
             _port = FreeTcpPort();
@@ -61,7 +62,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
             _serverThread.Start();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void DestroyFixture()
         {
             _serverThread.Abort();
@@ -99,11 +100,11 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         }
 
         [Test]
-        public void HaveNoAuthenication_SendRequestToUrlWithAuthenication_ActionSuccessIsTrue()
+        public void HaveNoAuthenication_SendRequestToUrlWithAuthenication_ActionReturnsLoginError()
         {
             _account.Url = GetUrl() + "authTest1/";
             var actionResult = _httpAction.ProcessJob(_th.Job);
-            Assert.True(actionResult.IsSuccess);
+            Assert.True(actionResult.Contains(ErrorCode.PasswordAction_Login_Error));
         }
 
         [Test]

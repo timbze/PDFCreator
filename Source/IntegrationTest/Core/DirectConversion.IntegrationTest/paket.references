@@ -1,6 +1,8 @@
-﻿NUnit
-NSubstitute
-DataStorage
+﻿DataStorage
 SimpleInjector
 SystemInterface
 SystemWrapper
+
+group test
+    NSubstitute
+    NUnit

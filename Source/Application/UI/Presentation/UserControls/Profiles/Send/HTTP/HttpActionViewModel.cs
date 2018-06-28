@@ -30,13 +30,15 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.HTTP
                 HttpAccountsView.SortDescriptions.Add(new SortDescription(nameof(HttpAccount.AccountInfo), ListSortDirection.Ascending));
             }
 
-            AddAccountCommand = commandLocator.GetMacroCommand()
+            AddAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<HttpAccountAddCommand>()
-                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()));
+                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()))
+                .Build();
 
-            EditAccountCommand = commandLocator.GetMacroCommand()
+            EditAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<HttpAccountEditCommand>()
-                .AddCommand(new DelegateCommand(o => RefreshAccountsView()));
+                .AddCommand(new DelegateCommand(o => RefreshAccountsView()))
+                .Build();
         }
 
         private void SelectNewAccountInView()

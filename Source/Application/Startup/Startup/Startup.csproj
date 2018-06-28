@@ -64,6 +64,7 @@
     <Compile Include="AppStarts\PrintFileStart.cs" />
     <Compile Include="AppStarts\StoreLicenseForAllUsersStart.cs" />
     <Compile Include="IAppStartResolver.cs" />
+    <Compile Include="ParametersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartConditions\CheckAllStartupConditions.cs" />
     <Compile Include="StartConditions\GhostscriptCondition.cs" />

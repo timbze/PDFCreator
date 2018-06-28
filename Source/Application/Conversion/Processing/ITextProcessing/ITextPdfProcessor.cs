@@ -3,6 +3,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface;
 using pdfforge.PDFCreator.Conversion.Settings;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SystemInterface.IO;
@@ -21,10 +22,11 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <returns>Number of pages in pdf file</returns>
         public override int GetNumberOfPages(string pdfFile)
         {
-            var pdfReader = new PdfReader(pdfFile);
-            var numberOfPages = pdfReader.NumberOfPages;
-            pdfReader.Close();
-            return numberOfPages;
+            using (var pdfReader = new PdfReader(pdfFile))
+            {
+                var numberOfPages = pdfReader.NumberOfPages;
+                return numberOfPages;
+            }
         }
 
         private char DeterminePdfVersionForPdfStamper(ConversionProfile profile)
@@ -50,7 +52,10 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 
             var stamperBundle = StamperCreator.CreateStamperAccordingToEncryptionAndSignature(pdfFile, processedFile, job.Profile, version);
             var stamper = stamperBundle.Item1;
-            var outputStream = stamperBundle.Item2;
+
+            var resources = new List<IDisposable>();
+            resources.Add(stamperBundle.Item2);
+            resources.Add(stamperBundle.Item3);
 
             try
             {
@@ -62,7 +67,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
                 metadataUpdater.UpdateXmpMetadata(stamper, job.Profile);
 
                 var backgroundAdder = new BackgroundAdder();
-                backgroundAdder.AddBackground(stamper, job.Profile);
+                backgroundAdder.AddBackground(stamper, job.Profile, resources);
 
                 //Signing after adding background and update metadata
                 var signer = new ITextSigner();
@@ -72,13 +77,17 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 try
                 {
-                    stamper?.Close();
+                    stamper?.Dispose();
                 }
                 catch (Exception ex)
                 {
                     Logger.Warn($"Could not close iText pdf stamper.\r\n{ex}");
                 }
-                outputStream?.Close();
+
+                foreach (var resource in resources)
+                {
+                    resource.Dispose();
+                }
             }
 
             //Set the final output pdf

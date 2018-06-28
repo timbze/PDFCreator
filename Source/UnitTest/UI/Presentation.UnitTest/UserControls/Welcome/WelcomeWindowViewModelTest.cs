@@ -1,61 +1,54 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Core.Controller;
-using pdfforge.PDFCreator.UI.Presentation.Customization;
+using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.UI.Presentation.Commands;
+using pdfforge.PDFCreator.UI.Presentation.Commands.UserGuide;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Help;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome;
-using pdfforge.PDFCreator.Utilities.Process;
-using SystemInterface.IO;
+using System.Windows.Input;
 
 namespace Presentation.UnitTest.UserControls.Welcome
 {
     [TestFixture]
     public class WelcomeWindowViewModelTest
     {
+        private WelcomeViewModel _welcomeViewModel;
+        private ICommand _whatsNewCommand;
+        private ICommand _blogCommand;
+        private ICommand _prioritySupportCommand;
+        private WelcomeWindowTranslation _translation;
+
         [SetUp]
         public void Setup()
         {
-            _processStarter = Substitute.For<IProcessStarter>();
+            var commandLocator = Substitute.For<ICommandLocator>();
+            _whatsNewCommand = Substitute.For<ICommand>();
+            commandLocator.GetInitializedCommand<ShowUserGuideCommand, HelpTopic>(HelpTopic.WhatsNew).Returns(_whatsNewCommand);
+            _blogCommand = Substitute.For<ICommand>();
+            commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.Blog).Returns(_blogCommand);
+            _prioritySupportCommand = Substitute.For<ICommand>();
+            commandLocator.GetCommand<PrioritySupportUrlOpenCommand>().Returns(_prioritySupportCommand);
 
-            var fileWrap = Substitute.For<IFile>();
-            fileWrap.Exists(Arg.Any<string>()).Returns(true);
+            _welcomeViewModel = new WelcomeViewModel(commandLocator, new DesignTimeTranslationUpdater(), new EditionHintOptionProvider(false, false));
 
-            _userGuideHelper = Substitute.For<IUserGuideHelper>();
-        }
-
-        private IProcessStarter _processStarter;
-        private IUserGuideHelper _userGuideHelper;
-
-        [Test]
-        public void FacebookCommand_IsExecutable_StartsProcessWithDonateUrl()
-        {
-            var vm = new WelcomeViewModel(_processStarter, new ButtonDisplayOptions(false, false), _userGuideHelper, new DesignTimeTranslationUpdater());
-            Assert.IsTrue(vm.FacebookCommand.IsExecutable);
-
-            vm.FacebookCommand.Execute(null);
-            _processStarter.Received().Start(Urls.Facebook);
+            _translation = new WelcomeWindowTranslation();
         }
 
         [Test]
-        public void GooglePlusCommand_IsExecutable_StartsProcessWithDonateUrl()
+        public void Commands_GetInitialized()
         {
-            var vm = new WelcomeViewModel(_processStarter, new ButtonDisplayOptions(false, false), _userGuideHelper, new DesignTimeTranslationUpdater());
-            Assert.IsTrue(vm.GooglePlusCommand.IsExecutable);
-
-            vm.GooglePlusCommand.Execute(null);
-            _processStarter.Received().Start(Urls.GooglePlus);
+            Assert.AreSame(_whatsNewCommand, _welcomeViewModel.WhatsNewCommand, "WhatsNewCommand");
+            Assert.AreSame(_blogCommand, _welcomeViewModel.BlogCommand, "BlogCommand");
+            Assert.AreSame(_prioritySupportCommand, _welcomeViewModel.PrioritySupportCommand, "PrioritySupportCommand");
         }
 
         [Test]
-        public void WhatsNewCommand_IsExecutable_OpensWhatsNewHelpTopic()
+        public void Title_IstranslationTitle()
         {
-            var vm = new WelcomeViewModel(_processStarter, new ButtonDisplayOptions(false, false), _userGuideHelper, new DesignTimeTranslationUpdater());
-            Assert.IsTrue(vm.WhatsNewCommand.IsExecutable);
-
-            vm.WhatsNewCommand.Execute(null);
-            _userGuideHelper.Received().ShowHelp(HelpTopic.WhatsNew);
+            Assert.AreEqual(_translation.Title, _welcomeViewModel.Title);
         }
     }
 }

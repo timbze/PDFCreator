@@ -50,7 +50,13 @@ namespace pdfforge.PDFCreator.Conversion.Ghostscript.Conversion
                 {
                     var errorMessage = ExtractGhostscriptErrors(GhostscriptOutput);
                     _logger.Error("Ghostscript execution failed: " + errorMessage);
-                    throw new ProcessingException("Ghostscript execution failed: " + errorMessage, ErrorCode.Conversion_GhostscriptError);
+                    if (errorMessage.Contains("Redistilling encrypted PDF is not permitted"))
+                    {
+                        throw new ProcessingException("Ghostscript execution failed: " + errorMessage, ErrorCode.Conversion_Ghostscript_PasswordProtectedPDFError);
+                    }
+                    {
+                        throw new ProcessingException("Ghostscript execution failed: " + errorMessage, ErrorCode.Conversion_GhostscriptError);
+                    }
                 }
 
                 _logger.Trace("Ghostscript Job was successful");

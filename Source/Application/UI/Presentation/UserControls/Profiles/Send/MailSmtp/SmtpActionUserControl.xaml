@@ -54,13 +54,24 @@
                         Visibility="{Binding ElementName=SmtpAccountsComboBox, Path=SelectedItem, Converter={StaticResource NullToVisibilityConverter}, NotifyOnSourceUpdated=True}" />
                 </Grid>
             </DockPanel>
-            <Label Margin="0 5 0 0">
-                <TextBlock Text="{Binding Translation.RecipientsLabel}" />
+
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsToText}"></TextBlock>
             </Label>
             <controls:TokenControl DataContext="{Binding RecipientsTokenViewModel}" />
 
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsCcText}"></TextBlock>
+            </Label>
+            <controls:TokenControl DataContext="{Binding RecipientsCcTokenViewModel}" />
+
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsBccText}"></TextBlock>
+            </Label>
+            <controls:TokenControl DataContext="{Binding RecipientsBccTokenViewModel}" />
+
             <Label Margin="0 -5">
-                <TextBlock Text="{Binding Translation.MultipleRecipientsSeperatedByCommas}" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding Translation.MultipleRecipientsHintText}" TextWrapping="Wrap" />
             </Label>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">

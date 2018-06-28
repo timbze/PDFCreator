@@ -23,19 +23,17 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         private Printers _printerDevices;
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetPrinterByIndex_IfIndexNegative_ThrowArgumentException()
         {
-            _printerDevices.GetPrinterByIndex(-1);
+            Assert.Throws<ArgumentException>(() => _printerDevices.GetPrinterByIndex(-1));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetPrinterByIndex_IfIndexTooBig_ThrowArgumentException()
         {
             var count = _printerDevices.Count;
 
-            _printerDevices.GetPrinterByIndex(count + 1);
+            Assert.Throws<ArgumentException>(() => _printerDevices.GetPrinterByIndex(count + 1));
         }
     }
 }

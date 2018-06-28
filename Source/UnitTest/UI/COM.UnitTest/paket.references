@@ -1,3 +1,4 @@
-﻿NSubstitute
-NUnit
-RhinoMocks
+﻿group test
+    NSubstitute
+    NUnit
+    RhinoMocks

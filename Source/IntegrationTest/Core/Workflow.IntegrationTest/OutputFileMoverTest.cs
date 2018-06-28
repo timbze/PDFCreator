@@ -9,6 +9,7 @@ using pdfforge.PDFCreator.Core.Workflow.Output;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.IO;
 using Rhino.Mocks;
 using System.IO;
 using SystemInterface.IO;
@@ -44,7 +45,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _pathUtil = new PathUtil(new PathWrap(), new DirectoryWrap());
 
             _queryRetypeFileName = Substitute.For<IRetypeFileNameQuery>();
-            _queryRetypeFileName.RetypeFileName(Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(RetypeOutputFilename);
+            _queryRetypeFileName.RetypeFileNameQuery(Arg.Any<string>(), Arg.Any<OutputFormat>(), Arg.Any<RetypeReason>()).Returns(RetypeOutputFilename);
         }
 
         private QueryResult<string> RetypeOutputFilename(CallInfo callInfo)
@@ -94,6 +95,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             return Path.Combine(directory, fileWithoutExtension);
         }
 
+        private AutosaveOutputFileMover BuildAutosaveOutputFileMover(IFile fileStub)
+        {
+            return new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil, Substitute.For<IDirectoryHelper>());
+        }
+
+        private InteractiveOutputFileMover BuildInteractiveOutputFileMover(IFile fileStub)
+        {
+            return new InteractiveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil, _queryRetypeFileName, new InvokeImmediatelyDispatcher(), Substitute.For<IDirectoryHelper>());
+        }
+
         [Test]
         public void MoveOutputFiles_MultipleFiles_AutoSaveWithEnsureUniqueFilenames_FirstFileExists_FirstAttemptToCopyFails_FileExists_FirstOutputfileHasContinuedAppendix()
         {
@@ -108,7 +119,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file after first attempt to copy has failed.
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -143,7 +154,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -180,7 +191,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(true).Repeat.Twice();
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -216,7 +227,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).Return(true).Repeat.Once();
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -250,7 +261,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = false;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -285,7 +296,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).Return(true).Repeat.Once();
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = false;
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
@@ -314,7 +325,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
         {
             var fileStub = MockRepository.GenerateStub<IFile>();
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Png);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
             _th.Job.Profile.AutoSave.Enabled = true;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
@@ -349,7 +360,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Png);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
             _th.Job.Profile.AutoSave.Enabled = true;
@@ -386,7 +397,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Png);
-            var outputFileMover = new InteractiveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil, _queryRetypeFileName, new InvokeImmediatelyDispatcher());
+            var outputFileMover = BuildInteractiveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
 
@@ -417,7 +428,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Deny all attempts to copy
 
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Png);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _multipleTempOutputFiles;
             _th.Job.Profile.AutoSave.Enabled = true;
 
@@ -438,7 +449,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
                 .Throw(new IOException("IoException"))
                 .Repeat.Once();
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Png);
-            var outputFileMover = new InteractiveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil, _queryRetypeFileName, new InvokeImmediatelyDispatcher());
+            var outputFileMover = BuildInteractiveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = false;
 
             _th.Job.TempOutputFiles = _multipleTempOutputFilesWithTwoDigits;
@@ -461,7 +472,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
         {
             var fileStub = MockRepository.GenerateStub<IFile>();
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.TempOutputFiles = _multipleTempOutputFilesWithTwoDigits;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
@@ -520,7 +531,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file after first attempt to copy has failed.
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _singleTempOutputfile;
@@ -546,7 +557,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = true;
             _th.Job.TempOutputFiles = _singleTempOutputfile;
@@ -572,7 +583,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             //Simulate existing file in first request for unique filename
             fileStub.Stub(x => x.Exists(Arg<string>.Is.Anything)).IgnoreArguments().Return(false);
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.Profile.AutoSave.Enabled = true;
             _th.Job.Profile.AutoSave.EnsureUniqueFilenames = false;
             _th.Job.TempOutputFiles = _singleTempOutputfile;
@@ -593,7 +604,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
         {
             var fileStub = MockRepository.GenerateStub<IFile>();
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
-            var outputFileMover = new InteractiveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil, _queryRetypeFileName, new InvokeImmediatelyDispatcher());
+            var outputFileMover = BuildInteractiveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _singleTempOutputfile;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
 
@@ -621,7 +632,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, OutputFormat.Pdf);
             _th.Job.Profile.AutoSave.Enabled = true;
 
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
 
             _th.Job.TempOutputFiles = _singleTempOutputfile;
             var filenameTemplate = _th.Job.OutputFilenameTemplate; //Save it, because it can change in MoveOutputFiles
@@ -643,7 +654,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
             fileStub.Stub(x => x.Copy("ignore", "ignore2", true)).IgnoreArguments().Throw(new IOException(""));
             //Deny all attempts to copy
             _th.GenerateGsJob(PSfiles.ThreePDFCreatorTestpages, OutputFormat.Pdf);
-            var outputFileMover = new AutosaveOutputFileMover(new DirectoryWrap(), fileStub, _pathUtil);
+            var outputFileMover = BuildAutosaveOutputFileMover(fileStub);
             _th.Job.TempOutputFiles = _singleTempOutputfile;
             _th.Job.Profile.AutoSave.Enabled = true;
 

@@ -121,11 +121,13 @@ namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
         {
             var printerName = Fixture.Create("Printer");
             var filename = Fixture.CreateFilePath(extension: "pdf");
+            var outputfilename = "";
+            var profilename = "";
             FileMock.Exists(filename).Returns(true);
             ConfigureValidFileOpenRead(FileMock, filename);
             var directConversion = Fixture.Create<DirectConversionBase>();
 
-            directConversion.TransformToInfFile(filename, printerName);
+            directConversion.TransformToInfFile(filename, printerName, outputfilename, profilename);
 
             Predicate<JobInfo> validateJobInfo = jobInfo =>
             {
@@ -190,6 +192,48 @@ namespace pdfforge.PDFCreator.Core.DirectConversion.UnitTest
             var infFile = directConversion.TransformToInfFile(filename);
 
             Assert.AreEqual("", infFile);
+        }
+
+        [Test]
+        public void TransformtoInfFile_WithOutputfileParameter_SetsOutputfileInJobInfo()
+        {
+            var filename = Fixture.CreateFilePath(extension: "pdf");
+            FileMock.Exists(filename).Returns(true);
+            ConfigureValidFileOpenRead(FileMock, filename);
+            var someOutputFile = "someOutputFile";
+
+            var directConversion = Fixture.Create<DirectConversionBase>();
+            directConversion.TransformToInfFile(filename, Arg.Any<string>(), "", someOutputFile);
+
+            _jobInfoManagerMock.Received(1).SaveToInfFile(Arg.Is<JobInfo>(x => x.SourceFiles[0].OutputFile == "someOutputFile"), Arg.Any<string>());
+        }
+
+        [Test]
+        public void TransformtoInfFile_WithProfileParameter_SetsProfileInJobInfo()
+        {
+            var filename = Fixture.CreateFilePath(extension: "pdf");
+            FileMock.Exists(filename).Returns(true);
+            ConfigureValidFileOpenRead(FileMock, filename);
+            var profileParameter = "someProfile";
+
+            var directConversion = Fixture.Create<DirectConversionBase>();
+            directConversion.TransformToInfFile(filename, Arg.Any<string>(), profileParameter, "");
+
+            _jobInfoManagerMock.Received(1).SaveToInfFile(Arg.Is<JobInfo>(x => x.SourceFiles[0].Profile == "someProfile" && x.SourceFiles[0].PrinterName == "PDFCreator"), Arg.Any<string>());
+        }
+
+        [Test]
+        public void TransformtoInfFile_WithPrinterName_DoesNotSetsProfileInJobInfo()
+        {
+            var filename = Fixture.CreateFilePath(extension: "pdf");
+            FileMock.Exists(filename).Returns(true);
+            ConfigureValidFileOpenRead(FileMock, filename);
+            var printerName = "somePrinterName";
+
+            var directConversion = Fixture.Create<DirectConversionBase>();
+            directConversion.TransformToInfFile(filename, printerName);
+
+            _jobInfoManagerMock.Received(1).SaveToInfFile(Arg.Is<JobInfo>(x => x.SourceFiles[0].PrinterName == "somePrinterName" && x.SourceFiles[0].Profile == ""), Arg.Any<string>());
         }
     }
 

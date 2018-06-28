@@ -5,7 +5,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
 {
     public class DesignTimeUpdateDownloadWindowViewModel : UpdateDownloadWindowViewModel
     {
-        public DesignTimeUpdateDownloadWindowViewModel() : base(null, null, null, new DesignTimeTranslationUpdater())
+        public DesignTimeUpdateDownloadWindowViewModel() : base(null, null, null, new DesignTimeTranslationUpdater(), null)
         {
             ProgressPercentage = 42;
             DownloadSpeedText = "450 MB/s";

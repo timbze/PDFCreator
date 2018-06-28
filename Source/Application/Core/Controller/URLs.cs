@@ -12,6 +12,8 @@
         public const string BusinessHintLink = "https://go.pdfforge.org/pdfcreator-business/inapp-hint";
 
         public const string PdfforgeWebsiteUrl = "http://www.pdfforge.org";
+        public const string PrioritySupport = "http://go.pdfforge.org/priority-support";
+        public const string Blog = "http://www.pdfforge.org/blog";
 
         public const string PDFCreatorDownloadUrl = "http://go.pdfforge.org/pdfcreator/download";
         public const string PDFCreatorWhatsNewUrl = "http://go.pdfforge.org/pdfcreator/whatsnew";

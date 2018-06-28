@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -9,6 +8,7 @@ using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Windows;
 using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
+using System.Collections.Generic;
 
 namespace Presentation.UnitTest.Windows
 {
@@ -27,7 +27,7 @@ namespace Presentation.UnitTest.Windows
             _eventWasRaised = false;
             _jobInfoStub = new JobInfo();
 
-            _model = new ManagePrintJobsViewModel(_jobInfoQueue, _dragAndDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater());
+            _model = new ManagePrintJobsViewModel(_jobInfoQueue, _dragAndDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater(), new DesignTimeApplicationNameProvider());
         }
 
         private IJobInfoQueue _jobInfoQueue;
@@ -52,7 +52,7 @@ namespace Presentation.UnitTest.Windows
         [Test]
         public void DeleteJobCommandWithTwoJobsInQueue_CurrentItemChanges_CommandRaisesCanExecuteChanged()
         {
-            _model = new ManagePrintJobsViewModel(_jobInfoQueue, _dragAndDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater());
+            _model = new ManagePrintJobsViewModel(_jobInfoQueue, _dragAndDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater(), new DesignTimeApplicationNameProvider());
             _model.DeleteJobCommand.CanExecuteChanged += delegate { _eventWasRaised = true; };
 
             _jobInfoQueue.OnNewJobInfo += Raise.EventWith(null, new NewJobInfoEventArgs(_jobInfoStub));

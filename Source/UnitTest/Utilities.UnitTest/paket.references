@@ -1,6 +1,7 @@
-NUnit
-RhinoMocks
-NSubstitute
-
 SystemWrapper
 SystemInterface
+
+group test
+    NSubstitute
+    NUnit
+    RhinoMocks

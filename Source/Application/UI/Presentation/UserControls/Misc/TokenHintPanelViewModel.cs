@@ -1,7 +1,7 @@
 ﻿using pdfforge.PDFCreator.UI.Presentation.Commands.UserGuide;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Help;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;

@@ -50,8 +50,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Printing.PrintFile
             printCommand.Print();
 
             Assert.IsTrue(printCommand.Successful);
-            Assert.AreEqual(tempFile, factory.LastMock.StartInfo.FileName);
-            Assert.IsNullOrEmpty(factory.LastMock.StartInfo.Arguments);
+            StringAssert.Contains(tempFile, factory.LastMock.StartInfo.Arguments);
         }
 
         [Test]
@@ -94,8 +93,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Printing.PrintFile
             printCommand.Print();
 
             Assert.IsTrue(printCommand.Successful);
-            Assert.AreEqual(tempFile, factory.LastMock.StartInfo.FileName);
-            Assert.AreEqual("\"" + printer + "\"", factory.LastMock.StartInfo.Arguments);
+            StringAssert.Contains("\"" + printer + "\"", factory.LastMock.StartInfo.Arguments);
         }
 
         [Test]

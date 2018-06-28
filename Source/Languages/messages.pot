@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: en\n"
 
 #: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation
 msgid "Home"
@@ -18,11 +22,15 @@ msgstr ""
 msgid "Accounts"
 msgstr ""
 
+#: pdfforge.PDFCreator.UI.Presentation.MainShellTranslation pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
+msgid "A new Update is available"
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
 msgid "An error occurred:"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation pdfforge.PDFCreatorShell.ContextMenuTranslation
+#: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation pdfforge.PDFCreator.UI.Presentation.Assistants.ApplicationTranslation pdfforge.PDFCreator.UI.Presentation.Assistants.UacAssistantTranslation
 msgid "Error"
 msgstr ""
 
@@ -51,7 +59,11 @@ msgid "PNG file"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
-msgid "The file could not be saved. Maybe the file is currently in use or you do not have the required permissions.\nPlease select another filename and try again."
+msgid "The path '{0}' is not a valid absolute path.\nPlease select another filename and try again."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
+msgid "The file '{0}' could not be saved. Maybe the file is currently in use or you do not have the required permissions.\nPlease select another filename and try again."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.WorkflowQuery.InteractiveWorkflowTranslation
@@ -90,7 +102,7 @@ msgstr ""
 msgid "Reorder and Merge Print Jobs"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Document Info"
 msgstr ""
 
@@ -98,7 +110,7 @@ msgstr ""
 msgid "Merged Files"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "Pages:"
 msgstr ""
 
@@ -106,11 +118,11 @@ msgstr ""
 msgid "Files:"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Title:"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
+#: pdfforge.PDFCreator.UI.Presentation.Windows.ManagePrintJobsWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Author:"
 msgstr ""
 
@@ -178,16 +190,8 @@ msgstr ""
 msgid "The MD5 hash of the downloaded file does not match the expected hash. It is possible that the file has been damaged during the download. Do you want to retry the download?"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
-msgid "Failure in update-process.\nPlease check your internet-connection and retry later."
-msgstr ""
-
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "The new version {0} is available.\nWould you like to download the new version?"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
-msgid "You already have the most recent version."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
@@ -200,10 +204,6 @@ msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "What's new?"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Windows.UpdateManagerTranslation
-msgid "A new Update is available"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PlusFeatureControlTranslation
@@ -255,7 +255,63 @@ msgid "Choose a File to convert"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "The history is empty"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Clear History"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Refresh History"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Enable History"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Disable History"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
 msgid "... or simply drop files here!"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Files recently created by PDFCreator:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Remove from history"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Creation Date:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Open with"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Delete"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Open with default viewer"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Open folder"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Open with PDF Architect"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Home.HomeViewTranslation
+msgid "Open with E-Mail Client"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Architect.ArchitectViewTranslation
@@ -358,7 +414,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobPasswordButtonTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Encryption.EncryptionPasswordsUserControlTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.TitleReplacementSettings.TitleReplacementsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobPasswordButtonTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Misc.MessageWindowTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
 msgid "OK"
 msgstr ""
 
@@ -447,7 +503,15 @@ msgid "Update check is already running."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
+msgid "PDFCreator was not able to look for an update.\nPlease check your internet connection and retry later."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
 msgid "Update check"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
+msgid "You already have the most recent version."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General.GeneralSettingsTranslation
@@ -787,11 +851,19 @@ msgid "Welcome"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
-msgid "The improvements of this version are listed in the \"What's new?\" section of the manual. For latest information about our products, join us on facebook or google+."
+msgid "The improvements of this version are listed in the \"What's new?\" section of the manual."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
 msgid "Thank you for downloading PDFCreator."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
+msgid "Priority Support"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome.WelcomeWindowTranslation
+msgid "Blog"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.DefectiveProfilesViewTranslation
@@ -879,7 +951,11 @@ msgid "Certificate File:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
-msgid "Set Password"
+msgid "Certificate Password:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
+msgid "Don't save password and request it during conversion"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Sign.SignUserControlTranslation
@@ -1114,6 +1190,14 @@ msgstr ""
 msgid "Attachment file (PDF):"
 msgstr ""
 
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
+msgid "Show tray notification after converting a document"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.NotificationsLevelSettingsTranslation
+msgid "Only show notification for errors"
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.MetadataTabTranslation
 msgid "Metadata"
 msgstr ""
@@ -1142,11 +1226,11 @@ msgstr ""
 msgid "Converts all documents without asking for settings. This requires more settings to be defined in the profile."
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Filename:"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
 msgid "Folder:"
 msgstr ""
 
@@ -1175,11 +1259,11 @@ msgid "If a file already exists, an incrementing number is added to the filename
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
-msgid "To be able to skip the print dialog and directly proceed to the save file dialog, you need PDFCreator Plus, PDFCreator Business or PDFCreator Terminal Server"
+msgid "Skip the print dialog and directly proceed to the save file dialog"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.SaveTabTranslation
-msgid "Show quick actions after converting a document"
+msgid "Show quick actions after the documents were converted"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertJpgTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertPngTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs.ConvertTabs.ConvertTiffTranslation
@@ -1315,23 +1399,31 @@ msgid "Could not find MAPI client (e.g. Thunderbird or Outlook)."
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
-msgid "Check E-Mail Client"
+msgid "Check E-mail Client"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "Edit E-Mail Text"
+msgid "Edit E-mail Text"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "Multiple recipients are separated by commas"
+msgid "Hint: Multiple recipients can be separated by commas"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "Recipients:"
+msgid "To:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+msgid "CC:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
+msgid "BCC:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailClient.MailClientTabTranslation
-msgid "Email"
+msgid "E-mail"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.ProfileAdvancedTranslation
@@ -1352,10 +1444,6 @@ msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
 msgid "Define your own tokens directly in the original document with the following pattern: \"[[[UserTokenName: User token value]]]\". Afterwards the definied value can be called via the following token: \"<User:UserTokenName>\". The original pattern will be removed from the created document. You can define any number of user tokens. You can find more information in the user guide:"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
-msgid "The extraction of user tokens is available in the business editions of PDFCreator"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.UserToken.UserTokenTranslation
@@ -1420,6 +1508,22 @@ msgid "_Cancel"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+msgid "Invalid path"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+msgid "The path is not valid. Please enter a valid absolute path."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+msgid "The folder path is not valid or empty. Please enter a valid path. \nThe folder path must not contain any of the following characters: \n \\ / : * ? \\< >"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
+msgid "Folder path is not valid"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "File path too long"
 msgstr ""
 
@@ -1467,7 +1571,7 @@ msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
 msgctxt "PrintJobWindowButton"
-msgid "_E-Mail"
+msgid "_E-mail"
 msgstr ""
 
 #. pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
@@ -1492,10 +1596,6 @@ msgstr ""
 msgid "_Folder:"
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PrintJobViewTranslation
-msgid "Show quick actions after converting the document"
-msgstr ""
-
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "We highly value that you are using PDFCreator!"
 msgstr ""
@@ -1516,6 +1616,26 @@ msgstr[1] ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint.PlusHintViewTranslation
 msgid "Try PDFCreator Plus!"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Quick Actions"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Send by e-mail"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Send by"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Total file size:"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep.QuickActionTranslation
+msgid "Don't show quick Actions until the next update"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Printer.PrinterTabTranslation
@@ -1653,7 +1773,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountsTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.DropboxTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.TimeServerTranslation pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.FtpActionTranslation
-msgid "Set Timeout"
+msgid "Timeout in seconds:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.HttpTranslation
@@ -1775,7 +1895,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "E-Mail Address:"
+msgid "E-mail Address:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
@@ -1795,7 +1915,7 @@ msgid "Please select a SMTP account:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "Send Test Mail"
+msgid "Send Test E-mail"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
@@ -1803,7 +1923,7 @@ msgid "AttachmentFile"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
-msgid "Test mail sent to {0}."
+msgid "The test e-mail was successfully sent to the following recipients:"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews.SmtpTranslation
@@ -1882,44 +2002,32 @@ msgid_plural "The FTP action will be disabled for this profiles."
 msgstr[0] ""
 msgstr[1] ""
 
+#: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
+msgid "PDFCreator has successfully converted '{0}'."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
+msgid "PDFCreator was not able to convert the document '{0}'."
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
+msgid "File successfully converted"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Notifications.NotificationTranslation
+msgid "Error while converting"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
+msgid "Please save or cancel settings to continue"
+msgstr ""
+
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by the free PDFCreator"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.MailSignatureHelperTranslation
 msgid "E-mail automatically created by PDFCreator"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "keyword 1 keyword 2"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "MyFile.docx"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "OutputFilename.jpg"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "OutputFilename2.jpg"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "OutputFilename3.jpg"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "Subject from Settings"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "Title from Printjob"
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Helper.TokenPlaceHoldersTranslation
-msgid "Title from Settings"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Helper.Gpo.GpoTranslation
@@ -1934,9 +2042,69 @@ msgstr ""
 msgid "These settings have been set by your administrator and can't be changed."
 msgstr ""
 
-#: pdfforge.PDFCreator.UI.Presentation.Events.PrintJobShellTranslation
-msgid "Please save or cancel settings to continue"
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "keyword 1 keyword 2"
 msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "MyFile.docx"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "OutputFilename.jpg"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "OutputFilename2.jpg"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "OutputFilename3.jpg"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "Subject from Settings"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "Title from Printjob"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "Title from Settings"
+msgstr ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Helper.Tokens.TokenPlaceHoldersTranslation
+msgid "Value for '{0}'"
+msgstr ""
+
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "and {0} more."
+msgid_plural "and {0} more."
+msgstr[0] ""
+msgstr[1] ""
+
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Delete File"
+msgid_plural "Delete Files"
+msgstr[0] ""
+msgstr[1] ""
+
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Are you sure you want to delete the following file?"
+msgid_plural "Are you sure you want to delete the following files?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Error During Deletion"
+msgstr ""
+
+#. pdfforge.PDFCreator.UI.Presentation.Commands.DeleteFilesTranslation
+msgid "Could not delete the following file.\nMaybe the file is currently in use.\nPlease try again later."
+msgid_plural "Could not delete the following files.\nMaybe the files are currently in use.\nPlease try again later."
+msgstr[0] ""
+msgstr[1] ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Commands.ContiueAndSaveEvaluationTranslation
 msgid "Do you want to continue and save your changes?"
@@ -2031,10 +2199,6 @@ msgid "The name is invalid or a printer with this name already exists"
 msgstr ""
 
 #: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
-msgid "and {0} more."
-msgstr ""
-
-#: pdfforge.PDFCreator.UI.Presentation.Assistants.PrintFilesTranslation
 msgid "You have tried to convert directories here. This is currently not supported."
 msgstr ""
 
@@ -2120,28 +2284,6 @@ msgstr ""
 
 #: pdfforge.PDFCreator.Core.Startup.Translations.StartupTranslation
 msgid "The Windows spooler service is not running. Please start the spooler first.\n\nProgram exiting now."
-msgstr ""
-
-#. pdfforge.PDFCreatorShell.ContextMenuTranslation
-msgid "and {0} more file/directory"
-msgid_plural "and {0} more files/directories"
-msgstr[0] ""
-msgstr[1] ""
-
-#: pdfforge.PDFCreatorShell.ContextMenuTranslation
-msgid "&Convert with PDFCreator"
-msgstr ""
-
-#: pdfforge.PDFCreatorShell.ContextMenuTranslation
-msgid "Hint"
-msgstr ""
-
-#: pdfforge.PDFCreatorShell.ContextMenuTranslation
-msgid "Couldn't find PDFCreator in your system. Please check if you have installed it."
-msgstr ""
-
-#: pdfforge.PDFCreatorShell.ContextMenuTranslation
-msgid "At least one of the selected items is not convertible! For more information about the unprintable files, see the list below."
 msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
@@ -2277,7 +2419,7 @@ msgid "Invalid SMTP e-mail recipients."
 msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
-msgid "No password provided for E-mail over SMTP."
+msgid "No password provided for e-mail over SMTP."
 msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
@@ -2446,6 +2588,10 @@ msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
 msgid "Internal Ghostscript error."
+msgstr ""
+
+#: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode
+msgid "You have printed a password-protected PDF file and Ghostscript ist not able to convert such files."
 msgstr ""
 
 #: pdfforge.PDFCreator.Conversion.Jobs.ErrorCode

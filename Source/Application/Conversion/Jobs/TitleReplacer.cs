@@ -46,28 +46,26 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             switch (titleReplacement.ReplacementType)
             {
                 case ReplacementType.RegEx:
-                    if (!string.IsNullOrEmpty(titleReplacement.Replace))
-
-                        title = Regex.Replace(title, titleReplacement.Search, titleReplacement.Replace);
+                    title = Regex.Replace(title, titleReplacement.Search, titleReplacement.Replace);
                     break;
 
                 case ReplacementType.Start:
-                    if (title.StartsWith(titleReplacement.Search))
+                    if (title.StartsWith(titleReplacement.Search, StringComparison.InvariantCultureIgnoreCase))
                     {
                         title = title.Substring(titleReplacement.Search.Length);
                     }
                     break;
 
                 case ReplacementType.End:
-                    if (title.EndsWith(titleReplacement.Search))
+                    if (title.EndsWith(titleReplacement.Search, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        title = title.Substring(0, title.LastIndexOf(titleReplacement.Search, StringComparison.InvariantCulture));
+                        title = title.Substring(0, title.LastIndexOf(titleReplacement.Search, StringComparison.InvariantCultureIgnoreCase));
                     }
                     break;
 
                 case ReplacementType.Replace:
                 default:
-                    title = title.Replace(titleReplacement.Search, "");
+                    title = title.Replace(titleReplacement.Search, "", StringComparison.InvariantCultureIgnoreCase);
                     break;
             }
 
@@ -85,6 +83,24 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
             {
                 AddReplacement(titleReplacement);
             }
+        }
+    }
+
+    internal static class StringExtension
+    {
+        public static string Replace(this string source, string oldString, string newString, StringComparison comparison)
+        {
+            int index = source.IndexOf(oldString, comparison);
+
+            while (index > -1)
+            {
+                source = source.Remove(index, oldString.Length);
+                source = source.Insert(index, newString);
+
+                index = source.IndexOf(oldString, index + newString.Length, comparison);
+            }
+
+            return source;
         }
     }
 }

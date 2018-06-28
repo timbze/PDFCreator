@@ -83,8 +83,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 
             autoSaveWorkflow.RunWorkflow(job);
 
-            var pdf = new PdfReader(job.OutputFiles[0]);
-            Assert.AreEqual("Author from Job + some text", pdf.Info["Author"], "Wrong author in PDF Metadata");
+            using (var pdf = new PdfReader(job.OutputFiles[0]))
+            {
+                Assert.AreEqual("Author from Job + some text", pdf.Info["Author"], "Wrong author in PDF Metadata");
+            }
         }
 
         [Test]
@@ -181,8 +183,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Core.Workflow
 
             autoSaveWorkflow.RunWorkflow(job);
 
-            var pdf = new PdfReader(job.OutputFiles[0]);
-            Assert.AreEqual("Title from Job by Author from Job", pdf.Info["Title"], "Wrong title in PDF Metadata");
+            using (var pdf = new PdfReader(job.OutputFiles[0]))
+            {
+                Assert.AreEqual("Title from Job by Author from Job", pdf.Info["Title"], "Wrong title in PDF Metadata");
+            }
         }
     }
 }

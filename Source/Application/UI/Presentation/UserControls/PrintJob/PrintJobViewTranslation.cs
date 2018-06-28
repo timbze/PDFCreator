@@ -12,6 +12,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         [Context("PrintJobWindowButton")]
         public string CancelButton { get; private set; } = "_Cancel";
 
+        public string VolumeLabelInvalidTitle { get; private set; } = "Invalid path";
+        public string VolumeLabelInvalid { get; private set; } = "The path is not valid. Please enter a valid absolute path.";
+
+        public string FolderPathIsNotValid { get; private set; } = "The folder path is not valid or empty. Please enter a valid path. \n" +
+                                                                   "The folder path must not contain any of the following characters: \n" +
+                                                                   @" \ / : * ? \" + "< >";
+
+        public string FolderPathIsNotValidTitle { get; private set; } = "Folder path is not valid";
         public string FilePathTooLongTitle { get; private set; } = "File path too long";
         private string FilePathTooLongDescription { get; set; } = "The path to the file is longer than the maximum of {0} characters allowed, please choose a shorter file path.";
 
@@ -43,7 +51,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public string SaveButton { get; private set; } = "_Save";
 
         [Context("PrintJobWindowButton")]
-        public string EmailButton { get; private set; } = "_E-Mail";
+        public string EmailButton { get; private set; } = "_E-mail";
 
         private string[] SelectedProfileIsDefective { get; set; } = { "There is an issue with the profile \'{0}\':", "There are issues with the profile \'{0}\':" };
 
@@ -57,6 +65,5 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
         public string TitleLabel { get; private set; } = "_Title:";
         public string FilenameText { get; private set; } = "File_name:";
         public string FoldernameText { get; private set; } = "_Folder:";
-        public string DisplayAfterConversionWindowText { get; private set; } = "Show quick actions after converting the document";
     }
 }

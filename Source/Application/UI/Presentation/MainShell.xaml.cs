@@ -6,6 +6,7 @@ using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace pdfforge.PDFCreator.UI.Presentation
@@ -55,6 +56,8 @@ namespace pdfforge.PDFCreator.UI.Presentation
             var desktopSize = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(this).Handle).WorkingArea;
             if (desktopSize.Width < Width || desktopSize.Height < Height)
                 WindowState = WindowState.Maximized;
+
+            FocusManager.SetFocusedElement(this, HomeButton);
         }
     }
 }

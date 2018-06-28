@@ -100,7 +100,7 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
         [Translation("The specified SMTP account is not configured.")]
         Smtp_NoAccount = 15105,
 
-        [Translation("No password provided for E-mail over SMTP.")]
+        [Translation("No password provided for e-mail over SMTP.")]
         Smtp_NoPasswordSpecified = 15111,
 
         [Translation("E-mail over SMTP could not be delivered to one or more recipients.")]
@@ -246,6 +246,9 @@ namespace pdfforge.PDFCreator.Conversion.Jobs
 
         [Translation("Internal Ghostscript error.")]
         Conversion_GhostscriptError = 29100,
+
+        [Translation("You have printed a password-protected PDF file and Ghostscript ist not able to convert such files.")]
+        Conversion_Ghostscript_PasswordProtectedPDFError = 29101,
 
         [Translation("Unknown internal error.")]
         Conversion_UnknownError = 29200,

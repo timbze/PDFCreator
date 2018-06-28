@@ -57,12 +57,15 @@
   <ItemGroup>
     <Compile Include="AppStartFactoryTest.cs" />
     <Compile Include="AppStarts\InitializeDefaultSettingsStartTest.cs" />
+    <Compile Include="AppStarts\NewPdfJobStartTest.cs" />
+    <Compile Include="AppStarts\NewDirectConversionJobStartTest.cs" />
     <Compile Include="AppStarts\StoreLicenseForAllUsersStartTest.cs" />
     <Compile Include="CheckAllStartupConditionsTest.cs" />
     <Compile Include="CheckLicenseConditionsTest.cs" />
     <Compile Include="CheckSpoolFolderConditionTest.cs" />
     <Compile Include="GhostscriptConditionTest.cs" />
     <Compile Include="MaybePipedApplicationStarterTest.cs" />
+    <Compile Include="ParametersManagerTest.cs" />
     <Compile Include="PrinterInstalledConditionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpoolFolderAccessTest.cs" />
@@ -201,28 +204,6 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="NSubstitute">
-          <HintPath>..\..\..\..\packages\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
-        <Reference Include="nunit.framework">
-          <HintPath>..\..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
         <Reference Include="Optional">
           <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net451\Optional.dll</HintPath>
           <Private>True</Private>
@@ -247,6 +228,28 @@
       <ItemGroup>
         <Reference Include="Translatable">
           <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="NSubstitute">
+          <HintPath>..\..\..\..\packages\test\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\..\..\packages\test\NUnit\lib\net45\nunit.framework.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

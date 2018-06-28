@@ -5,6 +5,7 @@ using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
@@ -22,11 +23,11 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <param name="stamper">Stamper with document</param>
         /// <param name="profile">Profile with backgroundpage settings</param>
         /// <exception cref="ProcessingException">In case of any error.</exception>
-        internal void AddBackground(PdfStamper stamper, ConversionProfile profile)
+        internal void AddBackground(PdfStamper stamper, ConversionProfile profile, IList<IDisposable> resources)
         {
             try
             {
-                DoAddBackground(stamper, profile);
+                DoAddBackground(stamper, profile, resources);
             }
             catch (ProcessingException)
             {
@@ -38,7 +39,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             }
         }
 
-        private void DoAddBackground(PdfStamper stamper, ConversionProfile profile)
+        private void DoAddBackground(PdfStamper stamper, ConversionProfile profile, IList<IDisposable> resources)
         {
             if (!profile.BackgroundPage.Enabled)
                 return;
@@ -47,7 +48,8 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
 
             var nFile = stamper.Reader.NumberOfPages;
 
-            var backgroundPdfReader = new PdfReader(profile.BackgroundPage.File); //ExtractPages(profile.BackgroundPage.File); //new PdfReader(profile.BackgroundPage.File);
+            var backgroundPdfReader = new PdfReader(profile.BackgroundPage.File);
+            resources.Add(backgroundPdfReader);
 
             Logger.Debug("BackgroundFile: " + Path.GetFullPath(profile.BackgroundPage.File));
             var nBackground = backgroundPdfReader.NumberOfPages;
@@ -189,8 +191,10 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 if (!profile.BackgroundPage.OnCover)
                 {
-                    var coverPdfReader = new PdfReader(profile.CoverPage.File);
-                    nCover = coverPdfReader.NumberOfPages;
+                    using (var coverPdfReader = new PdfReader(profile.CoverPage.File))
+                    {
+                        nCover = coverPdfReader.NumberOfPages;
+                    }
                 }
             }
             return nCover;
@@ -210,8 +214,10 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 if (!profile.BackgroundPage.OnAttachment)
                 {
-                    var attachmentPdfReader = new PdfReader(profile.AttachmentPage.File);
-                    nAttachment = attachmentPdfReader.NumberOfPages;
+                    using (var attachmentPdfReader = new PdfReader(profile.AttachmentPage.File))
+                    {
+                        nAttachment = attachmentPdfReader.NumberOfPages;
+                    }
                 }
             }
             return nAttachment;

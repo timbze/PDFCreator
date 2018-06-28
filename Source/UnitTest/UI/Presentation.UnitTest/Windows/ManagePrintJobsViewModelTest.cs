@@ -37,7 +37,7 @@ namespace Presentation.UnitTest.Windows
 
         private ManagePrintJobsViewModel BuildViewModel()
         {
-            return new ManagePrintJobsViewModel(_queueStub, _dragDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater());
+            return new ManagePrintJobsViewModel(_queueStub, _dragDrop, _jobInfoManager, _dispatcher, new DesignTimeTranslationUpdater(), new DesignTimeApplicationNameProvider());
         }
 
         [Test]

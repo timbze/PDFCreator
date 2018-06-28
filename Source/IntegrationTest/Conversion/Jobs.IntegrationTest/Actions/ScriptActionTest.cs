@@ -47,7 +47,14 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.Actions
         [TearDown]
         public void CleanUp()
         {
-            _th.CleanUp();
+            try
+            {
+                _th.CleanUp();
+            }
+            catch
+            {
+                // ignore errors while deleting temp files
+            }
         }
 
         private ScriptAction BuildScriptAction()

@@ -34,6 +34,7 @@
         <!-- The first two behaviors are needed by MahApps. They are added by default, but as we overwrite behaviors, we have to add them again -->
         <behaviours:BorderlessWindowBehavior />
         <behaviours:GlowWindowBehavior />
+        <behaviours:WindowsSettingBehaviour />
 
         <beh:EventToCommandBehavior Command="{Binding WindowClosedCommand}" Event="Closing" PassArguments="True" />
         <beh:EventToCommandBehavior Command="{Binding WindowActivatedCommand}" Event="Activated" PassArguments="True" />

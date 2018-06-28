@@ -51,6 +51,7 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Compile Include="History\JobHistoryManagerTest.cs" />
     <Compile Include="Licensing\TerminalServerDetectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +86,14 @@
   </Target>
   -->
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Conversion\Jobs\Jobs.csproj">
+      <Project>{18354054-45F6-4F51-8730-D05643A400A3}</Project>
+      <Name>Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Conversion\Settings\Settings.csproj">
+      <Project>{94936199-C9C7-4A5F-A58E-6123158E84F3}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Core\Controller\Controller.csproj">
       <Project>{be1a6f7d-6439-4361-8e96-df90b4bfe000}</Project>
       <Name>Controller</Name>
@@ -92,6 +101,14 @@
     <ProjectReference Include="..\..\..\Application\Core\Services\Services.csproj">
       <Project>{c6058628-42b2-4cf6-a4be-622ad45f6e42}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Core\SettingsManagement\SettingsManagement.csproj">
+      <Project>{9B31D8CD-4E32-4925-B696-7D1CF02F0142}</Project>
+      <Name>SettingsManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Application\Utilities\Utilities.csproj">
+      <Project>{EA29538B-89A5-4FB3-AE0F-5E2370E852F8}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
@@ -130,28 +147,6 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="NSubstitute">
-          <HintPath>..\..\..\..\packages\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
-        <Reference Include="nunit.framework">
-          <HintPath>..\..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
         <Reference Include="Optional">
           <HintPath>..\..\..\..\packages\Optional.StrongNamed\lib\net451\Optional.dll</HintPath>
           <Private>True</Private>
@@ -163,8 +158,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="Rhino.Mocks">
-          <HintPath>..\..\..\..\packages\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
+        <Reference Include="SystemInterface">
+          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -174,8 +169,30 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="SystemInterface">
-          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+        <Reference Include="NSubstitute">
+          <HintPath>..\..\..\..\packages\test\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\..\..\packages\test\NUnit\lib\net45\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="Rhino.Mocks">
+          <HintPath>..\..\..\..\packages\test\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

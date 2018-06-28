@@ -1,4 +1,5 @@
 ﻿using NLog;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Utilities;
@@ -11,12 +12,14 @@ namespace pdfforge.PDFCreator.Core.Startup
     public class AppStartFactory
     {
         private readonly IAppStartResolver _appStartResolver;
+        private readonly IParametersManager _parametersManager;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
 
-        public AppStartFactory(IAppStartResolver appStartResolver)
+        public AppStartFactory(IAppStartResolver appStartResolver, IParametersManager parametersManager)
         {
             _appStartResolver = appStartResolver;
+            _parametersManager = parametersManager;
         }
 
         public IAppStart CreateApplicationStart(string[] commandLineArgs)
@@ -57,10 +60,20 @@ namespace pdfforge.PDFCreator.Core.Startup
             {
                 var printFile = FindPrintFile(commandLineParser);
                 var printerName = FindPrinterName(commandLineParser);
+                var outputFileParameter = FindOutputfileParameter(commandLineParser);
+
+                // Ignore profileParameter if printerName is set to ensure that the printer has priority.
+                // Later we can't distinguish, if the printer was requested or set by default.
+                var profileParameter = "";
+                if (string.IsNullOrWhiteSpace(printerName))
+                    profileParameter = FindProfileParameter(commandLineParser);
 
                 var printFileStart = _appStartResolver.ResolveAppStart<PrintFileStart>();
                 printFileStart.PrintFile = printFile;
                 printFileStart.PrinterName = printerName;
+
+                if (!string.IsNullOrWhiteSpace(outputFileParameter) || !string.IsNullOrWhiteSpace(profileParameter))
+                    _parametersManager.SaveParameterSettings(outputFileParameter, profileParameter);
 
                 return printFileStart;
             }
@@ -131,10 +144,17 @@ namespace pdfforge.PDFCreator.Core.Startup
             if (newJob != null)
             {
                 var printerName = FindPrinterName(commandLineParser);
+                var profileParameter = "";
 
+                if (string.IsNullOrWhiteSpace(printerName))
+                    profileParameter = FindProfileParameter(commandLineParser);
+
+                var outputFileParameter = FindOutputfileParameter(commandLineParser);
                 var newPsJobStart = appStartResolver.ResolveAppStart<NewPsJobStart>();
                 newPsJobStart.NewDirectConversionFile = newJob;
                 newPsJobStart.PrinterName = printerName;
+                newPsJobStart.OutputFileParameter = outputFileParameter;
+                newPsJobStart.ProfileParameter = profileParameter;
 
                 return newPsJobStart;
             }
@@ -144,9 +164,17 @@ namespace pdfforge.PDFCreator.Core.Startup
             if (newJob != null)
             {
                 var printerName = FindPrinterName(commandLineParser);
+                var outputFileParameter = FindOutputfileParameter(commandLineParser);
+                var profileParameter = "";
+
+                if (string.IsNullOrWhiteSpace(printerName))
+                    profileParameter = FindProfileParameter(commandLineParser);
+
                 var newPdfJobStart = appStartResolver.ResolveAppStart<NewPdfJobStart>();
                 newPdfJobStart.NewDirectConversionFile = newJob;
                 newPdfJobStart.PrinterName = printerName;
+                newPdfJobStart.OutputFileParameter = outputFileParameter;
+                newPdfJobStart.ProfileParameter = profileParameter;
 
                 return newPdfJobStart;
             }
@@ -200,6 +228,22 @@ namespace pdfforge.PDFCreator.Core.Startup
         {
             if (commandLineParser.HasArgument("PrinterName"))
                 return commandLineParser.GetArgument("PrinterName");
+
+            return "";
+        }
+
+        private string FindOutputfileParameter(CommandLineParser commandLineParser)
+        {
+            if (commandLineParser.HasArgument("Outputfile"))
+                return commandLineParser.GetArgument("Outputfile");
+
+            return "";
+        }
+
+        private string FindProfileParameter(CommandLineParser commandLineParser)
+        {
+            if (commandLineParser.HasArgument("Profile"))
+                return commandLineParser.GetArgument("Profile");
 
             return "";
         }

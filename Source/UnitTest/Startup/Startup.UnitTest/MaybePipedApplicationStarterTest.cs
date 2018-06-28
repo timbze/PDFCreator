@@ -3,6 +3,7 @@ using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Startup.AppStarts;
 using pdfforge.PDFCreator.Core.StartupInterface;
@@ -28,6 +29,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             _cleanUp = Substitute.For<IPdfCreatorCleanUp>();
             _updateAssistant = Substitute.For<IUpdateAssistant>();
             _startupConditions = Substitute.For<ICheckAllStartupConditions>();
+            _notificationService = Substitute.For<INotificationService>();
         }
 
         private IPipeServerManager _pipeServerManager;
@@ -37,6 +39,8 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
         private IUpdateAssistant _updateAssistant;
         private ICheckAllStartupConditions _startupConditions;
         private IJobInfoQueueManager _jobInfoQueueManager;
+        private INotificationService _notificationService;
+        private IJobHistoryManager _jobHistoryManager;
 
         private MaybePipedApplicationStarter BuildMaybePipedApplicationStarter(int retries = 1)
         {
@@ -44,10 +48,11 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             var jobInfoQueue = Substitute.For<IJobInfoQueue>();
             var staticPropertiesHack = Substitute.For<IStaticPropertiesHack>();
             var spooledJobFinder = Substitute.For<ISpooledJobFinder>();
+            _jobHistoryManager = Substitute.For<IJobHistoryManager>();
 
             var starter = new MaybePipedApplicationStarter(_settingsManager, _updateAssistant, _startupConditions,
                 _threadManager, _pipeServerManager, _jobInfoQueueManager, jobInfoQueue, staticPropertiesHack, _cleanUp,
-                spooledJobFinder);
+                spooledJobFinder, _notificationService, _jobHistoryManager);
 
             starter.Retries = retries;
 
@@ -90,6 +95,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
             {
                 _settingsManager.LoadAllSettings();
                 _pipeServerManager.IsServerRunning();
+                _settingsManager.LoadAllSettings();
             });
         }
 
@@ -237,6 +243,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 _settingsManager.LoadAllSettings();
                 _pipeServerManager.IsServerRunning();
                 _pipeServerManager.StartServer();
+                _settingsManager.LoadAllSettings();
                 // Expect Shutdown directly, as this will stop the pipe server after an error
                 _pipeServerManager.Shutdown();
             });
@@ -264,6 +271,7 @@ namespace pdfforge.PDFCreator.UnitTest.Startup
                 _pipeServerManager.PrepareShutdown();
                 _threadManager.Shutdown();
                 _settingsManager.SaveCurrentSettings();
+                _jobHistoryManager.Save();
                 _pipeServerManager.Shutdown();
             });
         }

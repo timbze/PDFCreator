@@ -122,8 +122,19 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
+        <Reference Include="SystemInterface">
+          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
         <Reference Include="nunit.framework">
-          <HintPath>..\..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <HintPath>..\..\..\..\packages\test\NUnit\lib\net45\nunit.framework.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -134,18 +145,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
         <Reference Include="Rhino.Mocks">
-          <HintPath>..\..\..\..\packages\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
-        <Reference Include="SystemInterface">
-          <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+          <HintPath>..\..\..\..\packages\test\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

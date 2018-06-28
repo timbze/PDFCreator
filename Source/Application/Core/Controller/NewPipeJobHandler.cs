@@ -48,7 +48,7 @@ namespace pdfforge.PDFCreator.Core.Controller
             else if (message.StartsWith("ReloadSettings|", StringComparison.OrdinalIgnoreCase))
             {
                 _logger.Info("Pipe Command: Reloading settings");
-                _settingsManager.LoadPdfCreatorSettings();
+                _settingsManager.LoadAllSettings();
             }
         }
 

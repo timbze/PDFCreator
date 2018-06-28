@@ -42,6 +42,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="SystemInterface, Version=9.6.171.928, Culture=neutral, PublicKeyToken=eac5c13f744ba6e9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\SystemInterface\lib\SystemInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SystemWrapper, Version=9.6.171.928, Culture=neutral, PublicKeyToken=9861416082383a00, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <!-- Include english-ini here to make NCrunch aware of it -->
@@ -53,6 +61,12 @@
     <Compile Include="GettextLanguageLoader.cs" />
     <Compile Include="ICommandLocator.cs" />
     <Compile Include="IInitializedCommand.cs" />
+    <Compile Include="JobHistory\HistoricFile.cs" />
+    <Compile Include="JobHistory\HistoricJob.cs" />
+    <Compile Include="JobHistory\IJobHistoryManager.cs" />
+    <Compile Include="JobHistory\IJobHistoryStorage.cs" />
+    <Compile Include="JobHistory\JobHistoryManager.cs" />
+    <Compile Include="JobHistory\JobHistoryJsonFileStorage.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Licensing\ActivationResponseEventArgs.cs" />
     <Compile Include="Licensing\ITerminalServerDetection.cs" />
@@ -67,10 +81,12 @@
     <Compile Include="Logging\InMemoryLogger.cs" />
     <Compile Include="Logging\LoggingHelper.cs" />
     <Compile Include="Macros\BooleanMacroResult.cs" />
+    <Compile Include="Macros\IMacroCommandBuilder.cs" />
     <Compile Include="Macros\IWaitableCommand.cs" />
     <Compile Include="Macros\IMacroCommand.cs" />
     <Compile Include="Macros\IMacroResult.cs" />
     <Compile Include="Macros\MacroAreDoneEventArgs.cs" />
+    <Compile Include="Macros\MacroCommandBuilder.cs" />
     <Compile Include="Macros\MacroCommandIsDoneEventArgs.cs" />
     <Compile Include="Macros\MacroCommand.cs" />
     <Compile Include="PdfCreatorCleanUp.cs" />
@@ -94,10 +110,6 @@
     <ProjectReference Include="..\..\Conversion\Jobs\Jobs.csproj">
       <Project>{18354054-45f6-4f51-8730-d05643a400a3}</Project>
       <Name>Jobs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controller\Controller.csproj">
-      <Project>{be1a6f7d-6439-4361-8e96-df90b4bfe000}</Project>
-      <Name>Controller</Name>
     </ProjectReference>
     <ProjectReference Include="..\SettingsManagement\SettingsManagement.csproj">
       <Project>{9b31d8cd-4e32-4925-b696-7d1cf02f0142}</Project>

@@ -99,7 +99,7 @@ namespace Presentation.UnitTest.UserControls.DebugSettings
             Received.InOrder(() =>
             {
                 _settingsManager.ApplyAndSaveSettings(Arg.Any<PdfCreatorSettings>());
-                _settingsManager.LoadPdfCreatorSettings();
+                _settingsManager.LoadAllSettings();
                 _settingsManager.SaveCurrentSettings();
             });
 

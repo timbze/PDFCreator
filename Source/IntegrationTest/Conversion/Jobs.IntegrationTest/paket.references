@@ -1,13 +1,15 @@
-BitMiracle.LibTiff.NET
 ftplib
 iTextSharp
-RhinoMocks
-NUnit
 SystemWrapper
 SystemInterface
-NSubstitute
 SimpleInjector
 Dropbox.Api.Net40
-Toolbelt.Net.Smtp.SmtpServerForUnitTest
-AutoFixture
-System.Net.Http.Formatting.Extension
+
+group test
+    AutoFixture
+    BitMiracle.LibTiff.NET
+    NSubstitute
+    NUnit
+    RhinoMocks
+    System.Net.Http.Formatting.Extension
+    Toolbelt.Net.Smtp.SmtpServerForUnitTest

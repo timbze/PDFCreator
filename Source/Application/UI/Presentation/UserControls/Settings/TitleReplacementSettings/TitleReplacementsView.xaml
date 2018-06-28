@@ -16,6 +16,12 @@
     Style="{DynamicResource TabUserControl}">
     <UserControl.Resources>
         <ResourceDictionary>
+            <Viewbox x:Key="RightArrow">
+                <Canvas Width="176.604" Height="176.604">
+                    <Ellipse Fill="{DynamicResource TagForegroundBrush}" Margin="10" Width="146.604" Height="156.604" />
+                    <Path Fill="{DynamicResource TagBackgroundBrush}" Data="F1 M 118.369,108.859 L 82.763,129.416 L 82.763,117.721 L 98.113,108.859 L 133.719,88.302 L 98.113,67.745 L 82.763,58.883 L 82.763,47.188 L 118.369,67.745 L 153.975,88.302 L 118.369,108.859 Z M 22.629,93.366 L 22.629,83.238 L 99.221,83.238 L 99.221,93.366 L 22.629,93.366 Z M 88.302,0.000 C 39.534,0.000 0.000,39.534 0.000,88.302 C 0.000,137.070 39.534,176.604 88.302,176.604 C 137.070,176.604 176.604,137.070 176.604,88.302 C 176.604,39.534 137.070,0.000 88.302,0.000 Z" />
+                </Canvas>
+            </Viewbox>
             <converter:TranslateableConverter x:Key="TranslatedEnumConverter" />
         </ResourceDictionary>
     </UserControl.Resources>

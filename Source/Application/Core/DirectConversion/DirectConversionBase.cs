@@ -33,7 +33,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
         ///     Create inf file from ps file.
         /// </summary>
         /// <returns>inf file in spool folder</returns>
-        public string TransformToInfFile(string file, string printerName = "")
+        public string TransformToInfFile(string file, string printerName = "", string profileParameter = "", string outputFileParameter = "")
         {
             if (string.IsNullOrEmpty(file))
             {
@@ -67,7 +67,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             try
             {
                 var psFileInJobFolder = CopyFileToJobFolder(jobFolder, file);
-                return CreateInfFile(file, jobFolder, psFileInJobFolder, printerName);
+                return CreateInfFile(file, jobFolder, psFileInJobFolder, printerName, profileParameter, outputFileParameter);
             }
             catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             return psFileInJobFolder;
         }
 
-        private string CreateInfFile(string psFile, string jobFolder, string psFileInJobFolder, string printerName)
+        private string CreateInfFile(string psFile, string jobFolder, string psFileInJobFolder, string printerName, string profileParameter, string outputFile)
         {
             var psFilename = Path.GetFileName(psFile);
             var infFile = Path.Combine(jobFolder, psFilename + ".inf");
@@ -119,6 +119,8 @@ namespace pdfforge.PDFCreator.Core.DirectConversion
             sourceFileInfo.JobCounter = 0;
             sourceFileInfo.JobId = 0;
             sourceFileInfo.PrinterName = printerName;
+            sourceFileInfo.Profile = profileParameter;
+            sourceFileInfo.OutputFile = outputFile;
             sourceFileInfo.SessionId = Process.GetCurrentProcess().SessionId;
             sourceFileInfo.TotalPages = GetNumberOfPages(psFile);
             sourceFileInfo.Type = JobType.PsJob;

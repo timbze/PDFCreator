@@ -1,8 +1,9 @@
 ﻿using Optional;
 using pdfforge.PDFCreator.Conversion.Actions;
-using pdfforge.PDFCreator.UI.Presentation.Controls;
+using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.Utilities.Threading;
 using pdfforge.PDFCreator.Utilities.Tokens;
@@ -18,7 +19,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
         private readonly IScriptActionHelper _scriptActionHelper;
 
-        public ScriptUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider provider, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper, TokenHelper tokenHelper)
+        public ScriptUserControlViewModel(ITranslationUpdater translationUpdater, ISelectedProfileProvider provider, IOpenFileInteractionHelper openFileInteractionHelper, IScriptActionHelper scriptActionHelper, TokenHelper tokenHelper, ITokenViewModelFactory tokenViewModelFactory)
             : base(translationUpdater, provider)
         {
             _openFileInteractionHelper = openFileInteractionHelper;
@@ -28,10 +29,22 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
             {
                 TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
                 var tokens = tokenHelper.GetTokenListWithFormatting();
-                ParameterTokenViewModel = new TokenViewModel(x => CurrentProfile.Scripting.ParameterString = x, () => CurrentProfile?.Scripting.ParameterString, tokens, ReplaceTokens);
-                ScriptFileTokenViewModel = new TokenViewModel(x => CurrentProfile.Scripting.ScriptFile = x, () => CurrentProfile?.Scripting.ScriptFile, tokens, ReplaceTokens, SelectScriptFileAction);
-                ParameterTokenViewModel.OnTextChanged += TokenTextChanged;
-                ScriptFileTokenViewModel.OnTextChanged += TokenTextChanged;
+
+                ParameterTokenViewModel = tokenViewModelFactory.BuilderWithSelectedProfile()
+                    .WithSelector(p => p.Scripting.ParameterString)
+                    .WithTokenList(tokens)
+                    .WithTokenReplacerPreview(TokenReplacer)
+                    .Build();
+
+                ScriptFileTokenViewModel = tokenViewModelFactory.BuilderWithSelectedProfile()
+                    .WithSelector(p => p.Scripting.ScriptFile)
+                    .WithTokenList(tokens)
+                    .WithTokenReplacerPreview(TokenReplacer)
+                    .WithButtonCommand(SelectScriptFileAction)
+                    .Build();
+
+                ParameterTokenViewModel.TextChanged += TokenTextChanged;
+                ScriptFileTokenViewModel.TextChanged += TokenTextChanged;
                 TokenTextChanged(this, EventArgs.Empty);
             }
         }
@@ -56,9 +69,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
 
         public string PreviewScriptCall { get; set; }
 
-        public TokenViewModel ScriptFileTokenViewModel { get; set; }
+        public TokenViewModel<ConversionProfile> ScriptFileTokenViewModel { get; set; }
 
-        public TokenViewModel ParameterTokenViewModel { get; set; }
+        public TokenViewModel<ConversionProfile> ParameterTokenViewModel { get; set; }
 
         public TokenReplacer TokenReplacer { get; }
 
@@ -95,20 +108,11 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Advanced.Scr
             ScriptFileTokenViewModel.RaiseTextChanged();
             TokenTextChanged(this, EventArgs.Empty);
         }
-
-        private string ReplaceTokens(string s)
-        {
-            if (s != null)
-            {
-                return TokenReplacer.ReplaceTokens(s);
-            }
-            return string.Empty;
-        }
     }
 
     public class DesignTimeScriptUserControlViewModel : ScriptUserControlViewModel
     {
-        public DesignTimeScriptUserControlViewModel() : base(new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCurrentSettingsProvider(), null, null, null)
+        public DesignTimeScriptUserControlViewModel() : base(new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCurrentSettingsProvider(), null, null, null, new DesignTimeTokenViewModelFactory())
         {
         }
     }

@@ -127,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] { "a@local", "b@local" }.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local" }.ToList(), mail.Recipients.Select(r => r.Address));
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }, mail.Recipients.Select(r => r.Address));
         }
 
         [Test]
@@ -151,7 +151,22 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
             action.ProcessJob(_job);
 
             var mail = _mockMailClient.Mails[0];
-            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }.ToList(), mail.To);
+            Assert.AreEqual(new[] { "a@local", "b@local", "c@local" }, mail.Recipients.Select(r => r.Address));
+        }
+
+        [Test]
+        public void EmailClientAction_WithMultipleRecipientsInCcAndBcc_AllRecipientsListedInMail()
+        {
+            var action = new EMailClientAction(_emailClientFactory);
+            _profile.EmailClientSettings.Recipients = "a@local;";
+            _profile.EmailClientSettings.RecipientsCc = "b@local";
+            _profile.EmailClientSettings.RecipientsBcc = ";c@local";
+
+            action.ProcessJob(_job);
+
+            var mail = _mockMailClient.Mails[0];
+            var formattedRecipients = mail.Recipients.Select(r => r.Type + ":" + r.Address);
+            Assert.AreEqual(new[] { "To:a@local", "Cc:b@local", "Bcc:c@local" }, formattedRecipients);
         }
 
         [Test]

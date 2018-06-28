@@ -8,11 +8,7 @@ namespace pdfforge.PDFCreator.Core.Services.Macros
     {
         event EventHandler MacroIsDone;
 
-        IMacroCommand AddCommand(ICommand command);
-
         ICommand GetCommand(int index);
-
-        IMacroCommand AddCommand<T>() where T : class, ICommand;
 
         void ExecuteWithAsyncResult(object parameter, TaskCompletionSource<IMacroResult> resultTask);
 

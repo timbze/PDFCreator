@@ -87,52 +87,5 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			return base.GetHashCode();
 		}
 		
-// Custom Code starts here
-// START_CUSTOM_SECTION:GENERAL
-
-	    public TitleReplacement()
-	    {
-	        
-	    }
-
-        /// <summary>
-        ///     Create a TitleReplacement with search and replace fields set
-        /// </summary>
-        /// <param name="replacementType">Defines how the replacement will be processed</param>
-        /// <param name="search">The text to search for</param>
-        /// <param name="replace">The text that will be inserted instead</param>
-        public TitleReplacement(ReplacementType replacementType, string search, string replace)
-        {
-            ReplacementType = replacementType;
-            Search = search;
-            Replace = replace;
-        }
-
-        public bool IsValid()
-        {
-            if (string.IsNullOrEmpty(Search))
-                return false;
-
-            if (ReplacementType != ReplacementType.RegEx)
-                return true;
-            
-            if (string.IsNullOrEmpty(Replace))
-                return false;
-
-            try
-            {
-                Regex.Replace("", Search, Replace);
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        // END_CUSTOM_SECTION:GENERAL
-// Custom Code ends here. Do not edit below
-		
 	}
 }

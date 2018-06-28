@@ -6,7 +6,9 @@ using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
+using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.Utilities;
+using pdfforge.PDFCreator.Utilities.IO;
 using System;
 using SystemInterface.IO;
 
@@ -20,20 +22,26 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
         private readonly IPathSafe _pathSafe;
         private readonly IErrorNotifier _errorNotifier;
         private readonly ISettingsProvider _settingsProvider;
-        private readonly IFileNameQuery _saveFileQuery;
         private readonly ICommandLocator _commandLocator;
         private readonly IPathUtil _pathUtil;
+        private readonly ILastSaveDirectoryHelper _lastSaveDirectoryHelper;
+        private readonly IDirectoryHelper _directoryHelper;
         private readonly ITargetFileNameComposer _targetFileNameComposer;
 
-        public InteractiveWorkflow(IShellManager shellManager, ITargetFileNameComposer targetFileNameComposer, IJobDataUpdater jobDataUpdater, IPathSafe pathSafe, IErrorNotifier errorNotifier, ISettingsProvider settingsProvider, IFileNameQuery saveFileQuery, ICommandLocator commandLocator, IPathUtil pathUtil)
+        public InteractiveWorkflow(IShellManager shellManager, ITargetFileNameComposer targetFileNameComposer, IJobDataUpdater jobDataUpdater,
+                                   IPathSafe pathSafe, IErrorNotifier errorNotifier, ISettingsProvider settingsProvider,
+                                   ICommandLocator commandLocator, IPathUtil pathUtil, ILastSaveDirectoryHelper lastSaveDirectoryHelper,
+                                   IDirectoryHelper directoryHelper
+            )
         {
             _shellManager = shellManager;
             _pathSafe = pathSafe;
             _errorNotifier = errorNotifier;
             _settingsProvider = settingsProvider;
-            _saveFileQuery = saveFileQuery;
             _commandLocator = commandLocator;
             _pathUtil = pathUtil;
+            _lastSaveDirectoryHelper = lastSaveDirectoryHelper;
+            _directoryHelper = directoryHelper;
             _targetFileNameComposer = targetFileNameComposer;
 
             JobDataUpdater = jobDataUpdater;
@@ -46,12 +54,27 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
         {
             job.OutputFilenameTemplate = ComposeFilename(job);
 
+            _lastSaveDirectoryHelper.Apply(job);
+
             if (job.Profile.SkipPrintDialog)
                 _commandLocator.GetCommand<SkipPrintDialogCommand>().Execute(job);
 
             _logger.Debug("Starting PrintJobWindow");
-            _shellManager.ShowPrintJobShell(job);
-            _settingsProvider.Settings.ApplicationSettings.LastUsedProfileGuid = job.Profile.Guid;
+
+            try
+            {
+                _shellManager.ShowPrintJobShell(job);
+                _settingsProvider.Settings.ApplicationSettings.LastUsedProfileGuid = job.Profile.Guid;
+                
+                if (job.IsSuccessful)
+                {
+                    _lastSaveDirectoryHelper.Save(job);
+                }
+            }
+            finally
+            {
+                _directoryHelper.DeleteCreatedDirectories();
+            }
         }
 
         private string ComposeFilename(Job job)

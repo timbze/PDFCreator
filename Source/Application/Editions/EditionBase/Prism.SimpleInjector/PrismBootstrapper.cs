@@ -9,6 +9,7 @@ using pdfforge.PDFCreator.UI.Presentation.UserControls.Home;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Printer;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.PlusHint;
+using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.QuickActionStep;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.UpdateHint;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Settings;
@@ -126,6 +127,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase.Prism.SimpleInjector
             container.RegisterTypeForNavigation<SettingsView>();
             container.RegisterTypeForNavigation<PrintJobView>();
             container.RegisterTypeForNavigation<PdfPasswordView>();
+            container.RegisterTypeForNavigation<QuickActionView>();
             container.RegisterTypeForNavigation<FtpPasswordView>();
             container.RegisterTypeForNavigation<SmtpPasswordView>();
             container.RegisterTypeForNavigation<HttpPasswordView>();

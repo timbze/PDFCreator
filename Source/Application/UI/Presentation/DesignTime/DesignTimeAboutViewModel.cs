@@ -10,7 +10,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
 {
     public class DesignTimeAboutViewModel : AboutViewModel
     {
-        public DesignTimeAboutViewModel() : base(new DesignTimeVersionHelper(), new ButtonDisplayOptions(false, false), new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCommandLocator(), new DesignTimeApplicationNameProvider())
+        public DesignTimeAboutViewModel() : base(new DesignTimeVersionHelper(), new ButtonDisplayOptions(false, false), new TranslationUpdater(new TranslationFactory(), new ThreadManager()), new DesignTimeCommandLocator(), new DesignTimeApplicationNameProvider(), null)
         {
         }
     }

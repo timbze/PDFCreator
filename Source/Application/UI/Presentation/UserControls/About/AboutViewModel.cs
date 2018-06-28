@@ -4,9 +4,11 @@ using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Commands.UserGuide;
 using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Help;
+using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.Utilities;
+using System;
 using System.Windows.Input;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls
@@ -17,7 +19,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls
 
         public AboutViewModel(IVersionHelper versionHelper
             , ButtonDisplayOptions buttonDisplayOptions, ITranslationUpdater translationUpdater
-            , ICommandLocator commandLocator, ApplicationNameProvider applicationNameProvider) : base(translationUpdater)
+            , ICommandLocator commandLocator, ApplicationNameProvider applicationNameProvider, EditionHintOptionProvider editionHintOptionProvider) : base(translationUpdater)
         {
             ApplicationNameProvider = applicationNameProvider;
             HideSocialMediaButtons = buttonDisplayOptions.HideSocialMediaButtons;
@@ -29,9 +31,14 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls
             PdfforgeWebsiteCommand = commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.PdfforgeWebsiteUrl);
             FacebookCommand = commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.Facebook);
             GooglePlusCommand = commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.GooglePlus);
+            AllowPrioritySupport = !editionHintOptionProvider?.ShowOnlyForPlusAndBusinessHint ?? true;
+            PrioritySupportCommand = commandLocator.GetCommand<PrioritySupportUrlOpenCommand>();
         }
 
+        public Boolean AllowPrioritySupport { get; }
+
         public bool HideSocialMediaButtons { get; }
+        public ICommand PrioritySupportCommand { get; }
         public string VersionText { get; }
 
         public ICommand ShowManualCommand { get; }

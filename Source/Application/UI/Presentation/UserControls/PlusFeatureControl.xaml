@@ -9,12 +9,18 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance designTime:DesignTimePlusFeatureControlViewModel, IsDesignTimeCreatable=True}">
+
     <UserControl.Resources>
         <Style TargetType="local:PlusFeatureControl">
             <Setter Property="Edition" Value="{Binding Edition, Mode=TwoWay}" />
         </Style>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
     </UserControl.Resources>
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Visibility" Value="{Binding ShowPlusHint, Converter={StaticResource BoolToVisibilityConverter}}" />
+        </Style>
+    </UserControl.Style>
 
     <Button Cursor="{x:Static Cursors.Hand}" Command="{Binding ShowEditionWebsiteCommand}" IsEnabled="{Binding ShowPlusHint}">
         <Button.Template>
@@ -32,7 +38,6 @@
             FontSize="9"
             FontWeight="Bold"
             ToolTip="{Binding ToolTip}"
-            Visibility="{Binding ShowPlusHint, Converter={StaticResource BoolToVisibilityConverter}}"
             IsTabStop="False">
             <ContentControl.Content>
                 <PriorityBinding>

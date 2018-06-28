@@ -82,6 +82,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
                 CallActions(job, actions);
                 CleanUp(job);
 
+                job.IsSuccessful = true;
                 _logger.Trace("Job finished successfully");
             }
             catch (ProcessingException ex)

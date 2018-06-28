@@ -22,6 +22,7 @@ using SimpleInjector.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Translatable;
 using MainShell = pdfforge.PDFCreator.UI.Presentation.MainShell;
 using PrintJobShell = pdfforge.PDFCreator.UI.Presentation.PrintJobShell;
@@ -126,7 +127,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
         }
 
         [Test]
-        [STAThread]
+        [Apartment(ApartmentState.STA)]
         [TestCaseSource(nameof(AllBootstrappers))]
         public void ConfigurationOfContainer_CanBeValidatedWithoutWarnings(Bootstrapper bootstrapper)
         {
@@ -156,7 +157,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
 
         [Test]
         [TestCaseSource(nameof(AllBootstrappers))]
-        [STAThread]
+        [Apartment(ApartmentState.STA)]
         public void ConfigurationOfContainer_WithInteractions_CanBeValidatedWithoutWarnings(Bootstrapper bootstrapper)
         {
             ViewRegistry.ClearInteractionMappings();
@@ -205,7 +206,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
         }
 
         [Test]
-        [STAThread]
+        [Apartment(ApartmentState.STA)]
         public void AllWhitelistedClasses_AreRegistered()
         {
             var bootstrapper = new PDFCreatorPlusBootstrapper();
@@ -231,7 +232,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
 
         [TestCase(typeof(MainShell))]
         [TestCase(typeof(PrintJobShell))]
-        [STAThread]
+        [Apartment(ApartmentState.STA)]
         public void Shells_CanBeResolved(Type type)
         {
             var bootstrapper = new PDFCreatorPlusBootstrapper();
@@ -241,7 +242,7 @@ namespace pdfforge.PDFCreator.UnitTest.Editions.PDFCreator
         }
 
         [Test]
-        [STAThread]
+        [Apartment(ApartmentState.STA)]
         public void AllTypes_DoNotRequestITranslatableInConstructor()
         {
             var bootstrapper = new PDFCreatorBootstrapper();

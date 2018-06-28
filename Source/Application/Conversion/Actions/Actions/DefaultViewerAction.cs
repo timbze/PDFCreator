@@ -7,7 +7,9 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using pdfforge.PDFCreator.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -46,11 +48,11 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                             job.Profile.OutputFormat == OutputFormat.PdfX;
 
             if (!isPdfFile)
-                return OpenJobOutput(job);
+                return OpenOutputFile(job.OutputFiles.First());
 
             if (job.Profile.OpenWithPdfArchitect && IsArchitectInstalled())
             {
-                return OpenWithArchitect(job);
+                return OpenWithArchitect(job.OutputFiles);
             }
 
             if (!_fileAssoc.HasOpen(".pdf"))
@@ -61,7 +63,7 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 return new ActionResult(); //return true, to avoid another message window.
             }
 
-            return OpenJobOutput(job);
+            return OpenOutputFile(job.OutputFiles.First());
         }
 
         private string GetArchitectPath()
@@ -82,12 +84,12 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             return _architectCheck.IsInstalled();
         }
 
-        private ActionResult OpenWithArchitect(Job job)
+        public ActionResult OpenWithArchitect(IEnumerable<string> files)
         {
             string architectPath = GetArchitectPath();
 
             Logger.Debug("Open with PDF Architect");
-            foreach (var file in job.OutputFiles)
+            foreach (var file in files)
             {
                 try
                 {
@@ -111,13 +113,13 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             return profile.OpenViewer;
         }
 
-        private ActionResult OpenJobOutput(Job job)
+        public ActionResult OpenOutputFile(string filePath)
         {
             Logger.Trace("Open file(s) with default programm");
             try
             {
-                Process.Start(job.OutputFiles[0]);
-                Logger.Trace("Openend (only first) file: " + job.OutputFiles[0]);
+                Process.Start(filePath);
+                Logger.Trace("Openend (only first) file: " + filePath);
             }
             catch
             {

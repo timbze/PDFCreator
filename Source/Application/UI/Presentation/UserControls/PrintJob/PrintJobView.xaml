@@ -10,6 +10,7 @@
              xmlns:printJob="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob"
              xmlns:behavior="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Styles.Behavior"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance designTime:DesignTimePrintJobViewModel, IsDesignTimeCreatable=True}">
@@ -107,23 +108,31 @@
 
                 <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=TitleTextBox}"
                            Content="{Binding Translation.TitleLabel}" />
+                <!--<TextBox Name="TitleTextBox" Grid.Row="0" Grid.Column="1"
+                             Text="{Binding Job.JobInfo.Metadata.Title}" />-->
                 <TextBox Name="TitleTextBox" Grid.Row="0" Grid.Column="1"
-                             Text="{Binding Job.JobInfo.Metadata.Title}" />
+                         Text="{Binding Title, Mode=TwoWay}" />
 
                 <Label Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=AuthorTextBox}"
                        Content="{Binding Translation.AuthorLabel}" />
+                <!--<TextBox Name="AuthorTextBox" Grid.Row="2" Grid.Column="1"
+                         Text="{Binding Job.JobInfo.Metadata.Author}" />-->
                 <TextBox Name="AuthorTextBox" Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Job.JobInfo.Metadata.Author}" />
+                         Text="{Binding Author}" />
 
                 <Label Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=SubjectTextBox}"
                            Content="{Binding Translation.SubjectLabel}" />
+                <!--<TextBox Name="SubjectTextBox" Grid.Row="4" Grid.Column="1"
+                             Text="{Binding Job.JobInfo.Metadata.Subject}" />-->
                 <TextBox Name="SubjectTextBox" Grid.Row="4" Grid.Column="1"
-                             Text="{Binding Job.JobInfo.Metadata.Subject}" />
+                         Text="{Binding Subject}" />
 
                 <Label Grid.Row="6" Grid.Column="0" Target="{Binding ElementName=KeywordsTextBox}"
                            Content="{Binding Translation.KeywordsLabel}" />
+                <!--<TextBox Name="KeywordsTextBox" Grid.Row="6" Grid.Column="1"
+                             Text="{Binding Job.JobInfo.Metadata.Keywords}" />-->
                 <TextBox Name="KeywordsTextBox" Grid.Row="6" Grid.Column="1"
-                             Text="{Binding Job.JobInfo.Metadata.Keywords}" />
+                         Text="{Binding Keyword}" />
             </Grid>
 
             <!--<Separator />
@@ -161,6 +170,7 @@
             </Button>
 
             <Button
+                    IsDefault="True"
                     Style="{DynamicResource GreenButton}"
                     Margin="10"
                     Width="90"

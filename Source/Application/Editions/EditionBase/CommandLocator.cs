@@ -20,11 +20,6 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             return instance;
         }
 
-        public IMacroCommand GetMacroCommand()
-        {
-            return GetCommand<MacroCommand>() as MacroCommand;
-        }
-
         public ICommand GetInitializedCommand<TCommand, TParameter>(TParameter parameter) where TCommand : class, IInitializedCommand<TParameter>
         {
             if (parameter == null)
@@ -32,6 +27,11 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             var instance = _container.GetInstance<TCommand>();
             instance?.Init(parameter);
             return instance;
+        }
+
+        public IMacroCommandBuilder CreateMacroCommand()
+        {
+            return new MacroCommandBuilder(this);
         }
     }
 }

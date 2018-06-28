@@ -42,6 +42,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Workflow
             WorkflowSteps.Add(WorkflowStep.Create<ProgressView>());
             WorkflowSteps.Add(new DropboxSharedLinkStep());
             WorkflowSteps.Add(new UpdateHintStep(_updateAssistant));
+            WorkflowSteps.Add(new QuickActionStep());
 
             return new InteractiveWorkflowManager(_workflowNavigationHelper, regionManager, WorkflowSteps);
         }

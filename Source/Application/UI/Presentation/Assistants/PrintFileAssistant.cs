@@ -53,7 +53,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             message += string.Join("\r\n", fileList.ToArray());
 
             if (fileList.Count < unprintable.Count)
-                message += "\r\n" + _translation.GetAndxMoreMessage(unprintable.Count - fileList.Count);
+                message += "\r\n" + _translation.GetAndXMoreMessage(unprintable.Count - fileList.Count);
 
             message += "\r\n\r\n" + _translation.ProceedAnyway;
 

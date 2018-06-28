@@ -1,10 +1,12 @@
 ﻿using NLog;
+using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using System;
 using System.Net;
 using System.Net.Mail;
+using Attachment = System.Net.Mail.Attachment;
 
 namespace pdfforge.PDFCreator.Conversion.Actions.Actions
 {
@@ -94,17 +96,31 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
                 return new ActionResult(ErrorCode.Smtp_NoPasswordSpecified);
             }
 
-            var recipients = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients);
-            recipients = recipients.Replace(';', ',');
+            var recipientsTo = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.Recipients.Replace(';', ','));
+            var recipientsCc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsCc.Replace(';', ','));
+            var recipientsBcc = job.TokenReplacer.ReplaceTokens(job.Profile.EmailSmtpSettings.RecipientsBcc.Replace(';', ','));
 
             MailMessage mail;
+
             try
             {
-                mail = new MailMessage(smtpAccount.Address, recipients);
+                mail = new MailMessage(smtpAccount.Address, recipientsTo);
             }
-            catch (FormatException)
+            catch (Exception e) when (e is FormatException || e is ArgumentException)
             {
-                Logger.Error($"\'{recipients}\' is no valid SMTP e-mail recipient.");
+                Logger.Error($"\'{recipientsTo}\' is no valid SMTP e-mail recipient: " + e.Message);
+                return new ActionResult(ErrorCode.Smtp_InvalidRecipients);
+            }
+
+            // these blocks have to be seperated, because we want to log the offending recipients
+            // (AddRecipients does this already, but can't be reused for the constructor)
+            try
+            {
+                AddRecipients(mail, RecipientType.Cc, recipientsCc);
+                AddRecipients(mail, RecipientType.Bcc, recipientsBcc);
+            }
+            catch
+            {
                 return new ActionResult(ErrorCode.Smtp_InvalidRecipients);
             }
 
@@ -147,6 +163,34 @@ namespace pdfforge.PDFCreator.Conversion.Actions.Actions
             );
 
             return SendEmail(job, smtp, mail);
+        }
+
+        private MailAddressCollection GetAddressCollection(MailMessage mail, RecipientType recipientType)
+        {
+            switch (recipientType)
+            {
+                case RecipientType.To: return mail.To;
+                case RecipientType.Cc: return mail.CC;
+                case RecipientType.Bcc: return mail.Bcc;
+                default: throw new ArgumentException("Invalid recipient type!", nameof(recipientType));
+            }
+        }
+
+        private void AddRecipients(MailMessage mail, RecipientType recipientType, string recipients)
+        {
+            if (string.IsNullOrWhiteSpace(recipients))
+                return;
+
+            var addressCollection = GetAddressCollection(mail, recipientType);
+            try
+            {
+                addressCollection.Add(recipients);
+            }
+            catch (Exception e) when (e is FormatException || e is ArgumentException)
+            {
+                Logger.Error($"\'{recipients}\' is no valid SMTP e-mail recipient: " + e.Message);
+                throw;
+            }
         }
 
         private bool SkipFileAttachments(Job job)

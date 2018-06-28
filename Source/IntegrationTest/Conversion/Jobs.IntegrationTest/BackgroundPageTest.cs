@@ -44,19 +44,21 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            }
         }
 
         [Test]
@@ -73,30 +75,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -113,30 +117,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -153,27 +159,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "2. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "3. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "2. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "3. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            }
         }
 
         [Test]
@@ -194,37 +202,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "2. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "3. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "2. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "3. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -245,37 +255,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
-            Assert.AreEqual(" ", pageText, "2. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
-            Assert.AreEqual(" ", pageText, "3. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background page on 1. cover page");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background page on 2. cover page");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4);
+                Assert.AreEqual(" ", pageText, "2. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5);
+                Assert.AreEqual(" ", pageText, "3. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -292,27 +304,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+            }
         }
 
         [Test]
@@ -333,37 +347,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -384,37 +400,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
-            Assert.AreEqual(" ", pageText, "4. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
-            Assert.AreEqual(" ", pageText, "5. document page is not empty");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
-            Assert.AreEqual(" ", pageText, "6. document page is not empty");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "1. page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6);
+                Assert.AreEqual(" ", pageText, "4. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7);
+                Assert.AreEqual(" ", pageText, "5. document page is not empty");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8);
+                Assert.AreEqual(" ", pageText, "6. document page is not empty");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -427,19 +445,21 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -456,30 +476,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+            }
         }
 
         [Test]
@@ -496,30 +518,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -536,27 +560,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -577,37 +603,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -628,37 +656,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -675,27 +705,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -716,37 +748,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -767,37 +801,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -810,19 +846,21 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -839,30 +877,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -879,30 +919,32 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //document
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //document
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "7. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "8. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "9. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -919,27 +961,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -960,37 +1004,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -1011,37 +1057,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsTrue(pageText.Contains("Background1"), "Did not add 1. background on 1. cover page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsTrue(pageText.Contains("Background2"), "Did not add 2. background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -1058,27 +1106,29 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+            }
         }
 
         [Test]
@@ -1099,37 +1149,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsTrue(pageText.Contains("Background3"), "Did not add 3. background on 3. attachment page.");
+            }
         }
 
         [Test]
@@ -1150,37 +1202,39 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
             _th.GenerateGsJob(PSfiles.SixEmptyPages, OutputFormat.Pdf);
             _th.RunGsJob();
 
-            var reader = new PdfReader(_th.Job.OutputFiles[0]);
-            //Cover
-            var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
-            //Document
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
-            Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
-            //attachment
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
-            pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
-            Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
-            Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            using (var reader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                //Cover
+                var pageText = PdfTextExtractor.GetTextFromPage(reader, 1).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover1"), "1. Page is not 1. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on cover.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 2).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Cover2"), "2. Page is not 2. cover page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. cover page.");
+                //Document
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 3).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background1", pageText, "Did not add 1. background page to 1. of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 4).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background2", pageText, "Did not add 2. background page to 2. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 5).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 3. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 6).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 4. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 7).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 5. page of document.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 8).Replace("\n", "").Replace(" ", "");
+                Assert.AreEqual("Background3", pageText, "Did not add 3. background page to 6. page of document.");
+                //attachment
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 9).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment1"), "9. page is not 1. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 1. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 10).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment2"), "10. page is not 2. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 2. attachment page.");
+                pageText = PdfTextExtractor.GetTextFromPage(reader, 11).Replace("\n", "").Replace(" ", "");
+                Assert.IsTrue(pageText.Contains("Attachment3"), "11. page is not 3. attachment page.");
+                Assert.IsFalse(pageText.Contains("Background"), "Unwanted background on 3. attachment page.");
+            }
         }
     }
 }

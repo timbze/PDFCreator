@@ -3,11 +3,9 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
-using pdfforge.PDFCreator.UI.Presentation.Controls;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
-using pdfforge.PDFCreator.Utilities.Tokens;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,25 +15,30 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Dropbox
 {
     public class DropboxUserControlViewModel : ProfileUserControlViewModel<DropboxTranslation>
     {
-        public TokenReplacer TokenReplacer { get; set; }
-        public TokenViewModel SharedFolderTokenViewModel { get; set; }
+        public TokenViewModel<ConversionProfile> SharedFolderTokenViewModel { get; set; }
         public IMacroCommand AddDropboxAccountCommand { get; set; }
         public ObservableCollection<DropboxAccount> DropboxAccounts { get; set; }
 
-        public DropboxUserControlViewModel(TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator)
+        public DropboxUserControlViewModel(ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory)
             : base(translationUpdater, currentSettingsProvider)
         {
-            AddDropboxAccountCommand = commandLocator.GetMacroCommand()
+            AddDropboxAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<DropboxAccountAddCommand>()
-                .AddCommand(new DelegateCommand(SelectNewAccountInView));
+                .AddCommand(new DelegateCommand(SelectNewAccountInView))
+                .Build();
 
             DropboxAccounts = currentSettingsProvider?.Settings?.ApplicationSettings.Accounts.DropboxAccounts;
 
-            if (tokenHelper != null)
-            {
-                TokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
-                SharedFolderTokenViewModel = new TokenViewModel(x => CurrentProfile.DropboxSettings.SharedFolder = x, () => CurrentProfile?.DropboxSettings.SharedFolder, tokenHelper.GetTokenListForDirectory(), ReplaceTokens);
-            }
+            translationUpdater.RegisterAndSetTranslation(tf => SetTokenViewModels(tokenViewModelFactory));
+        }
+
+        private void SetTokenViewModels(ITokenViewModelFactory tokenViewModelFactory)
+        {
+            SharedFolderTokenViewModel = tokenViewModelFactory
+                .BuilderWithSelectedProfile()
+                .WithSelector(p => p.DropboxSettings.SharedFolder)
+                .WithDefaultTokenReplacerPreview(th => th.GetTokenListForDirectory())
+                .Build();
         }
 
         private void SelectNewAccountInView(object obj)
@@ -50,15 +53,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.Dropbox
             base.OnCurrentProfileChanged(sender, propertyChangedEventArgs);
 
             SharedFolderTokenViewModel.RaiseTextChanged();
-        }
-
-        private string ReplaceTokens(string s)
-        {
-            if (s != null)
-            {
-                return TokenReplacer.ReplaceTokens(s);
-            }
-            return string.Empty;
         }
     }
 }

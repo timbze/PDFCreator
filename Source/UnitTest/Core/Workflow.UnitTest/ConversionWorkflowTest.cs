@@ -17,17 +17,24 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         [SetUp]
         public void SetUp()
         {
-            _jobInfo = new JobInfo();
-            _jobInfo.Metadata = new Metadata();
+            _jobInfo = new JobInfo
+            {
+                Metadata = new Metadata
+                {
+                    Title = "Test"
+                }
+            };
             _job = new Job(_jobInfo, _profile, new JobTranslations(), new Accounts());
+            _job.OutputFiles.Add("X:\\test.pdf");
             _profileChecker = Substitute.For<IProfileChecker>();
             _profileChecker.ProfileCheck(Arg.Any<ConversionProfile>(), Arg.Any<Accounts>()).Returns(_validActionResult);
 
             _query = Substitute.For<ITargetFileNameComposer>();
             _jobRunner = Substitute.For<IJobRunner>();
             _jobDataUpdater = Substitute.For<IJobDataUpdater>();
+            _notificationService = Substitute.For<INotificationService>();
 
-            _workflow = new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _query, null);
+            _workflow = new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _query, null, _notificationService);
         }
 
         private Job _job;
@@ -40,6 +47,7 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
         private ITargetFileNameComposer _query;
         private IJobRunner _jobRunner;
         private IJobDataUpdater _jobDataUpdater;
+        private INotificationService _notificationService;
 
         private void SetUpConditionsForCompleteWorkflow()
         {
@@ -99,18 +107,20 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
             RunWorkFlow_QueryTargetFileThrowsManagePrintJobsException_ThrowsManagePrintJobsExceptionAndMetadataGetsReverted
             ()
         {
+            var titleToRevert = "My Title to revert!";
+
             Job job = null;
             _jobDataUpdater
                 .When(x => x.UpdateTokensAndMetadata(Arg.Any<Job>()))
                 .Do(x =>
                 {
                     job = x.Arg<Job>();
-                    job.JobInfo.Metadata = null;
+                    job.JobInfo.Metadata.Title = titleToRevert;
                 });
 
             _query.When(x => x.ComposeTargetFileName(Arg.Any<Job>())).Do(x => { throw new ManagePrintJobsException(); });
             Assert.Throws<ManagePrintJobsException>(() => _workflow.RunWorkflow(_job), "Did not throw exception");
-            Assert.NotNull(job.JobInfo.Metadata, "Metadata not reverted"); //ToDo: Compare with _metadata
+            Assert.AreNotEqual(titleToRevert, job.JobInfo.Metadata.Title, "Metadata not reverted");
         }
 
         [Test]
@@ -132,6 +142,28 @@ namespace pdfforge.PDFCreator.UnitTest.Core.Workflow
 
             var workflowResult = _workflow.RunWorkflow(_job);
             Assert.AreEqual(WorkflowResult.Error, workflowResult);
+        }
+
+        [Test]
+        public void AutoWorkflow_NotificationWasCalled()
+        {
+            var workflowResult = _workflow.RunWorkflow(_job);
+
+            _notificationService.Received().ShowInfoNotification(Arg.Any<string>());
+            _notificationService.DidNotReceive().ShowErrorNotification(Arg.Any<string>());
+        }
+
+        [Test]
+        public void AutoWorkflow_DoWorkflowThrowsError_NotificationErrorWasCalled()
+        {
+            var errorResult = new ActionResult(ErrorCode.Conversion_UnknownError);
+            SetUpConditionsForCompleteWorkflow();
+            _profileChecker.ProfileCheck(_profile, new Accounts()).Returns(errorResult);
+
+            var workflowResult = _workflow.RunWorkflow(_job);
+
+            _notificationService.DidNotReceive().ShowInfoNotification(Arg.Any<string>());
+            _notificationService.Received().ShowErrorNotification(Arg.Any<string>());
         }
     }
 }

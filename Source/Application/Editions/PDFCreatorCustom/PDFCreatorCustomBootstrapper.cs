@@ -13,6 +13,7 @@ using pdfforge.PDFCreator.Editions.EditionBase;
 using pdfforge.PDFCreator.Editions.PDFCreatorCustom.Properties;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.Assistants.Update;
+using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
@@ -53,6 +54,8 @@ namespace pdfforge.PDFCreator.Editions.PDFCreatorCustom
         {
             container.Register<ILicenseChecker, UnlicensedLicenseChecker>();
             container.Register<IOfflineActivator, UnlicensedOfflineActivator>();
+
+            container.Register<PrioritySupportUrlOpenCommand, CustomPrioritySupportUrlOpenCommand>();
         }
 
         protected override void RegisterUserTokenExtractor(Container container)

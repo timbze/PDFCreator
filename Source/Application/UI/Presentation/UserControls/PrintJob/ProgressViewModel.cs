@@ -94,7 +94,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob
                 }
                 else
                 {
-                    args.AbortAction();
+                    args.AbortAction(LoginQueryResult.AbortedByUser);
                 }
                 interactionFinishedEvent.Set();
             });

@@ -1,3 +1,5 @@
-﻿NUnit
-RhinoMocks
-SystemInterface
+﻿SystemInterface
+
+group test
+    NUnit
+    RhinoMocks

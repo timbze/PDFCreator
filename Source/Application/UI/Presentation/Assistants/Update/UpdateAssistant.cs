@@ -45,7 +45,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
             _gpoSettings = gpoSettings;
             _eventAggregator = eventAggregator;
             _skipVersionRegistryPath = @"HKEY_CURRENT_USER\" + installationPathProvider.ApplicationRegistryPath;
-            OnlineVersion = new ApplicationVersion(new Version(), "", "");
+            OnlineVersion = new ApplicationVersion(new Version(0, 0, 0, 0), "", "");
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants.Update
                     _logger.Debug("Loading update-info.txt");
                     var data = Data.CreateDataStorage();
                     var iniStorage = new IniStorage();
-                    iniStorage.SetData(data);
+                    iniStorage.Data = data;
                     iniStorage.ReadData(stream, true);
 
                     var onlineVersion = new Version(iniStorage.Data.GetValue(sectionName + "\\Version"));

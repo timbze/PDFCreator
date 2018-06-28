@@ -1,6 +1,7 @@
 ﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.Utilities;
@@ -15,14 +16,20 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         private readonly IPathUtil _pathUtil;
+        private readonly IParametersManager _parametersManager;
 
-        public TargetFileNameComposer(IPathUtil pathUtil)
+        public TargetFileNameComposer(IPathUtil pathUtil, IParametersManager parametersManager)
         {
             _pathUtil = pathUtil;
+            _parametersManager = parametersManager;
         }
 
         public string ComposeTargetFileName(Job job)
         {
+            if (!string.IsNullOrWhiteSpace(job.JobInfo.OutputFileParameter))
+                if (_pathUtil.IsValidRootedPath(job.JobInfo.OutputFileParameter))
+                    return job.JobInfo.OutputFileParameter;
+
             var tr = job.TokenReplacer;
             var outputFolder = ValidName.MakeValidFolderName(tr.ReplaceTokens(job.Profile.TargetDirectory));
             var fileName = ComposeOutputFilename(job);

@@ -21,7 +21,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class QueueTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void CleanDependencies()
         {
             ComDependencyBuilder.ResetDependencies();

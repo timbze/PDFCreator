@@ -12,7 +12,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class PdfCreatorTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void CleanDependencies()
         {
             ComDependencyBuilder.ResetDependencies();

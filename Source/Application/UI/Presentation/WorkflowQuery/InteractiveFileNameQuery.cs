@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Conversion.Jobs;
@@ -12,6 +9,9 @@ using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.Utilities.IO;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
 {
@@ -37,9 +37,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
             return result;
         }
 
-        public QueryResult<string> RetypeFileName(string filename, OutputFormat outputFormat)
+        public QueryResult<string> RetypeFileNameQuery(string filename, OutputFormat outputFormat, RetypeReason retypeReason)
         {
-            NotifyUserAboutRetype(filename);
+            NotifyUserAboutFailure(filename, retypeReason);
 
             var interaction = CreateRetypeInteraction(filename, outputFormat);
 
@@ -163,12 +163,21 @@ namespace pdfforge.PDFCreator.UI.Presentation.WorkflowQuery
             }
         }
 
-        private void NotifyUserAboutRetype(string currentFileName)
+        private void NotifyUserAboutFailure(string currentFileName, RetypeReason retypeReason)
         {
-            const string title = "PDFCreator";
+            var message = "";
+            switch (retypeReason)
+            {
+                case RetypeReason.InvalidRootedPath:
+                    message = _translation.FormatInvalidRootedPathMessage(currentFileName);
+                    break;
 
-            var messageText = _translation.RetypeFilenameMessage;
-            var message = $"{currentFileName} \r\n{messageText}";
+                case RetypeReason.CopyError:
+                    message = _translation.FormatCopyErrorMessage(currentFileName);
+                    break;
+            }
+
+            const string title = "PDFCreator";
 
             ShowMessage(message, title, MessageOptions.OK, MessageIcon.Warning);
         }

@@ -29,7 +29,7 @@ namespace pdfforge.PDFCreator.UI.Presentation
         public IInteractionRequest InteractionRequest { get; }
 
         private readonly IEventAggregator _aggregator;
-        private readonly ICommandLocator _commandsLocator;
+        private readonly ICommandLocator _commandLocator;
         private string _activePath = MainRegionViewNames.HomeView;
         private Action _closeViewAction;
         private readonly IDispatcher _dispatcher;
@@ -51,12 +51,12 @@ namespace pdfforge.PDFCreator.UI.Presentation
 
         public MainShellViewModel(DragAndDropEventHandler dragAndDrop, ITranslationUpdater translation,
             ApplicationNameProvider applicationName, IInteractionRequest interactionRequest,
-            IEventAggregator aggregator, ICommandLocator commandsLocator, IDispatcher dispatcher, IRegionManager regionManager,
+            IEventAggregator aggregator, ICommandLocator commandLocator, IDispatcher dispatcher, IRegionManager regionManager,
             IWelcomeSettingsHelper welcomeSettingsHelper, IGpoSettings gpoSettings, IUpdateAssistant updateAssistant, IEventAggregator eventAggregator)
             : base(translation)
         {
             _aggregator = aggregator;
-            _commandsLocator = commandsLocator;
+            _commandLocator = commandLocator;
             ApplicationName = applicationName;
             InteractionRequest = interactionRequest;
 
@@ -66,10 +66,11 @@ namespace pdfforge.PDFCreator.UI.Presentation
             ShowUpdate = updateAssistant.IsUpdateAvailable();
             GpoSettings = gpoSettings;
 
-            NavigateCommand = commandsLocator?.GetMacroCommand()
+            NavigateCommand = commandLocator?.CreateMacroCommand()
             .AddCommand<SaveAndContinueEvaluationCommand>()
             .AddCommand<SaveApplicationSettingsChangesCommand>()
-            .AddCommand<NavigateMainTabCommand>();
+            .AddCommand<NavigateMainTabCommand>()
+            .Build();
 
             DragEnterCommand = new DelegateCommand<DragEventArgs>(dragAndDrop.HandleDragEnter);
             DragDropCommand = new DelegateCommand<DragEventArgs>(dragAndDrop.HandleDropEvent);
@@ -168,10 +169,11 @@ namespace pdfforge.PDFCreator.UI.Presentation
 
         public bool CanClose()
         {
-            var macroCommand = _commandsLocator.GetMacroCommand()
+            var macroCommand = _commandLocator.CreateMacroCommand()
                 .AddCommand<SaveAndContinueEvaluationCommand>()
                 .AddCommand<SaveApplicationSettingsChangesCommand>()
-                .AddCommand(new DelegateCommand(OnCloseMainWindow));
+                .AddCommand(new DelegateCommand(OnCloseMainWindow))
+                .Build();
 
             if (macroCommand.CanExecute(null))
             {

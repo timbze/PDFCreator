@@ -47,7 +47,7 @@ namespace Presentation.UnitTest
             if (buttonDisplayOptions == null)
                 buttonDisplayOptions = new ButtonDisplayOptions(false, false);
 
-            _aboutViewModel = new AboutViewModel(_versionHelper, buttonDisplayOptions, _translationUpdater, _commandLocator, new DesignTimeApplicationNameProvider());
+            _aboutViewModel = new AboutViewModel(_versionHelper, buttonDisplayOptions, _translationUpdater, _commandLocator, new DesignTimeApplicationNameProvider(), null);
         }
 
         [Test]
@@ -116,6 +116,15 @@ namespace Presentation.UnitTest
             _commandLocator.GetInitializedCommand<UrlOpenCommand, String>(Urls.GooglePlus).Returns(googlePlusCommand);
             InitAboutViewModel();
             Assert.AreSame(googlePlusCommand, _aboutViewModel.GooglePlusCommand);
+        }
+
+        [Test]
+        public void Initialize_CommandLocatorSetsPrioritySupportCommand()
+        {
+            var openPriortiySupportUrlCommand = Substitute.For<ICommand>();
+            _commandLocator.GetCommand<PrioritySupportUrlOpenCommand>().Returns(openPriortiySupportUrlCommand);
+            InitAboutViewModel();
+            Assert.AreSame(openPriortiySupportUrlCommand, _aboutViewModel.PrioritySupportCommand);
         }
 
         [Test]

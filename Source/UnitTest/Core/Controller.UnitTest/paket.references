@@ -1,3 +1,5 @@
-﻿NUnit
-NSubstitute
-SystemInterface
+﻿SystemInterface
+
+group test
+    NSubstitute
+    NUnit

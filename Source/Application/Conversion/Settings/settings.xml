@@ -3,9 +3,21 @@
   <options>
     <namespace>pdfforge.PDFCreator.Conversion.Settings</namespace>
     <addRaisePropertyChanged>True</addRaisePropertyChanged>
-    <generatorVersion>0.10.2.0</generatorVersion>
+    <generatorVersion>1.0.1.0</generatorVersion>
   </options>
   <classes>
+    <class name="ParameterSettings" propertyName="ParameterSettings" readonly="False" classtype="Class">
+      <comment />
+      <class name="Parameters" propertyName="Parameters" readonly="False" classtype="Class">
+        <comment />
+        <value name="Outputfile" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+          <comment>The outputfile path</comment>
+        </value>
+        <value name="Profile" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+          <comment>Parameter for profile</comment>
+        </value>
+      </class>
+    </class>
     <class name="PdfCreatorSettings" propertyName="PdfCreatorSettings" readonly="False" classtype="Class">
       <comment>Container class for PDFCreator settings and profiles</comment>
       <class name="ApplicationProperties" propertyName="ApplicationProperties" readonly="False" classtype="Class">
@@ -112,6 +124,15 @@
             </value>
           </classarray>
         </class>
+        <class name="JobHistory" propertyName="JobHistory" readonly="False" classtype="Class">
+          <comment />
+          <value name="Capacity" type="value" datatype="Int" enumname="" defaultvalue="30" islist="False">
+            <comment>Max number of jobs tracked in history</comment>
+          </value>
+          <value name="Enabled" type="value" datatype="Bool" enumname="" defaultvalue="true" islist="False">
+            <comment>If enabled PDFCreator tracks latest converted files in history</comment>
+          </value>
+        </class>
         <classarray name="PrinterMapping" propertyName="PrinterMappings" readonly="False" classtype="Class">
           <comment />
           <value name="PrinterName" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
@@ -141,6 +162,12 @@
         </value>
         <value name="Language" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
           <comment />
+        </value>
+        <value name="LastLoginVersion" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+          <comment />
+        </value>
+        <value name="LastSaveDirectory" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+          <comment>The last directory the user during interactive job (if no target directory was set in profile)</comment>
         </value>
         <value name="LastUsedProfileGuid" type="value" datatype="String" enumname="" defaultvalue="DefaultGuid" islist="False">
           <comment />
@@ -221,24 +248,30 @@
           </value>
         </class>
         <class name="EmailClientSettings" propertyName="EmailClientSettings" readonly="False" classtype="Class">
-          <comment>Opens the default E-mail client with the converted document as attachment</comment>
+          <comment>Opens the default e-mail client with the converted document as attachment</comment>
           <value name="AddSignature" type="value" datatype="Bool" enumname="" defaultvalue="true" islist="False">
             <comment>Add the PDFCreator signature to the mail</comment>
           </value>
           <value name="Content" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
-            <comment>Body text of the E-mail</comment>
+            <comment>Body text of the e-mail</comment>
           </value>
           <value name="Enabled" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
             <comment>Enables the EmailClient action</comment>
           </value>
           <value name="Html" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
-            <comment>Use html for E-mail body</comment>
+            <comment>Use html for e-mail body</comment>
           </value>
           <value name="Recipients" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
-            <comment>The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org</comment>
+            <comment>The list of receipients of the e-mail, i.e. info@someone.com; me@mywebsite.org</comment>
+          </value>
+          <value name="RecipientsBcc" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment>The list of receipients of the e-mail in the 'BCC' field, i.e. info@someone.com; me@mywebsite.org</comment>
+          </value>
+          <value name="RecipientsCc" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment>The list of receipients of the e-mail in the 'CC' field, i.e. info@someone.com; me@mywebsite.org</comment>
           </value>
           <value name="Subject" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
-            <comment>Subject line of the E-mail</comment>
+            <comment>Subject line of the e-mail</comment>
           </value>
         </class>
         <class name="EmailSmtpSettings" propertyName="EmailSmtpSettings" readonly="False" classtype="Class">
@@ -256,13 +289,19 @@
             <comment>If true, this action will be executed</comment>
           </value>
           <value name="Html" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
-            <comment>Use html for E-mail body</comment>
+            <comment>Use html for e-mail body</comment>
           </value>
           <value name="Recipients" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
-            <comment>The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org</comment>
+            <comment>The list of receipients of the e-mail, i.e. info@someone.com; me@mywebsite.org</comment>
+          </value>
+          <value name="RecipientsBcc" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment>The list of receipients of the e-mail in the 'BCC' field, i.e. info@someone.com; me@mywebsite.org</comment>
+          </value>
+          <value name="RecipientsCc" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
+            <comment>The list of receipients of the e-mail in the 'CC' field, i.e. info@someone.com; me@mywebsite.org</comment>
           </value>
           <value name="Subject" type="value" datatype="String" enumname="" defaultvalue="" islist="False">
-            <comment>Subject line of the E-mail</comment>
+            <comment>Subject line of the e-mail</comment>
           </value>
         </class>
         <class name="Ftp" propertyName="Ftp" readonly="False" classtype="Class">
@@ -484,12 +523,6 @@
             <comment>Can users rename this profile?</comment>
           </value>
         </class>
-        <class name="SaveDialog" propertyName="SaveDialog" readonly="False" classtype="Class">
-          <comment>Settings to control the behaviour of the save dialog</comment>
-          <value name="SetDirectory" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
-            <comment>If true, the save dialog will open in the given folder instead of the last used folder.</comment>
-          </value>
-        </class>
         <class name="Scripting" propertyName="Scripting" readonly="False" classtype="Class">
           <comment>The scripting action allows to run a script after the conversion</comment>
           <value name="Enabled" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
@@ -576,6 +609,12 @@
         </value>
         <value name="OutputFormat" type="value" datatype="Enum" enumname="OutputFormat" defaultvalue="OutputFormat.Pdf" islist="False">
           <comment>Default format for this print job.</comment>
+        </value>
+        <value name="ShowAllNotifications" type="value" datatype="Bool" enumname="" defaultvalue="true" islist="False">
+          <comment>Show a notification after converting the document</comment>
+        </value>
+        <value name="ShowOnlyErrorNotifications" type="value" datatype="Bool" enumname="" defaultvalue="false" islist="False">
+          <comment>Only show notification for error</comment>
         </value>
         <value name="ShowProgress" type="value" datatype="Bool" enumname="" defaultvalue="true" islist="False">
           <comment>If true, a progress window will be shown during conversion</comment>

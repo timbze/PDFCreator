@@ -7,6 +7,7 @@ using pdfforge.PDFCreator.UI.Presentation.Workflow;
 using Ploeh.AutoFixture;
 using Prism.Regions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Presentation.UnitTest
 {
@@ -55,7 +56,7 @@ namespace Presentation.UnitTest
         }
 
         [Test]
-        public async void Run_WithDisabledStep_StepIsSkipped()
+        public async Task Run_WithDisabledStep_StepIsSkipped()
         {
             var step = BuildAndRegisterWorkflowStep(isRequired: false);
             var workflowManager = BuildWorkflowManager(new[] { step });
@@ -66,7 +67,7 @@ namespace Presentation.UnitTest
         }
 
         [Test]
-        public async void Run_WithSingleStep_ExecutesStep()
+        public async Task Run_WithSingleStep_ExecutesStep()
         {
             var step = BuildAndRegisterWorkflowStep();
             var viewModel = Substitute.For<IWorkflowViewModel>();
@@ -79,7 +80,7 @@ namespace Presentation.UnitTest
         }
 
         [Test]
-        public async void Run_WithMultipleSteps_ExecutesSteps()
+        public async Task Run_WithMultipleSteps_ExecutesSteps()
         {
             var steps = new[] { BuildAndRegisterWorkflowStep(), BuildAndRegisterWorkflowStep() };
             var workflowManager = BuildWorkflowManager(steps);

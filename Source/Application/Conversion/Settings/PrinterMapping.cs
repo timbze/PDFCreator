@@ -72,22 +72,5 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			return base.GetHashCode();
 		}
 		
-// Custom Code starts here
-// START_CUSTOM_SECTION:GENERAL
-
-	    public PrinterMapping()
-	    {
-	        
-	    }
-
-        public PrinterMapping(string printerName, string profileGuid)
-        {
-            PrinterName = printerName;
-            ProfileGuid = profileGuid;
-        }
-
-// END_CUSTOM_SECTION:GENERAL
-// Custom Code ends here. Do not edit below
-		
 	}
 }

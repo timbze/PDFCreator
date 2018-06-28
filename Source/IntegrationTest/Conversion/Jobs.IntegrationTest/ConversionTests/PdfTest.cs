@@ -48,7 +48,8 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             try
             {
-                new PdfReader(_th.Job.OutputFiles[0]);
+                using (new PdfReader(_th.Job.OutputFiles[0]))
+                { }
             }
             catch (Exception ex)
             {

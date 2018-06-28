@@ -23,6 +23,8 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         public Metadata Metadata { get; set; }
         public JobType JobType { get; set; }
         public DateTime PrintDateTime { get; set; }
+        public string OutputFileParameter { get; set; }
+        public string ProfileParameter { get; set; }
 
         private int CalculateTotalPages()
         {

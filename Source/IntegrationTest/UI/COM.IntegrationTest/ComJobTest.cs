@@ -7,15 +7,18 @@ using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Printing;
 using pdfforge.PDFCreator.Core.Printing.Port;
 using pdfforge.PDFCreator.Core.Printing.Printer;
+using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Logging;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.COM;
+using pdfforge.PDFCreator.UI.Presentation.Commands.FirstTimeCommands;
 using pdfforge.PDFCreator.UI.Presentation.Settings;
 using pdfforge.PDFCreator.UI.ViewModels;
 using pdfforge.PDFCreator.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using SystemWrapper.IO;
 using SystemWrapper.Microsoft.Win32;
@@ -26,7 +29,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
     [TestFixture]
     internal class ComJobTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void CleanDependencies()
         {
             ComDependencyBuilder.ResetDependencies();
@@ -49,7 +52,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
 
             var settingsLoader = new SettingsLoader(translationHelper, Substitute.For<ISettingsMover>(), installationPathProvider, Substitute.For<IPrinterHelper>());
 
-            var settingsManager = new SettingsManager(settingsProvider, settingsLoader, installationPathProvider);
+            var settingsManager = new SettingsManager(settingsProvider, settingsLoader, installationPathProvider, new VersionHelper(Assembly.GetExecutingAssembly()), new List<IFirstTimeCommand>(), Substitute.For<ICommandLocator>());
             settingsManager.LoadAllSettings();
 
             var folderProvider = new FolderProvider(new PrinterPortReader(new RegistryWrap(), new PathWrapSafe()), new PathWrap());
@@ -160,23 +163,21 @@ namespace pdfforge.PDFCreator.IntegrationTest.UI.COM
         }
 
         [Test]
-        [ExpectedException(typeof(FormatException))]
         public void SetProfileSettings_IfEmptyValue_ThrowsCOMException()
         {
             CreateTestPages(1);
 
             var comJob = _queue.NextJob;
-            comJob.SetProfileSetting("PdfSettings.Security.Enabled", "");
+            Assert.Throws<FormatException>(() => comJob.SetProfileSetting("PdfSettings.Security.Enabled", ""));
         }
 
         [Test]
-        [ExpectedException(typeof(FormatException))]
         public void SetProfileSettings_IfInappropriateValue_ThrowsCOMException()
         {
             CreateTestPages(1);
 
             var comJob = _queue.NextJob;
-            comJob.SetProfileSetting("PdfSettings.Security.Enabled", "3");
+            Assert.Throws<FormatException>(() => comJob.SetProfileSetting("PdfSettings.Security.Enabled", "3"));
         }
     }
 }

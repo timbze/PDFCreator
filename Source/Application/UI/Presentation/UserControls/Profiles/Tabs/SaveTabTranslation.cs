@@ -22,8 +22,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs
         public string DontOverwriteFiles { get; private set; } = "Don't overwrite existing files";
         public string UniqueFilenameHint { get; private set; } = "If a file already exists, an incrementing number is added to the filename, i.e. 'file_5.pdf'";
 
-        public string SkipPrintDialogHint { get; private set; } = "To be able to skip the print dialog and directly proceed to the save file dialog, you need PDFCreator Plus, PDFCreator Business or PDFCreator Terminal Server";
-
-        public string ShowWindowAfterConversion { get; private set; } = "Show quick actions after converting a document";
+        public string ShowQuickActions { get; private set; } = "Show quick actions after the documents were converted";
     }
 }

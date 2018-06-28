@@ -24,6 +24,7 @@ using pdfforge.PDFCreator.Core.Printing.Port;
 using pdfforge.PDFCreator.Core.Printing.Printer;
 using pdfforge.PDFCreator.Core.Printing.Printing;
 using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.Services.Licensing;
 using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.SettingsManagement;
@@ -38,11 +39,14 @@ using pdfforge.PDFCreator.Editions.EditionBase.Tab;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Presentation;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
+using pdfforge.PDFCreator.UI.Presentation.Commands.FirstTimeCommands;
 using pdfforge.PDFCreator.UI.Presentation.Commands.ProfileCommands;
 using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Help;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.UI.Presentation.Notifications;
 using pdfforge.PDFCreator.UI.Presentation.Settings;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Misc;
@@ -150,8 +154,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.Register<AutoSaveWorkflow>(); // Workflow is registered so all dependencies can be verified in test
             container.Register<InteractiveWorkflow>(); // Workflow is registered so all dependencies can be verified in test
 
-            var commandLocator = new CommandLocator(container);
-            container.Register<ICommandLocator>(() => commandLocator);
+            container.RegisterSingleton<ICommandLocator>(() => new CommandLocator(container));
 
             container.Register<IWorkflowFactory>(() => _workflowFactory);
 
@@ -204,6 +207,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.RegisterSingleton<IPathUtil, PathUtil>();
             container.RegisterSingleton<IEnvironment, EnvironmentWrap>();
             container.RegisterSingleton<IDirectoryHelper, DirectoryHelper>();
+            container.RegisterSingleton<IReadableFileSizeFormatter, ReadableReadableFileSizeFormatter>();
 
             container.RegisterSingleton<IProcessStarter, ProcessStarter>();
             container.RegisterSingleton<IDateTimeProvider, DateTimeProvider>();
@@ -221,7 +225,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.RegisterSingleton<ITranslationUpdater, TranslationUpdater>();
             container.RegisterSingleton<IPipeMessageHandler, NewPipeJobHandler>();
 
-            container.Register<IVersionHelper>(() => new VersionHelper(GetType().Assembly));
+            container.RegisterSingleton<IVersionHelper>(() => new VersionHelper(GetType().Assembly));
             container.Register<ITerminalServerDetection, TerminalServerDetection>();
 
             container.Register<IRepairSpoolFolderAssistant, RepairSpoolFolderAssistant>();
@@ -249,9 +253,12 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
             container.RegisterSingleton<ISettingsLoader, SettingsLoader>();
 
+            container.RegisterSingleton<IJobHistoryStorage, JobHistoryJsonFileStorage>();
+            container.RegisterSingleton<IJobHistoryManager, JobHistoryManager>();
+
             container.Register<IIniSettingsAssistant, IniSettingsAssistant>();
             container.Register<IIniSettingsLoader, IniSettingsLoader>();
-            container.Register<IDataStorageFactory, DataStorageFactory>();
+            container.RegisterSingleton<IDataStorageFactory, DataStorageFactory>();
             container.RegisterSingleton<IJobInfoManager, JobInfoManager>();
             container.Register<IStaticPropertiesHack, StaticPropertiesHack>();
 
@@ -273,6 +280,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.RegisterSingleton<IMainWindowThreadLauncher, MainShellLauncher>();
 
             container.Register<ILastSaveDirectoryHelper, LastSaveDirectoryHelper>();
+            container.Register<ITokenViewModelFactory, TokenViewModelFactory>();
 
             container.RegisterSingleton<IGpoSettings>(GetGpoSettings);
 
@@ -281,6 +289,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             RegisterUserGuideHelper(container);
             RegisterTranslator(container);
             RegisterMailSigantureHelper(container);
+            RegisterParameterSettingsManager(container);
             RegisterSettingsHelper(container);
             RegisterStartupConditions(container);
             RegisterActions(container);
@@ -292,6 +301,8 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             RegisterPdfProcessor(container);
             RegisterUserTokenExtractor(container);
             RegisterPlusHintHelper(container);
+            RegisterFirstTimeCommand(container);
+            RegisterNotificationService(container);
             container.RegisterSingleton(BuildCustomization);
         }
 
@@ -322,6 +333,14 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.AddRegistration(typeof(ISelectedProfileProvider), registration);
             container.AddRegistration(typeof(ICurrentSettingsProvider), registration);
             container.AddRegistration(typeof(CurrentSettingsProvider), registration);
+        }
+
+        protected void RegisterFirstTimeCommand(Container container)
+        {
+            container.RegisterCollection<IFirstTimeCommand>(new[]
+            {
+                typeof(ResetShowQuickActionCommand)
+            });
         }
 
         protected abstract void RegisterUpdateAssistant(Container container);
@@ -447,6 +466,11 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             container.AddRegistration(typeof(ITranslationFactory), registration);
         }
 
+        private void RegisterParameterSettingsManager(Container container)
+        {
+            container.RegisterSingleton<IParametersManager, ParametersManager>();
+        }
+
         protected abstract SettingsProvider CreateSettingsProvider();
 
         private void RegisterSettingsHelper(Container container)
@@ -471,7 +495,7 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
             ViewRegistry.RegisterInteraction(typeof(EncryptionPasswordInteraction), typeof(EncryptionPasswordsUserControl));
             ViewRegistry.RegisterInteraction(typeof(EditEmailTextInteraction), typeof(EditEmailTextUserControl));
             ViewRegistry.RegisterInteraction(typeof(UpdateDownloadInteraction), typeof(UpdateDownloadWindow));
-            ViewRegistry.RegisterInteraction(typeof(RecommendPdfArchitectInteraction), typeof(RecommendPdfArchitectWindow));
+            ViewRegistry.RegisterInteraction(typeof(RecommendPdfArchitectInteraction), typeof(RecommendPdfArchitectView));
             ViewRegistry.RegisterInteraction(typeof(PasswordOverlayInteraction), typeof(PasswordOverlay));
             ViewRegistry.RegisterInteraction(typeof(SignaturePasswordInteraction), typeof(SignaturePasswordOverlayView));
             ViewRegistry.RegisterInteraction(typeof(OfflineActivationInteraction), typeof(OfflineActivationUserControl));
@@ -549,6 +573,11 @@ namespace pdfforge.PDFCreator.Editions.EditionBase
 
         public virtual void RegisterEditiondependentRegions(IRegionManager regionManager)
         {
+        }
+
+        public virtual void RegisterNotificationService(Container container)
+        {
+            container.RegisterSingleton<INotificationService, NotificationService>();
         }
     }
 }

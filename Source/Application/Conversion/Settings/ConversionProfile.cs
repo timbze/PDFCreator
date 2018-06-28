@@ -46,7 +46,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public DropboxSettings DropboxSettings { get; set; } = new DropboxSettings();
 		
 		/// <summary>
-		/// Opens the default E-mail client with the converted document as attachment
+		/// Opens the default e-mail client with the converted document as attachment
 		/// </summary>
 		public EmailClientSettings EmailClientSettings { get; set; } = new EmailClientSettings();
 		
@@ -94,11 +94,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		/// Properties of the profile
 		/// </summary>
 		public Properties Properties { get; set; } = new Properties();
-		
-		/// <summary>
-		/// Settings to control the behaviour of the save dialog
-		/// </summary>
-		public SaveDialog SaveDialog { get; set; } = new SaveDialog();
 		
 		/// <summary>
 		/// The scripting action allows to run a script after the conversion
@@ -163,6 +158,16 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public OutputFormat OutputFormat { get; set; } = OutputFormat.Pdf;
 		
 		/// <summary>
+		/// Show a notification after converting the document
+		/// </summary>
+		public bool ShowAllNotifications { get; set; } = true;
+		
+		/// <summary>
+		/// Only show notification for error
+		/// </summary>
+		public bool ShowOnlyErrorNotifications { get; set; } = false;
+		
+		/// <summary>
 		/// If true, a progress window will be shown during conversion
 		/// </summary>
 		public bool ShowProgress { get; set; } = true;
@@ -209,7 +214,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			PngSettings.ReadValues(data, path + @"PngSettings\");
 			Printing.ReadValues(data, path + @"Printing\");
 			Properties.ReadValues(data, path + @"Properties\");
-			SaveDialog.ReadValues(data, path + @"SaveDialog\");
 			Scripting.ReadValues(data, path + @"Scripting\");
 			Stamping.ReadValues(data, path + @"Stamping\");
 			TextSettings.ReadValues(data, path + @"TextSettings\");
@@ -223,6 +227,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { OpenViewer = bool.Parse(data.GetValue(@"" + path + @"OpenViewer")); } catch { OpenViewer = true;}
 			try { OpenWithPdfArchitect = bool.Parse(data.GetValue(@"" + path + @"OpenWithPdfArchitect")); } catch { OpenWithPdfArchitect = true;}
 			try { OutputFormat = (OutputFormat) Enum.Parse(typeof(OutputFormat), data.GetValue(@"" + path + @"OutputFormat")); } catch { OutputFormat = OutputFormat.Pdf;}
+			try { ShowAllNotifications = bool.Parse(data.GetValue(@"" + path + @"ShowAllNotifications")); } catch { ShowAllNotifications = true;}
+			try { ShowOnlyErrorNotifications = bool.Parse(data.GetValue(@"" + path + @"ShowOnlyErrorNotifications")); } catch { ShowOnlyErrorNotifications = false;}
 			try { ShowProgress = bool.Parse(data.GetValue(@"" + path + @"ShowProgress")); } catch { ShowProgress = true;}
 			try { ShowQuickActions = bool.Parse(data.GetValue(@"" + path + @"ShowQuickActions")); } catch { ShowQuickActions = true;}
 			try { SkipPrintDialog = bool.Parse(data.GetValue(@"" + path + @"SkipPrintDialog")); } catch { SkipPrintDialog = false;}
@@ -248,7 +254,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			PngSettings.StoreValues(data, path + @"PngSettings\");
 			Printing.StoreValues(data, path + @"Printing\");
 			Properties.StoreValues(data, path + @"Properties\");
-			SaveDialog.StoreValues(data, path + @"SaveDialog\");
 			Scripting.StoreValues(data, path + @"Scripting\");
 			Stamping.StoreValues(data, path + @"Stamping\");
 			TextSettings.StoreValues(data, path + @"TextSettings\");
@@ -262,6 +267,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"OpenViewer", OpenViewer.ToString());
 			data.SetValue(@"" + path + @"OpenWithPdfArchitect", OpenWithPdfArchitect.ToString());
 			data.SetValue(@"" + path + @"OutputFormat", OutputFormat.ToString());
+			data.SetValue(@"" + path + @"ShowAllNotifications", ShowAllNotifications.ToString());
+			data.SetValue(@"" + path + @"ShowOnlyErrorNotifications", ShowOnlyErrorNotifications.ToString());
 			data.SetValue(@"" + path + @"ShowProgress", ShowProgress.ToString());
 			data.SetValue(@"" + path + @"ShowQuickActions", ShowQuickActions.ToString());
 			data.SetValue(@"" + path + @"SkipPrintDialog", SkipPrintDialog.ToString());
@@ -289,7 +296,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.PngSettings = PngSettings.Copy();
 			copy.Printing = Printing.Copy();
 			copy.Properties = Properties.Copy();
-			copy.SaveDialog = SaveDialog.Copy();
 			copy.Scripting = Scripting.Copy();
 			copy.Stamping = Stamping.Copy();
 			copy.TextSettings = TextSettings.Copy();
@@ -303,6 +309,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.OpenViewer = OpenViewer;
 			copy.OpenWithPdfArchitect = OpenWithPdfArchitect;
 			copy.OutputFormat = OutputFormat;
+			copy.ShowAllNotifications = ShowAllNotifications;
+			copy.ShowOnlyErrorNotifications = ShowOnlyErrorNotifications;
 			copy.ShowProgress = ShowProgress;
 			copy.ShowQuickActions = ShowQuickActions;
 			copy.SkipPrintDialog = SkipPrintDialog;
@@ -333,7 +341,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!PngSettings.Equals(v.PngSettings)) return false;
 			if (!Printing.Equals(v.Printing)) return false;
 			if (!Properties.Equals(v.Properties)) return false;
-			if (!SaveDialog.Equals(v.SaveDialog)) return false;
 			if (!Scripting.Equals(v.Scripting)) return false;
 			if (!Stamping.Equals(v.Stamping)) return false;
 			if (!TextSettings.Equals(v.TextSettings)) return false;
@@ -347,6 +354,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!OpenViewer.Equals(v.OpenViewer)) return false;
 			if (!OpenWithPdfArchitect.Equals(v.OpenWithPdfArchitect)) return false;
 			if (!OutputFormat.Equals(v.OutputFormat)) return false;
+			if (!ShowAllNotifications.Equals(v.ShowAllNotifications)) return false;
+			if (!ShowOnlyErrorNotifications.Equals(v.ShowOnlyErrorNotifications)) return false;
 			if (!ShowProgress.Equals(v.ShowProgress)) return false;
 			if (!ShowQuickActions.Equals(v.ShowQuickActions)) return false;
 			if (!SkipPrintDialog.Equals(v.SkipPrintDialog)) return false;
@@ -391,8 +400,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine(Printing.ToString());
 			sb.AppendLine("[Properties]");
 			sb.AppendLine(Properties.ToString());
-			sb.AppendLine("[SaveDialog]");
-			sb.AppendLine(SaveDialog.ToString());
 			sb.AppendLine("[Scripting]");
 			sb.AppendLine(Scripting.ToString());
 			sb.AppendLine("[Stamping]");
@@ -411,6 +418,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("OpenViewer=" + OpenViewer.ToString());
 			sb.AppendLine("OpenWithPdfArchitect=" + OpenWithPdfArchitect.ToString());
 			sb.AppendLine("OutputFormat=" + OutputFormat.ToString());
+			sb.AppendLine("ShowAllNotifications=" + ShowAllNotifications.ToString());
+			sb.AppendLine("ShowOnlyErrorNotifications=" + ShowOnlyErrorNotifications.ToString());
 			sb.AppendLine("ShowProgress=" + ShowProgress.ToString());
 			sb.AppendLine("ShowQuickActions=" + ShowQuickActions.ToString());
 			sb.AppendLine("SkipPrintDialog=" + SkipPrintDialog.ToString());
@@ -426,17 +435,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
 			return base.GetHashCode();
 		}
-		
-// Custom Code starts here
-// START_CUSTOM_SECTION:GENERAL
-
-        public bool IsDefault
-        {
-            get { return Guid == ProfileGuids.DEFAULT_PROFILE_GUID; }
-        }
-
-// END_CUSTOM_SECTION:GENERAL
-// Custom Code ends here. Do not edit below
 		
 	}
 }

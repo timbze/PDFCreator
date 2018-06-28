@@ -1,13 +1,12 @@
 ﻿using pdfforge.Obsidian;
-using pdfforge.Obsidian.Trigger;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
-using pdfforge.PDFCreator.UI.Interactions;
-using pdfforge.PDFCreator.UI.Interactions.Enums;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -18,10 +17,13 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
 {
     public class SignUserControlViewModel : ProfileUserControlViewModel<SignUserControlTranslation>
     {
-        private readonly IFile _file;
-        private readonly IInteractionRequest _interactionRequest;
         private readonly IOpenFileInteractionHelper _openFileInteractionHelper;
-        private readonly ICurrentSettingsProvider _currentSettingsProvider;
+        private readonly ISignaturePasswordCheck _signaturePasswordCheck;
+        private readonly IFile _file;
+
+        public TokenViewModel<ConversionProfile> SignReasonTokenViewModel { get; private set; }
+        public TokenViewModel<ConversionProfile> SignContactTokenViewModel { get; private set; }
+        public TokenViewModel<ConversionProfile> SignLocationTokenViewModel { get; private set; }
 
         public ICollectionView TimeServerAccountsView { get; }
 
@@ -31,19 +33,43 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
         public IMacroCommand AddTimeServerAccountCommand { get; }
         public Signature Signature => CurrentProfile?.PdfSettings.Signature;
         public DelegateCommand ChooseCertificateFileCommand { get; }
-        public DelegateCommand SignaturePasswordCommand { get; }
         public bool OnlyForPlusAndBusiness { get; }
 
-        public SignUserControlViewModel(IInteractionRequest interactionRequest, IFile file,
-            IOpenFileInteractionHelper openFileInteractionHelper, EditionHintOptionProvider editionHintOptionProvider,
-            ITranslationUpdater translationUpdater, ISelectedProfileProvider selectedProfile,
-            ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator)
-        : base(translationUpdater, selectedProfile)
+        public string Password
         {
-            _file = file;
+            get { return Signature?.SignaturePassword; }
+            set
+            {
+                Signature.SignaturePassword = value;
+                RaisePropertyChanged(nameof(CertificatePasswordIsValid));
+            }
+        }
+
+        public string CertificateFile
+        {
+            get { return Signature?.CertificateFile; }
+            set
+            {
+                Signature.CertificateFile = value;
+                RaisePropertyChanged(nameof(CertificateFile));
+                RaisePropertyChanged(nameof(CertificatePasswordIsValid));
+            }
+        }
+
+        public SignUserControlViewModel(
+            IOpenFileInteractionHelper openFileInteractionHelper, EditionHintOptionProvider editionHintOptionProvider,
+            ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider,
+            ICommandLocator commandLocator, ISignaturePasswordCheck signaturePasswordCheck,
+            IFile file, ITokenViewModelFactory tokenViewModelFactory)
+        : base(translationUpdater, currentSettingsProvider)
+        {
             _openFileInteractionHelper = openFileInteractionHelper;
-            _interactionRequest = interactionRequest;
-            _currentSettingsProvider = currentSettingsProvider;
+
+            _signaturePasswordCheck = signaturePasswordCheck;
+            _file = file;
+
+            translationUpdater.RegisterAndSetTranslation(tf => SetTokenViewModels(tokenViewModelFactory));
+            currentSettingsProvider.SelectedProfileChanged += (sender, args) => SetTokenViewModels(tokenViewModelFactory);
 
             if (editionHintOptionProvider != null)
             {
@@ -58,15 +84,42 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
             }
 
             ChooseCertificateFileCommand = new DelegateCommand(ChooseCertificateFileExecute);
-            SignaturePasswordCommand = new DelegateCommand(SignaturePasswordExecute);
 
-            AddTimeServerAccountCommand = commandLocator.GetMacroCommand()
+            if (Signature != null)
+                AskForPasswordLater = string.IsNullOrEmpty(Password);
+
+            AddTimeServerAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<TimeServerAccountAddCommand>()
-                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()));
+                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()))
+                .Build();
 
-            EditTimeServerAccountCommand = commandLocator.GetMacroCommand()
+            EditTimeServerAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<TimeServerAccountEditCommand>()
-                .AddCommand(new DelegateCommand(o => RefreshAccountsView()));
+                .AddCommand(new DelegateCommand(o => RefreshAccountsView()))
+                .Build();
+        }
+
+        private void SetTokenViewModels(ITokenViewModelFactory tokenViewModelFactory)
+        {
+            var builder = tokenViewModelFactory
+                .BuilderWithSelectedProfile()
+                .WithDefaultTokenReplacerPreview(th => th.GetTokenListWithFormatting());
+
+            SignReasonTokenViewModel = builder
+                .WithSelector(p => p.PdfSettings.Signature.SignReason)
+                .Build();
+
+            SignContactTokenViewModel = builder
+                .WithSelector(p => p.PdfSettings.Signature.SignContact)
+                .Build();
+
+            SignLocationTokenViewModel = builder
+                .WithSelector(p => p.PdfSettings.Signature.SignLocation)
+                .Build();
+
+            RaisePropertyChanged(nameof(SignReasonTokenViewModel));
+            RaisePropertyChanged(nameof(SignContactTokenViewModel));
+            RaisePropertyChanged(nameof(SignLocationTokenViewModel));
         }
 
         private void SelectNewAccountInView()
@@ -92,7 +145,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
 
             interactionResult.MatchSome(s =>
             {
-                Signature.CertificateFile = s;
+                CertificateFile = s;
                 RaisePropertyChanged(nameof(Signature));
             });
         }
@@ -102,41 +155,48 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.SecureTab.Si
             base.OnCurrentProfileChanged(sender, propertyChangedEventArgs);
             RaisePropertyChanged(nameof(Signature));
             RaisePropertyChanged(nameof(TimeServerAccountsView));
+            RaisePropertyChanged(nameof(Password));
+            RaisePropertyChanged(nameof(CertificateFile));
+            RaisePropertyChanged(nameof(CertificatePasswordIsValid));
+            RaisePropertyChanged(nameof(AskForPasswordLater));
+
+            if (string.IsNullOrEmpty(Password))
+                AskForPasswordLater = true;
         }
 
-        private void SignaturePasswordExecute(object obj)
+        public bool CertificatePasswordIsValid
         {
-            var certFile = CurrentProfile.PdfSettings.Signature.CertificateFile;
-
-            if (!_file.Exists(certFile))
+            get
             {
-                ShowCertFileMessage();
-                return;
+                if (string.IsNullOrEmpty(CertificateFile))
+                    return false;
+
+                if (!_file.Exists(CertificateFile))
+                    return false;
+
+                if (AskForPasswordLater)
+                    return true;
+
+                return _signaturePasswordCheck.IsValidPassword(Signature.CertificateFile, Password);
             }
-
-            var signaturePasswordInteraction = new SignaturePasswordInteraction(PasswordMiddleButton.Remove, certFile);
-            signaturePasswordInteraction.Password = CurrentProfile.PdfSettings.Signature.SignaturePassword;
-
-            _interactionRequest.Raise(signaturePasswordInteraction, interaction =>
-            {
-                if (interaction.Result == PasswordResult.StorePassword)
-                {
-                    CurrentProfile.PdfSettings.Signature.SignaturePassword = interaction.Password;
-                }
-                else if (interaction.Result == PasswordResult.RemovePassword)
-                {
-                    CurrentProfile.PdfSettings.Signature.SignaturePassword = "";
-                }
-            });
         }
 
-        private void ShowCertFileMessage()
-        {
-            var caption = Translation.PDFSignature;
-            var message = Translation.CertificateDoesNotExist;
+        private bool _askForPasswordLater;
 
-            var interaction = new MessageInteraction(message, caption, MessageOptions.OK, MessageIcon.Error);
-            _interactionRequest.Raise(interaction);
+        public bool AskForPasswordLater
+        {
+            get { return _askForPasswordLater; }
+            set
+            {
+                _askForPasswordLater = value;
+                if (value)
+                {
+                    Password = "";
+                    RaisePropertyChanged(nameof(Password));
+                }
+                RaisePropertyChanged(nameof(AskForPasswordLater));
+                RaisePropertyChanged(nameof(CertificatePasswordIsValid));
+            }
         }
     }
 }

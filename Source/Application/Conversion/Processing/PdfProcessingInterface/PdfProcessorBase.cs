@@ -117,6 +117,8 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                 throw new ProcessingException("_file in PdfProcessor does not exist: " + pdfFile, ErrorCode.Processing_OutputFileMissing);
             }
 
+            ApplyTokens(job);
+
             const int retryCount = 5;
             var retryInterval = TimeSpan.FromMilliseconds(300);
 
@@ -193,6 +195,23 @@ namespace pdfforge.PDFCreator.Conversion.Processing.PdfProcessingInterface
                 pdfVersion = "1.7";
 
             return pdfVersion;
+        }
+
+        private void ApplyTokens(Job job)
+        {
+            try
+            {
+                if (job.Profile.PdfSettings.Signature.Enabled)
+                {
+                    job.Profile.PdfSettings.Signature.SignReason = job.TokenReplacer.ReplaceTokens(job.Profile.PdfSettings.Signature.SignReason);
+                    job.Profile.PdfSettings.Signature.SignContact = job.TokenReplacer.ReplaceTokens(job.Profile.PdfSettings.Signature.SignContact);
+                    job.Profile.PdfSettings.Signature.SignLocation = job.TokenReplacer.ReplaceTokens(job.Profile.PdfSettings.Signature.SignLocation);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn("Exception while replacing tokens in signature metadata: " + ex.Message);
+            }
         }
 
         protected abstract void DoProcessPdf(Job job);

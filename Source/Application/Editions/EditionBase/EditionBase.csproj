@@ -349,6 +349,28 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
+        <Reference Include="ToastNotifications">
+          <HintPath>..\..\..\..\packages\ToastNotifications\lib\net40\ToastNotifications.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="ToastNotifications.Messages">
+          <HintPath>..\..\..\..\packages\ToastNotifications.Messages\lib\net40\ToastNotifications.Messages.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
         <Reference Include="Translatable">
           <HintPath>..\..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
           <Private>True</Private>

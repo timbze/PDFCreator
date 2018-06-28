@@ -4,8 +4,6 @@ namespace pdfforge.PDFCreator.Core.SettingsManagement
 {
     public interface ISettingsManager
     {
-        void LoadPdfCreatorSettings();
-
         ISettingsProvider GetSettingsProvider();
 
         void SaveCurrentSettings();

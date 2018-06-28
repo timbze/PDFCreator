@@ -32,7 +32,7 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
 
         private void InitializeTest(OutputFormat outputFormat)
         {
-            _th.GenerateGsJob(PSfiles.PDFCreatorTestpage, outputFormat);
+            _th.GenerateGsJob(PSfiles.PortraitPage, outputFormat);
 
             //Settings of the set outputfile
             _th.Job.JobInfo.Metadata.Title = "Test Title";

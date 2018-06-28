@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Properties"
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
              xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="1000"
              d:DataContext="{d:DesignInstance designTime:DesignTimeAboutViewModel, IsDesignTimeCreatable=True}">
@@ -78,7 +79,7 @@
                 </DockPanel>
             </DockPanel>
             <Separator HorizontalAlignment="Stretch" Margin="0 30 0 30" Background="{DynamicResource PdfforgeDarkGreyColorBrush}" Height="1" DockPanel.Dock="Top" />
-            <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" LastChildFill="False">
+            <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" LastChildFill="True">
                 <Button DockPanel.Dock="Right"
                         Style="{DynamicResource NoChromeButton}"
                         Command="{Binding GooglePlusCommand}"
@@ -89,14 +90,26 @@
                         Command="{Binding FacebookCommand}"
                         Visibility="{Binding Path=HideSocialMediaButtons, Converter={StaticResource BoolToVisibilityConverter}}"
                         Margin="0 0 10 0" Content="{StaticResource FacebookLogo}" MaxHeight="32" />
+
                 <Button DockPanel.Dock="Left"
                         Content="{Binding Translation.License}"
                         Style="{DynamicResource BoldTextButton}"
                         Command="{Binding ShowLicenseCommand}" />
+
                 <Button DockPanel.Dock="Left"
                         Content="{Binding Translation.UserManual}"
                         Style="{DynamicResource BoldTextButton}" Margin="50 0 0 0"
                         Command="{Binding ShowManualCommand}" />
+
+                <Grid>
+                    <Grid.Resources>
+                        <SolidColorBrush x:Key="NoChromeButton.Deactive.Foreground" Color="Black" />
+                        <system:Double x:Key="NoChromeButton.Deactive.Opacity">0.4</system:Double>
+                    </Grid.Resources>
+                    <Button Style="{DynamicResource BoldTextButton}" Content="{Binding Translation.PrioritySupport}" IsEnabled="{Binding AllowPrioritySupport}" Command="{Binding PrioritySupportCommand}" />
+
+                    <userControls:PlusFeatureControl Edition="AllLicensed" Margin="0 -40 0 0" />
+                </Grid>
             </DockPanel>
         </DockPanel>
     </Grid>

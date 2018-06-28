@@ -87,7 +87,21 @@ namespace pdfforge.PDFCreator.Core.Startup.StartConditions
                 none: e => _licenseChecker.GetSavedLicenseKey());
 
             return licenseKey.Match(
-                some: key => _licenseChecker.ActivateWithKey(key),
+                some: key =>
+                {
+                    var newActivation = _licenseChecker.ActivateWithoutSaving(key);
+
+                    // Only save if we receive a valid license or the license was blocked
+                    newActivation
+                    .Filter(a => a.IsActivationStillValid() || a.Result == Result.BLOCKED, LicenseError.NoActivation)
+                    .MatchSome(a => _licenseChecker.SaveActivation(a));
+
+                    // If the online activation failed and the old activation is still valid, return the current activation
+                    if (!newActivation.HasValue && activation.Exists(a => a.IsActivationStillValid()))
+                        return activation;
+
+                    return newActivation;
+                },
                 none: e => Option.None<Activation, LicenseError>(LicenseError.NoLicenseKey));
         }
 

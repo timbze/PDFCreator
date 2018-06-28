@@ -29,7 +29,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews
         }
 
         //AccountView
-        public string EmailAddressLabel { get; private set; } = "E-Mail Address:";
+        public string EmailAddressLabel { get; private set; } = "E-mail Address:";
 
         public string PortLabel { get; private set; } = "Port:";
         public string Ssl { get; private set; } = "SSL";
@@ -38,26 +38,24 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews
         public string SendEmailViaSmtp { get; private set; } = "Send e-mail via SMTP";
 
         public string SelectSmtpAccountLabel { get; private set; } = "Please select a SMTP account:";
-        public string RecipientsLabel { get; private set; } = "Recipients:";
-        public string MultipleRecipientsSeperatedByCommas { get; private set; } = "Multiple recipients are separated by commas";
-        public string EditMailText { get; private set; } = "Edit E-Mail Text";
-        public string SendTestMail { get; private set; } = "Send Test Mail";
+        public string EditMailText { get; private set; } = "Edit E-mail Text";
+        public string SendTestMail { get; private set; } = "Send Test E-mail";
 
         //TestAssistant
         public string AttachmentFile { get; private set; } = "AttachmentFile";
 
-        private string TestMailSent { get; set; } = "Test mail sent to {0}.";
+        public string TestMailSent { get; private set; } = "The test e-mail was successfully sent to the following recipients:";
         public string SetSmtpServerPassword { get; private set; } = "Set SMTP Server Password";
         public string NoAccount { get; private set; } = "The specified SMTP account is not configured.";
-
-        public string GetTestMailSentFormattedTranslation(string reciepent)
-        {
-            return string.Format(TestMailSent, reciepent);
-        }
 
         public string AttachSignatureText { get; private set; } = "Attach pdfforge signature";
         public string BodyTextLabel { get; private set; } = "_Text:";
         public string SubjectLabel { get; private set; } = "_Subject:";
         public string UseHtml { get; private set; } = "Use Html";
+
+        public string MultipleRecipientsHintText { get; private set; } = "Hint: Multiple recipients can be separated by commas";
+        public string RecipientsToText { get; private set; } = "To:";
+        public string RecipientsCcText { get; private set; } = "CC:";
+        public string RecipientsBccText { get; private set; } = "BCC:";
     }
 }

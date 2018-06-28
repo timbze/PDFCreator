@@ -19,9 +19,19 @@
     <HeaderedContentControl Template="{DynamicResource BorderlessHeaderPanelTemplate}" Header="{Binding Translation.Email}">
         <StackPanel>
             <Label>
-                <TextBlock Text="{Binding Translation.RecipientsText}"></TextBlock>
+                <TextBlock Text="{Binding Translation.RecipientsToText}"></TextBlock>
             </Label>
             <controls:TokenControl DataContext="{Binding RecipientsTokenViewModel}" />
+
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsCcText}"></TextBlock>
+            </Label>
+            <controls:TokenControl DataContext="{Binding RecipientsCcTokenViewModel}" />
+
+            <Label>
+                <TextBlock Text="{Binding Translation.RecipientsBccText}"></TextBlock>
+            </Label>
+            <controls:TokenControl DataContext="{Binding RecipientsBccTokenViewModel}" />
 
             <Label Margin="0 -5">
                 <TextBlock Text="{Binding Translation.MultipleRecipientsHintText}" TextWrapping="Wrap" />

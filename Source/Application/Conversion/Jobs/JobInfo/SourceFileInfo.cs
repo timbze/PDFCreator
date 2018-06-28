@@ -74,5 +74,8 @@ namespace pdfforge.PDFCreator.Conversion.Jobs.JobInfo
         ///     User tokens extracted from ps file if activated
         /// </summary>
         public UserToken UserToken { get; set; }
+
+        public string OutputFile { get; set; }
+        public string Profile { get; set; }
     }
 }

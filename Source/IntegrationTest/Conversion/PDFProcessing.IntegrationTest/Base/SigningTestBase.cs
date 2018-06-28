@@ -210,6 +210,26 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.PDFProcessing.Base
         }
 
         [Test]
+        public void SigningPdf_SigningWasSuccessful_TokensWereReplacedInSignatureMetadata()
+        {
+            var tokenKey = TestHelper.Job.TokenReplacer.GetTokenNames(true)[0];
+            var tokenValue = TestHelper.Job.TokenReplacer.ReplaceTokens(tokenKey);
+
+            TestHelper.Job.Profile.PdfSettings.Signature.SignReason = tokenKey;
+            TestHelper.Job.Profile.PdfSettings.Signature.SignContact = tokenKey;
+            TestHelper.Job.Profile.PdfSettings.Signature.SignLocation = tokenKey;
+
+            PdfProcessor.ProcessPdf(TestHelper.Job);
+
+            // set expected values with replaced tokens before testing
+            TestHelper.Job.Profile.PdfSettings.Signature.SignReason = tokenValue;
+            TestHelper.Job.Profile.PdfSettings.Signature.SignContact = tokenValue;
+            TestHelper.Job.Profile.PdfSettings.Signature.SignLocation = tokenValue;
+
+            SigningTester.TestSignature(TestHelper.Job);
+        }
+
+        [Test]
         public void SigningPdf_UnavailableTimeServer_ThrowsProcessingException()
         {
             TestHelper.Job.Profile.OutputFormat = OutputFormat.Pdf;

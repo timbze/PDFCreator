@@ -36,6 +36,36 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         }
 
         [Test]
+        public void AfterAddingReplacementCollection_WhenRemovingAtEnd_IgnoreCasing()
+        {
+            var replacements = new List<TitleReplacement>();
+            replacements.Add(new TitleReplacement(ReplacementType.End, ".doc", ""));
+            var titleReplacer = new TitleReplacer();
+            titleReplacer.AddReplacements(replacements);
+
+            const string originalTitle = "Filename.DOC";
+
+            var title = titleReplacer.Replace(originalTitle);
+
+            Assert.AreEqual("Filename", title);
+        }
+
+        [Test]
+        public void AfterAddingReplacementCollection_WhenRemovingAtBeginning_IgnoreCasing()
+        {
+            var replacements = new List<TitleReplacement>();
+            replacements.Add(new TitleReplacement(ReplacementType.Start, "Word - ", ""));
+            var titleReplacer = new TitleReplacer();
+            titleReplacer.AddReplacements(replacements);
+
+            const string originalTitle = "WoRd - Filename.doc";
+
+            var title = titleReplacer.Replace(originalTitle);
+
+            Assert.AreEqual("Filename.doc", title);
+        }
+
+        [Test]
         public void Replace_WithNullTitle_ThrowsArgumentException()
         {
             var titleReplacer = new TitleReplacer();
@@ -64,7 +94,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
 
             var title = titleReplacer.Replace(originalTitle);
 
-            Assert.AreEqual("My Sample Title - Microsoft Word", title);
+            Assert.AreEqual("", title);
         }
 
         [Test]
@@ -165,7 +195,6 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         }
 
         [TestCase("", "")]
-        [TestCase("abc", "")]
         [TestCase("(.*", "abc")]
         public void TitleReplacement_(string search, string replace)
         {

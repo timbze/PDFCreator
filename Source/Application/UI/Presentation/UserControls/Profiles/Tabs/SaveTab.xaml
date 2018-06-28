@@ -8,6 +8,7 @@
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
              xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
              xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls"
+             xmlns:tabs="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Tabs"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="400"
              d:DataContext="{d:DesignInstance designTime:DesignTimeSaveTabViewModel, IsDesignTimeCreatable=True}"
@@ -15,7 +16,7 @@
     <UserControl.Resources>
         <converter:BoolToVisibilityConverter x:Key="ShowWhenTrue" TrueValue="Visible" FalseValue="Collapsed" />
         <converter:BoolToVisibilityConverter x:Key="ShowWhenFalse" TrueValue="Collapsed" FalseValue="Visible" />
-
+        <converter:BoolNegationConverter x:Key="BoolNegationConverter" />
         <Style TargetType="Separator">
             <Setter Property="Height" Value="10" />
             <Setter Property="Background" Value="Transparent" />
@@ -126,23 +127,24 @@
 
                     <userControls:PlusFeatureControl Margin="10 0" Edition="AllLicensed" />
                 </StackPanel>
-
-                <TextBlock Margin="25 0 0 0"
-                           Visibility="{Binding AllowSkipPrintDialog, Converter={StaticResource ShowWhenFalse}}"
-                           Text="{Binding Translation.SkipPrintDialogHint}"
-                           TextWrapping="Wrap" />
-
-                <!--<CheckBox Content="{Binding Translation.ShowWindowAfterConversion}"
-                          IsChecked="{Binding CurrentProfile.ShowQuickActions}"
-                          Margin="0 5 0 0" />-->
             </StackPanel>
+
             <Separator />
 
             <CheckBox Content="{Binding Translation.OpenFileAfterSaving}"
                       IsChecked="{Binding CurrentProfile.OpenViewer}" />
             <CheckBox Content="{Binding Translation.OpenWithPdfArchitect}"
                       IsChecked="{Binding CurrentProfile.OpenWithPdfArchitect}"
+                      IsEnabled="{Binding CurrentProfile.OpenViewer}"
                       Margin="25 5 0 0" />
+
+            <Separator />
+
+            <CheckBox Content="{Binding Translation.ShowQuickActions}"
+                      IsChecked="{Binding CurrentProfile.ShowQuickActions}"
+                      Visibility="{Binding CurrentProfile.AutoSave.Enabled, Converter={StaticResource ShowWhenFalse}}" />
+
+            <tabs:NotificationsLevelSettingsView />
         </StackPanel>
     </HeaderedContentControl>
 </UserControl>

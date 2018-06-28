@@ -1,1 +1,3 @@
-﻿NUnit
+﻿group test
+    NUnit
+	NSubstitute

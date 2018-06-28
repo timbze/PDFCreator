@@ -130,7 +130,7 @@ namespace pdfforge.IntegrationTest.Presentation.IntegrationTest
         {
             foreach (HelpTopic topic in Enum.GetValues(typeof(HelpTopic)))
             {
-                Assert.IsNotNullOrEmpty(StringValueAttribute.GetValue(topic), $"Topic {topic} does not have a html reference attached");
+                Assert.IsFalse(string.IsNullOrEmpty(StringValueAttribute.GetValue(topic)), $"Topic {topic} does not have a html reference attached");
             }
         }
     }

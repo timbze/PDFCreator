@@ -1,9 +1,7 @@
-﻿using pdfforge.PDFCreator.Conversion.Settings;
-using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
+﻿using pdfforge.PDFCreator.Conversion.Settings.GroupPolicies;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
-using Prism.Mvvm;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
 {

@@ -64,7 +64,7 @@ namespace Presentation.UnitTest.UserControls.AccountViewModels
             _accounts.TimeServerAccounts.Add(new TimeServerAccount());
 
             _commandLocator = Substitute.For<ICommandLocator>();
-            _commandLocator.GetMacroCommand().Returns(x => new MacroCommand(_commandLocator));
+            _commandLocator.CreateMacroCommand().Returns(x => new MacroCommandBuilder(_commandLocator));
 
             _ftpAccountAddCommand = Substitute.For<ICommand>();
             _commandLocator.GetCommand<FtpAccountAddCommand>().Returns(_ftpAccountAddCommand);

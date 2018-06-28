@@ -100,7 +100,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
             if (_settings == null || forceUpdate)
             {
                 CloneSettings();
-                _selectedProfile = Profiles.First();
+                var firstProfile = Profiles.First();
+                _selectedProfile = _selectedProfile == null ? firstProfile : Profiles.FirstOrDefault(x => x.Guid == _selectedProfile.Guid) ?? firstProfile;
+                _selectedProfile = _selectedProfile ?? Profiles.First();
                 SettingsChanged?.Invoke(this, EventArgs.Empty);
             }
         }

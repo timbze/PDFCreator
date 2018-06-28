@@ -2,6 +2,7 @@
 using pdfforge.Mail;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Workflow;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using System;
 using SystemInterface.IO;
 using SystemWrapper.IO;
@@ -46,16 +47,16 @@ namespace pdfforge.PDFCreator.UI.Presentation.Helper
             var eMail = new Email();
             var tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            clientSettings.Recipients = tokenReplacer.ReplaceTokens(clientSettings.Recipients);
-            foreach (var recipient in clientSettings.Recipients.Replace(',', ';').Split(';'))
-            {
-                if (!string.IsNullOrWhiteSpace(recipient))
-                    eMail.To.Add(recipient.Trim());
-            }
+            var recipientsTo = tokenReplacer.ReplaceTokens(clientSettings.Recipients);
+            var recipientsCc = tokenReplacer.ReplaceTokens(clientSettings.RecipientsCc);
+            var recipientsBcc = tokenReplacer.ReplaceTokens(clientSettings.RecipientsBcc);
 
             eMail.Subject = tokenReplacer.ReplaceTokens(clientSettings.Subject);
             eMail.Html = clientSettings.Html;
             eMail.Body = tokenReplacer.ReplaceTokens(clientSettings.Content);
+            eMail.Recipients.AddTo(recipientsTo);
+            eMail.Recipients.AddCc(recipientsCc);
+            eMail.Recipients.AddBcc(recipientsBcc);
 
             if (clientSettings.AddSignature)
             {

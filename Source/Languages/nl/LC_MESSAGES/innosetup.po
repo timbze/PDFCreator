@@ -1,17 +1,12 @@
-msgid "Setup has finished installing [name] on your computer."
-msgstr "[name] is op je computer geïnstalleerd."
-
-msgid "Edit & Insert"
-msgstr "Bewerken & Invoegen"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: Dutch (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 10:38+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Dutch <http://translate.pdfforge.org/projects/pdfcreator/innosetup/nl/>\n"
+"Language-Team: Dutch <http://translate.pdfforge.org/projects/pdfcreator/"
+"innosetup/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,524 +14,678 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "Review"
-msgstr "Nakijken"
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Het programma is al geïnstalleerd.%n%nOm te herinstalleren, moet u de "
+"applicatie eerst verwijderen.%n%nInstallatie wordt afgebroken."
 
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
-msgstr "PDFCreator is al geïnstalleerd. Verwijder eerst de bestaande installatie  (versie %1) alvorens PDFCreator %2 te installeren.%n%nWil je PDFCreator nu updaten? Je instellingen blijven bewaard."
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"PDFCreator is al geïnstalleerd. Verwijder eerst de bestaande installatie  "
+"(versie %1) alvorens PDFCreator %2 te installeren.%n%nWil je PDFCreator nu "
+"updaten? Je instellingen blijven bewaard."
 
-msgid "Secure & Sign"
-msgstr "Beveilig & Onderteken"
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Het programma is al geïnstalleerd.%n%nVernieuwen kan nu niet; verwijder de "
+"bestaande versie eerst.%n%nSetup wordt afgebroken."
 
 msgid "The setup will be canceled."
 msgstr "Installatie wordt afgebroken."
 
-msgid "Forms"
-msgstr "Formulieren"
-
-msgid "The following applications have to be closed to proceed with the uninstallation:"
-msgstr "Deze programma's moeten worden gesloten om door te gaan met de-installatie:"
-
-msgid "Try out the new PDF Architect"
-msgstr "Probeer de nieuwe PDFArchitect uit"
-
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "Het gedownloade bestand is beschadigd en wordt gewist. Installatie afgebroken."
-
-msgid "A shortcut has been added to your desktop."
-msgstr "Snelkoppeling op bureaublad toegevoegd."
-
-msgid "Donate to PDFCreator"
-msgstr "Doneer aan PDFCreator"
-
-msgid "Install PDF Architect with great free features"
-msgstr "Installeer PDF Architect, met vele slimme functies"
-
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "De installatie van Microsoft.Net Framework %1 is misgelopen. (Foutcode: %2)%n%nWil je de .Net installatie-log inzien?"
-
-msgid "Rotate, move and delete pages"
-msgstr "Draai, verplaats of verwijder pagina's"
-
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "Setup heeft eerst .Net Framework 4.0 geïnstalleerd. Dit vergt een herstart, waarna je opnieuw de setup moet draaien.%n%nSetup sluit nu."
-
-msgid "Merge multiple PDFs"
-msgstr "Voeg PDF's samen"
-
-msgid "PDFCreator download"
-msgstr "PDFCreator ophalen"
-
-msgid "Free features:"
-msgstr "Gratis functies:"
-
-msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
-msgstr "Er is een nieuwe versie (%1) beschikbaar!%n%nWil je deze ophalen en installeren?"
-
-msgid "Enhance PDFCreator with edit features!"
-msgstr "Voeg redigeermogelijkheden aan toe aan PDFCreator!"
-
-msgid "Set installation directory and additional options"
-msgstr "Kies installatiemap en andere opties"
-
-msgid "New in PDF Architect {0}:"
-msgstr "Nieuw in PDF Architect {0}:"
-
-msgid "Please choose a printer name."
-msgstr "Kies een printernaam."
-
-msgid "Automatic E-Sign workflows"
-msgstr "Automatische E-Sign processen"
-
-msgid "There already exists a printer with this name. Please choose another name."
-msgstr "Er is al een printer met die naam. Kies een andere naam."
-
-msgid "Verify and remove signatures"
-msgstr "Handtekeningen verifiëren en verwijderen"
-
-msgid "For &all users"
-msgstr "Voor &alle gebruikers"
-
-msgid "Already installed"
-msgstr "Reeds geïnstalleerd"
-
-msgid "Full installation"
-msgstr "Complete installatie"
-
-msgid "Automatic updates"
-msgstr "Automatische updates"
-
-msgid "Install printer"
-msgstr "Installeer printer"
-
-msgid "Default application for PDF files"
-msgstr "Standaardtoepassing voor PDF's"
-
-msgid "Install printer driver"
-msgstr "Installeer printeraansturing"
-
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "De nieuwe PDFArchitect wordt geïnstalleerd. Dit duurt even."
-
-msgid "Install printer port"
-msgstr "Installeer printerpoort"
-
-msgid "Firefox integration"
-msgstr "Firefox-integratie"
-
-msgid "Languages"
-msgstr "Talen"
-
-msgid "Internet Explorer integration"
-msgstr "Integratie met Internet Explorer"
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "Je activering is te lang geleden. Vernieuw je activering."
-
-msgid "MS Outlook previewer integration"
-msgstr "MS Outlook voorbeeldintegratie"
-
-msgid "Invalid answer from license server!"
-msgstr "Ongeldig antwoord van licentieserver!"
-
-msgid "Windows Explorer integration"
-msgstr "Windows Verkenner-integratie"
-
-msgid "No answer from license server!"
-msgstr "Licentieserver geeft geen antwoord!"
-
-msgid "No thanks"
-msgstr "Nee, bedankt"
-
-msgid "Wrong answer from license server!"
-msgstr "Licentieserver geeft onjuist antwoord!"
-
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
-msgstr "Verwijder 'PDFCreator Server' voor je verdergaat met installeren. 'PDFCreator' en 'PDFCreator Server' werken niet gelijktijdig op dezelfde machine."
-
-msgid "License server answer not valid for this computer!"
-msgstr "Ongeldig antwoord van licentieserver voor dit systeem!"
-
-msgid "PDFCreator setup"
-msgstr "PDFCreator setup"
-
-msgid "License key validation"
-msgstr "Valideren licentiesleutel"
-
-msgid "Setup is being prepared..."
-msgstr "Setup maakt zich gereed..."
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "Voer een geldige licentiesleutel in en ga door met installeren."
-
-msgid "Printer"
-msgstr "Printer"
-
-msgid "Invalid license answer hash!"
-msgstr "Ongeldige hash van het licentieantwoord!"
-
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "Er waren fouten bij de installatie. je vindt een uitgebreide beschrijving in 'SetupLog.txt' in de installatiemap."
-
-msgid "License key"
-msgstr "Licentiesleutel"
-
-msgid "Printer name"
-msgstr "Printernaam"
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "De opmaak van de licentiesleutel is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Choosing a printer name."
-msgstr "Kies een printernaam."
-
-msgid "Message"
-msgstr "Bericht"
-
-msgid "Please choose a name for the printer."
-msgstr "Kies een printernaam."
-
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "Geen licentiesleutel ingevoerd. Met de parameters '/VerySilent' of '/Silent' is dit vereist. Gebruik daarvoor de parameter '/%1'.%n%nVoorbeeld: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "PDFCreator installeert een 'printer' op je systeem waarmee elk programma dat kan afdrukken, PDF's, bitmap- of PostScript-bestanden kan maken.%n%nPrinternaam:"
-
-msgid "Offline license check"
-msgstr "Offline licentiecontrole"
-
-msgid "This process might take several minutes."
-msgstr "Dit proces vergt enkele minuten."
-
-msgid "The machine or the user is blocked!"
-msgstr "De computer of gebruiker is geblokkeerd!"
-
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr "Met PDFCreator maak je met gemak pdf's - gebruik het zoals een printer vanuit Word, Excel of elke andere Windowsapplicatie."
-
-msgid "An invalid license key is provided!"
-msgstr "Een ongeldige licentiesleutel ingevoerd!"
-
-msgid "application files"
-msgstr "toepassingsbestanden"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "Toepassing '%1' is actief.%n%nSluit deze eerst af.%n%n"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr "Versie %1 is niet ondersteund! Gebruik de recente versie vanaf %2."
-
-msgid "Please restart your system first to continue setup."
-msgstr "Herstart je systeem om door te gaan met installatie."
-
-msgid "License agreement"
-msgstr "Licentievoorwaarden"
-
-msgid "PDFCreator settings"
-msgstr "PDFCreator instellingen"
-
-msgid "PDFCreator log file"
-msgstr "PDFCreator logbestand"
-
-msgid "Show help after setup"
-msgstr "Toon hulp na installatie"
-
-msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr "Je hebt geen beheerder-status.%n%n%nOm vanuit een programma een PDF document te maken, gebruikt PDFCreator een PostScript printeraansturing.%nJe moet een beheerder zijn om een printeraansturing te installeren.%n%nGa je door met installatie, dan kun je alleen bestaande PostScript-bestanden kunnen converteren.%n%nDoorgaan met installatie?%n"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr "Gebruik 'PDFCreator Terminal Server' voor  computers met  Terminal Services.%n%nWil je meer weten over 'PDFCreator Terminal Server'?"
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "Er is een eerdere versie'%1' gevonden. Deze is niet bij te werken naar versie '%2'.%n%nVerwijder eerst de oude versie."
-
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "Dit is een ontwikkelaarsversie van PDFCreator.%n%nHet is geen proefversie van de volgende release. Er zitten fouten in, of het start helemaal niet.%n%nInstalleer je deze versie toch, dan horen we graag je bevindingen."
-
-msgid "Other tasks:"
-msgstr "Andere taken:"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "Deze versie ondersteunt geen servers. Toch installeren?"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "De aanpassing is voor een oudere versie; je kunt deze niet gebruiken."
-
-msgid "Delete all application settings?"
-msgstr "Alle instellingen wissen?"
-
-msgid "Edit pages"
-msgstr "Bewerk pagina's"
-
-msgid "Uninstall the printer with all its components."
-msgstr "Verwijder de printeraansturing volledig."
-
-msgid "Split and merge"
-msgstr "Splitsen en samenvoegen"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "Om te updaten, klik <OK>, of breek de installatie af en verwijder eerst de oudere versie."
-
-msgid "Create"
-msgstr "Maak"
-
-msgid "Create an &entry in the Windows Explorer context menu"
-msgstr "Maak een &ingang in het contextmenu van de verkenner"
-
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Het programma is al geïnstalleerd.%n%nOm te herinstalleren, moet u de applicatie eerst verwijderen.%n%nInstallatie wordt afgebroken."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "Maak PDF en bitmap-bestanden met %1"
-
 msgid "Do you want to cancel the setup?"
 msgstr "Wil je de installatie afbreken?"
 
-msgid "Bad request (400)"
-msgstr "Ongeldige aanvraag (400)"
-
-msgid "Custom installation"
-msgstr "Installatie op maat"
-
-msgid "Access denied (401)"
-msgstr "Toegang geweigerd (410)"
-
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "PDFCreator heeft Microsoft .Net %1 nodig. Download en  installeer Microsoft .Net %1 en voer dan PDFCreator setup opnieuw uit."
-
-msgid "File not found (404)"
-msgstr "Bestand niet gevonden (404)"
-
-msgid "Download the latest version..."
-msgstr "Haal de recente versie op..."
-
-msgid "Proxy authentication required (407)"
-msgstr "Proxy authenticatie vereist (407)"
-
-msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "Printernamen mogen geen '!', '\\' of ',' bevatten. Kies een andere naam."
-
-msgid "Server internal error (500)"
-msgstr "Interne serverfout (500)"
-
-msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "Er zit een fout in de omgevingsvariabele 'pad' %n%n->Ontbrekende of corrupte ingang: %Systemroot%\\system32\\wbem%n%nDe fout moet worden hersteld om door te kunnen gaan.%n%nKlik OK als je de fout wilt herstellen. Je moet naderhand je systeem herstarten.%n%nBreek anders de installatie af."
-
-msgid "Bad gateway (502)"
-msgstr "Ongeldige gateway (502)"
-
-msgid "Help"
-msgstr "Hulp"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "Service tijdelijk onbereikbaar (503)"
-
-msgid "Install printer monitor"
-msgstr "Installeer printermonitor"
-
-msgid "Cancelling download..."
-msgstr "Afbreken download..."
-
-msgid "Please wait. Checking license key..."
-msgstr "Wacht even, licentiesleutel controleren..."
-
-msgid "Cannot connect"
-msgstr "Kan niet verbinden"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "Je licentie geldt niet voor deze versie. Vernieuw je licentie op %1."
-
-msgid "Connecting..."
-msgstr "Verbinden..."
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "De computertijd lijkt verkeerd te staan. Stel deze goed in."
-
-msgid "Current file"
-msgstr "Huidig bestand"
-
-msgid "Enter the valid license key"
-msgstr "Voer een geldige licentiesleutel in"
-
-msgid "Details"
-msgstr "Details"
-
-msgid "Invalid license key!"
-msgstr "Ongeldige licentiesleutel!"
-
-msgid "Download cancelled"
-msgstr "Download afgebroken"
-
-msgid "Licensee"
-msgstr "Licentiehouder"
-
-msgid "Download complete"
-msgstr "Download ten einde"
-
-msgid "Offline activation string:"
-msgstr "Offline activatiecode:"
-
-msgid "Download failed"
-msgstr "Download is misgegaan"
-
-msgid "The authorization is failed!"
-msgstr "Goedkeuring is mislukt!"
-
-msgid "Downloading..."
-msgstr "Downloaden..."
-
-msgid "The product %1 does not exist!"
-msgstr "Product %1 bestaat niet!"
-
-msgid "Please click here to revoke your previous activations."
-msgstr "Klik hier om uw vorige activeringen te herroepen."
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr "Je accepteert de licentievoorwaarden door op 'doorgaan' te klikken."
-
-msgid "Elapsed time:"
-msgstr "Verstreken tijd:"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Hiervoor hoef je geen beheerder te zijn%n%n"
-
-msgid "File:"
-msgstr "Bestand:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "Het programma is niet geïnstalleerd; de aanpassing is niet bruikbaar."
-
-msgid "The following files were not downloaded:"
-msgstr "De volgende bestanden zijn niet opgehaald:"
-
-msgid "Edit texts and fonts"
-msgstr "Bewerk tekst en lettertypen"
-
-msgid "Downloading additional files"
-msgstr "Extra bestanden ophalen"
-
-msgid "Convert"
-msgstr "Converteren"
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "Wacht op download aanvullende bestanden..."
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr ""
+"Deze programma's moeten worden gesloten om door te gaan met de-installatie:"
 
 msgid "Compact installation"
 msgstr "Compacte installatie"
 
-msgid "GB"
-msgstr "GB"
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+"Het gedownloade bestand is beschadigd en wordt gewist. Installatie "
+"afgebroken."
 
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "Het controlegetal van het gedownloade bestand klopt niet. Toch doorgaan?"
+msgid "Custom installation"
+msgstr "Installatie op maat"
 
-msgid "Getting file information..."
-msgstr "Bestandsinformatie ophalen..."
+msgid "Donate to PDFCreator"
+msgstr "Doneer aan PDFCreator"
 
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "Je printernaam is te lang; deze is maximaal 221 tekens. Kies een andere naam."
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
+msgstr ""
+"Microsoft .Net Framework %1 wordt geïnstalleerd - dit kan enige minuten "
+"duren."
 
-msgid "Hide"
-msgstr "Verbergen"
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+"De installatie van Microsoft.Net Framework %1 is misgelopen. (Foutcode: %2)%n"
+"%nWil je de .Net installatie-log inzien?"
 
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Installeer printermonitor, printerpoort, printeraansturing en printer"
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install "
+"Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+"PDFCreator heeft Microsoft .Net %1 nodig. Download en  installeer Microsoft ."
+"Net %1 en voer dan PDFCreator setup opnieuw uit."
 
-msgid "HTTP error %d"
-msgstr "HTTP fout %d"
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup again."
+"%n%nSetup will now exit."
+msgstr ""
+"Setup heeft eerst .Net Framework 4.0 geïnstalleerd. Dit vergt een herstart, "
+"waarna je opnieuw de setup moet draaien.%n%nSetup sluit nu."
 
-msgid "Empty answer from license server!"
-msgstr "Leeg antwoord van licentieserver."
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"Het controlegetal van het gedownloade bestand klopt niet. Toch doorgaan?"
 
-msgid "Ignore"
-msgstr "Negeer"
+msgid "PDFCreator download"
+msgstr "PDFCreator ophalen"
 
-msgid "The license is not valid for the given product!"
-msgstr "De licentie geldt niet voor dit product!"
+msgid "Download the latest version..."
+msgstr "Haal de recente versie op..."
 
-msgid "Initializing..."
-msgstr "Initialiseren..."
-
-msgid "Please enter the license key."
-msgstr "Voer de licentiesleutel in."
-
-msgid "KB"
-msgstr "KB"
-
-msgid "License server answer:"
-msgstr "Antwoord van licentieserver:"
-
-msgid "KB/s"
-msgstr "KB/s"
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr "Vraag hulp via support@pdfforge.org!"
-
-msgid "MB"
-msgstr "MB"
-
-msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "Er is een eerdere versie'%1' gevonden.%nDeze is bij te werken naar versie '%2'.%n%n"
-
-msgid "MB/s"
-msgstr "MB/s"
-
-msgid "PDF to Word"
-msgstr "PDF naar Word"
-
-msgid "Remaining time:"
-msgstr "Resterende tijd:"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "Microsoft .Net Framework %1 wordt geïnstalleerd - dit kan enige minuten duren."
-
-msgid "Retry"
-msgstr "Herhaal"
-
-msgid "For the &current user only"
-msgstr "Alleen voor &huidige gebruiker"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Controleer internetverbinding en klik 'Opnieuw' voor hernieuwde download of klik 'Afbreken' om te stoppen."
-
-msgid "An unknown error is occurred!"
-msgstr "Onbekende fout!"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "Controleer internetverbinding en klik 'Opnieuw' voor hernieuwde download of klik 'Doorgaan' om de installatie voort te zetten."
-
-msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
-msgstr "je hebt een geldige licentiesleutel nodig. Wil je doorgaan met installeren?"
-
-msgid "Speed:"
-msgstr "Snelheid:"
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "De geïnstalleerde versie '%1' is nieuwer dan deze installatie '%2'.%n%nVoor installatie van een eerdere versie moet je de nieuwere versie verwijderen.%n%nDe installatie wordt afgebroken."
-
-msgid "Starting download..."
-msgstr "Download begint..."
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Het programma is al geïnstalleerd.%n%nVernieuwen kan nu niet; verwijder de bestaande versie eerst.%n%nSetup wordt afgebroken."
-
-msgid "Status:"
-msgstr "Status:"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "Het maximum van %1 gebruikers is bereikt!"
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr "De geïnstalleerde versie is te oud; je kunt deze aanpassing niet gebruiken."
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"Er is een nieuwe versie (%1) beschikbaar!%n%nWil je deze ophalen en "
+"installeren?"
 
 msgid "Expert settings"
 msgstr "Expertinstellingen"
 
+msgid "Set installation directory and additional options"
+msgstr "Kies installatiemap en andere opties"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"Printernamen mogen geen '!', '\\' of ',' bevatten. Kies een andere naam."
+
+msgid "Please choose a printer name."
+msgstr "Kies een printernaam."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"Je printernaam is te lang; deze is maximaal 221 tekens. Kies een andere naam."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "Er is al een printer met die naam. Kies een andere naam."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system afterwards."
+"%n%nOtherwise Cancel the installation."
+msgstr ""
+"Er zit een fout in de omgevingsvariabele 'pad' %n%n->Ontbrekende of corrupte "
+"ingang: %Systemroot%\\system32\\wbem%n%nDe fout moet worden hersteld om door "
+"te kunnen gaan.%n%nKlik OK als je de fout wilt herstellen. Je moet naderhand "
+"je systeem herstarten.%n%nBreek anders de installatie af."
+
+msgid "For &all users"
+msgstr "Voor &alle gebruikers"
+
+msgid "For the &current user only"
+msgstr "Alleen voor &huidige gebruiker"
+
+msgid "Full installation"
+msgstr "Complete installatie"
+
+msgid "Help"
+msgstr "Hulp"
+
+msgid "Install printer"
+msgstr "Installeer printer"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Installeer printermonitor, printerpoort, printeraansturing en printer"
+
+msgid "Install printer driver"
+msgstr "Installeer printeraansturing"
+
+msgid "Install printer monitor"
+msgstr "Installeer printermonitor"
+
+msgid "Install printer port"
+msgstr "Installeer printerpoort"
+
+msgid "Offline activation instructions"
+msgstr "Offline activeringsinstructies"
+
+msgid "Languages"
+msgstr "Talen"
+
+msgid "Please wait. Checking license key..."
+msgstr "Wacht even, licentiesleutel controleren..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "Je activering is te lang geleden. Vernieuw je activering."
+
+msgid "Empty answer from license server!"
+msgstr "Leeg antwoord van licentieserver."
+
+msgid "Invalid answer from license server!"
+msgstr "Ongeldig antwoord van licentieserver!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr "Je licentie geldt niet voor deze versie. Vernieuw je licentie op %1."
+
+msgid "No answer from license server!"
+msgstr "Licentieserver geeft geen antwoord!"
+
+msgid "An unknown error is occurred!"
+msgstr "Onbekende fout!"
+
+msgid "Wrong answer from license server!"
+msgstr "Licentieserver geeft onjuist antwoord!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr "De computertijd lijkt verkeerd te staan. Stel deze goed in."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Ongeldig antwoord van licentieserver voor dit systeem!"
+
+msgid "The license is not valid for the given product!"
+msgstr "De licentie geldt niet voor dit product!"
+
+msgid "License key validation"
+msgstr "Valideren licentiesleutel"
+
+msgid "Enter the valid license key"
+msgstr "Voer een geldige licentiesleutel in"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Voer een geldige licentiesleutel in en ga door met installeren."
+
 msgid "An error occurred validating the license key!"
 msgstr "Valideren van de licentiesleutel leidt tot een fout!"
+
+msgid "Invalid license answer hash!"
+msgstr "Ongeldige hash van het licentieantwoord!"
+
+msgid "Invalid license key!"
+msgstr "Ongeldige licentiesleutel!"
+
+msgid "License key"
+msgstr "Licentiesleutel"
+
+msgid "Please enter the license key."
+msgstr "Voer de licentiesleutel in."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr ""
+"De opmaak van de licentiesleutel is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "Licentiehouder"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"je hebt een geldige licentiesleutel nodig. Wil je doorgaan met installeren?"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
+"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Geen licentiesleutel ingevoerd. Met de parameters '/VerySilent' of '/Silent' "
+"is dit vereist. Gebruik daarvoor de parameter '/%1'.%n%nVoorbeeld: %2 /"
+"Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "Offline activatiecode:"
+
+msgid "Offline license check"
+msgstr "Offline licentiecontrole"
+
+msgid "License server answer:"
+msgstr "Antwoord van licentieserver:"
+
+msgid "The machine or the user is blocked!"
+msgstr "De computer of gebruiker is geblokkeerd!"
+
+msgid "The authorization is failed!"
+msgstr "Goedkeuring is mislukt!"
+
+msgid "An invalid license key is provided!"
+msgstr "Een ongeldige licentiesleutel ingevoerd!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Het maximum van %1 gebruikers is bereikt!"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "The product %1 does not exist!"
+msgstr "Product %1 bestaat niet!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr "Versie %1 is niet ondersteund! Gebruik de recente versie vanaf %2."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Vraag hulp via support@pdfforge.org!"
+
+msgid "License agreement"
+msgstr "Licentievoorwaarden"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "Je accepteert de licentievoorwaarden door op 'doorgaan' te klikken."
+
+msgid "PDFCreator log file"
+msgstr "PDFCreator logbestand"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"De geïnstalleerde versie '%1' is nieuwer dan deze installatie '%2'.%n%nVoor "
+"installatie van een eerdere versie moet je de nieuwere versie verwijderen.%n"
+"%nDe installatie wordt afgebroken."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Je hebt geen beheerder-status.%n%n%nOm vanuit een programma een PDF document "
+"te maken, gebruikt PDFCreator een PostScript printeraansturing.%nJe moet een "
+"beheerder zijn om een printeraansturing te installeren.%n%nGa je door met "
+"installatie, dan kun je alleen bestaande PostScript-bestanden kunnen "
+"converteren.%n%nDoorgaan met installatie?%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Hiervoor hoef je geen beheerder te zijn%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"Er is een eerdere versie'%1' gevonden. Deze is niet bij te werken naar "
+"versie '%2'.%n%nVerwijder eerst de oude versie."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"Er is een eerdere versie'%1' gevonden.%nDeze is bij te werken naar versie "
+"'%2'.%n%n"
+
+msgid "Other tasks:"
+msgstr "Andere taken:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "Het programma is niet geïnstalleerd; de aanpassing is niet bruikbaar."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr "De aanpassing is voor een oudere versie; je kunt deze niet gebruiken."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr ""
+"De geïnstalleerde versie is te oud; je kunt deze aanpassing niet gebruiken."
+
+msgid "Edit pages"
+msgstr "Bewerk pagina's"
+
+msgid "Edit texts and fonts"
+msgstr "Bewerk tekst en lettertypen"
+
+msgid "Split and merge"
+msgstr "Splitsen en samenvoegen"
+
+msgid "PDF to Word"
+msgstr "PDF naar Word"
+
+msgid "Create"
+msgstr "Maak"
+
+msgid "Convert"
+msgstr "Converteren"
+
+msgid "Edit & Insert"
+msgstr "Bewerken & Invoegen"
+
+msgid "Review"
+msgstr "Nakijken"
+
+msgid "Secure & Sign"
+msgstr "Beveilig & Onderteken"
+
+msgid "Forms"
+msgstr "Formulieren"
+
+msgid "Try out the new PDF Architect"
+msgstr "Probeer de nieuwe PDFArchitect uit"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "Snelkoppeling op bureaublad toegevoegd."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Installeer PDF Architect, met vele slimme functies"
+
+msgid "Rotate, move and delete pages"
+msgstr "Draai, verplaats of verwijder pagina's"
+
+msgid "Merge multiple PDFs"
+msgstr "Voeg PDF's samen"
+
+msgid "Free features:"
+msgstr "Gratis functies:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "Voeg redigeermogelijkheden aan toe aan PDFCreator!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "Nieuw in PDF Architect {0}:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "Automatische E-Sign processen"
+
+msgid "Verify and remove signatures"
+msgstr "Handtekeningen verifiëren en verwijderen"
+
+msgid "Already installed"
+msgstr "Reeds geïnstalleerd"
+
+msgid "Automatic updates"
+msgstr "Automatische updates"
+
+msgid "Default application for PDF files"
+msgstr "Standaardtoepassing voor PDF's"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "De nieuwe PDFArchitect wordt geïnstalleerd. Dit duurt even."
+
+msgid "Firefox integration"
+msgstr "Firefox-integratie"
+
+msgid "Internet Explorer integration"
+msgstr "Integratie met Internet Explorer"
+
+msgid "MS Outlook previewer integration"
+msgstr "MS Outlook voorbeeldintegratie"
+
+msgid "Windows Explorer integration"
+msgstr "Windows Verkenner-integratie"
+
+msgid "No thanks"
+msgstr "Nee, bedankt"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"Verwijder 'PDFCreator Server' voor je verdergaat met installeren. "
+"'PDFCreator' en 'PDFCreator Server' werken niet gelijktijdig op dezelfde "
+"machine."
+
+msgid "PDFCreator setup"
+msgstr "PDFCreator setup"
+
+msgid "Setup is being prepared..."
+msgstr "Setup maakt zich gereed..."
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"Er waren fouten bij de installatie. je vindt een uitgebreide beschrijving in "
+"'SetupLog.txt' in de installatiemap."
+
+msgid "Printer name"
+msgstr "Printernaam"
+
+msgid "Choosing a printer name."
+msgstr "Kies een printernaam."
+
+msgid "Please choose a name for the printer."
+msgstr "Kies een printernaam."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"PDFCreator installeert een 'printer' op je systeem waarmee elk programma dat "
+"kan afdrukken, PDF's, bitmap- of PostScript-bestanden kan maken.%n"
+"%nPrinternaam:"
+
+msgid "This process might take several minutes."
+msgstr "Dit proces vergt enkele minuten."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"Met PDFCreator maak je met gemak pdf's - gebruik het zoals een printer "
+"vanuit Word, Excel of elke andere Windowsapplicatie."
+
+msgid "application files"
+msgstr "toepassingsbestanden"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Toepassing '%1' is actief.%n%nSluit deze eerst af.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Herstart je systeem om door te gaan met installatie."
+
+msgid "PDFCreator settings"
+msgstr "PDFCreator instellingen"
+
+msgid "Show help after setup"
+msgstr "Toon hulp na installatie"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"Gebruik 'PDFCreator Terminal Server' voor  computers met  Terminal Services."
+"%n%nWil je meer weten over 'PDFCreator Terminal Server'?"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n"
+"%nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"Dit is een ontwikkelaarsversie van PDFCreator.%n%nHet is geen proefversie "
+"van de volgende release. Er zitten fouten in, of het start helemaal niet.%n"
+"%nInstalleer je deze versie toch, dan horen we graag je bevindingen."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr "Deze versie ondersteunt geen servers. Toch installeren?"
+
+msgid "Delete all application settings?"
+msgstr "Alle instellingen wissen?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Verwijder de printeraansturing volledig."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"Om te updaten, klik <OK>, of breek de installatie af en verwijder eerst de "
+"oudere versie."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "Maak een &ingang in het contextmenu van de verkenner"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Maak PDF en bitmap-bestanden met %1"
+
+msgid "Bad request (400)"
+msgstr "Ongeldige aanvraag (400)"
+
+msgid "Access denied (401)"
+msgstr "Toegang geweigerd (410)"
+
+msgid "File not found (404)"
+msgstr "Bestand niet gevonden (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Proxy authenticatie vereist (407)"
+
+msgid "Server internal error (500)"
+msgstr "Interne serverfout (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Ongeldige gateway (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Service tijdelijk onbereikbaar (503)"
+
+msgid "Cancelling download..."
+msgstr "Afbreken download..."
+
+msgid "Cannot connect"
+msgstr "Kan niet verbinden"
+
+msgid "Connecting..."
+msgstr "Verbinden..."
+
+msgid "Current file"
+msgstr "Huidig bestand"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Download cancelled"
+msgstr "Download afgebroken"
+
+msgid "Download complete"
+msgstr "Download ten einde"
+
+msgid "Download failed"
+msgstr "Download is misgegaan"
+
+msgid "Downloading..."
+msgstr "Downloaden..."
+
+msgid "Please click here to revoke your previous activations."
+msgstr "Klik hier om uw vorige activeringen te herroepen."
+
+msgid "Elapsed time:"
+msgstr "Verstreken tijd:"
+
+msgid "File:"
+msgstr "Bestand:"
+
+msgid "The following files were not downloaded:"
+msgstr "De volgende bestanden zijn niet opgehaald:"
+
+msgid "Downloading additional files"
+msgstr "Extra bestanden ophalen"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Wacht op download aanvullende bestanden..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Bestandsinformatie ophalen..."
+
+msgid "Hide"
+msgstr "Verbergen"
+
+msgid "HTTP error %d"
+msgstr "HTTP fout %d"
+
+msgid "Ignore"
+msgstr "Negeer"
+
+msgid "Initializing..."
+msgstr "Initialiseren..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Remaining time:"
+msgstr "Resterende tijd:"
+
+msgid "Retry"
+msgstr "Herhaal"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Controleer internetverbinding en klik 'Opnieuw' voor hernieuwde download of "
+"klik 'Afbreken' om te stoppen."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Controleer internetverbinding en klik 'Opnieuw' voor hernieuwde download of "
+"klik 'Doorgaan' om de installatie voort te zetten."
+
+msgid "Speed:"
+msgstr "Snelheid:"
+
+msgid "Starting download..."
+msgstr "Download begint..."
+
+msgid "Status:"
+msgstr "Status:"
 
 msgid "Total progress"
 msgstr "Totale voortgang"
@@ -547,5 +696,5 @@ msgstr "Onbekend"
 msgid "%.2f of %.2f"
 msgstr "%.2f van %.2f"
 
-msgid "Offline activation instructions"
-msgstr "Offline activeringsinstructies"
+msgid "Setup has finished installing [name] on your computer."
+msgstr "[name] is op je computer geïnstalleerd."

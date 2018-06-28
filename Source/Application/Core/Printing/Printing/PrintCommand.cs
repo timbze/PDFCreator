@@ -110,19 +110,21 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
             if (CommandType == PrintType.Print && Printer != printerHelper.GetDefaultPrinter())
                 throw new InvalidOperationException("The default printer needs to be set in order to print this file");
 
-            var p = ProcessWrapperFactory.BuildProcessWrapper(new ProcessStartInfo(Filename));
+            var p = ProcessWrapperFactory.BuildProcessWrapper(new ProcessStartInfo());
 
-            if (SupportsPrintTo())
-            {
-                Logger.Debug("Launch PrintTo for \"" + Filename + "\"");
-                p.StartInfo.Verb = "Printto";
-                p.StartInfo.Arguments = "\"" + Printer + "\"";
-            }
-            else
-            {
-                Logger.Debug("Launch Print for \"" + Filename + "\"");
-                p.StartInfo.Verb = "Print";
-            }
+            var verb = SupportsPrintTo()
+                ? "printto"
+                : "print";
+
+            var command = GetCommand(verb);
+            var arguments = SupportsPrintTo()
+                ? command.GetReplacedCommandArgs(Filename, Printer)
+                : command.GetReplacedCommandArgs(Filename);
+
+            p.StartInfo.FileName = command.Command;
+            p.StartInfo.Arguments = arguments;
+
+            Logger.Debug($"Launching {verb} for \"{Filename}\": {command.Command} {arguments}");
 
             try
             {
@@ -159,6 +161,11 @@ namespace pdfforge.PDFCreator.Core.Printing.Printing
         private bool SupportsPrintTo()
         {
             return _fileAssoc.HasPrintTo(Path.GetExtension(Filename));
+        }
+
+        private ShellCommand GetCommand(string verb)
+        {
+            return _fileAssoc.GetShellCommand(Path.GetExtension(Filename), verb);
         }
     }
 }

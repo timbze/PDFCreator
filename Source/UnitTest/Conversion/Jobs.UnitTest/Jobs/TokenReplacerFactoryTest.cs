@@ -74,17 +74,17 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
         private IEnvironment _environment;
         private Job _job;
 
-        [TestCase("ClientComputer", Result = "someComputer")]
-        [TestCase("Counter", Result = "3")]
-        [TestCase("JobId", Result = "14")]
-        [TestCase("PrinterName", Result = "SomePrinter")]
-        [TestCase("SessionId", Result = "121")]
-        [TestCase("PrintJobAuthor", Result = "someAuthor")]
-        [TestCase("PrintJobName", Result = "somePrintJobName")]
-        [TestCase("Username", Result = "someUser")]
-        [TestCase("ComputerName", Result = "someMachine")]
-        [TestCase("Author", Result = "someAuthor")]
-        [TestCase("Title", Result = "someTitle")]
+        [TestCase("ClientComputer", ExpectedResult = "someComputer")]
+        [TestCase("Counter", ExpectedResult = "3")]
+        [TestCase("JobId", ExpectedResult = "14")]
+        [TestCase("PrinterName", ExpectedResult = "SomePrinter")]
+        [TestCase("SessionId", ExpectedResult = "121")]
+        [TestCase("PrintJobAuthor", ExpectedResult = "someAuthor")]
+        [TestCase("PrintJobName", ExpectedResult = "somePrintJobName")]
+        [TestCase("Username", ExpectedResult = "someUser")]
+        [TestCase("ComputerName", ExpectedResult = "someMachine")]
+        [TestCase("Author", ExpectedResult = "someAuthor")]
+        [TestCase("Title", ExpectedResult = "someTitle")]
         public string BuildTokenReplacerFromJobInfo_ReturnsCorrectTokenValues(string tokenName)
         {
             var tokenReplacer = _tokenReplacerFactory.BuildTokenReplacerFromJobInfo(_jobInfo);
@@ -115,8 +115,8 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             Assert.Contains(tokenName, tokenList);
         }
 
-        [TestCase("NumberOfCopies", Result = "5")]
-        [TestCase("NumberOfPages", Result = "14")]
+        [TestCase("NumberOfCopies", ExpectedResult = "5")]
+        [TestCase("NumberOfPages", ExpectedResult = "14")]
         public string BuildTokenReplacerWithoutOutputfiles_ReturnsCorrectTokenValues(string tokenName)
         {
             var tokenreplacer = _tokenReplacerFactory.BuildTokenReplacerWithoutOutputfiles(_job);
@@ -124,8 +124,8 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Jobs
             return token.GetValue();
         }
 
-        [TestCase("OutputFilePath", Result = "fullPath")]
-        [TestCase("OutputFilenames", Result = "file, file")]
+        [TestCase("OutputFilePath", ExpectedResult = "fullPath")]
+        [TestCase("OutputFilenames", ExpectedResult = "file, file")]
         public string BuildTokenReplacerWithOutputfiles_ReturnsCorrectTokenValues(string tokenName)
         {
             var tokenreplacer = _tokenReplacerFactory.BuildTokenReplacerWithOutputfiles(_job);

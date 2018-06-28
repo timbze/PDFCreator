@@ -1,2 +1,4 @@
 ﻿DataStorage
-NUnit
+
+group test
+    NUnit

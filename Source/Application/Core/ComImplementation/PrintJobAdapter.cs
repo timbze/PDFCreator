@@ -179,7 +179,6 @@ namespace pdfforge.PDFCreator.Core.ComImplementation
         private void DisableIrrelevantProfileSettings(ConversionProfile profile)
         {
             profile.AutoSave.Enabled = false;
-            profile.SaveDialog.SetDirectory = false;
         }
 
         /// <summary>

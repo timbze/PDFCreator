@@ -5,6 +5,7 @@ using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.Query;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
+using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Core.Workflow.Queries;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using SystemWrapper.IO;
@@ -54,9 +55,9 @@ namespace Presentation.UnitTest.UserControls
         public void ShowSaveFileDialog_SetValuesFromUserInput_SetFilepathAndOutputFormatInJob()
         {
             var pathSafe = new PathWrapSafe();
-            var vm = BuildCommand();
+            var skipPrintDialogCommand = BuildCommand();
             var job = BuildJob(_pdfProfile);
-            vm.Execute(job);
+            skipPrintDialogCommand.Execute(job);
 
             var result = _saveFileQuery
                 .GetFileName(pathSafe.GetDirectoryName(job.OutputFilenameTemplate),
@@ -70,13 +71,13 @@ namespace Presentation.UnitTest.UserControls
         public void ShowSaveFileDialog_SetValuesFromUserInput_FilepathAndOutputFormatHasChanged()
         {
             var pathSafe = new PathWrapSafe();
-            var vm = BuildCommand();
+            var skipPrintDialogCommand = BuildCommand();
             var job = BuildJob(_pdfProfile);
 
             var diffFilenameTemplate = job.OutputFilenameTemplate;
             var diffOutputFormat = job.Profile.OutputFormat;
 
-            vm.Execute(job);
+            skipPrintDialogCommand.Execute(job);
 
             _saveFileQuery
                 .GetFileName(pathSafe.GetDirectoryName(job.OutputFilenameTemplate),
@@ -84,6 +85,19 @@ namespace Presentation.UnitTest.UserControls
 
             Assert.AreNotEqual(job.OutputFilenameTemplate, diffFilenameTemplate);
             Assert.AreNotEqual(job.Profile.OutputFormat, diffOutputFormat);
+        }
+
+        [Test]
+        public void ShowSaveFileDialog_UserCancels_ThrowAbortWorkflowException()
+        {
+            var skipPrintDialogCommand = BuildCommand();
+            var job = BuildJob(_pdfProfile);
+
+            var userCanceledResult = new QueryResult<OutputFilenameResult> { Success = false };
+
+            _saveFileQuery.GetFileName(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<OutputFormat>()).Returns(userCanceledResult);
+
+            Assert.Throws<AbortWorkflowException>(() => skipPrintDialogCommand.Execute(job));
         }
     }
 }

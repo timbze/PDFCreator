@@ -72,7 +72,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.General
             }
         });
 
-        public string NewUpdateMessage => Translation.GetNewUpdateMessage(_updateAssistant.OnlineVersion.Version.ToString(2));
+        public string NewUpdateMessage => Translation.GetNewUpdateMessage(_updateAssistant.OnlineVersion.Version.ToString(3));
 
         private void UpdateLater()
         {

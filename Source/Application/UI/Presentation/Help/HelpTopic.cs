@@ -17,6 +17,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Help
 
         [HelpTopic("pdfcreator/pdfcreator-settings/accounts")] Accounts,
 
+        [HelpTopic("pdfcreator/pdfcreator-settings/home")] Home,
+
         // Application settings
         [HelpTopic("pdfcreator/pdfcreator-settings/application-settings/general")] AppGeneral,
 
@@ -77,6 +79,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.Help
         [HelpTopic("pdfcreator/using-pdfcreator/index")] ConvertDocuments,
 
         [HelpTopic("pdfcreator/using-pdfcreator/tokens")] Tokens,
+
+        [HelpTopic("pdfcreator/using-pdfcreator/quick-action")] QuickAction,
 
         //Faq
         [HelpTopic("pdfcreator/frequently-asked-questions/pdf-tools")] PdfTools,

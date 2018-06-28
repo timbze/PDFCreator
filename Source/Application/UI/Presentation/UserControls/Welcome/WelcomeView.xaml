@@ -6,57 +6,25 @@
              xmlns:converter="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Converter"
              xmlns:designTime="clr-namespace:pdfforge.PDFCreator.UI.Presentation.DesignTime"
              xmlns:properties="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Properties"
+             xmlns:userControls="clr-namespace:pdfforge.PDFCreator.UI.Presentation.UserControls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:help="clr-namespace:pdfforge.PDFCreator.UI.Presentation.Help"
              mc:Ignorable="d"
              Height="250"
              Width="500"
+             help:HelpProvider.HelpTopic="WhatsNew"
              d:DataContext="{d:DesignInstance designTime:DesignTimeWelcomeViewModel, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary Source="../../Styles/BrandLogos.xaml" />
     </UserControl.Resources>
     <Grid>
-        <Grid.Resources>
-            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Collapsed"
-                                                 FalseValue="Visible" />
-            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="Cursor" Value="{x:Static Cursors.Hand}" />
-                <Setter Property="Foreground" Value="#06c" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Padding" Value="1" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Foreground" Value="#ADADAD" />
-                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" Orientation="Horizontal">
-            <ContentControl IsTabStop="False" Content="{DynamicResource PDFCreatorLogo}" Height="100" Margin="0 0 10 0" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <ContentControl IsTabStop="False" Focusable="False" Content="{DynamicResource PDFCreatorLogo}" Height="100" Margin="0 0 10 0" />
             <StackPanel Margin="5,0,0,0">
                 <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" MaxWidth="350"
                            TextWrapping="Wrap" Text="{Binding Translation.WelcomeTextHeadlineText}">
@@ -67,16 +35,19 @@
             </StackPanel>
         </StackPanel>
 
-        <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Columns="2">
+        <UniformGrid Grid.Row="1" Columns="3">
             <UniformGrid.Background>
                 <SolidColorBrush Opacity="0.05" Color="Black" />
             </UniformGrid.Background>
-            <Button Style="{StaticResource NoChromeButton}" Content="{Binding Translation.WhatsNewButtonContent}" Command="{Binding WhatsNewCommand}"></Button>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Style="{StaticResource NoChromeButton}" Command="{Binding FacebookCommand}" Margin="10 0"
-                        Visibility="{Binding Path=HideSocialMediaButtons, Converter={StaticResource BoolToVisibilityConverter}}" Content="{StaticResource FacebookLogo}" MaxHeight="32" />
-                <Button Style="{StaticResource NoChromeButton}" Command="{Binding GooglePlusCommand}"  Margin="10 0"
-                        Visibility="{Binding Path=HideSocialMediaButtons, Converter={StaticResource BoolToVisibilityConverter}}" Content="{StaticResource GooglePlusLogo}" MaxHeight="32" />
+            <Button Content="{Binding Translation.WhatsNewButtonContent}" Command="{Binding WhatsNewCommand}" Style="{DynamicResource NoChromeButton}" />
+            <Button Content="{Binding Translation.Blog}" Command="{Binding BlogCommand}" Style="{DynamicResource NoChromeButton}" />
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <SolidColorBrush x:Key="NoChromeButton.Deactive.Foreground" Color="Black" />
+                    <system:Double x:Key="NoChromeButton.Deactive.Opacity">0.4</system:Double>
+                </StackPanel.Resources>
+                <Button Style="{DynamicResource NoChromeButton}" Content="{Binding Translation.PrioritySupport}" IsEnabled="{Binding AllowPrioritySupport}" Command="{Binding PrioritySupportCommand}" />
+                <userControls:PlusFeatureControl Edition="AllLicensed" />
             </StackPanel>
         </UniformGrid>
     </Grid>

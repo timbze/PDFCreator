@@ -14,17 +14,23 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         private string _newInfFile;
 
         protected NewDirectConversionJobStart(IJobInfoQueue jobInfoQueue,
-            IMaybePipedApplicationStarter maybePipedApplicationStarter, IJobInfoManager jobInfoManager)
+            IMaybePipedApplicationStarter maybePipedApplicationStarter, IJobInfoManager jobInfoManager, IDirectConversion directConversion)
             : base(maybePipedApplicationStarter)
         {
             _jobInfoQueue = jobInfoQueue;
             _jobInfoManager = jobInfoManager;
+            DirectConversion = directConversion;
         }
 
-        protected abstract DirectConversionBase DirectConversionBase { get; }
+        private IDirectConversion DirectConversion { get; }
 
         public string NewDirectConversionFile { get; internal set; }
+
         public string PrinterName { get; internal set; }
+
+        public string OutputFileParameter { get; set; }
+
+        public string ProfileParameter { get; set; }
 
         private string NewInfFile
         {
@@ -33,7 +39,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
                 if (!string.IsNullOrEmpty(_newInfFile))
                     return _newInfFile;
 
-                _newInfFile = DirectConversionBase.TransformToInfFile(NewDirectConversionFile, PrinterName);
+                _newInfFile = DirectConversion.TransformToInfFile(NewDirectConversionFile, PrinterName, ProfileParameter, OutputFileParameter);
 
                 if (string.IsNullOrEmpty(_newInfFile))
                     _newInfFile = "";

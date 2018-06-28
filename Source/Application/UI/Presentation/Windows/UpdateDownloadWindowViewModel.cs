@@ -1,6 +1,7 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Conversion.Jobs.FolderProvider;
 using pdfforge.PDFCreator.UI.Interactions;
+using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.Utilities;
@@ -21,17 +22,19 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
         private readonly IFile _file;
         private readonly IPathSafe _pathSafe = new PathWrapSafe();
         private readonly ITempFolderProvider _tempFolderProvider;
+        private readonly IReadableFileSizeFormatter _readableFileSizeFormatter;
         private string _downloadLocation;
         private DownloadSpeed _downloadSpeed;
         private DateTime _lastUpdate;
         private WebClient _webClient;
 
-        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider, ITranslationUpdater translationUpdater)
+        public UpdateDownloadWindowViewModel(IDirectory directory, IFile file, ITempFolderProvider tempFolderProvider, ITranslationUpdater translationUpdater, IReadableFileSizeFormatter readableFileSizeFormatter)
             : base(translationUpdater)
         {
             _directory = directory;
             _file = file;
             _tempFolderProvider = tempFolderProvider;
+            _readableFileSizeFormatter = readableFileSizeFormatter;
             _dispatcher = Dispatcher.CurrentDispatcher;
 
             CancelCommand = new DelegateCommand(ExecuteCancel);
@@ -96,19 +99,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             FinishInteraction();
         }
 
-        private string GetReadableSpeed(double speed)
-        {
-            string[] sizes = { "B", "KB", "MB", "GB" };
-            var order = 0;
-            while (speed >= 1024 && order + 1 < sizes.Length)
-            {
-                order++;
-                speed = speed / 1024;
-            }
-
-            return $"{speed:0.00} {sizes[order]}";
-        }
-
         private void WebClientOnDownloadProgressChanged(object sender,
             DownloadProgressChangedEventArgs downloadProgressChangedEventArgs)
         {
@@ -127,7 +117,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             RaisePropertyChanged(nameof(ProgressPercentage));
 
             DownloadSpeedText = string.Format("{0}/s - {1:0} s",
-                GetReadableSpeed(_downloadSpeed.BytesPerSecond),
+                _readableFileSizeFormatter.GetFileSizeString(_downloadSpeed.BytesPerSecond),
                 _downloadSpeed.EstimatedRemainingDuration.TotalSeconds);
 
             if (progressPercentage == 100)

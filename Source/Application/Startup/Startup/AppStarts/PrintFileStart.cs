@@ -39,7 +39,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
                 return ExitCode.PrintFileDoesNotExist;
             }
 
-            _settingsManager.LoadPdfCreatorSettings();
+            _settingsManager.LoadAllSettings();
 
             _printFileHelper.PdfCreatorPrinter = GetValidPrinterName();
 

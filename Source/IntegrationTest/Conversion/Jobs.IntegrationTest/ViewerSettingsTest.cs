@@ -165,8 +165,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         {
             _th.Profile.PdfSettings.PageView = pageView;
 
-            var pdfReader = RunJobAndLoadFileToPdfReader();
-            DoPageViewAndDocumentViewSettingsTest(pdfReader);
+            using (var pdfReader = RunJobAndLoadFileToPdfReader())
+            {
+                DoPageViewAndDocumentViewSettingsTest(pdfReader);
+            }
         }
 
         [TestCase(DocumentView.ContentGroupPanel)]
@@ -179,30 +181,33 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
         {
             _th.Profile.PdfSettings.DocumentView = documentView;
 
-            var pdfReader = RunJobAndLoadFileToPdfReader();
-            DoPageViewAndDocumentViewSettingsTest(pdfReader);
+            using (var pdfReader = RunJobAndLoadFileToPdfReader())
+            {
+                DoPageViewAndDocumentViewSettingsTest(pdfReader);
+            }
         }
 
-        [TestCase(0, Result = 1)]
-        [TestCase(1, Result = 1)]
-        [TestCase(2, Result = 2)]
-        [TestCase(3, Result = 3)]
-        [TestCase(4, Result = 3)]
+        [TestCase(0, ExpectedResult = 1)]
+        [TestCase(1, ExpectedResult = 1)]
+        [TestCase(2, ExpectedResult = 2)]
+        [TestCase(3, ExpectedResult = 3)]
+        [TestCase(4, ExpectedResult = 3)]
         public int ViewerStartsOnPageTest(int startPage)
         {
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
 
-            var pdfreader = RunJobAndLoadFileToPdfReader();
-
-            return GetOpenPage(pdfreader);
+            using (var pdfreader = RunJobAndLoadFileToPdfReader())
+            {
+                return GetOpenPage(pdfreader);
+            }
         }
 
-        [TestCase(0, Result = 1)]
-        [TestCase(1, Result = 1)]
-        [TestCase(2, Result = 2)]
-        [TestCase(3, Result = 3)]
-        [TestCase(4, Result = 4)]
-        [TestCase(5, Result = 4)]
+        [TestCase(0, ExpectedResult = 1)]
+        [TestCase(1, ExpectedResult = 1)]
+        [TestCase(2, ExpectedResult = 2)]
+        [TestCase(3, ExpectedResult = 3)]
+        [TestCase(4, ExpectedResult = 4)]
+        [TestCase(5, ExpectedResult = 4)]
         public int ViewerStartsOnPageTest_withCoverPage(int startPage)
         {
             _th.Profile.CoverPage.Enabled = true;
@@ -211,15 +216,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
 
-            var pdfreader = RunJobAndLoadFileToPdfReader();
-
-            return GetOpenPage(pdfreader);
+            using (var pdfreader = RunJobAndLoadFileToPdfReader())
+            {
+                return GetOpenPage(pdfreader);
+            }
         }
 
-        [TestCase(0, Result = 1)]
-        [TestCase(1, Result = 1)]
-        [TestCase(4, Result = 4)]
-        [TestCase(5, Result = 4)]
+        [TestCase(0, ExpectedResult = 1)]
+        [TestCase(1, ExpectedResult = 1)]
+        [TestCase(4, ExpectedResult = 4)]
+        [TestCase(5, ExpectedResult = 4)]
         public int ViewerStartsOnPageTest_withAttachmentPage(int startPage)
         {
             _th.Profile.AttachmentPage.Enabled = true;
@@ -228,15 +234,16 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
 
-            var pdfreader = RunJobAndLoadFileToPdfReader();
-
-            return GetOpenPage(pdfreader);
+            using (var pdfreader = RunJobAndLoadFileToPdfReader())
+            {
+                return GetOpenPage(pdfreader);
+            }
         }
 
-        [TestCase(0, Result = 1)]
-        [TestCase(1, Result = 1)]
-        [TestCase(5, Result = 5)]
-        [TestCase(6, Result = 5)]
+        [TestCase(0, ExpectedResult = 1)]
+        [TestCase(1, ExpectedResult = 1)]
+        [TestCase(5, ExpectedResult = 5)]
+        [TestCase(6, ExpectedResult = 5)]
         public int ViewerStartsOnPageTest_withCoverAndAttachmentPage(int startPage)
         {
             _th.Profile.CoverPage.Enabled = true;
@@ -249,9 +256,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs
 
             _th.Profile.PdfSettings.ViewerStartsOnPage = startPage;
 
-            var pdfreader = RunJobAndLoadFileToPdfReader();
-
-            return GetOpenPage(pdfreader);
+            using (var pdfreader = RunJobAndLoadFileToPdfReader())
+            {
+                return GetOpenPage(pdfreader);
+            }
         }
 
         private static int GetOpenPage(PdfReader pdfreader)

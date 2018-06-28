@@ -8,5 +8,6 @@ namespace pdfforge.PDFCreator.UI.Presentation
         public string Profiles { get; private set; } = "Profiles";
         public string Printer { get; private set; } = "Printer";
         public string Accounts { get; private set; } = "Accounts";
+        public string UpdateToolTip { get; private set; } = "A new Update is available";
     }
 }

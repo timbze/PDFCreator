@@ -4,9 +4,12 @@ using pdfforge.Obsidian;
 using pdfforge.Obsidian.Interaction.DialogInteractions;
 using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Printing.Printer;
+using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Home;
+using pdfforge.PDFCreator.UnitTest.UnitTestHelper;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,8 +26,11 @@ namespace Presentation.UnitTest
             var printerHelper = Substitute.For<IPrinterHelper>();
             printerHelper.GetApplicablePDFCreatorPrinter(Arg.Any<string>()).Returns("Some Default Printer");
             var settingsProvider = Substitute.For<ISettingsProvider>();
+            var jobHistoryManager = Substitute.For<IJobHistoryManager>();
+            var commandLocator = Substitute.For<ICommandLocator>();
 
-            HomeViewModel = new HomeViewModel(_interactionInvoker, _fileConversionHandler, new DesignTimeTranslationUpdater(), printerHelper, settingsProvider);
+            HomeViewModel = new HomeViewModel(_interactionInvoker, _fileConversionHandler, new DesignTimeTranslationUpdater(), printerHelper,
+                settingsProvider, jobHistoryManager, new InvokeImmediatelyDispatcher(), commandLocator);
         }
 
         private IInteractionInvoker _interactionInvoker;

@@ -3,11 +3,9 @@ using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.Core.Services.Macros;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
-using pdfforge.PDFCreator.UI.Presentation.Controls;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
-using pdfforge.PDFCreator.Utilities.Tokens;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -24,18 +22,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.FTP
         public IMacroCommand EditAccountCommand { get; }
         public IMacroCommand AddAccountCommand { get; }
 
-        public TokenViewModel DirectoryTokenViewModel { get; set; }
+        public TokenViewModel<ConversionProfile> DirectoryTokenViewModel { get; set; }
 
-        private readonly TokenReplacer _tokenReplacer;
-
-        public FtpActionViewModel(TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator)
+        public FtpActionViewModel(TokenHelper tokenHelper, ITranslationUpdater translationUpdater, ICurrentSettingsProvider currentSettingsProvider, ICommandLocator commandLocator, ITokenViewModelFactory tokenViewModelFactory)
             : base(translationUpdater, currentSettingsProvider)
         {
-            if (tokenHelper != null)
-            {
-                _tokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
-                DirectoryTokenViewModel = new TokenViewModel(x => CurrentProfile.Ftp.Directory = x, () => CurrentProfile?.Ftp.Directory, _tokenReplacer.GetTokenNames(true), ReplaceTokens);
-            }
+            // TODO update on translation change!
+            DirectoryTokenViewModel = tokenViewModelFactory
+                .BuilderWithSelectedProfile()
+                .WithSelector(p => p.Ftp.Directory)
+                .WithDefaultTokenReplacerPreview(th => th.GetTokenListWithFormatting())
+                .Build();
 
             if (currentSettingsProvider?.Settings != null)
             {
@@ -44,13 +41,15 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.FTP
                 FtpAccountsView.SortDescriptions.Add(new SortDescription(nameof(FtpAccount.AccountInfo), ListSortDirection.Ascending));
             }
 
-            AddAccountCommand = commandLocator.GetMacroCommand()
+            AddAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<FtpAccountAddCommand>()
-                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()));
+                .AddCommand(new DelegateCommand(o => SelectNewAccountInView()))
+                .Build();
 
-            EditAccountCommand = commandLocator.GetMacroCommand()
+            EditAccountCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<FtpAccountEditCommand>()
-                .AddCommand(new DelegateCommand(o => RefreshAccountsView()));
+                .AddCommand(new DelegateCommand(o => RefreshAccountsView()))
+                .Build();
         }
 
         private void SelectNewAccountInView()
@@ -62,14 +61,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.FTP
         private void RefreshAccountsView()
         {
             FtpAccountsView.Refresh();
-        }
-
-        private string ReplaceTokens(string s)
-        {
-            if (s == null)
-                return string.Empty;
-
-            return _tokenReplacer.ReplaceTokens(s);
         }
     }
 }

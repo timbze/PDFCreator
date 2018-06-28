@@ -28,10 +28,13 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         private static readonly object LockObject = new object();
 
         protected abstract IDirectory Directory { get; }
+        protected abstract IDirectoryHelper DirectoryHelper { get; }
         protected abstract IFile File { get; }
-        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        protected readonly Logger _logger = LogManager.GetCurrentClassLogger();
         protected abstract IPathUtil PathUtil { get; }
         private string _outfilebody;
+
+        protected abstract QueryResult<string> HandleInvalidRootedPath(string filename, OutputFormat outputFormat);
 
         protected abstract QueryResult<string> HandleFirstFileFailed(string filename, OutputFormat outputFormat);
 
@@ -48,10 +51,24 @@ namespace pdfforge.PDFCreator.Core.Workflow.Output
         {
             _logger.Trace("Moving output files to final location");
 
-            //Ensure the the first file is the first in TempOutputFiles
-            job.TempOutputFiles = job.TempOutputFiles.OrderBy(x => x).ToList();
+            if (!PathUtil.IsValidRootedPath(job.OutputFilenameTemplate))
+            {
+                var result = HandleInvalidRootedPath(job.OutputFilenameTemplate, job.Profile.OutputFormat);
+                if (result.Success == false)
+                {
+                    throw new AbortWorkflowException("User cancelled retyping invalid rooted path.");
+                }
+                job.OutputFilenameTemplate = result.Data;
+            }
 
             _outfilebody = DetermineOutfileBody(job.OutputFilenameTemplate);
+
+            var outputDirectory = PathUtil.GetLongDirectoryName(job.OutputFilenameTemplate);
+
+            DirectoryHelper.CreateDirectory(outputDirectory);
+
+            //Ensure the the first file is the first in TempOutputFiles
+            job.TempOutputFiles = job.TempOutputFiles.OrderBy(x => x).ToList();
 
             int fileNumber = 0;
             foreach (var tempOutputFile in job.TempOutputFiles)

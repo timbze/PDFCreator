@@ -13,7 +13,7 @@ using System;
 namespace pdfforge.PDFCreator.Conversion.Settings
 {
 	/// <summary>
-	/// Opens the default E-mail client with the converted document as attachment
+	/// Opens the default e-mail client with the converted document as attachment
 	/// </summary>
 	[ImplementPropertyChanged]
 	public partial class EmailClientSettings : INotifyPropertyChanged {
@@ -28,7 +28,7 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public bool AddSignature { get; set; } = true;
 		
 		/// <summary>
-		/// Body text of the E-mail
+		/// Body text of the e-mail
 		/// </summary>
 		public string Content { get; set; } = "";
 		
@@ -38,17 +38,27 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 		public bool Enabled { get; set; } = false;
 		
 		/// <summary>
-		/// Use html for E-mail body
+		/// Use html for e-mail body
 		/// </summary>
 		public bool Html { get; set; } = false;
 		
 		/// <summary>
-		/// The list of receipients of the E-mail, i.e. info@someone.com; me@mywebsite.org
+		/// The list of receipients of the e-mail, i.e. info@someone.com; me@mywebsite.org
 		/// </summary>
 		public string Recipients { get; set; } = "";
 		
 		/// <summary>
-		/// Subject line of the E-mail
+		/// The list of receipients of the e-mail in the 'BCC' field, i.e. info@someone.com; me@mywebsite.org
+		/// </summary>
+		public string RecipientsBcc { get; set; } = "";
+		
+		/// <summary>
+		/// The list of receipients of the e-mail in the 'CC' field, i.e. info@someone.com; me@mywebsite.org
+		/// </summary>
+		public string RecipientsCc { get; set; } = "";
+		
+		/// <summary>
+		/// Subject line of the e-mail
 		/// </summary>
 		public string Subject { get; set; } = "";
 		
@@ -60,6 +70,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			try { Enabled = bool.Parse(data.GetValue(@"" + path + @"Enabled")); } catch { Enabled = false;}
 			try { Html = bool.Parse(data.GetValue(@"" + path + @"Html")); } catch { Html = false;}
 			try { Recipients = Data.UnescapeString(data.GetValue(@"" + path + @"Recipients")); } catch { Recipients = "";}
+			try { RecipientsBcc = Data.UnescapeString(data.GetValue(@"" + path + @"RecipientsBcc")); } catch { RecipientsBcc = "";}
+			try { RecipientsCc = Data.UnescapeString(data.GetValue(@"" + path + @"RecipientsCc")); } catch { RecipientsCc = "";}
 			try { Subject = Data.UnescapeString(data.GetValue(@"" + path + @"Subject")); } catch { Subject = "";}
 		}
 		
@@ -70,6 +82,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			data.SetValue(@"" + path + @"Enabled", Enabled.ToString());
 			data.SetValue(@"" + path + @"Html", Html.ToString());
 			data.SetValue(@"" + path + @"Recipients", Data.EscapeString(Recipients));
+			data.SetValue(@"" + path + @"RecipientsBcc", Data.EscapeString(RecipientsBcc));
+			data.SetValue(@"" + path + @"RecipientsCc", Data.EscapeString(RecipientsCc));
 			data.SetValue(@"" + path + @"Subject", Data.EscapeString(Subject));
 		}
 		
@@ -82,6 +96,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			copy.Enabled = Enabled;
 			copy.Html = Html;
 			copy.Recipients = Recipients;
+			copy.RecipientsBcc = RecipientsBcc;
+			copy.RecipientsCc = RecipientsCc;
 			copy.Subject = Subject;
 			
 			return copy;
@@ -97,6 +113,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			if (!Enabled.Equals(v.Enabled)) return false;
 			if (!Html.Equals(v.Html)) return false;
 			if (!Recipients.Equals(v.Recipients)) return false;
+			if (!RecipientsBcc.Equals(v.RecipientsBcc)) return false;
+			if (!RecipientsCc.Equals(v.RecipientsCc)) return false;
 			if (!Subject.Equals(v.Subject)) return false;
 			
 			return true;
@@ -111,6 +129,8 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			sb.AppendLine("Enabled=" + Enabled.ToString());
 			sb.AppendLine("Html=" + Html.ToString());
 			sb.AppendLine("Recipients=" + Recipients.ToString());
+			sb.AppendLine("RecipientsBcc=" + RecipientsBcc.ToString());
+			sb.AppendLine("RecipientsCc=" + RecipientsCc.ToString());
 			sb.AppendLine("Subject=" + Subject.ToString());
 			
 			return sb.ToString();
@@ -121,11 +141,6 @@ namespace pdfforge.PDFCreator.Conversion.Settings
 			// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
 			return base.GetHashCode();
 		}
-		
-// Custom Code starts here
-// START_CUSTOM_SECTION:GENERAL
-// END_CUSTOM_SECTION:GENERAL
-// Custom Code ends here. Do not edit below
 		
 	}
 }

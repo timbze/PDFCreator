@@ -1,7 +1,9 @@
-﻿NSubstitute
-NUnit
-RhinoMocks
-SystemInterface
+﻿SystemInterface
 LicenseValidator.Interface
 DataStorage
 NGettext
+
+group test
+    NSubstitute
+    NUnit
+    RhinoMocks

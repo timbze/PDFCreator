@@ -2,12 +2,14 @@
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Core.Communication;
 using pdfforge.PDFCreator.Core.Services;
+using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.StartupInterface;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.Utilities.Threading;
 using System;
+using System.Threading.Tasks;
 
 namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 {
@@ -27,18 +29,23 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         private readonly IPipeServerManager _pipeServerManager;
         private readonly ISettingsManager _settingsManager;
         private readonly ISpooledJobFinder _spooledJobFinder;
+        private readonly INotificationService _notificationService;
+        private readonly IJobHistoryManager _jobHistoryManager;
         private readonly IThreadManager _threadManager;
         private readonly IUpdateAssistant _updateAssistant;
 
         public MaybePipedApplicationStarter(ISettingsManager settingsManager, IUpdateAssistant updateAssistant,
             ICheckAllStartupConditions startupConditions, IThreadManager threadManager,
             IPipeServerManager pipeServerManager, IJobInfoQueueManager jobInfoQueueManager, IJobInfoQueue jobInfoQueue,
-            IStaticPropertiesHack staticPropertiesHack, IPdfCreatorCleanUp cleanUp, ISpooledJobFinder spooledJobFinder)
+            IStaticPropertiesHack staticPropertiesHack, IPdfCreatorCleanUp cleanUp, ISpooledJobFinder spooledJobFinder,
+            INotificationService notificationService, IJobHistoryManager jobHistoryManager)
         {
             StartupConditions = startupConditions;
             _jobInfoQueue = jobInfoQueue;
             _cleanUp = cleanUp;
             _spooledJobFinder = spooledJobFinder;
+            _notificationService = notificationService;
+            _jobHistoryManager = jobHistoryManager;
             _settingsManager = settingsManager;
             _updateAssistant = updateAssistant;
             _threadManager = threadManager;
@@ -55,6 +62,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
         public bool SendMessageOrStartApplication(Func<string> composePipeMessage, Func<bool> startApplication, bool startManagePrintJobs)
         {
             _settingsManager.LoadAllSettings();
+            Task.Run(() => _jobHistoryManager.Load());
 
             var pipeMessage = composePipeMessage();
 
@@ -100,6 +108,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
             _threadManager.Shutdown();
 
             _settingsManager.SaveCurrentSettings();
+            _jobHistoryManager.Save();
 
             _pipeServerManager.Shutdown();
         }
@@ -132,7 +141,7 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
 
                 _logger.Debug("Reloading settings");
                 // Settings may have changed as this may have not been the only instance till now
-                _settingsManager.LoadPdfCreatorSettings();
+                _settingsManager.LoadAllSettings();
 
                 if (startManagePrintJobs)
                     _jobInfoQueueManager.ManagePrintJobs();

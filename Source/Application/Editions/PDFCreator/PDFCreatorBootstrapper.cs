@@ -12,6 +12,7 @@ using pdfforge.PDFCreator.Editions.EditionBase;
 using pdfforge.PDFCreator.UI.Presentation;
 using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.Assistants.Update;
+using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.Customization;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Misc;
@@ -54,6 +55,8 @@ namespace pdfforge.PDFCreator.Editions.PDFCreator
         {
             container.Register<ILicenseChecker, UnlicensedLicenseChecker>();
             container.Register<IOfflineActivator, UnlicensedOfflineActivator>();
+
+            container.Register<PrioritySupportUrlOpenCommand, DisabledPrioritySupportUrlOpenCommand>();
         }
 
         protected override void RegisterUserTokenExtractor(Container container)
@@ -96,6 +99,11 @@ namespace pdfforge.PDFCreator.Editions.PDFCreator
         public override void RegisterEditiondependentRegions(IRegionManager regionManager)
         {
             regionManager.RegisterViewWithRegion(RegionNames.StatusBarPlusHintRegion, typeof(PlusHintControl));
+        }
+
+        public override void RegisterNotificationService(Container container)
+        {
+            container.RegisterSingleton<INotificationService, DisabledNotificationService>();
         }
     }
 }

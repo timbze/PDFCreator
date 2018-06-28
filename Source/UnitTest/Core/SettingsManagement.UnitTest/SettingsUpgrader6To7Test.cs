@@ -136,7 +136,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 
             var settings = CreateSettings(data);
             Assert.IsNotEmpty(settings.ApplicationSettings.Accounts.TimeServerAccounts);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotNull(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
 
             var storedAccount = settings.ApplicationSettings.Accounts.TimeServerAccounts.First(a => a.Url == account.Url);
             AssertTimeServersAreEqual(account, storedAccount);
@@ -164,8 +165,11 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
             var settings = CreateSettings(data);
             var expectedNumberofProfiles = NumDefaultServers + 1;
             Assert.AreEqual(expectedNumberofProfiles, settings.ApplicationSettings.Accounts.TimeServerAccounts.Count);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotNull(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+
+            Assert.IsNotNull(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
         }
 
         [Test]
@@ -198,8 +202,11 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
             var settings = CreateSettings(data);
             var expectedNumberofProfiles = NumDefaultServers + 2;
             Assert.AreEqual(expectedNumberofProfiles, settings.ApplicationSettings.Accounts.TimeServerAccounts.Count);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotNull(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[0].PdfSettings.Signature.TimeServerAccountId);
+
+            Assert.IsNotNull(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[1].PdfSettings.Signature.TimeServerAccountId);
 
             AssertTimeServersAreEqual(firstAccount, settings.ApplicationSettings.Accounts.TimeServerAccounts.First(a => a.Url == firstAccount.Url));
             AssertTimeServersAreEqual(secondAccount, settings.ApplicationSettings.Accounts.TimeServerAccounts.First(a => a.Url == secondAccount.Url));
@@ -239,7 +246,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 
             var settings = CreateSettings(data);
             Assert.IsNotEmpty(settings.ApplicationSettings.Accounts.FtpAccounts);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[0].Ftp.AccountId);
+            Assert.IsNotNull(settings.ConversionProfiles[0].Ftp.AccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[0].Ftp.AccountId);
             AssertFtpAccountsAreEqual(account, settings.ApplicationSettings.Accounts.FtpAccounts[0]);
         }
 
@@ -285,7 +293,8 @@ namespace pdfforge.PDFCreator.UnitTest.Core.SettingsManagement
 
             var settings = CreateSettings(data);
             Assert.IsNotEmpty(settings.ApplicationSettings.Accounts.SmtpAccounts);
-            Assert.IsNotNullOrEmpty(settings.ConversionProfiles[0].EmailSmtpSettings.AccountId);
+            Assert.IsNotNull(settings.ConversionProfiles[0].EmailSmtpSettings.AccountId);
+            Assert.IsNotEmpty(settings.ConversionProfiles[0].EmailSmtpSettings.AccountId);
             AssertSmtpAccountsAreEqual(account, settings.ApplicationSettings.Accounts.SmtpAccounts[0]);
         }
 

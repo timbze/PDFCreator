@@ -23,7 +23,18 @@ namespace PDFCreator.TestUtilities
 
         public ConversionWorkflow BuildWorkflow()
         {
-            return new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _targetFileNameComposer, _outputFileMover);
+            return new AutoSaveWorkflow(_jobDataUpdater, _jobRunner, _profileChecker, _targetFileNameComposer, _outputFileMover, new TestNotificationService());
+        }
+    }
+
+    internal class TestNotificationService : INotificationService
+    {
+        public void ShowInfoNotification(string documentName)
+        {
+        }
+
+        public void ShowErrorNotification(string documentName)
+        {
         }
     }
 }

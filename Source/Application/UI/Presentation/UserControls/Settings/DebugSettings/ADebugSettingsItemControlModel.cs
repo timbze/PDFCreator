@@ -28,7 +28,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Settings.DebugSetting
         protected void ApplySettingsProcedure(PdfCreatorSettings settings)
         {
             SettingsManager.ApplyAndSaveSettings(settings);
-            SettingsManager.LoadPdfCreatorSettings(); //Load settings to ensure default profile
+            SettingsManager.LoadAllSettings(); //Load settings to ensure default profile
             SettingsManager.SaveCurrentSettings(); //Save settings again to synch registry with current settings
             SettingsLoaded?.Invoke(this, new SettingsEventArgs(SettingsProvider.Settings));
             SettingsProvider.Reset();

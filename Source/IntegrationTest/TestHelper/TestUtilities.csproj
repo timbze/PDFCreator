@@ -44,9 +44,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\PdfTools.LibPdf\lib\libpdfNET.dll</HintPath>
     </Reference>
-    <Reference Include="NSubstitute">
-      <HintPath>..\..\..\packages\NSubstitute\lib\net40\NSubstitute.dll</HintPath>
-    </Reference>
     <Reference Include="PdfValidatorNET">
       <HintPath>..\..\..\packages\PdfTools.PdfAValidator\lib\PdfValidatorNET.dll</HintPath>
     </Reference>
@@ -57,6 +54,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Translatable, Version=0.2.1.0, Culture=neutral, PublicKeyToken=b8f79a42dd8d813f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Translatable\lib\net40\Translatable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundPageTester.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="IntegrationTestBootstrapper.cs" />
     <Compile Include="PaketGhostscriptDiscovery.cs" />
     <Compile Include="ParameterHelper.cs" />
-    <Compile Include="PdfReaderHelper.cs" />
     <Compile Include="PDFValidation.cs" />
     <Compile Include="PdfVersionTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -263,30 +263,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <ItemGroup>
-        <Reference Include="nunit.framework">
-          <HintPath>..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
         <Reference Include="Obsidian">
           <HintPath>..\..\..\packages\Obsidian\lib\Obsidian.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <ItemGroup>
-        <Reference Include="Rhino.Mocks">
-          <HintPath>..\..\..\packages\RhinoMocks\lib\net\Rhino.Mocks.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -320,6 +298,17 @@
       <ItemGroup>
         <Reference Include="SystemWrapper">
           <HintPath>..\..\..\packages\SystemWrapper\lib\SystemWrapper.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <ItemGroup>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\..\packages\test\NUnit\lib\net45\nunit.framework.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

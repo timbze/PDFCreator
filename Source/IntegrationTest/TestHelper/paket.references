@@ -1,8 +1,9 @@
 iTextSharp
 NLog
-NUnit
-RhinoMocks
 SystemWrapper
 SystemInterface
 SimpleInjector
 Obsidian
+
+group test
+	NUnit

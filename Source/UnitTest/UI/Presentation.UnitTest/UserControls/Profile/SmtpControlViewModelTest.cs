@@ -7,7 +7,7 @@ using pdfforge.PDFCreator.UI.Presentation.Assistants;
 using pdfforge.PDFCreator.UI.Presentation.Commands;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime;
 using pdfforge.PDFCreator.UI.Presentation.DesignTime.Helper;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailSmtp;
@@ -55,8 +55,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             currentSettingsProvider.Settings.Returns(settings);
 
             var commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator.GetMacroCommand().Returns(x => new MacroCommand(commandLocator));
+            commandLocator.CreateMacroCommand().Returns(x => new MacroCommandBuilder(commandLocator));
 
             _addCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<SmtpAccountAddCommand>().Returns(_addCommand);
@@ -66,7 +65,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             _tokenHelper = new TokenHelper(new DesignTimeTranslationUpdater());
             _tokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
-            _viewModel = new SmtpActionViewModel(_interactionRequest, _smtpTest, translationUpdater, currentSettingsProvider, commandLocator, _tokenHelper);
+            _viewModel = new SmtpActionViewModel(_interactionRequest, _smtpTest, translationUpdater, currentSettingsProvider, commandLocator, new TokenViewModelFactory(currentSettingsProvider, new TokenHelper(new DesignTimeTranslationUpdater())));
         }
 
         [Test]

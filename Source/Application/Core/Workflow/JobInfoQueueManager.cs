@@ -1,6 +1,7 @@
 ﻿using NLog;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
+using pdfforge.PDFCreator.Core.Services.JobHistory;
 using pdfforge.PDFCreator.Core.SettingsManagement;
 using pdfforge.PDFCreator.Core.Workflow.Exceptions;
 using pdfforge.PDFCreator.Utilities.Threading;
@@ -23,6 +24,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly IJobBuilder _jobBuilder;
         private readonly ISettingsProvider _settingsProvider;
+        private readonly IJobHistoryManager _jobHistoryManager;
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IManagePrintJobExceptionHandler _managePrintJobExceptionHandler;
@@ -32,7 +34,8 @@ namespace pdfforge.PDFCreator.Core.Workflow
         private bool _managePrintJobs;
         private ISynchronizedThread _processingThread;
 
-        public JobInfoQueueManager(IManagePrintJobExceptionHandler managePrintJobExceptionHandler, IThreadManager threadManager, IWorkflowFactory workflowFactory, IJobInfoQueue jobInfoQueue, IJobBuilder jobBuilder, ISettingsProvider settingsProvider)
+        public JobInfoQueueManager(IManagePrintJobExceptionHandler managePrintJobExceptionHandler, IThreadManager threadManager, IWorkflowFactory workflowFactory,
+                                   IJobInfoQueue jobInfoQueue, IJobBuilder jobBuilder, ISettingsProvider settingsProvider, IJobHistoryManager jobHistoryManager)
         {
             _managePrintJobExceptionHandler = managePrintJobExceptionHandler;
             _threadManager = threadManager;
@@ -40,6 +43,7 @@ namespace pdfforge.PDFCreator.Core.Workflow
             _jobInfoQueue = jobInfoQueue;
             _jobBuilder = jobBuilder;
             _settingsProvider = settingsProvider;
+            _jobHistoryManager = jobHistoryManager;
 
             _jobInfoQueue.OnNewJobInfo += JobInfoQueue_OnNewJobInfo;
         }
@@ -167,6 +171,10 @@ namespace pdfforge.PDFCreator.Core.Workflow
                     _logger.Error("The job '{0}' terminated at step {1} and did not end successfully.",
                         job.JobInfo.Metadata.Title, workflowResult);
                 }
+            }
+            else
+            {
+                _jobHistoryManager.Add(job);
             }
         }
 

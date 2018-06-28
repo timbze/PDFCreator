@@ -30,10 +30,6 @@
             <Button Width="150" Padding="5" Margin="0 10" Command="{Binding OpenUserGuideCommand}">
                 <TextBlock Text="{Binding Translation.UserGuideButtonText}" TextWrapping="Wrap" />
             </Button>
-
-            <Label Margin="0 0 0 10">
-                <TextBlock Text="{Binding Translation.OnlyForBusinessText}"  TextWrapping="Wrap" />
-            </Label>
         </StackPanel>
     </HeaderedContentControl>
 </UserControl>

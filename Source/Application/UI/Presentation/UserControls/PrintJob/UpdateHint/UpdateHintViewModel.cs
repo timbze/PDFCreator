@@ -6,7 +6,6 @@ using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.UI.Presentation.Windows;
 using pdfforge.PDFCreator.UI.Presentation.Workflow;
-using pdfforge.PDFCreator.Utilities;
 using pdfforge.PDFCreator.Utilities.Process;
 using Prism.Events;
 using System;
@@ -23,13 +22,13 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.PrintJob.UpdateHint
         public string AvailabeVersionText { get; }
 
         public UpdateHintViewModel(IUpdateAssistant updateAssistant, IProcessStarter processStarter,
-            ITranslationUpdater translationUpdater, IEventAggregator eventAggregator, IVersionHelper versionHelper) : base(translationUpdater)
+            ITranslationUpdater translationUpdater, IEventAggregator eventAggregator) : base(translationUpdater)
         {
             _updateAssistant = updateAssistant;
             _processStarter = processStarter;
             _eventAggregator = eventAggregator;
             WhatsNewUrl = Urls.PDFCreatorWhatsNewUrl;
-            AvailabeVersionText = Translation.GetNewUpdateMessage(updateAssistant.OnlineVersion.Version.ToString(2));
+            AvailabeVersionText = Translation.GetNewUpdateMessage(updateAssistant.OnlineVersion.Version.ToString(3));
         }
 
         public ICommand InstallUpdateCommand => new DelegateCommand(o => InstallUpdate());

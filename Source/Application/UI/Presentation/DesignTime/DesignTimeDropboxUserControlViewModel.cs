@@ -7,7 +7,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.DesignTime
     public class DesignTimeDropboxUserControlViewModel : DropboxUserControlViewModel
     {
         public DesignTimeDropboxUserControlViewModel()
-            : base(null, new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator())
+            : base(new DesignTimeTranslationUpdater(), new DesignTimeCurrentSettingsProvider(), new DesignTimeCommandLocator(), new DesignTimeTokenViewModelFactory())
         {
         }
     }

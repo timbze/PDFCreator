@@ -50,61 +50,75 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts
 
             ConflateAllAccounts(_currentSettingsProvider.Settings);
 
-            FtpAccountAddCommand = commandLocator.GetMacroCommand()
+            FtpAccountAddCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<FtpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            FtpAccountRemoveCommand = commandLocator.GetMacroCommand()
+            FtpAccountRemoveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<FtpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            FtpAccountEditCommand = commandLocator.GetMacroCommand()
+            FtpAccountEditCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<FtpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            SmtpAccountAddCommand = commandLocator.GetMacroCommand()
+            SmtpAccountAddCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<SmtpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            SmtpAccountRemoveCommand = commandLocator.GetMacroCommand()
+            SmtpAccountRemoveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<SmtpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            SmtpAccountEditCommand = commandLocator.GetMacroCommand()
+            SmtpAccountEditCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<SmtpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            HttpAccountAddCommand = commandLocator.GetMacroCommand()
+            HttpAccountAddCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<HttpAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            HttpAccountRemoveCommand = commandLocator.GetMacroCommand()
+            HttpAccountRemoveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<HttpAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            HttpAccountEditCommand = commandLocator.GetMacroCommand()
+            HttpAccountEditCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<HttpAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            DropboxAccountAddCommand = commandLocator.GetMacroCommand()
+            DropboxAccountAddCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<DropboxAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            DropboxAccountRemoveCommand = commandLocator.GetMacroCommand()
+            DropboxAccountRemoveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<DropboxAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            TimeServerAccountAddCommand = commandLocator.GetMacroCommand()
+            TimeServerAccountAddCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<TimeServerAccountAddCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            TimeServerAccountRemoveCommand = commandLocator.GetMacroCommand()
+            TimeServerAccountRemoveCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<TimeServerAccountRemoveCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
-            TimeServerAccountEditCommand = commandLocator.GetMacroCommand()
+            TimeServerAccountEditCommand = commandLocator.CreateMacroCommand()
                 .AddCommand<TimeServerAccountEditCommand>()
-                .AddCommand<SaveApplicationSettingsChangesCommand>();
+                .AddCommand<SaveApplicationSettingsChangesCommand>()
+                .Build();
 
             if (_currentSettingsProvider != null)
                 _currentSettingsProvider.SelectedProfileChanged += CurrentSettingsProviderOnSelectedProfileChanged;

@@ -14,7 +14,7 @@ namespace PDFCreator.TestUtilities
             CheckPDFVersion(job.OutputFiles[0], job.Profile, job.Passwords, pdfProcessor);
         }
 
-        public static void CheckPDFVersion(string testFile, ConversionProfile profile, JobPasswords passwords, IPdfProcessor pdfProcessor)
+        private static void CheckPDFVersion(string testFile, ConversionProfile profile, JobPasswords passwords, IPdfProcessor pdfProcessor)
         {
             PdfReader pdfReader;
             if (profile.PdfSettings.Security.Enabled)
@@ -29,9 +29,10 @@ namespace PDFCreator.TestUtilities
                 pdfReader = new PdfReader(testFile);
             }
 
-            CheckPDFVersion(pdfReader, profile, pdfProcessor);
-
-            pdfReader.Close();
+            using (pdfReader)
+            {
+                CheckPDFVersion(pdfReader, profile, pdfProcessor);
+            }
         }
 
         public static void CheckPDFVersion(PdfReader pdfReader, ConversionProfile profile, IPdfProcessor pdfProcessor)

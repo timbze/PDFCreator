@@ -1,11 +1,12 @@
 ﻿using pdfforge.Obsidian;
-using pdfforge.Obsidian.Interaction;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Jobs.JobInfo;
+using pdfforge.PDFCreator.Core.Controller;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
+using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,21 +17,23 @@ using System.Windows.Input;
 
 namespace pdfforge.PDFCreator.UI.Presentation.Windows
 {
-    public class ManagePrintJobsViewModel : InteractionAwareViewModelBase<ManagePrintJobsInteraction>
+    public class ManagePrintJobsViewModel : OverlayViewModelBase<ManagePrintJobsInteraction, ManagePrintJobsWindowTranslation>
     {
         private readonly DragAndDropEventHandler _dragAndDrop;
         private readonly IJobInfoManager _jobInfoManager;
         private readonly IDispatcher _dispatcher;
+        private readonly ApplicationNameProvider _applicationNameProvider;
         private readonly IJobInfoQueue _jobInfoQueue;
         private readonly ObservableCollection<JobInfo> _jobInfos;
-        private ManagePrintJobsWindowTranslation _translation;
 
-        public ManagePrintJobsViewModel(IJobInfoQueue jobInfoQueue, DragAndDropEventHandler dragAndDrop, IJobInfoManager jobInfoManager, IDispatcher dispatcher, ITranslationUpdater translationUpdater)
+        public ManagePrintJobsViewModel(IJobInfoQueue jobInfoQueue, DragAndDropEventHandler dragAndDrop, IJobInfoManager jobInfoManager, IDispatcher dispatcher, ITranslationUpdater translationUpdater, ApplicationNameProvider applicationNameProvider)
+            : base(translationUpdater)
         {
             _jobInfoQueue = jobInfoQueue;
             _dragAndDrop = dragAndDrop;
             _jobInfoManager = jobInfoManager;
             _dispatcher = dispatcher;
+            _applicationNameProvider = applicationNameProvider;
             _jobInfoQueue.OnNewJobInfo += OnNewJobInfo;
 
             ListSelectionChangedCommand = new DelegateCommand(ListSelectionChanged);
@@ -47,20 +50,12 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             _jobInfos = synchronizedJobs.ObservableCollection;
             JobInfos = new CollectionView(_jobInfos);
             JobListSelectionChanged = new DelegateCommand(ListItemChange);
-
-            translationUpdater.RegisterAndSetTranslation(tf => Translation = tf.UpdateOrCreateTranslation(Translation));
         }
 
         private void ListItemChange(object obj)
         {
             RaiseRefreshView();
             RaisePropertyChanged(nameof(SelectedPrintJob));
-        }
-
-        public ManagePrintJobsWindowTranslation Translation
-        {
-            get { return _translation; }
-            set { _translation = value; RaisePropertyChanged(nameof(Translation)); }
         }
 
         public JobInfo SelectedPrintJob
@@ -149,6 +144,9 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             var jobInfo = o as JobInfo;
             var position = JobInfos.CurrentPosition;
 
+            if (jobInfo == null)
+                return;
+
             _jobInfos.Remove(jobInfo);
             _jobInfoQueue.Remove(jobInfo, true);
 
@@ -203,83 +201,6 @@ namespace pdfforge.PDFCreator.UI.Presentation.Windows
             return _jobInfos.Count > 1;
         }
 
-        private void ExecuteMoveUp(object o)
-        {
-            if (!CanExecuteMoveUp(o))
-                throw new InvalidOperationException();
-
-            var jobs = o as IEnumerable<object>;
-
-            if (jobs == null)
-                return;
-
-            var job = (JobInfo)jobs.First();
-
-            MoveJob(job, -1);
-            RaiseRefreshView();
-        }
-
-        private bool CanExecuteMoveUp(object o)
-        {
-            var selectedJobs = (o as IEnumerable<object>)?.ToList();
-            if (selectedJobs == null)
-            {
-                return false;
-            }
-
-            if (selectedJobs.Count != 1)
-            {
-                return false;
-            }
-
-            var indexOfSelectedElement = _jobInfos.IndexOf((JobInfo)selectedJobs.First());
-            // if indexofselected element is not on the bottom of list we can move up (meaning it is not first element in list)
-            return indexOfSelectedElement > 0;
-        }
-
-        private void ExecuteMoveDown(object o)
-        {
-            if (!CanExecuteMoveDown(o))
-                throw new InvalidOperationException();
-
-            var jobs = o as IEnumerable<object>;
-
-            if (jobs == null)
-                return;
-
-            var job = (JobInfo)jobs.First();
-
-            MoveJob(job, +1);
-            RaiseRefreshView();
-        }
-
-        private bool CanExecuteMoveDown(object o)
-        {
-            var selectedJobs = (o as IEnumerable<object>)?.ToList();
-            if (selectedJobs == null)
-            {
-                return false;
-            }
-
-            if (selectedJobs.Count != 1)
-            {
-                return false;
-            }
-
-            var indexOfSelectedElement = _jobInfos.IndexOf((JobInfo)selectedJobs.First());
-            // if indexofselected element is not on the bottom of list we can move up
-            return indexOfSelectedElement < _jobInfos.Count - 1;
-        }
-
-        private void MoveJob(JobInfo jobInfo, int positionDifference)
-        {
-            var oldIndex = _jobInfos.IndexOf(jobInfo);
-            var newIndex = oldIndex + positionDifference;
-            _jobInfos.Move(oldIndex, newIndex);
-
-            JobInfos.MoveCurrentTo(jobInfo);
-        }
-
-        public override string Title => Translation.Title;
+        public override string Title => _applicationNameProvider.ApplicationName;
     }
 }

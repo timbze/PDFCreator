@@ -119,7 +119,7 @@ namespace pdfforge.PDFCreator.Core.Services.Translation
             {
                 var data = Data.CreateDataStorage();
                 var iniStorage = new IniStorage();
-                iniStorage.SetData(data);
+                iniStorage.Data = data;
                 iniStorage.ReadData(stream, clear: true);
                 return data;
             }

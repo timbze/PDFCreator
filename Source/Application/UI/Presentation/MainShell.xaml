@@ -77,7 +77,9 @@
                     <Style BasedOn="{StaticResource NavButtonStyleText}" TargetType="{x:Type Button}" />
                 </DockPanel.Resources>
 
-                <Button Content="{Binding Translation.Home, Converter={StaticResource UpperCaseConverter}}"
+                <Button Name="HomeButton"
+                        Content="{Binding Translation.Home, Converter={StaticResource UpperCaseConverter}}"
+                        help:HelpProvider.HelpTopic="Home"
                         BorderBrush="{ Binding ActivePath,
                                         Converter={StaticResource StringToActiveColorConverter},
                                         ConverterParameter={x:Static constants:MainRegionViewNames.HomeView}}"
@@ -134,13 +136,15 @@
                         BorderBrush="{ Binding ActivePath,
                                         Converter={StaticResource StringToActiveColorConverter},
                                         ConverterParameter={x:Static constants:MainRegionViewNames.SettingsView}}"
-                        CommandParameter="{x:Static constants:MainRegionViewNames.SettingsView}">
+                        CommandParameter="{x:Static constants:MainRegionViewNames.SettingsView}"
+                        help:HelpProvider.HelpTopic="AppSettings">
                     <StackPanel>
                         <controls:Badged BadgePlacementMode="TopRight"
                                          Visibility="{Binding ShowUpdate,
                                          Converter={StaticResource BoolToVisibilityConverter}}"
                                          Badge="!"
-                                         BadgeBackground="{DynamicResource WarningYellowBrush}" />
+                                         BadgeBackground="{DynamicResource WarningYellowBrush}"
+                                         ToolTip="{Binding Translation.UpdateToolTip}" />
 
                         <ContentControl Content="{StaticResource ApplicationSettings}"
                                         Height="25"

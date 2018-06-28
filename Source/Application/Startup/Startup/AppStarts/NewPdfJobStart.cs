@@ -9,11 +9,8 @@ namespace pdfforge.PDFCreator.Core.Startup.AppStarts
     {
         public NewPdfJobStart(IJobInfoQueue jobInfoQueue, ISpoolerProvider spoolerProvider,
             IMaybePipedApplicationStarter maybePipedApplicationStarter, IJobInfoManager jobInfoManager, PdfDirectConversion directConversion)
-            : base(jobInfoQueue, maybePipedApplicationStarter, jobInfoManager)
+            : base(jobInfoQueue, maybePipedApplicationStarter, jobInfoManager, directConversion)
         {
-            DirectConversionBase = directConversion;
         }
-
-        protected override DirectConversionBase DirectConversionBase { get; }
     }
 }

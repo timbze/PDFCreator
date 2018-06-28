@@ -1,17 +1,12 @@
-msgid "Setup has finished installing [name] on your computer."
-msgstr "A telepítő végzett a [name] telepítésével."
-
-msgid "Edit & Insert"
-msgstr "Szerkesztés és beszúrás"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: Hungarian (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 10:38+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Hungarian <http://translate.pdfforge.org/projects/pdfcreator/innosetup/hu/>\n"
+"Language-Team: Hungarian <http://translate.pdfforge.org/projects/pdfcreator/"
+"innosetup/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,526 +14,695 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "Review"
-msgstr "Áttekintés"
-
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
 msgstr ""
+"Ez az alkalmazás már telepítve van.%n%nÚjbóli telepítéshez előbb távolítsa "
+"el a programot.%n%nA telepítő most kilép."
 
-msgid "Secure & Sign"
-msgstr "Védelem és aláírás"
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"A PDFCreator már telepítve van. A telepített %1 változatot el kell "
+"távolítani a PDFCreator %2.%n% telepítése előtt. Kívánja most a PDFCreator "
+"frissítését? A program beállításai és a nyomtatók változatlanul maradnak."
+
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Ez az alkalmazás már telepítve van.%n%nFrissítés nem lehetséges. Kérjük, "
+"előbb távolítsa el az alkalmazást.%n%nA telepítő leáll."
 
 msgid "The setup will be canceled."
 msgstr "A telepítő kilép."
 
-msgid "Forms"
-msgstr "Űrlapok"
-
-msgid "The following applications have to be closed to proceed with the uninstallation:"
-msgstr "A telepítés folytatásához a következő alkalmazásokat be kell zárni:"
-
-msgid "Try out the new PDF Architect"
-msgstr "Próbálja ki az új PDF Architect-et"
-
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "A letöltött fájl hibás volt, így töröltük. A telepítő most leáll!"
-
-msgid "A shortcut has been added to your desktop."
-msgstr "A parancsikont elhelyeztük az Ön asztalára."
-
-msgid "Donate to PDFCreator"
-msgstr "Adomány nyújtása a PDFCreator-nak."
-
-msgid "Install PDF Architect with great free features"
-msgstr ""
-
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "Hiba történt a Microsoft .NET Framework %1 telepítése során. (Hibakód: %2)%n%nKívánja megtekinteni a :NET telepítési naplófájlt?"
-
-msgid "Rotate, move and delete pages"
-msgstr ""
-
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "A PDFCreator telepítője elvégezte a .NET Framework 4.0 telepítését. Ez a lépés újraindítást igényel. Kérjük, indítsa újra a rendszert, majd futtassa újból a telepítőt.%n%nA telepítő most kilép."
-
-msgid "Merge multiple PDFs"
-msgstr ""
-
-msgid "PDFCreator download"
-msgstr "PDFCreator letöltése"
-
-msgid "Free features:"
-msgstr ""
-
-msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
-msgstr "Újabb verzió (%1) érhető el a pdfforge szerverein!%n%nSzeretné letölteni és telepíteni ezt a verziót?"
-
-msgid "Enhance PDFCreator with edit features!"
-msgstr ""
-
-msgid "Set installation directory and additional options"
-msgstr "Telepítési könyvtár és egyéb opciók megadása"
-
-#, fuzzy
-msgid "New in PDF Architect {0}:"
-msgstr "Próbálja ki az új PDF Architect-et"
-
-msgid "Please choose a printer name."
-msgstr "Kérjük adjon nevet a nyomtatónak."
-
-msgid "Automatic E-Sign workflows"
-msgstr ""
-
-msgid "There already exists a printer with this name. Please choose another name."
-msgstr "Ezen a néven már létezik nyotmató. Kérjük, válasszon másik nevet."
-
-msgid "Verify and remove signatures"
-msgstr ""
-
-msgid "For &all users"
-msgstr "Mindenkinek"
-
-msgid "Already installed"
-msgstr "Már telepítve van"
-
-msgid "Full installation"
-msgstr "Teljes telepítés"
-
-msgid "Automatic updates"
-msgstr "Automatikus frissítések"
-
-msgid "Install printer"
-msgstr "Nyomtató telepítése"
-
-msgid "Default application for PDF files"
-msgstr "Alapértelmezett alkalmazás PDF fájlokhoz"
-
-msgid "Install printer driver"
-msgstr "Illesztőprogram telepítése"
-
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "Az új PDFArchitect telepítésre kerül. Ez egy kis időt igénybe vehet."
-
-msgid "Install printer port"
-msgstr "Nyomtató port telepítése"
-
-msgid "Firefox integration"
-msgstr "Firefox integráció"
-
-msgid "Languages"
-msgstr "Nyelvek"
-
-msgid "Internet Explorer integration"
-msgstr "Internet Explorer integráció"
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "Ez az aktiváció túl régi. Kérjük, újítsa meg."
-
-msgid "MS Outlook previewer integration"
-msgstr "Microsoft Outlook betekintő integráció"
-
-msgid "Invalid answer from license server!"
-msgstr "Érvénytelen válasz a licensz kiszolgálótól."
-
-msgid "Windows Explorer integration"
-msgstr "Windows Intéző integráció"
-
-msgid "No answer from license server!"
-msgstr "Licensz kiszolgáló nem válaszol!"
-
-msgid "No thanks"
-msgstr ""
-
-msgid "Wrong answer from license server!"
-msgstr "Érvénytelen válasz a licensz kiszolgálótól!"
-
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
-msgstr ""
-
-msgid "License server answer not valid for this computer!"
-msgstr "A licensz kiszolgáló válasza nem érvényes erre a számítógépre!"
-
-msgid "PDFCreator setup"
-msgstr "PDFCreator telepítő"
-
-msgid "License key validation"
-msgstr "Licenszkulcs érvényesítése"
-
-msgid "Setup is being prepared..."
-msgstr "A telepítő előkészül..."
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "Adjon megérvényes licenszkulcsot a telepítés folytatásához"
-
-msgid "Printer"
-msgstr "Nyomtató"
-
-msgid "Invalid license answer hash!"
-msgstr ""
-
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "A nyomtató telepítése közben hibák léptek fel. A részletes leírást megtalálja a program könyvtárában, a 'SetupLog.txt'-ben."
-
-msgid "License key"
-msgstr ""
-
-msgid "Printer name"
-msgstr "Nyomtató név"
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "A licensz kulcs formátuma: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Choosing a printer name."
-msgstr "Nyomtató név megadása:"
-
-msgid "Message"
-msgstr "Üzenet"
-
-msgid "Please choose a name for the printer."
-msgstr "Kérjük válasszon nevet a nyomtatónak."
-
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "Nem adott meg licensz kulcsot. Licensz kulcs mindenképp szükségeltetik a '/VerySilent' illetve '/Silent' kapcsolókhoz. Kérjük, használja a '/%1' kapcsolót.%n%nPélda: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "A PDFCreator egy nyomtatót telepít az Ön számítógépére. Erre a nyomtatóre minden olyan alkalmazásból tud nyomtatni, amely PDF-et, képet vagy PostScript állományt tud létrehozni.%n%nA nyomtató neve:"
-
-msgid "Offline license check"
-msgstr "Offline licensz ellenőrzés"
-
-msgid "This process might take several minutes."
-msgstr "A folyamat pár percet igénybe vehet."
-
-msgid "The machine or the user is blocked!"
-msgstr ""
-
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr ""
-
-msgid "An invalid license key is provided!"
-msgstr ""
-
-msgid "application files"
-msgstr "Programfájlok"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "A %1 alkalmazás jelenleg is fut.%n%nKérjük, előbb zárja be az alkalmazást.%n%n"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr ""
-
-msgid "Please restart your system first to continue setup."
-msgstr "Kérjük, indítsa újra a számítógépet a telepítés folytatásához."
-
-msgid "License agreement"
-msgstr ""
-
-msgid "PDFCreator settings"
-msgstr "PDFCreator beállítások"
-
-msgid "PDFCreator log file"
-msgstr "PDFCreator naplófájl"
-
-msgid "Show help after setup"
-msgstr "Súgó megjelenítése a telepítés után."
-
-msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr "Ön nem tagja a Rendszergazdák csoportnak.%n%n%nPDF állományok létrehozásához a PDFCreator PostScript illesztőprogramot használ, minden program esetén.%nRendszergazdai csoporttagság szükséges nyomtató illesztőprogram telepítéséhez.%n%nHa folytatja a telepítést, csak meglévő PostScript állományok átalakítására lesz lehetősége.%n%nFolytatja a telepítést?%n"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr ""
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "Régebbi verzió '%1' van telepítve. %n%nNem lehetséges a frissítés erről a verzióról erre a verzióra: '%2'Kérlek uninstalláld először a programot."
-
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "Ez egy előzetes PDFCreator verzió.%n%nEz nem egy korai verzió a következő kiadásból. Valószínűleg sok hibát fog tartalmazni, vagy egyáltalán nem is fog működni.%n%nHa mégis van merszed kipróbálni, szívesen vesszük a visszajelzéseidet."
-
-msgid "Other tasks:"
-msgstr "Egyéb teendők:"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "Ez a verzió nem támogatja a szerver üzemmódot. Mindenképp szeretné telepíteni ezt a verziót?"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "A javítás egy régebbi verzióhoz készült. Nem telepíthető."
-
-msgid "Delete all application settings?"
-msgstr "Minden beállítást töröl?"
-
-msgid "Edit pages"
-msgstr "Lapok szerkesztése"
-
-msgid "Uninstall the printer with all its components."
-msgstr "Nyomtató törlése minden komponenssel együtt."
-
-msgid "Split and merge"
-msgstr "Darabolás és összefűzés"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "A frissítéshez kattintson az <OK> gombra, vagy lépjen ki a telepítőből és előbb távolítsa el a régebbi verziót."
-
-msgid "Create"
-msgstr "Létrehozás"
-
-msgid "Create an &entry in the Windows Explorer context menu"
-msgstr "&entry menüpont létrehozása a Windows Intéző helyi menüjében."
-
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Ez az alkalmazás már telepítve van.%n%nÚjbóli telepítéshez előbb távolítsa el a programot.%n%nA telepítő most kilép."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "PDF és bittérképes fájlok létrehozása %1-val"
-
 msgid "Do you want to cancel the setup?"
 msgstr "Biztos megszakítja a telepítőt?"
 
-msgid "Bad request (400)"
-msgstr "Hibás kérés (400)"
-
-msgid "Custom installation"
-msgstr "Egyedi telepítés"
-
-msgid "Access denied (401)"
-msgstr "Hozzáférés megtagadva (401)"
-
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "A PDFCreator-nak szüksége van a Microsoft .NET %1 szoftvercsomagra. Kérjük, töltse le és telepítse a Microsoft .NET  %1-t, majd futtassa újra a PDFCreator telepítőjét."
-
-msgid "File not found (404)"
-msgstr "A fájl nem található (404)"
-
-msgid "Download the latest version..."
-msgstr "Legfrissebb verzió letöltése"
-
-msgid "Proxy authentication required (407)"
-msgstr "Proxy hitelesítés szükséges (407)"
-
-#, fuzzy
-msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "A következő szimbólumok nem használhatók a nyomtató nevében: '!', '', ','. Kérjük, válasszon másik nevet."
-
-msgid "Server internal error (500)"
-msgstr "Kiszolgáló hiba (500)"
-
-msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "A 'PATH' rendszerváltozóban hibát észleltünk.%n%n->Hiányzó, vagy hibás bejegyzés: %Systemroot%\\System32\\wbem%n%nEz a hiba javításra szorul, mielőtt a telepítés folytatódna.%n%nKérjük, kattintson az OK-ra, a hiba kijavításához. Ez után a rendszert újra kell indítani.%n%nHa mégsem szeretné, kattintson a Mégse gombra."
-
-msgid "Bad gateway (502)"
-msgstr "Helytelen átjáró (502)"
-
-msgid "Help"
-msgstr "Segítség"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "A szolgáltatás átmenetileg nem elérhető (503)"
-
-msgid "Install printer monitor"
-msgstr "Nyomtatófigyelő telepítése"
-
-msgid "Cancelling download..."
-msgstr "Letöltés megszakítása..."
-
-msgid "Please wait. Checking license key..."
-msgstr "Kérlek várj. Licensz kulcs ellenőrzése..."
-
-msgid "Cannot connect"
-msgstr "Nem lehet kapcsolódni"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "Ehhez a verzióhoz nem érvényes a licence kulcsa. Kérjük, újítsa meg a licence-ét %1."
-
-msgid "Connecting..."
-msgstr "Kapcsolódás..."
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "A számítógépen a rendszeridő helytelennek tűnik. Kérjük, ellenőrizze a rendszeridőt."
-
-msgid "Current file"
-msgstr "Aktuális fájl"
-
-msgid "Enter the valid license key"
-msgstr "Érvényes licenszkulcs megadása"
-
-msgid "Details"
-msgstr "Részletek"
-
-msgid "Invalid license key!"
-msgstr "Érvénytelen licenszkulcs!"
-
-msgid "Download cancelled"
-msgstr "Letöltés megszakítva"
-
-msgid "Licensee"
-msgstr "Licensz tulajdonosa"
-
-msgid "Download complete"
-msgstr "Letöltés kész"
-
-msgid "Offline activation string:"
-msgstr "Offline aktiválási karakterlánc:"
-
-msgid "Download failed"
-msgstr "Letöltés sikertelen."
-
-msgid "The authorization is failed!"
-msgstr ""
-
-msgid "Downloading..."
-msgstr "Letöltés..."
-
-msgid "The product %1 does not exist!"
-msgstr ""
-
-msgid "Please click here to revoke your previous activations."
-msgstr ""
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr ""
-
-msgid "Elapsed time:"
-msgstr "Eltelt idő:"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Ehhez nem kell a Rendszergazda csoport tagjának lenni.%n%n"
-
-msgid "File:"
-msgstr "Fájl:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "A program nincs telepítve. Nem használhatja ezt a javítást."
-
-msgid "The following files were not downloaded:"
-msgstr "A következő fájlok nem lettek letöltve:"
-
-msgid "Edit texts and fonts"
-msgstr "Szöveg szerkesztése, betűtípus megváltoztatása"
-
-msgid "Downloading additional files"
-msgstr "További fájlok letöltése"
-
-msgid "Convert"
-msgstr "Konvertálás"
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "Kérjük várjon, amíg a telepítő letölti a további fájlokat..."
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr "A telepítés folytatásához a következő alkalmazásokat be kell zárni:"
 
 msgid "Compact installation"
 msgstr "Minimális telepítés"
 
-msgid "GB"
-msgstr "GB"
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr "A letöltött fájl hibás volt, így töröltük. A telepítő most leáll!"
 
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "A letöltött állomány ellenőrzése nem sikerült. Mégis szeretné elindítani a telepítést?"
+msgid "Custom installation"
+msgstr "Egyedi telepítés"
 
-msgid "Getting file information..."
-msgstr "Fájlinformációk betöltése..."
+msgid "Donate to PDFCreator"
+msgstr "A PDFCreator támogatása adománnyal"
 
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "A válaszotott nyomtató név túl hosszú. A név legfeljebb 221 karakter hosszúságú lehet. Kérjük, válasszon új nevet."
-
-msgid "Hide"
-msgstr "Elrejt"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Nyomtatófigyelő, nyomtató port, illesztőprogramok és nyomtató telepítése"
-
-msgid "HTTP error %d"
-msgstr "HTTP hiba %d"
-
-msgid "Empty answer from license server!"
-msgstr "Üres válasz a licensz kiszolgálótól."
-
-msgid "Ignore"
-msgstr "Elvetés"
-
-msgid "The license is not valid for the given product!"
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
 msgstr ""
+"Microsoft .NET Framework %1 telepítése. Ez néhány percet igényve vehet. "
+"Kérjük, várjon."
 
-msgid "Initializing..."
-msgstr "Inicializálás..."
-
-msgid "Please enter the license key."
-msgstr "Kérjük, adja meg a licenszkulcsot."
-
-msgid "KB"
-msgstr "KB"
-
-msgid "License server answer:"
-msgstr "Licensz kiszolgáló válasza:"
-
-msgid "KB/s"
-msgstr "KB/sec"
-
-msgid "Please contact the support at support@pdfforge.org!"
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
 msgstr ""
+"Hiba történt a Microsoft .NET Framework %1 telepítése során. (Hibakód: %2)%n"
+"%nKívánja megtekinteni a :NET telepítési naplófájlt?"
 
-msgid "MB"
-msgstr "MB"
-
-msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "Régebbi verzió '%1' van telepítve. %n%nLehetséges a frissítés erről a verzióról erre a verzióra: '%2'.%n%n"
-
-msgid "MB/s"
-msgstr "MB/sec"
-
-msgid "PDF to Word"
-msgstr "PDF átalakítása Word-be"
-
-msgid "Remaining time:"
-msgstr "Hátralévő idő:"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
-msgstr "Microsoft .NET Framework %1 telepítése. Ez néhány percet igényve vehet. Kérjük, várjon."
-
-msgid "Retry"
-msgstr "Újra"
-
-msgid "For the &current user only"
-msgstr "&current user részére"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Ellenőrizze a kapcsolatot és kattintson az \"Ismét\" gombra a fájlok ismételt letöltéséhez, vagy kattintson a \"Mégse\" gombra a telepítő megszakításához."
-
-msgid "An unknown error is occurred!"
-msgstr "Ismeretlen hiba történt!"
-
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "Ellenőrizze a kapcsolatot és kattintson az \"Ismét\" gombra a fájlok ismételt letöltéséhez, vagy kattintson a \"Következő\" gombra a telepítés folytatásához."
-
-msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install "
+"Microsoft .Net %1 and then rerun the PDFCreator setup."
 msgstr ""
+"A PDFCreator-nak szüksége van a Microsoft .NET %1 szoftvercsomagra. Kérjük, "
+"töltse le és telepítse a Microsoft .NET  %1-t, majd futtassa újra a "
+"PDFCreator telepítőjét."
 
-msgid "Speed:"
-msgstr "Sebesség:"
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "A telepített verzió '%1' újabb mint a jelenlegi telepítő (%2) verziója. A régebbi verzió telepítéséhez előbb távolítsa el a programot.%n%nA telepítő most kilép."
-
-msgid "Starting download..."
-msgstr "Letöltés megkezdése..."
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Ez az alkalmazás már telepítve van.%n%nFrissítés nem lehetséges. Kérjük, előbb távolítsa el az alkalmazást.%n%nA telepítő leáll."
-
-msgid "Status:"
-msgstr "Állapot:"
-
-msgid "The maximum of %1 licenses is exceeded!"
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup again."
+"%n%nSetup will now exit."
 msgstr ""
+"A PDFCreator telepítője elvégezte a .NET Framework 4.0 telepítését. Ez a "
+"lépés újraindítást igényel. Kérjük, indítsa újra a rendszert, majd futtassa "
+"újból a telepítőt.%n%nA telepítő most kilép."
 
-msgid "The installed application is too old. You cannot use this patch."
-msgstr "A telepített alkalmazás túl régi. Nem használhatja ezt a javítást."
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"A letöltött állomány ellenőrzése nem sikerült. Mégis szeretné elindítani a "
+"telepítést?"
+
+msgid "PDFCreator download"
+msgstr "PDFCreator letöltése"
+
+msgid "Download the latest version..."
+msgstr "Legfrissebb verzió letöltése..."
+
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"Újabb verzió (%1) érhető el a pdfforge szerverein!%n%nSzeretné letölteni és "
+"telepíteni ezt a verziót?"
 
 msgid "Expert settings"
 msgstr "Haladó beállítások"
 
+msgid "Set installation directory and additional options"
+msgstr "Telepítési könyvtár és egyéb opciók megadása"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"A következő szimbólumok nem használhatók a nyomtató nevében: '!', '\\' vagy "
+"','. Kérjük, válasszon másik nyomtatónevet."
+
+msgid "Please choose a printer name."
+msgstr "Kérjük adjon nevet a nyomtatónak."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"A válaszotott nyomtató név túl hosszú. A név legfeljebb 221 karakter "
+"hosszúságú lehet. Kérjük, válasszon új nevet."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "Ezen a néven már létezik nyotmató. Kérjük, válasszon másik nevet."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system afterwards."
+"%n%nOtherwise Cancel the installation."
+msgstr ""
+"A 'PATH' rendszerváltozóban hibát észleltünk.%n%n->Hiányzó, vagy hibás "
+"bejegyzés: %Systemroot%\\System32\\wbem%n%nEz a hiba javításra szorul, "
+"mielőtt a telepítés folytatódna.%n%nKérjük, kattintson az OK-ra, a hiba "
+"kijavításához. Ez után a rendszert újra kell indítani.%n%nHa mégsem "
+"szeretné, kattintson a Mégse gombra."
+
+msgid "For &all users"
+msgstr "Mindenkinek"
+
+msgid "For the &current user only"
+msgstr "&current user részére"
+
+msgid "Full installation"
+msgstr "Teljes telepítés"
+
+msgid "Help"
+msgstr "Súgó"
+
+msgid "Install printer"
+msgstr "Nyomtató telepítése"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr ""
+"Nyomtatófigyelő, nyomtató port, illesztőprogramok és nyomtató telepítése"
+
+msgid "Install printer driver"
+msgstr "Illesztőprogram telepítése"
+
+msgid "Install printer monitor"
+msgstr "Nyomtatófigyelő telepítése"
+
+msgid "Install printer port"
+msgstr "Nyomtató port telepítése"
+
+msgid "Offline activation instructions"
+msgstr "Offline aktiválási útmutató"
+
+msgid "Languages"
+msgstr "Nyelvek"
+
+msgid "Please wait. Checking license key..."
+msgstr "Kérlek várj. Licensz kulcs ellenőrzése..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "Ez az aktiváció túl régi. Kérjük, újítsa meg."
+
+msgid "Empty answer from license server!"
+msgstr "Üres válasz a licensz kiszolgálótól!"
+
+msgid "Invalid answer from license server!"
+msgstr "Érvénytelen válasz a licensz kiszolgálótól!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr ""
+"Ehhez a verzióhoz nem érvényes a licence kulcsa. Kérjük, újítsa meg a "
+"licence-ét %1."
+
+msgid "No answer from license server!"
+msgstr "Licensz kiszolgáló nem válaszol!"
+
+msgid "An unknown error is occurred!"
+msgstr "Ismeretlen hiba történt!"
+
+msgid "Wrong answer from license server!"
+msgstr "Érvénytelen válasz a licensz kiszolgálótól!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr ""
+"A számítógépen a rendszeridő helytelennek tűnik. Kérjük, ellenőrizze a "
+"rendszeridőt."
+
+msgid "License server answer not valid for this computer!"
+msgstr "A licensz kiszolgáló válasza nem érvényes erre a számítógépre!"
+
+msgid "The license is not valid for the given product!"
+msgstr "A licenc nem érvényes az adott termékhez!"
+
+msgid "License key validation"
+msgstr "Licenszkulcs érvényesítése"
+
+msgid "Enter the valid license key"
+msgstr "Érvényes licenszkulcs megadása"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Adjon megérvényes licenszkulcsot a telepítés folytatásához."
+
 msgid "An error occurred validating the license key!"
 msgstr "Hiba történt a licenszkulcs érvényestése során!"
+
+msgid "Invalid license answer hash!"
+msgstr "A licenc ellenőrző kódja érvénytelen!"
+
+msgid "Invalid license key!"
+msgstr "Érvénytelen licenszkulcs!"
+
+msgid "License key"
+msgstr "Licenc kulcs"
+
+msgid "Please enter the license key."
+msgstr "Kérjük, adja meg a licenszkulcsot."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "A licensz kulcs formátuma: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "Licensz tulajdonosa"
+
+msgid "Message"
+msgstr "Üzenet"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"A folytatáshoz szükség van egy új licenc kulcsra. Kívánja folytatni a "
+"telepítést?"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
+"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Nem adott meg licensz kulcsot. Licensz kulcs mindenképp szükségeltetik a '/"
+"VerySilent' illetve '/Silent' kapcsolókhoz. Kérjük, használja a '/%1' "
+"kapcsolót.%n%nPélda: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "Offline aktiválási karakterlánc:"
+
+msgid "Offline license check"
+msgstr "Offline licensz ellenőrzés"
+
+msgid "License server answer:"
+msgstr "Licensz kiszolgáló válasza:"
+
+msgid "The machine or the user is blocked!"
+msgstr "A számítógép vagy a felhasználó zárolva van!"
+
+msgid "The authorization is failed!"
+msgstr "Az azonosítás sikertelen!"
+
+msgid "An invalid license key is provided!"
+msgstr "A licenc kulcs érvénytelen!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Túllépte a maximális %1 licencet!"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "The product %1 does not exist!"
+msgstr "A %1 termék hiányzik!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr ""
+"A %1 verzió nem támogatott. Kérjük használja a legfrissebb verziót innen: %2."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr ""
+"Kérjük vegye fel a kapcsolatot a támogatókkal a support@pdfforge.org címen."
+
+msgid "License agreement"
+msgstr "Licenc szerződés"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "A Tovább gombra kattintással Ön elfogadja a licenc szerződést."
+
+msgid "PDFCreator log file"
+msgstr "PDFCreator naplófájl"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"A telepített verzió '%1' újabb mint a jelenlegi telepítő (%2) verziója. A "
+"régebbi verzió telepítéséhez előbb távolítsa el a programot.%n%nA telepítő "
+"most kilép."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Ön nem tagja a Rendszergazdák csoportnak.%n%n%nPDF állományok létrehozásához "
+"a PDFCreator PostScript illesztőprogramot használ, minden program esetén."
+"%nRendszergazdai csoporttagság szükséges nyomtató illesztőprogram "
+"telepítéséhez.%n%nHa folytatja a telepítést, csak meglévő PostScript "
+"állományok átalakítására lesz lehetősége.%n%nFolytatja a telepítést?%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Ehhez nem kell a Rendszergazda csoport tagjának lenni.%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"Régebbi verzió '%1' van telepítve. %n%nNem lehetséges a frissítés erről a "
+"verzióról erre a verzióra: '%2'Kérlek uninstalláld először a programot."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"Régebbi verzió '%1' van telepítve. %n%nLehetséges a frissítés erről a "
+"verzióról erre a verzióra: '%2'.%n%n"
+
+msgid "Other tasks:"
+msgstr "Egyéb teendők:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "A program nincs telepítve. Nem használhatja ezt a javítást."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr "A javítás egy régebbi verzióhoz készült. Nem telepíthető."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr "A telepített alkalmazás túl régi. Nem használhatja ezt a javítást."
+
+msgid "Edit pages"
+msgstr "Lapok szerkesztése"
+
+msgid "Edit texts and fonts"
+msgstr "Szöveg szerkesztése, betűtípus megváltoztatása"
+
+msgid "Split and merge"
+msgstr "Darabolás és összefűzés"
+
+msgid "PDF to Word"
+msgstr "PDF átalakítása Word-be"
+
+msgid "Create"
+msgstr "Létrehozás"
+
+msgid "Convert"
+msgstr "Konvertálás"
+
+msgid "Edit & Insert"
+msgstr "Szerkesztés és beszúrás"
+
+msgid "Review"
+msgstr "Áttekintés"
+
+msgid "Secure & Sign"
+msgstr "Védelem és aláírás"
+
+msgid "Forms"
+msgstr "Űrlapok"
+
+msgid "Try out the new PDF Architect"
+msgstr "Próbálja ki az új PDF Architect-et"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "A parancsikont elhelyeztük az Ön asztalára."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Telepítse a PDF Architect-et a nagyszerű ingyenes funkciókkal"
+
+msgid "Rotate, move and delete pages"
+msgstr "Oldalak forgatása, mozgatása, törlése"
+
+msgid "Merge multiple PDFs"
+msgstr "Több PDF összefésülése"
+
+msgid "Free features:"
+msgstr "Ingyenes funkciók:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "Bővítse a PDFCreatort szekesztési funkcióval!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "Újdonságok a PDF Architect {0} verzióban:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "Automatikus E-Sign folyamatok"
+
+msgid "Verify and remove signatures"
+msgstr "Aláírások ellenőrzése és eltávolítása"
+
+msgid "Already installed"
+msgstr "Már telepítve van"
+
+msgid "Automatic updates"
+msgstr "Automatikus frissítések"
+
+msgid "Default application for PDF files"
+msgstr "Alapértelmezett alkalmazás PDF fájlokhoz"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "Az új PDFArchitect telepítésre kerül. Ez egy kis időt igénybe vehet."
+
+msgid "Firefox integration"
+msgstr "Firefox integráció"
+
+msgid "Internet Explorer integration"
+msgstr "Internet Explorer integráció"
+
+msgid "MS Outlook previewer integration"
+msgstr "Microsoft Outlook betekintő integráció"
+
+msgid "Windows Explorer integration"
+msgstr "Windows Intéző integráció"
+
+msgid "No thanks"
+msgstr "Köszönöm, nem"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"Kérjük távolítsa el a 'PDFCreator Server'-t mielőtt folytatja a telepítést. "
+"A 'PDF Creator' és 'PDFCreator Server' programokat nem lehet egy "
+"számítógépen használni."
+
+msgid "PDFCreator setup"
+msgstr "PDFCreator telepítés"
+
+msgid "Setup is being prepared..."
+msgstr "A telepítő előkészül..."
+
+msgid "Printer"
+msgstr "Nyomtató"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"A nyomtató telepítése közben hibák léptek fel. A részletes leírást "
+"megtalálja a program könyvtárában, a 'SetupLog.txt'-ben."
+
+msgid "Printer name"
+msgstr "Nyomtató név"
+
+msgid "Choosing a printer name."
+msgstr "Nyomtató név megadása."
+
+msgid "Please choose a name for the printer."
+msgstr "Kérjük válasszon nevet a nyomtatónak."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"A PDFCreator egy nyomtatót telepít az Ön számítógépére. Erre a nyomtatóra "
+"minden olyan alkalmazásból tud nyomtatni, amely PDF-et, képet vagy "
+"PostScript állományt tud létrehozni.%n%nA nyomtató neve:"
+
+msgid "This process might take several minutes."
+msgstr "A folyamat pár percet igénybe vehet."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"A PDFCreator egyszerűen készít PDF-et bármely Windows programból. Használja "
+"a Word, Excel vagy bármely más Windows alkalmazásból úgy, mint egy nyomtatót."
+
+msgid "application files"
+msgstr "Programfájlok"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr ""
+"A %1 alkalmazás jelenleg is fut.%n%nKérjük, előbb zárja be az alkalmazást.%n"
+"%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Kérjük, indítsa újra a számítógépet a telepítés folytatásához."
+
+msgid "PDFCreator settings"
+msgstr "PDFCreator beállítások"
+
+msgid "Show help after setup"
+msgstr "Súgó megjelenítése a telepítés után"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"Kérjük használja a \"PDFCreator Terminal Server\"-t a azokon a "
+"számítógépeken, ahol a Terminal Services.%n%n telepítve van. Kíván további "
+"információt a \"PDFCreator Terminal Server\"-ről?"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n"
+"%nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"Ez egy előzetes PDFCreator verzió.%n%nEz nem egy korai verzió a következő "
+"kiadásból. Valószínűleg sok hibát fog tartalmazni, vagy egyáltalán nem is "
+"fog működni.%n%nHa mégis van merszed kipróbálni, szívesen vesszük a "
+"visszajelzéseidet."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"Ez a verzió nem támogatja a szerver üzemmódot. Mindenképp szeretné "
+"telepíteni ezt a verziót?"
+
+msgid "Delete all application settings?"
+msgstr "Minden beállítást töröl?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Nyomtató törlése minden komponenssel együtt."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"A frissítéshez kattintson az <OK> gombra, vagy lépjen ki a telepítőből és "
+"előbb távolítsa el a régebbi verziót."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "&entry menüpont létrehozása a Windows Intéző helyi menüjében"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "PDF és bittérképes fájlok létrehozása %1-val"
+
+msgid "Bad request (400)"
+msgstr "Hibás kérés (400)"
+
+msgid "Access denied (401)"
+msgstr "Hozzáférés megtagadva (401)"
+
+msgid "File not found (404)"
+msgstr "A fájl nem található (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Proxy hitelesítés szükséges (407)"
+
+msgid "Server internal error (500)"
+msgstr "Kiszolgáló hiba (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Helytelen átjáró (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "A szolgáltatás átmenetileg nem elérhető (503)"
+
+msgid "Cancelling download..."
+msgstr "Letöltés megszakítása..."
+
+msgid "Cannot connect"
+msgstr "Nem lehet kapcsolódni"
+
+msgid "Connecting..."
+msgstr "Kapcsolódás..."
+
+msgid "Current file"
+msgstr "Aktuális fájl"
+
+msgid "Details"
+msgstr "Részletek"
+
+msgid "Download cancelled"
+msgstr "Letöltés megszakítva"
+
+msgid "Download complete"
+msgstr "Letöltés kész"
+
+msgid "Download failed"
+msgstr "Letöltés sikertelen"
+
+msgid "Downloading..."
+msgstr "Letöltés..."
+
+msgid "Please click here to revoke your previous activations."
+msgstr "Kérjük kattintson ide az előző művelet visszavonásához."
+
+msgid "Elapsed time:"
+msgstr "Eltelt idő:"
+
+msgid "File:"
+msgstr "Fájl:"
+
+msgid "The following files were not downloaded:"
+msgstr "A következő fájlok nem lettek letöltve:"
+
+msgid "Downloading additional files"
+msgstr "További fájlok letöltése"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Kérjük várjon, amíg a telepítő letölti a további fájlokat..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Fájlinformációk betöltése..."
+
+msgid "Hide"
+msgstr "Elrejt"
+
+msgid "HTTP error %d"
+msgstr "HTTP hiba %d"
+
+msgid "Ignore"
+msgstr "Elvetés"
+
+msgid "Initializing..."
+msgstr "Inicializálás..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/sec"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/sec"
+
+msgid "Remaining time:"
+msgstr "Hátralévő idő:"
+
+msgid "Retry"
+msgstr "Ismét"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Ellenőrizze a kapcsolatot és kattintson az \"Ismét\" gombra a fájlok "
+"ismételt letöltéséhez, vagy kattintson a \"Mégse\" gombra a telepítő "
+"megszakításához."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Ellenőrizze a kapcsolatot és kattintson az \"Ismét\" gombra a fájlok "
+"ismételt letöltéséhez, vagy kattintson a \"Következő\" gombra a telepítés "
+"folytatásához."
+
+msgid "Speed:"
+msgstr "Sebesség:"
+
+msgid "Starting download..."
+msgstr "Letöltés megkezdése..."
+
+msgid "Status:"
+msgstr "Állapot:"
 
 msgid "Total progress"
 msgstr "Teljes állapot"
@@ -547,7 +711,7 @@ msgid "Unknown"
 msgstr "Ismeretlen"
 
 msgid "%.2f of %.2f"
-msgstr "%.2f a %.2f-ből."
+msgstr "%.2f a %.2f-ből"
 
-msgid "Offline activation instructions"
-msgstr "Offline aktiválási útmutató"
+msgid "Setup has finished installing [name] on your computer."
+msgstr "A telepítő végzett a [name] telepítésével."

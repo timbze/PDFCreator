@@ -1,17 +1,12 @@
-msgid "Setup has finished installing [name] on your computer."
-msgstr "Installering af [name] er fuldført."
-
-msgid "Edit & Insert"
-msgstr "Rediger/indsæt"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: Danish (PDFCreator)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 10:38+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Danish <http://translate.pdfforge.org/projects/pdfcreator/innosetup/da/>\n"
+"Language-Team: Danish <http://translate.pdfforge.org/projects/pdfcreator/"
+"innosetup/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,524 +14,679 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.16\n"
 
-msgid "Review"
-msgstr "Efterse"
+msgid ""
+"The application is already installed.%n%nFor a new installation uninstall "
+"the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programmet er allerede installeret.%n%nFor at foretage en ny installation "
+"skal programmet først afinstalleres.%n%nOpsætningen afbrydes."
 
-msgid "PDFCreator is already installed. It is necessary to uninstall the existing installation (version %1) before installing PDFCreator %2.%n%nDo you want to update PDFCreator now? Your PDFCreator settings and printers will be preserved."
-msgstr "PDFCreator er allerede installeret. Den installerede (version %1) skal afinstalleres før installering af PDFCreator %2.%n%nSkal PDFCreator opdateres nu? Indstillinger af PDFCreator og printere bevares."
+msgid ""
+"PDFCreator is already installed. It is necessary to uninstall the existing "
+"installation (version %1) before installing PDFCreator %2.%n%nDo you want to "
+"update PDFCreator now? Your PDFCreator settings and printers will be "
+"preserved."
+msgstr ""
+"PDFCreator er allerede installeret. Den eksisterende installation (version "
+"%1) skal afinstalleres før installering af PDFCreator %2.%n%nSkal PDFCreator "
+"opdateres nu? Dine PDFCreator-indstillinger og -printere bevares."
 
-msgid "Secure & Sign"
-msgstr "Beskyt og signer"
+msgid ""
+"The application is already installed.%n%nAn update is not possible. Please "
+"uninstall the application first.%n%nThe setup will be canceled."
+msgstr ""
+"Programmet er allerede installeret.%n%nOpdatering er ikke mulig. Afinstaller "
+"programmet først.%n%nOpsætningen afbrydes."
 
 msgid "The setup will be canceled."
 msgstr "Opsætningen afbrydes."
 
-msgid "Forms"
-msgstr "Formularer"
-
-msgid "The following applications have to be closed to proceed with the uninstallation:"
-msgstr "Følgende programmer skal lukkes, før afinstallationen fortsættes:"
-
-msgid "Try out the new PDF Architect"
-msgstr "Prøv den ny PDF Architect"
-
-msgid "The downloaded file is corrupt and has been deleted. The setup will canceled!"
-msgstr "Den downloadede fil er ødelagt og nu slettet. Opsætningen afbrydes!"
-
-msgid "A shortcut has been added to your desktop."
-msgstr "Der er oprettet en genvej på skrivebordet."
-
-msgid "Donate to PDFCreator"
-msgstr "Doner til PDFCreator"
-
-msgid "Install PDF Architect with great free features"
-msgstr "Installer PDF Architect med gratis funktioner"
-
-msgid "An error has occurred during the installation of Microsoft.Net Framework %1. (Error code: %2)%n%nDo you want to see the .Net installation log file?"
-msgstr "En fejl opstod under installation af Microsoft.Net Framework %1. (Fejlkode: %2)%n%nVis .Net installationens logfil?"
-
-msgid "Rotate, move and delete pages"
-msgstr "Roter, flyt og slet sider"
-
-msgid "The PDFCreator setup has installed the .Net framework 4.0. This step needs a system restart. Please reboot your system now and then start the setup again.%n%nSetup will now exit."
-msgstr "Opsætningen af PDFCreator har installeret .Net Framework 4.0. Systemet skal genstartes. Genstart nu og start så opsætningen igen.%n%Setup afsluttes."
-
-msgid "Merge multiple PDFs"
-msgstr "Samle flere PDF"
-
-msgid "PDFCreator download"
-msgstr "Download PDFCreator"
-
-msgid "Free features:"
-msgstr "Gratis funktioner:"
-
-msgid "A new version (%1) is available on the pdfforge servers!%n%nDo you want to download and install this version?"
-msgstr "En ny version (%1) er lagt på pdfforge servere!%n%nSkal den version downloades og installeres?"
-
-msgid "Enhance PDFCreator with edit features!"
-msgstr "Forstærk PDFCreator med redigeringsmuligheder!"
-
-msgid "Set installation directory and additional options"
-msgstr "Væg installationsmappe og andre indstillinger"
-
-msgid "New in PDF Architect {0}:"
-msgstr "Nyt i PDF Architect {0}:"
-
-msgid "Please choose a printer name."
-msgstr "Vælg et printernavn."
-
-msgid "Automatic E-Sign workflows"
-msgstr "Automatisk signering"
-
-msgid "There already exists a printer with this name. Please choose another name."
-msgstr "Der er allerede en printer med dette navn. Vælg et andet."
-
-msgid "Verify and remove signatures"
-msgstr "Verificer og fjern signaturer"
-
-msgid "For &all users"
-msgstr "For &alle brugere"
-
-msgid "Already installed"
-msgstr "Allerede installeret"
-
-msgid "Full installation"
-msgstr "Fuld installation"
-
-msgid "Automatic updates"
-msgstr "Automatisk opdatering"
-
-msgid "Install printer"
-msgstr "Installer printer"
-
-msgid "Default application for PDF files"
-msgstr "Standardprogram til PDF"
-
-msgid "Install printer driver"
-msgstr "Installer printerdriver"
-
-msgid "The new PDF Architect will be installed. This might take a while."
-msgstr "Den ny PDF Architect installeres. Det kan tage et stykke tid."
-
-msgid "Install printer port"
-msgstr "Installer printerport"
-
-msgid "Firefox integration"
-msgstr "Integration med Firefox"
-
-msgid "Languages"
-msgstr "Sprog"
-
-msgid "Internet Explorer integration"
-msgstr "Integration med Internet Explorer"
-
-msgid "The activation is too old! Please renew your activation."
-msgstr "Aktiveringen er udløbet! Forny aktiveringen."
-
-msgid "MS Outlook previewer integration"
-msgstr "Integration med Outlook eksempler"
-
-msgid "Invalid answer from license server!"
-msgstr "Ugyldigt svar fra licensserver!"
-
-msgid "Windows Explorer integration"
-msgstr "Integration med Windows Stifinder"
-
-msgid "No answer from license server!"
-msgstr "Intet svar fra licensserver!"
-
-msgid "No thanks"
-msgstr "Nej tak"
-
-msgid "Wrong answer from license server!"
-msgstr "Forkert svar fra licensserver!"
-
-msgid "Please uninstall 'PDFCreator Server' before you continue with the installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' on the same machine."
-msgstr "Afinstaller 'PDFCreator Server' før installationen fortsættes. 'PDFCreator' og 'PDFCreator Server' kan ikke begge anvendes på samme maskine."
-
-msgid "License server answer not valid for this computer!"
-msgstr "Licensservers svar er ugyldigt for denne computer!"
-
-msgid "PDFCreator setup"
-msgstr "PDFCreator opsætning"
-
-msgid "License key validation"
-msgstr "Validering af licensnøgle"
-
-msgid "Setup is being prepared..."
-msgstr "Opsætning forberedes..."
-
-msgid "Enter the valid license key and continue with the installation."
-msgstr "Indsæt den gyldige licensnøgle og fortsæt med installationen."
-
-msgid "Printer"
-msgstr "Printer"
-
-msgid "Invalid license answer hash!"
-msgstr "Hash-værdi som svar på ugyldig licens!"
-
-msgid "During the printer installation errors have occurred. A detailed description can be found in the file 'SetupLog.txt' in application path."
-msgstr "Fejl under installation af printer. En detaljeret beskrivelse findes i filen 'SetupLog.txt' i programstien."
-
-msgid "License key"
-msgstr "Licensnøgle"
-
-msgid "Printer name"
-msgstr "Printernavn"
-
-msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-msgstr "Licensnøglens format er XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-
-msgid "Choosing a printer name."
-msgstr "Vælg et printernavn."
-
-msgid "Message"
-msgstr "Besked"
-
-msgid "Please choose a name for the printer."
-msgstr "Vælg et navn til printeren."
-
-msgid "No license key was given. A license key in combination with the parameters '/VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-msgstr "Ingen licensnøgle blev opgivet. En licensnøgle sammen med parametrene'/VerySilent' eller '/Silent' er absolut nødvendig! Brug parameteren '/%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
-
-msgid "PDFCreator installs a printer on your computer. With this printer each application that is able to print, can create PDF documents, bitmaps or PostScript files.%n%nName of printer:"
-msgstr "PDFCreator installerer en printer på computeren. Med den printer kan alle programmer, som kan udskrive, oprette PDF-dokumenter, bitmap- eller PostScriptfiler.%n%nPrinternavn:"
-
-msgid "Offline license check"
-msgstr "Offline licenskontrol"
-
-msgid "This process might take several minutes."
-msgstr "Processen kan vare flere minutter."
-
-msgid "The machine or the user is blocked!"
-msgstr "Maskinen eller brugeren er låst!"
-
-msgid "PDFCreator easily creates PDFs from any Windows program. Use it like a printer in Word, Excel, or any other Windows application."
-msgstr "PDFCreator fremstiller let PDF fra ethvert Windowsprogram. Brug den som en printer i Word, Excel, eller andet Windowsprogram."
-
-msgid "An invalid license key is provided!"
-msgstr "Licensnøglen er ugyldig!"
-
-msgid "application files"
-msgstr "programfiler"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "The application '%1' is running.%n%nPlease close the application first.%n%n"
-msgstr "Programmet '%1' kører.%n%nLuk det først.%n%n"
-
-msgid "The version %1 is not supported! Please use the latest version from here %2."
-msgstr "Version %1 understøttes ikke! Brug seneste version herfra %2."
-
-msgid "Please restart your system first to continue setup."
-msgstr "Genstart computeren for at fuldføre installationen."
-
-msgid "License agreement"
-msgstr "Licensaftale"
-
-msgid "PDFCreator settings"
-msgstr "Indstil PDFCreator"
-
-msgid "PDFCreator log file"
-msgstr "PDFCreator logfil"
-
-msgid "Show help after setup"
-msgstr "Vis hjælp efter opsætning"
-
-msgid "You are not a member of the administrator group.%n%n%nFor creating a PDF document out of any application, the PDFCreator is using a PostScript printerdriver.%nYou have to be a member of the administrator group, to install any printerdriver.%n%nIf you continue the installation, you will only be able to convert existing PostScript files.%n%nContinue the setup?%n"
-msgstr "Manglende administratorrettigheder.%n%n%nVed oprettelse af et PDF-dokument fra et program, bruger PDFCreator en PostScript printerdriver.%nFor at installere en printerdriver, kræves administratorrettigheder.%n%nHvis installationen fortsættes, kan kun eksisterende PostScript filer konverteres.%n%nFortsæt opsætning?%n"
-
-msgid "Please use \"PDFCreator Terminal Server\" for use on computers with installed Terminal Services.%n%nWould you like to have more information about \"PDFCreator Terminal Server\"?"
-msgstr "Brug \"PDFCreator Terminal Server\" på computere med installerede Terminal Services.%n%nØnskes mere information om \"PDFCreator Terminal Server\"?"
-
-msgid "An older version '%1' was found.%n%nIt is not possible to update this version to version '%2'.%n%nPlease uninstall the application first."
-msgstr "En ældre version '%1' blev fundet.%n%nDen version kan ikke opdateres til version '%2'.%n%nAfinstaller først programmet."
-
-msgid "This is a developer preview of PDFCreator.%n%nThis is not an early version of the next release. It will most likely contain bugs or not work at all.%n%nIf you should dare to install it anyway, we would like to hear your feedback."
-msgstr "Dette er en udviklerudgave af PDFCreator.%n%nDet er ikke en tidlig version af næste udgave. Den indeholder sikkert fejl og funktionsmangler.%n%nHvis du alligevel tør installere den, vil vi gerne modtage feedback."
-
-msgid "Other tasks:"
-msgstr "Andet:"
-
-msgid "This version doesn't support the server mode. Do you want install this version anyway?"
-msgstr "Denne version understøtter ikke servertilstand. Skal denne version alligevel installeres?"
-
-msgid "This patch is for an older application version. You cannot use this patch."
-msgstr "Denne patch er til en ældre programversion. Den kan ikke anvendes."
-
-msgid "Delete all application settings?"
-msgstr "Slet alle program indstillinger?"
-
-msgid "Edit pages"
-msgstr "Rediger sider"
-
-msgid "Uninstall the printer with all its components."
-msgstr "Afinstaller printeren og alle dens bestanddele."
-
-msgid "Split and merge"
-msgstr "Opdel/samle"
-
-msgid "To update, use <OK>, or cancel the setup and uninstall the older version first."
-msgstr "For at opdatere, brug <OK>, eller afbryd opsætningen og afinstaller først den gamle version."
-
-msgid "Create"
-msgstr "Opret"
-
-msgid "Create an &entry in the Windows Explorer context menu"
-msgstr "Opret et &punkt i Windows Stifinders højrekliksmenu"
-
-msgid "The application is already installed.%n%nFor a new installation uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Programmet er allerede installeret.%n%nVed en ny installation, skal programmet først afinstalleres.%n%nOpsætningen afbrydes."
-
-msgid "Create PDF and Bitmap files with %1"
-msgstr "Opret PDF- og bitmapfiler med %1"
-
 msgid "Do you want to cancel the setup?"
 msgstr "Skal opsætningen afbrydes?"
 
-msgid "Bad request (400)"
-msgstr "HTTP-fejl 400"
-
-msgid "Custom installation"
-msgstr "Tilpasset installation"
-
-msgid "Access denied (401)"
-msgstr "Adgang nægtet (401)"
-
-msgid "PDFCreator requires Microsoft .Net %1. Please download and install Microsoft .Net %1 and then rerun the PDFCreator setup."
-msgstr "PDFCreator kræver Microsoft .Net %1. Download og installer Microsoft .Net %1 og kør så PDFCreator opsætningen igen."
-
-msgid "File not found (404)"
-msgstr "Fil ikke fundet (404)"
-
-msgid "Download the latest version..."
-msgstr "Download nyeste version..."
-
-msgid "Proxy authentication required (407)"
-msgstr "Proxy ægthedsbevis kræves (407)"
-
-msgid "It is not allowed to use the symbols '!','\\' or ',' in the printer name. Please choose a new printer name."
-msgstr "Symbolerne '!',''\\\" eller ',' må ikke bruges i printernavnet. Vælg et nyt printernavn."
-
-msgid "Server internal error (500)"
-msgstr "Intern serverfejl (500)"
-
-msgid "An error in the system environment variable 'Path' has occurred%n%n->Missing or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be fixed first before the installation can be continued.%n%nPlease select OK if you want this error to be fixed. You have to restart your system afterwards.%n%nOtherwise Cancel the installation."
-msgstr "Fejl i system environment variable 'Sti' er opstået%n%n->Manglende eller ødelagte data: %Systemroot%\\system32\\wbem%n%nDen fejl skal rettes, før installationen kan fortsættes.%n%nVælg OK for at rette fejlen. Computeren skal herefter genstartes.%n%nEllers afbryd installationen."
-
-msgid "Bad gateway (502)"
-msgstr "HTTP-fejl 502"
-
-msgid "Help"
-msgstr "Hjælp"
-
-msgid "Service temporarily unavailable (503)"
-msgstr "Service midlertidig uopnåelig (503)"
-
-msgid "Install printer monitor"
-msgstr "Installer printermonitor"
-
-msgid "Cancelling download..."
-msgstr "Afbryder download..."
-
-msgid "Please wait. Checking license key..."
-msgstr "Vent. Kontrollerer licensnøgle..."
-
-msgid "Cannot connect"
-msgstr "Kan ikke forbinde"
-
-msgid "This version is not covered by your license key! Please renew your license on %1."
-msgstr "Denne version er ikke dækket af licensnøglen! Forny licensen på %1."
-
-msgid "Connecting..."
-msgstr "Forbinder..."
-
-msgid "The computer time seems to be incorrectly set! Please check your system time."
-msgstr "Computerens ur ser ud til at være forkert indstillet! Kontroller systemtiden."
-
-msgid "Current file"
-msgstr "Aktuel fil"
-
-msgid "Enter the valid license key"
-msgstr "Indsæt den gyldige licensnøgle"
-
-msgid "Details"
-msgstr "Detaljer"
-
-msgid "Invalid license key!"
-msgstr "Ugyldig licensnøgle!"
-
-msgid "Download cancelled"
-msgstr "Download afbrudt"
-
-msgid "Licensee"
-msgstr "Licenseret"
-
-msgid "Download complete"
-msgstr "Download er fuldført"
-
-msgid "Offline activation string:"
-msgstr "Offline aktiveringsstring:"
-
-msgid "Download failed"
-msgstr "Download fejlede"
-
-msgid "The authorization is failed!"
-msgstr "Autorisation mislykkedes!"
-
-msgid "Downloading..."
-msgstr "Downloader..."
-
-msgid "The product %1 does not exist!"
-msgstr "Produktet %1 findes ikke!"
-
-msgid "Please click here to revoke your previous activations."
-msgstr "Klik her for at genoprette tidligere aktiveringer."
-
-msgid "By clicking on Next you accept the license agreement."
-msgstr "Ved at klikke på Næste accepteres licensaftalen."
-
-msgid "Elapsed time:"
-msgstr "Tidsforbrug:"
-
-msgid "For this you don't have to be a member of the administrator group.%n%n"
-msgstr "Til dette kræves ikke administratorrettigheder.%n%n"
-
-msgid "File:"
-msgstr "Fil:"
-
-msgid "The application is not installed. You cannot use this patch."
-msgstr "Programmet er ikke installeret. Denne patch han ikke bruges."
-
-msgid "The following files were not downloaded:"
-msgstr "Disse filer blev ikke downloadet:"
-
-msgid "Edit texts and fonts"
-msgstr "Rediger tekst og fonte"
-
-msgid "Downloading additional files"
-msgstr "Downloader yderligere filer"
-
-msgid "Convert"
-msgstr "Konverter"
-
-msgid "Please wait, while setup downloading additional files..."
-msgstr "Vent, medens der downloades yderligere filer..."
+msgid ""
+"The following applications have to be closed to proceed with the "
+"uninstallation:"
+msgstr "Følgende programmer skal lukkes, før afinstallationen fortsættes:"
 
 msgid "Compact installation"
 msgstr "Kompakt installation"
 
-msgid "GB"
-msgstr "GB"
+msgid ""
+"The downloaded file is corrupt and has been deleted. The setup will canceled!"
+msgstr ""
+"Den downloadede fil er ødelagt og er blevet slettet. Opsætningen afbrydes!"
 
-msgid "The downloaded file could not be verified with its checksum. Do you want to start the setup anyway?"
-msgstr "Den downloadede fil kunne ikke bekræftes med dens tjeksum. Start installation alligevel?"
+msgid "Custom installation"
+msgstr "Tilpasset installation"
 
-msgid "Getting file information..."
-msgstr "Henter filoplysninger..."
+msgid "Donate to PDFCreator"
+msgstr "Giv et bidrag til PDFCreator"
 
-msgid "The chosen printer name is too long. The name can be 221 characters long at the most. Please choose a new printer name."
-msgstr "Printernavnet er for langt. Det kan højst være på 221 tegn. Vælg et nyt printernavn."
-
-msgid "Hide"
-msgstr "Skjul"
-
-msgid "Install printer monitor, printer port, printer drivers and printer"
-msgstr "Installer printermonitor, -port, -drivere og printer"
-
-msgid "HTTP error %d"
-msgstr "HTTP fejl %d"
-
-msgid "Empty answer from license server!"
-msgstr "Tomt svar fra licensserver!"
-
-msgid "Ignore"
-msgstr "Ignorer"
-
-msgid "The license is not valid for the given product!"
-msgstr "Licensen er ikke gyldig for dette produkt!"
-
-msgid "Initializing..."
-msgstr "Initierer..."
-
-msgid "Please enter the license key."
-msgstr "Indsæt licensnøglen."
-
-msgid "KB"
-msgstr "KB"
-
-msgid "License server answer:"
-msgstr "Svar fra licensserver:"
-
-msgid "KB/s"
-msgstr "KB/s"
-
-msgid "Please contact the support at support@pdfforge.org!"
-msgstr "Kontakt support hos support@pdfforge.org!"
-
-msgid "MB"
-msgstr "MB"
-
-msgid "An older version '%1' was found.%nIt is possible to update this version to version '%2'.%n%n"
-msgstr "En ældre version '%1' blev fundet.%nDen version kan opdateres til version '%2'.%n%n"
-
-msgid "MB/s"
-msgstr "MB/s"
-
-msgid "PDF to Word"
-msgstr "PDF til Word"
-
-msgid "Remaining time:"
-msgstr "Resterer:"
-
-msgid "Installing Microsoft .Net Framework %1 This can take several minutes. Please wait."
+msgid ""
+"Installing Microsoft .Net Framework %1 This can take several minutes. Please "
+"wait."
 msgstr "Installerer Microsoft .Net Framework %1. Det kan vare flere minutter."
 
-msgid "Retry"
-msgstr "Prøv igen"
+msgid ""
+"An error has occurred during the installation of Microsoft.Net Framework %1. "
+"(Error code: %2)%n%nDo you want to see the .Net installation log file?"
+msgstr ""
+"En fejl opstod under installation af Microsoft.Net Framework %1. (Fejlkode: "
+"%2)%n%nVil du se .Net-installationslogfilen?"
 
-msgid "For the &current user only"
-msgstr "Kun for &denne bruger"
+msgid ""
+"PDFCreator requires Microsoft .Net %1. Please download and install "
+"Microsoft .Net %1 and then rerun the PDFCreator setup."
+msgstr ""
+"PDFCreator kræver Microsoft .Net %1. Download og installer Microsoft .Net %1 "
+"og kør så PDFCreator-opsætningen igen."
 
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Cancel' to terminate setup."
-msgstr "Kontroller forbindelsen og klik 'Prøv igen' for at forsøge at downloade filerne, eller klik 'Afbryd' for at afslutte."
+msgid ""
+"The PDFCreator setup has installed the .Net framework 4.0. This step needs a "
+"system restart. Please reboot your system now and then start the setup again."
+"%n%nSetup will now exit."
+msgstr ""
+"Opsætningen af PDFCreator har installeret .Net Framework 4.0. Systemet skal "
+"genstartes. Genstart nu og start så opsætningen igen.%n%Setup afsluttes."
 
-msgid "An unknown error is occurred!"
-msgstr "Der opstod en ukendt fejl!"
+msgid ""
+"The downloaded file could not be verified with its checksum. Do you want to "
+"start the setup anyway?"
+msgstr ""
+"Den downloadede fil kunne ikke bekræftes med dens tjeksum. Start "
+"installation alligevel?"
 
-msgid "Check your connection and click 'Retry' to try downloading the files again, or click 'Next' to continue installing anyway."
-msgstr "Kontroller forbindelsen og klik 'Prøv igen' for at forsøge at downloade filerne, eller klik 'Næste' for at fortsætte alligevel."
+msgid "PDFCreator download"
+msgstr "Download PDFCreator"
 
-msgid "You need a new valid license key to continue. Do you want to proceed with the installation?"
-msgstr "Der kræves en gyldig licensnøgle for at fortsætte. Fortsæt med installationen?"
+msgid "Download the latest version..."
+msgstr "Download nyeste version..."
 
-msgid "Speed:"
-msgstr "Hastighed:"
-
-msgid "The installed version '%1' is newer than this setup version '%2'.%n%nFor the installation of an older version, uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Ugyldig version '%1' er nyere end denne setup version '%2'.%n%nFor at installere en ældre version, skal programmet først afinstalleres.%n%nOpsætningen annulleres."
-
-msgid "Starting download..."
-msgstr "Starter download..."
-
-msgid "The application is already installed.%n%nAn update is not possible. Please uninstall the application first.%n%nThe setup will be canceled."
-msgstr "Programmet er allerede installeret.%n%nOpdatering er ikke mulig. Afinstaller programmet først.%n%nOpsætningen afbrydes."
-
-msgid "Status:"
-msgstr "Status:"
-
-msgid "The maximum of %1 licenses is exceeded!"
-msgstr "Det maksimale antal på %1 licenser er overskredet!"
-
-msgid "The installed application is too old. You cannot use this patch."
-msgstr "Det installerede program er for gammelt. Denne patch kan ikke anvendes."
+msgid ""
+"A new version (%1) is available on the pdfforge servers!%n%nDo you want to "
+"download and install this version?"
+msgstr ""
+"En ny version (%1) er tilgængelig på pdfforge-serverne!%n%nVil du downloade "
+"og installere den?"
 
 msgid "Expert settings"
 msgstr "Ekspertopsætning"
 
+msgid "Set installation directory and additional options"
+msgstr "Væg installationsmappe og andre indstillinger"
+
+msgid ""
+"It is not allowed to use the symbols '!','\\' or ',' in the printer name. "
+"Please choose a new printer name."
+msgstr ""
+"Det er ikke tilladt at bruge symbolerne '!', '\\' eller ',' i printernavnet. "
+"Vælg et nyt printernavn."
+
+msgid "Please choose a printer name."
+msgstr "Vælg et printernavn."
+
+msgid ""
+"The chosen printer name is too long. The name can be 221 characters long at "
+"the most. Please choose a new printer name."
+msgstr ""
+"Printernavnet er for langt. Det kan højst være på 221 tegn. Vælg et nyt "
+"printernavn."
+
+msgid ""
+"There already exists a printer with this name. Please choose another name."
+msgstr "Der er allerede en printer med dette navn. Vælg et andet."
+
+msgid ""
+"An error in the system environment variable 'Path' has occurred%n%n->Missing "
+"or corrupted entry: %Systemroot%\\system32\\wbem%n%nThis error has to be "
+"fixed first before the installation can be continued.%n%nPlease select OK if "
+"you want this error to be fixed. You have to restart your system afterwards."
+"%n%nOtherwise Cancel the installation."
+msgstr ""
+"Fejl i systemmiljøvariablen 'Path' er opstået%n%n->Manglende eller ødelagt "
+"sti: %Systemroot%\\system32\\wbem%n%nDenne fejl skal rettes, før "
+"installationen kan fortsættes.%n%nVælg OK for at rette fejlen. Computeren "
+"skal herefter genstartes.%n%nEllers afbryd installationen."
+
+msgid "For &all users"
+msgstr "For &alle brugere"
+
+msgid "For the &current user only"
+msgstr "Kun for &denne bruger"
+
+msgid "Full installation"
+msgstr "Fuld installation"
+
+msgid "Help"
+msgstr "Hjælp"
+
+msgid "Install printer"
+msgstr "Installer printer"
+
+msgid "Install printer monitor, printer port, printer drivers and printer"
+msgstr "Installer printermonitor, -port, -drivere og printer"
+
+msgid "Install printer driver"
+msgstr "Installer printerdriver"
+
+msgid "Install printer monitor"
+msgstr "Installer printermonitor"
+
+msgid "Install printer port"
+msgstr "Installer printerport"
+
+msgid "Offline activation instructions"
+msgstr "Om offline aktivering"
+
+msgid "Languages"
+msgstr "Sprog"
+
+msgid "Please wait. Checking license key..."
+msgstr "Vent. Kontrollerer licensnøgle..."
+
+msgid "The activation is too old! Please renew your activation."
+msgstr "Aktiveringen er udløbet! Forny aktiveringen."
+
+msgid "Empty answer from license server!"
+msgstr "Tomt svar fra licensserver!"
+
+msgid "Invalid answer from license server!"
+msgstr "Ugyldigt svar fra licensserver!"
+
+msgid ""
+"This version is not covered by your license key! Please renew your license "
+"on %1."
+msgstr "Denne version er ikke dækket af licensnøglen! Forny licensen på %1."
+
+msgid "No answer from license server!"
+msgstr "Intet svar fra licensserver!"
+
+msgid "An unknown error is occurred!"
+msgstr "Der opstod en ukendt fejl!"
+
+msgid "Wrong answer from license server!"
+msgstr "Forkert svar fra licensserver!"
+
+msgid ""
+"The computer time seems to be incorrectly set! Please check your system time."
+msgstr ""
+"Computerens ur ser ud til at være forkert indstillet! Kontroller systemtiden."
+
+msgid "License server answer not valid for this computer!"
+msgstr "Licensservers svar er ugyldigt for denne computer!"
+
+msgid "The license is not valid for the given product!"
+msgstr "Licensen er ikke gyldig for dette produkt!"
+
+msgid "License key validation"
+msgstr "Validering af licensnøgle"
+
+msgid "Enter the valid license key"
+msgstr "Indsæt den gyldige licensnøgle"
+
+msgid "Enter the valid license key and continue with the installation."
+msgstr "Indsæt den gyldige licensnøgle og fortsæt med installationen."
+
 msgid "An error occurred validating the license key!"
 msgstr "Der opstod en fejl ved kontrol af licensnøglen!"
+
+msgid "Invalid license answer hash!"
+msgstr "Ugyldig licenssvar-hashværdi!"
+
+msgid "Invalid license key!"
+msgstr "Ugyldig licensnøgle!"
+
+msgid "License key"
+msgstr "Licensnøgle"
+
+msgid "Please enter the license key."
+msgstr "Indsæt licensnøglen."
+
+msgid "The format of the license key is XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+msgstr "Licensnøglens format er XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+
+msgid "Licensee"
+msgstr "Licenseret"
+
+msgid "Message"
+msgstr "Besked"
+
+msgid ""
+"You need a new valid license key to continue. Do you want to proceed with "
+"the installation?"
+msgstr ""
+"Der kræves en gyldig licensnøgle for at fortsætte. Fortsæt med "
+"installationen?"
+
+msgid ""
+"No license key was given. A license key in combination with the parameters '/"
+"VerySilent' or '/Silent' is absolutely necessary! Please use the parameter '/"
+"%1'.%n%nSample: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+msgstr ""
+"Ingen licensnøgle blev opgivet. En licensnøgle sammen med parametrene '/"
+"VerySilent' eller '/Silent' er absolut nødvendig! Brug parameteren '/%1'.%n"
+"%nEksempel: %2 /Silent /%1=12345-67890-ABCDE-FGHIJ-KLMNO-PQRST"
+
+msgid "Offline activation string:"
+msgstr "Offline-aktiveringsstreng:"
+
+msgid "Offline license check"
+msgstr "Offline licenskontrol"
+
+msgid "License server answer:"
+msgstr "Svar fra licensserver:"
+
+msgid "The machine or the user is blocked!"
+msgstr "Maskinen eller brugeren er låst!"
+
+msgid "The authorization is failed!"
+msgstr "Autorisation mislykkedes!"
+
+msgid "An invalid license key is provided!"
+msgstr "Licensnøglen er ugyldig!"
+
+msgid "The maximum of %1 licenses is exceeded!"
+msgstr "Det maksimale antal på %1 licenser er overskredet!"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "The product %1 does not exist!"
+msgstr "Produktet %1 findes ikke!"
+
+msgid ""
+"The version %1 is not supported! Please use the latest version from here %2."
+msgstr "Version %1 understøttes ikke! Brug seneste version herfra %2."
+
+msgid "Please contact the support at support@pdfforge.org!"
+msgstr "Kontakt support hos support@pdfforge.org!"
+
+msgid "License agreement"
+msgstr "Licensaftale"
+
+msgid "By clicking on Next you accept the license agreement."
+msgstr "Ved at klikke på Næste accepteres licensaftalen."
+
+msgid "PDFCreator log file"
+msgstr "PDFCreator-logfil"
+
+msgid ""
+"The installed version '%1' is newer than this setup version '%2'.%n%nFor the "
+"installation of an older version, uninstall the application first.%n%nThe "
+"setup will be canceled."
+msgstr ""
+"Ugyldig version '%1' er nyere end denne setup version '%2'.%n%nFor at "
+"installere en ældre version, skal programmet først afinstalleres.%n"
+"%nOpsætningen annulleres."
+
+msgid ""
+"You are not a member of the administrator group.%n%n%nFor creating a PDF "
+"document out of any application, the PDFCreator is using a PostScript "
+"printerdriver.%nYou have to be a member of the administrator group, to "
+"install any printerdriver.%n%nIf you continue the installation, you will "
+"only be able to convert existing PostScript files.%n%nContinue the setup?%n"
+msgstr ""
+"Manglende administratorrettigheder.%n%n%nVed oprettelse af et PDF-dokument "
+"fra et program bruger PDFCreator en PostScript-printerdriver.%nFor at "
+"installere en printerdriver kræves administratorrettigheder.%n%nHvis "
+"installationen fortsættes, kan kun eksisterende PostScript-filer konverteres."
+"%n%nFortsæt opsætning?%n"
+
+msgid "For this you don't have to be a member of the administrator group.%n%n"
+msgstr "Til dette kræves ikke administratorrettigheder.%n%n"
+
+msgid ""
+"An older version '%1' was found.%n%nIt is not possible to update this "
+"version to version '%2'.%n%nPlease uninstall the application first."
+msgstr ""
+"En ældre version '%1' blev fundet.%n%nDen version kan ikke opdateres til "
+"version '%2'.%n%nAfinstaller først programmet."
+
+msgid ""
+"An older version '%1' was found.%nIt is possible to update this version to "
+"version '%2'.%n%n"
+msgstr ""
+"En ældre version '%1' blev fundet.%nDen version kan opdateres til version "
+"'%2'.%n%n"
+
+msgid "Other tasks:"
+msgstr "Andet:"
+
+msgid "The application is not installed. You cannot use this patch."
+msgstr "Programmet er ikke installeret. Denne patch han ikke bruges."
+
+msgid ""
+"This patch is for an older application version. You cannot use this patch."
+msgstr "Denne patch er til en ældre programversion. Den kan ikke anvendes."
+
+msgid "The installed application is too old. You cannot use this patch."
+msgstr ""
+"Det installerede program er for gammelt. Denne patch kan ikke anvendes."
+
+msgid "Edit pages"
+msgstr "Rediger sider"
+
+msgid "Edit texts and fonts"
+msgstr "Rediger tekst og fonte"
+
+msgid "Split and merge"
+msgstr "Opdel/samle"
+
+msgid "PDF to Word"
+msgstr "PDF til Word"
+
+msgid "Create"
+msgstr "Opret"
+
+msgid "Convert"
+msgstr "Konverter"
+
+msgid "Edit & Insert"
+msgstr "Rediger/indsæt"
+
+msgid "Review"
+msgstr "Efterse"
+
+msgid "Secure & Sign"
+msgstr "Beskyt og signer"
+
+msgid "Forms"
+msgstr "Formularer"
+
+msgid "Try out the new PDF Architect"
+msgstr "Prøv den ny PDF Architect"
+
+msgid "A shortcut has been added to your desktop."
+msgstr "Der er oprettet en genvej på skrivebordet."
+
+msgid "Install PDF Architect with great free features"
+msgstr "Installer PDF Architect med gratis funktioner"
+
+msgid "Rotate, move and delete pages"
+msgstr "Roter, flyt og slet sider"
+
+msgid "Merge multiple PDFs"
+msgstr "Saml flere PDF'er"
+
+msgid "Free features:"
+msgstr "Gratis funktioner:"
+
+msgid "Enhance PDFCreator with edit features!"
+msgstr "Udvid PDFCreator med redigeringsmuligheder!"
+
+msgid "New in PDF Architect {0}:"
+msgstr "Nyt i PDF Architect {0}:"
+
+msgid "Automatic E-Sign workflows"
+msgstr "Automatisk signering"
+
+msgid "Verify and remove signatures"
+msgstr "Verificer og fjern signaturer"
+
+msgid "Already installed"
+msgstr "Allerede installeret"
+
+msgid "Automatic updates"
+msgstr "Automatisk opdatering"
+
+msgid "Default application for PDF files"
+msgstr "Standardprogram til PDF"
+
+msgid "The new PDF Architect will be installed. This might take a while."
+msgstr "Den nye PDF Architect installeres. Dette kan tage et stykke tid."
+
+msgid "Firefox integration"
+msgstr "Integration med Firefox"
+
+msgid "Internet Explorer integration"
+msgstr "Integration med Internet Explorer"
+
+msgid "MS Outlook previewer integration"
+msgstr "Integration med Outlook eksempler"
+
+msgid "Windows Explorer integration"
+msgstr "Integration med Windows Stifinder"
+
+msgid "No thanks"
+msgstr "Nej tak"
+
+msgid ""
+"Please uninstall 'PDFCreator Server' before you continue with the "
+"installation. It is not possible to use 'PDFCreator' and 'PDFCreator Server' "
+"on the same machine."
+msgstr ""
+"Afinstaller 'PDFCreator Server' før installationen fortsættes. 'PDFCreator' "
+"og 'PDFCreator Server' kan ikke begge anvendes på samme maskine."
+
+msgid "PDFCreator setup"
+msgstr "Opsætning af PDFCreator"
+
+msgid "Setup is being prepared..."
+msgstr "Opsætning forberedes..."
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid ""
+"During the printer installation errors have occurred. A detailed description "
+"can be found in the file 'SetupLog.txt' in application path."
+msgstr ""
+"Fejl under installation af printer. En detaljeret beskrivelse findes i filen "
+"'SetupLog.txt' i programstien."
+
+msgid "Printer name"
+msgstr "Printernavn"
+
+msgid "Choosing a printer name."
+msgstr "Valg af printernavn."
+
+msgid "Please choose a name for the printer."
+msgstr "Vælg et navn til printeren."
+
+msgid ""
+"PDFCreator installs a printer on your computer. With this printer each "
+"application that is able to print, can create PDF documents, bitmaps or "
+"PostScript files.%n%nName of printer:"
+msgstr ""
+"PDFCreator installerer en printer på computeren. Med den printer kan alle "
+"programmer, som kan udskrive, oprette PDF-dokumenter, bitmap- eller "
+"PostScriptfiler.%n%nPrinternavn:"
+
+msgid "This process might take several minutes."
+msgstr "Processen kan vare flere minutter."
+
+msgid ""
+"PDFCreator easily creates PDFs from any Windows program. Use it like a "
+"printer in Word, Excel, or any other Windows application."
+msgstr ""
+"PDFCreator fremstiller nemt PDF'er fra ethvert Windowsprogram. Brug den som "
+"en printer i Word, Excel, eller et vilkårligt andet Windows-program."
+
+msgid "application files"
+msgstr "programfiler"
+
+msgid ""
+"The application '%1' is running.%n%nPlease close the application first.%n%n"
+msgstr "Programmet '%1' kører.%n%nLuk det først.%n%n"
+
+msgid "Please restart your system first to continue setup."
+msgstr "Genstart computeren for at fuldføre installationen."
+
+msgid "PDFCreator settings"
+msgstr "Indstillinger for PDFCreator"
+
+msgid "Show help after setup"
+msgstr "Vis hjælp efter opsætning"
+
+msgid ""
+"Please use \"PDFCreator Terminal Server\" for use on computers with "
+"installed Terminal Services.%n%nWould you like to have more information "
+"about \"PDFCreator Terminal Server\"?"
+msgstr ""
+"Brug \"PDFCreator Terminal Server\" på computere med Terminal Services "
+"installeret.%n%nØnskes mere information om \"PDFCreator Terminal Server\"?"
+
+msgid ""
+"This is a developer preview of PDFCreator.%n%nThis is not an early version "
+"of the next release. It will most likely contain bugs or not work at all.%n"
+"%nIf you should dare to install it anyway, we would like to hear your "
+"feedback."
+msgstr ""
+"Dette er en udviklerudgave af PDFCreator.%n%nDet er ikke en tidlig version "
+"af næste udgave. Den indeholder sikkert fejl og funktionsmangler.%n%nHvis du "
+"alligevel tør installere den, vil vi gerne modtage feedback."
+
+msgid ""
+"This version doesn't support the server mode. Do you want install this "
+"version anyway?"
+msgstr ""
+"Denne version understøtter ikke servertilstand. Skal denne version alligevel "
+"installeres?"
+
+msgid "Delete all application settings?"
+msgstr "Slet alle programindstillinger?"
+
+msgid "Uninstall the printer with all its components."
+msgstr "Afinstaller printeren og alle dens bestanddele."
+
+msgid ""
+"To update, use <OK>, or cancel the setup and uninstall the older version "
+"first."
+msgstr ""
+"Tryk <OK> for at opdatere, eller afbryd opsætningen og afinstaller først den "
+"gamle version."
+
+msgid "Create an &entry in the Windows Explorer context menu"
+msgstr "Opret et &punkt i Windows Stifinders højrekliksmenu"
+
+msgid "Create PDF and Bitmap files with %1"
+msgstr "Opret PDF- og bitmapfiler med %1"
+
+msgid "Bad request (400)"
+msgstr "HTTP-fejl 400"
+
+msgid "Access denied (401)"
+msgstr "Adgang nægtet (401)"
+
+msgid "File not found (404)"
+msgstr "Fil ikke fundet (404)"
+
+msgid "Proxy authentication required (407)"
+msgstr "Proxy-godkendelse kræves (407)"
+
+msgid "Server internal error (500)"
+msgstr "Intern serverfejl (500)"
+
+msgid "Bad gateway (502)"
+msgstr "Ugyldig gateway (502)"
+
+msgid "Service temporarily unavailable (503)"
+msgstr "Tjeneste midlertidigt utilgængelig (503)"
+
+msgid "Cancelling download..."
+msgstr "Afbryder download..."
+
+msgid "Cannot connect"
+msgstr "Kan ikke forbinde"
+
+msgid "Connecting..."
+msgstr "Forbinder..."
+
+msgid "Current file"
+msgstr "Aktuel fil"
+
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "Download cancelled"
+msgstr "Download afbrudt"
+
+msgid "Download complete"
+msgstr "Download er fuldført"
+
+msgid "Download failed"
+msgstr "Download fejlede"
+
+msgid "Downloading..."
+msgstr "Downloader..."
+
+msgid "Please click here to revoke your previous activations."
+msgstr "Klik her for at genoprette tidligere aktiveringer."
+
+msgid "Elapsed time:"
+msgstr "Tidsforbrug:"
+
+msgid "File:"
+msgstr "Fil:"
+
+msgid "The following files were not downloaded:"
+msgstr "Disse filer blev ikke downloadet:"
+
+msgid "Downloading additional files"
+msgstr "Downloader yderligere filer"
+
+msgid "Please wait, while setup downloading additional files..."
+msgstr "Vent, medens der downloades yderligere filer..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Getting file information..."
+msgstr "Henter filoplysninger..."
+
+msgid "Hide"
+msgstr "Skjul"
+
+msgid "HTTP error %d"
+msgstr "HTTP fejl %d"
+
+msgid "Ignore"
+msgstr "Ignorer"
+
+msgid "Initializing..."
+msgstr "Initierer..."
+
+msgid "KB"
+msgstr "KB"
+
+msgid "KB/s"
+msgstr "KB/s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MB/s"
+msgstr "MB/s"
+
+msgid "Remaining time:"
+msgstr "Resterer:"
+
+msgid "Retry"
+msgstr "Prøv igen"
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Cancel' to terminate setup."
+msgstr ""
+"Kontroller forbindelsen og klik 'Prøv igen' for at forsøge at downloade "
+"filerne, eller klik 'Afbryd' for at afslutte."
+
+msgid ""
+"Check your connection and click 'Retry' to try downloading the files again, "
+"or click 'Next' to continue installing anyway."
+msgstr ""
+"Kontroller forbindelsen og klik 'Prøv igen' for at forsøge at downloade "
+"filerne, eller klik 'Næste' for at fortsætte alligevel."
+
+msgid "Speed:"
+msgstr "Hastighed:"
+
+msgid "Starting download..."
+msgstr "Starter download..."
+
+msgid "Status:"
+msgstr "Status:"
 
 msgid "Total progress"
 msgstr "Fremdrift"
@@ -547,5 +697,5 @@ msgstr "Ukendt"
 msgid "%.2f of %.2f"
 msgstr "%.2f af %.2f"
 
-msgid "Offline activation instructions"
-msgstr "Om offline aktivering"
+msgid "Setup has finished installing [name] on your computer."
+msgstr "Installering af [name] er fuldført."

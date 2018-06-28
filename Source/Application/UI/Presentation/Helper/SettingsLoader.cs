@@ -102,7 +102,7 @@ namespace pdfforge.PDFCreator.UI.ViewModels
                 @".DEFAULT\" + _installationPathProvider.SettingsRegistryPath);
 
             var data = Data.CreateDataStorage();
-            defaultUserStorage.SetData(data);
+            defaultUserStorage.Data = data;
 
             // Store default settings and then load the machine defaults from HKEY_USERS\.DEFAULT to give them prefrence
             defaultSettings.StoreValues(data, "");

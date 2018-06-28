@@ -42,7 +42,7 @@
             <DockPanel Margin="5">
                 <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Margin="0 0 5 0">Please leave us a mail address in case we should have further questions regarding the problem. In most cases, you will not receive any mail at all. Under no circumstances will we send mails not related to this bug report.</TextBlock>
 
-                <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Margin="0 0 5 0"><Bold>E-Mail address</Bold> (optional):</TextBlock>
+                <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Margin="0 0 5 0"><Bold>E-mail address</Bold> (optional):</TextBlock>
                 <TextBox DockPanel.Dock="Left" Width="250" Text="{Binding ElementName=ThisWindow, Path=EmailAddress}" HorizontalAlignment="Left" />
             </DockPanel>
             <TextBlock Margin="5" TextWrapping="Wrap"><Bold>Please note:</Bold> The information above can contain personal information like your name (i.e. in user profile paths). Please make sure it does not contain any information you would not like to disclose before posting.</TextBlock>

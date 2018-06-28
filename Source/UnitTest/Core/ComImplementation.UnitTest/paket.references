@@ -1,6 +1,8 @@
-﻿NUnit
-NSubstitute
-SystemWrapper
+﻿SystemWrapper
 SystemInterface
 Translatable
 DataStorage
+
+group test
+    NSubstitute
+    NUnit

@@ -62,8 +62,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             CheckOutputFiles();
 
-            var pdfReader = new PdfReader(_th.Job.OutputFiles[0]);
-            Assert.AreEqual('4', pdfReader.PdfVersion);
+            using (var pdfReader = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                Assert.AreEqual('4', pdfReader.PdfVersion);
+            }
         }
 
         /// <summary>
@@ -85,8 +87,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             CheckOutputFiles();
 
-            var pdf = new PdfReader(_th.Job.OutputFiles[0]);
-            Assert.AreEqual(numberOfSourceFiles, pdf.NumberOfPages, "Number of output pages is incorrect");
+            using (var pdf = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                Assert.AreEqual(numberOfSourceFiles, pdf.NumberOfPages, "Number of output pages is incorrect");
+            }
         }
 
         [Test]
@@ -98,9 +102,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             CheckOutputFiles();
 
-            var pdf = new PdfReader(_th.Job.OutputFiles[0]);
-
-            Assert.AreEqual(11, pdf.NumberOfPages, "Number of output pages is incorrect");
+            using (var pdf = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                Assert.AreEqual(11, pdf.NumberOfPages, "Number of output pages is incorrect");
+            }
         }
 
         [Test]
@@ -160,8 +165,10 @@ namespace pdfforge.PDFCreator.IntegrationTest.Conversion.Jobs.ConversionTests
 
             CheckOutputFiles();
 
-            var pdf = new PdfReader(_th.Job.OutputFiles[0]);
-            Assert.AreEqual(1, pdf.NumberOfPages, "Number of output pages is incorrect");
+            using (var pdf = new PdfReader(_th.Job.OutputFiles[0]))
+            {
+                Assert.AreEqual(1, pdf.NumberOfPages, "Number of output pages is incorrect");
+            }
         }
 
         [Test]

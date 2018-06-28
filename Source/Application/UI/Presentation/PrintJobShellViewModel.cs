@@ -33,14 +33,13 @@ namespace pdfforge.PDFCreator.UI.Presentation
 
         public PrintJobShellViewModel(ApplicationNameProvider applicationNameProvider, IInteractionRequest interactionRequest, ITranslationUpdater updater, IEventAggregator eventAggregator, DragAndDropEventHandler dragAndDrop) : base(updater)
         {
-            var eventAggregator1 = eventAggregator;
             ApplicationName = applicationNameProvider;
             InteractionRequest = interactionRequest;
 
             if (eventAggregator != null)
             {
-                eventAggregator1.GetEvent<ShowLockLayerEvent>().Subscribe(() => ShowLockLayer = true);
-                eventAggregator1.GetEvent<HideLockLayerEvent>().Subscribe(() => ShowLockLayer = false);
+                eventAggregator.GetEvent<ShowLockLayerEvent>().Subscribe(() => ShowLockLayer = true);
+                eventAggregator.GetEvent<HideLockLayerEvent>().Subscribe(() => ShowLockLayer = false);
             }
 
             DragEnterCommand = new DelegateCommand<DragEventArgs>(dragAndDrop.HandleDragEnter);

@@ -1,15 +1,17 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.security;
 using NLog;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Pkcs;
-using Org.BouncyCastle.Security;
 using pdfforge.PDFCreator.Conversion.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
 using pdfforge.PDFCreator.Conversion.Settings.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
@@ -28,6 +30,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
         /// <param name="stamper">Stamper with document</param>
         /// <param name="profile">Profile with signature settings</param>
         /// <param name="jobPasswords">Passwords with PdfSignaturePassword</param>
+        /// <param name="accounts">List of accounts</param>
         /// <exception cref="ProcessingException">In case of any error.</exception>
         public void SignPdfFile(PdfStamper stamper, ConversionProfile profile, JobPasswords jobPasswords, Accounts accounts)
         {
@@ -72,182 +75,105 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             {
                 throw;
             }
+            catch (WebException ex)
+            {
+                throw new ProcessingException(ex.GetType() + " while signing:" + Environment.NewLine + ex.Message, ErrorCode.Signature_NoTimeServerConnection, ex);
+            }
             catch (Exception ex)
             {
                 throw new ProcessingException(ex.GetType() + " while signing:" + Environment.NewLine + ex.Message, ErrorCode.Signature_GenericError, ex);
             }
         }
 
-        private void DoSignPdfFile(PdfStamper stamper, Signature signing, JobPasswords jobPasswords, TimeServerAccount timeServerAccount)
+        private string GetCertificateAlias(Pkcs12Store store)
         {
-            var fsCert = new FileStream(signing.CertificateFile, FileMode.Open, FileAccess.Read);
-            var ks = new Pkcs12Store(fsCert, jobPasswords.PdfSignaturePassword.ToCharArray());
-            string alias = null;
-            foreach (string al in ks.Aliases)
+            foreach (string al in store.Aliases)
             {
-                if (ks.IsKeyEntry(al) && ks.GetKey(al).Key.IsPrivate)
+                if (store.IsKeyEntry(al) && store.GetKey(al).Key.IsPrivate)
                 {
-                    alias = al;
-                    break;
+                    return al;
                 }
             }
-            fsCert.Close();
-            ICipherParameters pk = ks.GetKey(alias).Key;
-            var x = ks.GetCertificateChain(alias);
-            var chain = new X509Certificate[x.Length];
-            for (var k = 0; k < x.Length; ++k)
-                chain[k] = x[k].Certificate;
 
-            ITSAClient tsc = null;
-            if (!string.IsNullOrWhiteSpace(timeServerAccount.Url))
+            throw new CryptographicException("Could not find a private key in the certificate");
+        }
+
+        private ICipherParameters GetPrivateKey(Pkcs12Store store, string alias)
+        {
+            return store.GetKey(alias).Key;
+        }
+
+        private IList<X509Certificate> GetCertificateChain(Pkcs12Store store, string alias)
+        {
+            return store.GetCertificateChain(alias)
+                .Select(x => x.Certificate)
+                .ToList();
+        }
+
+        private Pkcs12Store GetCertificateStore(string certificateFile, string password)
+        {
+            using (var fsCert = new FileStream(certificateFile, FileMode.Open, FileAccess.Read))
             {
-                if (!timeServerAccount.IsSecured)
-                    tsc = new TSAClientBouncyCastle(timeServerAccount.Url);
-                else
-                    tsc = new TSAClientBouncyCastle(timeServerAccount.Url, timeServerAccount.UserName, timeServerAccount.Password);
+                return new Pkcs12Store(fsCert, password.ToCharArray());
             }
+        }
 
-            var psa = stamper.SignatureAppearance;
-            if (tsc == null)
-                psa.SetCrypto(pk, chain, null, PdfSignatureAppearance.WINCER_SIGNED);
-            else
-                psa.SetCrypto(null, chain, null, PdfSignatureAppearance.SELF_SIGNED);
+        private ITSAClient BuildTimeServerClient(TimeServerAccount timeServerAccount)
+        {
+            if (string.IsNullOrWhiteSpace(timeServerAccount.Url))
+                return null;
+
+            return timeServerAccount.IsSecured
+                ? new TSAClientBouncyCastle(timeServerAccount.Url, timeServerAccount.UserName, timeServerAccount.Password)
+                : new TSAClientBouncyCastle(timeServerAccount.Url);
+        }
+
+        private IOcspClient BuildOcspClient()
+        {
+            var verifier = new OcspVerifier(null, null);
+            return new OcspClientBouncyCastle(verifier);
+        }
+
+        private PdfSignatureAppearance BuildSignatureAppearance(PdfStamper stamper, Signature signing)
+        {
+            // Creating the appearance
+            PdfSignatureAppearance appearance = stamper.SignatureAppearance;
+            appearance.Reason = signing.SignReason;
+            appearance.Contact = signing.SignContact;
+            appearance.Location = signing.SignLocation;
 
             if (!signing.AllowMultiSigning)
                 //Lock PDF, except for form filling (irrelevant for PDFCreator)
-                psa.CertificationLevel = PdfSignatureAppearance.CERTIFIED_FORM_FILLING_AND_ANNOTATIONS;
-
-            psa.Reason = signing.SignReason;
-            psa.Contact = signing.SignContact;
-            psa.Location = signing.SignLocation;
+                appearance.CertificationLevel = PdfSignatureAppearance.CERTIFIED_FORM_FILLING_AND_ANNOTATIONS;
 
             if (signing.DisplaySignatureInDocument)
             {
                 var signPage = SignPageNr(stamper, signing);
 
-                psa.SetVisibleSignature(new Rectangle(signing.LeftX, signing.LeftY, signing.RightX, signing.RightY),
+                appearance.SetVisibleSignature(new Rectangle(signing.LeftX, signing.LeftY, signing.RightX, signing.RightY),
                     signPage, null);
             }
 
-            var dic = new PdfSignature(PdfName.ADOBE_PPKLITE, new PdfName("adbe.pkcs7.detached"));
-            dic.Reason = psa.Reason;
-            dic.Location = psa.Location;
-            dic.Contact = psa.Contact;
-            dic.Date = new PdfDate(psa.SignDate);
-            psa.CryptoDictionary = dic;
-
-            const int contentEstimated = 15000;
-            // Preallocate excluded byte-range for the signature content (hex encoded)
-            var exc = new Dictionary<PdfName, int>();
-            exc[PdfName.CONTENTS] = contentEstimated * 2 + 2;
-            psa.PreClose(exc);
-            const string hashAlgorithm = "SHA1"; //Always use HashAlgorithm "SHA1"
-            var sgn = new PdfPKCS7(pk, chain, null, hashAlgorithm, false);
-            var messageDigest = DigestUtilities.GetDigest(hashAlgorithm);
-            var data = psa.GetRangeStream();
-            var buf = new byte[8192];
-            int n;
-            while ((n = data.Read(buf, 0, buf.Length)) > 0)
-            {
-                messageDigest.BlockUpdate(buf, 0, n);
-            }
-            var hash = new byte[messageDigest.GetDigestSize()];
-            messageDigest.DoFinal(hash, 0);
-            byte[] ocsp = null;
-            if (chain.Length >= 2)
-            {
-                var url = PdfPKCS7.GetOCSPURL(chain[0]);
-                if (!string.IsNullOrEmpty(url))
-                    ocsp = new OcspClientBouncyCastle().GetEncoded(chain[0], chain[1], url);
-            }
-            var cal = psa.SignDate;
-            var sh = sgn.GetAuthenticatedAttributeBytes(hash, cal, ocsp);
-            sgn.Update(sh, 0, sh.Length);
-
-            var paddedSig = new byte[contentEstimated];
-
-            if (tsc != null)
-            {
-                byte[] encodedSigTsa = null;
-                try
-                {
-                    encodedSigTsa = sgn.GetEncodedPKCS7(hash, cal, tsc, ocsp);
-                    Array.Copy(encodedSigTsa, 0, paddedSig, 0, encodedSigTsa.Length);
-                }
-                catch (Exception ex)
-                {
-                    throw new ProcessingException(
-                        ex.GetType() + " while connecting to timeserver (can't connect to timeserver): " + ex.Message, ErrorCode.Signature_NoTimeServerConnection);
-                }
-                if (contentEstimated + 2 < encodedSigTsa.Length)
-                {
-                    throw new ProcessingException(
-                        "Not enough space for signature", ErrorCode.Signature_NotEnoughSpaceForSignature);
-                }
-            }
-            else
-            {
-                var encodedSig = sgn.GetEncodedPKCS7(hash, cal);
-                Array.Copy(encodedSig, 0, paddedSig, 0, encodedSig.Length);
-                if (contentEstimated + 2 < encodedSig.Length)
-                {
-                    throw new ProcessingException("Not enough space for signature", ErrorCode.Signature_ProfileCheck_NotEnoughSpaceForSignature);
-                }
-            }
-
-            var dic2 = new PdfDictionary();
-            dic2.Put(PdfName.CONTENTS, new PdfString(paddedSig).SetHexWriting(true));
-            psa.Close(dic2);
+            return appearance;
         }
 
-        /// <summary>
-        ///     This method returns true if a password for a given certificate file is valid.
-        /// </summary>
-        /// <param name="certficateFilename">Name of p12 or pfx certificate file.</param>
-        /// <param name="certifcatePassword">A password string.</param>
-        /// <returns>
-        ///     True if the password is valid.
-        /// </returns>
-        /// <example>
-        ///     <code lang="C#">
-        /// X509 x509 = new X509();
-        /// string certificateFile = "MyCertificate.pfx";
-        /// string password = "MyPassword";
-        /// Console.WriteLine("Check the password for certifcate '" + certificateFile + "':");
-        /// if (x509.IsValidCertificatePassword(certificateFile, password))
-        ///  Console.WriteLine("The password '" + password + "' is valid!");
-        /// else
-        ///  Console.WriteLine("The password '" + password + "'is invalid!");
-        /// password = "WrongPassword";
-        /// if (x509.IsValidCertificatePassword(certificateFile, password))
-        ///  Console.WriteLine("The password '" + password + "' is valid!");
-        /// else
-        ///  Console.WriteLine("The password '" + password + "'is invalid!");
-        /// x509 = null;
-        /// Console.ReadLine();
-        /// </code>
-        ///     <code lang="vbscript">
-        /// Option Explicit
-        /// Dim x509, password, certificateFile, resStr
-        /// certificateFile = "MyCertificate.pfx"
-        /// password = "MyPassword"
-        /// resStr = "Check the password for certificate '" + certificateFile + "':"
-        /// Set x509 = WScript.CreateObject("pdfforge.x509.x509")
-        /// if (pdf.IsValidCertificatePassword(certificateFile, password)) then
-        ///  resStr = resStr + vbCrLf + "The password '" + password + "' is valid!"
-        /// else
-        ///  resStr = resStr + vbCrLf + "The password '" + password + "'is invalid!"
-        /// end if
-        /// password = "WrongPassword"
-        /// if (pdf.IsValidCertificatePassword(certificateFile, password)) then
-        ///  resStr = resStr + vbCrLf + "The password '" + password + "' is valid!"
-        /// else
-        ///  resStr = resStr + vbCrLf + "The password '" + password + "'is invalid!"
-        /// end if
-        /// Set x509 = Nothing
-        /// MsgBox resStr
-        /// </code>
-        /// </example>
+        private void DoSignPdfFile(PdfStamper stamper, Signature signing, JobPasswords jobPasswords, TimeServerAccount timeServerAccount)
+        {
+            Pkcs12Store store = GetCertificateStore(signing.CertificateFile, jobPasswords.PdfSignaturePassword);
+            var certificateAlias = GetCertificateAlias(store);
+            var pk = GetPrivateKey(store, certificateAlias);
+
+            var appearance = BuildSignatureAppearance(stamper, signing);
+            // Creating the signature
+            IExternalSignature pks = new PrivateKeySignature(pk, DigestAlgorithms.SHA512);
+            var chain = GetCertificateChain(store, certificateAlias);
+            var ocspClient = BuildOcspClient();
+            var tsaClient = BuildTimeServerClient(timeServerAccount);
+
+            var cryptoStandard = CryptoStandard.CADES;
+            MakeSignature.SignDetached(appearance, pks, chain, null, ocspClient, tsaClient, 0, cryptoStandard);
+        }
+
         private bool IsValidCertificatePassword(string certficateFilename, string certifcatePassword)
         {
             try
@@ -261,41 +187,7 @@ namespace pdfforge.PDFCreator.Conversion.Processing.ITextProcessing
             }
         }
 
-        /// <summary>
-        ///     This method returns true if a certificate has a private key.
-        /// </summary>
-        /// <param name="certficateFilename">Name of p12 or pfx certificate file.</param>
-        /// <param name="certifcatePassword">A password string.</param>
-        /// <returns>
-        ///     True if the certificate has a private key.
-        /// </returns>
-        /// <example>
-        ///     <code lang="C#">
-        /// X509 x509 = new X509();
-        /// string certificateFile = "MyCertificate.pfx";
-        /// string password = "MyPassword";
-        /// if (x509.CertificateHasPrivateKey(certificateFile, password))
-        ///  Console.WriteLine("The certificate '{0}' has a private key.", certificateFile);
-        /// else
-        ///  Console.WriteLine("The certificate '{0}' has NO private key.", certificateFile);
-        /// x509 = null;
-        /// Console.ReadLine();
-        /// </code>
-        ///     <code lang="vbscript">
-        /// Option Explicit
-        /// Dim x509, password, certificateFile
-        /// certificateFile = "MyCertificate.pfx"
-        /// password = "MyPassword"
-        /// Set x509 = WScript.CreateObject("pdfforge.x509.x509")
-        /// if (pdf.CertificateHasPrivateKey(certificateFile, password)) then
-        ///  MsgBox "The certifcate '" + certificateFile + "' has a private key."
-        /// else
-        ///  MsgBox "The certifcate '" + certificateFile + "' has a NO private key."
-        /// end if
-        /// Set x509 = Nothing
-        /// </code>
-        /// </example>
-        public bool CertificateHasPrivateKey(string certficateFilename, string certifcatePassword)
+        private bool CertificateHasPrivateKey(string certficateFilename, string certifcatePassword)
         {
             var cert = new X509Certificate2(certficateFilename, certifcatePassword);
             if (cert.HasPrivateKey)

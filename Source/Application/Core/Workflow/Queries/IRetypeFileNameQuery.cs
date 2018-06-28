@@ -3,8 +3,14 @@ using pdfforge.PDFCreator.Conversion.Settings.Enums;
 
 namespace pdfforge.PDFCreator.Core.Workflow.Queries
 {
+    public enum RetypeReason
+    {
+        InvalidRootedPath,
+        CopyError
+    }
+
     public interface IRetypeFileNameQuery
     {
-        QueryResult<string> RetypeFileName(string filename, OutputFormat outputFormat);
+        QueryResult<string> RetypeFileNameQuery(string filename, OutputFormat outputFormat, RetypeReason retypeReason);
     }
 }

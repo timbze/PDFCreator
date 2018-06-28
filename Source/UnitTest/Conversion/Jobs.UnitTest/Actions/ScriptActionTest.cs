@@ -17,7 +17,7 @@ namespace pdfforge.PDFCreator.UnitTest.Conversion.Jobs.Actions
         private IPath _path;
         private IProcessStarter _processStarter;
         private ScriptAction _scriptAction;
-        private Accounts _unusedAccounts;
+        private readonly Accounts _unusedAccounts = null;
 
         [SetUp]
         public void Setup()

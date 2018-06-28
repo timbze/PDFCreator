@@ -43,8 +43,7 @@ namespace Presentation.UnitTest.UserControls.Profile
             settingsProvider.Settings.Returns(settings);
 
             var commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator = Substitute.For<ICommandLocator>();
-            commandLocator.GetMacroCommand().Returns(x => new MacroCommand(commandLocator));
+            commandLocator.CreateMacroCommand().Returns(x => new MacroCommandBuilder(commandLocator));
 
             _addCommand = Substitute.For<ICommand>();
             commandLocator.GetCommand<HttpAccountAddCommand>().Returns(_addCommand);

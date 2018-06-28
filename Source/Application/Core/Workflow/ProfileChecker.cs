@@ -47,7 +47,6 @@ namespace pdfforge.PDFCreator.Core.Workflow
             var actionResult = new ActionResult();
 
             actionResult.AddRange(CheckAutosaveSettings(profile));
-            actionResult.AddRange(CheckSaveSettings(profile));
             actionResult.AddRange(CheckCoverPageSettings(profile));
             actionResult.AddRange(CheckAttachmentPageSettings(profile));
             actionResult.AddRange(CheckStampingSettings(profile));
@@ -58,23 +57,6 @@ namespace pdfforge.PDFCreator.Core.Workflow
             foreach (var actionCheck in _actionChecks)
             {
                 actionResult.AddRange(actionCheck.Check(profile, accounts));
-            }
-
-            return actionResult;
-        }
-
-        private ActionResult CheckSaveSettings(ConversionProfile profile)
-        {
-            var actionResult = new ActionResult();
-
-            if (profile.SaveDialog.SetDirectory
-                && !profile.AutoSave.Enabled) //Skip if Autosave is enabled.
-            {
-                if (string.IsNullOrEmpty(profile.TargetDirectory))
-                {
-                    _logger.Error("Preselected folder for savedialog is empty.");
-                    actionResult.Add(ErrorCode.SaveDialog_NoPreselectedFolder);
-                }
             }
 
             return actionResult;

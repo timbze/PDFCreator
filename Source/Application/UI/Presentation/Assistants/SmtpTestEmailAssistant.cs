@@ -9,9 +9,11 @@ using pdfforge.PDFCreator.Core.Services.Translation;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
 using pdfforge.PDFCreator.UI.Interactions.Enums;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Overlay.Password;
+using pdfforge.PDFCreator.Utilities.Tokens;
 using System.Linq;
 using System.Text;
 using SystemInterface.IO;
@@ -31,11 +33,13 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
         private readonly IMailSignatureHelper _mailSignatureHelper;
         private readonly ErrorCodeInterpreter _errorCodeInterpreter;
         private readonly IInteractionInvoker _interactionInvoker;
+        private readonly TokenHelper _tokenHelper;
         private readonly ISmtpMailAction _smtpMailAction;
         private SmtpTranslation _translation;
 
         public SmtpTestEmailAssistant(ITranslationUpdater translationUpdater, IInteractionRequest interactionRequest, IFile file,
-            ISmtpMailAction smtpMailAction, IPath path, IMailSignatureHelper mailSignatureHelper, ErrorCodeInterpreter errorCodeInterpreter, IInteractionInvoker interactionInvoker)
+            ISmtpMailAction smtpMailAction, IPath path, IMailSignatureHelper mailSignatureHelper, ErrorCodeInterpreter errorCodeInterpreter,
+            IInteractionInvoker interactionInvoker, TokenHelper tokenHelper)
         {
             _interactionRequest = interactionRequest;
             _file = file;
@@ -45,6 +49,25 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             _mailSignatureHelper = mailSignatureHelper;
             _errorCodeInterpreter = errorCodeInterpreter;
             _interactionInvoker = interactionInvoker;
+            _tokenHelper = tokenHelper;
+        }
+
+        private string GetRecipientsString(EmailSmtpSettings smtpSettings, TokenReplacer tokenReplacer)
+        {
+            var recipientsTo = tokenReplacer.ReplaceTokens(smtpSettings.Recipients);
+            var recipientsCc = tokenReplacer.ReplaceTokens(smtpSettings.RecipientsCc);
+            var recipientsBcc = tokenReplacer.ReplaceTokens(smtpSettings.RecipientsBcc);
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"{_translation.RecipientsToText} {recipientsTo}");
+
+            if (!string.IsNullOrWhiteSpace(recipientsCc))
+                sb.AppendLine($"{_translation.RecipientsCcText} {recipientsCc}");
+
+            if (!string.IsNullOrWhiteSpace(recipientsBcc))
+                sb.AppendLine($"{_translation.RecipientsBccText} {recipientsBcc}");
+
+            return sb.ToString();
         }
 
         public void SendTestMail(ConversionProfile profile, Accounts accounts)
@@ -64,22 +87,19 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             var jobTranslations = new JobTranslations();
             jobTranslations.EmailSignature = _mailSignatureHelper.ComposeMailSignature();
 
-            var job = CreateJob(jobTranslations, currentProfile, accounts);
+            var testFile = _path.Combine(_path.GetTempPath(), _translation.AttachmentFile + ".pdf");
+            _file.WriteAllText(testFile, @"PDFCreator", Encoding.GetEncoding("Unicode"));
+
+            var job = CreateJob(jobTranslations, currentProfile, accounts, testFile);
 
             var success = TrySetJobPasswords(job, profile);
             if (!success)
                 return;
 
-            var testFile = _path.Combine(_path.GetTempPath(), _translation.AttachmentFile + ".pdf");
-            _file.WriteAllText(testFile, @"PDFCreator", Encoding.GetEncoding("Unicode"));
-            job.OutputFiles.Add(testFile);
-
-            var recipients = currentProfile.EmailSmtpSettings.Recipients;
-
             actionResult = _smtpMailAction.ProcessJob(job);
 
             _file.Delete(testFile);
-            DisplayResult(actionResult, recipients);
+            DisplayResult(actionResult, job);
         }
 
         private bool TrySetJobPasswords(Job job, ConversionProfile profile)
@@ -95,21 +115,17 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             job.Passwords.SmtpPassword = smtpAccount.Password;
 
             if (!string.IsNullOrWhiteSpace(job.Passwords.SmtpPassword))
-            {
                 return true;
-            }
 
-            var sb = new StringBuilder();
-            sb.AppendLine(_translation.RecipientsLabel);
-            sb.AppendLine(profile.EmailSmtpSettings.Recipients);
+            var recipientsString = GetRecipientsString(job.Profile.EmailSmtpSettings, job.TokenReplacer);
 
             var title = _translation.SetSmtpServerPassword;
             var description = _translation.SmtpServerPasswordLabel;
 
             var interaction = new PasswordOverlayInteraction(PasswordMiddleButton.None, title, description, false);
-            interaction.IntroText = sb.ToString();
+            interaction.IntroText = recipientsString;
 
-            // TODO: Can this be done with IInteractionRequest? (it's hard to wait for the response!)
+            // TODO:Use IInteractionRequest
             _interactionInvoker.Invoke(interaction);
 
             if (interaction.Result != PasswordResult.StorePassword)
@@ -119,20 +135,24 @@ namespace pdfforge.PDFCreator.UI.Presentation.Assistants
             return true;
         }
 
-        private Job CreateJob(JobTranslations jobTranslations, ConversionProfile currentProfile, Accounts accounts)
+        private Job CreateJob(JobTranslations jobTranslations, ConversionProfile currentProfile, Accounts accounts, string outputFile)
         {
             var jobInfo = new JobInfo();
             var job = new Job(jobInfo, currentProfile, jobTranslations, accounts);
+            job.JobInfo.Metadata = new Metadata();
+            job.JobInfo.SourceFiles.Add(new SourceFileInfo { Filename = "test.ps" });
+            job.OutputFiles.Add(outputFile);
+            job.TokenReplacer = _tokenHelper.TokenReplacerWithPlaceHolders;
 
             return job;
         }
 
-        private void DisplayResult(ActionResult actionResult, string recipients)
+        private void DisplayResult(ActionResult actionResult, Job job)
         {
             if (actionResult.IsSuccess)
             {
                 var title = _translation.SendTestMail;
-                var message = _translation.GetTestMailSentFormattedTranslation(recipients);
+                var message = _translation.TestMailSent + "\n" + GetRecipientsString(job.Profile.EmailSmtpSettings, job.TokenReplacer);
                 DisplayMessage(message, title, MessageIcon.Info);
             }
             else

@@ -92,8 +92,6 @@ namespace pdfforge.PDFCreator.Core.Workflow
 
             JobDataUpdater.UpdateTokensAndMetadata(job);
 
-            _logger.Debug("Starting PrintJobWindow");
-
             try
             {
                 DoWorkflowWork(job);

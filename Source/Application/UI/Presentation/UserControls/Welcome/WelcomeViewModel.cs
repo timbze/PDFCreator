@@ -1,7 +1,8 @@
-﻿using pdfforge.Obsidian;
-using pdfforge.PDFCreator.Core.Controller;
+﻿using pdfforge.PDFCreator.Core.Controller;
+using pdfforge.PDFCreator.Core.Services;
 using pdfforge.PDFCreator.UI.Interactions;
-using pdfforge.PDFCreator.UI.Presentation.Customization;
+using pdfforge.PDFCreator.UI.Presentation.Commands;
+using pdfforge.PDFCreator.UI.Presentation.Commands.UserGuide;
 using pdfforge.PDFCreator.UI.Presentation.Help;
 using pdfforge.PDFCreator.UI.Presentation.Helper;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
@@ -9,58 +10,29 @@ using pdfforge.PDFCreator.UI.Presentation.ServiceLocator;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
 using pdfforge.PDFCreator.Utilities.Process;
 using System;
+using System.Windows.Input;
 
 namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Welcome
 {
     public class WelcomeViewModel : OverlayViewModelBase<WelcomeInteraction, WelcomeWindowTranslation>, IWhitelisted
     {
         private readonly IProcessStarter _processStarter;
-        private readonly ButtonDisplayOptions _buttonDisplayOptions;
-        private readonly IUserGuideHelper _userGuideHelper;
 
-        public WelcomeViewModel(IProcessStarter processStarter, ButtonDisplayOptions buttonDisplayOptions, IUserGuideHelper userGuideHelper, ITranslationUpdater translationUpdater)
+        public WelcomeViewModel(ICommandLocator commandLocator, ITranslationUpdater translationUpdater, EditionHintOptionProvider editionHintOptionProvider)
             : base(translationUpdater)
         {
-            _processStarter = processStarter;
-            _buttonDisplayOptions = buttonDisplayOptions;
-            _userGuideHelper = userGuideHelper;
+            AllowPrioritySupport = !editionHintOptionProvider?.ShowOnlyForPlusAndBusinessHint ?? true;
 
-            WhatsNewCommand = new DelegateCommand(WhatsNewCommandExecute);
-            FacebookCommand = new DelegateCommand(FacebookCommandExecute);
-            GooglePlusCommand = new DelegateCommand(GooglePlusCommandExecute);
+            WhatsNewCommand = commandLocator.GetInitializedCommand<ShowUserGuideCommand, HelpTopic>(HelpTopic.WhatsNew);
+            BlogCommand = commandLocator.GetInitializedCommand<UrlOpenCommand, string>(Urls.Blog);
+            PrioritySupportCommand = commandLocator.GetCommand<PrioritySupportUrlOpenCommand>();
         }
 
-        public bool HideSocialMediaButtons => _buttonDisplayOptions.HideSocialMediaButtons;
+        public Boolean AllowPrioritySupport { get; }
 
-        public DelegateCommand WhatsNewCommand { get; }
-        public DelegateCommand FacebookCommand { get; }
-        public DelegateCommand GooglePlusCommand { get; }
-
-        public void WhatsNewCommandExecute(object obj)
-        {
-            _userGuideHelper.ShowHelp(HelpTopic.WhatsNew);
-        }
-
-        public void FacebookCommandExecute(object obj)
-        {
-            ShowUrlInBrowser(Urls.Facebook);
-        }
-
-        public void GooglePlusCommandExecute(object obj)
-        {
-            ShowUrlInBrowser(Urls.GooglePlus);
-        }
-
-        private void ShowUrlInBrowser(string url)
-        {
-            try
-            {
-                _processStarter.Start(url);
-            }
-            catch (Exception)
-            {
-            }
-        }
+        public ICommand WhatsNewCommand { get; }
+        public ICommand BlogCommand { get; }
+        public ICommand PrioritySupportCommand { get; }
 
         public override string Title => Translation.Title;
     }

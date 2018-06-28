@@ -21,8 +21,9 @@ namespace pdfforge.PDFCreator.UI.COM
             var jobRunner = _container.GetInstance<IJobRunner>();
             var jobDataUpdater = _container.GetInstance<IJobDataUpdater>();
             var outputFileMover = _container.GetInstance<AutosaveOutputFileMover>();
+            var notificationService = _container.GetInstance<DisabledNotificationService>();
 
-            return new AutoSaveWorkflow(jobDataUpdater, jobRunner, profileChecker, targetFileNameComposer, outputFileMover);
+            return new AutoSaveWorkflow(jobDataUpdater, jobRunner, profileChecker, targetFileNameComposer, outputFileMover, notificationService);
         }
     }
 }

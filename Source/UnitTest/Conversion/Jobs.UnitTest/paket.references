@@ -1,7 +1,9 @@
-﻿NSubstitute
-NUnit
-RhinoMocks
-SystemInterface
+﻿SystemInterface
 DataStorage
 SystemWrapper
 pdfforge.Mail
+
+group test
+    NSubstitute
+    NUnit
+    RhinoMocks

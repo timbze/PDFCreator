@@ -1,8 +1,11 @@
-AutoFixture
 DataStorage
-NUnit
-NSubstitute
+LicenseValidator
 Prism.Wpf
 Obsidian
 pdfforge.Mail
 SystemInterface
+
+group test
+    AutoFixture
+    NSubstitute
+    NUnit

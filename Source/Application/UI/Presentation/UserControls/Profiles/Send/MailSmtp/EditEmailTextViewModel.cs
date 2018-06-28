@@ -1,8 +1,7 @@
 ﻿using pdfforge.Obsidian;
 using pdfforge.PDFCreator.Core.Workflow;
 using pdfforge.PDFCreator.UI.Interactions;
-using pdfforge.PDFCreator.UI.Presentation.Controls;
-using pdfforge.PDFCreator.UI.Presentation.Helper;
+using pdfforge.PDFCreator.UI.Presentation.Helper.Tokens;
 using pdfforge.PDFCreator.UI.Presentation.Helper.Translation;
 using pdfforge.PDFCreator.UI.Presentation.UserControls.Accounts.AccountViews;
 using pdfforge.PDFCreator.UI.Presentation.ViewModelBases;
@@ -14,34 +13,35 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailSmt
     public class EditEmailTextViewModel : OverlayViewModelBase<EditEmailTextInteraction, SmtpTranslation>
     {
         private readonly string _signatureText;
-        public TokenViewModel SubjectTokenViewModel { get; set; }
-        public TokenViewModel ContentTokenViewModel { get; set; }
+        public TokenViewModel<EditEmailTextInteraction> SubjectTokenViewModel { get; set; }
+        public TokenViewModel<EditEmailTextInteraction> ContentTokenViewModel { get; set; }
 
         private readonly TokenReplacer _tokenReplacer;
 
-        public EditEmailTextViewModel(ITranslationUpdater translationUpdater, IMailSignatureHelper mailSignatureHelper, TokenHelper tokenHelper)
+        public EditEmailTextViewModel(ITranslationUpdater translationUpdater, IMailSignatureHelper mailSignatureHelper, TokenHelper tokenHelper, TokenViewModelFactory tokenViewModelFactory)
             : base(translationUpdater)
         {
-            if (tokenHelper != null)
-            {
-                _tokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
+            _tokenReplacer = tokenHelper.TokenReplacerWithPlaceHolders;
 
-                SubjectTokenViewModel = new TokenViewModel(x => Interaction.Subject = x, () => Interaction?.Subject, tokenHelper.GetTokenListForEmail(), ReplaceTokens);
-                ContentTokenViewModel = new TokenViewModel(x => Interaction.Content = x, () => Interaction?.Content, tokenHelper.GetTokenListForEmail(), ReplaceTokensAddSignature);
-            }
+            var builder = tokenViewModelFactory
+                .Builder<EditEmailTextInteraction>()
+                .WithInitialValue(Interaction)
+                .WithTokenList(tokenHelper.GetTokenListForEmail());
+
+            SubjectTokenViewModel = builder
+                .WithSelector(i => i.Subject)
+                .WithDefaultTokenReplacerPreview()
+                .Build();
+
+            ContentTokenViewModel = builder
+                .WithSelector(i => i.Content)
+                .WithTokenCustomPreview(ReplaceTokensAddSignature)
+                .Build();
 
             _signatureText = mailSignatureHelper.ComposeMailSignature();
 
             OkCommand = new DelegateCommand(ExecuteOk);
             CancelCommand = new DelegateCommand(o => FinishInteraction());
-        }
-
-        private string ReplaceTokens(string s)
-        {
-            if (s == null)
-                return string.Empty;
-
-            return _tokenReplacer.ReplaceTokens(s);
         }
 
         private string ReplaceTokensAddSignature(string s)
@@ -84,6 +84,8 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.Send.MailSmt
             RaisePropertyChanged(nameof(SubjectTokenViewModel));
             RaisePropertyChanged(nameof(AddSignature));
             RaisePropertyChanged(nameof(Interaction));
+            SubjectTokenViewModel.CurrentValue = Interaction;
+            ContentTokenViewModel.CurrentValue = Interaction;
             ContentTokenViewModel?.RaiseTextChanged();
         }
 

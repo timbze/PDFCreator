@@ -1,4 +1,5 @@
-﻿using iTextSharp.text.pdf;
+﻿using iTextSharp.text.exceptions;
+using iTextSharp.text.pdf;
 using NUnit.Framework;
 using pdfforge.PDFCreator.Conversion.Jobs.Jobs;
 using pdfforge.PDFCreator.Conversion.Settings;
@@ -56,24 +57,26 @@ namespace PDFCreator.TestUtilities
             //Testing Opening
             Assert.That(() =>
             {
-                var reader = new PdfReader(testFile);
-                reader.Close();
+                using (new PdfReader(testFile))
+                {
+                }
             },
                 canOpen ? !Throws.Exception.TypeOf<BadPasswordException>() : Throws.Exception.TypeOf<BadPasswordException>());
 
             //Testing Editing
             Assert.That(() =>
             {
-                var r = new PdfReader(testFile);
-                FileStream f;
-                var file = testFile + "PasswordTestCopy.pdf";
-                using (f = new FileStream(file, FileMode.Create, FileAccess.Write))
+                using (var reader = new PdfReader(testFile))
                 {
-                    var s = new PdfStamper(r, f);
-                    s.Close();
-                    f.Close();
+                    var file = testFile + "PasswordTestCopy.pdf";
+                    using (var fileStream = new FileStream(file, FileMode.Create, FileAccess.Write))
+                    {
+                        var s = new PdfStamper(reader, fileStream);
+                        s.Close();
+                        fileStream.Close();
+                    }
+                    File.Delete(file);
                 }
-                File.Delete(file);
             }, canEdit ? !Throws.Exception.TypeOf<BadPasswordException>() : Throws.Exception.TypeOf<BadPasswordException>());
         }
 
@@ -92,24 +95,24 @@ namespace PDFCreator.TestUtilities
             //Testing Opening
             Assert.That(() =>
             {
-                var reader = new PdfReader(testFile, Encoding.Default.GetBytes(password));
-                reader.Close();
+                using (new PdfReader(testFile, Encoding.Default.GetBytes(password)))
+                { }
             },
                 canOpen ? !Throws.Exception.TypeOf<BadPasswordException>() : Throws.Exception.TypeOf<BadPasswordException>());
 
             //Testing Editing
             Assert.That(() =>
             {
-                var r = new PdfReader(testFile, Encoding.Default.GetBytes(password));
-                FileStream f;
-                var file = testFile + "PasswordTestCopy.pdf";
-                using (f = new FileStream(file, FileMode.Create, FileAccess.Write))
+                using (var pdfReader = new PdfReader(testFile, Encoding.Default.GetBytes(password)))
                 {
-                    var s = new PdfStamper(r, f);
-                    s.Close();
-                    f.Close();
+                    var file = testFile + "PasswordTestCopy.pdf";
+                    using (var fileStream = new FileStream(file, FileMode.Create, FileAccess.Write))
+                    {
+                        using (new PdfStamper(pdfReader, fileStream))
+                        { }
+                    }
+                    File.Delete(file);
                 }
-                File.Delete(file);
             }, canEdit ? !Throws.Exception.TypeOf<BadPasswordException>() : Throws.Exception.TypeOf<BadPasswordException>());
         }
 
@@ -135,20 +138,25 @@ namespace PDFCreator.TestUtilities
             {
                 Assert.That(() =>
                 {
-                    var reader = new PdfReader(file);
-                    Assert.AreEqual(PdfWriter.VERSION_1_4, reader.PdfVersion, "Pdf Version is not set to 1.4.");
-                    Assert.AreEqual(-1, reader.GetCryptoMode(), "Encryption mode is not -1 (disabled)");
-                    Assert.AreEqual(0, reader.Permissions, "Wrong permission value");
+                    using (var reader = new PdfReader(file))
+                    {
+                        Assert.AreEqual(PdfWriter.VERSION_1_4, reader.PdfVersion, "Pdf Version is not set to 1.4.");
+                        Assert.AreEqual(-1, reader.GetCryptoMode(), "Encryption mode is not -1 (disabled)");
+                        Assert.AreEqual(0, reader.Permissions, "Wrong permission value");
+                    }
                 }, !Throws.Exception.TypeOf<BadPasswordException>());
                 return;
             }
 
-            var pdfReader = new PdfReader(file, Encoding.Default.GetBytes(ownerPassword));
+            using (var pdfReader = new PdfReader(file, Encoding.Default.GetBytes(ownerPassword)))
+            {
+                CheckEncryptionLevel(profile, isIText, pdfReader);
+                CheckPermissions(profile, pdfReader);
+            }
+        }
 
-            CheckEncryptionLevel(profile, isIText, pdfReader);
-
-            #region check permissions
-
+        private static void CheckPermissions(ConversionProfile profile, PdfReader pdfReader)
+        {
             long permissionCode = pdfReader.Permissions;
             Assert.AreEqual(-3904, permissionCode & -3904, "Permission-Bit 7-8 and 13-32 are not true! (PDF-Reference)");
             Assert.AreEqual(-4, permissionCode | -4, "Permission-Bit 1-2 are not false! (PDF-Reference)");
@@ -213,8 +221,6 @@ namespace PDFCreator.TestUtilities
             else
                 Assert.AreEqual(0, permissionCode & PdfWriter.ALLOW_SCREENREADERS,
                     "Unrequested Allow-ScreenReaders is set (" + profile.PdfSettings.Security.EncryptionLevel + ")");
-
-            #endregion check permissions
         }
 
         private static void CheckEncryptionLevel(ConversionProfile profile, bool IsIText, PdfReader pdfReader)
