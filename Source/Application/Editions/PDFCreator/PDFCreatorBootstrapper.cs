@@ -56,7 +56,7 @@ namespace pdfforge.PDFCreator.Editions.PDFCreator
 
         protected override void RegisterUpdateAssistant(Container container)
         {
-            container.RegisterSingleton<IUpdateHelper, UpdateHelper>();
+            container.RegisterSingleton<IUpdateHelper, DisabledUpdateHelper>();
             container.RegisterSingleton<IUpdateLauncher>(() => new SimpleUpdateLauncher(container.GetInstance<IWebLinkLauncher>()));
             container.RegisterSingleton<IOnlineVersionHelper, OnlineVersionHelper>();
             container.RegisterSingleton(() => new UpdateInformationProvider(Urls.PdfCreatorUpdateInfoUrl, "PDFCreator", Urls.PdfCreatorUpdateChangelogUrl));

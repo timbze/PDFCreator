@@ -55,7 +55,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.Helper
             {
                 if (settings.ApplicationSettings.UpdateInterval == UpdateInterval.Never)
                 {
-                    settings.ApplicationSettings.UpdateInterval = UpdateInterval.Monthly;
+                    // settings.ApplicationSettings.UpdateInterval = UpdateInterval.Monthly;
                 }
             }
         }
