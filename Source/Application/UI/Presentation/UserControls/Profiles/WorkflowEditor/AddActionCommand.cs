@@ -29,10 +29,10 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles.WorkflowEdit
 
         private bool IsSupported(IPresenterActionFacade actionFacade)
         {
-            if (_editionHelper.IsFreeEdition)
-            {
-                return !typeof(IBusinessFeatureAction).IsAssignableFrom(actionFacade.ActionType);
-            }
+            // if (_editionHelper.IsFreeEdition)
+            // {
+            //     return !typeof(IBusinessFeatureAction).IsAssignableFrom(actionFacade.ActionType);
+            // }
 
             return true;
         }
