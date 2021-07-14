@@ -80,7 +80,7 @@ namespace pdfforge.PDFCreator.UI.Presentation.UserControls.Profiles
             : base(translationUpdater, selectedProfileProvider, dispatcher)
         {
             IsServer = editionHelper.IsServer;
-            AllowSkipPrintDialog = !editionHelper.IsFreeEdition;
+            AllowSkipPrintDialog = true;
             _buttonFunctionProvider = buttonFunctionProvider;
             _tokenHelper = tokenHelper;
             _tokenViewModelFactory = tokenViewModelFactory;
