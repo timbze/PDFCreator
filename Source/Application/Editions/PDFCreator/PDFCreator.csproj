@@ -524,4 +524,10 @@
       </ItemGroup>
     </When>
   </Choose>
+  <PropertyGroup>
+    <PostBuildEvent>
+      del "$(TargetDir)*.pdb"
+      del "$(TargetDir)*.xml"
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
